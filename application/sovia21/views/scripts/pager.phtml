@@ -1,0 +1,43 @@
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+ из <?php echo $this->totalItemCount; ?>
+
+<!-- First page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    Первая
+  </a> |
+<?php else: ?>
+  <span class="disabled">Первая</span> |
+<?php endif; ?>
+
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; Предыдущая
+  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; Предыдущая</span> |
+<?php endif; ?>
+
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Следующая &gt;
+  </a> |
+<?php else: ?>
+  <span class="disabled">Следующая &gt;</span> |
+<?php endif; ?>
+
+<!-- Last page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+    Последняя
+  </a>
+<?php else: ?>
+  <span class="disabled">Последняя</span>
+<?php endif; ?>
+
+</div>
+<?php endif; ?>
