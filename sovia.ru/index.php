@@ -4,7 +4,7 @@ mb_internal_encoding('UTF-8');
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application/sovia21'));
+    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application/sovia21'));
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -15,7 +15,6 @@ defined('APPLICATION_ENV')
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../../library'),
     realpath(APPLICATION_PATH . '/../../models'),
-    realpath(APPLICATION_PATH . '/models'),
     get_include_path(),
 )));
 

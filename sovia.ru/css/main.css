@@ -1,0 +1,65 @@
+/* Sovia CSS */
+
+html {
+    background: #122129 url('/images/bg-icons.png');
+}
+
+body {
+    margin: 0;
+    padding: 0 0 0 50px;
+    font-family: "Palatino Linotype", Antiqua, serif;
+    background: url('/images/moon.png') top left no-repeat;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: none;
+}
+
+a:link, a:visited {
+    color: #3d6d88;
+}
+
+#header {
+    height: 120px;
+}
+
+#logo {
+    padding: 40px 0 0 0;
+}
+
+#navigation-main {
+    font-size: 1.2em;
+    height: 2em;
+}
+
+#navigation-main ul {
+    margin: 0;
+    padding: 0;
+}
+
+#navigation-main ul li {
+    margin: 0;
+    padding: 0 2em;
+    display: inline-block;
+    list-style-type: none;
+}
+
+#navigation-main a:link, #navigation-main a:visited {
+    color: #bdd4da;
+}
+
+#navigation-main a:hover {
+    color: #ff9600;
+}
+
+#content {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1em;
+}
