@@ -16,12 +16,6 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
     protected $_user;
 
     /**
-     * ACL
-     * @var Acl
-     */
-    protected $_acl;
-
-    /**
      * Текущая страница
      * @var int
      */
@@ -32,7 +26,6 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
         /** @var $bootstrap Zend_Application_Bootstrap_Bootstrap */
         $bootstrap = $this->getInvokeArg('bootstrap');
         $this->_user = $bootstrap->getResource('user');
-        $this->_acl  = $bootstrap->getResource('acl');
         $page = intval($this->_getParam('page', 1));
         if ($page < 1) {
             $page = 1;
@@ -65,6 +58,7 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
         if ($clear) {
             $storage->message = null;
         }
+
         return $message;
     }
 }

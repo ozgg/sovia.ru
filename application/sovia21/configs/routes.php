@@ -4,6 +4,39 @@ return array(
         '/'
     ),
 
+    'tos' => new Zend_Controller_Router_Route_Static(
+        '/tos',
+        array(
+            'controller' => 'user',
+            'action' => 'agreement',
+        )
+    ),
+
+    'tos_old' => new Zend_Controller_Router_Route_Static(
+        '/user/tos',
+        array(
+            'controller' => 'user',
+            'action' => 'agreement',
+            'canonical' => true,
+        )
+    ),
+
+    'privacy' => new Zend_Controller_Router_Route_Static(
+        '/privacy',
+        array(
+            'controller' => 'user',
+            'action' => 'privacy',
+        )
+    ),
+
+    'privacy_old' => new Zend_Controller_Router_Route_Static(
+        '/user/privacy',
+        array(
+            'controller' => 'user',
+            'action' => 'privacy',
+            'canonical' => true,
+        )
+    ),
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',
