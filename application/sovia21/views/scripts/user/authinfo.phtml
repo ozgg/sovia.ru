@@ -1,0 +1,37 @@
+<div id="auth-info">
+<?php
+if ($this->user->getId() > 0) {
+	$login = $this->user->getLogin(false);
+	$link  = $this->partial('user/_userlink.phtml', array('login' => $login));
+?>
+    <div id="auth-options">
+        <div class="userpic"><?php echo ($this->user->getDefaultAvatar()); ?></div>
+        <div class="fl">
+            <p>Здравствуйте,<br /><?php echo $link; ?>.</p>
+            <ul>
+                <li><a href="/my/">Кабинет</a></li>
+                <li><a href="/user/logout/">Выйти</a></li>
+            </ul>
+        </div>
+    </div>
+<?php
+} else {
+?>
+    <form method="post" action="/user/login/">
+        <dl id="auth-dl-top">
+            <dt><label for="auth-login-top">Вход на сайт: </label></dt>
+            <dd><input type="text" size="16" maxlength="16" id="auth-login-top" name="login" title="Логин" /></dd>
+            <dd><input type="password" size="14" id="auth-password-top" name="password" title="Пароль" /></dd>
+            <dd><input type="image" src="/images/auth-submit.gif" id="auth-submit-top" title="Войти" /><input type="hidden" name="remember" value="1" /></dd>
+        </dl>
+    </form>
+    <div id="auth-options-holder" class="fr">
+        <ul>
+            <li><a href="/user/register/">Регистрация</a></li>
+            <li><a href="/user/recover/">Забыли пароль?</a></li>
+        </ul>
+    </div>
+<?php
+}
+?>
+</div>

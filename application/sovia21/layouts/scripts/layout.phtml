@@ -23,14 +23,16 @@ echo $this->headScript() . PHP_EOL;
     </ul>
     <div id="content">
 <?php
-	echo $this->partial('crumbs.phtml', array('crumbs' => $this->crumbs));
+//	echo $this->partial('crumbs.phtml', array('crumbs' => $this->crumbs));
 ?>
 <?php echo $this->layout()->content; ?>
 
     </div>
 
     <div id="right-column">
-        right column
+<?php
+	echo $this->action('authinfo', 'User');
+?>
     </div>
     
     <div id="footer">

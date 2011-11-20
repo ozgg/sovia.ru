@@ -25,6 +25,11 @@ a:link, a:visited {
     color: #3d6d88;
 }
 
+form {
+    margin: 0;
+    padding: 0;
+}
+
 #header {
     height: 120px;
     margin: 0 300px 0 0;
@@ -79,4 +84,8 @@ a:link, a:visited {
     font-size: 0.9em;
     padding: 0.5em 2em;
     display: inline-block;
+}
+
+#auth-info {
+    color: #aaaaaa;
 }

@@ -1,0 +1,338 @@
+<?php
+/**
+ * Date: 28.08.11
+ * Time: 14:45
+ */
+
+/**
+ * Пользователь сайта
+ */
+class User_Row extends Ext_Db_Table_Row implements User_Interface
+{
+    /**
+     * Задать новый пароль
+     *
+     * @param string $password
+     * @return User_Row
+     */
+    public function setPassword($password)
+    {
+        $salt = $this->_makeSalt();
+        $this->salt = $salt;
+        $this->password = md5($salt . $password);
+
+        return $this;
+    }
+
+    /**
+     * Сгенерировать соль
+     * 
+     * @return string
+     */
+    protected function _makeSalt()
+    {
+        $salt = '';
+        $length   = rand(5, 15);
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $symbols  = '1234567890-=~!@#$%^&*()_+|[]{};:,.<>?/';
+        $alphaLength = strlen($alphabet) - 1;
+        $symbolsLength = strlen($symbols) - 1;
+        for ($i = 0; $i < $length; $i++) {
+            if (rand(0, 1)) {
+                $salt .= $alphabet[rand(0, $alphaLength)];
+            } else {
+                $salt .= $symbols[rand(0, $symbolsLength)];
+            }
+        }
+        return $salt;
+    }
+
+    /**
+     * Задать ip-адрес
+     *
+     * @return User_Row
+     */
+    public function setIp()
+    {
+        $this->remote_addr = ip2long(self::$_ip);
+        return $this;
+    }
+
+    /**
+     * Получить ip-адрес
+     * 
+     * @return string
+     */
+    public function getRemoteAddr()
+    {
+        return long2ip($this->remote_addr);
+    }
+
+    /**
+     * Создать ключ
+     *
+     * @param int $typeId тип ключа (@see User_Key)
+     * @return User_Key_Row
+     */
+    public function createKey($typeId)
+    {
+        $data = array(
+            'user_id' => $this->getId(),
+            'type_id' => $typeId,
+        );
+        $keyTable = new User_Key();
+        /** @var $key User_Key_Row */
+        $key = $keyTable->createRow($data);
+        $key->generate();
+        $key->save();
+        return $key;
+    }
+
+    /**
+     * Добавить запись в блог
+     *
+     * @param array $data
+     * @return Blog_Entry_Row
+     */
+    public function createBlogEntry(array $data)
+    {
+        $table = new Blog_Entry();
+        $entryData = array(
+            'user_id'  => $this->getId(),
+        );
+        /** @var $entry Blog_Entry_Row */
+        $entry = $table->createRow($entryData);
+        $entry->setData($data)->save();
+        return $entry;
+    }
+
+
+
+
+
+
+
+    public function getRank()
+    {
+        return $this->_rank;
+    }
+
+    public function setRank($rank)
+    {
+        $this->_rank = intval($rank);
+        return $this;
+    }
+
+    public function getAllowMail()
+    {
+        return $this->_allowMail;
+    }
+
+    public function setAllowMail($allowMail)
+    {
+        settype($allowMail, 'int');
+        if ($allowMail != 0) {
+            $allowMail = 1;
+        }
+        $this->_allowMail = $allowMail;
+        return $this;
+    }
+
+    public function getHasPosts()
+    {
+        return $this->_hasPosts;
+    }
+
+    public function setHasPosts($hasPosts)
+    {
+        $this->_hasPosts = abs($hasPosts);
+        return $this;
+    }
+
+    public function getHasComments()
+    {
+        return $this->_hasComments;
+    }
+
+    public function setHasComments($hasComments)
+    {
+        $this->_hasComments = abs($hasComments);
+        return $this;
+    }
+
+    public function getIsActive()
+    {
+        return $this->_isActive;
+    }
+
+    public function setIsActive($isActive)
+    {
+        $this->_isActive = abs($isActive);
+        return $this;
+    }
+
+    public function getLogin($escape = true)
+    {
+        if ($escape) {
+            $login = $this->_escape($this->_login);
+        } else {
+            $login = $this->_login;
+        }
+        return $login;
+    }
+
+    public function setLogin($login)
+    {
+        $this->_login = $login;
+        return $this;
+    }
+
+    public function getMail($escape = true)
+    {
+        if ($escape) {
+            $mail = $this->_escape($this->_mail);
+        } else {
+            $mail = $this->_mail;
+        }
+        return $mail;
+    }
+
+    public function setMail($mail)
+    {
+        $this->_mail = $mail;
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        return $this->_salt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->_salt = $salt;
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->_password;
+    }
+
+    public function setNewPassword($password)
+    {
+        $this->_salt = Default_Model_DbTable_UserItem::makeSalt();
+        $this->_password = md5($this->_salt . $password);
+        return $this;
+    }
+
+    public function getRoles($raw = false)
+    {
+        $roles    = array();
+        $hasRoles = $this->getMapper()->getRoles($this->getId());
+        if ($raw) {
+            $roles = $hasRoles;
+        } else {
+            foreach ($hasRoles as $roleName => $isPresent) {
+                if ($isPresent) {
+                    $roles[] = $roleName;
+                }
+            }
+            unset($roleName, $isPresent);
+        }
+        unset($hasRoles);
+        return $roles;
+    }
+
+    public function addRole($name)
+    {
+        return $this->getMapper()->addRole($this->getId(), $name);
+    }
+
+    public function revokeRole($name)
+    {
+        if ($this->getId() == 1) {
+            throw new Exception('У этого пользователя нельзя убирать роли');
+        }
+        return $this->getMapper()->revokeRole($this->getId(), $name);
+    }
+
+    public function checkPair($login, $password)
+    {
+        return $this->getMapper()->checkPair($login, $password);
+    }
+
+    public function setSession($userId, $remoteAddr)
+    {
+        $addressPattern = '/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/';
+        if (!is_numeric($remoteAddr)) {
+            if (preg_match($addressPattern, $remoteAddr)) {
+                $remoteAddr = ip2long($remoteAddr);
+            } else {
+                $remoteAddr = 0;
+            }
+        }
+        unset($addressPattern);
+        return $this->getMapper()->setSession($userId, $remoteAddr);
+    }
+
+    public function checkSession($userId, $key)
+    {
+        return $this->getMapper()->checkSession($userId, $key);
+    }
+
+    public function search($login)
+    {
+        return $this->getMapper()->search($login);
+    }
+
+    public function see()
+    {
+        return $this->getMapper()->see($this->getId());
+    }
+
+    public function getActivity()
+    {
+        return $this->getMapper()->getActivity();
+    }
+
+    public function mailIsOk()
+    {
+        $result = true;
+        return $result;
+    }
+
+    public function resetPassword()
+    {
+        $password = '';
+        $alphabet = 'qwertyuiopasdfghjklzxcvbnm1234567890';
+        $length   = strlen($alphabet) - 1;
+        $size     = rand(8, 10);
+        for ($i = 0; $i < $size; $i++) {
+            $offset    = rand(0, $length);
+            $password .= $alphabet[$offset];
+            unset($offset);
+        }
+        unset($i, $alphabet, $length, $size);
+        $this->setNewPassword($password);
+        $this->save();
+        return $password;
+    }
+
+    public function getDefaultAvatar()
+    {
+        $profile = $this->getProfile();
+        $avatar  = $profile->getDefaultAvatar();
+        unset($profile);
+        return $avatar;
+    }
+
+    public function getProfile()
+    {
+        $model = new Default_Model_UserProfile();
+        $profile = $model->find($this->getId());
+        unset($model);
+        return $profile;
+    }
+
+}

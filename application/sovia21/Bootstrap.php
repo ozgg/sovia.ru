@@ -52,26 +52,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initUser()
     {
-//        if (empty($this->_user)) {
-//            $this->bootstrap('db');
-//            $this->bootstrap('acl');
-//            $storage = new Zend_Session_Namespace('auth_user');
-//            /** @var $user User_Interface */
-//            $user = $storage->user;
-//            if (empty($user)) {
-//                $user = new User_Guest();
-//            } else {
-//                $table = new User();
-//                $table->see($user->getId());
-//            }
-//
-//            /** @var $acl Acl */
-//            $acl = $this->getResource('acl');
-//            $acl->setCurrentUser($user);
-//
-//            $this->_user = $user;
-//        }
-//        return $this->_user;
+        if (empty($this->_user)) {
+            $this->bootstrap('db');
+            $storage = new Zend_Session_Namespace('auth_user');
+            /** @var $user User_Interface */
+            $user = $storage->user;
+            if (empty($user)) {
+                $user = new User_Guest();
+            } else {
+                $table = new User();
+                $table->see($user->getId());
+            }
+
+            $this->_user = $user;
+        }
+        return $this->_user;
     }
 
     /**
