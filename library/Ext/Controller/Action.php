@@ -31,6 +31,7 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
             $page = 1;
         }
         $this->_page = $page;
+        $this->view->flashMessage = $this->_getFlashMessage();
     }
 
     /**

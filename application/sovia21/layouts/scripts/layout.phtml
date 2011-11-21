@@ -19,11 +19,12 @@ echo $this->headScript() . PHP_EOL;
         <li><a href="/" title="Читать сны">Сны</a></li>
         <li><a href="/" title="Сонник">Сонник</a></li>
         <li><a href="/" title="Форум о снах">Форум</a></li>
-        <li><a href="/" title="Информация о проекте">О проекте</a></li>
+        <li><a href="<?php echo $this->url(array(), 'about', true); ?>" title="Информация о проекте">О проекте</a></li>
     </ul>
     <div id="content">
 <?php
-//	echo $this->partial('crumbs.phtml', array('crumbs' => $this->crumbs));
+    echo $this->partial('flashMessage.phtml', array('message' => $this->flashMessage));
+    //	echo $this->partial('crumbs.phtml', array('crumbs' => $this->crumbs));
 ?>
 <?php echo $this->layout()->content; ?>
 

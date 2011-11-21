@@ -6,10 +6,6 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     /**
-     * @var Acl
-     */
-    protected $_acl;
-    /**
      * @var User_Interface
      */
     protected $_user;
@@ -42,6 +38,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         foreach ($routes as $name => $route) {
             $router->addRoute($name, $route);
         }
+
         return $router;
     }
 
@@ -66,6 +63,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
             $this->_user = $user;
         }
+
         return $this->_user;
     }
 
@@ -99,6 +97,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headScript()->prependFile('/js/jquery.js');
         Zend_Paginator::setDefaultScrollingStyle('Sliding');
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pager.phtml');
+
         return $view;
     }
 
@@ -114,6 +113,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'namespace' => '',
         ));
         $resourceLoader->addResourceType('form', 'forms/', 'Form');
+        
         return $resourceLoader;
     }
 }

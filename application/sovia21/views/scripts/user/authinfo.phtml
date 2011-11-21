@@ -17,20 +17,18 @@ if ($this->user->getId() > 0) {
 <?php
 } else {
 ?>
-    <form method="post" action="/user/login/">
-        <dl id="auth-dl-top">
-            <dt><label for="auth-login-top">Вход на сайт: </label></dt>
-            <dd><input type="text" size="16" maxlength="16" id="auth-login-top" name="login" title="Логин" /></dd>
-            <dd><input type="password" size="14" id="auth-password-top" name="password" title="Пароль" /></dd>
-            <dd><input type="image" src="/images/auth-submit.gif" id="auth-submit-top" title="Войти" /><input type="hidden" name="remember" value="1" /></dd>
-        </dl>
+    <form id="auth-top" method="post" action="<?php echo $this->url(array(), 'user_login', true); ?>">
+    <dl>
+        <dt><label for="auth-login-top">Вход на сайт: </label></dt>
+        <dd><input type="text" size="16" maxlength="16" id="auth-login-top" name="login" title="Логин" /></dd>
+        <dd><input type="password" size="14" id="auth-password-top" name="password" title="Пароль" /></dd>
+        <dd><input type="image" src="/images/auth-submit.gif" id="auth-submit-top" title="Войти" /><input type="hidden" name="remember" value="1" /></dd>
+    </dl>
     </form>
-    <div id="auth-options-holder" class="fr">
-        <ul>
-            <li><a href="/user/register/">Регистрация</a></li>
-            <li><a href="/user/recover/">Забыли пароль?</a></li>
-        </ul>
-    </div>
+    <ul id="auth-options">
+        <li><a href="<?php echo $this->url(array(), 'user_register', true); ?>">Регистрация</a></li>
+        <li><a href="<?php echo $this->url(array(), 'user_forgot', true); ?>">Забыли пароль?</a></li>
+    </ul>
 <?php
 }
 ?>

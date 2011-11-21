@@ -11,7 +11,6 @@ return array(
             'action' => 'agreement',
         )
     ),
-
     'tos_old' => new Zend_Controller_Router_Route_Static(
         '/user/tos',
         array(
@@ -28,7 +27,6 @@ return array(
             'action' => 'privacy',
         )
     ),
-
     'privacy_old' => new Zend_Controller_Router_Route_Static(
         '/user/privacy',
         array(
@@ -36,6 +34,34 @@ return array(
             'action' => 'privacy',
             'canonical' => true,
         )
+    ),
+
+    'user_register' => new Zend_Controller_Router_Route_Static(
+        'register',
+        array(
+            'controller' => 'user',
+            'action'     => 'register',
+        )
+    ),
+    'user_login' => new Zend_Controller_Router_Route_Static(
+        'login',
+        array(
+            'controller' => 'user',
+            'action'     => 'login',
+        )
+    ),
+    'user_logout' => new Zend_Controller_Router_Route_Static(
+        'logout',
+        array(
+            'controller' => 'user',
+            'action'     => 'logout',
+        )
+    ),
+    'user_forgot' => new Zend_Controller_Router_Route_Static(
+        'user/forgot'
+    ),
+    'user_reset' => new Zend_Controller_Router_Route_Static(
+        'user/reset'
     ),
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(
@@ -105,57 +131,13 @@ return array(
             'month' => '([1-9]|1[0-2])',
         )
     ),
-
-    'user_login' => new Zend_Controller_Router_Route_Static(
-        'login',
-        array(
-            'controller' => 'user',
-            'action'     => 'login',
-        )
-    ),
-    'user_logout' => new Zend_Controller_Router_Route_Static(
-        'logout',
-        array(
-            'controller' => 'user',
-            'action'     => 'logout',
-        )
-    ),
-    'user_forgot' => new Zend_Controller_Router_Route_Static(
-        'user/forgot'
-    ),
-    'user_reset' => new Zend_Controller_Router_Route_Static(
-        'user/reset'
-    ),
-
-    'series_home' => new Zend_Controller_Router_Route_Static(
-        'photography/series'
-    ),
-    'series' => new Zend_Controller_Router_Route(
-        '/photography/series/:name',
-        array(
-            'controller' => 'photography',
-            'action' => 'series',
-        ),
-        array(
-             'name' => '[-a-z0-9]+',
-        )
-    ),
-    'sample_home' => new Zend_Controller_Router_Route_Static(
-        'photography/sample'
-    ),
-    'sample' => new Zend_Controller_Router_Route(
-        '/photography/sample/:name',
-        array(
-            'controller' => 'photography',
-            'action' => 'sample',
-        ),
-        array(
-             'name' => '[-a-z0-9]+',
-        )
-    ),
+//*/
 
     'about' => new Zend_Controller_Router_Route_Static(
-        'about'
+        'about',
+        array(
+            'controller' => 'index',
+            'action'     => 'about',
+        )
     ),
-//*/
 );
