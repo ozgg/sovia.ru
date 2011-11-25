@@ -1,3 +1,10 @@
+-- Переименование поля с адресом электронной почты
+ALTER TABLE `user_item`
+    CHANGE `mail` `email` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `user_item` ADD UNIQUE `user_email` (`email`);
+
+
 -- Новый тип ключа пользователя
 ALTER TABLE `user_key` DROP FOREIGN KEY `fk_user_key_owner`;
 

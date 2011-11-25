@@ -82,13 +82,13 @@ class UserController extends Ext_Controller_Action
                 $user->login = $data['login'];
                 $user->setPassword($data['password']);
                 $user->email = $data['email'];
+                $user->setIp();
                 if (!empty($key)) {
                     $user->parent_id = $key->user_id;
+                    $key->expire();
+                    $key->save();
                 }
-                $user->setIp();
                 $user->save();
-                $key->expire();
-                $key->save();
                 $this->_auth->getStorage()->write($user->getId());
                 $storage = new Zend_Session_Namespace('auth_user');
                 $storage->user = $user;
