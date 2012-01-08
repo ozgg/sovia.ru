@@ -10,7 +10,7 @@ class Ext_Db_Table_Row extends Zend_Db_Table_Row_Abstract
 
     public function getId()
     {
-        return $this->id;
+        return $this->get('id');
     }
 
     public static function setRemoteAddr($ip)
@@ -18,5 +18,15 @@ class Ext_Db_Table_Row extends Zend_Db_Table_Row_Abstract
         $octet = '(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})';
         $cutPattern = "/^{$octet}\.{$octet}\.{$octet}\.{$octet}.*/";
         self::$_ip = preg_replace($cutPattern, '$1.$2.$3.$4', $ip);
+    }
+
+    protected function set($column, $value)
+    {
+        $this->$column = $value;
+    }
+
+    protected function get($column)
+    {
+        return $this->$column;
     }
 }

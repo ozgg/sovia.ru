@@ -6,8 +6,29 @@
 /**
  *
  */
-class Default_Model_UserProfile extends Default_Model_Ancestor
+class User_Profile
 {
+
+    /**
+     * Связи с другими таблицами
+     * @var array
+     */
+    protected $_referenceMap = array(
+        'User' => array(
+            'columns'       => 'id',
+            'refTableClass' => 'User',
+            'refColumns'    => 'user_id',
+        ),
+    );
+
+
+
+
+
+
+
+
+
 	protected $_ownerId;
 	protected $_avatarId;
 	protected $_maxAvatars;

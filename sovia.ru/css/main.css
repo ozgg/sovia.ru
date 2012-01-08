@@ -49,6 +49,10 @@ p {
 	text-align: justify;
 }
 
+ul, ol {
+	margin: 0;
+}
+
 .notice {
 	font-size: 0.9em;
 	color: #777777;
@@ -130,6 +134,22 @@ dd.notice {
     color: #aa0000;
 }
 
+.error {
+    background: #ffeeee;
+    color: #800000;
+    border: dotted 1px;
+    padding: 0.5em 2em;
+    margin: 0.5em auto;
+}
+
+#flash-message {
+    background: #eeffee;
+    color: #008000;
+    border: dotted 1px;
+    padding: 0.5em 2em;
+    margin: 0.5em auto;
+}
+
 /*
 body {
 	margin: 0;
@@ -196,10 +216,6 @@ a:hover {
 
 .result {
 	text-align: center;
-}
-
-ul, ol {
-	margin: 0;
 }
 
 .roles {

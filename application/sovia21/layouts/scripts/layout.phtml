@@ -24,7 +24,6 @@ echo $this->headScript() . PHP_EOL;
     <div id="content">
 <?php
     echo $this->partial('flashMessage.phtml', array('message' => $this->flashMessage));
-    //	echo $this->partial('crumbs.phtml', array('crumbs' => $this->crumbs));
 ?>
 <?php echo $this->layout()->content; ?>
 
@@ -37,7 +36,7 @@ echo $this->headScript() . PHP_EOL;
     </div>
     
     <div id="footer">
-        <div class="footer-element">&#0169; 2006&#0150;2011 sovia.ru</div>
+        <div class="footer-element">&#0169; 2006&#0150;2012 sovia.ru</div>
         <div class="footer-element"><a href="<?php echo $this->url(array(), 'tos', true); ?>" title="Пользовательское соглашение">Пользовательское соглашение</a></div>
     </div>
 </body>

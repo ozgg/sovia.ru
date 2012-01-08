@@ -3,13 +3,17 @@
  * Date: 20.11.11
  * Time: 1:31
  */
- 
+
+/**
+ * Контроллер пользователей
+ */
 class UserController extends Ext_Controller_Action
 {
     /**
      * @var Zend_Auth_Adapter_DbTable
      */
     protected $_authAdapter;
+
     /**
      * @var Zend_Auth
      */
@@ -25,6 +29,9 @@ class UserController extends Ext_Controller_Action
         $this->_auth = Zend_Auth::getInstance();
     }
 
+    /**
+     * Пользовательское соглашение
+     */
     public function agreementAction()
     {
         $view  = $this->view;
@@ -34,9 +41,11 @@ class UserController extends Ext_Controller_Action
             $view->headLink(array('rel' => 'canonical', 'href' => $href));
         }
         $view->headTitle($title);
-        $view->crumbs = array($title);
     }
 
+    /**
+     * Соглашение о конфиденциальности
+     */
     public function privacyAction()
     {
         $view  = $this->view;
@@ -46,9 +55,11 @@ class UserController extends Ext_Controller_Action
             $view->headLink(array('rel' => 'canonical', 'href' => $href));
         }
         $view->headTitle($title);
-        $view->crumbs = array($title);
     }
 
+    /**
+     * Блок с информацией о пользователе
+     */
     public function authinfoAction()
     {
         $this->view->user = $this->_user;
@@ -69,7 +80,8 @@ class UserController extends Ext_Controller_Action
         $form    = new Form_User_Register();
         if ($request->isPost()) {
             $data = $request->getPost();
-            if ($form->isValid($data)) {
+            $done = false || !empty($data['agree']);
+            if ($form->isValid($data) && empty($data['agree'])) {
                 $keyTable  = new User_Key();
                 $userTable = new User();
                 $mapper = $keyTable->getMapper();
@@ -82,6 +94,7 @@ class UserController extends Ext_Controller_Action
                 $user->login = $data['login'];
                 $user->setPassword($data['password']);
                 $user->email = $data['email'];
+                $user->setAllowMail(!empty($data['mail_get']));
                 $user->setIp();
                 if (!empty($key)) {
                     $user->parent_id = $key->user_id;
@@ -92,6 +105,10 @@ class UserController extends Ext_Controller_Action
                 $this->_auth->getStorage()->write($user->getId());
                 $storage = new Zend_Session_Namespace('auth_user');
                 $storage->user = $user;
+                $done = true;
+            }
+            if ($done) {
+                $this->_setFlashMessage('Регистрация прошла успешно.');
                 $this->_redirect($this->view->url(array(), 'home', true));
             }
         }
@@ -100,13 +117,12 @@ class UserController extends Ext_Controller_Action
 
 
     /**
-     * Вход
+     * Авторизация
+     *
+     * @return void
      */
     public function loginAction()
     {
-        if ($this->_user->getId() > 0) {
-            $this->_redirect($this->view->url(array(), 'home', true));
-        }
         $this->view->headTitle('Вход');
         $this->view->headMeta()->appendName('description', 'Вход на сайт');
         $error = '';
@@ -121,67 +137,13 @@ class UserController extends Ext_Controller_Action
                 $user = $this->_auth();
                 $storage = new Zend_Session_Namespace('auth_user');
                 $storage->user = $user;
-                $this->_redirect('/');
+                $this->_redirect($this->view->url(array(), 'home', true));
             } else {
                 $this->getResponse()->setHttpResponseCode(401);
                 $error = 'Неправильный логин или пароль';
             }
         }
         $this->view->error = $error;
-
-        $this->view->headTitle('Вход на сайт');
-        $authData = $this->_auth->read();
-        if (!empty($authData['user'])) {
-            $this->_redirect('/user/');
-        }
-        $errors     = array();
-        $result     = '';
-        $showForm   = true;
-        $login      = '';
-        $rememberMe = '';
-        $request    = $this->getRequest();
-        if ($request->isPost()) {
-            $login    = $request->getPost('login');
-            $password = $request->getPost('password');
-            $remember = $request->getPost('remember');
-            if ($login != '') {
-                $model  = new Default_Model_UserItem();
-                $userId = $model->checkPair($login, $password);
-                if (!empty($userId)) {
-                    $result  .= 'Вы успешно вошли.';
-                    $showForm = false;
-                    $user     = $model->find($userId);
-                    $roles    = $user->getRoles();
-                    $authData = array(
-                        'user' => $user,
-                        'roles' => $roles,
-                    );
-                    $this->_auth->write($authData);
-                    $authData = $this->_auth->read();
-                    $this->view->user = $authData['user'];
-                    unset($authData);
-                    if (!empty($remember)) {
-                        $remoteAddr = $_SERVER['REMOTE_ADDR'];
-                        $sessionKey = $model->setSession($userId, $remoteAddr);
-                        $cookieData = "{$userId}\t{$sessionKey}";
-                        unset($remoteAddr, $sessionKey);
-                        $expires    = time() + 2419200;
-                        setcookie('person', $cookieData, $expires, '/');
-                        unset($cookieData, $expires);
-                        $rememberMe = 'checked="checked" ';
-                    }
-                } else {
-                    $errors[] = 'В доступе отказано';
-                }
-                unset($userId, $model);
-            }
-            unset($password, $remember);
-        }
-        $this->view->showForm = $showForm;
-        $this->view->errors   = $errors;
-        $this->view->result   = $result;
-        $this->view->login    = $login;
-        $this->view->remember = $rememberMe;
     }
 
 	/**
@@ -235,21 +197,18 @@ class UserController extends Ext_Controller_Action
 		$this->view->result = $result;
 	}
 
-	/**
-	 * Выход
-	 */
-	public function logoutAction()
-	{
-		$this->view->headTitle('Выход');
-		$auth = $this->_auth->read();
-		if (!empty($auth['user'])) {
-			$this->_auth->write(array('user' => null, 'roles' => array()));
-			setcookie('person', false, 0, '/');
-			$this->view->result = 'Вы вышли.';
-		} else {
-			$this->_redirect('/');
-		}
-	}
+    /**
+     * Выход с сайта (закрытие сессии)
+     *
+     * @return void
+     */
+    public function logoutAction()
+    {
+        $this->_auth->clearIdentity();
+        $storage = new Zend_Session_Namespace('auth_user');
+        $storage->user = null;
+        $this->_redirect($this->view->url(array(), 'home', true));
+    }
 
 	/**
 	 * Профиль пользователя
@@ -374,9 +333,12 @@ class UserController extends Ext_Controller_Action
 		unset($data, $key);
 	}
 
-	/**
-	 * Воспользоваться ключом восстановления
-	 */
+    /**
+     * Воспользоваться ключом восстановления
+     * @param $ownerId
+     * @param $eventKey
+     * @return null
+     */
 	protected function _useRecoveryKey($ownerId, $eventKey)
 	{
 		settype($ownerId, 'int');
@@ -404,6 +366,7 @@ class UserController extends Ext_Controller_Action
 			throw new Exception('Неизвестный ключ.');
 		}
 		unset($key, $userKey, $userItem);
+
 		return $password;
 	}
 
@@ -423,15 +386,16 @@ class UserController extends Ext_Controller_Action
         }
         $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
         $this->_authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-        $this->_authAdapter->setTableName('user')
+        $this->_authAdapter->setTableName('user_item')
                     ->setIdentityColumn($column)
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('md5(concat(salt, ?))')
                     ->setIdentity($login)
                     ->setCredential($password);
         $select = $this->_authAdapter->getDbSelect();
-        $select->where('banned_till is null or banned_till < now()');
+        $select->where('is_active = 1');
         $result = $this->_auth->authenticate($this->_authAdapter);
+
         return $result->isValid();
     }
 
