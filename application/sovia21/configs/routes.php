@@ -63,6 +63,43 @@ return array(
     'user_reset' => new Zend_Controller_Router_Route_Static(
         '/user/reset'
     ),
+
+    'cabinet' => new Zend_Controller_Router_Route_Static(
+        '/my',
+        array(
+            'controller' => 'cabinet',
+            'action'     => '',
+        )
+    ),
+    'cabinet_profile' => new Zend_Controller_Router_Route_Static(
+        '/my/profile',
+        array(
+            'controller' => 'cabinet',
+            'action'     => 'profile',
+        )
+    ),
+    'cabinet_avatars' => new Zend_Controller_Router_Route_Static(
+        '/my/avatars',
+        array(
+            'controller' => 'cabinet',
+            'action'     => 'avatars',
+        )
+    ),
+    'cabinet_dreams' => new Zend_Controller_Router_Route_Static(
+        '/my/dreams',
+        array(
+            'controller' => 'cabinet',
+            'action'     => 'dreams',
+        )
+    ),
+    'cabinet_symbols' => new Zend_Controller_Router_Route_Static(
+        '/my/symbols',
+        array(
+            'controller' => 'cabinet',
+            'action'     => 'symbols',
+        )
+    ),
+
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',

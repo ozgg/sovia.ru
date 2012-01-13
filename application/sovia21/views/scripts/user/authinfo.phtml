@@ -6,7 +6,7 @@ if ($this->user->getId() > 0) {
     <div id="auth-options">
         <p>Здравствуйте, <?php echo $link; ?>.</p>
         <ul>
-            <li><a href="/my/">Кабинет</a></li>
+            <li><a href="<?php echo $this->url(array(), 'cabinet', true); ?>">Кабинет</a></li>
             <li><a href="<?php echo $this->url(array(), 'user_logout', true); ?>">Выйти</a></li>
         </ul>
     </div>

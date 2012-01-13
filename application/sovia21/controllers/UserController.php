@@ -29,6 +29,13 @@ class UserController extends Ext_Controller_Action
         $this->_auth = Zend_Auth::getInstance();
     }
 
+    public function indexAction()
+    {
+        $this->view->headTitle('Пользователю');
+        $description = 'Что может получить пользователь от нашего ресурса';
+        $this->view->headMeta()->appendName('description', $description);
+    }
+
     /**
      * Пользовательское соглашение
      */
@@ -207,57 +214,6 @@ class UserController extends Ext_Controller_Action
         $this->view->key     = $body;
     }
 
-	/**
-	 * Редактирование пользователя
-	 */
-	public function editAction()
-	{
-		if (!$this->_hasRoles('administrator')) {
-			$this->_redirect('/user/');
-		}
-		$epp     = 30;
-		$model   = new Default_Model_UserItem();
-		$request = $this->getRequest();
-		$userId  = intval($request->getParam('user_id', 0));
-		$item    = $model->find($userId);
-		$errors  = array();
-		$result  = '';
-		if (!empty($item) && ($item->getId() > 0)) {
-			$this->view->item = $item;
-			if ($request->isPost()) {
-				$post = $request->getPost();
-				if (!empty($post['password'])) {
-					$item->setNewPassword($post['password']);
-				}
-				if (isset($post['mail'])) {
-					$item->setMail($post['mail']);
-				}
-				if (isset($post['karma'])) {
-					$item->setRank($post['rank']);
-				}
-				$item->setAllowMail(!empty($post['allow_mail']));
-				try {
-					$item->save();
-					$result = 'Информация обновлена успешно';
-				} catch (Exception $e) {
-					$errors[] = $e->getMessage();
-				}
-			}
-			$this->view->roles = $item->getRoles(true);
-		}
-		$list  = $model->getList($this->_page, $epp);
-		$count = $list['count'];
-		$pager = new Zend_Paginator(new Zend_Paginator_Adapter_Null($count));
-		$pager->setCurrentPageNumber($this->_page)
-			  ->setItemCountPerPage($epp);
-		$this->view->pager  = $pager;
-		$this->view->list   = $list;
-		$this->view->page   = $this->_page;
-		$this->view->userId = $userId;
-		$this->view->errors = $errors;
-		$this->view->result = $result;
-	}
-
     /**
      * Выход с сайта (закрытие сессии)
      *
@@ -270,52 +226,6 @@ class UserController extends Ext_Controller_Action
         $storage->user = null;
         $this->_redirect($this->view->url(array(), 'home', true));
     }
-
-	/**
-	 * Профиль пользователя
-	 */
-	public function profileAction()
-	{
-		$title   = 'Профиль пользователя';
-		$request = $this->getRequest();
-		$login   = $request->getParam('of', '');
-		$search  = '';
-		$list    = array();
-		$model   = new Default_Model_UserItem();
-		if ($login != '') {
-			$item  = $model->findByField('login', $login);
-			if ($item->getId() > 0) {
-				$title .= " {$item->getLogin()}";
-				$this->view->item = $item;
-			}
-		} else {
-			$title = 'Поиск пользователей';
-		}
-		unset($login);
-		if ($request->isPost()) {
-			$login = trim($request->getPost('search_login', ''));
-			if ($login != '') {
-				$search = mb_substr($login, 0, 16);
-				$list   = $model->search($search);
-			}
-			unset($login);
-		}
-		unset($request, $model);
-		$this->view->search = $search;
-		$this->view->list   = $list;
-		$this->view->headTitle($title);
-	}
-
-	/**
-	 * Активность пользователей
-	 */
-	public function activityAction()
-	{
-		$this->view->headTitle('Активность пользователей');
-		$model = new Default_Model_UserItem();
-		$this->view->list = $model->getActivity();
-		unset($model);
-	}
 
     /**
      * Получение ключа сброса пароля
@@ -359,43 +269,6 @@ class UserController extends Ext_Controller_Action
         $this->view->isSent  = $isSent;
         $this->view->message = $message;
     }
-
-    /**
-     * Воспользоваться ключом восстановления
-     * @param $ownerId
-     * @param $eventKey
-     * @return null
-     */
-	protected function _useRecoveryKey($ownerId, $eventKey)
-	{
-		settype($ownerId, 'int');
-		$userKey  = new Default_Model_UserKey();
-		$userItem = new Default_Model_UserItem();
-		$password = null;
-		$key = $userKey->findByField('event_key', $eventKey);
-		if ($key->getId() > 0) {
-			if ($ownerId == $key->getOwnerId()) {
-				if (!$key->isExpired()) {
-					$user = $userItem->find($ownerId);
-					if ($user->getId() > 0) {
-						$password = $user->resetPassword();
-						$key->delete();
-					}
-					unset($user);
-				} else {
-					$key->delete();
-					throw new Exception('Ключ больше недействителен.');
-				}
-			} else {
-				throw new Exception('Неправильный ключ.');
-			}
-		} else {
-			throw new Exception('Неизвестный ключ.');
-		}
-		unset($key, $userKey, $userItem);
-
-		return $password;
-	}
 
     /**
      * Аутентификация
@@ -444,5 +317,12 @@ class UserController extends Ext_Controller_Action
         $storage->write($user->getId());
 
         return $user;
+    }
+
+    protected function activityAction()
+    {
+        $this->view->headTitle('Активность пользователей');
+        $description = 'Этот раздел устарел и был закрыт.';
+        $this->view->headMeta()->appendName('description', $description);
     }
 }
