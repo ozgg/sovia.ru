@@ -25,6 +25,18 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
     }
 
     /**
+     * Обновить время последнего входа
+     *
+     * @return User_Row
+     */
+    public function login()
+    {
+        $this->last_seen = new Zend_Db_Expr('now()');
+        return $this;
+    }
+
+
+    /**
      * Сгенерировать соль
      * 
      * @return string
@@ -44,6 +56,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
                 $salt .= $symbols[rand(0, $symbolsLength)];
             }
         }
+
         return $salt;
     }
 
@@ -55,6 +68,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
     public function setIp()
     {
         $this->remote_addr = ip2long(self::$_ip);
+
         return $this;
     }
 
@@ -85,7 +99,18 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         $key = $keyTable->createRow($data);
         $key->generate();
         $key->save();
+
         return $key;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getLogin()
+    {
+        return $this->login;
     }
 
     /**
@@ -106,125 +131,32 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $entry;
     }
 
-
-
-
-
-
-
-    public function getRank()
-    {
-        return $this->_rank;
-    }
-
-    public function setRank($rank)
-    {
-        $this->_rank = intval($rank);
-        return $this;
-    }
-
-    public function getAllowMail()
-    {
-        return $this->_allowMail;
-    }
-
     public function setAllowMail($allowMail)
     {
         settype($allowMail, 'int');
         if ($allowMail != 0) {
             $allowMail = 1;
         }
-        $this->_allowMail = $allowMail;
+        $this->allow_mail = $allowMail;
         return $this;
     }
 
-    public function getHasPosts()
+    public function getDefaultAvatar()
     {
-        return $this->_hasPosts;
+//        $profile = $this->getProfile();
+//        $avatar  = $profile->getDefaultAvatar();
+//        unset($profile);
+//        return $avatar;
     }
 
-    public function setHasPosts($hasPosts)
-    {
-        $this->_hasPosts = abs($hasPosts);
-        return $this;
-    }
 
-    public function getHasComments()
-    {
-        return $this->_hasComments;
-    }
 
-    public function setHasComments($hasComments)
-    {
-        $this->_hasComments = abs($hasComments);
-        return $this;
-    }
 
-    public function getIsActive()
-    {
-        return $this->_isActive;
-    }
 
-    public function setIsActive($isActive)
-    {
-        $this->_isActive = abs($isActive);
-        return $this;
-    }
 
-    public function getLogin($escape = true)
-    {
-        if ($escape) {
-            $login = $this->_escape($this->_login);
-        } else {
-            $login = $this->_login;
-        }
-        return $login;
-    }
 
-    public function setLogin($login)
-    {
-        $this->_login = $login;
-        return $this;
-    }
 
-    public function getMail($escape = true)
-    {
-        if ($escape) {
-            $mail = $this->_escape($this->_mail);
-        } else {
-            $mail = $this->_mail;
-        }
-        return $mail;
-    }
 
-    public function setMail($mail)
-    {
-        $this->_mail = $mail;
-        return $this;
-    }
-
-    public function getSalt()
-    {
-        return $this->_salt;
-    }
-
-    public function setSalt($salt)
-    {
-        $this->_salt = $salt;
-        return $this;
-    }
-
-    public function getPassword()
-    {
-        return $this->_password;
-    }
-
-    public function setNewPassword($password)
-    {
-        $this->_salt = Default_Model_DbTable_UserItem::makeSalt();
-        $this->_password = md5($this->_salt . $password);
-        return $this;
-    }
 
     public function getRoles($raw = false)
     {
@@ -317,22 +249,6 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         $this->setNewPassword($password);
         $this->save();
         return $password;
-    }
-
-    public function getDefaultAvatar()
-    {
-        $profile = $this->getProfile();
-        $avatar  = $profile->getDefaultAvatar();
-        unset($profile);
-        return $avatar;
-    }
-
-    public function getProfile()
-    {
-        $model = new Default_Model_UserProfile();
-        $profile = $model->find($this->getId());
-        unset($model);
-        return $profile;
     }
 
 }

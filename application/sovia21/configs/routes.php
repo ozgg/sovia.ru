@@ -37,31 +37,31 @@ return array(
     ),
 
     'user_register' => new Zend_Controller_Router_Route_Static(
-        'register',
+        '/register',
         array(
             'controller' => 'user',
             'action'     => 'register',
         )
     ),
     'user_login' => new Zend_Controller_Router_Route_Static(
-        'login',
+        '/login',
         array(
             'controller' => 'user',
             'action'     => 'login',
         )
     ),
     'user_logout' => new Zend_Controller_Router_Route_Static(
-        'logout',
+        '/logout',
         array(
             'controller' => 'user',
             'action'     => 'logout',
         )
     ),
     'user_forgot' => new Zend_Controller_Router_Route_Static(
-        'user/forgot'
+        '/user/forgot'
     ),
     'user_reset' => new Zend_Controller_Router_Route_Static(
-        'user/reset'
+        '/user/reset'
     ),
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(

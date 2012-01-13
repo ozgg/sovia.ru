@@ -1,0 +1,18 @@
+<h1>Восстановить пароль</h1>
+<?php if (!empty($this->message)): ?>
+<div class="message"><?php echo $this->message; ?></div>
+<?php endif; ?>
+<?php if (!$this->isSent): ?>
+<p>Для восстановления пароля введите e-mail адрес, указанный при&nbsp;регистрации.
+На&nbsp;него придёт ключ восстановления пароля.</p>
+<p>Если он уже пришёл, вы можете <a href="<?php echo $this->url(array(), 'user_reset', true); ?>">ввести ключ</a>.</p>
+<form action="<?php echo $this->url(); ?>" method="post">
+    <dl>
+        <dt><label for="email">E-mail, указанный при регистрации</label></dt>
+        <dd><input type="text" id="email" name="email" size="50" maxlength="100"/></dd>
+    </dl>
+    <div class="submit"><button type="submit">Получить код</button></div>
+</form>
+<?php else: ?>
+<div class="message">Ключ восстановления создан и отправлен вам по электронной почте.</div>
+<?php endif; ?>

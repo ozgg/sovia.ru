@@ -1,18 +1,14 @@
 <div id="auth-info">
 <?php
 if ($this->user->getId() > 0) {
-	$login = $this->user->getLogin(false);
-	$link  = $this->partial('user/_userlink.phtml', array('login' => $login));
+	$link  = $this->partial('user/_userlink.phtml', array('login' => $this->user->login));
 ?>
     <div id="auth-options">
-        <div class="userpic"><?php echo ($this->user->getDefaultAvatar()); ?></div>
-        <div class="fl">
-            <p>Здравствуйте,<br /><?php echo $link; ?>.</p>
-            <ul>
-                <li><a href="/my/">Кабинет</a></li>
-                <li><a href="/user/logout/">Выйти</a></li>
-            </ul>
-        </div>
+        <p>Здравствуйте, <?php echo $link; ?>.</p>
+        <ul>
+            <li><a href="/my/">Кабинет</a></li>
+            <li><a href="<?php echo $this->url(array(), 'user_logout', true); ?>">Выйти</a></li>
+        </ul>
     </div>
 <?php
 } else {

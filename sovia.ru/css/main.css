@@ -130,6 +130,31 @@ dd.notice {
     color: #aa0000;
 }
 
+#flash-message {
+    margin: 0.5em auto;
+    padding: 0.5em 2em;
+    color: #004000;
+    background: #f0fff0;
+    border: dotted 1px;
+}
+
+.message {
+    margin: 0.5em auto;
+    padding: 0.5em 2em;
+    color: #202020;
+    background: #f0f0f0;
+    border: dotted 1px;
+}
+
+.result {
+    margin: 0.5em auto;
+    padding: 0.5em 2em;
+    color: #002000;
+    background: #f0fff0;
+    border: dotted 1px;
+    font-weight: bold;
+}
+
 /*
 body {
 	margin: 0;

@@ -15,6 +15,8 @@ class Form_User_Register extends Zend_Form
         $this->_addEmail();
         $this->_addPassword();
         $this->_addKey();
+        $this->_addMailFlag();
+        $this->_addBotTrap();
 
         $submit = new Zend_Form_Element_Submit(
             array(
@@ -115,5 +117,32 @@ class Form_User_Register extends Zend_Form
         unset($exclude, $validator, $validatorOptions);
 //*/
         $this->addElement($key);
+    }
+
+    private function _addMailFlag()
+    {
+        $flag = new Zend_Form_Element_Checkbox(
+            array(
+                'name'  => 'mail_get',
+                'label' => 'Получать уведомления по e-mail',
+                'value' => '1',
+            )
+        );
+
+        $this->addElement($flag);
+    }
+
+    private function _addBotTrap()
+    {
+        $trap = new Zend_Form_Element_Checkbox(
+            array(
+                'name'  => 'agree',
+                'label' => 'Я бот и на самом деле не собираюсь пользоваться сайтом',
+                'value' => '1',
+                'checked' => false,
+            )
+        );
+
+        $this->addElement($trap);
     }
 }

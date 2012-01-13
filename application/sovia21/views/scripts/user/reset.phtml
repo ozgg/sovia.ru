@@ -1,0 +1,21 @@
+<h1>Сбросить пароль</h1>
+<?php if (!empty($this->message)): ?>
+<div class="message"><?php echo $this->message; ?></div>
+<?php endif; ?>
+<?php if (!$this->isReset): ?>
+<p>Для сброса пароля введите e-mail адрес, указанный при&nbsp;регистрации,
+ключ, который на него пришёл, и новый пароль.</p>
+<form action="<?php echo $this->url(); ?>" method="post">
+    <dl>
+        <dt><label for="email">E-mail, указанный при регистрации</label></dt>
+        <dd><input type="text" id="email" name="email" size="50" maxlength="100" value="<?php echo $this->escape($this->email); ?>" /></dd>
+        <dt><label for="key">Ключ смены пароля</label></dt>
+        <dd><input type="text" id="key" name="key" size="50" maxlength="50" value="<?php echo $this->escape($this->key); ?>" /></dd>
+        <dt><label for="password">Новый пароль</label></dt>
+        <dd><input type="text" id="password" name="password" size="50" maxlength="100"/></dd>
+    </dl>
+    <div class="submit"><button type="submit">Сменить пароль</button></div>
+</form>
+<?php else: ?>
+<div class="message">Пароль успешно изменён на новый.</div>
+<?php endif; ?>

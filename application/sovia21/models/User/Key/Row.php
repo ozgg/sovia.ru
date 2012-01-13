@@ -24,4 +24,9 @@ class User_Key_Row extends Ext_Db_Table_Row
         $date = date('smiYHd');
         $this->body = sprintf($format, $rand, $type, $user, $date, rand(0, 16));
     }
+
+    public function getBody()
+    {
+        return $this->body;
+    }
 }

@@ -69,7 +69,8 @@ class UserController extends Ext_Controller_Action
         $form    = new Form_User_Register();
         if ($request->isPost()) {
             $data = $request->getPost();
-            if ($form->isValid($data)) {
+            $done = false || !empty($data['agree']);
+            if ($form->isValid($data) && empty($data['agree'])) {
                 $keyTable  = new User_Key();
                 $userTable = new User();
                 $mapper = $keyTable->getMapper();
@@ -82,6 +83,7 @@ class UserController extends Ext_Controller_Action
                 $user->login = $data['login'];
                 $user->setPassword($data['password']);
                 $user->email = $data['email'];
+                $user->setAllowMail(!empty($data['mail_get']));
                 $user->setIp();
                 if (!empty($key)) {
                     $user->parent_id = $key->user_id;
@@ -92,6 +94,10 @@ class UserController extends Ext_Controller_Action
                 $this->_auth->getStorage()->write($user->getId());
                 $storage = new Zend_Session_Namespace('auth_user');
                 $storage->user = $user;
+                $done = true;
+            }
+            if ($done) {
+                $this->_setFlashMessage('Регистрация прошла успешно.');
                 $this->_redirect($this->view->url(array(), 'home', true));
             }
         }
@@ -129,59 +135,6 @@ class UserController extends Ext_Controller_Action
         }
         $this->view->error = $error;
 
-        $this->view->headTitle('Вход на сайт');
-        $authData = $this->_auth->read();
-        if (!empty($authData['user'])) {
-            $this->_redirect('/user/');
-        }
-        $errors     = array();
-        $result     = '';
-        $showForm   = true;
-        $login      = '';
-        $rememberMe = '';
-        $request    = $this->getRequest();
-        if ($request->isPost()) {
-            $login    = $request->getPost('login');
-            $password = $request->getPost('password');
-            $remember = $request->getPost('remember');
-            if ($login != '') {
-                $model  = new Default_Model_UserItem();
-                $userId = $model->checkPair($login, $password);
-                if (!empty($userId)) {
-                    $result  .= 'Вы успешно вошли.';
-                    $showForm = false;
-                    $user     = $model->find($userId);
-                    $roles    = $user->getRoles();
-                    $authData = array(
-                        'user' => $user,
-                        'roles' => $roles,
-                    );
-                    $this->_auth->write($authData);
-                    $authData = $this->_auth->read();
-                    $this->view->user = $authData['user'];
-                    unset($authData);
-                    if (!empty($remember)) {
-                        $remoteAddr = $_SERVER['REMOTE_ADDR'];
-                        $sessionKey = $model->setSession($userId, $remoteAddr);
-                        $cookieData = "{$userId}\t{$sessionKey}";
-                        unset($remoteAddr, $sessionKey);
-                        $expires    = time() + 2419200;
-                        setcookie('person', $cookieData, $expires, '/');
-                        unset($cookieData, $expires);
-                        $rememberMe = 'checked="checked" ';
-                    }
-                } else {
-                    $errors[] = 'В доступе отказано';
-                }
-                unset($userId, $model);
-            }
-            unset($password, $remember);
-        }
-        $this->view->showForm = $showForm;
-        $this->view->errors   = $errors;
-        $this->view->result   = $result;
-        $this->view->login    = $login;
-        $this->view->remember = $rememberMe;
     }
 
 	/**
@@ -235,21 +188,19 @@ class UserController extends Ext_Controller_Action
 		$this->view->result = $result;
 	}
 
-	/**
-	 * Выход
-	 */
-	public function logoutAction()
-	{
-		$this->view->headTitle('Выход');
-		$auth = $this->_auth->read();
-		if (!empty($auth['user'])) {
-			$this->_auth->write(array('user' => null, 'roles' => array()));
-			setcookie('person', false, 0, '/');
-			$this->view->result = 'Вы вышли.';
-		} else {
-			$this->_redirect('/');
-		}
-	}
+    /**
+     * Выход с сайта (закрытие сессии)
+     *
+     * @return void
+     */
+    public function logoutAction()
+    {
+        $this->_auth->clearIdentity();
+        $storage = new Zend_Session_Namespace('auth_user');
+        $storage->user = null;
+        $this->_redirect($this->view->url(array(), 'home', true));
+    }
+
 
 	/**
 	 * Профиль пользователя
@@ -297,115 +248,111 @@ class UserController extends Ext_Controller_Action
 		unset($model);
 	}
 
-	/**
-	 * Восстановление пароля
-	 *
-	 */
-	public function recoverAction()
-	{
-		$this->view->headTitle('Восстановление пароля');
-		$showForm = true;
-		$errors   = array();
-		$result   = '';
-		$request  = $this->getRequest();
-		$model    = new Default_Model_UserItem();
-		if ($request->isPost()) {
-			$login = $request->getPost('recover_login', '');
-			$email = $request->getPost('recover_email', '');
-			$user  = $model->findByField('login', $login);
-			if ($user->getId() > 0) {
-				if ($user->getMail() == $email) {
-					try {
-						$this->_addRecoveryKey($user);
-						$result = 'Запрос на восстановление пароля принят.
-								Вам придёт письмо со ссылкой для
-								восстановления.';
-					} catch (Exception $e) {
-						$errors[] = $e->getMessage();
-					}
-					$showForm = false;
-				} else {
-					$errors[] = 'E-mail не совпадает с адресом в профиле.';
-				}
-			} else {
-				$errors[] = 'Не нашлось такого пользователя.';
-			}
-			unset($login, $email, $user);
-		} else {
-			$key   = $request->getParam('key', '');
-			$parts = explode('-', $key);
-			if (count($parts) == 2) {
-				$ownerId  = $parts[0];
-				$eventKey = $parts[1];
-				try {
-					$password = $this->_useRecoveryKey($ownerId, $eventKey);
-					if (!empty($password)) {
-						$result .= "Пароль успешно изменён на {$password}";
-					} else {
-						$errors[] = 'Не удалось создать новый пароль.';
-					}
-				} catch (Exception $e) {
-					$errors[] = $e->getMessage();
-				}
-				unset($ownerId, $eventKey);
-				$showForm = false;
-			}
-			unset($key, $parts);
-		}
-		unset($model, $request);
-		$this->view->showForm = $showForm;
-		$this->view->errors   = $errors;
-		$this->view->result   = $result;
-	}
+    /**
+     * Получение ключа сброса пароля
+     *
+     * @return void
+     */
+    public function forgotAction()
+    {
+        $this->view->headTitle('Выслать ключ восстановления пароля');
+        $description = 'Форма отправки ключа восстановления пароля';
+        $this->view->headMeta()->appendName('description', $description);
+        $isSent  = false;
+        $message = '';
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        if ($request->isPost() && $request->has('email')) {
+            $email = $request->getPost('email');
+            $userTable = new User();
+            $userMapper = $userTable->getMapper();
+            $userMapper->email($email);
+            /** @var $user User_Row */
+            $user = $userMapper->fetchRow();
+            if (!empty($user)) {
+                $keyTable  = new User_Key();
+                $keyMapper = $keyTable->getMapper();
+                $keyMapper->user($user)->active()->typeId(User_Key::KEY_RESET);
+                $key = $keyMapper->fetchRow();
+                if (is_null($key)) {
+                    $key = $user->createKey(User_Key::KEY_RESET);
+                    /** @var $mailer Helper_Mailer */
+                    $mailer = $this->_helper->getHelper('Mailer');
+                    $isSent = $mailer->recover($user, $key);
+                } else {
+                    $message = 'Ключ уже создан и ещё не использован';
+                }
+            } else {
+                $message = 'Такого адреса нет';
+            }
+        }
 
-	/**
-	 * Добавить ключ восстановления пароля
-	 */
-	protected function _addRecoveryKey(Default_Model_UserItem $user)
-	{
-		$key = new Default_Model_UserKey();
-		$key->create($user, Default_Model_UserKey::TYPE_PASSWORD);
-		$mailer = $this->_helper->getHelper('Mailer');
-		$data   = array(
-			'type' => Helper_Mailer::TYPE_RECOVER,
-			'key'  => $key,
-		);
-		$mailer->send($user, $data);
-		unset($data, $key);
-	}
+        $this->view->isSent  = $isSent;
+        $this->view->message = $message;
+    }
 
-	/**
-	 * Воспользоваться ключом восстановления
-	 */
-	protected function _useRecoveryKey($ownerId, $eventKey)
-	{
-		settype($ownerId, 'int');
-		$userKey  = new Default_Model_UserKey();
-		$userItem = new Default_Model_UserItem();
-		$password = null;
-		$key = $userKey->findByField('event_key', $eventKey);
-		if ($key->getId() > 0) {
-			if ($ownerId == $key->getOwnerId()) {
-				if (!$key->isExpired()) {
-					$user = $userItem->find($ownerId);
-					if ($user->getId() > 0) {
-						$password = $user->resetPassword();
-						$key->delete();
-					}
-					unset($user);
-				} else {
-					$key->delete();
-					throw new Exception('Ключ больше недействителен.');
-				}
-			} else {
-				throw new Exception('Неправильный ключ.');
-			}
-		} else {
-			throw new Exception('Неизвестный ключ.');
-		}
-		unset($key, $userKey, $userItem);
-		return $password;
-	}
+
+    /**
+     * Сброс пароля
+     *
+     * @return void
+     */
+    public function resetAction()
+    {
+        $this->view->headTitle('Сброс пароля');
+        $description = 'Форма восстановления пароля';
+        $this->view->headMeta()->appendName('description', $description);
+        $isReset = false;
+        $message = '';
+        $email   = '';
+        $body    = '';
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $email = $request->getPost('email', '');
+            $body  = $request->getPost('key',   '');
+            $password = $request->getPost('password', '');
+            if (strlen($email) < 6) {
+                $message = 'Неправильный e-mail';
+            } elseif (strlen($body) < 1) {
+                $message = 'Неправильный ключ';
+            } elseif (strlen($password) < 5) {
+                $message = 'Слишком короткий пароль';
+            } else {
+                $userTable = new User();
+                $userMapper = $userTable->getMapper();
+                $userMapper->email($email);
+                /** @var $user User_Row */
+                $user = $userMapper->fetchRow();
+                if (!is_null($user)) {
+                    $keyTable = new User_Key();
+                    $keyMapper = $keyTable->getMapper();
+                    $keyMapper->active()
+                              ->user($user)
+                              ->body($body)
+                              ->typeId(User_Key::KEY_RESET);
+                    /** @var $key User_Key_Row */
+                    $key = $keyMapper->fetchRow();
+                    if (!is_null($key)) {
+                        $user->setPassword($password);
+                        $user->save();
+                        $isReset = true;
+                        $key->expire();
+                        $key->save();
+                    } else {
+                        $message = 'Недействительный ключ';
+                    }
+                } else {
+                    $message = 'Такого адреса нет';
+                }
+            }
+        }
+
+        $this->view->isReset = $isReset;
+        $this->view->message = $message;
+        $this->view->email   = $email;
+        $this->view->key     = $body;
+    }
 
     /**
      * Аутентификация
@@ -423,15 +370,16 @@ class UserController extends Ext_Controller_Action
         }
         $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
         $this->_authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-        $this->_authAdapter->setTableName('user')
+        $this->_authAdapter->setTableName('user_item')
                     ->setIdentityColumn($column)
                     ->setCredentialColumn('password')
                     ->setCredentialTreatment('md5(concat(salt, ?))')
                     ->setIdentity($login)
                     ->setCredential($password);
         $select = $this->_authAdapter->getDbSelect();
-        $select->where('banned_till is null or banned_till < now()');
+        $select->where('is_active = 1');
         $result = $this->_auth->authenticate($this->_authAdapter);
+
         return $result->isValid();
     }
 
@@ -451,6 +399,7 @@ class UserController extends Ext_Controller_Action
         $user->login();
         $user->save();
         $storage->write($user->getId());
+
         return $user;
     }
 }

@@ -116,4 +116,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         return $resourceLoader;
     }
+
+    protected function _initHelpers()
+    {
+        Zend_Controller_Action_HelperBroker::addPath(APPLICATION_PATH . '/plugins/helpers', 'Helper');
+    }
 }
