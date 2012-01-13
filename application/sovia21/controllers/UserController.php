@@ -115,7 +115,6 @@ class UserController extends Ext_Controller_Action
         $this->view->form = $form;
     }
 
-
     /**
      * Авторизация
      *
@@ -144,6 +143,68 @@ class UserController extends Ext_Controller_Action
             }
         }
         $this->view->error = $error;
+    }
+
+    /**
+     * Сброс пароля
+     *
+     * @return void
+     */
+    public function resetAction()
+    {
+        $this->view->headTitle('Сброс пароля');
+        $description = 'Форма восстановления пароля';
+        $this->view->headMeta()->appendName('description', $description);
+        $isReset = false;
+        $message = '';
+        $email   = '';
+        $body    = '';
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $email = $request->getPost('email', '');
+            $body  = $request->getPost('key',   '');
+            $password = $request->getPost('password', '');
+            if (strlen($email) < 6) {
+                $message = 'Неправильный e-mail';
+            } elseif (strlen($body) < 1) {
+                $message = 'Неправильный ключ';
+            } elseif (strlen($password) < 5) {
+                $message = 'Слишком короткий пароль';
+            } else {
+                $userTable = new User();
+                $userMapper = $userTable->getMapper();
+                $userMapper->email($email);
+                /** @var $user User_Row */
+                $user = $userMapper->fetchRow();
+                if (!is_null($user)) {
+                    $keyTable = new User_Key();
+                    $keyMapper = $keyTable->getMapper();
+                    $keyMapper->active()
+                              ->user($user)
+                              ->body($body)
+                              ->typeId(User_Key::KEY_RESET);
+                    /** @var $key User_Key_Row */
+                    $key = $keyMapper->fetchRow();
+                    if (!is_null($key)) {
+                        $user->setPassword($password);
+                        $user->save();
+                        $isReset = true;
+                        $key->expire();
+                        $key->save();
+                    } else {
+                        $message = 'Недействительный ключ';
+                    }
+                } else {
+                    $message = 'Такого адреса нет';
+                }
+            }
+        }
+
+        $this->view->isReset = $isReset;
+        $this->view->message = $message;
+        $this->view->email   = $email;
+        $this->view->key     = $body;
     }
 
 	/**
