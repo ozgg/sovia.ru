@@ -103,14 +103,21 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $key;
     }
 
+    public function setEmail($email)
+    {
+        $this->set('email', $email);
+
+        return $this;
+    }
+
     public function getEmail()
     {
-        return $this->email;
+        return $this->get('email');
     }
 
     public function getLogin()
     {
-        return $this->login;
+        return $this->get('login');
     }
 
     /**
@@ -142,18 +149,17 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this;
     }
 
+    public function getAllowMail()
+    {
+        return (bool) $this->get('allow_mail');
+    }
+
     public function getDefaultAvatar()
     {
 //        $profile = $this->getProfile();
 //        $avatar  = $profile->getDefaultAvatar();
 //        unset($profile);
 //        return $avatar;
-    }
-
-    public function getProfile()
-    {
-        $profile = $this->findDependentRowset('Profile')->current();
-        return $profile;
     }
 
     public function setLastSeen($lastSeen)
@@ -163,6 +169,13 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this;
     }
 
+    public function checkCurrentPassword($password)
+    {
+        $salt = $this->get('salt');
+        $hash = md5($salt . $password);
+
+        return ($hash == $this->get('password'));
+    }
 
 
 
@@ -197,67 +210,4 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         }
         return $this->getMapper()->revokeRole($this->getId(), $name);
     }
-
-    public function checkPair($login, $password)
-    {
-        return $this->getMapper()->checkPair($login, $password);
-    }
-
-    public function setSession($userId, $remoteAddr)
-    {
-        $addressPattern = '/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/';
-        if (!is_numeric($remoteAddr)) {
-            if (preg_match($addressPattern, $remoteAddr)) {
-                $remoteAddr = ip2long($remoteAddr);
-            } else {
-                $remoteAddr = 0;
-            }
-        }
-        unset($addressPattern);
-        return $this->getMapper()->setSession($userId, $remoteAddr);
-    }
-
-    public function checkSession($userId, $key)
-    {
-        return $this->getMapper()->checkSession($userId, $key);
-    }
-
-    public function search($login)
-    {
-        return $this->getMapper()->search($login);
-    }
-
-    public function see()
-    {
-        return $this->getMapper()->see($this->getId());
-    }
-
-    public function getActivity()
-    {
-        return $this->getMapper()->getActivity();
-    }
-
-    public function mailIsOk()
-    {
-        $result = true;
-        return $result;
-    }
-
-    public function resetPassword()
-    {
-        $password = '';
-        $alphabet = 'qwertyuiopasdfghjklzxcvbnm1234567890';
-        $length   = strlen($alphabet) - 1;
-        $size     = rand(8, 10);
-        for ($i = 0; $i < $size; $i++) {
-            $offset    = rand(0, $length);
-            $password .= $alphabet[$offset];
-            unset($offset);
-        }
-        unset($i, $alphabet, $length, $size);
-        $this->setNewPassword($password);
-        $this->save();
-        return $password;
-    }
-
 }

@@ -1,0 +1,59 @@
+<?php
+/** @var $user User_Row */
+$user = $this->user;
+$login = $user->getLogin();
+$mailget = '';
+if ($user->getAllowMail()) {
+    $mailget = 'checked="checked" ';
+}
+?>
+<h1>Редактировать профиль</h1>
+<p>На этой странице вы можете изменить некоторые данные своего профиля.
+Можно также перейти к управлению <a href="<?php echo $this->url(array(), 'cabinet_avatars', true); ?>">картинками пользователя</a>.
+</p>
+<?php
+echo $this->partial('errors.phtml', array('errors' => $this->errors));
+?>
+<form method="post" action="<?php echo $this->url(); ?>" id="profile-edit-form">
+	<fieldset>
+		<legend>Основные данные</legend>
+		<dl>
+			<dt><label>Ваш логин</label></dt>
+			<dd><?php echo $this->escape($login); ?></dd>
+			<dd class="notice">Логин поменять нельзя. Он выбирается один раз при регистрации.</dd>
+			<dt><label>Прочее</label></dt>
+			<dd>
+				<input type="checkbox" name="allow_mail" id="new_mailget" value="1" <?php echo $mailget; ?>/>
+				<label for="new_mailget">Получать письма с сервера</label>
+			</dd>
+		</dl>
+		<div><a href="#" onclick="$('#profile-pass-block').toggle();return false;">Смена пароля и e-mail адреса</a></div>
+		<dl id="profile-pass-block">
+			<dt><label for="old_password">Текущий пароль</label></dt>
+			<dd><input type="password" name="old_password" id="old_password" size="16" /></dd>
+			<dd class="notice">Текущий пароль нужен для гарантии того, что вы производите эти действия от своего имени.</dd>
+			<dt><label for="new_password">Пароль</label></dt>
+			<dd><input type="password" name="new_password" id="new_password" size="16" /></dd>
+			<dd class="notice">Если не собираетесь менять пароль, оставьте это поле пустым.<br />
+			Пароль желательно выбирать надёжным. Рекомендуется использовать
+			прописные и строчные символы, цифры и знаки препинания. Минимальная длина составляет
+			три символа. Рекомендуемая длина &mdash; 8 символов.</dd>
+			<dt><label for="new_password_confirm">Подтверждение пароля</label></dt>
+			<dd><input type="password" name="new_password_confirm" id="new_password_confirm" size="16" /></dd>
+			<dd class="notice">Введите пароль ещё раз, чтобы убедиться, что не было
+			допущено ошибок.</dd>
+			<dt><label for="new_email">Ваш e-mail</label></dt>
+			<dd><input type="text" name="new_email" id="new_email" size="50" maxlength="100" value="<?php echo $this->escape($user->getEmail()); ?>" /></dd>
+			<dd class="notice">Адрес электронной почты нужен для восстановления пароля в случае его
+			утери, получения сообщений с сервера (если вы устанавливаете соответствующую
+			галочку) и обратной связи с вами в случае необходимости
+			(<a href="<?php echo $this->url(array(), 'privacy', true); ?>" title="Соглашение о конфиденциальности">Соглашение о конфиденциальности</a>).</dd>
+		</dl>
+	</fieldset>
+	<div class="submit"><button type="submit">Готово</button></div>
+</form>
+<script type="text/javascript">/*<![CDATA[*/
+$(document).ready = new function() {
+	$('#profile-pass-block').toggle();
+}
+/*]]>*/</script>
