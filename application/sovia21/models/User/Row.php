@@ -10,6 +10,18 @@
 class User_Row extends Ext_Db_Table_Row implements User_Interface
 {
     /**
+     * Обновить время последнего входа
+     *
+     * @return User_Row
+     */
+    public function login()
+    {
+        $this->setLastSeen(new Zend_Db_Expr('now()'));
+
+        return $this;
+    }
+
+    /**
      * Задать новый пароль
      *
      * @param string $password
@@ -18,23 +30,11 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
     public function setPassword($password)
     {
         $salt = $this->_makeSalt();
-        $this->salt = $salt;
-        $this->password = md5($salt . $password);
+        $this->set('salt', $salt);
+        $this->set('password', md5($salt . $password));
 
         return $this;
     }
-
-    /**
-     * Обновить время последнего входа
-     *
-     * @return User_Row
-     */
-    public function login()
-    {
-        $this->last_seen = new Zend_Db_Expr('now()');
-        return $this;
-    }
-
 
     /**
      * Сгенерировать соль
@@ -67,7 +67,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
      */
     public function setIp()
     {
-        $this->remote_addr = ip2long(self::$_ip);
+        $this->set('remote_addr', ip2long(self::$_ip));
 
         return $this;
     }
@@ -79,7 +79,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
      */
     public function getRemoteAddr()
     {
-        return long2ip($this->remote_addr);
+        return long2ip($this->get('remote_addr'));
     }
 
     /**
@@ -137,7 +137,8 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         if ($allowMail != 0) {
             $allowMail = 1;
         }
-        $this->allow_mail = $allowMail;
+        $this->set('allow_mail', $allowMail);
+
         return $this;
     }
 
@@ -149,10 +150,18 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
 //        return $avatar;
     }
 
+    public function getProfile()
+    {
+        $profile = $this->findDependentRowset('Profile')->current();
+        return $profile;
+    }
 
+    public function setLastSeen($lastSeen)
+    {
+        $this->set('last_seen', $lastSeen);
 
-
-
+        return $this;
+    }
 
 
 

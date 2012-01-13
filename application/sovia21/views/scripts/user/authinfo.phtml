@@ -15,7 +15,7 @@ if ($this->user->getId() > 0) {
 ?>
     <form id="auth-top" method="post" action="<?php echo $this->url(array(), 'user_login', true); ?>">
     <dl>
-        <dt><label for="auth-login-top">Вход на сайт: </label></dt>
+        <dt><label for="auth-login-top"><a href="<?php echo $this->url(array(), 'user_login', true); ?>" title="Вход">Вход</a> на сайт: </label></dt>
         <dd><input type="text" size="16" maxlength="16" id="auth-login-top" name="login" title="Логин" /></dd>
         <dd><input type="password" size="14" id="auth-password-top" name="password" title="Пароль" /></dd>
         <dd><input type="image" src="/images/auth-submit.gif" id="auth-submit-top" title="Войти" /><input type="hidden" name="remember" value="1" /></dd>
