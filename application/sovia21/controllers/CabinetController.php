@@ -23,6 +23,85 @@ class CabinetController extends Ext_Controller_Action
 
     public function avatarsAction()
     {
+        $this->checkUser();
+        $view = $this->view;
+        $table = new User;
+        /** @var $user User_Row */
+        $user = $table->selectBy('id', $this->_user->getId())->fetchRowIfExists();
+        $view->user = $user;
+        $this->view->headTitle('Управление картинками пользователя');
+
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        $errors  = array();
+        $results = array();
+        $avatarTable = new User_Avatar;
+        $avatarMapper = $avatarTable->getMapper();
+        $avatarMapper->owner($user);
+        $list = $avatarMapper->fetchAll();
+
+        if ($request->isPost()) {
+            $post = $request->getPost('avatar');
+            if (!empty($post)) {
+                foreach ($post as $avatarId => $data) {
+                    /** @var $avatar User_Avatar_Row */
+                    $avatar = $avatarTable->selectBy('id', $avatarId)->fetchRowIfExists();
+                    if ($avatar->getOwnerId() == $user->getId()) {
+                        if (isset($data['del'])) {
+                            try {
+                                $name = strip_tags($avatar->getName());
+                                $avatar->delete();
+                                $results[] = "Картинка {$name} удалена.";
+                            } catch (Exception $e) {
+                                $errors[] = $e->getMessage();
+                            }
+                        } else {
+                            if (isset($data['name'])) {
+                                $avatar->setName($data['name']);
+                                try {
+                                    $avatar->save();
+                                } catch (Exception $e) {
+                                    $errors[] = $e->getMessage();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            $post = $request->getPost('avatar_default');
+            if (!empty($post)) {
+                /** @var $avatar User_Avatar_Row */
+                $avatar = $avatarTable->selectBy('id', $post)->fetchRowIfExists();
+                if ($avatar->getOwnerId() == $user->getId()) {
+                    if ($user->getAvatarId() != $post) {
+                        $user->setAvatarId($post);
+                        try {
+                            $user->save();
+                            $result  = "Новая картинка по умолчанию &mdash; ";
+                            $result .= $avatar->getName();
+                            $results[] = $result;
+                        } catch (Exception $e) {
+                            $errors[] = $e->getMessage();
+                        }
+                    }
+                }
+            }
+
+            $count = count($list);
+            if ($count < $user->getMaxAvatars()) {
+                try {
+                    $filePath = $this->_setUploadedAvatar('avatar_add');
+                    if (!empty($filePath)) {
+                        $results[] = 'Новая картинка добавлена';
+                    }
+                } catch (Exception $e) {
+                    $errors[] = $e->getMessage();
+                }
+            }
+        }
+        $this->view->errors = $errors;
+        $this->view->list   = $list;
+        $this->_setFlashMessage($results);
     }
 
     public function dreamsAction()
@@ -113,7 +192,7 @@ class CabinetController extends Ext_Controller_Action
    	{
    		$filePath = null;
    		$upload = new Zend_File_Transfer_Adapter_Http();
-   		$upload->setDestination(APPLICATION_PATH . '/upload/');
+//   		$upload->setDestination(APPLICATION_PATH . '/upload/');
    		$upload->receive();
    		$filePath = $upload->getFileName($name);
    		if (!empty($filePath)) {

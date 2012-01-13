@@ -1,4 +1,7 @@
 <?php
+/**
+ * Таблица пользователя
+ */
 class User extends Ext_Db_Table_Abstract
 {
     /**

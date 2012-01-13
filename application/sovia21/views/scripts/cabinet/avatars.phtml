@@ -1,0 +1,81 @@
+<?php
+/** @var $user User_Row */
+$user = $this->user;
+	$defaultAvatarId = $user->getAvatarId();
+	$maxAvatars      = $user->getMaxAvatars();
+	$maxWeight = round(User_Avatar::MAX_WEIGHT / 1024, 2);
+	$maxWidth  = User_Avatar::MAX_WIDTH;
+	$maxHeight = User_Avatar::MAX_HEIGHT;
+?>
+<h1>Управление картинками пользователя</h1>
+<p>Вы&nbsp;можете загрузить до&nbsp;<?php echo $maxAvatars; ?>&nbsp;картинок
+пользователя (аватаров) и&nbsp;использовать их&nbsp;на&nbsp;сайте. Каждая
+картинка должна иметь размер <?php echo "{$maxWidth}&nbsp;на&nbsp;{$maxHeight}"; ?>
+ пикселей, а&nbsp;размер файла не&nbsp;может превышать
+<?php echo $maxWeight; ?>&nbsp;килобайт.
+Допустимые форматы файлов: JPG, PNG, GIF.</p>
+<?php
+	echo $this->partial('errors.phtml', array('errors'  => $this->errors));
+?>
+<form id="avatar-management-form" action="<?php echo $this->url(); ?>" method="post" enctype="multipart/form-data">
+<?php
+$count = count($this->list);
+if ($count > 0) {
+?>
+<h2>Ваши картинки пользователя</h2>
+<ul id="avatar-list">
+<?php
+	foreach ($this->list as $avatar) {
+		$checked = '';
+		$avatarId = $avatar->getId();
+		if ($avatar->getId() == $defaultAvatarId) {
+			$checked = 'checked="checked" ';
+		}
+?>
+	<li>
+		<div class="userpic"><?php echo $avatar; ?></div>
+		<div class="details">
+			<label for="avatar-name-<?php echo $avatarId; ?>">Название: </label>
+			<input type="text" name="avatar[<?php echo $avatarId; ?>][name]" value="<?php echo $avatar->getName(); ?>" size="30" maxlength="30" id="avatar-name-<?php echo $avatarId; ?>" title="Название" /><br />
+			<input type="radio" name="avatar_default" value="<?php echo $avatarId; ?>" <?php echo $checked; ?> id="default-avatar-<?php echo $avatarId; ?>" title="Использовать по умолчанию" />
+			<label for="default-avatar-<?php echo $avatarId; ?>" class="small">Использовать по умолчанию</label><br />
+			<br />
+			<input type="checkbox" name="avatar[<?php echo $avatarId; ?>][del]" id="avatar-del-<?php echo $avatarId; ?>" />
+			<label for="avatar-del-<?php echo $avatarId; ?>">Удалить</label>
+		</div>
+	</li>
+<?php
+	}
+?>
+</ul>
+<div class="submit"><button type="submit">Готово</button></div>
+<?php
+} else {
+?>
+<div class="result">У вас нет ни одной картинки пользователя</div>
+<?php
+}
+unset($defaultAvatarId, $profile);
+
+if ($count < $maxAvatars) {
+?>
+<h2>Добавить картинку</h2>
+<dl>
+	<dt><label for="avatar-add">Путь к файлу на компьютере</label></dt>
+	<dd>
+		<input type="hidden" name="MAX_FILE_SIZE" value="20480" />
+		<input type="file" name="avatar_add" id="avatar-add" />
+	</dd>
+	<dd class="notice">Картинка не может превышать по размеру файла <?php echo $maxWeight; ?> килобайт
+	и иметь размеры <?php echo "{$maxWidth}x{$maxHeight}"; ?> пикселей. Допустимые форматы: png, jpg, gif.</dd>
+</dl>
+<div class="submit"><button type="submit">Готово</button></div>
+<?php
+} else {
+?>
+<div class="result">Вы загрузили максимально возможное количество картинок</div>
+<?php
+}
+unset($maxWeight, $maxWidth, $maxHeight, $maxAvatars, $count);
+?>
+</form>

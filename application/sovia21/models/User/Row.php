@@ -177,7 +177,20 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return ($hash == $this->get('password'));
     }
 
+    public function getAvatarId()
+    {
+        return $this->get('avatar_id');
+    }
 
+    public function setAvatarId($avatarId)
+    {
+        $this->set('avatar_id', $avatarId);
+    }
+
+    public function getMaxAvatars()
+    {
+        return $this->get('max_avatars');
+    }
 
 
     public function getRoles($raw = false)

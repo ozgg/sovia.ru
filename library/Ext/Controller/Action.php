@@ -37,13 +37,18 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
     /**
      * Установить сообщение в сессию
      *
-     * @param string $message
+     * @param string|array $message
      * @return void
      */
     protected function _setFlashMessage($message)
     {
-        $storage = new Zend_Session_Namespace('internal');
-        $storage->message = $message;
+        if (!empty($message)) {
+            if (is_array($message)) {
+                $message = implode('<br />', $message);
+            }
+            $storage = new Zend_Session_Namespace('internal');
+            $storage->message = $message;
+        }
     }
 
     /**
