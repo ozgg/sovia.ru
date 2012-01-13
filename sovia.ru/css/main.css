@@ -167,6 +167,31 @@ dd.notice {
     margin: 0.5em auto;
 }
 
+
+#avatar-list {
+	margin: 0;
+	padding: 0;
+}
+
+#avatar-list li {
+	display: block;
+	height: 100px;
+	list-style-type: none;
+	margin: 0.5em 0 0 0;
+	padding: 0;
+}
+
+#avatar-list .userpic {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 0 5px 0 0;
+}
+
+#avatar-list .details {
+	margin: 0 0 0 105px;
+}
+
 /*
 body {
 	margin: 0;
@@ -416,30 +441,6 @@ a:hover {
 #right-column .sidebar {
 	background: #dddddd;
 	margin: 0 0 1em 0;
-}
-
-#avatar-list {
-	margin: 0;
-	padding: 0;
-}
-
-#avatar-list li {
-	display: block;
-	height: 100px;
-	list-style-type: none;
-	margin: 0.5em 0 0 0;
-	padding: 0;
-}
-
-#avatar-list .userpic {
-	float: left;
-	width: 100px;
-	height: 100px;
-	margin: 0 5px 0 0;
-}
-
-#avatar-list .details {
-	margin: 0 0 0 105px;
 }
 
 .posting {

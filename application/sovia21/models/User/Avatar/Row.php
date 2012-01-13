@@ -9,32 +9,28 @@
 class User_Avatar_Row extends Ext_Db_Table_Row
 {
 
-    	public function __toString()
-    	{
-            try {
-                $image = '';
-              		$path  = $this->getFilepath();
-              		if (!empty($path)) {
-              			$file = '.' . User_Avatar::STORAGE . $path;
-              			if (file_exists($file)) {
-              				$imageSize = getimagesize($file);
-              				if (!empty($imageSize[3])) {
-              					$name   = $this->getName();
-              					$image  = '<img src="' . User_Avatar::STORAGE . $path . '"';
-              					$image .= $imageSize[3] . ' alt="' . $name . '" />';
-              					unset($name);
-              				}
-              			}
-              			unset($file);
-              		}
-              		unset($path);
-
-            } catch (Exception $e) {
-                $image = $e->getMessage() . '<pre>' . $e->getTraceAsString() . '</pre>';
+    public function __toString()
+    {
+        $image = '';
+        $path  = $this->getFilepath();
+        if (!empty($path)) {
+            $file = '.' . User_Avatar::STORAGE . $path;
+            if (file_exists($file)) {
+                $imageSize = getimagesize($file);
+                if (!empty($imageSize[3])) {
+                    $name   = $this->getName();
+                    $image  = '<img src="' . User_Avatar::STORAGE . $path . '"';
+                    $image .= $imageSize[3] . ' alt="' . $name . '" />';
+                    unset($name);
+                }
+            } else {
+                return $file;
             }
 
-    		return $image;
-    	}
+        }
+
+        return $image;
+    }
 
     	public function getId()
     	{

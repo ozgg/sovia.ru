@@ -22,3 +22,5 @@ ALTER TABLE `user_key`
 ALTER TABLE `sovia_dev`.`user_item`
   ADD COLUMN `avatar_id` INT(10) UNSIGNED NULL  COMMENT 'Default avatar' AFTER `password`,
   ADD COLUMN `max_avatars` TINYINT(3) UNSIGNED DEFAULT 3  NOT NULL  COMMENT 'Maximum number of avatars' AFTER `avatar_id`;
+
+UPDATE `user_item` i SET i.`avatar_id` = (SELECT p.`avatar_id` FROM `user_profile` p WHERE p.`owner_id` = i.`id`);
