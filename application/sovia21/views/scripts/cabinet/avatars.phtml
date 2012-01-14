@@ -63,7 +63,7 @@ if ($count < $maxAvatars) {
 <dl>
 	<dt><label for="avatar-add">Путь к файлу на компьютере</label></dt>
 	<dd>
-		<input type="hidden" name="MAX_FILE_SIZE" value="20480" />
+		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo User_Avatar::MAX_WEIGHT; ?>" />
 		<input type="file" name="avatar_add" id="avatar-add" />
 	</dd>
 	<dd class="notice">Картинка не может превышать по размеру файла <?php echo $maxWeight; ?> килобайт

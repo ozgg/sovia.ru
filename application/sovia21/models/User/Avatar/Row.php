@@ -8,7 +8,6 @@
 
 class User_Avatar_Row extends Ext_Db_Table_Row
 {
-
     public function __toString()
     {
         $image = '';
@@ -32,82 +31,72 @@ class User_Avatar_Row extends Ext_Db_Table_Row
         return $image;
     }
 
-    	public function getId()
-    	{
-    		return $this->get('id');
-    	}
+    public function getId()
+    {
+        return $this->get('id');
+    }
 
-    	public function getOwnerId()
-    	{
-    		return $this->get('owner_id');
-    	}
+    public function getOwnerId()
+    {
+        return $this->get('owner_id');
+    }
 
-    	public function setOwnerId($ownerId)
-    	{
-    		$this->_ownerId = intval($ownerId);
-    		return $this;
-    	}
+    public function setOwner(User_Row $owner)
+    {
+        $this->set('owner_id', $owner->getId());
 
-    	public function getName()
-    	{
-    		return $this->get('name');
-    	}
+        return $this;
+    }
 
-    	public function setName($name)
-    	{
-    		$this->set('name', $name);
+    public function getName()
+    {
+        return htmlspecialchars($this->get('name'), ENT_QUOTES, 'UTF-8');
+    }
 
-    		return $this;
-    	}
+    public function setName($name)
+    {
+        $this->set('name', $name);
 
-    	public function getFilepath()
-    	{
-    		$path  = floor($this->getId() / 1000);
-    		$path .= sprintf('/%x-%u', $this->getOwnerId(), $this->getId());
-    		$path .= ".{$this->getExtension()}";
-    		return $path;
-    	}
+        return $this;
+    }
 
-    	public function getExtension()
-    	{
-    		return $this->get('extension');
-    	}
+    public function getFilepath()
+    {
+        $path  = floor($this->getId() / 1000);
+        $path .= sprintf('/%x-%u', $this->getOwnerId(), $this->getId());
+        $path .= ".{$this->getExtension()}";
+        return $path;
+    }
 
-    	public function setExtension($extension)
-    	{
-    		$this->_extension = $extension;
-    		return $this;
-    	}
+    public function getExtension()
+    {
+        return $this->get('extension');
+    }
 
-    	public function getList($page = 1, $epp = 30, array $options = array())
-    	{
-    		return $this->getMapper()->getList($page, $epp, $options);
-    	}
+    public function setExtension($extension)
+    {
+        $this->set('extension', $extension);
 
-    	public function delete()
-    	{
-    		if ($this->getMapper()->delete($this->getId())) {
-    			$path  = $this->getFilepath();
-    			if (!empty($path)) {
-    				$file = '.' . User_Avatar::STORAGE . $path;
-    				if (file_exists($file)) {
-    					unlink($file);
-    				} else {
-    					throw new Exception('Файл с картинкой не найден.');
-    				}
-    				unset($file);
-    			} else {
-    				throw new Exception('Не указан путь к файлу с картинкой.');
-    			}
-    			unset($path);
-    		}
-    	}
+        return $this;
+    }
 
-    	public function getCountOf($userId)
-    	{
-    		settype($userId, 'int');
-    		return $this->getMapper()->getCountOf($userId);
-    	}
+    public function delete()
+    {
+        parent::delete();
+        $path  = $this->getFilepath();
+        if (!empty($path)) {
+            $file = '.' . User_Avatar::STORAGE . $path;
+            if (file_exists($file)) {
+                unlink($file);
+            } else {
+                throw new Exception('Файл с картинкой не найден.');
+            }
+            unset($file);
+        } else {
+            throw new Exception('Не указан путь к файлу с картинкой.');
+        }
+        unset($path);
+    }
 
     public function setFile($filePath)
     {

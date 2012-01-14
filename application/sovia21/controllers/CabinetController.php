@@ -45,21 +45,22 @@ class CabinetController extends Ext_Controller_Action
             if (!empty($post)) {
                 foreach ($post as $avatarId => $data) {
                     /** @var $avatar User_Avatar_Row */
-                    $avatar = $avatarTable->selectBy('id', $avatarId)->fetchRowIfExists();
-                    if ($avatar->getOwnerId() == $user->getId()) {
+                    $avatar = $avatarTable->selectBy('id', $avatarId)->fetchRow();
+                    if (!empty($avatar) && ($avatar->getOwnerId() == $user->getId())) {
                         if (isset($data['del'])) {
                             try {
-                                $name = strip_tags($avatar->getName());
+                                $name = $avatar->getName();
                                 $avatar->delete();
                                 $results[] = "Картинка {$name} удалена.";
                             } catch (Exception $e) {
                                 $errors[] = $e->getMessage();
                             }
                         } else {
-                            if (isset($data['name'])) {
+                            if (isset($data['name']) && ($data['name'] != $avatar->getName())) {
                                 $avatar->setName($data['name']);
                                 try {
                                     $avatar->save();
+                                    $results[] = "Информация о картинке {$avatar->getName()} обновлена";
                                 } catch (Exception $e) {
                                     $errors[] = $e->getMessage();
                                 }
@@ -71,19 +72,23 @@ class CabinetController extends Ext_Controller_Action
             $post = $request->getPost('avatar_default');
             if (!empty($post)) {
                 /** @var $avatar User_Avatar_Row */
-                $avatar = $avatarTable->selectBy('id', $post)->fetchRowIfExists();
-                if ($avatar->getOwnerId() == $user->getId()) {
-                    if ($user->getAvatarId() != $post) {
-                        $user->setAvatarId($post);
-                        try {
-                            $user->save();
-                            $result  = "Новая картинка по умолчанию &mdash; ";
-                            $result .= $avatar->getName();
-                            $results[] = $result;
-                        } catch (Exception $e) {
-                            $errors[] = $e->getMessage();
+                $avatar = $avatarTable->selectBy('id', $post)->fetchRow();
+                if (!empty($avatar)) {
+                    if ($avatar->getOwnerId() == $user->getId()) {
+                        if ($user->getAvatarId() != $post) {
+                            $user->setAvatarId($post);
+                            try {
+                                $user->save();
+                                $result  = "Новая картинка по умолчанию &mdash; ";
+                                $result .= $avatar->getName();
+                                $results[] = $result;
+                            } catch (Exception $e) {
+                                $errors[] = $e->getMessage();
+                            }
                         }
                     }
+                } else {
+                    $errors[] = "Выбранная по умолчанию картинка не найдена.";
                 }
             }
 
@@ -102,6 +107,9 @@ class CabinetController extends Ext_Controller_Action
         $this->view->errors = $errors;
         $this->view->list   = $list;
         $this->_setFlashMessage($results);
+        if (!empty($results)) {
+            $this->_redirect($this->view->url(array(), 'cabinet_avatars', true));
+        }
     }
 
     public function dreamsAction()
@@ -188,28 +196,45 @@ class CabinetController extends Ext_Controller_Action
    		}
    	}
 
-   	protected function _setUploadedAvatar($name)
-   	{
-   		$filePath = null;
-   		$upload = new Zend_File_Transfer_Adapter_Http();
-//   		$upload->setDestination(APPLICATION_PATH . '/upload/');
-   		$upload->receive();
-   		$filePath = $upload->getFileName($name);
-   		if (!empty($filePath)) {
-   			$data = array(
-   				'owner_id' => $this->_userId,
-   				'name'     => date('Y-m-d H:i'),
-   			);
-   			$model = new Default_Model_UserAvatar($data);
-   			$mimetype = $upload->getMimeType('avatar_add');
-   			if (strpos($mimetype, 'image/') === 0) {
-   				$model->setFile($filePath);
-   			} else {
-   				throw new Exception('Недопустимый тип файла.');
-   			}
-   		}
-   		return $filePath;
-   	}
+    protected function _setUploadedAvatar($name)
+    {
+        $filePath = null;
+        $process  = true;
+        $upload = new Zend_File_Transfer_Adapter_Http();
+        $upload->setDestination(APPLICATION_PATH . '/upload/');
+        $upload->receive();
+        $info = $upload->getFileInfo($name);
+        switch ($info[$name]['error']) {
+            case UPLOAD_ERR_NO_FILE:
+                $process = false;
+                break;
+            case UPLOAD_ERR_FORM_SIZE:
+                throw new Exception('Файл слишком большой');
+                break;
+            case UPLOAD_ERR_OK:
+                break;
+            default:
+                throw new Exception("Ошибка загрузки: {$info[$name]['error']}");
+        }
+
+        if ($process) {
+            $filePath = $upload->getFileName($name);
+            if (!empty($filePath)) {
+                $data = array(
+                    'owner_id' => $this->_user->getId(),
+                    'name'     => date('Y-m-d H:i'),
+                );
+                $table = new User_Avatar();
+
+                /** @var $avatar User_Avatar_Row */
+                $avatar = $table->createRow($data);
+                $avatar->setFile($filePath);
+                $avatar->save();
+            }
+        }
+
+        return $filePath;
+    }
 
    	protected function _getEntries(Default_Model_PostingItem $model, $epp = 10, $tag = null)
    	{

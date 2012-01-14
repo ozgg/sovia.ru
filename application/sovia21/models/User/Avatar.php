@@ -45,7 +45,7 @@ class User_Avatar extends Ext_Db_Table_Abstract
     const STORAGE = '/images/avatars/';
     const MAX_WIDTH  = 100;
     const MAX_HEIGHT = 100;
-    const MAX_WEIGHT = 20480;
+    const MAX_WEIGHT = 40960;
 
     /**
      * Получить преобразователь
