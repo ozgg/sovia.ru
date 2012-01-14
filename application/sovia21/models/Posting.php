@@ -1,24 +1,27 @@
 <?php
 /**
- * 
+ * Date: 14.01.12
+ * Time: 13:47
+ *
+ * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
 
 /**
- *
+ * Запись
  */
-class User_Avatar extends Ext_Db_Table_Abstract
+class Posting extends Ext_Db_Table_Abstract
 {
     /**
-     * Имя таблицы
+     * Название таблицы
      *
      * @var string
      */
-    protected $_name = 'user_avatar';
+    protected $_name = 'posting_item';
 
     /**
      * Преобразователь для конкретизации выборки
      *
-     * @var User_Avatar_Mapper
+     * @var Posting_Mapper
      */
     protected $_mapper;
 
@@ -27,7 +30,7 @@ class User_Avatar extends Ext_Db_Table_Abstract
      *
      * @var string
      */
-    protected $_rowClass = 'User_Avatar_Row';
+    protected $_rowClass = 'Posting_Row';
 
     /**
      * Связи с другими таблицами
@@ -40,24 +43,28 @@ class User_Avatar extends Ext_Db_Table_Abstract
             'refTableClass' => 'User',
             'refColumns'    => 'owner_id',
         ),
+        'Community' => array(
+            'columns'       => 'id',
+            'refTableClass' => 'Posting_Community',
+            'refColumns'    => 'community_id',
+        ),
+        'Avatar' => array(
+            'columns'       => 'id',
+            'refTableClass' => 'User_Avatar',
+            'refColumns'    => 'avatar_id',
+        ),
     );
-
-    const STORAGE = '/images/avatars/';
-    const MAX_WIDTH  = 100;
-    const MAX_HEIGHT = 100;
-    const MAX_WEIGHT = 40960;
 
     /**
      * Получить преобразователь
      *
-     * @return User_Avatar_Mapper
+     * @return Posting_Mapper
      */
     public function getMapper()
     {
         if (is_null($this->_mapper)) {
-            $this->_mapper = new User_Avatar_Mapper($this);
+            $this->_mapper = new Posting_Mapper($this);
         }
         return $this->_mapper;
     }
 }
-?>

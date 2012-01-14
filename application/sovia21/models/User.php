@@ -5,25 +5,29 @@
 class User extends Ext_Db_Table_Abstract
 {
     /**
-     * Имя таблицы
+     * Название таблицы
+     *
      * @var string
      */
     protected $_name = 'user_item';
 
     /**
      * Преобразователь для конкретизации выборки
+     *
      * @var User_Mapper
      */
     protected $_mapper;
 
     /**
      * Класс для представления записи
+     *
      * @var string
      */
     protected $_rowClass = 'User_Row';
 
     /**
      * Связи с другими таблицами
+     *
      * @var array
      */
     protected $_referenceMap = array(
@@ -36,6 +40,7 @@ class User extends Ext_Db_Table_Abstract
 
     /**
      * Получить преобразователь
+     *
      * @return User_Mapper
      */
     public function getMapper()
