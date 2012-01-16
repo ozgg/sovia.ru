@@ -6,6 +6,11 @@ class User_Guest implements User_Interface
         return 0;
     }
 
+    public function getRank()
+    {
+        return 0;
+    }
+
     protected function _hasRoles($roles)
     {
         return false;

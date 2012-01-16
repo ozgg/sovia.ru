@@ -120,6 +120,11 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this->get('login');
     }
 
+    public function getRank()
+    {
+        return $this->get('rank');
+    }
+
     /**
      * Добавить запись в блог
      *

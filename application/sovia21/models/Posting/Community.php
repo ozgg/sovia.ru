@@ -63,4 +63,15 @@ class Posting_Community extends Ext_Db_Table_Abstract
 
         return $this->_mapper;
     }
+
+    public function getPathTo(Posting_Community_Row $community)
+    {
+        $select = $this->select();
+        $select->from($this, '*')
+               ->where('left_key <= ?', $community->getLeftKey())
+               ->where('right_key >= ?', $community->getRightKey())
+               ->order('left_key');
+
+        return $this->fetchAll($select);
+    }
 }

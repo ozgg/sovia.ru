@@ -100,6 +100,9 @@ return array(
         )
     ),
 
+    'forum' => new Zend_Controller_Router_Route_Static(
+        '/forum'
+    ),
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',

@@ -18,7 +18,7 @@ echo $this->headScript() . PHP_EOL;
         <li><a href="/" title="Блог проекта">Блог</a></li>
         <li><a href="/" title="Читать сны">Сны</a></li>
         <li><a href="/" title="Сонник">Сонник</a></li>
-        <li><a href="/" title="Форум о снах">Форум</a></li>
+        <li><a href="<?php echo $this->url(array(), 'forum', true); ?>" title="Форум о снах">Форум</a></li>
         <li><a href="<?php echo $this->url(array(), 'about', true); ?>" title="Информация о проекте">О проекте</a></li>
     </ul>
     <div id="content">
