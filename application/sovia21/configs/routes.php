@@ -103,6 +103,23 @@ return array(
     'forum' => new Zend_Controller_Router_Route_Static(
         '/forum'
     ),
+    'forum_community' => new Zend_Controller_Router_Route(
+        'forum/community/:id',
+        array(
+            'controller' => 'forum',
+            'action' => 'community',
+        )
+    ),
+    'forum_community_old' => new Zend_Controller_Router_Route(
+        'forum/contents/of/:id',
+        array(
+            'controller' => 'forum',
+            'action' => 'community',
+            'canonical' => true,
+        )
+    ),
+
+
 /*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',

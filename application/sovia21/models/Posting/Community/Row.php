@@ -57,7 +57,7 @@ class Posting_Community_Row extends Ext_Db_Table_Row
 
    	public function getMinimalRank()
    	{
-   		return $this->_minimalRank;
+   		return $this->get('minimal_rank');
    	}
 
    	public function setMinimalRank($minimalRank)
@@ -134,16 +134,16 @@ class Posting_Community_Row extends Ext_Db_Table_Row
    		return $cache[$id];
    	}
 
-   	public function getLink()
-   	{
-   		$link = '/forum/contents/of/';
-   		if (!empty($this->_alias)) {
-   			$link .= rawurlencode($this->_alias);
-   		} else {
-   			$link .= $this->getId();
-   		}
-   		return $link;
-   	}
+    public function getLink()
+    {
+        if (strlen($this->get('alias')) > 0) {
+            $link = rawurlencode($this->get('alias'));
+        } else {
+            $link = $this->getId();
+        }
+
+        return $link;
+    }
 
    	public function getOwner()
    	{

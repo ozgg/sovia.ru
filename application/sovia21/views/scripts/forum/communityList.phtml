@@ -18,7 +18,7 @@ if (!empty($this->list)) {
 	$format  = "\t<tr class=\"row%d\">\n";
 	$format .= "\t\t<td>%s<a href=\"%s\">%s</a></td>";
 	$format .= "<td>%d</td>\n\t</tr>\n";
-        /** @var $community Posting_Community_Row */
+    /** @var $community Posting_Community_Row */
 	foreach ($this->list as $community) {
 		if ($row++ > 1) {
 			$row = 0;
@@ -28,7 +28,7 @@ if (!empty($this->list)) {
 			$lock  = '<div class="lock-' . $community->getIsInternal() . '">';
 			$lock .= '&nbsp;</div>';
 		}
-		$link  = $community->getLink();
+		$link  = $this->url(array('id' => $community->getLink()), 'forum_community', true);
 		$name  = $community->getTitle();
 		$posts = $community->getHasPosts();
 		printf($format, $row, $lock, $link, $name, $posts);

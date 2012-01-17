@@ -52,4 +52,10 @@ class ErrorController extends Zend_Controller_Action
         $log = $bootstrap->getResource('Log');
         return $log;
     }
+
+    public function deniedAction()
+    {
+        $this->view->headTitle('Доступ запрещён');
+        header('HTTP/1.1 403 Forbidden');
+    }
 }
