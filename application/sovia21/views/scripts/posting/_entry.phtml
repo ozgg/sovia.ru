@@ -1,0 +1,9 @@
+<?php
+$href = $this->url(array('id' => $this->entry->id, 'alias' => $this->entry->alias), 'blog_entry');
+?>
+<div class="entry">
+    <div class="entry-date"><?php echo $this->entry->getDate(); ?></div>
+    <h3><a href="<?php echo $href; ?>" title="Читать"><?php echo $this->entry->title; ?></a> (<?php echo $this->entry->getType()->name; ?>)</h3>
+    <div class="entry-body"><?php echo BodyParser::replaceCuts($this->entry->preview, $href); ?></div>
+    <div class="entry-footer"><a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a></div>
+</div>

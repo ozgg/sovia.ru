@@ -26,7 +26,7 @@ class ForumController extends Ext_Controller_Action
                ->isInternal($this->_user->getId() > 0)
                ->parent($parent);
 
-        $this->view->list = $mapper->fetchAll();
+        $this->view->assign('list', $mapper->fetchAll());
     }
 
     public function communityAction()
@@ -47,6 +47,9 @@ class ForumController extends Ext_Controller_Action
         if (!$allowed) {
             $this->_forward('denied', 'Error');
         }
+
+        $this->getPosts($community);
+
         $view = $this->view;
         $view->headTitle('Форум');
         if ($this->_getParam('canonical', false)) {
@@ -73,5 +76,28 @@ class ForumController extends Ext_Controller_Action
         }
 
         $view->ancestors = $ancestors;
+    }
+
+    protected function getPosts(Posting_Community_Row $community)
+    {
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->community($community)
+               ->isInternal($this->_user->getId() > 0)
+               ->minimalRank($this->_user->getRank())
+               ->recent();
+        $paginator = $mapper->paginate($this->_page, 5);
+        $entries = $paginator->getCurrentItems();
+        $titles  = array();
+        foreach ($entries as $entry) {
+            $titles[] = "«{$entry->title}»";
+        }
+        $description = "Страница {$this->_page} форума «{$community->getTitle()}».";
+        $description .= ' ' . implode(', ', $titles);
+        $this->view->assign('paginator', $paginator);
+        $this->view->assign('entries',   $entries);
+        $this->view->assign('page',      $this->_page);
+        $this->view->headTitle("Страница {$this->_page}");
+        $this->view->headMeta()->appendName('description', $description);
     }
 }

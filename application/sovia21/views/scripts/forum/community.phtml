@@ -20,3 +20,15 @@ if (count($this->ancestors)) {
 <h3>Сообщества внутри</h3>
 <?php 	echo $this->partial('forum/communityList.phtml', array('list' => $this->list)); ?>
 <?php } ?>
+<?php   if ($this->entries->count() > 0): ?>
+<div class="entries-list">
+<?php
+            foreach ($this->entries as $entry):
+               echo $this->partial('posting/_entry.phtml', array('entry' => $this->entries->current()));
+            endforeach;
+?>
+</div>
+<?php   else: ?>
+<div class="message">Записей нет</div>
+<?php   endif; ?>
+<?php echo $this->paginator; ?>

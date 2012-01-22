@@ -39,19 +39,19 @@ class Posting extends Ext_Db_Table_Abstract
      */
     protected $_referenceMap = array(
         'Owner' => array(
-            'columns'       => 'id',
+            'columns'       => 'owner_id',
             'refTableClass' => 'User',
-            'refColumns'    => 'owner_id',
+            'refColumns'    => 'id',
         ),
         'Community' => array(
-            'columns'       => 'id',
+            'columns'       => 'community_id',
             'refTableClass' => 'Posting_Community',
-            'refColumns'    => 'community_id',
+            'refColumns'    => 'id',
         ),
         'Avatar' => array(
-            'columns'       => 'id',
+            'columns'       => 'avatar_id',
             'refTableClass' => 'User_Avatar',
-            'refColumns'    => 'avatar_id',
+            'refColumns'    => 'id',
         ),
     );
 
@@ -65,6 +65,7 @@ class Posting extends Ext_Db_Table_Abstract
         if (is_null($this->_mapper)) {
             $this->_mapper = new Posting_Mapper($this);
         }
+
         return $this->_mapper;
     }
 }

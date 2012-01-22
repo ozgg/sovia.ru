@@ -39,14 +39,14 @@ class Posting_Community extends Ext_Db_Table_Abstract
      */
     protected $_referenceMap = array(
         'Owner' => array(
-            'columns'       => 'id',
+            'columns'       => 'owner_id',
             'refTableClass' => 'User',
-            'refColumns'    => 'owner_id',
+            'refColumns'    => 'id',
         ),
         'Type' => array(
-            'columns'       => 'id',
+            'columns'       => 'type_id',
             'refTableClass' => 'Posting_Type',
-            'refColumns'    => 'type_id',
+            'refColumns'    => 'id',
         ),
     );
 

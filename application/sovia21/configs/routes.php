@@ -120,7 +120,7 @@ return array(
     ),
 
 
-/*
+//*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',
         array(

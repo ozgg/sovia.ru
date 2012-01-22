@@ -19,8 +19,12 @@ alter table `user_key` drop column `event_key`,
 ALTER TABLE `user_key`
     ADD CONSTRAINT `FK_user_key_owner` FOREIGN KEY (`user_id`) REFERENCES `user_item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
-ALTER TABLE `sovia_dev`.`user_item`
+ALTER TABLE `user_item`
   ADD COLUMN `avatar_id` INT(10) UNSIGNED NULL  COMMENT 'Default avatar' AFTER `password`,
   ADD COLUMN `max_avatars` TINYINT(3) UNSIGNED DEFAULT 3  NOT NULL  COMMENT 'Maximum number of avatars' AFTER `avatar_id`;
 
 UPDATE `user_item` i SET i.`avatar_id` = (SELECT p.`avatar_id` FROM `user_profile` p WHERE p.`owner_id` = i.`id`);
+
+ALTER TABLE `posting_item`
+  ADD COLUMN `preview` TEXT NULL  COMMENT 'Preview for list' AFTER `body`,
+  ADD COLUMN `description` TEXT NULL  COMMENT 'Meta description' AFTER `preview`;
