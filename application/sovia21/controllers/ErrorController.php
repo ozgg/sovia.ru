@@ -1,15 +1,15 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
+class ErrorController extends Ext_Controller_Action
 {
 
     public function errorAction()
     {
-        $this->view->headTitle('Ошибка');
+        $this->_headTitle('Ошибка');
         $errors = $this->_getParam('error_handler');
         
         if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'Вы пришли на страницу ошибки';
+            $this->view->assign('message', 'Вы пришли на страницу ошибки');
             return;
         }
         switch ($errors->type) {
@@ -19,32 +19,35 @@ class ErrorController extends Zend_Controller_Action
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Страница не найдена';
+                $this->view->assign('message', 'Страница не найдена');
                 break;
             default:
                 // application error
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
-                $this->view->message = 'Ошибка сервера';
+                $this->view->assign('message', 'Ошибка сервера');
                 break;
         }
         
         // Log exception, if logger available
+        /** @var $log Zend_Log */
         if ($log = $this->getLog()) {
+            /** @noinspection PhpUndefinedFieldInspection */
             $log->log($this->view->message, $priority, $errors->exception);
             $log->log('Request Parameters', $priority, $errors->request->getParams());
         }
         
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
-            $this->view->exception = $errors->exception;
+            $this->view->assign('exception', $errors->exception);
         }
         
-        $this->view->request = $errors->request;
+        $this->view->assign('request', $errors->request);
     }
 
     public function getLog()
     {
+        /** @var $bootstrap Bootstrap */
         $bootstrap = $this->getInvokeArg('bootstrap');
         if (!$bootstrap->hasResource('Log')) {
             return false;
@@ -55,7 +58,7 @@ class ErrorController extends Zend_Controller_Action
 
     public function deniedAction()
     {
-        $this->view->headTitle('Доступ запрещён');
+        $this->_headTitle('Доступ запрещён');
         header('HTTP/1.1 403 Forbidden');
     }
 }

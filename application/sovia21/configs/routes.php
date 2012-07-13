@@ -107,15 +107,15 @@ return array(
         'forum/community/:id',
         array(
             'controller' => 'forum',
-            'action' => 'community',
+            'action'     => 'community',
         )
     ),
     'forum_community_old' => new Zend_Controller_Router_Route(
         'forum/contents/of/:id',
         array(
             'controller' => 'forum',
-            'action' => 'community',
-            'canonical' => true,
+            'action'     => 'community',
+            'canonical'  => true,
         )
     ),
 
@@ -125,7 +125,7 @@ return array(
         'sitemap',
         array(
             'controller' => 'index',
-            'action' => 'sitemap',
+            'action'     => 'sitemap',
         )
     ),
 
