@@ -20,6 +20,18 @@ class User_Mapper extends Ext_Db_Table_Select
     public function email($email)
     {
         $this->where('email = ?', $email);
+
+        return $this;
+    }
+
+    /**
+     * @param $login
+     * @return User_Mapper
+     */
+    public function login($login)
+    {
+        $this->where('login = ?', $login);
+
         return $this;
     }
 }

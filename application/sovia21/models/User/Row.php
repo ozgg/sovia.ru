@@ -139,6 +139,26 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this;
     }
 
+    public function getCreatedAt()
+    {
+        return $this->get('created_at');
+    }
+
+    public function getLastSeen()
+    {
+        return $this->get('last_seen');
+    }
+
+    public function getHasPosts()
+    {
+        return $this->get('has_posts');
+    }
+
+    public function getHasComments()
+    {
+        return $this->get('has_comments');
+    }
+
     /**
      * Добавить запись в блог
      *

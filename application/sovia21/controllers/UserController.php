@@ -273,6 +273,42 @@ class UserController extends Ext_Controller_Action
         $this->view->assign('message', $message);
     }
 
+    public function profileAction()
+    {
+        $title   = 'Профиль пользователя';
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        $login   = $request->getParam('of', '');
+        $search  = '';
+        $list    = array();
+        $table   = new User();
+        $mapper  = $table->getMapper();
+        if ($login != '') {
+            $mapper->login($login);
+            /** @var $user User_Row */
+            $user  = $mapper->fetchRow();
+            if ($user->getId() > 0) {
+                $title .= " {$user->getLogin()}";
+                $this->view->assign('user', $user);
+            }
+        } else {
+            $title = 'Поиск пользователей';
+        }
+        $this->_headTitle($title);
+
+        if ($request->isPost()) {
+            $login = trim($request->getPost('search_login', ''));
+            $mapper->reset()->limit(10);
+            if ($login != '') {
+                $search = mb_substr($login, 0, 16);
+                $list   = $mapper->login($search)->fetchAll();
+            }
+        }
+
+        $this->view->assign('search', $search);
+        $this->view->assign('list', $list);
+    }
+
     /**
      * Аутентификация
      *
