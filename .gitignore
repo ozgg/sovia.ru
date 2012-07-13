@@ -1,3 +1,5 @@
 .idea
-library/Zend/
 application/sovia21/configs/local.php
+application/sovia21/upload/*
+library/Zend/
+sovia.ru/images/avatars/*

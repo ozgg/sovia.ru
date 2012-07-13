@@ -8,7 +8,7 @@ class User_Key_Row extends Ext_Db_Table_Row
 {
     public function expire()
     {
-        $this->updated_at = date('Y-m-d H:i:s');
+        $this->set('updated_at', date('Y-m-d H:i:s'));
     }
 
     /**
@@ -19,14 +19,20 @@ class User_Key_Row extends Ext_Db_Table_Row
     {
         $format = '%04d-%03d-%06x-%s-%x';
         $rand = rand(0, 9999);
-        $type = $this->type_id;
-        $user = $this->user_id;
+        $type = $this->get('type_id');
+        $user = $this->get('user_id');
         $date = date('smiYHd');
-        $this->body = sprintf($format, $rand, $type, $user, $date, rand(0, 16));
+        $body = sprintf($format, $rand, $type, $user, $date, rand(0, 16));
+        $this->set('body', $body);
     }
 
     public function getBody()
     {
-        return $this->body;
+        return $this->get('body');
+    }
+
+    public function getUserId()
+    {
+        return $this->get('user_id');
     }
 }

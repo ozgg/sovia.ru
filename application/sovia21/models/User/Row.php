@@ -120,9 +120,23 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this->get('login');
     }
 
+    public function setLogin($login)
+    {
+        $this->set('login', $login);
+
+        return $this;
+    }
+
     public function getRank()
     {
         return $this->get('rank');
+    }
+
+    public function setParentId($parentId)
+    {
+        $this->set('parent_id', $parentId);
+
+        return $this;
     }
 
     /**
