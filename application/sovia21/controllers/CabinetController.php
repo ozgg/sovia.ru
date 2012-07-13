@@ -11,14 +11,14 @@ class CabinetController extends Ext_Controller_Action
     protected function checkUser()
     {
         if ($this->_user->getId() < 1) {
-            $this->_redirect($this->view->url(array(), 'user_login', true));
+            $this->_redirect($this->_url(array(), 'user_login', true));
         }
     }
 
     public function indexAction()
     {
         $this->checkUser();
-        $this->view->headTitle('Личный кабинет');
+        $this->_headTitle('Личный кабинет');
     }
 
     public function avatarsAction()
@@ -28,8 +28,8 @@ class CabinetController extends Ext_Controller_Action
         $table = new User;
         /** @var $user User_Row */
         $user = $table->selectBy('id', $this->_user->getId())->fetchRowIfExists();
-        $view->user = $user;
-        $this->view->headTitle('Управление картинками пользователя');
+        $view->assign('user', $user);
+        $this->_headTitle('Управление картинками пользователя');
 
         /** @var $request Zend_Controller_Request_Http */
         $request = $this->getRequest();
@@ -104,11 +104,11 @@ class CabinetController extends Ext_Controller_Action
                 }
             }
         }
-        $this->view->errors = $errors;
-        $this->view->list   = $list;
+        $this->view->assign('errors', $errors);
+        $this->view->assign('list', $list);
         $this->_setFlashMessage($results);
         if (!empty($results)) {
-            $this->_redirect($this->view->url(array(), 'cabinet_avatars', true));
+            $this->_redirect($this->_url(array(), 'cabinet_avatars', true));
         }
     }
 
@@ -124,9 +124,9 @@ class CabinetController extends Ext_Controller_Action
         $table = new User;
         /** @var $user User_Row */
         $user = $table->selectBy('id', $this->_user->getId())->fetchRowIfExists();
-        $view->user = $user;
+        $view->assign('user', $user);
 
-        $view->headTitle('Редактировать профиль');
+        $this->_headTitle('Редактировать профиль');
         $errors  = array();
         /** @var $request Zend_Controller_Request_Http */
         $request = $this->getRequest();
@@ -144,13 +144,13 @@ class CabinetController extends Ext_Controller_Action
                 try {
                     $user->save();
                     $this->_setFlashMessage('Информация обновлена успешно');
-                    $this->_redirect($view->url(array(), 'cabinet_profile', true));
+                    $this->_redirect($this->_url(array(), 'cabinet_profile', true));
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
                 }
             }
         }
-        $view->errors = $errors;
+        $view->assign('errors', $errors);
     }
 
     public function symbolsAction()
@@ -235,45 +235,4 @@ class CabinetController extends Ext_Controller_Action
 
         return $filePath;
     }
-
-   	protected function _getEntries(Default_Model_PostingItem $model, $epp = 10, $tag = null)
-   	{
-   		$list  = array('count' => 0, 'list' => array());
-   		$pager = null;
-   		$options = array(
-   			'tag'      => $tag,
-   			'owner_id' => $this->_userId,
-   			'is_internal' => 255,
-   		);
-   		$list  = $model->getList($this->_page, $epp, $options);
-   		$pages = new Zend_Paginator_Adapter_Null($list['count']);
-   		$pager = new Zend_Paginator($pages);
-   		$pager->setCurrentPageNumber($this->_page)
-   			  ->setItemCountPerPage($epp);
-   		unset($pages);
-   		$this->view->pager = $pager;
-   		$this->view->list  = $list;
-   		$this->view->page  = $this->_page;
-   		$this->view->tag   = $tag;
-   	}
-
-   	protected function _getTags($epp = 50, $typeId = null)
-   	{
-   		$options = array(
-   			'type'     => $typeId,
-   			'owner_id' => $this->_userId,
-   		);
-   		$model = new Default_Model_PostingTag();
-   		$list   = $model->getList($this->_page, $epp, $options);
-   		$pages  = new Zend_Paginator_Adapter_Null($list['count']);
-   		$pager  = new Zend_Paginator($pages);
-   		$pager->setCurrentPageNumber($this->_page)
-   			  ->setItemCountPerPage($epp);
-   		$this->view->total = ceil($list['count'] / $epp);
-   		$this->view->pager = $pager;
-   		$this->view->list  = $list;
-   		$this->view->page  = $this->_page;
-   		$this->view->forms = array('%d снов', '%d сон', '%d сна');
-   		unset($pages, $model, $epp, $typeId);
-   	}
 }

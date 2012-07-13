@@ -13,9 +13,9 @@ class ForumController extends Ext_Controller_Action
 {
     public function indexAction()
     {
-        $this->view->headTitle('Форум');
+        $this->_headTitle('Форум');
         $description = 'Форум, где можно обсуждать разные темы касательно снов и не только';
-        $this->view->headMeta()->appendName('description', $description);
+        $this->setDescription($description);
 
         $table = new Posting_Community();
         /** @var $parent Posting_Community_Row */
@@ -51,13 +51,13 @@ class ForumController extends Ext_Controller_Action
         $this->getPosts($community);
 
         $view = $this->view;
-        $view->headTitle('Форум');
+        $this->_headTitle('Форум');
         if ($this->_getParam('canonical', false)) {
-            $href = $view->url(array(), 'tos', true);
-            $view->headLink(array('rel' => 'canonical', 'href' => $href));
+            $href = $this->_url(array(), 'tos', true);
+            $this->_headLink(array('rel' => 'canonical', 'href' => $href));
         }
 
-        $view->headTitle($community->getTitle());
+        $this->_headTitle($community->getTitle());
 
         $mapper = $table->getMapper();
         $mapper->tree()
@@ -65,8 +65,8 @@ class ForumController extends Ext_Controller_Action
                 ->isInternal($this->_user->getId() > 0)
                 ->minimalRank($this->_user->getRank());
 
-        $view->list      = $mapper->fetchAll();
-        $view->community = $community;
+        $view->assign('list', $mapper->fetchAll());
+        $view->assign('community', $community);
         $ancestors = $table->getPathTo($community)->toArray();
         if (count($ancestors) > 2) {
             array_pop($ancestors);
@@ -75,7 +75,7 @@ class ForumController extends Ext_Controller_Action
             $ancestors = array();
         }
 
-        $view->ancestors = $ancestors;
+        $view->assign('ancestors', $ancestors);
     }
 
     protected function getPosts(Posting_Community_Row $community)
@@ -97,7 +97,7 @@ class ForumController extends Ext_Controller_Action
         $this->view->assign('paginator', $paginator);
         $this->view->assign('entries',   $entries);
         $this->view->assign('page',      $this->_page);
-        $this->view->headTitle("Страница {$this->_page}");
-        $this->view->headMeta()->appendName('description', $description);
+        $this->_headTitle("Страница {$this->_page}");
+        $this->setDescription($description);
     }
 }
