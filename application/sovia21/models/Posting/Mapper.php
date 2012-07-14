@@ -8,6 +8,13 @@
 
 class Posting_Mapper extends Ext_Db_Table_Select
 {
+    public function id($id)
+    {
+        $this->where('id = ?', $id);
+
+        return $this;
+    }
+
     public function community(Posting_Community_Row $community)
     {
         $this->where('community_id = ?', $community->getId());

@@ -222,6 +222,41 @@ dd.notice {
 	border-top: dashed 1px #a2a2a2;
 }
 
+.entry {
+    margin: 1em 0 0 0;
+}
+
+.entry .header {
+    background: #feefd0;
+    min-height: 110px;
+}
+
+.entry .avatar {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+.entry .spawn-info, .entry .title, .entry .tags {
+    margin-left: 110px;
+}
+
+.entry .title a:link, .entry .title a:visited, .entry .title h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.entry .footer {
+    text-align: right;
+}
+
+.entry .body {
+    margin: 0 5px;
+}
+
 /*
 
 a:link, a:visited {
@@ -468,40 +503,6 @@ a:hover {
 	margin: 0 0 1em 0;
 }
 
-.posting {
-	margin: 1em 0 0 0;
-}
-
-.posting .header {
-	background: #feefd0;
-	min-height: 110px;
-}
-
-.posting .avatar {
-	float: left;
-	width: 100px;
-	height: 100px;
-	margin: 5px;
-}
-
-.posting .spawn-info, .posting .title, .posting .tags {
-	margin-left: 110px;
-}
-
-.posting .title a:link, .posting .title a:visited, .posting .title h2 {
-	font-size: 1.2em;
-	font-weight: bold;
-	margin: 0;
-	padding: 0;
-}
-
-.posting .footer {
-	text-align: right;
-}
-
-.posting .body {
-	margin: 0 5px;
-}
 
 .controls {
 	display: block;

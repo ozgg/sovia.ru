@@ -78,6 +78,32 @@ class ForumController extends Ext_Controller_Action
         $view->assign('ancestors', $ancestors);
     }
 
+    public function entryAction()
+    {
+        $id    = intval($this->_getParam('id', 0));
+        $alias = $this->_getParam('alias');
+        if ($id > 0) {
+            $view = $this->view;
+            $table  = new Posting();
+            $mapper = $table->getMapper();
+            $mapper->id($id);
+            /** @var $entry Posting_Row */
+            $entry = $mapper->fetchRowIfExists('Такой записи нет');
+            if (!$entry->canBeSeenBy($this->_user)) {
+                $this->_forward('denied', 'error');
+            }
+            if ($entry->getAlias() != $alias) {
+                $parameters = array('id' => $id, 'alias' => $entry->getAlias());
+                $this->_redirect($this->_url($parameters, 'forum_entry'));
+            }
+            $view->assign('entry', $entry);
+            $this->_headTitle($entry->getTitle());
+            $this->setDescription($entry->getDescription());
+        } else {
+            $this->_redirect($this->_url(array(), 'forum', true));
+        }
+    }
+
     protected function getPosts(Posting_Community_Row $community)
     {
         $table = new Posting();

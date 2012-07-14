@@ -118,6 +118,18 @@ return array(
             'canonical'  => true,
         )
     ),
+    'forum_entry' => new Zend_Controller_Router_Route_Regex(
+        'forum/post/(\d+)-([a-z0-9][-a-z0-9.]+)',
+        array(
+            'controller' => 'forum',
+            'action' => 'entry',
+        ),
+        array(
+            1 => 'id',
+            2 => 'alias',
+        ),
+        'forum/post/%d-%s'
+    ),
 
 
 //*

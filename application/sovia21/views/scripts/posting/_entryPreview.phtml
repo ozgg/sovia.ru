@@ -8,8 +8,8 @@ $href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry-
             <?php echo $this->partial('user/_userlink.phtml', array('login' => $this->entry->getOwner()->getLogin())); ?>,
             <?php echo $this->entry->getDate(); ?>
         </div>
-        <div class="title"><?php echo $this->escape($this->entry->getTitle()); ?></div>
+        <div class="title"><a href="<?php echo $href; ?>" title="Читать"><?php echo $this->escape($this->entry->getTitle()); ?></a> (<?php echo $this->entry->getType()->getName(); ?>)</div>
     </div>
-    <div class="entry-body"><?php echo $this->entry->getBody(); ?></div>
+    <div class="entry-body"><?php echo BodyParser::replaceCuts($this->entry->getPreview(), $href); ?></div>
     <div class="entry-footer"><a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a></div>
 </div>

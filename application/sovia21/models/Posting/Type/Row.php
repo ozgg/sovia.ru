@@ -8,5 +8,8 @@
 
 class Posting_Type_Row extends Ext_Db_Table_Row
 {
-
+    public function getName()
+    {
+        return $this->get('name');
+    }
 }

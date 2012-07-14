@@ -24,7 +24,7 @@ if (count($this->ancestors)) {
 <div class="entries-list">
 <?php
             foreach ($this->entries as $entry):
-               echo $this->partial('posting/_entry.phtml', array('entry' => $this->entries->current()));
+               echo $this->partial('posting/_entryPreview.phtml', array('entry' => $this->entries->current(), 'route' => 'forum_entry'));
             endforeach;
 ?>
 </div>
