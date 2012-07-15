@@ -1,3 +1,9 @@
-<h1>Sovia 2.1</h1>
-    <p>Index</p>
+<h1>Sovia 2.2</h1>
+<h2>Последние записи</h2>
+<?php
+foreach ($this->posts as $post) {
+    echo $this->partial('posting/_entryPreview.phtml', array('entry' => $post));
+}
+?>
+
 <?php echo $this->partial('socials.phtml'); ?>

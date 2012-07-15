@@ -129,6 +129,20 @@ return array(
             2 => 'alias',
         ),
         'forum/post/%d-%s'
+
+    ),
+
+    'dream_entry' => new Zend_Controller_Router_Route_Regex(
+        'dreams/(\d+)-([a-z0-9][-a-z0-9.]+)',
+        array(
+            'controller' => 'dream',
+            'action' => 'entry',
+        ),
+        array(
+            1 => 'id',
+            2 => 'alias',
+        ),
+        'dreams/%d-%s'
     ),
 
 
