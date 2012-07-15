@@ -8,6 +8,23 @@
 
 class Posting_Community_Row extends Ext_Db_Table_Row
 {
+    const VIS_PUBLIC     = 0;
+    const VIS_REGISTERED = 1;
+
+    public function canBeSeenBy(User_Interface $user)
+    {
+        $isInternal = $this->getIsInternal();
+        if ($isInternal == self::VIS_PUBLIC) {
+            $can = true;
+        } else {
+            $can  = ($user->getId() > 0);
+            $can &= ($this->getMinimalRank() <= $user->getRank());
+        }
+
+        return $can;
+    }
+
+
     public function getId()
    	{
    		return $this->get('id');
@@ -62,18 +79,8 @@ class Posting_Community_Row extends Ext_Db_Table_Row
 
    	public function setMinimalRank($minimalRank)
    	{
-   		$this->_minimalRank = intval($minimalRank);
-   		return $this;
-   	}
+   		$this->set('minimal_rank', intval($minimalRank));
 
-   	public function getTypeId()
-   	{
-   		return $this->get('type_id');
-   	}
-
-   	public function setTypeId($typeId)
-   	{
-   		$this->_typeId = intval($typeId);
    		return $this;
    	}
 
@@ -84,19 +91,14 @@ class Posting_Community_Row extends Ext_Db_Table_Row
 
    	public function setIsFinal($isFinal)
    	{
-   		$this->_isFinal = intval($isFinal);
+   		$this->set('is_final', intval($isFinal));
+
    		return $this;
    	}
 
    	public function getHasPosts()
    	{
    		return $this->get('has_posts');
-   	}
-
-   	public function setHasPosts($hasPosts)
-   	{
-   		$this->_hasPosts = intval($hasPosts);
-   		return $this;
    	}
 
    	public function getTitle()
@@ -113,25 +115,7 @@ class Posting_Community_Row extends Ext_Db_Table_Row
 
    	public function getAlias()
    	{
-   		return $this->_alias;
-   	}
-
-   	public function setAlias($alias)
-   	{
-   		$this->_alias = $alias;
-   		return $this;
-   	}
-
-   	public function getPostingType()
-   	{
-   		static $cache = array();
-   		$id = $this->getTypeId();
-   		if (!isset($cache[$id])) {
-   			$model = new Default_Model_PostingType();
-   			$cache[$id] = $model->find($id);
-   			unset($model);
-   		}
-   		return $cache[$id];
+   		return $this->get('alias');
    	}
 
     public function getLink()
@@ -145,20 +129,11 @@ class Posting_Community_Row extends Ext_Db_Table_Row
         return $link;
     }
 
-   	public function getOwner()
-   	{
-   		static $cache = array();
-   		$ownerId = $this->getOwnerId();
-   		if (!isset($cache[$ownerId])) {
-   			$model = new Default_Model_UserItem();
-   			$cache[$ownerId] = $model->find($ownerId);
-   			unset($model);
-   		}
-   		return $cache[$ownerId];
-   	}
-
-   	public function getPath(Default_Model_PostingCommunity $community)
-   	{
-   		return $this->getMapper()->getPath($community);
-   	}
+    /**
+     * @return User_Row
+     */
+    public function getOwner()
+    {
+        return $this->findParentRow('User');
+    }
 }

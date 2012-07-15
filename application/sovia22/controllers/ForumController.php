@@ -86,7 +86,7 @@ class ForumController extends Ext_Controller_Action
             $view = $this->view;
             $table  = new Posting();
             $mapper = $table->getMapper();
-            $mapper->id($id);
+            $mapper->post()->id($id);
             /** @var $entry Posting_Row */
             $entry = $mapper->fetchRowIfExists('Такой записи нет');
             if (!$entry->canBeSeenBy($this->_user)) {
@@ -97,6 +97,20 @@ class ForumController extends Ext_Controller_Action
                 $this->_redirect($this->_url($parameters, 'forum_entry'));
             }
             $view->assign('entry', $entry);
+            $community = $entry->getCommunity();
+            if (!empty($community)) {
+                $view->assign('community', $entry->getCommunity());
+                $communityTable = new Posting_Community();
+                $ancestors = $communityTable->getPathTo($community)->toArray();
+                if (count($ancestors) > 2) {
+                    array_pop($ancestors);
+                    array_shift($ancestors);
+                } else {
+                    $ancestors = array();
+                }
+
+                $view->assign('ancestors', $ancestors);
+            }
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {

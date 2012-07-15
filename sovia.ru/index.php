@@ -4,7 +4,7 @@ mb_internal_encoding('UTF-8');
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application/sovia21'));
+    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application/sovia22'));
 
 // Define application environment
 defined('APPLICATION_ENV')

@@ -12,6 +12,12 @@ class Posting_Row extends Ext_Db_Table_Row
     const VIS_REGISTERED = 1;
     const VIS_PRIVATE    = 255;
 
+    const TYPE_DREAM   = 1;
+    const TYPE_ARTICLE = 2;
+    const TYPE_SYMBOL  = 3;
+    const TYPE_ENTITY  = 4;
+    const TYPE_POST    = 5;
+
     public function canBeSeenBy(User_Interface $user)
     {
         $isInternal = $this->getIsInternal();
@@ -106,5 +112,22 @@ class Posting_Row extends Ext_Db_Table_Row
     public function getMinimalRank()
     {
         return $this->get('minimal_rank');
+    }
+
+    /**
+     * @return Posting_Community_Row
+     */
+    public function getCommunity()
+    {
+        return $this->findParentRow('Posting_Community');
+    }
+
+    public function getComments()
+    {
+        $table  = new Posting_Comment();
+        /** @var $mapper Posting_Mapper */
+        $mapper = $table->getMapper()->post($this->getId())->order('left_key');
+
+        return $mapper->fetchAll();
     }
 }
