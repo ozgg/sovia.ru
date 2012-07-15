@@ -4,6 +4,10 @@ class IndexController extends Ext_Controller_Action
 {
     public function indexAction()
     {
+        $table  = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->recent()->isInternal(0)->limit(3);
+        $this->view->assign('posts', $mapper->fetchAll());
     }
 
     public function aboutAction()

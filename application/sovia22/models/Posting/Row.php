@@ -130,4 +130,30 @@ class Posting_Row extends Ext_Db_Table_Row
 
         return $mapper->fetchAll();
     }
+
+    public function getRouteName()
+    {
+        switch ($this->get('type')) {
+            case self::TYPE_DREAM:
+                $route = 'dream_entry';
+                break;
+            case self::TYPE_POST:
+                $route = 'forum_entry';
+                break;
+            case self::TYPE_ARTICLE:
+                $route = 'article_entry';
+                break;
+            case self::TYPE_ENTITY:
+                $route = 'entity_entry';
+                break;
+            case self::TYPE_SYMBOL:
+                $route = 'dreambook_entry';
+                break;
+            default:
+                $route = null;
+                break;
+        }
+
+        return $route;
+    }
 }
