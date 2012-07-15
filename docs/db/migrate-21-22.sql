@@ -27,4 +27,11 @@ UPDATE `user_item` i SET i.`avatar_id` = (SELECT p.`avatar_id` FROM `user_profil
 
 ALTER TABLE `posting_item`
   ADD COLUMN `preview` TEXT NULL  COMMENT 'Preview for list' AFTER `body`,
-  ADD COLUMN `description` TEXT NULL  COMMENT 'Meta description' AFTER `preview`;
+  ADD COLUMN `description` TEXT NULL  COMMENT 'Meta description' AFTER `preview`,
+  ADD COLUMN `type` TINYINT(1) UNSIGNED DEFAULT 0  NOT NULL  COMMENT 'Type (dream, post, symbol, etc)' AFTER `owner_id`;
+
+UPDATE `posting_item` SET `type` = 1 WHERE `community_id` = 1;
+UPDATE `posting_item` SET `type` = 2 WHERE `community_id` IN (2, 5);
+UPDATE `posting_item` SET `type` = 3 WHERE `community_id` = 3;
+UPDATE `posting_item` SET `type` = 4 WHERE `community_id` = 4;
+UPDATE `posting_item` SET `type` = 5 WHERE `community_id` > 5;

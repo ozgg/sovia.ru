@@ -15,6 +15,41 @@ class Posting_Mapper extends Ext_Db_Table_Select
         return $this;
     }
 
+    public function dream()
+    {
+        $this->where('type = ?', Posting_Row::TYPE_DREAM);
+
+        return $this;
+    }
+
+    public function article()
+    {
+        $this->where('type = ?', Posting_Row::TYPE_ARTICLE);
+
+        return $this;
+    }
+
+    public function symbol()
+    {
+        $this->where('type = ?', Posting_Row::TYPE_SYMBOL);
+
+        return $this;
+    }
+
+    public function entity()
+    {
+        $this->where('type = ?', Posting_Row::TYPE_ENTITY);
+
+        return $this;
+    }
+
+    public function post()
+    {
+        $this->where('type = ?', Posting_Row::TYPE_POST);
+
+        return $this;
+    }
+
     public function community(Posting_Community_Row $community)
     {
         $this->where('community_id = ?', $community->getId());

@@ -1,21 +1,5 @@
-<h1>Форум</h1>
-<h2><?php echo $this->escape($this->community->getTitle()); ?></h2>
-<?php
-if (count($this->ancestors)) {
-?>
-    <div class="ancestors">Уровни выше:
-<?php
-    foreach ($this->ancestors as $ancestor) {
-        $id = (strlen($ancestor['alias']) > 0) ? $ancestor['alias'] : $ancestor['id'];
-?>
-    <span><a href="<?php echo $this->url(array('id' => $id), 'forum_community', true); ?>"><?php echo $this->escape($ancestor['title']); ?></a></span>
-<?php
-    }
-?>
-    </div>
-<?php
-}
-?>
+<?php echo $this->partial('forum/_header.phtml', array('community' => $this->community, 'ancestors' => $this->ancestors, 'link' => false)); ?>
+
 <?php if (count($this->list)) { ?>
 <h3>Сообщества внутри</h3>
 <?php 	echo $this->partial('forum/communityList.phtml', array('list' => $this->list)); ?>
