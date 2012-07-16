@@ -53,7 +53,7 @@ class ForumController extends Ext_Controller_Action
         $view = $this->view;
         $this->_headTitle('Форум');
         if ($this->_getParam('canonical', false)) {
-            $href = $this->_url(array(), 'tos', true);
+            $href = $this->_url(array('id' => $id), 'forum_community', true);
             $this->_headLink(array('rel' => 'canonical', 'href' => $href));
         }
 
@@ -92,9 +92,11 @@ class ForumController extends Ext_Controller_Action
             if (!$entry->canBeSeenBy($this->_user)) {
                 $this->_forward('denied', 'error');
             }
-            if ($entry->getAlias() != $alias) {
+            $realAlias = $entry->getAlias();
+            if ($this->_getParam('canonical', false) || ($realAlias != $alias)) {
                 $parameters = array('id' => $id, 'alias' => $entry->getAlias());
-                $this->_redirect($this->_url($parameters, 'forum_entry'));
+                $href = $this->_url($parameters, 'forum_entry', true);
+                $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
             $community = $entry->getCommunity();
