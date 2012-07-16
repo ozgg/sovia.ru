@@ -48,7 +48,6 @@ class ForumController extends Ext_Controller_Action
             $this->_forward('denied', 'Error');
         }
 
-        $this->getPosts($community);
 
         $view = $this->view;
         $this->_headTitle('Форум');
@@ -58,6 +57,7 @@ class ForumController extends Ext_Controller_Action
         }
 
         $this->_headTitle($community->getTitle());
+        $this->getPosts($community);
 
         $mapper = $table->getMapper();
         $mapper->tree()

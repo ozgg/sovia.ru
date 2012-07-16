@@ -158,7 +158,7 @@ return array(
             'action'     => 'random',
         )
     ),
-    'dream_entry' => new Zend_Controller_Router_Route_Regex(
+    'dreams_entry' => new Zend_Controller_Router_Route_Regex(
         'dreams/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
             'controller' => 'dreams',
@@ -170,7 +170,7 @@ return array(
         ),
         'dreams/%d-%s'
     ),
-    'dream_entry_old' => new Zend_Controller_Router_Route(
+    'dreams_entry_old' => new Zend_Controller_Router_Route(
         'dreams/read/entry/:id',
         array(
             'controller' => 'dreams',
