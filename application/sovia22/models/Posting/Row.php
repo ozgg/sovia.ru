@@ -135,16 +135,16 @@ class Posting_Row extends Ext_Db_Table_Row
     {
         switch ($this->get('type')) {
             case self::TYPE_DREAM:
-                $route = 'dream_entry';
+                $route = 'dreams_entry';
                 break;
             case self::TYPE_POST:
                 $route = 'forum_entry';
                 break;
             case self::TYPE_ARTICLE:
-                $route = 'article_entry';
+                $route = 'articles_entry';
                 break;
             case self::TYPE_ENTITY:
-                $route = 'entity_entry';
+                $route = 'entities_entry';
                 break;
             case self::TYPE_SYMBOL:
                 $route = 'dreambook_entry';

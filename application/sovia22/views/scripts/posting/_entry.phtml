@@ -1,5 +1,20 @@
 <?php
 $href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->route);
+$isInternal = $this->entry->getIsinternal();
+$lockString = '';
+if ($isInternal > 0) {
+    switch ($isInternal) {
+        case 1:
+            $title = ' title="Видно только зарегистрированным пользователям"';
+            break;
+        case 255:
+            $title = ' title="Видно только автору"';
+            break;
+        default:
+            $title = '';
+    }
+    $lockString = '<div class="lock-' . $isInternal . '"' . $title . '>&nbsp;</div>';
+}
 ?>
 <div class="entry">
     <div class="header">
@@ -8,7 +23,7 @@ $href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry-
             <?php echo $this->partial('user/_userlink.phtml', array('login' => $this->entry->getOwner()->getLogin())); ?>,
             <?php echo $this->entry->getDate(); ?>
         </div>
-        <div class="title"><?php echo $this->escape($this->entry->getTitle()); ?></div>
+        <div class="title"><?php echo $lockString, $this->escape($this->entry->getTitle()); ?></div>
     </div>
     <div class="entry-body"><?php echo $this->entry->getBody(); ?></div>
     <div class="entry-footer"><a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a></div>
