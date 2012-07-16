@@ -151,6 +151,13 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_random' => new Zend_Controller_Router_Route_Static(
+        '/dreams/random',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'random',
+        )
+    ),
     'dream_entry' => new Zend_Controller_Router_Route_Regex(
         'dreams/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(

@@ -16,7 +16,7 @@ echo $this->headScript() . PHP_EOL;
     </div>
     <ul id="navigation-main">
         <li><a href="/" title="Блог проекта">Блог</a></li>
-        <li><a href="/" title="Читать сны">Сны</a></li>
+        <li><a href="<?php echo $this->url(array(), 'dreams', true); ?>" title="Читать сны">Сны</a></li>
         <li><a href="/" title="Сонник">Сонник</a></li>
         <li><a href="<?php echo $this->url(array(), 'forum', true); ?>" title="Форум о снах">Форум</a></li>
         <li><a href="<?php echo $this->url(array(), 'about', true); ?>" title="Информация о проекте">О проекте</a></li>
@@ -33,6 +33,20 @@ echo $this->headScript() . PHP_EOL;
 <?php
 	echo $this->action('authinfo', 'User');
 ?>
+        <div class="blocks">
+            <div class="stat"></div>
+            <div class="random-dream"></div>
+            <div class="more">
+                <p>А ещё есть вот что</p>
+                <ul>
+                    <li><a href="<?php echo $this->url(); ?>">Архив снов</a></li>
+                    <li><a href="<?php echo $this->url(array(), 'dreams_random', true); ?>">Случайный сон</a></li>
+                    <li><a href="<?php echo $this->url(); ?>">Описания сущностей</a></li>
+                    <li><a href="<?php echo $this->url(); ?>">Бредовый генератор снов</a></li>
+                </ul>
+            </div>
+            <div class="sape"></div>
+        </div>
     </div>
     
     <div id="footer">

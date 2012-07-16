@@ -84,4 +84,12 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
         return $this;
     }
+
+    public function random()
+    {
+        $this->order('rand()');
+        $this->limit(1);
+
+        return $this;
+    }
 }

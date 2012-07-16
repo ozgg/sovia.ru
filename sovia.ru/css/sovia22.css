@@ -257,6 +257,16 @@ dd.notice {
     margin: 0 5px;
 }
 
+#right-column .blocks {
+    position: absolute;
+    top: 157px;
+    right: 30px;
+}
+
+#right-column .blocks div {
+    border-radius: 15px;
+    background: #dddddd;
+}
 /*
 
 a:link, a:visited {

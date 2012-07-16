@@ -93,7 +93,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $type = Zend_View_Helper_Placeholder_Container_Abstract::PREPEND;
         $view->headTitle()->setSeparator(' / ');
         $view->headTitle('Совия', $type);
-        $view->headLink()->appendStylesheet('/css/main.css');
+        $view->headLink()->appendStylesheet('/css/sovia22.css');
         $view->headScript()->prependFile('/js/jquery.js');
         Zend_Paginator::setDefaultScrollingStyle('Sliding');
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pager.phtml');
