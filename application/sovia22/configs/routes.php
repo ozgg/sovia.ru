@@ -104,7 +104,7 @@ return array(
         '/forum'
     ),
     'forum_community' => new Zend_Controller_Router_Route(
-        'forum/community/:id',
+        'forum/communities/:id',
         array(
             'controller' => 'forum',
             'action'     => 'community',
@@ -119,7 +119,7 @@ return array(
         )
     ),
     'forum_entry' => new Zend_Controller_Router_Route_Regex(
-        'forum/post/(\d+)-([a-z0-9][-a-z0-9.]+)',
+        'forum/posts/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
             'controller' => 'forum',
             'action' => 'entry',
@@ -128,14 +128,33 @@ return array(
             1 => 'id',
             2 => 'alias',
         ),
-        'forum/post/%d-%s'
+        'forum/posts/%d-%s'
 
     ),
+    'forum_entry_old' => new Zend_Controller_Router_Route(
+        'forum/read/entry/:id',
+        array(
+            'controller' => 'forum',
+            'action'     => 'entry',
+            'canonical'  => true,
+        )
+    ),
 
+    'dreams' => new Zend_Controller_Router_Route_Static(
+        '/dreams'
+    ),
+    'dreams_old' => new Zend_Controller_Router_Route_Static(
+        '/dreams/read',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'dream_entry' => new Zend_Controller_Router_Route_Regex(
         'dreams/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
-            'controller' => 'dream',
+            'controller' => 'dreams',
             'action' => 'entry',
         ),
         array(
@@ -143,6 +162,14 @@ return array(
             2 => 'alias',
         ),
         'dreams/%d-%s'
+    ),
+    'dream_entry_old' => new Zend_Controller_Router_Route(
+        'dreams/read/entry/:id',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'entry',
+            'canonical'  => true,
+        )
     ),
 
 

@@ -17,8 +17,8 @@ class User_Avatar_Row extends Ext_Db_Table_Row
             if (file_exists($file)) {
                 $imageSize = getimagesize($file);
                 if (!empty($imageSize[3])) {
-                    $name   = $this->getName();
-                    $image  = '<img src="' . User_Avatar::STORAGE . $path . '"';
+                    $name  = $this->getName();
+                    $image = '<img src="' . User_Avatar::STORAGE . $path . '" ';
                     $image .= $imageSize[3] . ' alt="' . $name . '" />';
                     unset($name);
                 }
