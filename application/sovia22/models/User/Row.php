@@ -174,7 +174,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
     {
         $table = new Posting();
         $entryData = array(
-            'user_id'  => $this->getId(),
+            'owner_id'  => $this->getId(),
         );
         /** @var $entry Posting_Row */
         $entry = $table->createRow($entryData);
