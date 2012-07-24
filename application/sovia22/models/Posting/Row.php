@@ -161,4 +161,21 @@ class Posting_Row extends Ext_Db_Table_Row
 
         return $route;
     }
+
+    public function setData(array $data)
+    {
+        $this->set('type', $data['type']);
+        $this->set('title', $data['title']);
+        $this->set('body_raw', $data['body']);
+        $this->set('description', $data['description']);
+        $this->set('is_internal', $data['is_internal']);
+        $this->set('community_id', $data['community_id']);
+
+        return $this;
+    }
+
+    public function touch()
+    {
+        $this->set('created_at', new Zend_Db_Expr('now()'));
+    }
 }

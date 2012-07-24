@@ -70,7 +70,7 @@ class EntitiesController extends Ext_Controller_Action
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {
-            $this->_redirect($this->_url(array(), 'forum', true));
+            $this->_redirect($this->_url(array(), 'entities', true));
         }
     }
 
@@ -80,14 +80,17 @@ class EntitiesController extends Ext_Controller_Action
             $this->_forward('denied', 'error');
         }
         $this->_headTitle('Описать сущность');
-    }
-
-    public function createAction()
-    {
-        if (!$this->_user->getIsActive()) {
-            $this->_forward('denied', 'error');
+        $form = new Form_Posting_Entity();
+        $form->setAction($this->_url(array(), 'entities_new', true));
+        $this->view->assign('form', $form);
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            if ($form->isValid($data)) {
+                $this->_edit($data);
+            }
         }
-
     }
 
     public function editAction()
@@ -95,6 +98,57 @@ class EntitiesController extends Ext_Controller_Action
         if (!$this->_user->getIsActive()) {
             $this->_forward('denied', 'error');
         }
+        $this->_headTitle('Редактирование');
+        $id = $this->_getParam('id');
+        $this->view->assign('message', $this->_getFlashMessage());
 
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $entry = $mapper->entity()->id($id);
+        $form  = new Form_Posting_Entity();
+
+        /** @var $request Zend_Controller_Request_Http */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $request->getPost();
+            if ($form->isValid($data)) {
+                $this->_edit($data, $entry);
+            }
+        } else {
+            if (!empty($entry)) {
+                $form->setEntry($entry);
+            }
+            $this->view->assign('form', $form);
+        }
+
+    }
+
+
+    /**
+     * Редактирование записи и создание новой
+     *
+     * @param array $data данные формы
+     * @param Posting_Row|null $entry
+     * @return void
+     */
+    protected function _edit(array $data, Posting_Row $entry = null)
+    {
+        if (is_null($entry)) {
+            $data['type']         = Posting_Row::TYPE_ENTITY;
+            $data['description']  = '';
+            $data['is_internal']  = Posting_Row::VIS_PUBLIC;
+            $data['community_id'] = 4;
+
+            /** @var $user User_Row */
+            $user  = $this->_user;
+            $entry = $user->createPosting($data);
+            $this->_setFlashMessage('Сущность добавлена');
+        } else {
+            $entry->setData($data);
+            $entry->touch();//updated_at = date('Y-m-d H:i:s');
+            $entry->save();
+            $this->_setFlashMessage('Запись изменена');
+        }
+        $this->_redirect('/blog/edit/id/' . $entry->getId());
     }
 }
