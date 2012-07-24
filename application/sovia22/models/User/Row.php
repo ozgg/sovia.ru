@@ -168,17 +168,18 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
      * Добавить запись в блог
      *
      * @param array $data
-     * @return Blog_Entry_Row
+     * @return Posting_Row
      */
-    public function createBlogEntry(array $data)
+    public function createPosting(array $data)
     {
-        $table = new Blog_Entry();
+        $table = new Posting();
         $entryData = array(
             'user_id'  => $this->getId(),
         );
-        /** @var $entry Blog_Entry_Row */
+        /** @var $entry Posting_Row */
         $entry = $table->createRow($entryData);
         $entry->setData($data)->save();
+
         return $entry;
     }
 
