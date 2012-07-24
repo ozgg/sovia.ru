@@ -33,6 +33,7 @@ class BodyParser
         $escape  = !empty($options[self::OPTION_ESCAPE]);
         $useCut  = empty($options[self::OPTION_NO_CUT]);
         $counter = 0;
+
         foreach (explode("\n", $body) as $string) {
             $string = rtrim($string);
             if (!$escape && preg_match(self::PATTERN_RAW_OPEN, $string)) {
@@ -60,20 +61,23 @@ class BodyParser
                 $out['preview'] .= "{$buffer}\n";
             }
         }
+
         return $out;
     }
 
     public static function replaceCuts($body, $baseUrl)
     {
-        $pattern = self::PATTERN_CUT_OPEN;
+        $pattern  = self::PATTERN_CUT_OPEN;
         $callback = function($matches) use ($baseUrl)
         {
             static $counter = 0;
             $text   = isset($matches[1]) ? $matches[1] : 'Читать дальше';
             $format = '<p class="cut">( <a href="%s#cut%d" rel="bookmark">%s</a> )</p>';
+
             return sprintf($format, $baseUrl, $counter++, $text);
         };
         $out = preg_replace_callback($pattern, $callback, $body);
+
         return $out;
     }
 
