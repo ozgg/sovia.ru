@@ -11,6 +11,11 @@ class User_Guest implements User_Interface
         return 0;
     }
 
+    public function getIsActive()
+    {
+        return false;
+    }
+
     protected function _hasRoles($roles)
     {
         return false;

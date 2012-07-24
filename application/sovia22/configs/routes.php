@@ -8,15 +8,15 @@ return array(
         '/tos',
         array(
             'controller' => 'user',
-            'action' => 'agreement',
+            'action'     => 'agreement',
         )
     ),
     'tos_old' => new Zend_Controller_Router_Route_Static(
         '/user/tos',
         array(
             'controller' => 'user',
-            'action' => 'agreement',
-            'canonical' => true,
+            'action'     => 'agreement',
+            'canonical'  => true,
         )
     ),
 
@@ -24,15 +24,15 @@ return array(
         '/privacy',
         array(
             'controller' => 'user',
-            'action' => 'privacy',
+            'action'     => 'privacy',
         )
     ),
     'privacy_old' => new Zend_Controller_Router_Route_Static(
         '/user/privacy',
         array(
             'controller' => 'user',
-            'action' => 'privacy',
-            'canonical' => true,
+            'action'     => 'privacy',
+            'canonical'  => true,
         )
     ),
 
@@ -122,7 +122,7 @@ return array(
         'forum/posts/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
             'controller' => 'forum',
-            'action' => 'entry',
+            'action'     => 'entry',
         ),
         array(
             1 => 'id',
@@ -162,7 +162,7 @@ return array(
         'dreams/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
             'controller' => 'dreams',
-            'action' => 'entry',
+            'action'     => 'entry',
         ),
         array(
             1 => 'id',
@@ -201,6 +201,41 @@ return array(
             'year'  => '\d{4}',
             'month' => '([1-9]|1[0-2])',
         )
+    ),
+
+    'entities' => new Zend_Controller_Router_Route_Static(
+        '/entities'
+    ),
+    'entities_old' => new Zend_Controller_Router_Route_Static(
+        '/entities/read',
+        array(
+            'controller' => 'entities',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
+    'entities_entry' => new Zend_Controller_Router_Route_Regex(
+        'entities/(\d+)-([a-z0-9][-a-z0-9.]+)',
+        array(
+            'controller' => 'entities',
+            'action'     => 'entry',
+        ),
+        array(
+            1 => 'id',
+            2 => 'alias',
+        ),
+        'entities/%d-%s'
+    ),
+    'entities_entry_old' => new Zend_Controller_Router_Route(
+        'entities/read/entry/:title',
+        array(
+            'controller' => 'entities',
+            'action'     => 'entry',
+            'canonical'  => true,
+        )
+    ),
+    'entities_new' => new Zend_Controller_Router_Route_Static(
+        '/entities/new'
     ),
 
 

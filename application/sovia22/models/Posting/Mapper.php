@@ -15,6 +15,13 @@ class Posting_Mapper extends Ext_Db_Table_Select
         return $this;
     }
 
+    public function title($title)
+    {
+        $this->where('title = ?', $title);
+
+        return $this;
+    }
+
     public function dream()
     {
         $this->where('type = ?', Posting_Row::TYPE_DREAM);
