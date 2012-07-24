@@ -76,4 +76,36 @@ class DreamsController extends Ext_Controller_Action
             $this->_redirect($this->_url(array(), 'forum', true));
         }
     }
+
+    public function archiveAction()
+    {
+        $this->_headTitle('Архив');
+        $year  = intval($this->_getParam('year', 0));
+        $month = intval($this->_getParam('month', 0));
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->dream()
+               ->isInternal($this->_user->getId() > 0)
+               ->minimalRank($this->_user->getRank());
+        $months = array(
+            1 => 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
+        );
+        if ($year > 2000) {
+            $this->view->assign('year', $year);
+            $this->_headTitle($year);
+            if (($month > 0) && ($month < 13)) {
+                $this->_headTitle($months[$month]);
+                $this->view->assign('month', $months[$month]);
+                $this->view->assign('posts', $mapper->archive($year, $month)->fetchAll());
+            } else {
+                $month = null;
+                $this->view->assign('monthPosts', $mapper->months($year)->fetchAll());
+            }
+        }
+        $mapper->reset();
+        $years = $mapper->years()->fetchAll();
+        $this->view->assign('years', $years);
+        $this->view->assign('months', $months);
+    }
 }

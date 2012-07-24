@@ -92,4 +92,64 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
         return $this;
     }
+    /**
+     * Предыдущая запись относительно заданной
+     *
+     * @param $id
+     * @return Posting_Mapper
+     */
+    public function prevFor($id)
+    {
+        $this->where('id < ?', $id);
+        $this->order('id desc');
+
+        return $this;
+    }
+
+    /**
+     * Следующая запись относительно заданной
+     *
+     * @param $id
+     * @return Posting_Mapper
+     */
+    public function nextFor($id)
+    {
+        $this->where('id > ?', $id);
+        $this->order('id asc');
+
+        return $this;
+    }
+
+    /**
+     * Выборка записей из архива по году и месяцу
+     * @param int $year
+     * @param int $month
+     * @return Posting_Mapper
+     */
+    public function archive($year, $month)
+    {
+        $this->where('year(created_at) = ?', $year);
+        $this->where('month(created_at) = ?', $month);
+
+        return $this;
+    }
+
+    public function years()
+    {
+        $this->from($this->_table, 'year(created_at) as y')
+            ->group('y')
+            ->order('y');
+
+        return $this;
+    }
+
+    public function months($year)
+    {
+        $this->from($this->_table, 'month(created_at) as m, count(*) as cnt')
+            ->where('year(created_at) = ?', $year)
+            ->group('m')
+            ->order('m');
+
+        return $this;
+    }
 }
