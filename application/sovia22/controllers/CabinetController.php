@@ -114,7 +114,17 @@ class CabinetController extends Ext_Controller_Action
 
     public function dreamsAction()
     {
+        $this->checkUser();
+        $this->_headTitle("Ваши сны, страница {$this->_page}");
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->dream()->user($this->_user)->recent();
+        $paginator = $mapper->paginate($this->_page, 10);
+        $entries   = $paginator->getCurrentItems();
 
+        $this->view->assign('paginator', $paginator);
+        $this->view->assign('entries',   $entries);
+        $this->view->assign('page',      $this->_page);
     }
 
     public function profileAction()

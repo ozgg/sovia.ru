@@ -85,7 +85,7 @@ return array(
             'action'     => 'avatars',
         )
     ),
-    'cabinet_dreams' => new Zend_Controller_Router_Route_Static(
+    'cabinet_dreams' => new Zend_Controller_Router_Route(
         '/my/dreams',
         array(
             'controller' => 'cabinet',
