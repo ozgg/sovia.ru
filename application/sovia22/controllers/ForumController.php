@@ -48,7 +48,6 @@ class ForumController extends Ext_Controller_Action
             $this->_forward('denied', 'Error');
         }
 
-
         $view = $this->view;
         $this->_headTitle('Форум');
         if ($this->_getParam('canonical', false)) {

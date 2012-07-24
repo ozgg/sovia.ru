@@ -1,3 +1,5 @@
+<?php $url = $this->url() . '?page='; ?>
+
 <?php if ($this->pageCount): ?>
 <div class="paginationControl">
 <?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
@@ -5,7 +7,7 @@
 
 <!-- First page link -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+  <a href="<?php echo $url . $this->first; ?>">
     Первая
   </a> |
 <?php else: ?>
@@ -14,7 +16,7 @@
 
 <!-- Previous page link -->
 <?php if (isset($this->previous)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+  <a href="<?php echo $url . $this->previous; ?>">
     &lt; Предыдущая
   </a> |
 <?php else: ?>
@@ -23,7 +25,7 @@
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+  <a href="<?php echo $url . $this->next; ?>">
     Следующая &gt;
   </a> |
 <?php else: ?>
@@ -32,7 +34,7 @@
 
 <!-- Last page link -->
 <?php if (isset($this->next)): ?>
-  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+  <a href="<?php echo $url . $this->last; ?>">
     Последняя
   </a>
 <?php else: ?>
