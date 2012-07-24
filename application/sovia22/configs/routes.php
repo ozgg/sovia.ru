@@ -178,6 +178,30 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_archive' => new Zend_Controller_Router_Route_Static(
+        'dreams/archive'
+    ),
+    'dreams_archive_year' => new Zend_Controller_Router_Route(
+        'dreams/archive/:year',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'archive',
+        ),
+        array(
+            'year' => '\d{4}',
+        )
+    ),
+    'dreams_archive_month' => new Zend_Controller_Router_Route(
+        'dreams/archive/:year/:month',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'archive',
+        ),
+        array(
+            'year'  => '\d{4}',
+            'month' => '([1-9]|1[0-2])',
+        )
+    ),
 
 
 //*

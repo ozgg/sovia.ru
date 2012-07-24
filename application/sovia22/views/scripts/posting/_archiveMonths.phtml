@@ -1,0 +1,9 @@
+<ul class="month-posts">
+<?php foreach ($this->posts as $row) { ?>
+    <li>
+        <a href="<?php echo $this->url(array('year' => $this->year, 'month' => $row->m), $this->route, true); ?>">
+        <?php echo $this->months[$row->m]; ?>
+        </a>
+    </li>
+<?php } ?>
+</ul>

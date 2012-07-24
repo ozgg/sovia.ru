@@ -1,0 +1,14 @@
+<?php
+if (!empty($this->entries)) {
+    echo "<dl class=\"entries-description\">\n";
+    foreach ($this->entries as $entry) {
+        /** @var $entry Posting_Row */
+        $params = array('id' => $entry->getId(), 'alias' => $entry->getAlias());
+        $href = $this->url($params, $entry->getRouteName(), true);
+?>
+        <dt><a href="<?php echo $href ?>" rel="bookmark"><?php echo $entry->getTitle(); ?></a> <span class="date">(<?php echo $entry->getDate(); ?>)</span></dt>
+        <dd><?php echo $this->escape($entry->getDescription()); ?></dd>
+<?php
+    }
+    echo "</dl>\n";
+}
