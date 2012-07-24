@@ -33,6 +33,11 @@ class Posting_Row extends Ext_Db_Table_Row
         return $can;
     }
 
+    public function isArticle()
+    {
+        return ($this->get('type') == self::TYPE_ARTICLE);
+    }
+
     /**
      * Дата написания записи в формате d.m.Y
      *
@@ -75,7 +80,7 @@ class Posting_Row extends Ext_Db_Table_Row
 
     public function getBody()
     {
-        return $this->get('body');
+        return $this->get('body_raw');
     }
 
     /**
