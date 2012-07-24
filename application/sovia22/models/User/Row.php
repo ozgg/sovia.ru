@@ -159,6 +159,11 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this->get('has_comments');
     }
 
+    public function getIsActive()
+    {
+        return ($this->get('is_active') > 0);
+    }
+
     /**
      * Добавить запись в блог
      *
