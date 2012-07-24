@@ -165,11 +165,13 @@ class Posting_Row extends Ext_Db_Table_Row
     public function setData(array $data)
     {
         $this->set('type', $data['type']);
+        $this->set('community_id', $data['community_id']);
+        $this->set('avatar_id', $data['avatar_id']);
+        $this->set('is_internal', $data['is_internal']);
         $this->set('title', $data['title']);
+        $this->set('alias', BodyParser::transliterateForUrl($data['title']));
         $this->set('body_raw', $data['body']);
         $this->set('description', $data['description']);
-        $this->set('is_internal', $data['is_internal']);
-        $this->set('community_id', $data['community_id']);
 
         return $this;
     }

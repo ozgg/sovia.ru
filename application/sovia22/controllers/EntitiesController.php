@@ -63,7 +63,7 @@ class EntitiesController extends Ext_Controller_Action
             $realAlias = $entry->getAlias();
             if ($this->_getParam('canonical', false) || ($realAlias != $alias)) {
                 $parameters = array('id' => $entry->getId(), 'alias' => $entry->getAlias());
-                $href = $this->_url($parameters, 'entities_entry', true);
+                $href = $this->_url($parameters, $entry->getRouteName(), true);
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
@@ -111,6 +111,7 @@ class EntitiesController extends Ext_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $request->getPost();
+            $data['avatar_id']    = null;
             if ($form->isValid($data)) {
                 $this->_edit($data, $entry);
             }
@@ -135,9 +136,9 @@ class EntitiesController extends Ext_Controller_Action
     {
         if (is_null($entry)) {
             $data['type']         = Posting_Row::TYPE_ENTITY;
-            $data['description']  = '';
-            $data['is_internal']  = Posting_Row::VIS_PUBLIC;
             $data['community_id'] = 4;
+            $data['is_internal']  = Posting_Row::VIS_PUBLIC;
+            $data['description']  = '';
 
             /** @var $user User_Row */
             $user  = $this->_user;
@@ -145,10 +146,15 @@ class EntitiesController extends Ext_Controller_Action
             $this->_setFlashMessage('Сущность добавлена');
         } else {
             $entry->setData($data);
-            $entry->touch();//updated_at = date('Y-m-d H:i:s');
+            $entry->touch();
             $entry->save();
-            $this->_setFlashMessage('Запись изменена');
+            $this->_setFlashMessage('Сущность изменена');
         }
-        $this->_redirect('/blog/edit/id/' . $entry->getId());
+
+        $parameters = array(
+            'id'    => $entry->getId(),
+            'alias' => $entry->getAlias()
+        );
+        $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 }
