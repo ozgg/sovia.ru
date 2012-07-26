@@ -237,6 +237,15 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         return $this->get('max_avatars');
     }
 
+    public function getAvatars()
+    {
+        $table = new User_Avatar();
+        $mapper = $table->getMapper();
+        $mapper->owner($this);
+
+        return $mapper->fetchAll();
+    }
+
 
     public function getRoles($raw = false)
     {

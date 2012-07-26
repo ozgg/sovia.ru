@@ -4,10 +4,20 @@
  * Time: 1:54
  */
  
-class Form_Posting_Entry extends Zend_Form
+class Form_Posting extends Zend_Form
 {
     public function init()
     {
+        $avatar = new Zend_Form_Element_Select(
+            array(
+                'name'  => 'avatar_id',
+                'label' => 'Аватар',
+            )
+        );
+        $avatar->addMultiOption('0', 'Не выбран');
+
+        $this->addElement($avatar);
+
         $title = new Zend_Form_Element_Text(
             array(
                 'name' => 'title',
@@ -40,5 +50,17 @@ class Form_Posting_Entry extends Zend_Form
         );
         $this->addElement($submit);
         unset($submit);
+    }
+
+    public function setUser(User_Interface $user)
+    {
+        $avatars = $user->getAvatars();
+        /** @var $element Zend_Form_Element_Select */
+        $element = $this->getElement('avatar_id');
+        /** @var $avatar User_Avatar_Row */
+        foreach ($avatars as $avatar) {
+            $element->addMultiOption($avatar->getId(), $avatar->getName());
+        }
+        $element->setValue($user->getAvatarId());
     }
 }

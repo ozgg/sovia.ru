@@ -13,10 +13,6 @@
 <p><a href="<?php echo $this->url(array(), 'entities_new', true); ?>">Описать сущность</a></p>
 <?php } ?>
 
-<?php
-foreach ($this->entries as $entry) {
-    echo $this->partial('posting/_entryPreview.phtml', array('entry' => $entry));
-}
-?>
+<?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
 
 <?php echo $this->paginator; ?>

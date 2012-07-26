@@ -1,14 +1,6 @@
 <h1>Ваши сны</h1>
 <h2>Страница <?php echo $this->page; ?></h2>
-<?php
-if (!empty($this->entries)) {
-    foreach ($this->entries as $entry) {
-        echo $this->partial('posting/_entryPreview.phtml', array('entry' => $this->entries->current()));
-    }
-} else {
-?>
-<div class="message">Записей нет</div>
-<?php
-}
 
-echo $this->paginator;
+<?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
+
+<?php echo $this->paginator; ?>

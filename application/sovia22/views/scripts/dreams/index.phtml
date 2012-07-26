@@ -1,10 +1,6 @@
 <h1>Читать сны</h1>
 <h2>Страница <?php echo $this->page; ?></h2>
 
-<?php
-foreach ($this->entries as $entry) {
-    echo $this->partial('posting/_entryPreview.phtml', array('entry' => $entry));
-}
-?>
+<?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
 
 <?php echo $this->paginator; ?>
