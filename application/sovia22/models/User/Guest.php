@@ -16,6 +16,16 @@ class User_Guest implements User_Interface
         return false;
     }
 
+    public function getAvatars()
+    {
+        return array();
+    }
+
+    public function getAvatarId()
+    {
+        return null;
+    }
+
     protected function _hasRoles($roles)
     {
         return false;

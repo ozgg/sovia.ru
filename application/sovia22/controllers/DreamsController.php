@@ -91,7 +91,7 @@ class DreamsController extends Ext_Controller_Action
             1 => 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
             'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
         );
-        if ($year > 2000) {
+        if ($year > 1990) {
             $this->view->assign('year', $year);
             $this->_headTitle($year);
             if (($month > 0) && ($month < 13)) {

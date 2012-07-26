@@ -99,6 +99,18 @@ class Posting_Row extends Ext_Db_Table_Row
         return $this->findParentRow('User_Avatar');
     }
 
+    public function getAvatarId()
+    {
+        $avatar = $this->getAvatar();
+        if (!is_null($avatar)) {
+            $avatarId = $avatar->getId();
+        } else {
+            $avatarId = 0;
+        }
+
+        return $avatarId;
+    }
+
     public function getTags()
     {
         return array();

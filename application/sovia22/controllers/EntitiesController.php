@@ -81,6 +81,7 @@ class EntitiesController extends Ext_Controller_Action
         }
         $this->_headTitle('Описать сущность');
         $form = new Form_Posting_Entity();
+        $form->setUser($this->_user);
         $form->setAction($this->_url(array(), 'entities_new', true));
         $this->view->assign('form', $form);
         /** @var $request Zend_Controller_Request_Http */
@@ -106,6 +107,7 @@ class EntitiesController extends Ext_Controller_Action
         $mapper = $table->getMapper();
         $entry = $mapper->entity()->id($id);
         $form  = new Form_Posting_Entity();
+        $form->setUser($this->_user);
 
         /** @var $request Zend_Controller_Request_Http */
         $request = $this->getRequest();
@@ -139,6 +141,19 @@ class EntitiesController extends Ext_Controller_Action
             $data['community_id'] = 4;
             $data['is_internal']  = Posting_Row::VIS_PUBLIC;
             $data['description']  = '';
+            if (isset($data['avatar_id'])) {
+                $avatarTable = new User_Avatar();
+                /** @var $avatar User_Avatar_Row */
+                $avatar = $avatarTable->selectBy('id', $data['avatar_id'])
+                                      ->fetchRow();
+                if (!is_null($avatar)) {
+                    if (!$avatar->belongsTo($this->_user)) {
+                        $data['avatar_id'] = null;
+                    }
+                } else {
+                    $data['avatar_id'] = null;
+                }
+            }
 
             /** @var $user User_Row */
             $user  = $this->_user;

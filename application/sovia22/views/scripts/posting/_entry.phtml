@@ -1,22 +1,8 @@
 <?php
-$href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->route);
+$href       = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->route);
 $isInternal = $this->entry->getIsinternal();
-$lockString = '';
-if ($isInternal > 0) {
-    switch ($isInternal) {
-        case 1:
-            $title = ' title="Видно только зарегистрированным пользователям"';
-            break;
-        case 255:
-            $title = ' title="Видно только автору"';
-            break;
-        default:
-            $title = '';
-    }
-    $lockString = '<div class="lock-' . $isInternal . '"' . $title . '>&nbsp;</div>';
-}
-$options = array(BodyParser::OPTION_ESCAPE => !$this->entry->isArticle());
-$body = BodyParser::parseEntry($this->entry->getBody());
+$options    = array(BodyParser::OPTION_ESCAPE => !$this->entry->isArticle());
+$body       = BodyParser::parseEntry($this->entry->getBody(), $options);
 ?>
 <div class="entry">
     <div class="header">
@@ -25,7 +11,17 @@ $body = BodyParser::parseEntry($this->entry->getBody());
             <?php echo $this->partial('user/_userlink.phtml', array('login' => $this->entry->getOwner()->getLogin())); ?>,
             <?php echo $this->entry->getDate(); ?>
         </div>
-        <div class="title"><?php echo $lockString, $this->escape($this->entry->getTitle()); ?></div>
+        <div class="title">
+<?php if ($isInternal > 0) { ?>
+            <div class="lock-<?php echo $isInternal; ?>" title="Ограничение видимости">&nbsp;</div>
+<?php } ?>
+<?php if ($this->isPreview) { ?>
+            <a href="<?php echo $href; ?>" title="Читать"><?php echo $this->escape($this->entry->getTitle()); ?></a>
+            (<?php echo $this->entry->getType()->getName(); ?>)
+<?php } else { ?>
+            <?php echo $this->escape($this->entry->getTitle()); ?>
+<?php } ?>
+        </div>
     </div>
     <div class="entry-body"><?php echo $body['body']; ?></div>
     <div class="entry-footer"><a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a></div>

@@ -11,7 +11,7 @@ class User_Avatar_Row extends Ext_Db_Table_Row
     public function __toString()
     {
         $image = '';
-        $path  = $this->getFilepath();
+        $path  = $this->getFilePath();
         if (!empty($path)) {
             $file = '.' . User_Avatar::STORAGE . $path;
             if (file_exists($file)) {
@@ -41,6 +41,11 @@ class User_Avatar_Row extends Ext_Db_Table_Row
         return $this->get('owner_id');
     }
 
+    public function belongsTo(User_Interface $user)
+    {
+        return ($this->getOwnerId() == $user->getId());
+    }
+
     public function setOwner(User_Row $owner)
     {
         $this->set('owner_id', $owner->getId());
@@ -60,11 +65,12 @@ class User_Avatar_Row extends Ext_Db_Table_Row
         return $this;
     }
 
-    public function getFilepath()
+    public function getFilePath()
     {
         $path  = floor($this->getId() / 1000);
         $path .= sprintf('/%x-%u', $this->getOwnerId(), $this->getId());
         $path .= ".{$this->getExtension()}";
+
         return $path;
     }
 
@@ -83,7 +89,7 @@ class User_Avatar_Row extends Ext_Db_Table_Row
     public function delete()
     {
         parent::delete();
-        $path  = $this->getFilepath();
+        $path  = $this->getFilePath();
         if (!empty($path)) {
             $file = '.' . User_Avatar::STORAGE . $path;
             if (file_exists($file)) {
