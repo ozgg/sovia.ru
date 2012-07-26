@@ -237,6 +237,16 @@ return array(
     'entities_new' => new Zend_Controller_Router_Route_Static(
         '/entities/new'
     ),
+    'entities_edit_entry' => new Zend_Controller_Router_Route(
+        'entities/:id/edit',
+        array(
+            'controller' => 'entities',
+            'action' => 'edit',
+        ),
+        array(
+            'id' => '\d+',
+        )
+    ),
 
 
 //*

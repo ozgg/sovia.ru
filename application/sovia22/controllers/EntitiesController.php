@@ -67,6 +67,7 @@ class EntitiesController extends Ext_Controller_Action
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
+            $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {
@@ -105,7 +106,12 @@ class EntitiesController extends Ext_Controller_Action
 
         $table = new Posting();
         $mapper = $table->getMapper();
-        $entry = $mapper->entity()->id($id);
+        /** @var $entry Posting_Row */
+        $entry = $mapper->entity()->id($id)->fetchRowIfExists();
+
+        if (!$entry->canBeEditedBy($this->_user)) {
+            $this->_forward('denied', 'error');
+        }
         $form  = new Form_Posting_Entity();
         $form->setUser($this->_user);
 
@@ -113,7 +119,6 @@ class EntitiesController extends Ext_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $request->getPost();
-            $data['avatar_id']    = null;
             if ($form->isValid($data)) {
                 $this->_edit($data, $entry);
             }
@@ -123,9 +128,7 @@ class EntitiesController extends Ext_Controller_Action
             }
             $this->view->assign('form', $form);
         }
-
     }
-
 
     /**
      * Редактирование записи и создание новой
@@ -136,25 +139,25 @@ class EntitiesController extends Ext_Controller_Action
      */
     protected function _edit(array $data, Posting_Row $entry = null)
     {
-        if (is_null($entry)) {
-            $data['type']         = Posting_Row::TYPE_ENTITY;
-            $data['community_id'] = 4;
-            $data['is_internal']  = Posting_Row::VIS_PUBLIC;
-            $data['description']  = '';
-            if (isset($data['avatar_id'])) {
-                $avatarTable = new User_Avatar();
-                /** @var $avatar User_Avatar_Row */
-                $avatar = $avatarTable->selectBy('id', $data['avatar_id'])
-                                      ->fetchRow();
-                if (!is_null($avatar)) {
-                    if (!$avatar->belongsTo($this->_user)) {
-                        $data['avatar_id'] = null;
-                    }
-                } else {
+        $owner = (is_null($entry) ? $this->_user : $entry->getOwner());
+        if (isset($data['avatar_id'])) {
+            $table = new User_Avatar();
+            /** @var $avatar User_Avatar_Row */
+            $avatar = $table->selectBy('id', $data['avatar_id'])->fetchRow();
+            if (!is_null($avatar)) {
+                if (!$avatar->belongsTo($owner)) {
                     $data['avatar_id'] = null;
                 }
+            } else {
+                $data['avatar_id'] = null;
             }
+        }
+        $data['type']         = Posting_Row::TYPE_ENTITY;
+        $data['community_id'] = 4;
+        $data['is_internal']  = Posting_Row::VIS_PUBLIC;
+        $data['description']  = '';
 
+        if (is_null($entry)) {
             /** @var $user User_Row */
             $user  = $this->_user;
             $entry = $user->createPosting($data);
