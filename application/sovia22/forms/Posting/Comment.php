@@ -1,13 +1,30 @@
 <?php
 /**
- * Date: 30.08.11
- * Time: 1:54
+ *
+ *
+ * Date: 27.07.12
+ * Time: 0:58
+ *
+ * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
- 
-class Form_Posting extends Zend_Form
+class Form_Posting_Comment extends Zend_Form
 {
     public function init()
     {
+        $comment = new Zend_Form_Element_Hidden(
+            array(
+                'name' => 'comment_id',
+            )
+        );
+        $this->addElement($comment);
+
+        $posting = new Zend_Form_Element_Hidden(
+            array(
+                'name' => 'posting_id',
+            )
+        );
+        $this->addElement($posting);
+
         $avatar = new Zend_Form_Element_Select(
             array(
                 'name'  => 'avatar_id',
@@ -16,18 +33,6 @@ class Form_Posting extends Zend_Form
         );
         $avatar->addMultiOption('0', 'Не выбран');
         $this->addElement($avatar);
-
-        $title = new Zend_Form_Element_Text(
-            array(
-                'name' => 'title',
-                'label' => 'Название',
-                'size' => 50,
-            )
-        );
-        $title->setRequired();
-        $title->addValidator('stringLength', false, array(3, 100));
-        $this->addElement($title);
-        unset($title);
 
         $body = new Zend_Form_Element_Textarea(
             array(
@@ -61,5 +66,15 @@ class Form_Posting extends Zend_Form
             $element->addMultiOption($avatar->getId(), $avatar->getName());
         }
         $element->setValue($user->getAvatarId());
+    }
+
+    public function setPosting(Posting_Row $posting)
+    {
+
+    }
+
+    public function setComment(Posting_Comment_Row $comment)
+    {
+
     }
 }
