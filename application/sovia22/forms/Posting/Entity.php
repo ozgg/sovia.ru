@@ -10,6 +10,6 @@ class Form_Posting_Entity extends Form_Posting
     {
         $this->getElement('title')->setValue($entry->getTitle());
         $this->getElement('body')->setValue($entry->getBody());
-        $this->getElement('avatar')->setValue($entry->getAvatarId());
+        $this->getElement('avatar_id')->setValue($entry->getAvatarId());
     }
 }

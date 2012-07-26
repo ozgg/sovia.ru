@@ -33,6 +33,11 @@ class Posting_Row extends Ext_Db_Table_Row
         return $can;
     }
 
+    public function canBeEditedBy(User_Interface $user)
+    {
+        return ($this->getOwner()->getId() == $user->getId());
+    }
+
     public function isArticle()
     {
         return ($this->get('type') == self::TYPE_ARTICLE);

@@ -2,10 +2,10 @@
 if (!empty($this->entries)) {
     /** @var $entry Posting_Row */
     foreach ($this->entries as $entry) {
-        echo $this->partial('posting/_entry.phtml', array('entry' => $entry, 'route' => $entry->getRouteName(), 'isPreview' => true));
+        echo $this->partial('posting/_entry.phtml', array('entry' => $entry, 'isPreview' => true));
     }
 } else {
-    ?>
+?>
 <div class="message">Записей нет</div>
 <?php
 }

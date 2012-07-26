@@ -1,3 +1,8 @@
 <h1>Сущности снов</h1>
 <h2>Описание сущности</h2>
+
+<?php if ($this->canEdit) { ?>
+    <p><a href="<?php echo $this->url(array('id' => $this->entry->getId()), 'entities_edit_entry', true); ?>" title="Редактировать">Редактировать</a></p>
+<?php } ?>
+
 <?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
