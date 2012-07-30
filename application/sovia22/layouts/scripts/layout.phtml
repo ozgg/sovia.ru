@@ -44,12 +44,8 @@ if (!empty($chunk)) {
 	echo $this->action('authinfo', 'User');
 ?>
         <div class="blocks">
-            <div class="stat"></div>
-            <div class="random-dream">
-<?php
-    echo $this->action('sidebar', 'Dreams');
-?>
-            </div>
+            <div class="stat"><?php echo $this->action('statistics', 'Dreams'); ?></div>
+            <div class="random-dream"><?php echo $this->action('sidebar', 'Dreams'); ?></div>
             <div class="more">
                 <p>А ещё есть вот что</p>
                 <ul>

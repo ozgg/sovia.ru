@@ -1,0 +1,14 @@
+<p>Чаще всего снится</p>
+<ul>
+<?php
+    /** @var $tag Posting_Tag_Row */
+    foreach ($this->tags as $tag) {
+?>
+    <li>
+        <a href="<?php echo $this->url(array('tag' => $tag->getName()), 'dreams_tagged', true); ?>"><?php echo $this->escape($tag->getName()); ?></a>
+        (<?php echo Ext_Helper_Declension::decline($tag->getWeight(), $this->words); ?>)
+    </li>
+<?php
+    }
+?>
+</ul>
