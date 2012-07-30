@@ -4,6 +4,7 @@ echo $this->doctype() . PHP_EOL;
 <html>
 <head>
 <?php
+$this->sape(array(2, 1, 2));
 echo $this->headMeta() . PHP_EOL;
 echo $this->headLink() . PHP_EOL;
 echo $this->headTitle() . PHP_EOL;
@@ -27,6 +28,15 @@ echo $this->headScript() . PHP_EOL;
 ?>
 <?php echo $this->layout()->content; ?>
 
+<?php
+$chunk = $this->sape();
+if (!empty($chunk)) {
+    ?>
+    <div class="sape-content"><div class="header">Реклама</div><?php echo $chunk ?></div>
+    <?php
+}
+?>
+
     </div>
 
     <div id="right-column">
@@ -49,13 +59,14 @@ echo $this->headScript() . PHP_EOL;
                     <li><a href="<?php echo $this->url(array(), 'fun_rave', true); ?>">Бредовый генератор снов</a></li>
                 </ul>
             </div>
-            <div class="sape"></div>
+            <div class="sape-bar"><p>Реклама<p><?php echo $this->sape(); ?></div>
         </div>
     </div>
     
     <div id="footer">
         <div class="footer-element">&#0169; 2006&#0150;2012 sovia.ru</div>
         <div class="footer-element"><a href="<?php echo $this->url(array(), 'tos', true); ?>" title="Пользовательское соглашение">Пользовательское соглашение</a></div>
+        <div class="sape-bottom"><?php echo $this->sape('all'); ?></div>
     </div>
 </body>
 </html>
