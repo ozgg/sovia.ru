@@ -108,4 +108,30 @@ class DreamsController extends Ext_Controller_Action
         $this->view->assign('years', $years);
         $this->view->assign('months', $months);
     }
+
+    public function raveAction()
+    {
+        $this->_headTitle('Для забавы');
+        $this->_headTitle('Бредовый генератор снов');
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->dream()->isInternal(0)->random()->limit(rand(3, 5));
+        $chunks = array();
+        $title  = '';
+        /** @var $dream Posting_Row */
+        foreach ($mapper->fetchAll() as $dream) {
+            $plot = explode("\n", $dream->getBody());
+            if (empty($title)) {
+                $title = $dream->getTitle();
+            } elseif (rand(0, 1)) {
+                $title = $dream->getTitle();
+            }
+            $chunks[] = $plot[rand(0, count($plot) - 1)];
+            unset($plot);
+        }
+        unset($i, $dream, $communityId, $total);
+        $body = implode("\n", $chunks);
+        $this->view->assign('title', $title);
+        $this->view->assign('body', $body);
+    }
 }
