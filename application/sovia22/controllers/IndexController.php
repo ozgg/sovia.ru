@@ -16,4 +16,9 @@ class IndexController extends Ext_Controller_Action
         $description = 'Информация о проекте «Совия», история и идеология';
         $this->setDescription($description);
     }
+
+    public function funAction()
+    {
+        $this->_headTitle('Для забавы');
+    }
 }

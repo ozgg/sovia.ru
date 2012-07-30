@@ -213,6 +213,22 @@ return array(
             'month' => '([1-9]|1[0-2])',
         )
     ),
+    'fun' => new Zend_Controller_Router_Route_Static(
+        '/fun',
+        array(
+            'controller' => 'index',
+            'action'     => 'fun',
+        )
+    ),
+    'fun_rave' => new Zend_Controller_Router_Route_Static(
+        '/fun/rave',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'rave',
+        )
+    ),
+
+
 
     'entities' => new Zend_Controller_Router_Route_Static(
         '/entities'
