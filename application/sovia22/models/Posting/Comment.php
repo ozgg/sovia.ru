@@ -43,7 +43,7 @@ class Posting_Comment extends Ext_Db_Table_Abstract
         ),
         'Posting' => array(
             'columns'       => 'posting_id',
-            'refTableClass' => 'Posting_Item',
+            'refTableClass' => 'Posting',
             'refColumns'    => 'id',
         ),
         'Avatar' => array(

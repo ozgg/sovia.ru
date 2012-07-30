@@ -13,17 +13,10 @@ class Form_Posting_Comment extends Zend_Form
     {
         $comment = new Zend_Form_Element_Hidden(
             array(
-                'name' => 'comment_id',
+                'name' => 'parent_id',
             )
         );
         $this->addElement($comment);
-
-        $posting = new Zend_Form_Element_Hidden(
-            array(
-                'name' => 'posting_id',
-            )
-        );
-        $this->addElement($posting);
 
         $avatar = new Zend_Form_Element_Select(
             array(
@@ -36,10 +29,10 @@ class Form_Posting_Comment extends Zend_Form
 
         $body = new Zend_Form_Element_Textarea(
             array(
-                'name' => 'body',
+                'name'  => 'body',
                 'label' => 'Текст',
-                'cols' => 80,
-                'rows' => 25,
+                'cols'  => 80,
+                'rows'  => 25,
             )
         );
         $body->setRequired();
@@ -48,7 +41,7 @@ class Form_Posting_Comment extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit(
             array(
-                'name' => 'submit',
+                'name'  => 'submit',
                 'label' => 'Готово',
             )
         );
@@ -68,13 +61,10 @@ class Form_Posting_Comment extends Zend_Form
         $element->setValue($user->getAvatarId());
     }
 
-    public function setPosting(Posting_Row $posting)
-    {
-
-    }
-
     public function setComment(Posting_Comment_Row $comment)
     {
-
+        /** @var $element Zend_Form_Element_Hidden */
+        $element = $this->getElement('parent_id');
+        $element->setValue($comment->getId());
     }
 }

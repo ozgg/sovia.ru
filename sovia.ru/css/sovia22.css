@@ -333,6 +333,10 @@ dd.notice {
     padding: 0 1em 0 0;
 }
 
+.comment-options {
+    float: right
+}
+
 /*
 
 .switcher {
@@ -536,10 +540,6 @@ dd.notice {
 .addthis-container {
 	float: right;
 	margin: 0.5em;
-}
-
-.comment-options {
-	float: right
 }
 
 .sidebar .header {

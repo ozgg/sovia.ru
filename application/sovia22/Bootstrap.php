@@ -15,7 +15,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $rs = $this->getPluginResource('db');
         $db = $rs->init();
 
-        $request= new Zend_Controller_Request_Http();
+        $request = new Zend_Controller_Request_Http();
         $ip = $request->getServer('REMOTE_ADDR');
 
         Ext_Db_Table_Row::setRemoteAddr($ip);

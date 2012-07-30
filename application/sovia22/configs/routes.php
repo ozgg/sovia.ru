@@ -100,6 +100,17 @@ return array(
         )
     ),
 
+    'posting_comments_create' => new Zend_Controller_Router_Route(
+        'posts/:id/comments',
+        array(
+            'controller' => 'posting',
+            'action' => 'comments',
+        ),
+        array(
+            'id' => '\d+',
+        )
+    ),
+
     'forum' => new Zend_Controller_Router_Route_Static(
         '/forum'
     ),
@@ -247,7 +258,6 @@ return array(
             'id' => '\d+',
         )
     ),
-
 
 //*
     'sitemap' => new Zend_Controller_Router_Route_Static(
