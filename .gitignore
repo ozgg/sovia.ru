@@ -2,4 +2,5 @@
 application/sovia21/configs/local.php
 application/sovia21/upload/*
 library/Zend/
+library/Sape/links.db
 sovia.ru/images/avatars/*

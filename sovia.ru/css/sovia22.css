@@ -339,6 +339,32 @@ dd.notice {
     float: right
 }
 
+.sape-bottom {
+    margin: 0 2em 0 4em;
+    font-size: 0.8em;
+    color: #777777;
+    font-weight: normal;
+    float: right;
+}
+
+.sape-bar {
+    font-size: 0.75em;
+}
+
+.sape-bar div {
+    margin: 0;
+    padding: 0;
+}
+
+.sape-content {
+    margin: 1em 0 0 0;
+    font-size: 0.8em;
+}
+
+.sape-content .header {
+    font-weight: bold;
+}
+
 /*
 
 .switcher {
@@ -572,27 +598,6 @@ dd.notice {
 
 .counters {
 	float: left;
-}
-
-.sape-bottom {
-	font-family: Arial, Verdana, Sans-Serif;
-	margin-left: 4em;
-	font-size: 0.8em;
-	color: #777777;
-	font-weight: normal;
-}
-
-.sape-bar {
-	font-size: 0.75em;
-}
-
-.sape-content {
-	margin: 1em 0 0 0;
-	font-size: 0.8em;
-}
-
-.sape-content .header {
-	font-weight: bold;
 }
 
 .adsense234 {
