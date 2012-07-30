@@ -24,7 +24,7 @@ abstract class Ext_Controller_Action extends Zend_Controller_Action
     public function preDispatch()
     {
         /** @var $bootstrap Zend_Application_Bootstrap_Bootstrap */
-        $bootstrap = $this->getInvokeArg('bootstrap');
+        $bootstrap   = $this->getInvokeArg('bootstrap');
         $this->_user = $bootstrap->getResource('user');
         $page = intval($this->_getParam('page', 1));
         if ($page < 1) {

@@ -267,6 +267,72 @@ dd.notice {
     border-radius: 15px;
     background: #dddddd;
 }
+
+#reply-main {
+    margin: 1em 0 0 0;
+}
+
+#reply-main .header {
+    width: 300px;
+    margin: 0 auto;
+    background: url('/images/comment-add.png') center left no-repeat;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #3d6d88;
+    text-indent: 40px;
+}
+
+#comments ul {
+    margin: 0 0 0 1px;
+    padding: 0;
+}
+
+#comments li {
+    display: block;
+    list-style-type: none;
+    margin: 0.5em 0 0 0;
+}
+
+#comments .header {
+    background: #feefd0;
+    height: 110px;
+}
+
+#comments .footer {
+    min-height: 1.2em;
+}
+
+#comments .stripe1 {
+    background: #fef9ee;
+}
+
+#comments .avatar {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+.comments-link {
+    float: right;
+}
+
+.answer-button {
+    background: url('/images/comment-add-small.png') center left no-repeat;
+    padding: 0 0 0 15px;
+    margin: 0 0 0 1.5em;
+    cursor: pointer;
+    width: 140px;
+    color: #3d6d88;
+    text-decoration: underline;
+}
+
+#answer-form {
+    border: dotted 1px;
+    margin: 0 0 0 1.5em;
+    padding: 0 1em 0 0;
+}
+
 /*
 
 .switcher {
@@ -422,67 +488,6 @@ dd.notice {
 .neighbours li.next {
 	background: url('/images/nav-next.png') center right no-repeat;
 	padding: 0 15px 0 0;
-}
-
-#reply-main {
-	margin: 1em 0 0 0;
-}
-
-#reply-main .header {
-	width: 300px;
-	margin: 0 auto;
-	background: url('/images/comment-add.png') center left no-repeat;
-	cursor: pointer;
-	text-decoration: underline;
-	color: #3d6d88;
-	text-indent: 40px;
-}
-
-#comments ul {
-	margin: 0 0 0 1px;
-	padding: 0;
-}
-
-#comments li {
-	display: block;
-	list-style-type: none;
-	margin: 0.5em 0 0 0;
-}
-
-#comments .header {
-	background: #feefd0;
-	height: 110px;
-}
-
-#comments .footer {
-	min-height: 1.2em;
-}
-
-#comments .stripe1 {
-	background: #fef9ee;
-}
-
-#comments .avatar {
-	float: left;
-	width: 100px;
-	height: 100px;
-	margin: 5px;
-}
-
-.answer-button {
-	background: url('/images/comment-add-small.png') center left no-repeat;
-	padding: 0 0 0 15px;
-	margin: 0 0 0 1.5em;
-	cursor: pointer;
-	width: 140px;
-	color: #3d6d88;
-	text-decoration: underline;
-}
-
-#answer-form {
-	border: dotted 1px;
-	margin: 0 0 0 1.5em;
-	padding: 0 1em 0 0;
 }
 
 .dreambook-letters {

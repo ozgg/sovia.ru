@@ -15,7 +15,7 @@ class Posting_Comment_Mapper extends Ext_Db_Table_Select
      */
     public function post(Posting_Row $post)
     {
-        $this->where('post_id = ?', $post->getId());
+        $this->where('posting_id = ?', $post->getId());
 
         return $this;
     }
