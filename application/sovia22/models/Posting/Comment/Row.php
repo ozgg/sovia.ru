@@ -48,4 +48,12 @@ class Posting_Comment_Row extends Ext_Db_Table_Row
     {
         return $this->get('body');
     }
+
+    /**
+     * @return Posting_Row
+     */
+    public function getPosting()
+    {
+        return $this->findParentRow('Posting');
+    }
 }

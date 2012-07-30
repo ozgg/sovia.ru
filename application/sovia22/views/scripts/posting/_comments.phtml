@@ -3,7 +3,7 @@ if (!empty($this->canComment)) {
 ?>
 <div id="reply-main">
     <div class="header" onclick="$('#reply-main-form').toggle();">Добавить комментарий</div>
-    <form id="reply-main-form" action="<?php echo $this->url(); ?>" method="post">
+    <form id="reply-main-form" action="<?php echo $this->url(array('id' => $this->entry->getId()), 'posting_comments_create', true); ?>" method="post">
         <dl>
             <?php
             if (!empty($this->avatars)) {
@@ -45,16 +45,18 @@ if (!empty($this->canComment)) {
 <?php
 }
 
-if (!empty($this->comments)) {
+$comments = $this->entry->getComments();
+if (!empty($comments)) {
+
 ?>
 <div id="comments">
-    <h3>Комментарии (<?php echo count($this->comments); ?>)</h3>
+    <h3>Комментарии (<?php echo count($comments); ?>)</h3>
     <ul>
         <?php
         $level  = 0;
         $stripe = 1;
         /** @var $comment Posting_Comment_Row */
-        foreach ($this->comments as $comment) {
+        foreach ($comments as $comment) {
             $commentId = $comment->getId();
             $owner     = $comment->getOwner();
             $ownerLink = $this->partial('user/_userlink.phtml', array(
@@ -101,7 +103,7 @@ if (!empty($this->comments)) {
     <?php
     if (!empty($this->canComment)) {
         ?>
-        <form id="answer-form" action="<?php echo $this->url(); ?>" method="post" style="display: none">
+        <form id="answer-form" action="<?php echo $this->url(array('id' => $this->entry->getId()), 'posting_comments_create', true); ?>" method="post" style="display: none">
             <dl>
                 <?php
                 if (!empty($this->avatars)) {

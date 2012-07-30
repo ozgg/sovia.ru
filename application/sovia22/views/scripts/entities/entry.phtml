@@ -9,7 +9,7 @@
 
 <?php
     echo $this->partial('posting/_comments.phtml', array(
-        'comments'   => $this->entry->getComments(),
+        'entry'      => $this->entry,
         'avatars'    => $this->avatars,
         'canComment' => $this->canComment
     ));
