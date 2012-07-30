@@ -134,4 +134,32 @@ class DreamsController extends Ext_Controller_Action
         $this->view->assign('title', $title);
         $this->view->assign('body', $body);
     }
+
+    public function sidebarAction()
+    {
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->dream()
+               ->isInternal(Posting_Row::VIS_PUBLIC)
+               ->random()
+               ->limit(1);
+        /** @var $dream Posting_Row */
+        $dream = $mapper->fetchRow();
+        $this->view->assign('title', $dream->getTitle());
+
+        $options = array(BodyParser::OPTION_ESCAPE => true);
+        $body    = BodyParser::parseEntry($dream->getBody(), $options);
+        $href    = $this->_url(array(
+            'id' => $dream->getId(),
+            'alias' => $dream->getAlias()
+        ));
+        $stripped = strip_tags($body['body']);
+        $text = mb_substr($stripped, 0, 200);
+        if (mb_strlen($text) < mb_strlen($stripped)) {
+            $text .= '…';
+        }
+
+        $this->view->assign('href', $href);
+        $this->view->assign('text', $text);
+    }
 }
