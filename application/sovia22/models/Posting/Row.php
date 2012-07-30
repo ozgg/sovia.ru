@@ -56,6 +56,14 @@ class Posting_Row extends Ext_Db_Table_Row
     }
 
     /**
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->get('created_at');
+    }
+
+    /**
      * @return Posting_Type_Row
      */
     public function getType()
@@ -148,9 +156,17 @@ class Posting_Row extends Ext_Db_Table_Row
     {
         $table  = new Posting_Comment();
         /** @var $mapper Posting_Mapper */
-        $mapper = $table->getMapper()->post($this->getId())->order('left_key');
+        $mapper = $table->getMapper()->post($this)->order('left_key');
 
         return $mapper->fetchAll();
+    }
+
+    /**
+     * @return int
+     */
+    public function getHasComments()
+    {
+        return intval($this->get('has_comments'));
     }
 
     public function getRouteName()

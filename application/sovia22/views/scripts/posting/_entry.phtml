@@ -9,7 +9,7 @@ $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
         <div class="avatar"><?php echo $this->partial('user/_avatar.phtml', array('avatar' => $this->entry->getAvatar())); ?></div>
         <div class="spawn-info">
             <?php echo $this->partial('user/_userlink.phtml', array('login' => $this->entry->getOwner()->getLogin())); ?>,
-            <?php echo $this->entry->getDate(); ?>
+            <?php echo Ext_Helper_Date::makeString($this->entry->getCreatedAt(), true); ?>
         </div>
         <div class="title">
 <?php if ($isInternal > 0) { ?>
@@ -24,5 +24,15 @@ $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
         </div>
     </div>
     <div class="entry-body"><?php echo $body['body']; ?></div>
-    <div class="entry-footer"><a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a></div>
+    <div class="entry-footer">
+        <a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a>
+<?php if ($this->isPreview) { ?>
+    <span class="comments-link">
+        <a href="<?php echo $href; ?>#comments" title="Посмотреть комментарии">
+            <?php echo Ext_Helper_Declension::decline($this->entry->getHasComments(), array('комментариев', 'комментарий', 'комментария')); ?>
+        </a>
+    </span>
+
+<?php } ?>
+    </div>
 </div>

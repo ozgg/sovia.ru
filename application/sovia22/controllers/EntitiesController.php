@@ -73,6 +73,8 @@ class EntitiesController extends Ext_Controller_Action
         } else {
             $this->_redirect($this->_url(array(), 'entities', true));
         }
+        $this->view->assign('canComment', $this->_user->getIsActive());
+        $this->view->assign('avatars',    $this->_user->getAvatars());
     }
 
     public function newAction()
