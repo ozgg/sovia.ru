@@ -266,6 +266,8 @@ dd.notice {
 #right-column .blocks div {
     border-radius: 15px;
     background: #dddddd;
+    margin: 0.5em 0 0.5em 2em;
+    padding: 0.3em;
 }
 
 #reply-main {
