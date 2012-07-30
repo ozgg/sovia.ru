@@ -189,6 +189,21 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_tagged' => new Zend_Controller_Router_Route(
+        'dreams/tagged/:tag',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'index',
+        )
+    ),
+    'dreams_tagged_old' => new Zend_Controller_Router_Route(
+        'dreams/read/tag/:tag',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'dreams_archive' => new Zend_Controller_Router_Route_Static(
         'dreams/archive'
     ),
@@ -213,6 +228,7 @@ return array(
             'month' => '([1-9]|1[0-2])',
         )
     ),
+
     'fun' => new Zend_Controller_Router_Route_Static(
         '/fun',
         array(

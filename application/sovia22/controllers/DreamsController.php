@@ -162,4 +162,15 @@ class DreamsController extends Ext_Controller_Action
         $this->view->assign('href', $href);
         $this->view->assign('text', $text);
     }
+
+    public function statisticsAction()
+    {
+        $words  = array('снов', 'сон', 'сна');
+        $table  = new Posting_Tag();
+        $mapper = $table->getMapper();
+        $mapper->dreams()->byWeight()->limit(10);
+
+        $this->view->assign('tags', $mapper->fetchAll());
+        $this->view->assign('words', $words);
+    }
 }
