@@ -152,7 +152,7 @@ class DreamsController extends Ext_Controller_Action
         $href    = $this->_url(array(
             'id' => $dream->getId(),
             'alias' => $dream->getAlias()
-        ));
+        ), $dream->getRouteName(), true);
         $stripped = strip_tags($body['body']);
         $text = mb_substr($stripped, 0, 200);
         if (mb_strlen($text) < mb_strlen($stripped)) {
