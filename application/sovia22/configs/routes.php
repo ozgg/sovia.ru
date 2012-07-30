@@ -291,6 +291,21 @@ return array(
         )
     ),
 
+    'statistics' => new Zend_Controller_Router_Route_Static(
+        '/statistics',
+        array(
+            'controller' => 'statistics',
+            'action'     => 'index',
+        )
+    ),
+    'statistics_symbols' => new Zend_Controller_Router_Route_Static(
+        '/statistics/symbols',
+        array(
+            'controller' => 'statistics',
+            'action'     => 'symbols',
+        )
+    ),
+
 //*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         'sitemap',
