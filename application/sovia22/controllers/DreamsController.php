@@ -47,6 +47,8 @@ class DreamsController extends Ext_Controller_Action
         $this->_headTitle('Сны');
         $this->_headTitle('Случайный сон');
         $this->setDescription('Случайный сон, выбранный из базы.');
+        $this->view->assign('canComment', $this->_user->getIsActive());
+        $this->view->assign('avatars',    $this->_user->getAvatars());
     }
 
     public function entryAction()
@@ -73,8 +75,10 @@ class DreamsController extends Ext_Controller_Action
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {
-            $this->_redirect($this->_url(array(), 'forum', true));
+            $this->_redirect($this->_url(array(), 'dreams', true));
         }
+        $this->view->assign('canComment', $this->_user->getIsActive());
+        $this->view->assign('avatars',    $this->_user->getAvatars());
     }
 
     public function archiveAction()

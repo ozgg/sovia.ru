@@ -15,11 +15,11 @@ class PostingController extends Ext_Controller_Action
         if (!$this->_user->getIsActive()) {
             $this->_forward('denied', 'error');
         }
-        $id = $this->_getParam('id');
-        $table = new Posting();
+        $id     = $this->_getParam('id');
+        $table  = new Posting();
         $mapper = $table->getMapper();
         /** @var $entry Posting_Row */
-        $entry = $mapper->entity()->id($id)->fetchRowIfExists();
+        $entry = $mapper->id($id)->fetchRowIfExists();
         if (!$entry->canBeSeenBy($this->_user)) {
             $this->_forward('denied', 'error');
         }
