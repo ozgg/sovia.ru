@@ -1,3 +1,11 @@
 <?php echo $this->partial('forum/_header.phtml', array('community' => $this->community, 'ancestors' => $this->ancestors, 'link' => true)); ?>
 
 <?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
+
+<?php
+echo $this->partial('posting/_comments.phtml', array(
+    'entry'      => $this->entry,
+    'avatars'    => $this->avatars,
+    'canComment' => $this->canComment
+));
+?>

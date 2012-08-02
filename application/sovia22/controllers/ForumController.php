@@ -117,6 +117,8 @@ class ForumController extends Ext_Controller_Action
         } else {
             $this->_redirect($this->_url(array(), 'forum', true));
         }
+        $this->view->assign('canComment', $this->_user->getIsActive());
+        $this->view->assign('avatars',    $this->_user->getAvatars());
     }
 
     protected function getPosts(Posting_Community_Row $community)
