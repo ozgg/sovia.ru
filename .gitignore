@@ -1,6 +1,6 @@
 .idea
-application/sovia21/configs/local.php
-application/sovia21/upload/*
+application/sovia22/configs/local.php
+application/sovia22/upload/*
 library/Zend/
 library/Sape/links.db
 sovia.ru/images/avatars/*
