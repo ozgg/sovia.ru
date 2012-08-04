@@ -159,4 +159,17 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
         return $this;
     }
+
+    public function letters()
+    {
+        $this->group('substring(`alias` from 1 for 1)');
+        $this->order('1 asc');
+
+        return $this;
+    }
+
+    public function letter($letter)
+    {
+
+    }
 }

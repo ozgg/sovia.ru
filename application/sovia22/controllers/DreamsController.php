@@ -149,22 +149,24 @@ class DreamsController extends Ext_Controller_Action
                ->limit(1);
         /** @var $dream Posting_Row */
         $dream = $mapper->fetchRow();
-        $this->view->assign('title', $dream->getTitle());
+        if (!is_null($dream)) {
+            $this->view->assign('title', $dream->getTitle());
 
-        $options = array(BodyParser::OPTION_ESCAPE => true);
-        $body    = BodyParser::parseEntry($dream->getBody(), $options);
-        $href    = $this->_url(array(
-            'id' => $dream->getId(),
-            'alias' => $dream->getAlias()
-        ), $dream->getRouteName(), true);
-        $stripped = strip_tags($body['body']);
-        $text = mb_substr($stripped, 0, 200);
-        if (mb_strlen($text) < mb_strlen($stripped)) {
-            $text .= '…';
+            $options = array(BodyParser::OPTION_ESCAPE => true);
+            $body    = BodyParser::parseEntry($dream->getBody(), $options);
+            $href    = $this->_url(array(
+                'id' => $dream->getId(),
+                'alias' => $dream->getAlias()
+            ), $dream->getRouteName(), true);
+            $stripped = strip_tags($body['body']);
+            $text = mb_substr($stripped, 0, 200);
+            if (mb_strlen($text) < mb_strlen($stripped)) {
+                $text .= '…';
+            }
+
+            $this->view->assign('href', $href);
+            $this->view->assign('text', $text);
         }
-
-        $this->view->assign('href', $href);
-        $this->view->assign('text', $text);
     }
 
     public function statisticsAction()

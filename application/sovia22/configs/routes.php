@@ -291,6 +291,27 @@ return array(
         )
     ),
 
+    'dreambook' => new Zend_Controller_Router_Route_Static(
+        '/dreambook'
+    ),
+    'dreambook_new' => new Zend_Controller_Router_Route_Static(
+        '/dreambook/new'
+    ),
+    'dreambook_letter' => new Zend_Controller_Router_Route(
+        'dreambook/read/:letter',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'letter',
+        )
+    ),
+    'dreambook_entry' => new Zend_Controller_Router_Route(
+        'dreambook/read/:letter/:symbol',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'entry',
+        )
+    ),
+
     'statistics' => new Zend_Controller_Router_Route_Static(
         '/statistics',
         array(

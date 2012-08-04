@@ -30,7 +30,7 @@ $config = array(
             'layoutPath' => APPLICATION_PATH . '/layouts/scripts',
         ),
         'db' => array(
-            'adapter'  => 'MYSQLI',
+            'adapter'  => 'pdo_mysql',
             'params' => array(
                 'host'     => '127.0.0.1',
                 'username' => '',

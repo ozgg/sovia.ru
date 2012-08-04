@@ -365,6 +365,50 @@ dd.notice {
     font-weight: bold;
 }
 
+
+.dreambook-letters {
+    margin: 0.5em 0;
+    height: 1.5em;
+    padding: 0;
+}
+
+.dreambook-letters li {
+    display: block;
+    list-style-type: none;
+    float: left;
+    width: 1.5em;
+    margin: 0;
+    text-align: center;
+}
+
+.dreambook-letters li a:link, .dreambook-letters li a:visited {
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+}
+
+.dreambook-letters li a:hover {
+    text-decoration: underline;
+    background: #fffff0;
+}
+
+.dreambook-list {
+    margin: 0;
+    padding: 0;
+}
+
+.dreambook-list li {
+    margin: 0;
+    padding: 0 1.5em;
+    display: block;
+    list-style-type: none;
+}
+
+.dreambook-list li a {
+    display: block;
+}
+
 /*
 
 .switcher {
@@ -520,49 +564,6 @@ dd.notice {
 .neighbours li.next {
 	background: url('/images/nav-next.png') center right no-repeat;
 	padding: 0 15px 0 0;
-}
-
-.dreambook-letters {
-	margin: 0.5em 0;
-	height: 1.5em;
-	padding: 0;
-}
-
-.dreambook-letters li {
-	display: block;
-	list-style-type: none;
-	float: left;
-	width: 1.5em;
-	margin: 0;
-	text-align: center;
-}
-
-.dreambook-letters li a:link, .dreambook-letters li a:visited {
-	font-weight: bold;
-	display: block;
-	text-decoration: none;
-	width: 100%;
-}
-
-.dreambook-letters li a:hover {
-	text-decoration: underline;
-	background: #fffff0;
-}
-
-.dreambook-list {
-	margin: 0;
-	padding: 0;
-}
-
-.dreambook-list li {
-	margin: 0;
-	padding: 0 1.5em;
-	display: block;
-	list-style-type: none;
-}
-
-.dreambook-list li a {
-	display: block;
 }
 
 .addthis-container {

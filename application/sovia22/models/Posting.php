@@ -68,4 +68,23 @@ class Posting extends Ext_Db_Table_Abstract
 
         return $this->_mapper;
     }
+
+    public function getLetters($type)
+    {
+        settype($type, 'int');
+        $letters = array();
+        $query   = "SELECT DISTINCT SUBSTRING(`title` FROM 1 FOR 1) AS ltr ";
+        $query  .= "FROM {$this->_name} WHERE type = {$type} ";
+        $query  .= "AND `title` IS NOT NULL ";
+        $query  .= "ORDER BY ltr ASC";
+        foreach ($this->getAdapter()->fetchAll($query) as $row) {
+            if ($row['ltr'] != '') {
+                $letters[] = $row['ltr'];
+            }
+            unset($row);
+        }
+        unset($query);
+
+        return $letters;
+    }
 }

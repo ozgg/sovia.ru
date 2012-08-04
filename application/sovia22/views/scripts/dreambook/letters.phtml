@@ -1,0 +1,9 @@
+<?php if (!empty($this->letters)) { ?>
+<ul class="dreambook-letters">
+<?php    foreach ($this->letters as $letter) { ?>
+    <li><a href="<?php echo $this->url(array('letter' => $letter), 'dreambook_letter', true); ?>"><?php echo $this->escape($letter); ?></a></li>
+<?php    } ?>
+</ul>
+<?php } else { ?>
+<div class="result">Нет ни одного символа</div>
+<?php } ?>
