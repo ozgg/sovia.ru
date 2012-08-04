@@ -76,5 +76,6 @@ class PostingController extends Ext_Controller_Action
         $query  .= $table->getDefaultAdapter()->quote($data['body']);
         $query  .= ')';
         $table->getDefaultAdapter()->query($query);
+        $this->_setFlashMessage('Комментарий добавлен');
     }
 }

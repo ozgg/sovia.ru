@@ -43,6 +43,11 @@ class Posting_Row extends Ext_Db_Table_Row
         return ($this->get('type') == self::TYPE_ARTICLE);
     }
 
+    public function isSymbol()
+    {
+        return ($this->get('type') == self::TYPE_SYMBOL);
+    }
+
     /**
      * Дата написания записи в формате d.m.Y
      *
@@ -212,5 +217,10 @@ class Posting_Row extends Ext_Db_Table_Row
     public function touch()
     {
         $this->set('created_at', new Zend_Db_Expr('now()'));
+    }
+
+    public function getLetter()
+    {
+        return mb_substr($this->getTitle(), 0, 1);
     }
 }

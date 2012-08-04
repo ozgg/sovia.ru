@@ -9,6 +9,9 @@ class Zend_View_Helper_sape extends Zend_View_Helper_Abstract
 	
 	public function sape($input = null)
 	{
+        if (!defined('_SAPE_USER')) {
+            return null;
+        }
 		if (empty(self::$_object)) {
 			self::$_object = new Sape_Client(array('charset' => 'UTF-8', 'host' => 'sovia.ru'));
 		}

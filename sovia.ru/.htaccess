@@ -1,6 +1,3 @@
-php_flag register_globals off
-php_flag magic_quotes_gpc off
-
 Options -Indexes
 
 RewriteEngine On

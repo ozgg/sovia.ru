@@ -1,5 +1,10 @@
 <?php
-$href       = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->entry->getRouteName());
+if ($this->entry->isSymbol()) {
+    $href = $this->url(array('letter' => $this->entry->getLetter(), 'symbol' => $this->entry->getTitle()), $this->entry->getRouteName());
+} else {
+    $href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->entry->getRouteName());
+}
+
 $isInternal = $this->entry->getIsinternal();
 $options    = array(BodyParser::OPTION_ESCAPE => !$this->entry->isArticle());
 $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
