@@ -13,6 +13,6 @@
 <?php } ?>
 
 <h2>Выберите букву, на которую начинается символ</h2>
-<?php
-echo $this->action('letters', 'dreambook', null);
-?>
+<?php echo $this->action('letters', 'dreambook', null); ?>
+
+<?php echo $this->partial('dreambook/_words.phtml', array('words' => $this->words)); ?>

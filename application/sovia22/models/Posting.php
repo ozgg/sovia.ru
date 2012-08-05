@@ -73,10 +73,10 @@ class Posting extends Ext_Db_Table_Abstract
     {
         settype($type, 'int');
         $letters = array();
-        $query   = "SELECT DISTINCT SUBSTRING(`title` FROM 1 FOR 1) AS ltr ";
-        $query  .= "FROM {$this->_name} WHERE type = {$type} ";
-        $query  .= "AND `title` IS NOT NULL ";
-        $query  .= "ORDER BY ltr ASC";
+        $query   = "select distinct substring(`title` from 1 for 1) as ltr ";
+        $query  .= "from {$this->_name} where type = {$type} ";
+        $query  .= "and `title` is not null ";
+        $query  .= "order by ltr asc";
         foreach ($this->getAdapter()->fetchAll($query) as $row) {
             if ($row['ltr'] != '') {
                 $letters[] = $row['ltr'];
@@ -86,5 +86,20 @@ class Posting extends Ext_Db_Table_Abstract
         unset($query);
 
         return $letters;
+    }
+
+    public function findSymbolsByLetter($letter)
+    {
+        $letter = $this->getAdapter()->quote($letter);
+        $where  = array(
+            'type = ' . Posting_Row::TYPE_SYMBOL,
+            "title like concat(substring({$letter} from 1 for 1), '%')",
+        );
+        $query = 'select id, title, substring(title from 1 for 1) as letter'
+               . " from {$this->_name}"
+               . ' where ' . implode(' and ', $where)
+               . ' order by title asc';
+
+        return $this->getAdapter()->fetchAll($query);
     }
 }

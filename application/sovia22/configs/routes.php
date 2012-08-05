@@ -297,6 +297,14 @@ return array(
     'dreambook_new' => new Zend_Controller_Router_Route_Static(
         '/dreambook/new'
     ),
+    'dreambook_read' => new Zend_Controller_Router_Route_Static(
+        '/dreambook/read',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'dreambook_letter' => new Zend_Controller_Router_Route(
         'dreambook/read/:letter',
         array(
@@ -309,6 +317,22 @@ return array(
         array(
             'controller' => 'dreambook',
             'action'     => 'entry',
+        )
+    ),
+    'dreambook_letter_old' => new Zend_Controller_Router_Route(
+        'dreambook/read/letter/:letter',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'letter',
+            'canonical'  => true,
+        )
+    ),
+    'dreambook_entry_old' => new Zend_Controller_Router_Route(
+        'dreambook/read/entry/:symbol',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'entry',
+            'canonical'  => true,
         )
     ),
 

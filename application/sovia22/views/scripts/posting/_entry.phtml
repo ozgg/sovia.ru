@@ -6,7 +6,7 @@ if ($this->entry->isSymbol()) {
 }
 
 $isInternal = $this->entry->getIsinternal();
-$options    = array(BodyParser::OPTION_ESCAPE => !$this->entry->isArticle());
+$options    = array(BodyParser::OPTION_ESCAPE => !($this->entry->isArticle() || $this->entry->isSymbol()));
 $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
 ?>
 <div class="entry">

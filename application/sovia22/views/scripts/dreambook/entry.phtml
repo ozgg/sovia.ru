@@ -1,0 +1,13 @@
+<h1>Сонник</h1>
+
+<?php echo $this->action('letters', 'dreambook'); ?>
+
+<?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
+
+<?php
+echo $this->partial('posting/_comments.phtml', array(
+    'entry'      => $this->entry,
+    'avatars'    => $this->avatars,
+    'canComment' => $this->canComment
+));
+?>
