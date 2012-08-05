@@ -1,0 +1,11 @@
+<h1>Статьи</h1>
+
+<?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
+
+<?php
+echo $this->partial('posting/_comments.phtml', array(
+    'entry'      => $this->entry,
+    'avatars'    => $this->avatars,
+    'canComment' => $this->canComment
+));
+?>
