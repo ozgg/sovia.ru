@@ -16,7 +16,7 @@ echo $this->headScript() . PHP_EOL;
         <div id="logo"><a href="<?php echo $this->url(array(), 'home', true); ?>" title="На главную страницу"><img src="/images/owl.png" alt="sovia.ru" width="250" height="50" /></a></div>
     </div>
     <ul id="navigation-main">
-        <li><a href="/" title="Блог проекта">Блог</a></li>
+        <li><a href="<?php echo $this->url(array(), 'articles', true); ?>" title="Статьи и блог проекта">Статьи</a></li>
         <li><a href="<?php echo $this->url(array(), 'dreams', true); ?>" title="Читать сны">Сны</a></li>
         <li><a href="<?php echo $this->url(array(), 'dreambook', true); ?>" title="Сонник">Сонник</a></li>
         <li><a href="<?php echo $this->url(array(), 'forum', true); ?>" title="Форум о снах">Форум</a></li>

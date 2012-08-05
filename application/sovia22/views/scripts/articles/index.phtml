@@ -1,0 +1,6 @@
+<h1>Блог проекта и статьи</h1>
+<h2>Страница <?php echo $this->page; ?></h2>
+
+<?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
+
+<?php echo $this->paginator; ?>

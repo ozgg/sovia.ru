@@ -66,7 +66,7 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
     public function minimalRank($rank)
     {
-        $this->where('minimal_rank >= ?', $rank);
+        $this->where('minimal_rank <= ?', $rank);
 
         return $this;
     }
