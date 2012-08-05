@@ -335,6 +335,16 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreambook_edit_entry' => new Zend_Controller_Router_Route(
+        'dreambook/:id/edit',
+        array(
+            'controller' => 'dreambook',
+            'action' => 'edit',
+        ),
+        array(
+            'id' => '\d+',
+        )
+    ),
 
     'statistics' => new Zend_Controller_Router_Route_Static(
         '/statistics',

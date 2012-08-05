@@ -124,8 +124,8 @@ class DreambookController extends Ext_Controller_Action
             if (!empty($entry)) {
                 $form->setEntry($entry);
             }
-            $this->view->assign('form', $form);
         }
+        $this->view->assign('form', $form);
     }
 
     /**
@@ -168,7 +168,7 @@ class DreambookController extends Ext_Controller_Action
         }
 
         $parameters = array(
-            'symbol'  => $entry->getTitle(),
+            'symbol' => $entry->getTitle(),
             'letter' => $entry->getLetter(),
         );
         $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));

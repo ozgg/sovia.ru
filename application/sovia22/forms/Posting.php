@@ -25,7 +25,7 @@ class Form_Posting extends Zend_Form
             )
         );
         $title->setRequired();
-        $title->addValidator('stringLength', false, array(3, 100));
+        $title->addValidator('stringLength', false, array(1, 100));
         $this->addElement($title);
         unset($title);
 
