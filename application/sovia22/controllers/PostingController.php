@@ -34,10 +34,17 @@ class PostingController extends Ext_Controller_Action
                 $this->_comment($data, $entry);
             }
         }
-        $parameters = array(
-            'id'    => $entry->getId(),
-            'alias' => $entry->getAlias()
-        );
+        if ($entry->isSymbol()) {
+            $parameters = array(
+                'letter' => $entry->getLetter(),
+                'symbol' => $entry->getTitle()
+            );
+        } else {
+            $parameters = array(
+                'id'    => $entry->getId(),
+                'alias' => $entry->getAlias()
+            );
+        }
         $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 

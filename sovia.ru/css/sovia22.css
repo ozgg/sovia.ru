@@ -409,6 +409,13 @@ dd.notice {
     display: block;
 }
 
+.dreambook-list li:nth-of-type(even) {
+    background: #f0f0ff;
+}
+
+.dreambook-list li:nth-of-type(odd) {
+    background: #f7f7ff;
+}
 /*
 
 .switcher {
