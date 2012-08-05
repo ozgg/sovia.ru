@@ -370,63 +370,35 @@ return array(
         )
     ),
 
-    'blog_read' => new Zend_Controller_Router_Route_Static(
-        'blog/read'
+    'articles' => new Zend_Controller_Router_Route_Static(
+        'articles'
     ),
-    'blog_entry' => new Zend_Controller_Router_Route_Regex(
-        'blog/read/(\d+)-([a-z0-9][-a-z0-9.]+)',
+    'articles_read' => new Zend_Controller_Router_Route_Static(
+        'articles/read',
         array(
-            'controller' => 'blog',
+            'controller' => 'articles',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
+    'articles_entry' => new Zend_Controller_Router_Route_Regex(
+        'articles/(\d+)-([a-z0-9][-a-z0-9.]+)',
+        array(
+            'controller' => 'articles',
             'action' => 'entry',
         ),
         array(
             1 => 'id',
             2 => 'alias',
         ),
-        'blog/read/%d-%s'
+        'articles/%d-%s'
     ),
-    'blog_edit' => new Zend_Controller_Router_Route_Static(
-        'blog/edit'
-    ),
-    'blog_edit_entry' => new Zend_Controller_Router_Route(
-        'blog/edit/id/:id',
-        array(
-            'controller' => 'blog',
-            'action' => 'edit',
-        ),
-        array(
-            'id' => '\d+',
-        )
-    ),
-    'blog_feed' => new Zend_Controller_Router_Route_Static(
+
+    'feed' => new Zend_Controller_Router_Route_Static(
         'rss',
         array(
-            'controller' => 'blog',
+            'controller' => 'posting',
             'action'     => 'rss',
-        )
-    ),
-    'blog_archive' => new Zend_Controller_Router_Route_Static(
-        'blog/archive'
-    ),
-    'blog_archive_year' => new Zend_Controller_Router_Route(
-        'blog/archive/:year',
-        array(
-            'controller' => 'blog',
-            'action' => 'archive',
-        ),
-        array(
-            'year' => '\d{4}',
-        )
-    ),
-    'blog_archive_month' => new Zend_Controller_Router_Route(
-        'blog/archive/:year/:month',
-        array(
-            'controller' => 'blog',
-            'action' => 'archive',
-        ),
-        array(
-            'year' => '\d{4}',
-            'month' => '([1-9]|1[0-2])',
         )
     ),
 //*/
