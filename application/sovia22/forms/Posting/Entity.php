@@ -6,6 +6,12 @@
  
 class Form_Posting_Entity extends Form_Posting
 {
+    public function init()
+    {
+        parent::init();
+        $this->addSubmit();
+    }
+
     public function setEntry(Posting_Row $entry)
     {
         $this->getElement('title')->setValue($entry->getTitle());
