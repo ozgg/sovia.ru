@@ -101,7 +101,7 @@ return array(
     ),
 
     'posting_comments_create' => new Zend_Controller_Router_Route(
-        'posts/:id/comments',
+        '/posts/:id/comments',
         array(
             'controller' => 'posting',
             'action' => 'comments',
@@ -115,14 +115,14 @@ return array(
         '/forum'
     ),
     'forum_community' => new Zend_Controller_Router_Route(
-        'forum/communities/:id',
+        '/forum/communities/:id',
         array(
             'controller' => 'forum',
             'action'     => 'community',
         )
     ),
     'forum_community_old' => new Zend_Controller_Router_Route(
-        'forum/contents/of/:id',
+        '/forum/contents/of/:id',
         array(
             'controller' => 'forum',
             'action'     => 'community',
@@ -143,7 +143,7 @@ return array(
 
     ),
     'forum_entry_old' => new Zend_Controller_Router_Route(
-        'forum/read/entry/:id',
+        '/forum/read/entry/:id',
         array(
             'controller' => 'forum',
             'action'     => 'entry',
@@ -182,7 +182,7 @@ return array(
         'dreams/%d-%s'
     ),
     'dreams_entry_old' => new Zend_Controller_Router_Route(
-        'dreams/read/entry/:id',
+        '/dreams/read/entry/:id',
         array(
             'controller' => 'dreams',
             'action'     => 'entry',
@@ -190,14 +190,14 @@ return array(
         )
     ),
     'dreams_tagged' => new Zend_Controller_Router_Route(
-        'dreams/tagged/:tag',
+        '/dreams/tagged/:tag',
         array(
             'controller' => 'dreams',
             'action'     => 'index',
         )
     ),
     'dreams_tagged_old' => new Zend_Controller_Router_Route(
-        'dreams/read/tag/:tag',
+        '/dreams/read/tag/:tag',
         array(
             'controller' => 'dreams',
             'action'     => 'index',
@@ -205,10 +205,10 @@ return array(
         )
     ),
     'dreams_archive' => new Zend_Controller_Router_Route_Static(
-        'dreams/archive'
+        '/dreams/archive'
     ),
     'dreams_archive_year' => new Zend_Controller_Router_Route(
-        'dreams/archive/:year',
+        '/dreams/archive/:year',
         array(
             'controller' => 'dreams',
             'action'     => 'archive',
@@ -218,7 +218,7 @@ return array(
         )
     ),
     'dreams_archive_month' => new Zend_Controller_Router_Route(
-        'dreams/archive/:year/:month',
+        '/dreams/archive/:year/:month',
         array(
             'controller' => 'dreams',
             'action'     => 'archive',
@@ -270,7 +270,7 @@ return array(
         'entities/%d-%s'
     ),
     'entities_entry_old' => new Zend_Controller_Router_Route(
-        'entities/read/entry/:title',
+        '/entities/read/entry/:title',
         array(
             'controller' => 'entities',
             'action'     => 'entry',
@@ -281,7 +281,7 @@ return array(
         '/entities/new'
     ),
     'entities_edit_entry' => new Zend_Controller_Router_Route(
-        'entities/:id/edit',
+        '/entities/:id/edit',
         array(
             'controller' => 'entities',
             'action' => 'edit',
@@ -306,21 +306,21 @@ return array(
         )
     ),
     'dreambook_letter' => new Zend_Controller_Router_Route(
-        'dreambook/read/:letter',
+        '/dreambook/read/:letter',
         array(
             'controller' => 'dreambook',
             'action'     => 'letter',
         )
     ),
     'dreambook_entry' => new Zend_Controller_Router_Route(
-        'dreambook/read/:letter/:symbol',
+        '/dreambook/read/:letter/:symbol',
         array(
             'controller' => 'dreambook',
             'action'     => 'entry',
         )
     ),
     'dreambook_letter_old' => new Zend_Controller_Router_Route(
-        'dreambook/read/letter/:letter',
+        '/dreambook/read/letter/:letter',
         array(
             'controller' => 'dreambook',
             'action'     => 'letter',
@@ -328,7 +328,7 @@ return array(
         )
     ),
     'dreambook_entry_old' => new Zend_Controller_Router_Route(
-        'dreambook/read/entry/:symbol',
+        '/dreambook/read/entry/:symbol',
         array(
             'controller' => 'dreambook',
             'action'     => 'entry',
@@ -336,7 +336,7 @@ return array(
         )
     ),
     'dreambook_edit_entry' => new Zend_Controller_Router_Route(
-        'dreambook/:id/edit',
+        '/dreambook/:id/edit',
         array(
             'controller' => 'dreambook',
             'action' => 'edit',
@@ -363,7 +363,7 @@ return array(
 
 //*
     'sitemap' => new Zend_Controller_Router_Route_Static(
-        'sitemap',
+        '/sitemap',
         array(
             'controller' => 'index',
             'action'     => 'sitemap',
@@ -371,10 +371,13 @@ return array(
     ),
 
     'articles' => new Zend_Controller_Router_Route_Static(
-        'articles'
+        '/articles'
+    ),
+    'articles_new' => new Zend_Controller_Router_Route_Static(
+        '/articles/new'
     ),
     'articles_read' => new Zend_Controller_Router_Route_Static(
-        'articles/read',
+        '/articles/read',
         array(
             'controller' => 'articles',
             'action'     => 'index',
@@ -393,9 +396,19 @@ return array(
         ),
         'articles/%d-%s'
     ),
+    'articles_edit_entry' => new Zend_Controller_Router_Route(
+        '/articles/:id/edit',
+        array(
+            'controller' => 'articles',
+            'action'     => 'edit',
+        ),
+        array(
+            'id' => '\d+',
+        )
+    ),
 
     'feed' => new Zend_Controller_Router_Route_Static(
-        'rss',
+        '/rss',
         array(
             'controller' => 'posting',
             'action'     => 'rss',
@@ -404,7 +417,7 @@ return array(
 //*/
 
     'about' => new Zend_Controller_Router_Route_Static(
-        'about',
+        '/about',
         array(
             'controller' => 'index',
             'action'     => 'about',

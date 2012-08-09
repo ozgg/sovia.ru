@@ -8,47 +8,9 @@ class Form_Posting extends Zend_Form
 {
     public function init()
     {
-        $avatar = new Zend_Form_Element_Select(
-            array(
-                'name'  => 'avatar_id',
-                'label' => 'Аватар',
-            )
-        );
-        $avatar->addMultiOption('0', 'Не выбран');
-        $this->addElement($avatar);
-
-        $title = new Zend_Form_Element_Text(
-            array(
-                'name' => 'title',
-                'label' => 'Название',
-                'size' => 50,
-            )
-        );
-        $title->setRequired();
-        $title->addValidator('stringLength', false, array(1, 100));
-        $this->addElement($title);
-        unset($title);
-
-        $body = new Zend_Form_Element_Textarea(
-            array(
-                'name' => 'body',
-                'label' => 'Текст',
-                'cols' => 80,
-                'rows' => 25,
-            )
-        );
-        $body->setRequired();
-        $this->addElement($body);
-        unset($body);
-
-        $submit = new Zend_Form_Element_Submit(
-            array(
-                'name' => 'submit',
-                'label' => 'Готово',
-            )
-        );
-        $this->addElement($submit);
-        unset($submit);
+        $this->addAvatar();
+        $this->addTitle();
+        $this->addBody();
     }
 
     public function setUser(User_Interface $user)
@@ -61,5 +23,82 @@ class Form_Posting extends Zend_Form
             $element->addMultiOption($avatar->getId(), $avatar->getName());
         }
         $element->setValue($user->getAvatarId());
+    }
+
+    protected function addAvatar()
+    {
+        $element = new Zend_Form_Element_Select(
+            array(
+                'name'  => 'avatar_id',
+                'label' => 'Аватар',
+            )
+        );
+        $element->addMultiOption('0', 'Не выбран');
+        $this->addElement($element);
+    }
+
+    protected function addTitle()
+    {
+        $element = new Zend_Form_Element_Text(
+            array(
+                'name'  => 'title',
+                'label' => 'Название',
+                'size'  => 50,
+            )
+        );
+        $element->setRequired();
+        $element->addValidator('stringLength', false, array(1, 100));
+        $this->addElement($element);
+    }
+
+    protected function addBody()
+    {
+        $element = new Zend_Form_Element_Textarea(
+            array(
+                'name'  => 'body',
+                'label' => 'Текст',
+                'cols'  => 80,
+                'rows'  => 25,
+            )
+        );
+        $element->setRequired();
+        $this->addElement($element);
+    }
+
+    protected function addTags()
+    {
+        $element = new Zend_Form_Element_Textarea(
+            array(
+                'name'  => 'tags',
+                'label' => 'Метки',
+                'cols'  => 80,
+                'rows'  => 3,
+            )
+        );
+        $this->addElement($element);
+    }
+
+    protected function addDescription()
+    {
+        $element = new Zend_Form_Element_Textarea(
+            array(
+                'name'  => 'description',
+                'label' => 'Описание',
+                'cols'  => 80,
+                'rows'  => 5,
+            )
+        );
+        $this->addElement($element);
+    }
+
+    protected function addSubmit()
+    {
+        $submit = new Zend_Form_Element_Submit(
+            array(
+                'name' => 'submit',
+                'label' => 'Готово',
+            )
+        );
+        $this->addElement($submit);
     }
 }

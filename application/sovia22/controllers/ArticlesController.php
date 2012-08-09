@@ -60,10 +60,11 @@ class ArticlesController extends Ext_Controller_Action
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
+            $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {
-            $this->_redirect($this->_url(array(), 'dreams', true));
+            $this->_redirect($this->_url(array(), 'articles', true));
         }
         $this->view->assign('canComment', $this->_user->getIsActive());
         $this->view->assign('avatars',    $this->_user->getAvatars());
