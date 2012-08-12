@@ -154,6 +154,9 @@ return array(
     'dreams' => new Zend_Controller_Router_Route_Static(
         '/dreams'
     ),
+    'dreams_new' => new Zend_Controller_Router_Route_Static(
+        '/dreams/new'
+    ),
     'dreams_old' => new Zend_Controller_Router_Route_Static(
         '/dreams/read',
         array(

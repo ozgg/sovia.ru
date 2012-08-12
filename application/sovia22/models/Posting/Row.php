@@ -134,6 +134,17 @@ class Posting_Row extends Ext_Db_Table_Row
         return array();
     }
 
+    public function getTagsAsText()
+    {
+        $buffer = array();
+        /** @var $tag Posting_Tag_Row */
+        foreach ($this->getTags() as $tag) {
+            $buffer[] = $tag->getName();
+        }
+
+        return implode(', ', $buffer);
+    }
+
     public function getDescription()
     {
         return $this->get('description');
