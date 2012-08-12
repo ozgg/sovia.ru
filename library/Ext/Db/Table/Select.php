@@ -27,6 +27,7 @@ class Ext_Db_Table_Select extends Zend_Db_Table_Select
     {
         /** @var $table Ext_Db_Table_Abstract */
         $table = $this->getTable();
+
         return $table->paginate($this, $page, $limit);
     }
 }

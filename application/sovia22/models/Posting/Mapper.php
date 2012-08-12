@@ -15,6 +15,13 @@ class Posting_Mapper extends Ext_Db_Table_Select
         return $this;
     }
 
+    public function ids(array $ids)
+    {
+        $this->where('id in (' . implode(', ', $ids) . ')');
+
+        return $this;
+    }
+
     public function title($title)
     {
         $this->where('title = ?', $title);
@@ -168,8 +175,13 @@ class Posting_Mapper extends Ext_Db_Table_Select
         return $this;
     }
 
-    public function letter($letter)
+    public function tagged($tag)
     {
+        $this->setIntegrityCheck(true);
+        $this->join(array('pht' => 'posting_has_tag'), 'pht.posting_id = posting_item.id');
+        $this->join(array('pt' => 'posting_tag'), 'pt.id = pht.tag_id');
+        $this->where('pt.name = ?', $tag);
 
+        return $this;
     }
 }

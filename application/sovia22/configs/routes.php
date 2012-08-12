@@ -206,7 +206,7 @@ return array(
         '/dreams/tagged/:tag',
         array(
             'controller' => 'dreams',
-            'action'     => 'index',
+            'action'     => 'tagged',
         )
     ),
     'dreams_tagged_old' => new Zend_Controller_Router_Route(

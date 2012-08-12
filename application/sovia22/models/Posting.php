@@ -102,4 +102,41 @@ class Posting extends Ext_Db_Table_Abstract
 
         return $this->getAdapter()->fetchAll($query);
     }
+
+    public function findPostIdsForTag($tag)
+    {
+        $query = "select p.id from {$this->_name} p "
+            . 'join posting_has_tag pht on (pht.posting_id = p.id) '
+            . 'join posting_tag pt on (pht.tag_id = pt.id) '
+            . 'where pt.name = ' . $this->getAdapter()->quote($tag);
+
+        $ids = array();
+        foreach ($this->getAdapter()->fetchAll($query) as $row) {
+            $ids[] = $row['id'];
+        }
+
+        return $ids;
+    }
+
+    public function findDreamsPageByTag($tag, $isInternal, $page)
+    {
+        $where = array(
+            'pt.name = ' . $this->getAdapter()->quote($tag),
+            'p.is_internal <= ' . $isInternal,
+            'p.type = ' . Posting_Row::TYPE_DREAM,
+        );
+
+        $common = "from {$this->_name} p "
+                . 'join posting_has_tag pht on (pht.posting_id = p.id) '
+                . 'join posting_tag pt on (pht.tag_id = pt.id) '
+                . 'where ' . implode(' and ', $where);
+
+        $query = "select p.* {$common} "
+               . 'limit 10 offset ' . ($page - 1) * 10;
+
+        $result = $this->getAdapter()->fetchAll($query);
+        $count  = $this->getAdapter()->fetchOne("select count(*) {$common}");
+
+        return array($result, $count);
+    }
 }
