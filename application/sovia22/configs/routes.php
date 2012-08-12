@@ -192,6 +192,16 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_edit_entry' => new Zend_Controller_Router_Route(
+        '/dreams/:id/edit',
+        array(
+            'controller' => 'dreams',
+            'action' => 'edit',
+        ),
+        array(
+            'id' => '\d+',
+        )
+    ),
     'dreams_tagged' => new Zend_Controller_Router_Route(
         '/dreams/tagged/:tag',
         array(

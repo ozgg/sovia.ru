@@ -304,12 +304,12 @@ class Posting_Row extends Ext_Db_Table_Row
         $row->save();
     }
 
-    public function removeTag($tagId)
+    protected function removeTag($tagId)
     {
         $intersection = new Posting_HasTag();
-        $intersection->delete(array(
-            'posting_id' => $this->getId(),
-            'tag_id'     => $tagId,
-        ));
+
+        $where = "posting_id = {$this->getId()} and tag_id = {$tagId}";
+
+        $intersection->delete($where);
     }
 }

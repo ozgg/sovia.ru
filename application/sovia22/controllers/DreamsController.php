@@ -73,6 +73,7 @@ class DreamsController extends Ext_Controller_Action
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
+            $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle('Сны');
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
@@ -205,9 +206,6 @@ class DreamsController extends Ext_Controller_Action
 
     public function editAction()
     {
-        if (!$this->_user->getIsActive()) {
-            $this->_forward('denied', 'error');
-        }
         $this->_headTitle('Редактирование');
         $id = $this->_getParam('id');
         $this->view->assign('message', $this->_getFlashMessage());
@@ -215,12 +213,12 @@ class DreamsController extends Ext_Controller_Action
         $table = new Posting();
         $mapper = $table->getMapper();
         /** @var $entry Posting_Row */
-        $entry = $mapper->article()->id($id)->fetchRowIfExists();
+        $entry = $mapper->dream()->id($id)->fetchRowIfExists();
 
         if (!$entry->canBeEditedBy($this->_user)) {
             $this->_forward('denied', 'error');
         }
-        $form  = new Form_Posting_Article();
+        $form = new Form_Posting_Dream();
         $form->setUser($this->_user);
 
         /** @var $request Zend_Controller_Request_Http */
@@ -262,6 +260,7 @@ class DreamsController extends Ext_Controller_Action
         }
         $data['type']         = Posting_Row::TYPE_DREAM;
         $data['community_id'] = 1;
+        $data['description']  = '';
         $tags = explode(',', str_replace('.', ',', $data['tags']));
 
         if (is_null($entry)) {

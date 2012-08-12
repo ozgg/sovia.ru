@@ -7,7 +7,7 @@ if (!empty($this->tags) && !empty($this->route)) {
     $links = array();
     /** @var $tag Posting_Tag_Row */
     foreach ($this->tags as $tag) {
-        $links[] = '<a href="' . $this->url(array('tag' => $tag->getName()), $this->route) . '" rel="tag">' . $tag->getName() . '</a>';
+        $links[] = '<a href="' . $this->url(array('tag' => $tag->getName()), $this->route) . '" rel="tag">' . $this->escape($tag->getName()) . '</a>';
     }
     echo implode(', ', $links);
 ?>
