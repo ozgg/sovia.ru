@@ -16,9 +16,9 @@ class DreamsController extends Ext_Controller_Action
         $table = new Posting();
         $mapper = $table->getMapper();
         $mapper->dream()
-               ->isInternal($this->_user->getId() > 0)
-               ->minimalRank($this->_user->getRank())
-               ->recent();
+            ->isInternal($this->_user->getId() > 0)
+            ->minimalRank($this->_user->getRank())
+            ->recent();
         $paginator = $mapper->paginate($this->_page, 10);
         $entries   = $paginator->getCurrentItems();
         $titles    = array();
@@ -37,6 +37,45 @@ class DreamsController extends Ext_Controller_Action
             $this->_headLink(array('rel' => 'canonical', 'href' => $href));
         }
         $this->view->assign('canAdd', $this->_user->getIsActive());
+    }
+
+    public function taggedAction()
+    {
+        $tag = $this->_getParam('tag');
+        if (is_null($tag)) {
+            $this->_redirect($this->_url(array(), 'dreams', true));
+        }
+        $this->_headTitle('Сны');
+        $this->_headTitle("С меткой «{$tag}»");
+        $this->_headTitle("Страница {$this->_page}");
+        $table  = new Posting();
+        $ids    = $table->findPostIdsForTag($tag);
+        $mapper = $table->getMapper();
+        $mapper->dream()
+               ->ids($ids)
+               ->isInternal($this->_user->getId() > 0)
+               ->minimalRank($this->_user->getRank())
+               ->recent();
+        $paginator = $mapper->paginate($this->_page, 10);
+        $entries   = $paginator->getCurrentItems();
+        $titles    = array();
+        /** @var $entry Posting_Row */
+        foreach ($entries as $entry) {
+            $titles[] = "«{$entry->getTitle()}»";
+        }
+
+       $description = "Страница {$this->_page} со снами.";
+       $description .= ' ' . implode(', ', $titles);
+       $this->view->assign('paginator', $paginator);
+       $this->view->assign('entries',   $entries);
+       $this->view->assign('page',      $this->_page);
+       $this->setDescription($description);
+       if ($this->_getParam('canonical', false)) {
+           $href = $this->_url(array(), 'dreams', true);
+           $this->_headLink(array('rel' => 'canonical', 'href' => $href));
+       }
+       $this->view->assign('canAdd', $this->_user->getIsActive());
+       $this->view->assign('tag', $tag);
     }
 
     public function randomAction()
