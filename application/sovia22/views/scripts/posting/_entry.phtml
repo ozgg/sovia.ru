@@ -27,6 +27,7 @@ $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
             <?php echo $this->escape($this->entry->getTitle()); ?>
 <?php } ?>
         </div>
+        <?php echo $this->partial('posting/_tags.phtml', array('tags' => $this->entry->getTags(), 'route' => $this->entry->getTagRoute())); ?>
     </div>
     <div class="entry-body"><?php echo $body['body']; ?></div>
     <div class="entry-footer">

@@ -1,0 +1,17 @@
+<?php
+if (!empty($this->tags) && !empty($this->route)) {
+?>
+<div class="tags">
+    Метки:
+<?php
+    $links = array();
+    /** @var $tag Posting_Tag_Row */
+    foreach ($this->tags as $tag) {
+        $links[] = '<a href="' . $this->url(array('tag' => $tag->getName()), $this->route) . '" rel="tag">' . $tag->getName() . '</a>';
+    }
+    echo implode(', ', $links);
+?>
+</div>
+<?php
+}
+?>

@@ -131,7 +131,9 @@ class Posting_Row extends Ext_Db_Table_Row
 
     public function getTags()
     {
-        return array();
+        $tags = $this->findManyToManyRowset('Posting_Tag', 'Posting_HasTag');
+
+        return $tags;
     }
 
     public function getTagsAsText()
@@ -202,6 +204,20 @@ class Posting_Row extends Ext_Db_Table_Row
                 break;
             case self::TYPE_SYMBOL:
                 $route = 'dreambook_entry';
+                break;
+            default:
+                $route = null;
+                break;
+        }
+
+        return $route;
+    }
+
+    public function getTagRoute()
+    {
+        switch ($this->get('type')) {
+            case self::TYPE_DREAM:
+                $route = 'dreams_tagged';
                 break;
             default:
                 $route = null;
