@@ -91,7 +91,7 @@ class Form_Posting extends Zend_Form
         $this->addElement($element);
     }
 
-    protected function addIsInternal()
+    protected function addIsInternal($addPrivate = true)
     {
         $element = new Zend_Form_Element_Select(
             array(
@@ -101,7 +101,9 @@ class Form_Posting extends Zend_Form
         );
         $element->addMultiOption(Posting_Row::VIS_PUBLIC, 'Все');
         $element->addMultiOption(Posting_Row::VIS_REGISTERED, 'Пользователи');
-        $element->addMultiOption(Posting_Row::VIS_PRIVATE, 'Только я');
+        if ($addPrivate) {
+            $element->addMultiOption(Posting_Row::VIS_PRIVATE, 'Только я');
+        }
         $element->setRequired();
         $element->setValue(Posting_Row::VIS_PUBLIC);
 
