@@ -8,7 +8,7 @@ if (!empty($this->user)) {
 <p>Последний раз на сайте: <?php echo $this->user->getLastSeen(); ?></p>
 <p>Сообщений: <?php echo $this->user->getHasPosts(); ?></p>
 <p>Комментариев: <?php echo $this->user->getHasComments(); ?></p>
-<p><a href="/dreams/read/author/<?php echo rawurlencode($this->user->getLogin(false)); ?>/">Читать сны этого пользователя</a></p>
+<p><a href="<?php echo $this->url(array('login' => $this->user->getLogin()), 'dreams_author', true); ?>/">Читать сны этого пользователя</a></p>
 <?php
 } else {
 	if ($this->search != '') {

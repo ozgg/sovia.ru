@@ -213,7 +213,22 @@ return array(
         '/dreams/read/tag/:tag',
         array(
             'controller' => 'dreams',
-            'action'     => 'index',
+            'action'     => 'tagged',
+            'canonical'  => true,
+        )
+    ),
+    'dreams_author' => new Zend_Controller_Router_Route(
+        '/dreams/of/:login',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'author',
+        )
+    ),
+    'dreams_author_old' => new Zend_Controller_Router_Route(
+        '/dreams/read/author/:login',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'author',
             'canonical'  => true,
         )
     ),
@@ -374,7 +389,6 @@ return array(
         )
     ),
 
-//*
     'sitemap' => new Zend_Controller_Router_Route_Static(
         '/sitemap',
         array(
@@ -427,7 +441,6 @@ return array(
             'action'     => 'rss',
         )
     ),
-//*/
 
     'about' => new Zend_Controller_Router_Route_Static(
         '/about',
