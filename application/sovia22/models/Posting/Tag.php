@@ -45,4 +45,18 @@ class Posting_Tag extends Ext_Db_Table_Abstract
 
         return $this->_mapper;
     }
+
+    /**
+     * @param Posting_Row $post
+     * @param $tagName
+     * @return null|Posting_Tag_Row
+     */
+    public function getTagForPost(Posting_Row $post, $tagName)
+    {
+        $select = $this->select();
+        $select->where('name = ?', $tagName)
+               ->where('type_id = ?', $post->getType()->getId());
+
+        return $select->fetchRow();
+    }
 }

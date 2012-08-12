@@ -73,6 +73,7 @@ class DreamsController extends Ext_Controller_Action
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
             $view->assign('entry', $entry);
+            $this->_headTitle('Сны');
             $this->_headTitle($entry->getTitle());
             $this->setDescription($entry->getDescription());
         } else {
@@ -84,6 +85,7 @@ class DreamsController extends Ext_Controller_Action
 
     public function archiveAction()
     {
+        $this->_headTitle('Дневник снов');
         $this->_headTitle('Архив');
         $year  = intval($this->_getParam('year', 0));
         $month = intval($this->_getParam('month', 0));
@@ -258,20 +260,21 @@ class DreamsController extends Ext_Controller_Action
                 $data['avatar_id'] = null;
             }
         }
-        $data['type']         = Posting_Row::TYPE_ARTICLE;
-        $data['community_id'] = 2;
-        $data['is_internal']  = Posting_Row::VIS_PUBLIC;
+        $data['type']         = Posting_Row::TYPE_DREAM;
+        $data['community_id'] = 1;
+        $tags = explode(',', str_replace('.', ',', $data['tags']));
 
         if (is_null($entry)) {
             /** @var $user User_Row */
             $user  = $this->_user;
-            $entry = $user->createPosting($data);
-            $this->_setFlashMessage('Статья добавлена');
+            $entry = $user->createPosting($data, $tags);
+            $this->_setFlashMessage('Сон добавлен');
         } else {
             $entry->setData($data);
+            $entry->setTags($tags);
             $entry->touch();
             $entry->save();
-            $this->_setFlashMessage('Статья изменена');
+            $this->_setFlashMessage('Сон изменён');
         }
 
         $parameters = array(

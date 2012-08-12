@@ -241,6 +241,34 @@ class Posting_Row extends Ext_Db_Table_Row
         return $this;
     }
 
+    public function setTags(array $tags)
+    {
+        $oldTags = array();
+        /** @var $tagRow Posting_Tag_Row */
+        foreach ($this->getTags() as $tagRow) {
+            $oldTags[$tagRow->getName()] = $tagRow->getId();
+        }
+
+        $newTags = array_unique($tags);
+        foreach ($newTags as $tag) {
+            $tag = trim($tag);
+            if (mb_strlen($tag) < 1) {
+                continue;
+            }
+            if (isset($oldTags[$tag])) {
+                unset($oldTags[$tag]);
+            } else {
+                $this->addTagName($tag);
+            }
+        }
+
+        foreach ($oldTags as $tagId) {
+            $this->removeTag($tagId);
+        }
+
+        return $this;
+    }
+
     public function touch()
     {
         $this->set('created_at', new Zend_Db_Expr('now()'));
@@ -249,5 +277,39 @@ class Posting_Row extends Ext_Db_Table_Row
     public function getLetter()
     {
         return mb_substr($this->getTitle(), 0, 1);
+    }
+
+    public function addTagName($tagName)
+    {
+        $tagTable = new Posting_Tag();
+
+        $tag = $tagTable->getTagForPost($this, $tagName);
+        if (is_null($tag)) {
+            $data = array(
+                'type_id' => $this->getType()->getId(),
+                'name'    => $tagName,
+            );
+            $tag = $tagTable->createRow($data);
+            $tag->save();
+        }
+
+        $intersection = new Posting_HasTag();
+
+        $data = array(
+            'posting_id' => $this->getId(),
+            'tag_id'     => $tag->getId(),
+        );
+
+        $row = $intersection->createRow($data);
+        $row->save();
+    }
+
+    public function removeTag($tagId)
+    {
+        $intersection = new Posting_HasTag();
+        $intersection->delete(array(
+            'posting_id' => $this->getId(),
+            'tag_id'     => $tagId,
+        ));
     }
 }
