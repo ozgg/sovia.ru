@@ -91,6 +91,23 @@ class Form_Posting extends Zend_Form
         $this->addElement($element);
     }
 
+    protected function addIsInternal()
+    {
+        $element = new Zend_Form_Element_Select(
+            array(
+                'name'  => 'is_internal',
+                'label' => 'Кто может прочитать',
+            )
+        );
+        $element->addMultiOption(Posting_Row::VIS_PUBLIC, 'Все');
+        $element->addMultiOption(Posting_Row::VIS_REGISTERED, 'Пользователи');
+        $element->addMultiOption(Posting_Row::VIS_PRIVATE, 'Только я');
+        $element->setRequired();
+        $element->setValue(Posting_Row::VIS_PUBLIC);
+
+        $this->addElement($element);
+    }
+
     protected function addSubmit()
     {
         $submit = new Zend_Form_Element_Submit(
