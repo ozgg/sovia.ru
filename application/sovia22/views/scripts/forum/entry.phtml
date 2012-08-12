@@ -1,5 +1,9 @@
 <?php echo $this->partial('forum/_header.phtml', array('community' => $this->community, 'ancestors' => $this->ancestors, 'link' => true)); ?>
 
+<?php if ($this->canEdit) { ?>
+<p><a href="<?php echo $this->url(array('id' => $this->entry->getId()), 'forum_edit_entry', true); ?>">Редактировать</a></p>
+<?php } ?>
+
 <?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
 
 <?php

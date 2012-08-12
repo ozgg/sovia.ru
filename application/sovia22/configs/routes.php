@@ -129,6 +129,13 @@ return array(
             'canonical'  => true,
         )
     ),
+    'forum_community_new' => new Zend_Controller_Router_Route(
+        '/forum/communities/:id/new',
+        array(
+            'controller' => 'forum',
+            'action'     => 'new',
+        )
+    ),
     'forum_entry' => new Zend_Controller_Router_Route_Regex(
         'forum/posts/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
@@ -148,6 +155,16 @@ return array(
             'controller' => 'forum',
             'action'     => 'entry',
             'canonical'  => true,
+        )
+    ),
+    'forum_edit_entry' => new Zend_Controller_Router_Route(
+        '/forum/posts/:id/edit',
+        array(
+            'controller' => 'forum',
+            'action' => 'edit',
+        ),
+        array(
+            'id' => '\d+',
         )
     ),
 

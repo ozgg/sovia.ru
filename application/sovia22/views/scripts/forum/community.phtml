@@ -5,6 +5,15 @@
 <?php 	echo $this->partial('forum/communityList.phtml', array('list' => $this->list)); ?>
 <?php } ?>
 
+<?php if ($this->canAdd) { ?>
+<p><a href="<?php echo $this->url(array('id' => $this->community->getId()), 'forum_community_new', true); ?>">Создать запись</a></p>
+<?php } ?>
+
+<?php if (count($this->entries)) { ?>
 <?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
+<?php } else { ?>
+<div class="result">Нет ни одной записи</div>
+<?php } ?>
+
 
 <?php echo $this->paginator; ?>
