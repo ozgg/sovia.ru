@@ -168,9 +168,10 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
      * Добавить запись в блог
      *
      * @param array $data
+     * @param array $tags
      * @return Posting_Row
      */
-    public function createPosting(array $data)
+    public function createPosting(array $data, array $tags = array())
     {
         $table = new Posting();
         $entryData = array(
@@ -179,6 +180,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
         /** @var $entry Posting_Row */
         $entry = $table->createRow($entryData);
         $entry->setData($data)->save();
+        $entry->setTags($tags);
 
         return $entry;
     }
