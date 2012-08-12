@@ -304,6 +304,11 @@ class Posting_Row extends Ext_Db_Table_Row
         $row->save();
     }
 
+    public function isPublic()
+    {
+        return ($this->get('is_internal') == self::VIS_PUBLIC);
+    }
+
     protected function removeTag($tagId)
     {
         $intersection = new Posting_HasTag();

@@ -416,6 +416,13 @@ dd.notice {
 .dreambook-list li:nth-of-type(odd) {
     background: #f7f7ff;
 }
+
+
+.addthis-container {
+    float: right;
+    margin: 0.5em;
+}
+
 /*
 
 .switcher {
@@ -571,11 +578,6 @@ dd.notice {
 .neighbours li.next {
 	background: url('/images/nav-next.png') center right no-repeat;
 	padding: 0 15px 0 0;
-}
-
-.addthis-container {
-	float: right;
-	margin: 0.5em;
 }
 
 .sidebar .header {
