@@ -1,13 +1,8 @@
 <?php
-if ($this->entry->isSymbol()) {
-    $href = $this->url(array('letter' => $this->entry->getLetter(), 'symbol' => $this->entry->getTitle()), $this->entry->getRouteName());
-} else {
-    $href = $this->url(array('id' => $this->entry->getId(), 'alias' => $this->entry->getAlias()), $this->entry->getRouteName());
-}
-
 $isInternal = $this->entry->getIsinternal();
 $options    = array(BodyParser::OPTION_ESCAPE => !($this->entry->isArticle() || $this->entry->isSymbol()));
 $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
+$href       = $this->url($this->entry->getRouteParameters(), $this->entry->getRouteName());
 ?>
 <div class="entry">
     <div class="header">
@@ -38,7 +33,6 @@ $body       = BodyParser::parseEntry($this->entry->getBody(), $options);
             <?php echo Ext_Helper_Declension::decline($this->entry->getHasComments(), array('комментариев', 'комментарий', 'комментария')); ?>
         </a>
     </span>
-
 <?php } ?>
     </div>
 </div>

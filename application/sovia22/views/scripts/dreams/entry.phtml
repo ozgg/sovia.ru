@@ -5,6 +5,8 @@
 <p><a href="<?php echo $this->url(array('id' => $this->entry->getId()), 'dreams_edit_entry', true); ?>" title="Редактировать">Редактировать</a></p>
 <?php } ?>
 
+<?php echo $this->partial('posting/_adjacent.phtml', array('entries' => $this->adjacent)); ?>
+
 <?php echo $this->partial('posting/_entry.phtml', array('entry' => $this->entry)); ?>
 
 <?php

@@ -62,6 +62,8 @@ class DreambookController extends Ext_Controller_Action
                 $href = $this->_url($parameters, 'dreambook_entry', true);
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
+            $adjacent = $table->findAdjacent($entry, $this->_user);
+            $view->assign('adjacent', $adjacent);
             $view->assign('entry', $entry);
             $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle($entry->getTitle());

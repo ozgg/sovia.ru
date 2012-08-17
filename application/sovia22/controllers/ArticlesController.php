@@ -22,8 +22,8 @@ class ArticlesController extends Ext_Controller_Action
         $paginator = $mapper->paginate($this->_page, 10);
         $entries   = $paginator->getCurrentItems();
         $titles    = array();
-        /** @var $entry Posting_Row */
         foreach ($entries as $entry) {
+            /** @var $entry Posting_Row */
             $titles[] = "«{$entry->getTitle()}»";
         }
         $description = "Страница {$this->_page} со статьями.";
@@ -59,6 +59,8 @@ class ArticlesController extends Ext_Controller_Action
                 $href = $this->_url($parameters, 'articles_entry', true);
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
+            $adjacent = $table->findAdjacent($entry, $this->_user);
+            $view->assign('adjacent', $adjacent);
             $view->assign('entry', $entry);
             $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle($entry->getTitle());

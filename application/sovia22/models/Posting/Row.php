@@ -139,8 +139,8 @@ class Posting_Row extends Ext_Db_Table_Row
     public function getTagsAsText()
     {
         $buffer = array();
-        /** @var $tag Posting_Tag_Row */
         foreach ($this->getTags() as $tag) {
+            /** @var $tag Posting_Tag_Row */
             $buffer[] = $tag->getName();
         }
 
@@ -213,6 +213,29 @@ class Posting_Row extends Ext_Db_Table_Row
         return $route;
     }
 
+    public function getRouteParameters()
+    {
+        $parameters = array();
+        switch ($this->get('type')) {
+            case self::TYPE_DREAM:
+            case self::TYPE_POST:
+            case self::TYPE_ARTICLE:
+            case self::TYPE_ENTITY:
+                $parameters = array(
+                    'id'    => $this->getId(),
+                    'alias' => $this->getAlias(),
+                );
+                break;
+            case self::TYPE_SYMBOL:
+                $parameters = array(
+                    'letter' => $this->getLetter(),
+                    'symbol' => $this->getTitle(),
+                );
+        }
+
+        return $parameters;
+    }
+
     public function getTagRoute()
     {
         switch ($this->get('type')) {
@@ -244,8 +267,8 @@ class Posting_Row extends Ext_Db_Table_Row
     public function setTags(array $tags)
     {
         $oldTags = array();
-        /** @var $tagRow Posting_Tag_Row */
         foreach ($this->getTags() as $tagRow) {
+            /** @var $tagRow Posting_Tag_Row */
             $oldTags[$tagRow->getName()] = $tagRow->getId();
         }
 
@@ -307,6 +330,16 @@ class Posting_Row extends Ext_Db_Table_Row
     public function isPublic()
     {
         return ($this->get('is_internal') == self::VIS_PUBLIC);
+    }
+
+    public function isPrivate()
+    {
+        return ($this->get('is_internal') == self::VIS_PRIVATE);
+    }
+
+    public function getEntryType()
+    {
+        return intval($this->get('type'));
     }
 
     protected function removeTag($tagId)

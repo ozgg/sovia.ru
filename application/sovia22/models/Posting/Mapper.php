@@ -109,12 +109,13 @@ class Posting_Mapper extends Ext_Db_Table_Select
     /**
      * Предыдущая запись относительно заданной
      *
-     * @param $id
+     * @param $entry
      * @return Posting_Mapper
      */
-    public function prevFor($id)
+    public function prevFor(Posting_Row $entry)
     {
-        $this->where('id < ?', $id);
+        $this->where('id < ?', $entry->getId());
+        $this->where('type = ?', $entry->getEntryType());
         $this->order('id desc');
 
         return $this;
@@ -123,12 +124,13 @@ class Posting_Mapper extends Ext_Db_Table_Select
     /**
      * Следующая запись относительно заданной
      *
-     * @param $id
+     * @param $entry
      * @return Posting_Mapper
      */
-    public function nextFor($id)
+    public function nextFor(Posting_Row $entry)
     {
-        $this->where('id > ?', $id);
+        $this->where('id > ?', $entry->getId());
+        $this->where('type = ?', $entry->getEntryType());
         $this->order('id asc');
 
         return $this;
