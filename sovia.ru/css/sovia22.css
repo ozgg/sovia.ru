@@ -423,6 +423,28 @@ dd.notice {
     margin: 0.5em;
 }
 
+ul.adjacent {
+    margin: 1em 0 0 0;
+    padding: 0;
+    height: 1.2em;
+}
+
+ul.adjacent li.next {
+    list-style: none;
+    display: block;
+    float: right;
+    background: url('/images/nav-next.png') center right no-repeat;
+    padding: 0 15px 0 0;
+}
+
+ul.adjacent li.prev {
+    list-style: none;
+    display: block;
+    float: left;
+    background: url('/images/nav-prev.png') center left no-repeat;
+    padding: 0 0 0 15px;
+}
+
 /*
 
 .switcher {

@@ -22,8 +22,8 @@ class DreamsController extends Ext_Controller_Action
         $paginator = $mapper->paginate($this->_page, 10);
         $entries   = $paginator->getCurrentItems();
         $titles    = array();
-        /** @var $entry Posting_Row */
         foreach ($entries as $entry) {
+            /** @var $entry Posting_Row */
             $titles[] = "«{$entry->getTitle()}»";
         }
         $description = "Страница {$this->_page} со снами.";
@@ -61,8 +61,8 @@ class DreamsController extends Ext_Controller_Action
         $paginator = $mapper->paginate($this->_page, 10);
         $entries   = $paginator->getCurrentItems();
         $titles    = array();
-        /** @var $entry Posting_Row */
         foreach ($entries as $entry) {
+            /** @var $entry Posting_Row */
             $titles[] = "«{$entry->getTitle()}»";
         }
         $description = "Страница {$this->_page} со снами.";
@@ -98,8 +98,8 @@ class DreamsController extends Ext_Controller_Action
         $paginator = $mapper->paginate($this->_page, 10);
         $entries   = $paginator->getCurrentItems();
         $titles    = array();
-        /** @var $entry Posting_Row */
         foreach ($entries as $entry) {
+            /** @var $entry Posting_Row */
             $titles[] = "«{$entry->getTitle()}»";
         }
 
@@ -150,6 +150,8 @@ class DreamsController extends Ext_Controller_Action
                 $href = $this->_url($parameters, 'dreams_entry', true);
                 $this->_headLink(array('rel' => 'canonical', 'href' => $href));
             }
+            $adjacent = $table->findAdjacent($entry, $this->_user);
+            $view->assign('adjacent', $adjacent);
             $view->assign('entry', $entry);
             $view->assign('canEdit', $entry->canBeEditedBy($this->_user));
             $this->_headTitle('Сны');
@@ -204,8 +206,8 @@ class DreamsController extends Ext_Controller_Action
         $mapper->dream()->isInternal(0)->random()->limit(rand(3, 5));
         $chunks = array();
         $title  = '';
-        /** @var $dream Posting_Row */
         foreach ($mapper->fetchAll() as $dream) {
+            /** @var $dream Posting_Row */
             $plot = explode("\n", $dream->getBody());
             if (empty($title)) {
                 $title = $dream->getTitle();

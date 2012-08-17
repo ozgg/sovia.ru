@@ -117,4 +117,28 @@ class Posting extends Ext_Db_Table_Abstract
 
         return $ids;
     }
+
+    public function findAdjacent(Posting_Row $entry, User_Interface $user)
+    {
+        if ($user->getIsActive()) {
+            $isInternal = Posting_Row::VIS_REGISTERED;
+        } else {
+            $isInternal = Posting_Row::VIS_PUBLIC;
+        }
+        $rank   = $user->getRank();
+        $result = array();
+        $mapper = $this->getMapper();
+        $mapper->reset();
+        $mapper->prevFor($entry)
+               ->isInternal($isInternal)
+               ->minimalRank($rank);
+        $result['prev'] = $mapper->fetchRow();
+        $mapper->reset();
+        $mapper->nextFor($entry)
+               ->isInternal($isInternal)
+               ->minimalRank($rank);
+        $result['next'] = $mapper->fetchRow();
+
+        return $result;
+    }
 }

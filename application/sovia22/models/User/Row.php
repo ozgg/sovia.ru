@@ -129,7 +129,7 @@ class User_Row extends Ext_Db_Table_Row implements User_Interface
 
     public function getRank()
     {
-        return $this->get('rank');
+        return intval($this->get('rank'));
     }
 
     public function setParentId($parentId)
