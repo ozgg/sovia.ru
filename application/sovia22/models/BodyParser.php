@@ -14,6 +14,13 @@ class BodyParser
     const PATTERN_CUT_OPEN  = '/<cut(?:\s+text="([^"]*)")?>/i';
     const PATTERN_CUT_CLOSE = '/^<\/cut>\s*$/i';
 
+    const TAG_DREAM   = 'dream';
+    const TAG_SYMBOL  = 'symbol';
+    const TAG_ARTICLE = 'article';
+    const TAG_POST    = 'post';
+    const TAG_ENTRY   = 'entry';
+    const TAG_ENTITY  = 'entity';
+
     /**
      * Начальный разбор текста записи на предпросмотр и основной текст.
      * 
@@ -90,23 +97,6 @@ class BodyParser
         return $out;
     }
 
-    protected static function _processTags($string, array $options)
-    {
-        $out = $string;
-        if (!empty($options[self::OPTION_ESCAPE])) {
-            $out = htmlspecialchars($out, ENT_QUOTES, 'utf-8');
-        }
-
-        return $out;
-    }
-
-    protected static function _processCut($matches)
-    {
-        static $counter = 0;
-        echo $counter++;
-        print_r($matches);
-    }
-
     public static function transliterateForUrl($text)
     {
         $text = mb_strtolower($text);
@@ -123,5 +113,75 @@ class BodyParser
         $text = str_replace($from, $into, $text);
         $text = preg_replace('/[^-a-z0-9.]/', '-', $text);
         return trim($text, '-.');
+    }
+
+    public static function getLink($tag, $attributes)
+    {
+        $helper  = new Zend_View_Helper_Url();
+        $options = array();
+        preg_match_all('/([a-z]+)="([^"]*)"/', $attributes, $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $index => $attribute) {
+                $options[$attribute] = $matches[2][$index];
+            }
+        }
+        $name   = '-';
+        $table  = new Posting;
+        $mapper = $table->getMapper();
+        $mapper->type($tag);
+        if ($tag == self::TAG_SYMBOL) {
+            if (isset($options['name'])) {
+                $mapper->title($options['name']);
+                $name = $options['name'];
+                /** @var $entry Posting_Row */
+                $entry = $mapper->fetchRow();
+            }
+        } else {
+            if (isset($options['id'])) {
+                $mapper->id($options['id']);
+                /** @var $entry Posting_Row */
+                $entry = $mapper->fetchRow();
+                if (!empty($entry)) {
+                    if (isset($options['title'])) {
+                        $name = $options['title'];
+                    } else {
+                        $name = $entry->getTitle();
+                    }
+                }
+            }
+        }
+        if (!empty($entry) && !$entry->isPrivate()) {
+            $href = $helper->url(
+                $entry->getRouteParameters(), $entry->getRouteName()
+            );
+            $name = htmlspecialchars($name, ENT_QUOTES, 'utf-8');
+            $link = '<a href="' . $href . '">' . $name . '</a>';
+        } else {
+            $link = "{$tag}:{$attributes}";
+        }
+
+        return $link;
+    }
+
+    protected static function _processTags($string, array $options)
+    {
+        $search  = array(
+            self::TAG_ARTICLE, self::TAG_DREAM, self::TAG_ENTITY,
+            self::TAG_ENTRY, self::TAG_POST, self::TAG_SYMBOL,
+        );
+        $pattern = '/<(' . implode('|', $search) . ')([^>]*)>/';
+        $string  = preg_replace($pattern, '[$1$2]', $string);
+
+        $out = $string;
+        if (!empty($options[self::OPTION_ESCAPE])) {
+            $out = htmlspecialchars($out, ENT_NOQUOTES, 'utf-8');
+        }
+
+        $pattern  = '/\[(' . implode('|', $search) . ')([^]]*)\]/';
+        $callback = function($matches) {
+            return BodyParser::getLink($matches[1], $matches[2]);
+        };
+
+        return preg_replace_callback($pattern, $callback, $out);
     }
 }

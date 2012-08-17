@@ -186,4 +186,32 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
         return $this;
     }
+
+    /**
+     * @param $typeName
+     * @return Posting_Mapper
+     */
+    public function type($typeName)
+    {
+        switch ($typeName) {
+            case BodyParser::TAG_ARTICLE:
+            case BodyParser::TAG_ENTRY:
+                $this->article();
+                break;
+            case BodyParser::TAG_DREAM:
+                $this->dream();
+                break;
+            case BodyParser::TAG_ENTITY:
+                $this->entity();
+                break;
+            case BodyParser::TAG_POST:
+                $this->post();
+                break;
+            case BodyParser::TAG_SYMBOL:
+                $this->symbol();
+                break;
+        }
+
+        return $this;
+    }
 }
