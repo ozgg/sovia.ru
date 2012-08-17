@@ -250,6 +250,17 @@ class Posting_Row extends Ext_Db_Table_Row
         return $route;
     }
 
+    public function getParserOptions()
+    {
+        $useCut = $this->get('type') == $this->isArticle();
+        $escape = !($this->isArticle() || $this->isSymbol());
+
+        return array(
+            BodyParser::OPTION_ESCAPE => $escape,
+            BodyParser::OPTION_NO_CUT => !$useCut,
+        );
+    }
+
     public function setData(array $data)
     {
         $this->set('type', $data['type']);

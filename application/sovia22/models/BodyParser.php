@@ -33,9 +33,13 @@ class BodyParser
         $escape  = !empty($options[self::OPTION_ESCAPE]);
         $useCut  = empty($options[self::OPTION_NO_CUT]);
         $counter = 0;
+        $lines   = 0;
 
         foreach (explode("\n", $body) as $string) {
             $string = rtrim($string);
+            if ($escape && !mb_strlen($string)) {
+                continue;
+            }
             if (!$escape && preg_match(self::PATTERN_RAW_OPEN, $string)) {
                 $raw = true;
                 continue;
@@ -58,7 +62,13 @@ class BodyParser
             }
             $out['body'] .= "{$buffer}\n";
             if (!$cut) {
-                $out['preview'] .= "{$buffer}\n";
+                if (!$escape || ($lines < 2)) {
+                    $out['preview'] .= "{$buffer}\n";
+                }
+                if ($escape && ($lines == 3)) {
+                    $out['preview'] .= '<cut text="Дальше">';
+                }
+                $lines++;
             }
         }
 
@@ -68,8 +78,7 @@ class BodyParser
     public static function replaceCuts($body, $baseUrl)
     {
         $pattern  = self::PATTERN_CUT_OPEN;
-        $callback = function($matches) use ($baseUrl)
-        {
+        $callback = function($matches) use ($baseUrl) {
             static $counter = 0;
             $text   = isset($matches[1]) ? $matches[1] : 'Читать дальше';
             $format = '<p class="cut">( <a href="%s#cut%d" rel="bookmark">%s</a> )</p>';
@@ -87,6 +96,7 @@ class BodyParser
         if (!empty($options[self::OPTION_ESCAPE])) {
             $out = htmlspecialchars($out, ENT_QUOTES, 'utf-8');
         }
+
         return $out;
     }
 

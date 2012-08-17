@@ -1,8 +1,14 @@
 <?php
 $isInternal = $this->entry->getIsinternal();
-$options    = array(BodyParser::OPTION_ESCAPE => !($this->entry->isArticle() || $this->entry->isSymbol()));
-$body       = BodyParser::parseEntry($this->entry->getBody(), $options);
+$options    = $this->entry->getParserOptions();
+$parsedBody = BodyParser::parseEntry($this->entry->getBody(), $options);
 $href       = $this->url($this->entry->getRouteParameters(), $this->entry->getRouteName());
+
+if ($this->isPreview) {
+    $body = BodyParser::replaceCuts($parsedBody['preview'], $href);
+} else {
+    $body = $parsedBody['body'];
+}
 ?>
 <div class="entry">
     <div class="header">
@@ -24,7 +30,7 @@ $href       = $this->url($this->entry->getRouteParameters(), $this->entry->getRo
         </div>
         <?php echo $this->partial('posting/_tags.phtml', array('tags' => $this->entry->getTags(), 'route' => $this->entry->getTagRoute())); ?>
     </div>
-    <div class="entry-body"><?php echo $body['body']; ?></div>
+    <div class="entry-body"><?php echo $body; ?></div>
     <div class="entry-footer">
         <a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a>
 <?php if ($this->isPreview) { ?>

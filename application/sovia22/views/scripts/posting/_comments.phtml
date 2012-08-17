@@ -65,13 +65,17 @@ if (!empty($comments)) {
         <?php
         $level  = 0;
         $stripe = 1;
-        /** @var $comment Posting_Comment_Row */
         foreach ($comments as $comment) {
+            /** @var $comment Posting_Comment_Row */
             $commentId = $comment->getId();
             $owner     = $comment->getOwner();
-            $ownerLink = $this->partial('user/_userlink.phtml', array(
-                'login' => $owner->getLogin(false)
-            ));
+            if (!empty($owner)) {
+                $ownerLink = $this->partial('user/_userlink.phtml', array(
+                    'login' => $owner->getLogin(false)
+                ));
+            } else {
+                $ownerLink = 'Аноним';
+            }
             $date = Ext_Helper_Date::makeString($comment->getCreatedAt(), true);
             $class = '';
             if ($stripe++ > 0) {
