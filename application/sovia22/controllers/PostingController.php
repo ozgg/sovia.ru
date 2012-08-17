@@ -85,4 +85,41 @@ class PostingController extends Ext_Controller_Action
         $table->getDefaultAdapter()->query($query);
         $this->_setFlashMessage('Комментарий добавлен');
     }
+
+    public function rssAction()
+    {
+        $this->getResponse()->setHeader('Content-Type', 'application/rss+xml', true);
+        $this->_getLayout()->disableLayout();
+        $host = $_SERVER['HTTP_HOST'];
+        $feed = new Zend_Feed_Writer_Feed();
+        $feed->setTitle('Совия');
+        $feed->setDescription('Сайт о снах');
+        $feed->setLink("http://{$host}/");
+        $feed->setFeedLink("http://{$host}/rss/", 'rss');
+        $feed->setDateModified(time());
+        $table   = new Posting();
+        $mapper  = $table->getMapper();
+        $mapper->isInternal(Posting_Row::VIS_PUBLIC)->recent()->limit(10);
+        $entries = $mapper->fetchAll();
+        if ($entries->count() > 0) {
+            foreach ($entries as $post) {
+                /** @var $post Posting_Row */
+                $options = $post->getRouteParameters();
+                $route   = $post->getRouteName();
+                $link    = $this->_url($options, $route, true);
+                $entry   = $feed->createEntry();
+                $body    = BodyParser::parseEntry(
+                    $post->getBody(), $post->getParserOptions()
+                );
+                $entry->setTitle($post->getTitle());
+                $entry->setLink("http://{$host}{$link}");
+                $entry->setDateCreated(strtotime($post->getCreatedAt()));
+                $entry->setContent(BodyParser::replaceCuts($body['preview'], $link));
+                $feed->addEntry($entry);
+            }
+        }
+        echo $feed->export('rss');
+
+//        $this->view->assign('feed', $feed->export('rss'));
+    }
 }

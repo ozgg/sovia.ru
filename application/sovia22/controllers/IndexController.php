@@ -8,6 +8,9 @@ class IndexController extends Ext_Controller_Action
         $mapper = $table->getMapper();
         $mapper->recent()->isInternal(0)->limit(3);
         $this->view->assign('entries', $mapper->fetchAll());
+        $rss = $this->_url(array(), 'feed', true);
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->view->headLink()->appendAlternate($rss, 'rss', 'Совия');
     }
 
     public function aboutAction()

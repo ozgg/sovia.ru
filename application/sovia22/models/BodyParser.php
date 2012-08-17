@@ -112,6 +112,7 @@ class BodyParser
         );
         $text = str_replace($from, $into, $text);
         $text = preg_replace('/[^-a-z0-9.]/', '-', $text);
+
         return trim($text, '-.');
     }
 
