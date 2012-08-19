@@ -38,6 +38,11 @@ textarea {
 	width: 100%;
 }
 
+dl {
+    padding: 0;
+    margin-bottom: 0;
+}
+
 dt label {
 	padding-left: 8px;
 }

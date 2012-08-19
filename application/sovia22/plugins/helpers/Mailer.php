@@ -17,76 +17,22 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
     {
         $subject = 'Sovia.ru: восстановление пароля';
         $route   = self::HOST . '/user/reset/';
-        $body    = "<p>Здравствуйте, {$user->getLogin()}.</p>";
-        $body   .= '<p>Для сброса вашего пароля проследуйте по ссылке '
-                 . '<a href="' . $route . '">' . $route . '</a> '
-                 . 'и введите ключ <b>' . $key->getBody() . '</b></p>'
-                 . '<p>Если вы не запрашивали восстановление пароля, '
-                 . 'просто проигнорируйте это письмо.</p>' . self::SIGN;
+        $view    = $this->_getView();
+        $view->assign('user', $user);
+        $view->assign('route', $route);
+        $view->assign('key', $key);
+        $body = $view->render('mail/recover.phtml');
+        echo $body;
 
         return $this->sendMail($user, $subject, $body);
     }
-	
-	public function send(User_Row $user, array $params = array())
-	{
-		if (isset($params['type'])) {
-			switch ($params['type']) {
-				case self::TYPE_RECOVER:
-					$this->recoverPassword($user, $params);
-					break;
-				case self::TYPE_COMMENT:
-					$this->sendCommentNotify($user, $params);
-					break;
-			}
-		}
-		return $this;
-	}
-	
-	/**
-	 * Восстановление пароля.
-	 *
-	 * Формирует текст письма и отправляет его пользователю, если все данные
-	 * верны.
-	 */
-	public function recoverPassword(User_Row $user, array $params)
-	{
-		$error = '';
-		if (isset($params['key'])) {
-			$key = $params['key'];
-			if (is_a($key, 'Default_Model_UserKey')) {
-				$mailData = array(
-					'toAddress' => $user->getEmail(),
-					'toName'    => $user->getLogin(),
-					'subject'   => 'sovia.ru: Восстановление пароля',
-				);
-				$userId  = $user->getId();
-				$keyText = $key->getEventKey();
-				$url  = self::HOST . "/user/recover/key/{$userId}-{$keyText}";
-				$link = sprintf('<a href="%1$s">%1$s</a>', $url);
-				$expiresAt = $key->getExpiresAt();
-				$body  = '';
-				$body .= "<p>Здравствуйте, {$user->getLogin()}.</p>";
-				$body .= "<p>Для вашего логина был запрос на восстановление
-							пароля. Для восстановления пароля пройдите по
-							ссылке {$link}</p>";
-				$body .= "<p>Ссылка действительна до {$expiresAt}.</p>";
-				$body .= '<p>Если вы не запрашивали восстановление пароля,
-							просто проигнорирйте это письмо.</p>';
-				$body .= self::SIGN;
-				$mailData['body'] = $body;
-				unset($expiresAt, $url, $link, $userId, $keyText, $body);
-				$this->sendMail($mailData);
-			} else {
-				$error = 'Ошибка ключа восстановления пароля. Неверный класс.';
-			}
-			unset($key);
-		}
-		if (!empty($error)) {
-			throw new Exception($error);
-		}
-		return $this;
-	}
-	
+
+    public function comment(Posting_Row $entry, Posting_Comment_Row $comment)
+    {
+        $sendComment = false;
+        $sendReply   = false;
+    }
+
 	public function sendCommentNotify(Default_Model_UserItem $user, array $params)
 	{
 		$parentId = $params['parentId'];
@@ -168,35 +114,6 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 		}
 		return $this;
 	}
-	
-	/**
-	 * Проверить адрес электронный почты на соответствие шаблону
-	 *
-	 * Осуществляет простую проверку входящей строки на похожесть на адрес
-	 * электронной почты. В случае несоответсвтия выбрасывает исключение.
-	 */
-	public function validateAddress($address)
-	{
-		return $this;
-	}
-	
-	/**
-	 * Проверить наличие параметров в массиве.
-	 *
-	 * Ищет в массиве $input индексы, являющиеся элементами массива $required.
-	 * Если хотя бы один параметр не найден, выбрасывает исключение с названием
-	 * параметра. Останавливается на первом же ненайденном индексе.
-	 */
-	public function checkParameters(array $input, array $required)
-	{
-		foreach ($required as $parameter) {
-			if (!isset($input[$parameter])) {
-				throw new Exception("Параметр {$parameter} не задан.");
-			}
-		}
-		unset($parameter);
-		return $this;
-	}
 
     /**
      * Отправить письмо
@@ -222,4 +139,11 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 
         return $isSent;
 	}
+
+    protected function _getView()
+    {
+        $config = array('scriptPath' => APPLICATION_PATH . '/views/scripts');
+
+        return new Zend_View($config);
+    }
 }

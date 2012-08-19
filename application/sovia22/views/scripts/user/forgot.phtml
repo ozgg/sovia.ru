@@ -1,4 +1,9 @@
 <h1>Восстановить пароль</h1>
+
+<?php if ($this->isSent) { ?>
+<div class="message">Ключ восстановления отправлен.</div>
+<?php } ?>
+
 <?php if (!empty($this->message)): ?>
 <div class="message"><?php echo $this->message; ?></div>
 <?php endif; ?>
