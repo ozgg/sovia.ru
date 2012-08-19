@@ -58,6 +58,8 @@ class PostingController extends Ext_Controller_Action
             if ($parent->getPosting()->getId() != $entry->getId()) {
                 $this->_forward('denied', 'error');
             }
+        } else {
+            $parentId = null;
         }
         $query  = 'call posting_comment_add(';
         $query .= "{$entry->getId()}, ";
@@ -83,6 +85,20 @@ class PostingController extends Ext_Controller_Action
         $query  .= $table->getDefaultAdapter()->quote($data['body']);
         $query  .= ')';
         $table->getDefaultAdapter()->query($query);
+        try {
+            $mailer = $this->_helper->getHelper('Mailer');
+            $data   = array(
+                'type'     => Helper_Mailer::TYPE_COMMENT,
+                'entry'    => $entry,
+                'comment'  => $data,
+                'parentId' => $parentId,
+            );
+//            $mailer->send($entry->getOwner(), $data);
+        } catch (Exception $e) {
+            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
+            $text = date('Y-m-d H:i:s') . ' ' . $e->getMessage();
+            file_put_contents($file, $text . PHP_EOL, FILE_APPEND);
+        }
         $this->_setFlashMessage('Комментарий добавлен');
     }
 

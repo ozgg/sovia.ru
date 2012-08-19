@@ -432,7 +432,7 @@ return array(
         'articles/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(
             'controller' => 'articles',
-            'action' => 'entry',
+            'action'     => 'entry',
         ),
         array(
             1 => 'id',
@@ -448,6 +448,112 @@ return array(
         ),
         array(
             'id' => '\d+',
+        )
+    ),
+    'articles_read_old_2884' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/how-to-remember-dreams',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2884',
+        )
+    ),
+    'articles_read_old_2885' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/how-to-heal-insomnia',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2885',
+        )
+    ),
+    'articles_read_old_2886' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/how-to-understand-dreams',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2886',
+        )
+    ),
+    'articles_read_old_2887' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/polyphasic-sleep',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2887',
+        )
+    ),
+    'articles_read_old_2888' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/how-to-sleep-faster',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2888',
+        )
+    ),
+    'articles_read_old_2889' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/dream-interpretation-giudelines',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2889',
+        )
+    ),
+    'articles_read_old_2890' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/lilth-and-selene-mystery',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2890',
+        )
+    ),
+    'articles_read_old_2891' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/sleeptracker',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2891',
+        )
+    ),
+    'articles_read_old_2892' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/twilight-time-has-come',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2892',
+        )
+    ),
+    'articles_read_old_2983' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/entry/virtual-machine',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2983',
+        )
+    ),
+    'articles_read_entry_old' => new Zend_Controller_Router_Route(
+        '/articles/read/entry/:id',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+        )
+    ),
+    'articles_blog_entry' => new Zend_Controller_Router_Route(
+        '/blog/read/entry/:id',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
         )
     ),
 

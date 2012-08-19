@@ -55,7 +55,7 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 			$key = $params['key'];
 			if (is_a($key, 'Default_Model_UserKey')) {
 				$mailData = array(
-					'toAddress' => $user->getMail(),
+					'toAddress' => $user->getEmail(),
 					'toName'    => $user->getLogin(),
 					'subject'   => 'sovia.ru: Восстановление пароля',
 				);
@@ -223,4 +223,3 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
         return $isSent;
 	}
 }
-?>
