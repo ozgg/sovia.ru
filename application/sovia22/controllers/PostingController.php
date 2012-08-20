@@ -59,6 +59,7 @@ class PostingController extends Ext_Controller_Action
                 $this->_forward('denied', 'error');
             }
         } else {
+            $parent   = null;
             $parentId = null;
         }
         $query  = 'call posting_comment_add(';
@@ -85,20 +86,18 @@ class PostingController extends Ext_Controller_Action
         $query  .= $table->getDefaultAdapter()->quote($data['body']);
         $query  .= ')';
         $table->getDefaultAdapter()->query($query);
-        try {
-            $mailer = $this->_helper->getHelper('Mailer');
-            $data   = array(
-                'type'     => Helper_Mailer::TYPE_COMMENT,
-                'entry'    => $entry,
-                'comment'  => $data,
-                'parentId' => $parentId,
-            );
-//            $mailer->send($entry->getOwner(), $data);
-        } catch (Exception $e) {
-            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
-            $text = date('Y-m-d H:i:s') . ' ' . $e->getMessage();
-            file_put_contents($file, $text . PHP_EOL, FILE_APPEND);
-        }
+//        $commentId = $table->getAdapter()->lastInsertId();
+//        try {
+//            /** @var $mailer Helper_Mailer */
+//            $mailer  = $this->_helper->getHelper('Mailer');
+//            /** @var $comment Posting_Comment_Row */
+//            $comment = $table->selectBy('id', $commentId)->fetchRow();
+//            $mailer->comment($entry, $comment, $parent);
+//        } catch (Exception $e) {
+//            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
+//            $text = date('Y-m-d H:i:s') . ' ' . $e->getMessage();
+//            file_put_contents($file, $text . PHP_EOL, FILE_APPEND);
+//        }
         $this->_setFlashMessage('Комментарий добавлен');
     }
 

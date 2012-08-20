@@ -27,93 +27,48 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
         return $this->sendMail($user, $subject, $body);
     }
 
-    public function comment(Posting_Row $entry, Posting_Comment_Row $comment)
+    public function comment(
+        Posting_Row $entry,
+        Posting_Comment_Row $comment,
+        Posting_Comment_Row $parent = null
+    )
     {
         $sendComment = false;
         $sendReply   = false;
-    }
+        $options     = array(
+            BodyParser::OPTION_ESCAPE => true,
+            BodyParser::OPTION_NO_CUT => true,
+        );
+        $body = BodyParser::parseEntry($comment->getBody(), $options);
 
-	public function sendCommentNotify(Default_Model_UserItem $user, array $params)
-	{
-		$parentId = $params['parentId'];
-		$comment  = $params['comment'];
-		$entry    = $params['entry'];
-		$reply    = Ext_Helper_Sovia_Parser::parse($comment->getBody(), true);
-		$entryOwner   = $user;
-		$commentOwner = $comment->getOwner();
-		$parentOwner  = null;
-		$sentToParent = false;
-		if (!empty($parentId)) {
-			$parent = new Default_Model_PostingComment();
-			$parent->find($parentId);
-			$parentOwner = $parent->getOwner();
-			if (is_object($parentOwner)) {
-				if ($parentOwner->getId() != $commentOwner->getId()) {
-					if ($parentOwner->getAllowMail()) {
-						$mailData = array(
-							'toAddress' => $parentOwner->getMail(),
-							'toName'    => $parentOwner->getLogin(),
-							'subject'   => 'sovia.ru: Ответ на ваш комментарий',
-						);
-						$url  = self::HOST . $entry->getLink();
-						$link = sprintf('<a href="%1$s">%1$s</a>', $url);
-						$body  = '';
-						$body .= "<p>Здравствуйте, {$user->getLogin()}.</p>";
-						$body .= "<p>Вы оставляли комментарий к записи на сайте
-									sovia.ru, на него был дан ответ от пользователя
-									{$commentOwner->getLogin()}:</p>";
-						$body .= "<blockquote>{$reply}</blockquote>";
-						$body .= "<hr /><p>Для ответа или просмотра комментария на
-									сайте вы можете перейти по ссылке {$link}</p>";
-						$body .= self::SIGN;
-						$mailData['body'] = $body;
-						try {
-							$this->sendMail($mailData);
-							$sentToParent = true;
-						} catch (Exception $e) {
-							// do nothing
-						}
-					}
-					
-				}
-			}
-		}
-		$parentOwnerId = 0;
-		if (is_object($parentOwner)) {
-			$parentOwnerId = $parentOwner->getId();
-		}
-		if ($commentOwner->getId() != $entryOwner->getId()) {
-			$sendToEntryOwner = true;
-			if ($entryOwner->getId() == $parentOwnerId) {
-				$sendToEntryOwner = !$sentToParent;
-			}
-			if ($sendToEntryOwner && $entryOwner->getAllowMail()) {
-				$mailData = array(
-					'toAddress' => $entryOwner->getMail(),
-					'toName'    => $entryOwner->getLogin(),
-					'subject'   => 'sovia.ru: Ответ на вашу запись',
-				);
-				$url  = self::HOST . $entry->getLink();
-				$link = sprintf('<a href="%1$s">%1$s</a>', $url);
-				$body  = '';
-				$body .= "<p>Здравствуйте, {$user->getLogin()}.</p>";
-				$body .= "<p>Вы оставляли запись на сайте sovia.ru, на неё 
-							был оставлен комментарий от пользователя
-							{$commentOwner->getLogin()}:</p>";
-				$body .= "<blockquote>{$reply}</blockquote>";
-				$body .= "<hr /><p>Для ответа или просмотра комментария на
-							сайте вы можете перейти по ссылке {$link}</p>";
-				$body .= self::SIGN;
-				$mailData['body'] = $body;
-				try {
-					$this->sendMail($mailData);
-				} catch (Exception $e) {
-					// do nothing
-				}
-			}
-		}
-		return $this;
-	}
+        $entryOwner   = $entry->getOwner();
+        $commentOwner = $comment->getOwner();
+        $sendComment  = ($commentOwner->getId() != $entryOwner->getId());
+        if (!is_null($parent)) {
+            $parentOwner = $parent->getOwner();
+            $sendReply   = ($parentOwner->getId() != $comment->getId());
+            if ($parentOwner->getId() == $entryOwner->getId()) {
+                $sendComment = false;
+            }
+            $sendReply &= (bool) $parentOwner->getAllowMail();
+        }
+        $sendComment &= (bool) $entryOwner->getAllowMail();
+
+        $view = $this->_getView();
+        $view->assign('entry', $entry);
+        $view->assign('body', strip_tags($body['body']));
+        $view->assign('commentator', $commentOwner);
+        if ($sendComment) {
+            $subject  = 'sovia.ru: Ответ на вашу запись';
+            $template = 'mail/comment.phtml';
+            $this->sendMail($entryOwner, $subject, $view->render($template));
+        }
+        if ($sendReply) {
+            $subject  = 'sovia.ru: Ответ на ваш комментарий';
+            $template = 'mail/reply.phtml';
+            $this->sendMail($entryOwner, $subject, $view->render($template));
+        }
+    }
 
     /**
      * Отправить письмо
@@ -126,6 +81,8 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 	public function sendMail(User_Row $user, $subject, $body)
 	{
         try {
+            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d H:i:s') . '.log';
+            file_put_contents($file, $subject . PHP_EOL . $body, FILE_APPEND);
             $mail = new Zend_Mail('utf-8');
             $mail->setFrom('support@sovia.ru', 'Sovia.ru');
             $mail->setSubject($subject);

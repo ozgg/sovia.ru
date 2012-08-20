@@ -1,1 +1,13 @@
-<p></p>
+<?php
+$link = $this->url($this->entry->getRouteParameters(), $this->entry->getRouteName());
+$href = Helper_Mailer::HOST . $link;
+?>
+<p>Здравствуйте, <?php echo $this->entry->getOwner()->getLogin(); ?>.</p>
+<p>Вы оставляли запись на сайте sovia.ru, на неё был оставлен комментарий от
+    пользователя <?php echo $this->commentator->getLogin(); ?>:</p>
+<blockquote><?php echo nl2br($this->body); ?></blockquote>
+<hr /><p>Для ответа или просмотра комментария на сайте вы можете перейти по ссылке
+    <a href="<?php echo $href ?>"><?php echo $href; ?></a></p>
+<p>-- <br />
+    С уважением,<br />
+    Команда sovia.ru</p>
