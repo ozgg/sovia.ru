@@ -86,18 +86,15 @@ class PostingController extends Ext_Controller_Action
         $query  .= $table->getDefaultAdapter()->quote($data['body']);
         $query  .= ')';
         $table->getDefaultAdapter()->query($query);
-//        $commentId = $table->getAdapter()->lastInsertId();
-//        try {
-//            /** @var $mailer Helper_Mailer */
-//            $mailer  = $this->_helper->getHelper('Mailer');
-//            /** @var $comment Posting_Comment_Row */
-//            $comment = $table->selectBy('id', $commentId)->fetchRow();
-//            $mailer->comment($entry, $comment, $parent);
-//        } catch (Exception $e) {
-//            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
-//            $text = date('Y-m-d H:i:s') . ' ' . $e->getMessage();
-//            file_put_contents($file, $text . PHP_EOL, FILE_APPEND);
-//        }
+        try {
+            /** @var $mailer Helper_Mailer */
+            $mailer  = $this->_helper->getHelper('Mailer');
+            $mailer->comment($entry, $this->_user, $data['body'], $parent);
+        } catch (Exception $e) {
+            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
+            $text = date('Y-m-d H:i:s') . ' ' . $e->getMessage();
+            file_put_contents($file, $text . PHP_EOL, FILE_APPEND);
+        }
         $this->_setFlashMessage('Комментарий добавлен');
     }
 

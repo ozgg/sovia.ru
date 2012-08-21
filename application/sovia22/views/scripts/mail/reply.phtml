@@ -2,7 +2,7 @@
 $link = $this->url($this->entry->getRouteParameters(), $this->entry->getRouteName());
 $href = Helper_Mailer::HOST . $link;
 ?>
-<p>Здравствуйте, <?php echo $this->entry->getOwner()->getLogin(); ?>.</p>
+<p>Здравствуйте, <?php echo $this->parentOwner->getLogin(); ?>.</p>
 <p>Вы оставляли комментарий к записи на сайте sovia.ru, на него был дан ответ от
     пользователя <?php echo $this->commentator->getLogin(); ?>:</p>
 <blockquote><?php echo nl2br($this->body); ?></blockquote>

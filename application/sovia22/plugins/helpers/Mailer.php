@@ -29,24 +29,23 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 
     public function comment(
         Posting_Row $entry,
-        Posting_Comment_Row $comment,
+        User_Interface $commentOwner,
+        $text,
         Posting_Comment_Row $parent = null
     )
     {
-        $sendComment = false;
-        $sendReply   = false;
-        $options     = array(
+        $sendReply = false;
+        $options   = array(
             BodyParser::OPTION_ESCAPE => true,
             BodyParser::OPTION_NO_CUT => true,
         );
-        $body = BodyParser::parseEntry($comment->getBody(), $options);
+        $body = BodyParser::parseEntry($text, $options);
 
-        $entryOwner   = $entry->getOwner();
-        $commentOwner = $comment->getOwner();
-        $sendComment  = ($commentOwner->getId() != $entryOwner->getId());
+        $entryOwner  = $entry->getOwner();
+        $sendComment = ($commentOwner->getId() != $entryOwner->getId());
         if (!is_null($parent)) {
             $parentOwner = $parent->getOwner();
-            $sendReply   = ($parentOwner->getId() != $comment->getId());
+            $sendReply   = ($parentOwner->getId() != $commentOwner->getId());
             if ($parentOwner->getId() == $entryOwner->getId()) {
                 $sendComment = false;
             }
@@ -63,10 +62,11 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
             $template = 'mail/comment.phtml';
             $this->sendMail($entryOwner, $subject, $view->render($template));
         }
-        if ($sendReply) {
+        if ($sendReply && !empty($parentOwner)) {
+            $view->assign('parentOwner', $parentOwner);
             $subject  = 'sovia.ru: Ответ на ваш комментарий';
             $template = 'mail/reply.phtml';
-            $this->sendMail($entryOwner, $subject, $view->render($template));
+            $this->sendMail($parentOwner, $subject, $view->render($template));
         }
     }
 
@@ -81,8 +81,6 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
 	public function sendMail(User_Row $user, $subject, $body)
 	{
         try {
-            $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d H:i:s') . '.log';
-            file_put_contents($file, $subject . PHP_EOL . $body, FILE_APPEND);
             $mail = new Zend_Mail('utf-8');
             $mail->setFrom('support@sovia.ru', 'Sovia.ru');
             $mail->setSubject($subject);
@@ -102,5 +100,11 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
         $config = array('scriptPath' => APPLICATION_PATH . '/views/scripts');
 
         return new Zend_View($config);
+    }
+
+    protected function _log($message)
+    {
+        $file = sys_get_temp_dir() . '/sovia-' . date('Y-m-d') . '.log';
+        file_put_contents($file, $message . PHP_EOL, FILE_APPEND);
     }
 }
