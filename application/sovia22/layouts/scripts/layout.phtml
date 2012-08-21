@@ -60,9 +60,10 @@ if (!empty($chunk)) {
     </div>
     
     <div id="footer">
-        <div class="footer-element">&#0169; 2006&#0150;2012 sovia.ru</div>
+        <div class="footer-element">&#0169; 2006–2012 sovia.ru</div>
         <div class="footer-element"><a href="<?php echo $this->url(array(), 'tos', true); ?>" title="Пользовательское соглашение">Пользовательское соглашение</a></div>
         <div class="sape-bottom"><?php echo $this->sape('all'); ?></div>
+        <?php echo $this->partial('counters.phtml'); ?>
     </div>
 </body>
 </html>
