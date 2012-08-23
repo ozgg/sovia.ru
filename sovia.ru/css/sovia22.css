@@ -58,45 +58,107 @@ ul, ol {
 	margin: 0;
 }
 
-.notice {
-	font-size: 0.9em;
-	color: #777777;
+aside header {
+    font-weight: bold;
 }
 
-dd.notice {
-	font-size: 0.8em;
-}
-
-#header {
-    height: 120px;
+/**
+ * Заголовок страницы
+ */
+header#page-header {
     margin: 0 300px 0 0;
+    height: 160px;
 }
 
-#logo {
-    padding: 40px 0 0 0;
+header#page-header div {
+    padding: 40px 0 30px 0;
 }
 
-#navigation-main {
+header#page-header nav ul {
     font-size: 1.2em;
     height: 2em;
     margin: 0 300px 0 0;
     padding: 0;
 }
 
-#navigation-main li {
+header#page-header nav ul li {
     margin: 0;
     padding: 0 2em;
     display: inline-block;
-    list-style-type: none;
+    list-style: none;
 }
 
-#navigation-main a:link, #navigation-main a:visited {
+header#page-header nav ul li a:link,
+header#page-header nav ul li a:visited {
     color: #bdd4da;
 }
 
-#navigation-main a:hover {
+header#page-header nav ul li a:hover {
     color: #ff9600;
 }
+/* Конец заголовка страницы */
+
+/**
+ * Низ страницы
+ */
+footer#page-footer {
+    color: #eeeeee;
+}
+
+footer#page-footer div {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+    display: inline-block;
+}
+
+footer#page-footer aside {
+    margin: 0 2em 0 4em;
+    font-size: 0.8em;
+    color: #777777;
+    font-weight: normal;
+    float: right;
+}
+/** Конец низа страницы */
+
+
+/**
+ * Правая колонка
+ */
+section#right-column {
+    right: 0;
+    top: 0;
+    width: 300px;
+    position: absolute;
+}
+
+section#right-column aside {
+    border-radius: 15px;
+    background: #dddddd;
+    margin: 0 30px 1em 30px;
+    padding: 0.5em;
+}
+
+section#right-column aside ul {
+    padding: 0 0 0 1.5em;
+}
+
+section#right-column aside.auth {
+    background: none;
+    color: #aaaaaa;
+    height: 160px;
+    margin: 0;
+    padding: 0 0 0 1.5em;
+}
+
+section#right-column aside.auth header {
+    font-weight: normal;
+    padding: 0 0 0 1.5em;
+}
+
+section#right-column aside.auth dl {
+    margin: 0;
+}
+/** Конец правой колонки */
 
 #content {
     background: #ffffff;
@@ -106,26 +168,21 @@ dd.notice {
     min-height: 500px;
 }
 
-#right-column {
-    right: 0;
-    top: 0;
-    width: 300px;
-    position: absolute;
+aside.sape {
+    margin: 1em 0 0 0;
+    font-size: 0.8em;
 }
 
-#footer {
-    color: #eeeeee;
+
+.notice {
+	font-size: 0.9em;
+	color: #777777;
 }
 
-.footer-element {
-    font-size: 0.9em;
-    padding: 0.5em 2em;
-    display: inline-block;
+dd.notice {
+	font-size: 0.8em;
 }
 
-#auth-info {
-    color: #aaaaaa;
-}
 
 .required {
 	background: url('/images/required.gif') 1px 3px no-repeat;
@@ -262,18 +319,6 @@ dd.notice {
     margin: 0 5px;
 }
 
-#right-column .blocks {
-    position: absolute;
-    top: 157px;
-    right: 30px;
-}
-
-#right-column .blocks div {
-    border-radius: 15px;
-    background: #dddddd;
-    margin: 0.5em 0 0.5em 2em;
-    padding: 0.3em;
-}
 
 #reply-main {
     margin: 1em 0 0 0;
@@ -342,32 +387,6 @@ dd.notice {
 
 .comment-options {
     float: right
-}
-
-.sape-bottom {
-    margin: 0 2em 0 4em;
-    font-size: 0.8em;
-    color: #777777;
-    font-weight: normal;
-    float: right;
-}
-
-.sape-bar {
-    font-size: 0.75em;
-}
-
-.sape-bar div {
-    margin: 0;
-    padding: 0;
-}
-
-.sape-content {
-    margin: 1em 0 0 0;
-    font-size: 0.8em;
-}
-
-.sape-content .header {
-    font-weight: bold;
 }
 
 
@@ -449,201 +468,3 @@ ul.adjacent li.prev {
     background: url('/images/nav-prev.png') center left no-repeat;
     padding: 0 0 0 15px;
 }
-
-/*
-
-.switcher {
-	display: inline-block;
-}
-
-.switcher div {
-	width: 16px;
-	height: 16px;
-	cursor: pointer;
-	overflow: hidden;
-}
-
-.role {
-	display: inline-block;
-	background: url('/images/yes-no-del.gif') no-repeat;
-	border: outset 1px;
-}
-
-.allowed {
-	background-position: 0 0;
-}
-
-.denied {
-	background-position: 0px -16px;
-}
-
-.hidden {
-	display: none;
-}
-
-.errors {
-	border: dashed #ff0000 1px;
-	padding: 0.5em 1.5em;
-	color: #770000;
-	margin: 0.7em 0;
-}
-
-.errors p {
-	text-indent: 0;
-}
-
-.result, .results {
-	border: dashed #777777 1px;
-	font-weight: bold;
-	margin: 0.7em 0;
-}
-
-.result {
-	text-align: center;
-}
-
-.roles {
-	padding: 0 0 0 1em;
-}
-
-.roles li {
-	display: block;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
-.fr {
-	float: right;
-}
-
-.fl {
-	float: left;
-}
-
-.small {
-	font-size: 0.9em;
-}
-
-
-#menu-top li a:hover {
-	text-decoration: underline;
-	color: #ff9600;
-}
-
-.controls {
-	display: block;
-	margin: 0;
-	padding: 0;
-	height: 16px;
-	cursor: pointer;
-}
-
-.posting .controls {
-	float: right;
-}
-
-.controls li, .controls div {
-	display: block;
-	float: right;
-	width: 16px;
-	height: 16px;
-	overflow: hidden;
-	background: url('/images/actions.png') no-repeat;
-}
-
-.controls li {
-	list-style-type: none;
-	text-indent: 32px;
-}
-
-.controls .delete {
-	background-position: 0 0;
-}
-
-.controls .edit {
-	background-position: -16px 0;
-}
-
-.pager {
-	min-height: 2.2em;
-}
-
-.pager ul, .pager li {
-	margin: 0;
-	padding: 0;
-}
-
-.pager li {
-	list-style-type: none;
-	display: block;
-	float: left;
-	background: #eeeeff;
-	border: solid #ffffee 1px;
-	padding: 0.3em;
-}
-
-.neighbours {
-	display: block;
-	height: 1.4em;
-	margin: 0;
-	padding: 0;
-}
-
-.neighbours li {
-	display: block;
-	float: right;
-	list-style-type: none;
-	margin: 0 0.9em;
-}
-
-.neighbours li.prev {
-	background: url('/images/nav-prev.png') center left no-repeat;
-	padding: 0 0 0 15px;
-}
-
-.neighbours li.next {
-	background: url('/images/nav-next.png') center right no-repeat;
-	padding: 0 15px 0 0;
-}
-
-.sidebar .header {
-	text-align: center;
-	font-weight: bold;
-}
-
-.sidebar-symbols {
-	padding: 0 1em 1em 1em;
-	margin: 0;
-}
-
-.sidebar-symbols li {
-	list-style-type: none;
-	display: block;
-	margin: 0;
-	padding: 0;
-}
-
-.sidebar-dream-title {
-	padding: 0 1em;
-	font-weight: bold;
-}
-
-.sidebar-dream-body {
-	padding: 0 1em 1em 1em;
-}
-
-.counters {
-	float: left;
-}
-
-.adsense234 {
-	width: 234px;
-	margin: 0 auto;
-}
-
-.banner468 {
-	width: 468px;
-	margin: 1em auto;
-}
-*/
