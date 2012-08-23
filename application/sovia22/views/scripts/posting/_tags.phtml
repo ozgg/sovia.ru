@@ -5,9 +5,16 @@ if (!empty($this->tags) && !empty($this->route)) {
     Метки:
 <?php
     $links = array();
-    /** @var $tag Posting_Tag_Row */
     foreach ($this->tags as $tag) {
-        $links[] = '<a href="' . $this->url(array('tag' => $tag->getName()), $this->route) . '" rel="tag">' . $this->escape($tag->getName()) . '</a>';
+        /** @var $tag Posting_Tag_Row */
+        $tagLink = '<a href="' . $this->url(array('tag' => $tag->getName()), $this->route) . '" rel="tag">' . $this->escape($tag->getName()) . '</a>';
+        if (!empty($this->tagLinks)) {
+            $post    = $tag->getPost();
+            if (!empty($post)) {
+                $tagLink .= ' (<a href="' . $this->url($post->getRouteParameters(), $post->getRouteName()) . '" title="Толкование">?</a>)';
+            }
+        }
+        $links[] = $tagLink;
     }
     echo implode(', ', $links);
 ?>

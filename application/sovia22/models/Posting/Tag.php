@@ -29,8 +29,17 @@ class Posting_Tag extends Ext_Db_Table_Abstract
      * Класс для представления записи
      *
      * @var string
+     * @see Posting_Tag_Row
      */
     protected $_rowClass = 'Posting_Tag_Row';
+
+    protected $_referenceMap = array(
+        'Posting' => array(
+            'columns'       => 'post_id',
+            'refTableClass' => 'Posting',
+            'refColumns'    => 'id',
+        ),
+    );
 
     /**
      * Получить преобразователь

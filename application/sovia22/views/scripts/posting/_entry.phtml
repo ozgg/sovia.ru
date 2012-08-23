@@ -28,7 +28,7 @@ if ($this->isPreview) {
             <?php echo $this->escape($this->entry->getTitle()); ?>
 <?php } ?>
         </div>
-        <?php echo $this->partial('posting/_tags.phtml', array('tags' => $this->entry->getTags(), 'route' => $this->entry->getTagRoute())); ?>
+        <?php echo $this->partial('posting/_tags.phtml', array('tags' => $this->entry->getTags(), 'route' => $this->entry->getTagRoute(), 'tagLinks' => !$this->isPreview)); ?>
     </div>
     <div class="entry-body"><?php echo $body; ?></div>
     <div class="entry-footer">

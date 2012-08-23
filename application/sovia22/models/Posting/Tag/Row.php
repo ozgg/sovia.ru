@@ -22,4 +22,12 @@ class Posting_Tag_Row extends Ext_Db_Table_Row
     {
         return $this->get('type_id');
     }
+
+    /**
+     * @return Posting_Row
+     */
+    public function getPost()
+    {
+        return $this->findParentRow('Posting');
+    }
 }

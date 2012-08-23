@@ -26,7 +26,7 @@ ALTER TABLE `user_item`
 UPDATE `user_item` i SET i.`avatar_id` = (SELECT p.`avatar_id` FROM `user_profile` p WHERE p.`owner_id` = i.`id`);
 
 ALTER TABLE `posting_item`
-  ADD COLUMN `description` TEXT NULL  COMMENT 'Meta description' AFTER `preview`,
+  ADD COLUMN `description` TEXT NULL  COMMENT 'Meta description',
   ADD COLUMN `type` TINYINT(1) UNSIGNED DEFAULT 0  NOT NULL  COMMENT 'Type (dream, post, symbol, etc)' AFTER `owner_id`,
   DROP COLUMN `pubdate`,
   DROP COLUMN `body`;
