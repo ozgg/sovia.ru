@@ -72,7 +72,7 @@ class BodyParser
                 if (!$escape || ($lines < 2)) {
                     $out['preview'] .= "{$buffer}\n";
                 }
-                if ($escape && ($lines == 3)) {
+                if ($escape && ($lines == 2)) {
                     $out['preview'] .= '<cut text="Дальше">';
                 }
                 $lines++;
