@@ -2,6 +2,14 @@
 $link = $this->url($this->entry->getRouteParameters(), $this->entry->getRouteName());
 $href = Helper_Mailer::HOST . $link;
 ?>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>Sovia.ru: ответ на комментарий</title>
+</head>
+<body>
 <p>Здравствуйте, <?php echo $this->entry->getOwner()->getLogin(); ?>.</p>
 <p>Вы оставляли запись на сайте sovia.ru, на неё был оставлен комментарий от
     пользователя <?php echo $this->commentator->getLogin(); ?>:</p>
@@ -11,3 +19,5 @@ $href = Helper_Mailer::HOST . $link;
 <p>-- <br />
     С уважением,<br />
     Команда sovia.ru</p>
+</body>
+</html>

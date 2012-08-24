@@ -22,7 +22,6 @@ class Helper_Mailer extends Zend_Controller_Action_Helper_Abstract
         $view->assign('route', $route);
         $view->assign('key', $key);
         $body = $view->render('mail/recover.phtml');
-        echo $body;
 
         return $this->sendMail($user, $subject, $body);
     }
