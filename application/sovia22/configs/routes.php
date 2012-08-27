@@ -241,6 +241,14 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_tagged_older' => new Zend_Controller_Router_Route(
+        '/dreams/read/symbol/:tag',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'tagged',
+            'canonical'  => true,
+        )
+    ),
     'dreams_author' => new Zend_Controller_Router_Route(
         '/dreams/of/:login',
         array(
@@ -484,6 +492,14 @@ return array(
     ),
     'articles_read' => new Zend_Controller_Router_Route_Static(
         '/articles/read',
+        array(
+            'controller' => 'articles',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
+    'articles_read_blog' => new Zend_Controller_Router_Route_Static(
+        '/blog/read',
         array(
             'controller' => 'articles',
             'action'     => 'index',
