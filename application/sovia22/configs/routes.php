@@ -70,6 +70,13 @@ return array(
             'action'     => 'rating',
         )
     ),
+    'user_list' => new Zend_Controller_Router_Route_Static(
+        '/users/list',
+        array(
+            'controller' => 'user',
+            'action'     => 'list',
+        )
+    ),
 
     'cabinet' => new Zend_Controller_Router_Route_Static(
         '/my',

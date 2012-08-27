@@ -314,6 +314,11 @@ class UserController extends Ext_Controller_Action
 
     }
 
+    public function listAction()
+    {
+
+    }
+
     /**
      * Аутентификация
      *
