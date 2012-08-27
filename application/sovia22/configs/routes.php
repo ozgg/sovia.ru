@@ -388,6 +388,14 @@ return array(
             'action'     => 'letter',
         )
     ),
+    'dreambook_view_letter' => new Zend_Controller_Router_Route(
+        '/dreambook/view/:letter',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'letter',
+            'canonical'  => true,
+        )
+    ),
     'dreambook_entry' => new Zend_Controller_Router_Route(
         '/dreambook/read/:letter/:symbol',
         array(
@@ -395,8 +403,16 @@ return array(
             'action'     => 'entry',
         )
     ),
+    'dreambook_entry_older' => new Zend_Controller_Router_Route(
+        '/dreambook/view/:letter/:symbol',
+        array(
+            'controller' => 'dreambook',
+            'action'     => 'entry',
+            'canonical'  => true,
+        )
+    ),
     'dreambook_letter_old' => new Zend_Controller_Router_Route(
-        '/dreambook/view/letter/:letter',
+        '/dreambook/read/letter/:letter',
         array(
             'controller' => 'dreambook',
             'action'     => 'letter',
@@ -404,7 +420,7 @@ return array(
         )
     ),
     'dreambook_entry_old' => new Zend_Controller_Router_Route(
-        '/dreambook/view/entry/:symbol',
+        '/dreambook/read/entry/:symbol',
         array(
             'controller' => 'dreambook',
             'action'     => 'entry',
