@@ -273,6 +273,37 @@ return array(
             'month' => '([1-9]|1[0-2])',
         )
     ),
+    'dreams_calendar' => new Zend_Controller_Router_Route_Static(
+        '/dreams/calendar',
+        array(
+            'controller' => 'dreams',
+            'action' => 'archive',
+            'canonical'  => true,
+        )
+    ),
+    'dreams_calendar_year' => new Zend_Controller_Router_Route(
+        '/dreams/calendar/:year',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'archive',
+            'canonical'  => true,
+        ),
+        array(
+            'year' => '\d{4}',
+        )
+    ),
+    'dreams_calendar_month' => new Zend_Controller_Router_Route(
+        '/dreams/calendar/:year/:month',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'archive',
+            'canonical'  => true,
+        ),
+        array(
+            'year'  => '\d{4}',
+            'month' => '([1-9]|1[0-2])',
+        )
+    ),
 
     'fun' => new Zend_Controller_Router_Route_Static(
         '/fun',
