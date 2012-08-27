@@ -530,6 +530,21 @@ return array(
             'canonical'  => true,
         )
     ),
+    'articles_blog_tags' => new Zend_Controller_Router_Route_Static(
+        '/blog/tags/:tag',
+        array(
+            'controller' => 'articles',
+            'action'     => 'tags',
+        )
+    ),
+    'articles_blog_read' => new Zend_Controller_Router_Route_Static(
+        '/blog/read/:entry',
+        array(
+            'controller' => 'articles',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'articles_entry' => new Zend_Controller_Router_Route_Regex(
         'articles/(\d+)-([a-z0-9][-a-z0-9.]+)',
         array(

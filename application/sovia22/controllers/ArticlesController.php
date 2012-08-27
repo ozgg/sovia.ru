@@ -132,6 +132,11 @@ class ArticlesController extends Ext_Controller_Action
 
     }
 
+    public function tagsAction()
+    {
+
+    }
+
     /**
      * Редактирование записи и создание новой
      *
