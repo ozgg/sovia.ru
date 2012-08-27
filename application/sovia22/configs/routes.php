@@ -530,14 +530,14 @@ return array(
             'canonical'  => true,
         )
     ),
-    'articles_blog_tags' => new Zend_Controller_Router_Route_Static(
+    'articles_blog_tags' => new Zend_Controller_Router_Route(
         '/blog/tags/:tag',
         array(
             'controller' => 'articles',
             'action'     => 'tags',
         )
     ),
-    'articles_blog_read' => new Zend_Controller_Router_Route_Static(
+    'articles_blog_read' => new Zend_Controller_Router_Route(
         '/blog/read/:entry',
         array(
             'controller' => 'articles',
