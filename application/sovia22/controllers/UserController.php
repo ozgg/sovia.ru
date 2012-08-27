@@ -309,6 +309,11 @@ class UserController extends Ext_Controller_Action
         $this->view->assign('list', $list);
     }
 
+    public function ratingAction()
+    {
+
+    }
+
     /**
      * Аутентификация
      *

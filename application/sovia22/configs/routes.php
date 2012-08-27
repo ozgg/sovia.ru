@@ -63,6 +63,13 @@ return array(
     'user_reset' => new Zend_Controller_Router_Route_Static(
         '/user/reset'
     ),
+    'user_rating' => new Zend_Controller_Router_Route_Static(
+        '/users/rating',
+        array(
+            'controller' => 'user',
+            'action'     => 'rating',
+        )
+    ),
 
     'cabinet' => new Zend_Controller_Router_Route_Static(
         '/my',
