@@ -256,6 +256,14 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_author_older' => new Zend_Controller_Router_Route(
+        '/dreams/read/user/:login',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'author',
+            'canonical'  => true,
+        )
+    ),
     'dreams_archive' => new Zend_Controller_Router_Route_Static(
         '/dreams/archive'
     ),
@@ -506,6 +514,15 @@ return array(
     ),
     'articles_read_old_2884' => new Zend_Controller_Router_Route_Static(
         '/articles/read/entry/how-to-remember-dreams',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2884',
+        )
+    ),
+    'articles_read_older_2884' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/how-to-remember-dreams',
         array(
             'controller' => 'articles',
             'action'     => 'entry',
