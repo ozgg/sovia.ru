@@ -35,6 +35,15 @@ return array(
             'canonical'  => true,
         )
     ),
+    'profile_ozgg' => new Zend_Controller_Router_Route_Static(
+        '/user/profile/dr_von_ozgg',
+        array(
+            'controller' => 'user',
+            'action'     => 'profile',
+            'of'         => 'dr_von_ozgg',
+            'canonical'  => true,
+        )
+    ),
 
     'user_register' => new Zend_Controller_Router_Route_Static(
         '/register',
