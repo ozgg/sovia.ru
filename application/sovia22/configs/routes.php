@@ -627,6 +627,30 @@ return array(
             'canonical'  => true,
         )
     ),
+    'articles_calendar' => new Zend_Controller_Router_Route(
+        '/blog/calendar',
+        array(
+            'controller' => 'articles',
+            'action'     => 'calendar',
+            'canonical'  => true,
+        )
+    ),
+    'articles_calendar_year' => new Zend_Controller_Router_Route(
+        '/blog/calendar/:year',
+        array(
+            'controller' => 'articles',
+            'action'     => 'calendar',
+            'canonical'  => true,
+        )
+    ),
+    'articles_calendar_month' => new Zend_Controller_Router_Route(
+        '/blog/calendar/:year/:month',
+        array(
+            'controller' => 'articles',
+            'action'     => 'calendar',
+            'canonical'  => true,
+        )
+    ),
 
     'feed' => new Zend_Controller_Router_Route_Static(
         '/rss',

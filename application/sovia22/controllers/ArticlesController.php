@@ -127,6 +127,11 @@ class ArticlesController extends Ext_Controller_Action
         $this->view->assign('form', $form);
     }
 
+    public function calendarAction()
+    {
+
+    }
+
     /**
      * Редактирование записи и создание новой
      *
