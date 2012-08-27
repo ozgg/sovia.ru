@@ -475,6 +475,14 @@ return array(
             'action'     => 'symbols',
         )
     ),
+    'statistics_symbols_old' => new Zend_Controller_Router_Route_Static(
+        '/symbols',
+        array(
+            'controller' => 'statistics',
+            'action'     => 'symbols',
+            'canonical'  => true,
+        )
+    ),
 
     'sitemap' => new Zend_Controller_Router_Route_Static(
         '/sitemap',
