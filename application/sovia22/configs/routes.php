@@ -620,6 +620,15 @@ return array(
             'id'         => '2887',
         )
     ),
+    'articles_read_older_2887' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/polyphasic-sleep',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2887',
+        )
+    ),
     'articles_read_old_2888' => new Zend_Controller_Router_Route_Static(
         '/articles/read/entry/how-to-sleep-faster',
         array(
@@ -631,6 +640,15 @@ return array(
     ),
     'articles_read_old_2889' => new Zend_Controller_Router_Route_Static(
         '/articles/read/entry/dream-interpretation-giudelines',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2889',
+        )
+    ),
+    'articles_read_older_2889' => new Zend_Controller_Router_Route_Static(
+        '/articles/read/dream-interpretation-giudelines',
         array(
             'controller' => 'articles',
             'action'     => 'entry',
