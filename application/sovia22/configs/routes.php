@@ -52,6 +52,14 @@ return array(
             'action'     => 'register',
         )
     ),
+    'user_register_old' => new Zend_Controller_Router_Route_Static(
+        '/users/register',
+        array(
+            'controller' => 'user',
+            'action'     => 'register',
+            'canonical'  => true,
+        )
+    ),
     'user_login' => new Zend_Controller_Router_Route_Static(
         '/login',
         array(
