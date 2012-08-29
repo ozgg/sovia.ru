@@ -1,15 +1,20 @@
-<h1>Sovia 2.2</h1>
-<h2>Последние записи</h2>
+<header>
+    <h1>Совия</h1>
+    <h2>Последние записи</h2>
+</header>
 
 <?php echo $this->partial('posting/_entries.phtml', array('entries' => $this->entries)); ?>
 <div class="divider"></div>
 
-<h2>Быстрый доступ к соннику</h2>
-<p>Вы можете выбрать букву, на которую начинается символ сна, чтобы посмотреть
-    список доступных интерпретаций.</p>
-<?php
-echo $this->action('letters', 'dreambook', null);
-?>
-<div class="divider"></div>
+<aside>
+    <header>
+        <h2>Быстрый доступ к соннику</h2>
+        <p>Вы можете выбрать букву, на которую начинается символ сна, чтобы посмотреть список доступных интерпретаций.</p>
+    </header>
+    <?php
+    echo $this->action('letters', 'dreambook', null);
+    ?>
+    <div class="divider"></div>
+</aside>
 
 <?php echo $this->partial('socials.phtml'); ?>

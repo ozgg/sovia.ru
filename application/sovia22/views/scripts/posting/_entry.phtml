@@ -10,8 +10,8 @@ if ($this->isPreview) {
     $body = $parsedBody['body'];
 }
 ?>
-<div class="entry">
-    <div class="header">
+<article class="entry">
+    <header>
         <div class="avatar"><?php echo $this->partial('user/_avatar.phtml', array('avatar' => $this->entry->getAvatar())); ?></div>
         <div class="spawn-info">
             <?php echo $this->partial('user/_userlink.phtml', array('login' => $this->entry->getOwner()->getLogin())); ?>,
@@ -29,9 +29,9 @@ if ($this->isPreview) {
 <?php } ?>
         </div>
         <?php echo $this->partial('posting/_tags.phtml', array('tags' => $this->entry->getTags(), 'route' => $this->entry->getTagRoute(), 'tagLinks' => !$this->isPreview)); ?>
-    </div>
-    <div class="entry-body"><?php echo $body; ?></div>
-    <div class="entry-footer">
+    </header>
+    <div class="body"><?php echo $body; ?></div>
+    <footer>
         <a href="<?php echo $href; ?>" title="Ссылка на эту запись">Ссылка</a>
 <?php if ($this->isPreview) { ?>
     <span class="comments-link">
@@ -40,5 +40,5 @@ if ($this->isPreview) {
         </a>
     </span>
 <?php } ?>
-    </div>
-</div>
+    </footer>
+</article>
