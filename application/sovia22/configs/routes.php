@@ -265,6 +265,14 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_tagged_entry_old' => new Zend_Controller_Router_Route(
+        '/dreams/read/tag/:tag/entry/:id',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'tagged',
+            'canonical'  => true,
+        )
+    ),
     'dreams_tagged_older' => new Zend_Controller_Router_Route(
         '/dreams/read/symbol/:tag',
         array(

@@ -1,4 +1,5 @@
 <?php
+header('X-UA-Compatible: IE=edge');
 date_default_timezone_set('Europe/Moscow');
 mb_internal_encoding('UTF-8');
 
