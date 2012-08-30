@@ -464,3 +464,7 @@ ul.adjacent li.prev {
     background: url('/images/nav-prev.png') center left no-repeat;
     padding: 0 0 0 15px;
 }
+
+header, nav, section, article, aside, footer, hgroup {
+    display: block;
+}
