@@ -24,4 +24,16 @@ class IndexController extends Ext_Controller_Action
     {
         $this->_headTitle('Для забавы');
     }
+
+    public function featuresAction()
+    {
+        $this->_headTitle('О проекте');
+        $this->_headTitle('Возможности');
+    }
+
+    public function changesAction()
+    {
+        $this->_headTitle('О проекте');
+        $this->_headTitle('История изменений');
+    }
 }

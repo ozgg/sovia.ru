@@ -764,4 +764,18 @@ return array(
             'action'     => 'about',
         )
     ),
+    'about_changes' => new Zend_Controller_Router_Route_Static(
+        '/about/changelog',
+        array(
+            'controller' => 'index',
+            'action'     => 'changes',
+        )
+    ),
+    'about_features' => new Zend_Controller_Router_Route_Static(
+        '/about/features',
+        array(
+            'controller' => 'index',
+            'action'     => 'features',
+        )
+    ),
 );
