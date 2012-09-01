@@ -213,6 +213,14 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_old_symbol' => new Zend_Controller_Router_Route_Static(
+        '/dreams/read/symbol',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'dreams_random' => new Zend_Controller_Router_Route_Static(
         '/dreams/random',
         array(
