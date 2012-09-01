@@ -80,6 +80,7 @@ class Posting_Mapper extends Ext_Db_Table_Select
 
     public function isInternal($isInternal)
     {
+        settype($isInternal, 'int');
         $this->where('is_internal <= ?', $isInternal);
 
         return $this;
