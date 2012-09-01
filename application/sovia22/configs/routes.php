@@ -750,6 +750,15 @@ return array(
             'id'         => '2888',
         )
     ),
+    'articles_read_oldest_2888' => new Zend_Controller_Router_Route_Static(
+        '/articles/how-to-sleep-faster',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2888',
+        )
+    ),
     'articles_read_old_2889' => new Zend_Controller_Router_Route_Static(
         '/articles/read/entry/dream-interpretation-giudelines',
         array(
