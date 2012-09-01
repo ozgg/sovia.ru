@@ -823,7 +823,7 @@ return array(
         )
     ),
     'articles_read_oldest_invalid_2891' => new Zend_Controller_Router_Route_Static(
-        '/articles/sleeptrack',
+        '/articles/read/sleeptrack',
         array(
             'controller' => 'articles',
             'action'     => 'entry',
