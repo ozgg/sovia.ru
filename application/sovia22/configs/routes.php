@@ -240,6 +240,17 @@ return array(
             'canonical'  => true,
         )
     ),
+    'dreams_entry_older' => new Zend_Controller_Router_Route(
+        '/dreams/read/:id',
+        array(
+            'controller' => 'dreams',
+            'action'     => 'entry',
+            'canonical'  => true,
+        ),
+        array(
+            'id' => '\d+'
+        )
+    ),
     'dreams_edit_entry' => new Zend_Controller_Router_Route(
         '/dreams/:id/edit',
         array(
