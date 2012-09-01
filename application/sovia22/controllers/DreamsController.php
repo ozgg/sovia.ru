@@ -87,34 +87,37 @@ class DreamsController extends Ext_Controller_Action
         $this->_headTitle('Сны');
         $this->_headTitle("С меткой «{$tag}»");
         $this->_headTitle("Страница {$this->_page}");
+        $description = "Страница {$this->_page} со снами.";
+
         $table  = new Posting();
         $ids    = $table->findPostIdsForTag($tag);
-        $mapper = $table->getMapper();
-        $mapper->dream()
-               ->ids($ids)
-               ->isInternal($this->_user->getId() > 0)
-               ->minimalRank($this->_user->getRank())
-               ->recent();
-        $paginator = $mapper->paginate($this->_page, 10);
-        $entries   = $paginator->getCurrentItems();
-        $titles    = array();
-        foreach ($entries as $entry) {
-            /** @var $entry Posting_Row */
-            $titles[] = "«{$entry->getTitle()}»";
-        }
+        if (!empty($ids)) {
+            $mapper = $table->getMapper();
+            $mapper->dream()
+                ->ids($ids)
+                ->isInternal($this->_user->getId() > 0)
+                ->minimalRank($this->_user->getRank())
+                ->recent();
+            $paginator = $mapper->paginate($this->_page, 10);
+            $entries   = $paginator->getCurrentItems();
+            $titles    = array();
+            foreach ($entries as $entry) {
+                /** @var $entry Posting_Row */
+                $titles[] = "«{$entry->getTitle()}»";
+            }
 
-       $description = "Страница {$this->_page} со снами.";
-       $description .= ' ' . implode(', ', $titles);
-       $this->view->assign('paginator', $paginator);
-       $this->view->assign('entries',   $entries);
-       $this->view->assign('page',      $this->_page);
-       $this->setDescription($description);
-       if ($this->_getParam('canonical', false)) {
-           $href = $this->_url(array('tag' => $tag), 'dreams_tagged', true);
-           $this->_headLink(array('rel' => 'canonical', 'href' => $href));
-       }
-       $this->view->assign('canAdd', $this->_user->getIsActive());
-       $this->view->assign('tag', $tag);
+            $description .= ' ' . implode(', ', $titles);
+            $this->view->assign('paginator', $paginator);
+            $this->view->assign('entries',   $entries);
+        }
+        if ($this->_getParam('canonical', false)) {
+            $href = $this->_url(array('tag' => $tag), 'dreams_tagged', true);
+            $this->_headLink(array('rel' => 'canonical', 'href' => $href));
+        }
+        $this->view->assign('canAdd', $this->_user->getIsActive());
+        $this->view->assign('tag',    $tag);
+        $this->view->assign('page',   $this->_page);
+        $this->setDescription($description);
     }
 
     public function randomAction()
