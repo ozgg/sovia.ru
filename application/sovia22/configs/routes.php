@@ -77,6 +77,14 @@ return array(
     'user_forgot' => new Zend_Controller_Router_Route_Static(
         '/user/forgot'
     ),
+    'user_forgot_old' => new Zend_Controller_Router_Route_Static(
+        '/user/recover',
+        array(
+            'controller' => 'user',
+            'action'     => 'forgot',
+            'canonical'  => true,
+        )
+    ),
     'user_reset' => new Zend_Controller_Router_Route_Static(
         '/user/reset'
     ),
@@ -565,6 +573,22 @@ return array(
             'canonical'  => true,
         )
     ),
+    'articles_read_tag' => new Zend_Controller_Router_Route(
+        '/articles/read/tag/:tag',
+        array(
+            'controller' => 'articles',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
+    'articles_read_tag_entry' => new Zend_Controller_Router_Route(
+        '/articles/read/tag/:tag/entry/:id',
+        array(
+            'controller' => 'articles',
+            'action'     => 'index',
+            'canonical'  => true,
+        )
+    ),
     'articles_read_blog' => new Zend_Controller_Router_Route_Static(
         '/blog/read',
         array(
@@ -654,6 +678,15 @@ return array(
             'id'         => '2885',
         )
     ),
+    'articles_read_oldest_2885' => new Zend_Controller_Router_Route_Static(
+        '/articles/how-to-heal-insomnia',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2885',
+        )
+    ),
     'articles_read_old_2886' => new Zend_Controller_Router_Route_Static(
         '/articles/read/entry/how-to-understand-dreams',
         array(
@@ -665,6 +698,15 @@ return array(
     ),
     'articles_read_older_2886' => new Zend_Controller_Router_Route_Static(
         '/articles/read/how-to-understand-dreams',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2886',
+        )
+    ),
+    'articles_read_oldest_2886' => new Zend_Controller_Router_Route_Static(
+        '/articles/how-to-understand-dreams',
         array(
             'controller' => 'articles',
             'action'     => 'entry',
@@ -755,6 +797,24 @@ return array(
     ),
     'articles_read_older_2891' => new Zend_Controller_Router_Route_Static(
         '/articles/read/sleeptracker',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2891',
+        )
+    ),
+    'articles_read_oldest_2891' => new Zend_Controller_Router_Route_Static(
+        '/articles/sleeptracker',
+        array(
+            'controller' => 'articles',
+            'action'     => 'entry',
+            'canonical'  => true,
+            'id'         => '2891',
+        )
+    ),
+    'articles_read_oldest_invalid_2891' => new Zend_Controller_Router_Route_Static(
+        '/articles/sleeptrack',
         array(
             'controller' => 'articles',
             'action'     => 'entry',
