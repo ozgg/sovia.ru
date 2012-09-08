@@ -36,4 +36,35 @@ class IndexController extends Ext_Controller_Action
         $this->_headTitle('О проекте');
         $this->_headTitle('История изменений');
     }
+
+    public function sitemapAction()
+    {
+        header('Content-Type: application/xml;charset=UTF-8');
+        $this->_getLayout()->disableLayout();
+        $list   = array();
+        $host   = "http://{$_SERVER['HTTP_HOST']}";
+        $router = Zend_Controller_Front::getInstance()->getRouter();
+        $static = array(
+            'home', 'tos', 'privacy', 'user_register', 'about',
+            'user_login', 'user_forgot', 'user_reset', 'forum', 'dreams',
+            'dreams_random', 'dreams_archive', 'fun', 'fun_rave', 'entities',
+            'dreambook', 'statistics', 'statistics_symbols', 'articles',
+            'about_changes', 'about_features',
+        );
+        foreach ($static as $name) {
+            $url = $router->assemble(array(), $name, true);
+            $list[] = array('loc' => "{$host}{$url}");
+        }
+        $table = new Posting();
+        $mapper = $table->getMapper();
+        $mapper->isInternal(0)->order('id desc');
+        foreach ($mapper->fetchAll() as $post) {
+            /** @var $post Posting_Row */
+            $url = $router->assemble(
+                $post->getRouteParameters(), $post->getRouteName(), true
+            );
+            $list[] = array('loc' => "{$host}{$url}");
+        }
+        $this->view->assign('list', $list);
+    }
 }
