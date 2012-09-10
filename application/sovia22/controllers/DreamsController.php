@@ -344,7 +344,13 @@ class DreamsController extends Ext_Controller_Action
         $data['type']         = Posting_Row::TYPE_DREAM;
         $data['community_id'] = 1;
         $data['description']  = '';
-        $tags = explode(',', str_replace('.', ',', $data['tags']));
+        $noCommas = (strpos($data['tags'], ',') === false);
+        $noDots   = (strpos($data['tags'], '.') === false);
+        if ($noCommas && $noDots) {
+            $tags = explode(' ', $data['tags']);
+        } else {
+            $tags = explode(',', str_replace('.', ',', $data['tags']));
+        }
 
         if (is_null($entry)) {
             /** @var $user User_Row */
