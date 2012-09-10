@@ -141,6 +141,7 @@ class UserController extends Ext_Controller_Action
             if ($isValid) {
                 $user = $this->_auth();
                 $storage = new Zend_Session_Namespace('auth_user');
+                Zend_Session::rememberMe(604800);
                 /** @noinspection PhpUndefinedFieldInspection */
                 $storage->user = $user;
                 $this->_redirect($this->_url(array(), 'home', true));
