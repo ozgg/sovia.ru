@@ -52,7 +52,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if (empty($this->_user)) {
             $this->bootstrap('db');
             $storage = new Zend_Session_Namespace('auth_user');
-            Zend_Session::rememberMe(604800);
             /** @var $user User_Interface */
             $user = $storage->user;
             if (empty($user)) {
@@ -60,6 +59,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             } else {
                 $table = new User();
                 $table->see($user->getId());
+                Zend_Session::rememberMe(604800);
             }
 
             $this->_user = $user;
