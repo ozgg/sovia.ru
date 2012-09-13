@@ -16,6 +16,7 @@ defined('APPLICATION_ENV')
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../../library'),
     realpath(APPLICATION_PATH . '/models'),
+    realpath(APPLICATION_PATH . '/controllers'),
     get_include_path(),
 )));
 

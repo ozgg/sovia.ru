@@ -7,8 +7,14 @@
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
-class DreambookController extends Ext_Controller_Action
+class DreambookController extends PostingController
 {
+    const POSTING_TYPE      = Posting_Row::TYPE_SYMBOL;
+    const DEFAULT_COMMUNITY = 3;
+    const POST_ADDED        = 'Символ добавлен';
+    const POST_UPDATED      = 'Символ изменён';
+    const ALWAYS_PUBLIC     = true;
+
     public function indexAction()
     {
         $this->_headTitle('Сонник');
@@ -128,52 +134,6 @@ class DreambookController extends Ext_Controller_Action
             }
         }
         $this->view->assign('form', $form);
-    }
-
-    /**
-     * Редактирование записи и создание новой
-     *
-     * @param array $data данные формы
-     * @param Posting_Row|null $entry
-     * @return void
-     */
-    protected function _edit(array $data, Posting_Row $entry = null)
-    {
-        $owner = (is_null($entry) ? $this->_user : $entry->getOwner());
-        if (isset($data['avatar_id'])) {
-            $table = new User_Avatar();
-            /** @var $avatar User_Avatar_Row */
-            $avatar = $table->selectBy('id', $data['avatar_id'])->fetchRow();
-            if (!is_null($avatar)) {
-                if (!$avatar->belongsTo($owner)) {
-                    $data['avatar_id'] = null;
-                }
-            } else {
-                $data['avatar_id'] = null;
-            }
-        }
-        $data['type']         = Posting_Row::TYPE_SYMBOL;
-        $data['community_id'] = 3;
-        $data['is_internal']  = Posting_Row::VIS_PUBLIC;
-        $data['description']  = '';
-
-        if (is_null($entry)) {
-            /** @var $user User_Row */
-            $user  = $this->_user;
-            $entry = $user->createPosting($data);
-            $this->_setFlashMessage('Символ добавлен');
-        } else {
-            $entry->setData($data);
-            $entry->touch();
-            $entry->save();
-            $this->_setFlashMessage('Символ изменён');
-        }
-
-        $parameters = array(
-            'symbol' => $entry->getTitle(),
-            'letter' => $entry->getLetter(),
-        );
-        $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 
     public function lettersAction()

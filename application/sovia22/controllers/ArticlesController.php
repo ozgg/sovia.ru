@@ -7,8 +7,13 @@
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
-class ArticlesController extends Ext_Controller_Action
+class ArticlesController extends PostingController
 {
+    const USE_DESCRIPTION   = true;
+    const POST_ADDED        = 'Статья добавлена';
+    const POST_UPDATED      = 'Статья изменена';
+    const ALWAYS_PUBLIC     = true;
+
     public function indexAction()
     {
         $this->_headTitle('Блог и статьи');
@@ -135,50 +140,5 @@ class ArticlesController extends Ext_Controller_Action
     public function tagsAction()
     {
 
-    }
-
-    /**
-     * Редактирование записи и создание новой
-     *
-     * @param array $data данные формы
-     * @param Posting_Row|null $entry
-     * @return void
-     */
-    protected function _edit(array $data, Posting_Row $entry = null)
-    {
-        $owner = (is_null($entry) ? $this->_user : $entry->getOwner());
-        if (isset($data['avatar_id'])) {
-            $table = new User_Avatar();
-            /** @var $avatar User_Avatar_Row */
-            $avatar = $table->selectBy('id', $data['avatar_id'])->fetchRow();
-            if (!is_null($avatar)) {
-                if (!$avatar->belongsTo($owner)) {
-                    $data['avatar_id'] = null;
-                }
-            } else {
-                $data['avatar_id'] = null;
-            }
-        }
-        $data['type']         = Posting_Row::TYPE_ARTICLE;
-        $data['community_id'] = 2;
-        $data['is_internal']  = Posting_Row::VIS_PUBLIC;
-
-        if (is_null($entry)) {
-            /** @var $user User_Row */
-            $user  = $this->_user;
-            $entry = $user->createPosting($data);
-            $this->_setFlashMessage('Статья добавлена');
-        } else {
-            $entry->setData($data);
-            $entry->touch();
-            $entry->save();
-            $this->_setFlashMessage('Статья изменена');
-        }
-
-        $parameters = array(
-            'id'    => $entry->getId(),
-            'alias' => $entry->getAlias()
-        );
-        $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 }

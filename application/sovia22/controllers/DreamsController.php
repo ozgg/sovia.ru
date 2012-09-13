@@ -7,8 +7,14 @@
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
-class DreamsController extends Ext_Controller_Action
+class DreamsController extends PostingController
 {
+    const POSTING_TYPE      = Posting_Row::TYPE_DREAM;
+    const DEFAULT_COMMUNITY = 1;
+    const USE_TAGS          = true;
+    const POST_ADDED        = 'Сон добавлен';
+    const POST_UPDATED      = 'Сон изменён';
+
     public function indexAction()
     {
         $this->_headTitle('Сны');
@@ -317,58 +323,5 @@ class DreamsController extends Ext_Controller_Action
             }
         }
         $this->view->assign('form', $form);
-    }
-
-    /**
-     * Редактирование записи и создание новой
-     *
-     * @param array $data данные формы
-     * @param Posting_Row|null $entry
-     * @return void
-     */
-    protected function _edit(array $data, Posting_Row $entry = null)
-    {
-        $owner = (is_null($entry) ? $this->_user : $entry->getOwner());
-        if (isset($data['avatar_id'])) {
-            $table = new User_Avatar();
-            /** @var $avatar User_Avatar_Row */
-            $avatar = $table->selectBy('id', $data['avatar_id'])->fetchRow();
-            if (!is_null($avatar)) {
-                if (!$avatar->belongsTo($owner)) {
-                    $data['avatar_id'] = null;
-                }
-            } else {
-                $data['avatar_id'] = null;
-            }
-        }
-        $data['type']         = Posting_Row::TYPE_DREAM;
-        $data['community_id'] = 1;
-        $data['description']  = '';
-        $noCommas = (strpos($data['tags'], ',') === false);
-        $noDots   = (strpos($data['tags'], '.') === false);
-        if ($noCommas && $noDots) {
-            $tags = explode(' ', $data['tags']);
-        } else {
-            $tags = explode(',', str_replace('.', ',', $data['tags']));
-        }
-
-        if (is_null($entry)) {
-            /** @var $user User_Row */
-            $user  = $this->_user;
-            $entry = $user->createPosting($data, $tags);
-            $this->_setFlashMessage('Сон добавлен');
-        } else {
-            $entry->setData($data);
-            $entry->setTags($tags);
-            $entry->touch();
-            $entry->save();
-            $this->_setFlashMessage('Сон изменён');
-        }
-
-        $parameters = array(
-            'id'    => $entry->getId(),
-            'alias' => $entry->getAlias()
-        );
-        $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 }

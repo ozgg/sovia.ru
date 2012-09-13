@@ -9,6 +9,13 @@
  */
 class PostingController extends Ext_Controller_Action
 {
+    const POSTING_TYPE      = Posting_Row::TYPE_ARTICLE;
+    const DEFAULT_COMMUNITY = 2;
+    const USE_DESCRIPTION   = false;
+    const USE_TAGS          = false;
+    const POST_ADDED        = 'Запись добавлена';
+    const POST_UPDATED      = 'Запись изменена';
+    const ALWAYS_PUBLIC     = false;
 
     public function commentsAction()
     {
@@ -131,7 +138,68 @@ class PostingController extends Ext_Controller_Action
             }
         }
         echo $feed->export('rss');
+    }
 
-//        $this->view->assign('feed', $feed->export('rss'));
+    /**
+     * Редактирование записи и создание новой
+     *
+     * @param array $data данные формы
+     * @param Posting_Row|null $entry
+     * @return void
+     */
+    protected function _edit(array $data, Posting_Row $entry = null)
+    {
+        $owner = (is_null($entry) ? $this->_user : $entry->getOwner());
+        if (isset($data['avatar_id'])) {
+            $table = new User_Avatar();
+            /** @var $avatar User_Avatar_Row */
+            $avatar = $table->selectBy('id', $data['avatar_id'])->fetchRow();
+            if (!is_null($avatar)) {
+                if (!$avatar->belongsTo($owner)) {
+                    $data['avatar_id'] = null;
+                }
+            } else {
+                $data['avatar_id'] = null;
+            }
+        }
+        $data['type']         = static::POSTING_TYPE;
+        if (static::DEFAULT_COMMUNITY > 0) {
+            $data['community_id'] = static::DEFAULT_COMMUNITY;
+        } elseif (!empty($entry)) {
+            $data['community_id'] = $entry->getCommunityId();
+        }
+        if (!static::USE_DESCRIPTION) {
+            $data['description']  = '';
+        }
+        if (static::ALWAYS_PUBLIC) {
+            $data['is_internal']  = Posting_Row::VIS_PUBLIC;
+        }
+        if (static::USE_TAGS) {
+            $noCommas = (strpos($data['tags'], ',') === false);
+            $noDots   = (strpos($data['tags'], '.') === false);
+            if ($noCommas && $noDots) {
+                $tags = explode(' ', $data['tags']);
+            } else {
+                $tags = explode(',', str_replace('.', ',', $data['tags']));
+            }
+        } else {
+            $tags = array();
+        }
+
+        if (is_null($entry)) {
+            /** @var $user User_Row */
+            $user  = $this->_user;
+            $entry = $user->createPosting($data, $tags);
+            $this->_setFlashMessage(static::POST_ADDED);
+        } else {
+            $entry->setData($data);
+            $entry->setTags($tags);
+            $entry->touch();
+            $entry->save();
+            $this->_setFlashMessage(static::POST_UPDATED);
+        }
+
+        $parameters = $entry->getRouteParameters();
+        $this->_redirect($this->_url($parameters, $entry->getRouteName(), true));
     }
 }

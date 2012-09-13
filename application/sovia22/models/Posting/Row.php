@@ -170,6 +170,18 @@ class Posting_Row extends Ext_Db_Table_Row
         return $this->findParentRow('Posting_Community');
     }
 
+    public function getCommunityId()
+    {
+        $community = $this->getCommunity();
+        if (!is_null($community)) {
+            $id = $community->getId();
+        } else {
+            $id = null;
+        }
+
+        return $id;
+    }
+
     public function getComments()
     {
         $table  = new Posting_Comment();
