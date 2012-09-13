@@ -94,4 +94,16 @@ class ArticlesController extends PostingController
     {
 
     }
+
+    /**
+     * @param $id
+     * @return Posting_Row
+     */
+    protected function getEntry($id)
+    {
+        $table = new Posting();
+        $mapper = $table->getMapper();
+
+        return $mapper->article()->id($id)->fetchRowIfExists();
+    }
 }

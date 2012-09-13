@@ -64,10 +64,7 @@ class PostingController extends Ext_Controller_Action
         $id = $this->_getParam('id');
         $this->view->assign('message', $this->_getFlashMessage());
 
-        $table = new Posting();
-        $mapper = $table->getMapper();
-        /** @var $entry Posting_Row */
-        $entry = $mapper->dream()->id($id)->fetchRowIfExists();
+        $entry = $this->getEntry($id);
 
         if (!$entry->canBeEditedBy($this->_user)) {
             $this->_forward('denied', 'error');
@@ -259,5 +256,17 @@ class PostingController extends Ext_Controller_Action
         $form->setUser($this->_user);
 
         return $form;
+    }
+
+    /**
+     * @param $id
+     * @return Posting_Row
+     */
+    protected function getEntry($id)
+    {
+        $table = new Posting();
+        $mapper = $table->getMapper();
+
+        return $mapper->id($id)->fetchRowIfExists();
     }
 }

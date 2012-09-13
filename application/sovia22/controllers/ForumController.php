@@ -195,4 +195,16 @@ class ForumController extends PostingController
 
         return $form;
     }
+
+    /**
+     * @param $id
+     * @return Posting_Row
+     */
+    protected function getEntry($id)
+    {
+        $table = new Posting();
+        $mapper = $table->getMapper();
+
+        return $mapper->post()->id($id)->fetchRowIfExists();
+    }
 }
