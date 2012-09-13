@@ -15,6 +15,9 @@ class ForumController extends PostingController
     const DEFAULT_COMMUNITY = 0;
     const ALWAYS_PUBLIC     = false;
 
+    const TITLE_ADD = 'Добавить запись';
+    const ROUTE_ADD = '';
+
     public function indexAction()
     {
         $this->_headTitle('Форум');
@@ -162,41 +165,6 @@ class ForumController extends PostingController
         }
     }
 
-    public function editAction()
-    {
-        if (!$this->_user->getIsActive()) {
-            $this->_forward('denied', 'error');
-        }
-        $this->_headTitle('Редактирование');
-        $id = $this->_getParam('id');
-        $this->view->assign('message', $this->_getFlashMessage());
-
-        $table = new Posting();
-        $mapper = $table->getMapper();
-        /** @var $entry Posting_Row */
-        $entry = $mapper->post()->id($id)->fetchRowIfExists();
-
-        if (!$entry->canBeEditedBy($this->_user)) {
-            $this->_forward('denied', 'error');
-        }
-        $form  = new Form_Posting_Entry();
-        $form->setUser($this->_user);
-
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data, $entry);
-            }
-        } else {
-            if (!empty($entry)) {
-                $form->setEntry($entry);
-            }
-            $this->view->assign('form', $form);
-        }
-    }
-
     protected function getPosts(Posting_Community_Row $community)
     {
         $table = new Posting();
@@ -218,5 +186,13 @@ class ForumController extends PostingController
         $this->view->assign('page',      $this->_page);
         $this->_headTitle("Страница {$this->_page}");
         $this->setDescription($description);
+    }
+
+    protected function getForm()
+    {
+        $form = new Form_Posting_Entry();
+        $form->setUser($this->_user);
+
+        return $form;
     }
 }

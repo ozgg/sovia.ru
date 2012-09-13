@@ -15,6 +15,9 @@ class EntitiesController extends PostingController
     const POST_UPDATED      = 'Сущность изменена';
     const ALWAYS_PUBLIC     = true;
 
+    const TITLE_ADD = 'Описать сущность';
+    const ROUTE_ADD = 'entities_new';
+
     public function indexAction()
     {
         $this->_headTitle('Сущности в снах');
@@ -90,53 +93,14 @@ class EntitiesController extends PostingController
         if (!$this->_user->getIsActive()) {
             $this->_forward('denied', 'error');
         }
-        $this->_headTitle('Описать сущность');
-        $form = new Form_Posting_Entity();
-        $form->setUser($this->_user);
-        $form->setAction($this->_url(array(), 'entities_new', true));
-        $this->view->assign('form', $form);
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data);
-            }
-        }
+        parent::newAction();
     }
 
-    public function editAction()
+    protected function getForm()
     {
-        if (!$this->_user->getIsActive()) {
-            $this->_forward('denied', 'error');
-        }
-        $this->_headTitle('Редактирование');
-        $id = $this->_getParam('id');
-        $this->view->assign('message', $this->_getFlashMessage());
-
-        $table = new Posting();
-        $mapper = $table->getMapper();
-        /** @var $entry Posting_Row */
-        $entry = $mapper->entity()->id($id)->fetchRowIfExists();
-
-        if (!$entry->canBeEditedBy($this->_user)) {
-            $this->_forward('denied', 'error');
-        }
-        $form  = new Form_Posting_Entity();
+        $form = new Form_Posting_Entity();
         $form->setUser($this->_user);
 
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data, $entry);
-            }
-        } else {
-            if (!empty($entry)) {
-                $form->setEntry($entry);
-            }
-            $this->view->assign('form', $form);
-        }
+        return $form;
     }
 }

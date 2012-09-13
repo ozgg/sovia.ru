@@ -15,6 +15,9 @@ class DreamsController extends PostingController
     const POST_ADDED        = 'Сон добавлен';
     const POST_UPDATED      = 'Сон изменён';
 
+    const TITLE_ADD = 'Описать сон';
+    const ROUTE_ADD = 'dreams_new';
+
     public function indexAction()
     {
         $this->_headTitle('Сны');
@@ -278,50 +281,14 @@ class DreamsController extends PostingController
         if (!$this->_user->getIsActive()) {
             $this->_forward('denied', 'error');
         }
-        $this->_headTitle('Описать сон');
-        $form = new Form_Posting_Dream();
-        $form->setUser($this->_user);
-        $form->setAction($this->_url(array(), 'dreams_new', true));
-        $this->view->assign('form', $form);
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data);
-            }
-        }
+        parent::newAction();
     }
 
-    public function editAction()
+    protected function getForm()
     {
-        $this->_headTitle('Редактирование');
-        $id = $this->_getParam('id');
-        $this->view->assign('message', $this->_getFlashMessage());
-
-        $table = new Posting();
-        $mapper = $table->getMapper();
-        /** @var $entry Posting_Row */
-        $entry = $mapper->dream()->id($id)->fetchRowIfExists();
-
-        if (!$entry->canBeEditedBy($this->_user)) {
-            $this->_forward('denied', 'error');
-        }
         $form = new Form_Posting_Dream();
         $form->setUser($this->_user);
 
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data, $entry);
-            }
-        } else {
-            if (!empty($entry)) {
-                $form->setEntry($entry);
-            }
-        }
-        $this->view->assign('form', $form);
+        return $form;
     }
 }

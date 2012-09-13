@@ -82,54 +82,7 @@ class ArticlesController extends PostingController
         if (!$this->_user->getIsActive() || $this->_user->getRank() < 1) {
             $this->_forward('denied', 'error');
         }
-        $this->_headTitle('Добавить статью');
-        $form = new Form_Posting_Article();
-        $form->setUser($this->_user);
-        $form->setAction($this->_url(array(), 'articles_new', true));
-        $this->view->assign('form', $form);
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data);
-            }
-        }
-    }
-
-    public function editAction()
-    {
-        if (!$this->_user->getIsActive()) {
-            $this->_forward('denied', 'error');
-        }
-        $this->_headTitle('Редактирование');
-        $id = $this->_getParam('id');
-        $this->view->assign('message', $this->_getFlashMessage());
-
-        $table = new Posting();
-        $mapper = $table->getMapper();
-        /** @var $entry Posting_Row */
-        $entry = $mapper->article()->id($id)->fetchRowIfExists();
-
-        if (!$entry->canBeEditedBy($this->_user)) {
-            $this->_forward('denied', 'error');
-        }
-        $form  = new Form_Posting_Article();
-        $form->setUser($this->_user);
-
-        /** @var $request Zend_Controller_Request_Http */
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if ($form->isValid($data)) {
-                $this->_edit($data, $entry);
-            }
-        } else {
-            if (!empty($entry)) {
-                $form->setEntry($entry);
-            }
-        }
-        $this->view->assign('form', $form);
+        parent::newAction();
     }
 
     public function calendarAction()
