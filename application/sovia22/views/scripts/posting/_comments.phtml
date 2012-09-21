@@ -23,7 +23,7 @@ if (!empty($this->canComment)) {
                         /** @var $avatar User_Avatar_Row */
                         foreach ($this->avatars as $avatar) {
                             $selected = '';
-                            if ($this->formData['avatarId'] == $avatar->getId()) {
+                            if ($this->avatarId == $avatar->getId()) {
                                 $selected = ' selected="selected"';
                             }
                             printf($format, $avatar->getId(), $selected, $avatar->getName());
@@ -126,7 +126,7 @@ if (!empty($comments)) {
                             $format = "\t\t\t\t<option value=\"%u\"%s>%s</option>\n";
                             foreach ($this->avatars as $avatar) {
                                 $selected = '';
-                                if ($this->formData['avatarId'] == $avatar->getId()) {
+                                if ($this->avatarId == $avatar->getId()) {
                                     $selected = ' selected="selected"';
                                 }
                                 printf($format, $avatar->getId(), $selected, $avatar->getName());

@@ -74,6 +74,7 @@ class ArticlesController extends PostingController
             $this->_redirect($this->_url(array(), 'articles', true));
         }
         $this->view->assign('canComment', $this->_user->getIsActive());
+        $this->view->assign('avatarId',   $this->_user->getAvatarId());
         $this->view->assign('avatars',    $this->_user->getAvatars());
     }
 

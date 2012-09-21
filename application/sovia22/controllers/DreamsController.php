@@ -174,6 +174,7 @@ class DreamsController extends PostingController
         }
         $this->view->assign('canComment', $this->_user->getIsActive());
         $this->view->assign('avatars',    $this->_user->getAvatars());
+        $this->view->assign('avatarId',   $this->_user->getAvatarId());
     }
 
     public function archiveAction()
