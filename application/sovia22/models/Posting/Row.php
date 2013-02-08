@@ -78,7 +78,12 @@ class Posting_Row extends Ext_Db_Table_Row
 
     public function getTitle()
     {
-        return $this->get('title');
+        $title = $this->get('title');
+        if (mb_strlen($title < 1)) {
+            $title = 'Без названия';
+        }
+
+        return $title;
     }
 
     public function getAlias()
