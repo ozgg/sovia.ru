@@ -30,16 +30,18 @@ class Loader
 
         // Get parts of full class name with namespace
         $parts = explode('\\', $className);
-        $path  = $library;
+        $path  = $library . DIRECTORY_SEPARATOR;
 
         // Class name has namespace in it?
         if (count($parts) > 1) {
             $file  = \array_pop($parts);
-            $path .= implode(DIRECTORY_SEPARATOR, $parts);
+            $path .= implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR;
         } else {
             $file = $className;
         }
-        $file = $path . DIRECTORY_SEPARATOR . $file . '.php';
+
+        // Complete file path
+        $file = $path . $file . '.php';
         if (file_exists($file) && is_file($file)) {
             require $file;
         }
