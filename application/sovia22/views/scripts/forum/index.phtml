@@ -1,9 +1,0 @@
-<h1>Форум</h1>
-
-<?php if (!empty($this->list)) { ?>
-<h2>Выберите сообщество</h2>
-
-<?php echo $this->partial('forum/communityList.phtml', array('list' => $this->list)); ?>
-<?php } else { ?>
-<div class="message">Нет ни одного сообщества</div>
-<?php } ?>
