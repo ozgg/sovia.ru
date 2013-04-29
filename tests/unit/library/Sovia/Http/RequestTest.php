@@ -1,27 +1,27 @@
 <?php
 /**
- * 
- * 
- * Date: 29.04.13
- * Time: 2:40
+ * Test case for HTTP request
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  * @package Test\Unit\Library\Sovia\Http
  */
 
 namespace Test\Unit\Library\Sovia\Http;
- 
-use Sovia\Http\Request;
+
 use Sovia\Test\TestCase;
+use Sovia\Http\Request;
+use Sovia\Http\UploadedFile;
 
 /**
- * Class RequestTest
+ * Test of HTTP request
  *
  * @covers \Sovia\Http\Request
  */
 class RequestTest extends TestCase
 {
     /**
+     * Test if constructor initializes $server parameters
+     *
      * @covers \Sovia\Http\Request::__construct
      */
     public function testConstructor()
@@ -39,18 +39,69 @@ class RequestTest extends TestCase
         $this->assertEquals($server['REQUEST_URI'], $request->getUri());
     }
 
+    /**
+     * Test getHeader() method
+     *
+     * @covers \Sovia\Http\Request::getHeader
+     */
     public function testGetHeader()
     {
-        $this->markTestIncomplete();
+        $value  = 'Beautiful header';
+        $server = [
+            'HTTP_CUSTOM_HEADER' => $value,
+        ];
+
+        $request = new Request($server);
+        $this->assertEquals($value, $request->getHeader('Custom-header'));
     }
 
+    /**
+     * Test getParameter() method
+     *
+     * @covers \Sovia\Http\Request::getParameter
+     */
     public function testGetParameter()
     {
-        $this->markTestIncomplete();
+        $get  = [
+            'foo' => 'get',
+            'bar' => 'get',
+        ];
+        $post = [
+            'foo' => 'post',
+            'baz' => 'post',
+        ];
+
+        $request = new Request([]);
+        $request->setGet($get);
+        $request->setPost($post);
+
+        $this->assertEquals('get', $request->getParameter('foo'));
+        $this->assertEquals('post', $request->getParameter('baz'));
+        $this->assertNull($request->getParameter('non_existent'));
     }
 
+    /**
+     * Test getFile method
+     *
+     * Method must return instance of UploadedFile
+     *
+     * @covers \Sovia\Http\Request::getFile
+     */
     public function testGetFile()
     {
-        $this->markTestIncomplete();
+        $files = [
+            'foo' => [
+                'name'     => 'foo.jpg',
+                'type'     => 'image/jpeg',
+                'tmp_name' => '/tmp/001.dat',
+                'error'    => \UPLOAD_ERR_OK,
+            ],
+        ];
+
+        $request = new Request([]);
+        $request->setFiles($files);
+
+        $file = $request->getFile('foo');
+        $this->assertTrue($file instanceof UploadedFile);
     }
 }

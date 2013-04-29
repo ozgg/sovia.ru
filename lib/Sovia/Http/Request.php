@@ -11,7 +11,7 @@ namespace Sovia\Http;
 /**
  * HTTP request
  */
-class Request 
+class Request
 {
     /**
      * Query string parameters
@@ -102,6 +102,26 @@ class Request
     public function __construct(array $server)
     {
         $this->setServer($server);
+    }
+
+    /**
+     * Get parameter from query or post data
+     *
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getParameter($name, $default = null)
+    {
+        if (isset($this->get[$name])) {
+            $value = $this->getElement($this->get, $name, $default);
+        } elseif (isset($this->post[$name])) {
+            $value = $this->getElement($this->post, $name, $default);
+        } else {
+            $value = $default;
+        }
+
+        return $value;
     }
 
     /**
