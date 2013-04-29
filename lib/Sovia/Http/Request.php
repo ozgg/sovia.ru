@@ -1,77 +1,112 @@
 <?php
 /**
- * 
- * 
- * Date: 29.04.13
- * Time: 2:27
+ * HTTP request
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
+ * @package Sovia\Http
  */
 
 namespace Sovia\Http;
- 
+
+/**
+ * HTTP request
+ */
 class Request 
 {
     /**
+     * Query string parameters
+     *
+     * Normally it's contents of $_GET
+     *
      * @var array
      */
     protected $get     = [];
 
     /**
+     * Post parameters
+     *
+     * Normally it's contents of $_POST
+     *
      * @var array
      */
     protected $post    = [];
 
     /**
+     * Request body
+     *
+     * Normally it's taken from php://input
+     *
      * @var string
      */
     protected $body    = '';
 
     /**
+     * Uploaded files
+     *
+     * Normally it's contents of $_FILES
+     *
      * @var array
      */
     protected $files   = [];
 
     /**
+     * Client cookies
+     *
+     * Normally it's contents of $_COOKIE
+     *
      * @var array
      */
     protected $cookies = [];
 
     /**
+     * Server parameters
+     *
+     * Normally it's contents of $_SERVER
+     *
      * @var array
      */
     protected $server  = [];
 
     /**
+     * Requested URI
+     *
+     * Normally it's taken from $server
+     *
      * @var string
      */
     protected $uri     = '';
 
     /**
+     * HTTP host
+     *
+     * Normally it's taken from $server
+     *
      * @var string
      */
     protected $host    = '';
 
     /**
+     * HTTP request method
+     *
+     * Normally it's taken from $server
+     *
      * @var string
      */
     protected $method  = '';
 
+    /**
+     * Constructor
+     *
+     * @param array $server
+     */
     public function __construct(array $server)
     {
         $this->setServer($server);
-        if (isset($this->server['REQUEST_URI'])) {
-            $this->setUri($this->server['REQUEST_URI']);
-        }
-        if (isset($this->server['HTTP_HOST'])) {
-            $this->setHost($this->server['HTTP_HOST']);
-        }
-        if (isset($this->server['REQUEST_METHOD'])) {
-            $this->setMethod($this->server['REQUEST_METHOD']);
-        }
     }
 
     /**
+     * Set request body
+     *
      * @param string $body
      * @return Request
      */
@@ -83,6 +118,8 @@ class Request
     }
 
     /**
+     * Get request body
+     *
      * @return string
      */
     public function getBody()
@@ -91,6 +128,8 @@ class Request
     }
 
     /**
+     * Set client cookies
+     *
      * @param array $cookies
      * @return Request
      */
@@ -102,6 +141,8 @@ class Request
     }
 
     /**
+     * Get raw client cookies data
+     *
      * @return array
      */
     public function getCookies()
@@ -110,6 +151,20 @@ class Request
     }
 
     /**
+     * Get client cookie
+     *
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getCookie($name, $default = null)
+    {
+        return $this->getElement($this->cookies, $name, $default);
+    }
+
+    /**
+     * Set uploaded files
+     *
      * @param array $files
      * @return Request
      */
@@ -121,6 +176,8 @@ class Request
     }
 
     /**
+     * Get raw uploaded files data
+     *
      * @return array
      */
     public function getFiles()
@@ -129,6 +186,25 @@ class Request
     }
 
     /**
+     * Get uploaded file
+     *
+     * @param string $name
+     * @return null|UploadedFile
+     */
+    public function getFile($name)
+    {
+        if (isset($this->files[$name])) {
+            $file = new UploadedFile($this->files[$name]);
+        } else {
+            $file = null;
+        }
+
+        return $file;
+    }
+
+    /**
+     * Set query string parameters
+     *
      * @param array $get
      * @return Request
      */
@@ -140,14 +216,26 @@ class Request
     }
 
     /**
-     * @return array
+     * Get query string parameter(s)
+     *
+     * @param string $parameter
+     * @param mixed $default
+     * @return mixed
      */
-    public function getGet()
+    public function getGet($parameter = '', $default = null)
     {
-        return $this->get;
+        if ($parameter != '') {
+            $value = $this->getElement($this->get, $parameter, $default);
+        } else {
+            $value = $this->get;
+        }
+
+        return $value;
     }
 
     /**
+     * Set post query data
+     *
      * @param array $post
      * @return Request
      */
@@ -159,33 +247,73 @@ class Request
     }
 
     /**
-     * @return array
+     * Get post parameter(s)
+     *
+     * @param string $parameter
+     * @param mixed $default
+     * @return mixed
      */
-    public function getPost()
+    public function getPost($parameter = '', $default = null)
     {
-        return $this->post;
+        if ($parameter != '') {
+            $value = $this->getElement($this->post, $parameter, $default);
+        } else {
+            $value = $this->post;
+        }
+
+        return $value;
     }
 
     /**
+     * Set server parameters
+     *
      * @param array $server
      * @return Request
      */
     public function setServer(array $server)
     {
         $this->server = $server;
+        $this->setUri($this->getServer('REQUEST_URI'));
+        $this->setHost($this->getServer('HTTP_HOST'));
+        $this->setMethod($this->getServer('REQUEST_METHOD'));
 
         return $this;
     }
 
     /**
-     * @return array
+     * Get server parameter(s)
+     *
+     * @param string $parameter
+     * @param string $default
+     * @return string|array
      */
-    public function getServer()
+    public function getServer($parameter = '', $default = '')
     {
-        return $this->server;
+        if ($parameter != '') {
+            $value = $this->getElement($this->server, $parameter, $default);
+        } else {
+            $value = $this->server;
+        }
+
+        return $value;
     }
 
     /**
+     * Get request header
+     *
+     * @param $header
+     * @return string|null
+     */
+    public function getHeader($header)
+    {
+        $parameter = 'HTTP_' . str_replace('-', '_', strtoupper($header));
+
+        return $this->getElement($this->server, $parameter, null);
+    }
+
+    /**
+     * Set request URI
+     *
      * @param string $uri
      * @return Request
      */
@@ -197,6 +325,8 @@ class Request
     }
 
     /**
+     * Get request URI
+     *
      * @return string
      */
     public function getUri()
@@ -205,6 +335,8 @@ class Request
     }
 
     /**
+     * Get HTTP host
+     *
      * @return string
      */
     public function getHost()
@@ -213,6 +345,8 @@ class Request
     }
 
     /**
+     * Set HTTP host
+     *
      * @param string $host
      * @return Request
      */
@@ -224,6 +358,8 @@ class Request
     }
 
     /**
+     * Ret request method
+     *
      * @return string
      */
     public function getMethod()
@@ -232,6 +368,8 @@ class Request
     }
 
     /**
+     * Set request method
+     *
      * @param string $method
      * @return Request
      */
@@ -242,4 +380,33 @@ class Request
         return $this;
     }
 
+    /**
+     * Get element from array storage
+     *
+     * @param array $storage
+     * @param string $parameter
+     * @param mixed $default
+     * @return mixed
+     */
+    protected function getElement(array $storage, $parameter, $default)
+    {
+        if (isset($storage[$parameter])) {
+            $value = $storage[$parameter];
+            if (is_int($default)) {
+                settype($value, 'int');
+            } elseif (is_string($default)) {
+                settype($value, 'string');
+            } elseif (is_float($default)) {
+                settype($value, 'float');
+            } elseif (is_bool($default)) {
+                settype($value, 'boolean');
+            } elseif (is_array($default)) {
+                settype($value, 'array');
+            }
+        } else {
+            $value = $default;
+        }
+
+        return $value;
+    }
 }
