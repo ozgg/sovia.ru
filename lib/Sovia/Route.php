@@ -58,21 +58,31 @@ abstract class Route
     const METHOD_PATCH  = 'PATCH';
 
     /**
+     * Type of route
+     *
      * @var string
      */
     protected $type;
 
     /**
+     * Name of route
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * Matching request URI
+     *
      * @var string
      */
     protected $uri;
 
     /**
+     * Pattern for reverse building
+     *
+     * Route builds URI from given parameters by pattern.
+     *
      * @var string
      */
     protected $reverse;
@@ -152,6 +162,8 @@ abstract class Route
     }
 
     /**
+     * Set name of action in controller
+     *
      * @param string $actionName
      * @return Route
      */
@@ -163,6 +175,8 @@ abstract class Route
     }
 
     /**
+     * Get action name
+     *
      * @return string
      */
     public function getActionName()
@@ -171,6 +185,8 @@ abstract class Route
     }
 
     /**
+     * Set controller name
+     *
      * @param string $controllerName
      * @return Route
      */
@@ -182,6 +198,8 @@ abstract class Route
     }
 
     /**
+     * Get controller name
+     *
      * @return string
      */
     public function getControllerName()
@@ -190,6 +208,8 @@ abstract class Route
     }
 
     /**
+     * Set allowed HTTP methods
+     *
      * @param array $methods
      * @return Route
      */
@@ -201,6 +221,8 @@ abstract class Route
     }
 
     /**
+     * Get allowed HTTP methods
+     *
      * @return array
      */
     public function getMethods()
@@ -209,6 +231,8 @@ abstract class Route
     }
 
     /**
+     * Set route name
+     *
      * @param string $name
      * @return Route
      */
@@ -220,6 +244,8 @@ abstract class Route
     }
 
     /**
+     * Get route name
+     *
      * @return string
      */
     public function getName()
@@ -228,10 +254,12 @@ abstract class Route
     }
 
     /**
+     * Set parameters
+     *
      * @param array $parameters
      * @return Route
      */
-    public function setParameters($parameters)
+    public function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
 
@@ -239,6 +267,8 @@ abstract class Route
     }
 
     /**
+     * Get parameters
+     *
      * @return array
      */
     public function getParameters()
@@ -247,6 +277,8 @@ abstract class Route
     }
 
     /**
+     * Set reverse pattern
+     *
      * @param string $reverse
      * @return Route
      */
@@ -258,6 +290,8 @@ abstract class Route
     }
 
     /**
+     * Get reverse pattern
+     *
      * @return string
      */
     public function getReverse()
@@ -266,6 +300,8 @@ abstract class Route
     }
 
     /**
+     * Set matching request URI
+     *
      * @param string $uri
      * @return Route
      */
@@ -277,6 +313,8 @@ abstract class Route
     }
 
     /**
+     * Get matching request URI
+     *
      * @return string
      */
     public function getUri()
@@ -285,6 +323,8 @@ abstract class Route
     }
 
     /**
+     * Get route type
+     *
      * @return string
      */
     public function getType()
@@ -293,6 +333,8 @@ abstract class Route
     }
 
     /**
+     * Set route type
+     *
      * @param string $type
      * @return Route
      */
