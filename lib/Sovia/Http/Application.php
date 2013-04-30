@@ -8,11 +8,15 @@
 
 namespace Sovia\Http;
 
+use Sovia\Traits\DependencyContainer;
+
 /**
  * HTTP application
  */
 class Application 
 {
+    use DependencyContainer;
+
     /**
      * Application directory
      *
