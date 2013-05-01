@@ -46,7 +46,7 @@ class StaticRouteTest extends TestCase
     {
         $route = new StaticRoute;
         $route->setMethods([StaticRoute::METHOD_GET, StaticRoute::METHOD_POST]);
-        $route->request(StaticRoute::METHOD_GET);
+        $route->request(StaticRoute::METHOD_GET, '');
     }
 
     /**
@@ -59,6 +59,6 @@ class StaticRouteTest extends TestCase
     {
         $route = new StaticRoute;
         $route->setMethods([StaticRoute::METHOD_GET]);
-        $route->request(StaticRoute::METHOD_POST);
+        $route->request(StaticRoute::METHOD_POST, '');
     }
 }

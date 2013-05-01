@@ -29,9 +29,10 @@ class RegexRoute extends Route
      * Request by HTTP method $method
      *
      * @param string $method
+     * @param string $uri
      * @return void
      */
-    public function request($method)
+    public function request($method, $uri)
     {
         // TODO: Implement request() method.
     }

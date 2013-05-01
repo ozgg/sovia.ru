@@ -126,9 +126,10 @@ abstract class Route
      * Request by HTTP method $method
      *
      * @param string $method
+     * @param string $uri
      * @return void
      */
-    abstract public function request($method);
+    abstract public function request($method, $uri);
 
     /**
      * Route factory

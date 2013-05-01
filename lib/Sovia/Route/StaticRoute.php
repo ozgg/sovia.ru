@@ -32,10 +32,11 @@ class StaticRoute extends Route
      * Request by HTTP method $method
      *
      * @param string $method
+     * @param string $uri
      * @throws \Sovia\Exceptions\Http\Client\MethodNotAllowed
      * @return void
      */
-    public function request($method)
+    public function request($method, $uri)
     {
         if (!in_array($method, $this->methods)) {
             throw new MethodNotAllowed;
