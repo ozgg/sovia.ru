@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Bad request
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class BadRequest extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\BadRequest
      */
-    protected $header = '400 Bad Request';
+    final public function getStatus()
+    {
+        return new Status\BadRequest;
+    }
 }

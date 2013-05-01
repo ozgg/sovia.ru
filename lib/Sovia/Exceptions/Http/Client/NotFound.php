@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
  
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Not Found
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class NotFound extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\NotFound
      */
-    protected $header = '404 Not Found';
+    final public function getStatus()
+    {
+        return new Status\NotFound;
+    }
 }

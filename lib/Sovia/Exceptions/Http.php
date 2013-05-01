@@ -8,27 +8,17 @@
 
 namespace Sovia\Exceptions;
 
+use Sovia\Http\Status;
+
 /**
  * Abstract HTTP exception
  */
 abstract class Http extends \Exception
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status
      */
-    protected $header = '500 Internal Server Error';
-
-    /**
-     * Get header
-     *
-     * @return string
-     */
-    protected function getHeader()
-    {
-        return $this->header;
-    }
+    abstract public function getStatus();
 }

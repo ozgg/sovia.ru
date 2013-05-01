@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Not acceptable
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class NotAcceptable extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\NotAcceptable
      */
-    protected $header = '406 Not Acceptable';
+    final public function getStatus()
+    {
+        return new Status\NotAcceptable;
+    }
 }

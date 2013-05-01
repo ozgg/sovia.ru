@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Server;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Not implemented
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class NotImplemented extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\NotImplemented
      */
-    protected $header = '501 Not Implemented';
+    final public function getStatus()
+    {
+        return new Status\NotImplemented;
+    }
 }

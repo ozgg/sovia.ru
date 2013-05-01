@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
  
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Unavailable for legal reasons
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class UnavailableForLegalReasons extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\UnavailableForLegalReasons
      */
-    protected $header = '451 Unavailable For Legal Reasons';
+    final public function getStatus()
+    {
+        return new Status\UnavailableForLegalReasons;
+    }
 }

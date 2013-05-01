@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Too many requests
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class TooManyRequests extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\TooManyRequests
      */
-    protected $header = '429 Too Many Requests';
+    final public function getStatus()
+    {
+        return new Status\TooManyRequests;
+    }
 }

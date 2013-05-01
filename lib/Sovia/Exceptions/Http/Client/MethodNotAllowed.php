@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Method not allowed
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class MethodNotAllowed extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\MethodNotAllowed
      */
-    protected $header = '405 Method Not Allowed';
+    final public function getStatus()
+    {
+        return new Status\MethodNotAllowed;
+    }
 }

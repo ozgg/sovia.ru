@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
  
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Payment required
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class PaymentRequired extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\PaymentRequired
      */
-    protected $header = '402 Payment Required';
+    final public function getStatus()
+    {
+        return new Status\PaymentRequired;
+    }
 }

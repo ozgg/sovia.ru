@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Client;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Gone
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class Gone extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\Gone
      */
-    protected $header = '410 Gone';
+    final public function getStatus()
+    {
+        return new Status\Gone;
+    }
 }

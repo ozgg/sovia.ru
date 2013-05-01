@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Server;
  
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Internal server error
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class InternalServerError extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\InternalServerError
      */
-    protected $header = '500 Internal Server Error';
+    final public function getStatus()
+    {
+        return new Status\InternalServerError;
+    }
 }

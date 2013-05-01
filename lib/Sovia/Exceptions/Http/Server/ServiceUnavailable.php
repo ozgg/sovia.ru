@@ -9,6 +9,7 @@
 namespace Sovia\Exceptions\Http\Server;
 
 use Sovia\Exceptions\Http;
+use Sovia\Http\Status;
 
 /**
  * Service unavailable
@@ -16,11 +17,12 @@ use Sovia\Exceptions\Http;
 class ServiceUnavailable extends Http
 {
     /**
-     * Header
+     * Get HTTP response status
      *
-     * This will be sent in response to client
-     *
-     * @var string
+     * @return Status\ServiceUnavailable
      */
-    protected $header = '503 Service Unavailable';
+    final public function getStatus()
+    {
+        return new Status\ServiceUnavailable;
+    }
 }
