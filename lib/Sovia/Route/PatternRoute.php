@@ -11,6 +11,7 @@
 
 namespace Sovia\Route;
  
+use Sovia\Exceptions\Http\Client\MethodNotAllowed;
 use Sovia\Route;
 
 /**
@@ -64,10 +65,21 @@ class PatternRoute extends Route
      *
      * @param string $method
      * @param string $uri
+     * @throws \Sovia\Exceptions\Http\Client\MethodNotAllowed
      * @return void
      */
     public function request($method, $uri)
     {
-        // TODO: Implement request() method.
+        if (!in_array($method, $this->methods)) {
+            throw new MethodNotAllowed;
+        }
+        $pattern = preg_replace('/:([^\/]+)/', '(?P<$1>[^\/]+)', $this->uri);
+        preg_match_all("#{$pattern}#", $uri, $matches);
+
+        foreach ($matches as $parameter => $result) {
+            if (!is_numeric($parameter) && isset($result[0])) {
+                $this->parameters[$parameter] = $result[0];
+            }
+        }
     }
 }

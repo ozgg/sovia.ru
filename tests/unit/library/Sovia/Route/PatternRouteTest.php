@@ -1,11 +1,9 @@
 <?php
 /**
- * 
- * 
- * Date: 01.05.13
- * Time: 12:43
+ * Test case for pattern-based route
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
+ * @package Test\Unit\Library\Sovia\Route
  */
 
 namespace Test\Unit\Library\Sovia\Route;
@@ -14,9 +12,8 @@ use Sovia\Route\PatternRoute;
 use Sovia\Test\TestCase;
 
 /**
- * Class PatternRouteTest
+ * Tests for PatternRoute
  *
- * @package Test\Unit\Library\Sovia\Route
  * @covers \Sovia\Route\PatternRoute
  */
 class PatternRouteTest extends TestCase
@@ -46,6 +43,19 @@ class PatternRouteTest extends TestCase
             [[1, 2]],
             [[[1, 2]]],
             [[['a' => 1, 'b' => 2]]],
+        ];
+    }
+
+    /**
+     * Data provider for testRequestSuccess
+     * 
+     * @return array
+     */
+    public function requestSuccessProvider()
+    {
+        return [
+            ['/foo/:foo', '/foo/1', ['foo' => 1]],
+            ['/foo/:foo/:bar', '/foo/1/2', ['foo' => 1, 'bar' => 2]],
         ];
     }
 
@@ -87,13 +97,36 @@ class PatternRouteTest extends TestCase
         call_user_func_array([$route, 'assemble'], $arguments);
     }
 
-    public function testRequestSuccess()
+    /**
+     * Test requesting URI with parameters
+     *
+     * @param string $pattern  URI pattern for route
+     * @param string $uri      URI to request
+     * @param array  $expect   expected route parameters taken from URI
+     *
+     * @covers \Sovia\Route\PatternRoute::request
+     * @dataProvider requestSuccessProvider
+     */
+    public function testRequestSuccess($pattern, $uri, array $expect)
     {
-        $this->markTestIncomplete();
+        $route = new PatternRoute;
+        $route->setUri($pattern);
+        $route->setMethods([PatternRoute::METHOD_GET]);
+        $route->request(PatternRoute::METHOD_GET, $uri);
+
+        $this->assertEquals($expect, $route->getParameters());
     }
 
+    /**
+     * Test requesting with not allowed method
+     *
+     * @expectedException \Sovia\Exceptions\Http\Client\MethodNotAllowed
+     * @covers \Sovia\Route\PatternRoute::request
+     */
     public function testRequestFailure()
     {
-        $this->markTestIncomplete();
+        $route = new PatternRoute;
+        $route->setMethods([PatternRoute::METHOD_GET]);
+        $route->request(PatternRoute::METHOD_POST, '');
     }
 }
