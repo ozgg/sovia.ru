@@ -28,4 +28,9 @@ class RestRouteTest extends TestCase
     {
         $this->markTestIncomplete();
     }
+
+    public function testGetMatch()
+    {
+        $this->markTestIncomplete();
+    }
 }

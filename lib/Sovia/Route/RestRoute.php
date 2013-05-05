@@ -14,7 +14,6 @@ use Sovia\Route;
 
 class RestRoute extends Route
 {
-
     /**
      * Assemble URI
      *
@@ -23,6 +22,16 @@ class RestRoute extends Route
     public function assemble()
     {
         // TODO: Implement assemble() method.
+    }
+
+    /**
+     * Get regEx pattern to match
+     *
+     * @return string
+     */
+    public function getMatch()
+    {
+        // TODO: Implement getMatch() method.
     }
 
     /**

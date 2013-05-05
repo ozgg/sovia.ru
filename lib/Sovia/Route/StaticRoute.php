@@ -29,6 +29,16 @@ class StaticRoute extends Route
     }
 
     /**
+     * Get regEx pattern to match
+     *
+     * @return string
+     */
+    public function getMatch()
+    {
+        return $this->uri;
+    }
+
+    /**
      * Request by HTTP method $method
      *
      * @param string $method

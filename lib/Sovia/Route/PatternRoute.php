@@ -61,6 +61,16 @@ class PatternRoute extends Route
     }
 
     /**
+     * Get regEx pattern to match
+     *
+     * @return string
+     */
+    public function getMatch()
+    {
+        return preg_replace('#:[^/]+#', '[^/]+', $this->uri);
+    }
+
+    /**
      * Request by HTTP method $method
      *
      * @param string $method

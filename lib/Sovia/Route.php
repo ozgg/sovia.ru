@@ -123,6 +123,13 @@ abstract class Route
     abstract public function assemble();
 
     /**
+     * Get regEx pattern to match
+     *
+     * @return string
+     */
+    abstract public function getMatch();
+
+    /**
      * Request by HTTP method $method
      *
      * @param string $method

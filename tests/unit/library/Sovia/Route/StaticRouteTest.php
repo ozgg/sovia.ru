@@ -61,4 +61,16 @@ class StaticRouteTest extends TestCase
         $route->setMethods([StaticRoute::METHOD_GET]);
         $route->request(StaticRoute::METHOD_POST, '');
     }
+
+    /**
+     * Test getting regEx pattern
+     *
+     * @covers \Sovia\Route\StaticRoute::getMatch
+     */
+    public function testGetMatch()
+    {
+        $route = new StaticRoute;
+        $route->setUri('/foo/bar');
+        $this->assertEquals('/foo/bar', $route->getMatch());
+    }
 }

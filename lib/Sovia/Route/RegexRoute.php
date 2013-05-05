@@ -22,7 +22,23 @@ class RegexRoute extends Route
      */
     public function assemble()
     {
-        // TODO: Implement assemble() method.
+        if (func_num_args() == 1) {
+            $parameters = (array) func_get_arg(0);
+        } else {
+            $parameters = func_get_args();
+        }
+
+        return vsprintf($this->reverse, $parameters);
+    }
+
+    /**
+     * Get regEx pattern to match
+     *
+     * @return string
+     */
+    public function getMatch()
+    {
+        return $this->uri;
     }
 
     /**

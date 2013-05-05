@@ -47,8 +47,22 @@ class PatternRouteTest extends TestCase
     }
 
     /**
+     * Data provider for testGetMatch
+     *
+     * @return array
+     */
+    public function getMatchProvider()
+    {
+        return [
+            [['/foo/:foo'], ['/foo/[^/]+']],
+            [['/foo/:foo/:bar'], ['/foo/[^/]+/[^/]+']],
+            [['/foo/:foo/:bar/baz'], ['/foo/[^/]+/[^/]+/baz']],
+        ];
+    }
+
+    /**
      * Data provider for testRequestSuccess
-     * 
+     *
      * @return array
      */
     public function requestSuccessProvider()
@@ -128,5 +142,20 @@ class PatternRouteTest extends TestCase
         $route = new PatternRoute;
         $route->setMethods([PatternRoute::METHOD_GET]);
         $route->request(PatternRoute::METHOD_POST, '');
+    }
+
+    /**
+     * Test getting regEx match
+     *
+     * @param string $uri
+     * @param string $pattern
+     * @covers \Sovia\Route\PatternRoute::getMatch
+     * @dataProvider getMatchProvider
+     */
+    public function testGetMatch($uri, $pattern)
+    {
+        $route = new PatternRoute;
+        $route->setUri($uri);
+        $this->assertEquals($pattern, $route->getMatch());
     }
 }
