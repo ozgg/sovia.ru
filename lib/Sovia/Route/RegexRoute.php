@@ -14,18 +14,26 @@ use Sovia\Route;
 
 class RegexRoute extends Route
 {
-
     /**
      * Assemble URI
      *
+     * @throws \Exception
      * @return string
      */
     public function assemble()
     {
+        if ($this->reverse == '') {
+            throw new \Exception('Reverse pattern is not specified');
+        }
+
         if (func_num_args() == 1) {
             $parameters = (array) func_get_arg(0);
         } else {
             $parameters = func_get_args();
+        }
+
+        if (substr_count($this->reverse, '%') != count($parameters)) {
+            throw new \Exception('Invalid number of parameters to assemble');
         }
 
         return vsprintf($this->reverse, $parameters);
