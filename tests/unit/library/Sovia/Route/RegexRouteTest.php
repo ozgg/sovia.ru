@@ -47,6 +47,21 @@ class RegexRouteTest extends TestCase
     }
 
     /**
+     * Data provider for testRequestSuccess
+     *
+     * @return array
+     */
+    public function requestSuccessProvider()
+    {
+        return [
+            ['/u(\d+)/foo\d+', '/u123/foo456', [0 => 123]],
+            ['/u/(?P<u>\d+)/foo/(\d+)', '/u/12/foo/34', ['u' => 12, 1 => 34]],
+            ['/(?P<a>\d+)/(?P<b>\d+)/(\d+)', '/1/2/3', ['a' => 1, 'b' => 2, 2 => 3]],
+            ['/(?P<a>\d+)/(\d+)/(?P<b>\d+)', '/1/2/3', ['a' => 1, 1 => 2, 'b' => 3]],
+        ];
+    }
+
+    /**
      * Test assembling route
      *
      * @param string $uri
@@ -83,14 +98,36 @@ class RegexRouteTest extends TestCase
         $route->assemble($parameters);
     }
 
-    public function testRequestSuccess()
+    /**
+     * Test successful route request
+     *
+     * @param string $pattern
+     * @param string $uri
+     * @param array $expect
+     * @dataProvider requestSuccessProvider
+     * @covers \Sovia\Route\RegexRoute::request
+     */
+    public function testRequestSuccess($pattern, $uri, array $expect)
     {
-        $this->markTestIncomplete();
+        $route = new RegexRoute;
+        $route->setUri($pattern);
+        $route->setMethods([RegexRoute::METHOD_GET]);
+        $route->request(RegexRoute::METHOD_GET, $uri);
+
+        $this->assertEquals($expect, $route->getParameters());
     }
 
+    /**
+     * Test getting exception requesting not allowed method
+     *
+     * @expectedException \Sovia\Exceptions\Http\Client\MethodNotAllowed
+     * @covers \Sovia\Route\RegexRoute::request
+     */
     public function testRequestFailure()
     {
-        $this->markTestIncomplete();
+        $route = new RegexRoute;
+        $route->setMethods([RegexRoute::METHOD_GET, RegexRoute::METHOD_PUT]);
+        $route->request(RegexRoute::METHOD_POST, '/');
     }
 
     /**

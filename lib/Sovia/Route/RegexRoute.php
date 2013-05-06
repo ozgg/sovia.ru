@@ -10,6 +10,7 @@
 
 namespace Sovia\Route;
  
+use Sovia\Exceptions\Http\Client\MethodNotAllowed;
 use Sovia\Route;
 
 class RegexRoute extends Route
@@ -54,10 +55,31 @@ class RegexRoute extends Route
      *
      * @param string $method
      * @param string $uri
+     * @throws \Sovia\Exceptions\Http\Client\MethodNotAllowed
      * @return void
      */
     public function request($method, $uri)
     {
-        // TODO: Implement request() method.
+        if (!in_array($method, $this->methods)) {
+            throw new MethodNotAllowed;
+        }
+        $parameters = [];
+
+        preg_match("#{$this->uri}#", $uri, $matches);
+        array_shift($matches);
+
+        $drop = false;
+        foreach ($matches as $parameter => $value) {
+            if ($drop) {
+                $drop = false;
+            } else {
+                if (!is_numeric($parameter)) {
+                    $drop = true;
+                }
+                $parameters[$parameter] = $value;
+            }
+        }
+
+        $this->setParameters($parameters);
     }
 }

@@ -27,7 +27,7 @@ class PatternRoute extends Route
      */
     public function assemble()
     {
-        preg_match_all('/:([^\/]+)/', $this->uri, $matches);
+        preg_match_all('#:([^/]+)#', $this->uri, $matches);
         if (isset($matches[1])) {
             $map = $matches[1];
         } else {
@@ -83,7 +83,7 @@ class PatternRoute extends Route
         if (!in_array($method, $this->methods)) {
             throw new MethodNotAllowed;
         }
-        $pattern = preg_replace('/:([^\/]+)/', '(?P<$1>[^\/]+)', $this->uri);
+        $pattern = preg_replace('#:([^/]+)#', '(?P<$1>[^\/]+)', $this->uri);
         preg_match_all("#{$pattern}#", $uri, $matches);
 
         foreach ($matches as $parameter => $result) {
