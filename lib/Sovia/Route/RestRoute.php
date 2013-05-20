@@ -1,7 +1,7 @@
 <?php
 /**
- * 
- * 
+ *
+ *
  * Date: 29.04.13
  * Time: 22:23
  *
@@ -9,7 +9,8 @@
  */
 
 namespace Sovia\Route;
- 
+
+use Sovia\Exceptions\Http\Client\MethodNotAllowed;
 use Sovia\Route;
 
 class RestRoute extends Route
@@ -18,6 +19,17 @@ class RestRoute extends Route
      * @var array
      */
     protected $resources = [];
+
+    public function __construct()
+    {
+        $this->methods = [
+            static::METHOD_GET,
+            static::METHOD_POST,
+            static::METHOD_PUT,
+            static::METHOD_PATCH,
+            static::METHOD_DELETE,
+        ];
+    }
 
     /**
      * Assemble URI
@@ -36,7 +48,16 @@ class RestRoute extends Route
      */
     public function getMatch()
     {
-        // TODO: Implement getMatch() method.
+        $pattern = $this->uri;
+        if (empty($this->resources)) {
+            $pattern .= '(?:/(\d+))?';
+        } else {
+            $pattern .= '(?:/(\d+)(?:/('
+                . implode('|', $this->resources)
+                . ')(?:/(\d+))?)?)?';
+        }
+
+        return $pattern;
     }
 
     /**
@@ -49,29 +70,30 @@ class RestRoute extends Route
      */
     public function request($method, $uri)
     {
-        $pattern = $this->uri;
-        if (empty($this->resources)) {
-            $pattern .= '(?:/(\d+))?';
-        } else {
-            $pattern .= '(?:/(\d+)(?:/(?:'
-                . implode('|', $this->resources)
-                . ')(?:/(\d+))?)?)?';
+        if (!in_array($method, $this->methods)) {
+            throw new MethodNotAllowed;
         }
 
-        preg_match_all("#{$pattern}#", $uri, $matches);
+        preg_match_all("#{$this->getMatch()}#", $uri, $matches);
 
-        if (!empty($matches[2][0])) {
+        if (!empty($matches[3][0])) {
             $parameters = [
                 'element_id'  => $matches[1][0],
-                'resource_id' => $matches[2][0],
+                'resource_id' => $matches[3][0],
             ];
+
+            $this->mapActionName($method, $matches[2][0]);
         } elseif (!empty($matches[1][0])) {
             $parameters = [
                 'element_id' => $matches[1][0],
             ];
+
+            $this->mapActionName($method);
         } else {
             $parameters = [];
         }
+
+        // set action name
 
         $this->setParameters($parameters);
     }
@@ -93,5 +115,36 @@ class RestRoute extends Route
         $this->resources = $resources;
 
         return $this;
+    }
+
+    /**
+     * Map action name based on method
+     *
+     * @param string $method HTTP method
+     * @param string $resource apply action on resource
+     */
+    protected function mapActionName($method, $resource = '')
+    {
+        $map = [
+            static::METHOD_GET    => 'get',
+            static::METHOD_POST   => 'create',
+            static::METHOD_PATCH  => 'update',
+            static::METHOD_PUT    => 'set',
+            static::METHOD_DELETE => 'destroy',
+        ];
+
+        if (isset($map[$method])) {
+            $actionName = $map[$method];
+        } else {
+            $actionName = $method;
+        }
+
+        $actionName .= 'Element';
+
+        if (strlen($resource)) {
+            $actionName .= ucfirst($resource);
+        }
+
+        $this->setActionName($actionName);
     }
 }

@@ -46,6 +46,11 @@ class RestRouteTest extends TestCase
         ];
     }
 
+    /**
+     * Data provider for testing successful requests
+     *
+     * @return array
+     */
     public function requestSuccessProvider()
     {
         $method = RegexRoute::METHOD_GET;
@@ -54,6 +59,13 @@ class RestRouteTest extends TestCase
             ['/foo', [], '/foo/4', $method, ['element_id' => 4]],
             ['/a', ['b', 'c'], '/a/1/c', $method, ['element_id' => 1]],
             ['/a', ['b', 'c'], '/a/1/b/2', $method, ['element_id' => 1, 'resource_id' => 2]],
+        ];
+    }
+
+    public function mapActionNameProvider()
+    {
+        return [
+            ['', [], '', '', '']
         ];
     }
 
@@ -106,6 +118,20 @@ class RestRouteTest extends TestCase
     }
 
     public function testGetMatch()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * @param $pattern
+     * @param $resources
+     * @param $uri
+     * @param $method
+     * @param $expect
+     * @dataProvider mapActionNameProvider
+     * @covers \Sovia\Route\RestRoute::mapActionName
+     */
+    public function testMapActionName($pattern, $resources, $uri, $method, $expect)
     {
         $this->markTestIncomplete();
     }
