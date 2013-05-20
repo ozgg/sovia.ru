@@ -15,6 +15,11 @@ use Sovia\Route;
 class RestRoute extends Route
 {
     /**
+     * @var array
+     */
+    protected $resources = [];
+
+    /**
      * Assemble URI
      *
      * @return string
@@ -39,10 +44,54 @@ class RestRoute extends Route
      *
      * @param string $method
      * @param string $uri
+     * @throws \Sovia\Exceptions\Http\Client\MethodNotAllowed
      * @return void
      */
     public function request($method, $uri)
     {
-        // TODO: Implement request() method.
+        $pattern = $this->uri;
+        if (empty($this->resources)) {
+            $pattern .= '(?:/(\d+))?';
+        } else {
+            $pattern .= '(?:/(\d+)(?:/(?:'
+                . implode('|', $this->resources)
+                . ')(?:/(\d+))?)?)?';
+        }
+
+        preg_match_all("#{$pattern}#", $uri, $matches);
+
+        if (!empty($matches[2][0])) {
+            $parameters = [
+                'element_id'  => $matches[1][0],
+                'resource_id' => $matches[2][0],
+            ];
+        } elseif (!empty($matches[1][0])) {
+            $parameters = [
+                'element_id' => $matches[1][0],
+            ];
+        } else {
+            $parameters = [];
+        }
+
+        $this->setParameters($parameters);
+    }
+
+    /**
+     * @return array
+     */
+    public function getResources()
+    {
+        return $this->resources;
+    }
+
+    /**
+     * @param array $resources
+     * @return RestRoute
+     */
+    public function setResources($resources)
+    {
+        $this->resources = $resources;
+
+        return $this;
     }
 }
