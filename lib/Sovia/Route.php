@@ -2,20 +2,21 @@
 /**
  * Abstract route
  *
- * Date: 29.04.13
- * Time: 21:09
- *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
+ * @package Sovia
  */
 
 namespace Sovia;
 
+/**
+ * Abstract Route
+ */
 abstract class Route
 {
     /**
      * Static route
      */
-    const TYPE_STATIC  = 'static';
+    const TYPE_STATIC = 'static';
 
     /**
      * Pattern route
@@ -25,27 +26,27 @@ abstract class Route
     /**
      * Regular expression route
      */
-    const TYPE_REGEX   = 'regex';
+    const TYPE_REGEX = 'regex';
 
     /**
      * REST route
      */
-    const TYPE_REST    = 'rest';
+    const TYPE_REST = 'rest';
 
     /**
      * HTTP get
      */
-    const METHOD_GET    = 'GET';
+    const METHOD_GET = 'GET';
 
     /**
      * HTTP post
      */
-    const METHOD_POST   = 'POST';
+    const METHOD_POST = 'POST';
 
     /**
      * HTTP put
      */
-    const METHOD_PUT    = 'PUT';
+    const METHOD_PUT = 'PUT';
 
     /**
      * HTTP delete
@@ -55,7 +56,7 @@ abstract class Route
     /**
      * HTTP patch
      */
-    const METHOD_PATCH  = 'PATCH';
+    const METHOD_PATCH = 'PATCH';
 
     /**
      * Type of route
@@ -137,6 +138,22 @@ abstract class Route
      * @return void
      */
     abstract public function request($method, $uri);
+
+    /**
+     * Constructor
+     *
+     * Make default methods allowed
+     */
+    public function __construct()
+    {
+        $this->methods = [
+            static::METHOD_GET,
+            static::METHOD_POST,
+            static::METHOD_PUT,
+            static::METHOD_PATCH,
+            static::METHOD_DELETE,
+        ];
+    }
 
     /**
      * Route factory

@@ -1,16 +1,13 @@
 <?php
 /**
- * 
- * 
- * Date: 29.04.13
- * Time: 22:22
+ * Pattern-based route
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  * @package Sovia\Route
  */
 
 namespace Sovia\Route;
- 
+
 use Sovia\Exceptions\Http\Client\MethodNotAllowed;
 use Sovia\Route;
 

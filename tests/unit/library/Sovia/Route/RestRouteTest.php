@@ -25,22 +25,48 @@ class RestRouteTest extends TestCase
      */
     protected $route;
 
+    /**
+     * Set up
+     *
+     * Creating new instance of tested class
+     */
     public function setUp()
     {
         $this->route = new RestRoute;
     }
 
+    /**
+     * Data provider for successful assemble
+     *
+     * @see testAssembleSuccess()
+     *
+     * @return array
+     */
     public function assembleSuccessProvider()
     {
         return [
-            ['', [], [], ''],
+            ['/foo', [], [], '/foo'],
+            ['/foo', [], [1], '/foo/1'],
+            ['/foo', ['bar'], [['id' => 1, 'bar' => 2]], '/foo/1/bar/2'],
+            ['/foo', ['bar', 'baz'], [['id' => 1, 'bar' => 2]], '/foo/1/bar/2'],
+            ['/foo', ['bar'], [['id' => 1, 'bar' => null]], '/foo/1/bar'],
         ];
     }
 
+    /**
+     * Data provider for failing assemble
+     *
+     * @see testAssembleFailure
+     *
+     * @return array
+     */
     public function assembleFailureProvider()
     {
         return [
-            ['', [], []],
+            ['/foo', ['bar', 'baz'], [['bar' => 3]]],
+            ['/foo', ['bar', 'baz'], [['zap' => 3]]],
+            ['/foo', [], [['bar' => 'baz']]],
+            ['/foo', ['bar'], [null, 1]],
         ];
     }
 
@@ -118,7 +144,11 @@ class RestRouteTest extends TestCase
         $uri, array $resources, array $parameters, $expect
     )
     {
-        $this->markTestIncomplete();
+        $this->route->setUri($uri);
+        $this->route->setResources($resources);
+        $result = call_user_func_array([$this->route, 'assemble'], $parameters);
+
+        $this->assertEquals($expect, $result);
     }
 
     /**
@@ -135,7 +165,9 @@ class RestRouteTest extends TestCase
         $uri, array $resources, array $parameters
     )
     {
-        $this->markTestIncomplete();
+        $this->route->setUri($uri);
+        $this->route->setResources($resources);
+        call_user_func_array([$this->route, 'assemble'], $parameters);
     }
 
     /**

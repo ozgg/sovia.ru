@@ -1,11 +1,9 @@
 <?php
 /**
- *
- *
- * Date: 29.04.13
- * Time: 22:23
+ * REST route
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
+ * @package Sovia\Route
  */
 
 namespace Sovia\Route;
@@ -13,32 +11,57 @@ namespace Sovia\Route;
 use Sovia\Exceptions\Http\Client\MethodNotAllowed;
 use Sovia\Route;
 
+/**
+ * REST route
+ */
 class RestRoute extends Route
 {
     /**
+     * Available element resources
+     *
      * @var array
      */
     protected $resources = [];
 
-    public function __construct()
-    {
-        $this->methods = [
-            static::METHOD_GET,
-            static::METHOD_POST,
-            static::METHOD_PUT,
-            static::METHOD_PATCH,
-            static::METHOD_DELETE,
-        ];
-    }
-
     /**
      * Assemble URI
      *
+     * @throws \Exception
      * @return string
      */
     public function assemble()
     {
-        // TODO: Implement assemble() method.
+        if (func_num_args() > 1) {
+            throw new \Exception('Too many arguments. Pass array|int or none');
+        }
+        $uri = $this->uri;
+        if (func_num_args() != 0) {
+            $argument = func_get_arg(0);
+            if (!is_array($argument)) {
+                $uri .= '/' . intval($argument);
+            } else {
+                if (empty($argument['id'])) {
+                    throw new \Exception('Missing id index');
+                }
+                $uri .= '/' . intval($argument['id']);
+                unset($argument['id']);
+                if (!empty($argument)) {
+                    if (count($argument) > 1) {
+                        throw new \Exception('Excessive number of resources');
+                    }
+                    $resource = key($argument);
+                    if (!in_array($resource, $this->resources)) {
+                        throw new \Exception("Invalid resource: {$resource}");
+                    }
+                    $uri .= '/' . $resource;
+                    if (!is_null($argument[$resource])) {
+                        $uri .= '/' . intval($argument[$resource]);
+                    }
+                }
+            }
+        }
+
+        return $uri;
     }
 
     /**
@@ -98,6 +121,8 @@ class RestRoute extends Route
     }
 
     /**
+     * Get available resources
+     *
      * @return array
      */
     public function getResources()
@@ -106,6 +131,8 @@ class RestRoute extends Route
     }
 
     /**
+     * Set available resources
+     *
      * @param array $resources
      * @return RestRoute
      */
