@@ -76,25 +76,24 @@ class RestRoute extends Route
 
         preg_match_all("#{$this->getMatch()}#", $uri, $matches);
 
-        if (!empty($matches[3][0])) {
-            $parameters = [
-                'element_id'  => $matches[1][0],
-                'resource_id' => $matches[3][0],
-            ];
+        $resource = '';
 
-            $this->mapActionName($method, $matches[2][0]);
+        if (!empty($matches[2][0])) {
+            $parameters = ['element_id' => $matches[1][0]];
+            if (!empty($matches[3][0])) {
+                $parameters['resource_id'] = $matches[3][0];
+            }
+
+            $resource = $matches[2][0];
         } elseif (!empty($matches[1][0])) {
             $parameters = [
                 'element_id' => $matches[1][0],
             ];
-
-            $this->mapActionName($method);
         } else {
             $parameters = [];
         }
 
-        // set action name
-
+        $this->mapActionName($method, $resource);
         $this->setParameters($parameters);
     }
 
@@ -136,7 +135,7 @@ class RestRoute extends Route
         if (isset($map[$method])) {
             $actionName = $map[$method];
         } else {
-            $actionName = $method;
+            $actionName = strtolower($method);
         }
 
         $actionName .= 'Element';
