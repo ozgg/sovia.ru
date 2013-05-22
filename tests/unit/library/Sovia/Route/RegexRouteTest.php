@@ -7,7 +7,7 @@
  */
 
 namespace Test\Unit\Library\Sovia\Route;
- 
+
 use Sovia\Route\RegexRoute;
 use Sovia\Test\TestCase;
 
@@ -56,8 +56,14 @@ class RegexRouteTest extends TestCase
         return [
             ['/u(\d+)/foo\d+', '/u123/foo456', [0 => 123]],
             ['/u/(?P<u>\d+)/foo/(\d+)', '/u/12/foo/34', ['u' => 12, 1 => 34]],
-            ['/(?P<a>\d+)/(?P<b>\d+)/(\d+)', '/1/2/3', ['a' => 1, 'b' => 2, 2 => 3]],
-            ['/(?P<a>\d+)/(\d+)/(?P<b>\d+)', '/1/2/3', ['a' => 1, 1 => 2, 'b' => 3]],
+            [
+                '/(?P<a>\d+)/(?P<b>\d+)/(\d+)', '/1/2/3',
+                ['a' => 1, 'b' => 2, 2 => 3]
+            ],
+            [
+                '/(?P<a>\d+)/(\d+)/(?P<b>\d+)', '/1/2/3',
+                ['a' => 1, 1 => 2, 'b' => 3]
+            ],
         ];
     }
 
@@ -66,10 +72,10 @@ class RegexRouteTest extends TestCase
      *
      * @param string $uri
      * @param string $reverse
-     * @param array $params
+     * @param array  $params
      * @param string $expect
      * @dataProvider assembleSuccessProvider
-     * @covers \Sovia\Route\RegexRoute::assemble
+     * @covers       \Sovia\Route\RegexRoute::assemble
      */
     public function testAssembleSuccess($uri, $reverse, array $params, $expect)
     {
@@ -85,10 +91,10 @@ class RegexRouteTest extends TestCase
      *
      * @param string $uri
      * @param string $reverse
-     * @param array $parameters
+     * @param array  $parameters
      * @expectedException \Exception
      * @dataProvider assembleFailureProvider
-     * @covers \Sovia\Route\RegexRoute::assemble
+     * @covers       \Sovia\Route\RegexRoute::assemble
      */
     public function testAssembleFailure($uri, $reverse, array $parameters)
     {
@@ -103,9 +109,9 @@ class RegexRouteTest extends TestCase
      *
      * @param string $pattern
      * @param string $uri
-     * @param array $expect
+     * @param array  $expect
      * @dataProvider requestSuccessProvider
-     * @covers \Sovia\Route\RegexRoute::request
+     * @covers       \Sovia\Route\RegexRoute::request
      */
     public function testRequestSuccess($pattern, $uri, array $expect)
     {
@@ -137,7 +143,7 @@ class RegexRouteTest extends TestCase
      */
     public function testGetMatch()
     {
-        $uri   = '/foo/u(\d+)/bar/(\s+)';
+        $uri = '/foo/u(\d+)/bar/(\s+)';
         $route = new RegexRoute;
         $route->setUri($uri);
         $this->assertEquals($uri, $route->getMatch());

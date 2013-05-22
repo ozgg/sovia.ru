@@ -99,6 +99,7 @@ class RestRouteTest extends TestCase
     {
         return [
             ['/users', [], '/users(?:/(\d+))?'],
+            ['/foo', ['a'], '/foo(?:/(\d+)(?:/(a)(?:/(\d+))?)?)?'],
             ['/foo', ['a', 'b'], '/foo(?:/(\d+)(?:/(a|b)(?:/(\d+))?)?)?'],
         ];
     }
@@ -159,9 +160,17 @@ class RestRouteTest extends TestCase
         $this->assertEquals($expect, $this->route->getParameters());
     }
 
+    /**
+     * Test failure of request
+     *
+     * @expectedException \Sovia\Exceptions\Http\Client\MethodNotAllowed
+     * @covers            \Sovia\Route\RestRoute::request
+     */
     public function testRequestFailure()
     {
-        $this->markTestIncomplete();
+        $this->route->setMethods([RestRoute::METHOD_GET]);
+        $this->route->setUri('/foo');
+        $this->route->request(RestRoute::METHOD_PUT, '/foo');
     }
 
     /**
