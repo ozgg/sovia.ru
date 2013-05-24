@@ -64,6 +64,15 @@ class Application
         header('Content-Type: text/plain');
         echo 'Oh, hi!', PHP_EOL;
         echo $this->getEnvironment(), PHP_EOL;
+        try {
+            $uri   = $this->extractDependency('request')->getUri();
+            $route = $this->extractDependency('router')->matchRequest($uri);
+
+            print_r($route);
+        } catch (\Exception $e) {
+            echo $e->getMessage(), PHP_EOL;
+            echo $e->getTraceAsString(), PHP_EOL;
+        }
         print_r($this->getDependencyContainer()->getKeys());
     }
 

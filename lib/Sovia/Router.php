@@ -87,11 +87,12 @@ class Router
     public function matchRequest($uri)
     {
         $match = null;
+        $path  = '/' . trim(strtolower(parse_url($uri, PHP_URL_PATH)), '/');
         foreach ($this->routes as $route) {
             if ($route->isStatic()) {
-                $found = strtolower($uri) == strtolower($route->getMatch());
+                $found = $path == strtolower($route->getMatch());
             } else {
-                $found = (preg_match("#{$route->getMatch()}#i", $uri) > 0);
+                $found = (preg_match("#{$route->getMatch()}#i", $path) > 0);
             }
             if ($found) {
                 $match = $route;
