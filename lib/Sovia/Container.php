@@ -73,4 +73,14 @@ class Container
     {
         return isset($this->storage[$name]);
     }
+
+    /**
+     * Get available keys
+     *
+     * @return array
+     */
+    public function getKeys()
+    {
+        return array_keys($this->storage);
+    }
 }

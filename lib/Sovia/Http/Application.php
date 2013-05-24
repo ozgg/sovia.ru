@@ -8,6 +8,8 @@
 
 namespace Sovia\Http;
 
+use Sovia\Config;
+use Sovia\Container;
 use Sovia\Router;
 use Sovia\Traits\DependencyContainer;
 
@@ -26,6 +28,13 @@ class Application
     protected $directory;
 
     /**
+     * Current environment
+     *
+     * @var string
+     */
+    protected $environment;
+
+    /**
      * Constructor
      *
      * Sets application directory and bootstraps it
@@ -35,6 +44,7 @@ class Application
     public function __construct($directory)
     {
         $this->setDirectory($directory);
+        $this->setDependencyContainer(new Container);
         $this->bootstrap();
     }
 
@@ -46,11 +56,15 @@ class Application
         $this->initRequest();
         $this->initRouter();
         $this->injectDependency('session', new Session);
+        $this->initConfig();
     }
 
     public function run()
     {
-
+        header('Content-Type: text/plain');
+        echo 'Oh, hi!', PHP_EOL;
+        echo $this->getEnvironment(), PHP_EOL;
+        print_r($this->getDependencyContainer()->getKeys());
     }
 
     /**
@@ -81,6 +95,29 @@ class Application
     }
 
     /**
+     * Set current environment
+     *
+     * @param string $environment
+     * @return Application
+     */
+    public function setEnvironment($environment)
+    {
+        $this->environment = (string) $environment;
+
+        return $this;
+    }
+
+    /**
+     * Get current environment
+     *
+     * @return string
+     */
+    public function getEnvironment()
+    {
+        return $this->environment;
+    }
+
+    /**
      * Import config from file
      *
      * @param string $name
@@ -105,7 +142,7 @@ class Application
     }
 
     /**
-     * Initialize request
+     * Initialize request and guess environment
      */
     protected function initRequest()
     {
@@ -117,6 +154,14 @@ class Application
         $request->setBody(file_get_contents('php://input'));
 
         $this->injectDependency('request', $request);
+
+        if (substr($request->getHost(), -5) == 'local') {
+            $environment = 'development';
+        } else {
+            $environment = 'production';
+        }
+
+        $this->setEnvironment($environment);
     }
 
     /**
@@ -129,5 +174,16 @@ class Application
         $router->import($routes);
 
         $this->injectDependency('router', $router);
+    }
+
+    /**
+     * Initialize environment configuration
+     */
+    protected function initConfig()
+    {
+        $baseDir = $this->getDirectory() . '/../../config';
+        $config  = new Config($baseDir);
+        $config->load($this->getEnvironment());
+        $this->injectDependency('config', $config);
     }
 }
