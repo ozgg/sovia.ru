@@ -13,7 +13,7 @@ use Sovia\Traits\DependencyContainer;
 /**
  * HTTP application
  */
-class Application 
+class Application
 {
     use DependencyContainer;
 
@@ -77,5 +77,28 @@ class Application
         $this->directory = $directory;
 
         return $this;
+    }
+
+    /**
+     * Import config from file
+     *
+     * @param string $name
+     * @return array
+     * @throws \Exception
+     */
+    public function importConfig($name)
+    {
+        if (strpos($name, '..') !== false) {
+            throw new \Exception("Bad name for config to include: {$name}");
+        }
+        $path = realpath($this->directory . DIRECTORY_SEPARATOR . 'config');
+        $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
+        if (file_exists($file) && is_file($file)) {
+            $config = include $file;
+        } else {
+            throw new \Exception("Cannot read config from file {$file}");
+        }
+
+        return (array) $config;
     }
 }

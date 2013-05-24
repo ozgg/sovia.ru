@@ -100,16 +100,17 @@ class RestRouteTest extends TestCase
     public function mapActionNameProvider()
     {
         return [
-            ['/users', [], '/users', RestRoute::METHOD_GET, 'getElement'],
-            ['/users', [], '/users/1', RestRoute::METHOD_GET, 'getElement'],
-            ['/users', [], '/users/1', RestRoute::METHOD_PUT, 'setElement'],
-            ['/foo', [], '/foo/1', RestRoute::METHOD_PATCH, 'updateElement'],
-            ['/foo', [], '/foo/1', RestRoute::METHOD_DELETE, 'destroyElement'],
-            ['/foo', ['a'], '/foo', RestRoute::METHOD_DELETE, 'destroyElement'],
-            ['/foo', ['f'], '/foo', RestRoute::METHOD_POST, 'createElement'],
+            ['/users', [], '/users', RestRoute::METHOD_GET, 'Collection'],
+            ['/users', [], '/users/1', RestRoute::METHOD_PUT, 'Element'],
+            ['/foo', ['a'], '/foo', RestRoute::METHOD_DELETE, 'Collection'],
+            ['/foo', ['f'], '/foo', RestRoute::METHOD_POST, 'Collection'],
+            [
+                '/a', ['bar', 'c'], '/a/1/bar/4', RestRoute::METHOD_GET,
+                'ElementBarResource'
+            ],
             [
                 '/a', ['bar', 'c'], '/a/1/bar', RestRoute::METHOD_GET,
-                'getElementBar'
+                'ElementBarResources'
             ],
         ];
     }

@@ -24,6 +24,19 @@ class RestRoute extends Route
     protected $resources = [];
 
     /**
+     * Init from array
+     *
+     * @param array $data
+     */
+    public function initFromArray(array $data)
+    {
+        parent::initFromArray($data);
+        if (isset($data['resources'])) {
+            $this->setResources($data['resources']);
+        }
+    }
+
+    /**
      * Assemble URI
      *
      * @throws \Exception
@@ -99,24 +112,30 @@ class RestRoute extends Route
 
         preg_match_all("#{$this->getMatch()}#", $uri, $matches);
 
-        $resource = '';
+        $resource   = '';
+        $elementId  = null;
+        $resourceId = null;
 
         if (!empty($matches[2][0])) {
-            $parameters = ['element_id' => $matches[1][0]];
+            $elementId  = $matches[1][0];
+            $parameters = ['element_id' => $elementId];
             if (!empty($matches[3][0])) {
-                $parameters['resource_id'] = $matches[3][0];
+                $resourceId = $matches[3][0];
+
+                $parameters['resource_id'] = $resourceId;
             }
 
             $resource = $matches[2][0];
         } elseif (!empty($matches[1][0])) {
+            $elementId  = $matches[1][0];
             $parameters = [
-                'element_id' => $matches[1][0],
+                'element_id' => $elementId,
             ];
         } else {
             $parameters = [];
         }
 
-        $this->mapActionName($method, $resource);
+        $this->mapActionName($elementId, $resource, $resourceId);
         $this->setParameters($parameters);
     }
 
@@ -144,31 +163,26 @@ class RestRoute extends Route
     }
 
     /**
-     * Map action name based on method
+     * Map action name based on ids and resource name
      *
-     * @param string $method HTTP method
+     * @param int    $elementId
      * @param string $resource apply action on resource
+     * @param int    $resourceId
      */
-    protected function mapActionName($method, $resource = '')
+    protected function mapActionName($elementId, $resource, $resourceId)
     {
-        $map = [
-            static::METHOD_GET    => 'get',
-            static::METHOD_POST   => 'create',
-            static::METHOD_PATCH  => 'update',
-            static::METHOD_PUT    => 'set',
-            static::METHOD_DELETE => 'destroy',
-        ];
-
-        if (isset($map[$method])) {
-            $actionName = $map[$method];
+        if (!empty($elementId)) {
+            $actionName = 'Element';
+            if (strlen($resource)) {
+                $actionName .= ucfirst($resource);
+                if (!empty($resourceId)) {
+                    $actionName .= 'Resource';
+                } else {
+                    $actionName .= 'Resources';
+                }
+            }
         } else {
-            $actionName = strtolower($method);
-        }
-
-        $actionName .= 'Element';
-
-        if (strlen($resource)) {
-            $actionName .= ucfirst($resource);
+            $actionName = 'Collection';
         }
 
         $this->setActionName($actionName);

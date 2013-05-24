@@ -58,4 +58,30 @@ class RouteTest extends TestCase
     {
         Route::factory('non-existent');
     }
+
+    /**
+     * Test initializing from array
+     *
+     * @covers \Sovia\Route::initFromArray
+     */
+    public function testInitFromArray()
+    {
+        /** @var Route $route */
+        $route = $this->getMockForAbstractClass('\\Sovia\\Route');
+        $data  = [
+            'name'       => 'testRoute',
+            'methods'    => [Route::METHOD_GET, Route::METHOD_PUT],
+            'reverse'    => '/yummy',
+            'controller' => 'test',
+            'action'     => 'tested',
+        ];
+
+        $route->initFromArray($data);
+
+        $this->assertEquals($data['name'], $route->getName());
+        $this->assertEquals($data['methods'], $route->getMethods());
+        $this->assertEquals($data['reverse'], $route->getReverse());
+        $this->assertEquals($data['controller'], $route->getControllerName());
+        $this->assertEquals($data['action'], $route->getActionName());
+    }
 }

@@ -187,6 +187,33 @@ abstract class Route
     }
 
     /**
+     * Init from array
+     *
+     * @param array $data
+     */
+    public function initFromArray(array $data)
+    {
+        if (isset($data['name'])) {
+            $this->setName($data['name']);
+        }
+        if (isset($data['controller'])) {
+            $this->setControllerName($data['controller']);
+        }
+        if (isset($data['action'])) {
+            $this->setActionName($data['action']);
+        }
+        if (isset($data['methods'])) {
+            $this->setMethods($data['methods']);
+        }
+        if (isset($data['reverse'])) {
+            $this->setReverse($data['reverse']);
+        }
+        if (isset($data['parameters'])) {
+            $this->setParameters($data['parameters']);
+        }
+    }
+
+    /**
      * Set name of action in controller
      *
      * @param string $actionName
