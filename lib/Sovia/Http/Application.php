@@ -45,6 +45,7 @@ class Application
     {
         $this->initRequest();
         $this->initRouter();
+        $this->injectDependency('session', new Session);
     }
 
     public function run()
