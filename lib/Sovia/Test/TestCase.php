@@ -19,15 +19,19 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * Get sample for test from file
      *
      * @param string $name
-     * @return mixed|null
+     * @throws \Exception
+     * @return mixed
      */
     protected function getSample($name)
     {
-        $sample    = null;
-        $directory = realpath(__DIR__ . DIRECTORY_SEPARATOR . $this->rootPath);
-        $file      = $directory . DIRECTORY_SEPARATOR . $name . '.php';
+        $sample = null;
+        $path   = __DIR__ . DIRECTORY_SEPARATOR . $this->rootPath
+            . DIRECTORY_SEPARATOR . 'samples';
+        $file   = realpath($path) . DIRECTORY_SEPARATOR . $name . '.php';
         if (file_exists($file) && is_file($file)) {
             $sample = include $file;
+        } else {
+            throw new \Exception("Cannot load sample {$name} from {$file}");
         }
 
         return $sample;

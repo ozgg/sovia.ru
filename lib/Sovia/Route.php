@@ -214,6 +214,16 @@ abstract class Route
     }
 
     /**
+     * Route is static?
+     *
+     * @return bool
+     */
+    public function isStatic()
+    {
+        return $this->type == static::TYPE_STATIC;
+    }
+
+    /**
      * Set name of action in controller
      *
      * @param string $actionName

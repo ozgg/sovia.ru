@@ -8,6 +8,8 @@
 
 namespace Sovia;
 
+use Sovia\Exceptions\Http\Client\NotFound;
+
 /**
  * Router
  */
@@ -72,5 +74,34 @@ class Router
                 $this->addRoute($route);
             }
         }
+    }
+
+    /**
+     * Match URI to routes and get according route
+     *
+     * @param string $uri
+     * @return Route
+     * @throws Exceptions\Http\Client\NotFound
+     */
+    public function matchRequest($uri)
+    {
+        $match = null;
+        foreach ($this->routes as $route) {
+            if ($route->isStatic()) {
+                $found = $uri == $route->getMatch();
+            } else {
+                $found = (preg_match("#{$route->getMatch()}#i", $uri) > 0);
+            }
+            if ($found) {
+                $match = $route;
+                break;
+            }
+        }
+
+        if (!$match instanceof Route) {
+            throw new NotFound("Cannot match URI {$uri} to any route");
+        }
+
+        return $match;
     }
 }
