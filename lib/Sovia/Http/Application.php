@@ -8,6 +8,7 @@
 
 namespace Sovia\Http;
 
+use Sovia\Router;
 use Sovia\Traits\DependencyContainer;
 
 /**
@@ -37,14 +38,13 @@ class Application
         $this->bootstrap();
     }
 
+    /**
+     * Bootstrap application
+     */
     public function bootstrap()
     {
-        $request = new Request($_SERVER);
-        $request->setGet($_GET);
-        $request->setPost($_POST);
-        $request->setFiles($_FILES);
-        $request->setCookies($_COOKIE);
-        $request->setBody(file_get_contents('php://input'));
+        $this->initRequest();
+        $this->initRouter();
     }
 
     public function run()
@@ -93,6 +93,7 @@ class Application
         }
         $path = realpath($this->directory . DIRECTORY_SEPARATOR . 'config');
         $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
+
         if (file_exists($file) && is_file($file)) {
             $config = include $file;
         } else {
@@ -100,5 +101,32 @@ class Application
         }
 
         return (array) $config;
+    }
+
+    /**
+     * Initialize request
+     */
+    protected function initRequest()
+    {
+        $request = new Request($_SERVER);
+        $request->setGet($_GET);
+        $request->setPost($_POST);
+        $request->setFiles($_FILES);
+        $request->setCookies($_COOKIE);
+        $request->setBody(file_get_contents('php://input'));
+
+        $this->injectDependency('request', $request);
+    }
+
+    /**
+     * Initialize router
+     */
+    protected function initRouter()
+    {
+        $routes = $this->importConfig('routes');
+        $router = new Router;
+        $router->import($routes);
+
+        $this->injectDependency('router', $router);
     }
 }

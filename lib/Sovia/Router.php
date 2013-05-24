@@ -16,6 +16,8 @@ use Sovia\Exceptions\Http\Client\NotFound;
 class Router 
 {
     /**
+     * Available routes
+     *
      * @var Route[]
      */
     protected $routes = [];
@@ -88,7 +90,7 @@ class Router
         $match = null;
         foreach ($this->routes as $route) {
             if ($route->isStatic()) {
-                $found = $uri == $route->getMatch();
+                $found = strtolower($uri) == strtolower($route->getMatch());
             } else {
                 $found = (preg_match("#{$route->getMatch()}#i", $uri) > 0);
             }
@@ -99,7 +101,7 @@ class Router
         }
 
         if (!$match instanceof Route) {
-            throw new NotFound("Cannot match URI {$uri} to any route");
+            throw new NotFound("Cannot match URI {$uri} against any route");
         }
 
         return $match;
