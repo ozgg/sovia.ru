@@ -196,6 +196,9 @@ abstract class Route
         if (isset($data['name'])) {
             $this->setName($data['name']);
         }
+        if (isset($data['uri'])) {
+            $this->setUri($data['uri']);
+        }
         if (isset($data['controller'])) {
             $this->setControllerName($data['controller']);
         }

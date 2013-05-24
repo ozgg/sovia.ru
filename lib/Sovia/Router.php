@@ -1,7 +1,7 @@
 <?php
 /**
  * Router
- * 
+ *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  * @package Sovia
  */
@@ -13,7 +13,7 @@ use Sovia\Exceptions\Http\Client\NotFound;
 /**
  * Router
  */
-class Router 
+class Router
 {
     /**
      * Available routes
@@ -63,18 +63,17 @@ class Router
     /**
      * Import routes from array
      *
-     * @param array $config
+     * @param array $routes
      */
-    public function import(array $config)
+    public function import(array $routes)
     {
-        foreach ($config as $type => $routes) {
-            foreach ($routes as $uri => $data) {
-                $route = Route::factory($type);
-                $route->setUri($uri);
-                $route->initFromArray($data);
+        foreach ($routes as $name => $data) {
+            $type  = isset($data['type']) ? $data['type'] : Route::TYPE_STATIC;
+            $route = Route::factory($type);
+            $route->setName($name);
+            $route->initFromArray($data);
 
-                $this->addRoute($route);
-            }
+            $this->addRoute($route);
         }
     }
 

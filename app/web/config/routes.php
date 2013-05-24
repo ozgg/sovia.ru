@@ -1,7 +1,7 @@
 <?php
 /**
  * Application routes
- * 
+ *
  * Date: 24.05.13
  * Time: 12:09
  *
@@ -11,11 +11,11 @@
 use Sovia\Route;
 
 return [
-    Route::TYPE_STATIC => [
-        '/' => [
-            'name'       => 'home',
-            'controller' => 'index',
-            'action'     => 'index',
-        ],
+    'home' => [
+        'type'       => Route::TYPE_STATIC,
+        'uri'        => '/',
+        'name'       => 'home',
+        'controller' => 'index',
+        'action'     => 'index',
     ],
 ];

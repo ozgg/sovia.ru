@@ -45,7 +45,7 @@ class RouterTest extends TestCase
         $config = $this->getSample('config/routes');
 
         $this->router->import($config);
-        $this->assertGreaterThan(0, count($this->router->getRoutes()));
+        $this->assertEquals(count($config), count($this->router->getRoutes()));
     }
 
     /**
