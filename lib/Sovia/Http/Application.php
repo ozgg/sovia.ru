@@ -195,4 +195,9 @@ class Application
         $config->load($this->getEnvironment());
         $this->injectDependency('config', $config);
     }
+
+    protected function runController()
+    {
+
+    }
 }
