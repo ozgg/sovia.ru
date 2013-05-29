@@ -11,11 +11,15 @@
 use Sovia\Route;
 
 return [
-    'home' => [
+    'home'  => [
         'type'       => Route::TYPE_STATIC,
         'uri'        => '/',
-        'name'       => 'home',
         'controller' => 'index',
+        'action'     => 'index',
+    ],
+    'about' => [
+        'uri'        => '/about',
+        'controller' => 'about',
         'action'     => 'index',
     ],
 ];

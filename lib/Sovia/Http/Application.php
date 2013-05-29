@@ -80,6 +80,8 @@ class Application
             $router  = $this->extractDependency('router');
 
             $route = $router->matchRequest($request->getUri());
+            $this->injectDependency('route', $route);
+
             $parts = [
                 $this->directory,
                 'controllers',
@@ -93,7 +95,7 @@ class Application
                 if (!class_exists($className)) {
                     throw new \Exception("Cannot find controller {$className}");
                 }
-                $controller = new $className($this->getDependencyContainer());
+                $controller = new $className($this);
                 if (!$controller instanceof Controller) {
                     throw new \Exception("Invalid controller: {$className}");
                 }
@@ -233,6 +235,7 @@ class Application
 
     protected function fallback(\Exception $e)
     {
+        header('Content-Type: text/plain');
         echo $e->getMessage(), PHP_EOL;
         echo $e->getTraceAsString(), PHP_EOL;
     }

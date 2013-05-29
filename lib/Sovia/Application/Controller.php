@@ -10,7 +10,7 @@
 
 namespace Sovia\Application;
 
-use Sovia\Container;
+use Sovia\Http\Application;
 use Sovia\Exceptions\Http\Client\NotFound;
 use Sovia\Traits;
 
@@ -18,12 +18,22 @@ abstract class Controller
 {
     use Traits\DependencyContainer, Traits\Environment;
 
-    protected $viewName;
+    /**
+     * @var Application
+     */
+    protected $application;
 
     /**
      * @var string
      */
     protected $viewsPath;
+
+    /**
+     * Render format
+     *
+     * @var string
+     */
+    protected $renderFormat = Renderer::FORMAT_HTML;
 
     /**
      * Name of layout to use
@@ -32,9 +42,31 @@ abstract class Controller
      */
     protected $layoutName = 'layout';
 
-    public function __construct(Container $container)
+    /**
+     * Name of view to render
+     *
+     * @var string
+     */
+    protected $viewName;
+
+    /**
+     * Parameters set from view
+     *
+     * @var array
+     */
+    protected $parameters = [];
+
+    public function __construct(Application $application)
     {
-        $this->setDependencyContainer($container);
+        $this->application = $application;
+        $this->setDependencyContainer($application->getDependencyContainer());
+
+        $route = $this->getRoute();
+
+        $this->viewsPath = $application->getDirectory() . '/views';
+        $this->viewName  = strtolower(
+            "{$route->getControllerName()}/{$route->getActionName()}"
+        );
     }
 
     public function init()
@@ -43,7 +75,8 @@ abstract class Controller
 
     public function execute($method, $name)
     {
-        $name      .= 'Action';
+        $name .= 'Action';
+
         $callback   = [];
         $actionName = strtolower($method) . ucfirst($name);
         if (method_exists($this, $actionName)) {
@@ -54,6 +87,7 @@ abstract class Controller
 
         if (!empty($callback)) {
             call_user_func($callback);
+            $this->render();
         } else {
             throw new NotFound("Cannot {$method} {$name} action");
         }
@@ -61,6 +95,11 @@ abstract class Controller
 
     public function render()
     {
+        $renderer = Renderer::factory($this->renderFormat);
+        $renderer->setDirectory($this->getViewsPath());
+        $renderer->setLayoutFile('layouts/' . $this->layoutName);
+        $renderer->setViewFile('scripts/' . $this->viewName);
+        $renderer->render($this->parameters);
     }
 
     /**
@@ -103,5 +142,29 @@ abstract class Controller
         $this->viewsPath = $viewsPath;
 
         return $this;
+    }
+
+    /**
+     * Get used route
+     *
+     * @return \Sovia\Route
+     */
+    protected function getRoute()
+    {
+        $this->requireDependencies('route');
+
+        return $this->extractDependency('route');
+    }
+
+    /**
+     * Get request
+     *
+     * @return \Sovia\Http\Request
+     */
+    protected function getRequest()
+    {
+        $this->requireDependencies('request');
+
+        return $this->extractDependency('request');
     }
 }
