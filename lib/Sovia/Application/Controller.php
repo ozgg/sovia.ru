@@ -10,10 +10,14 @@
 
 namespace Sovia\Application;
 
+use Sovia\Container;
 use Sovia\Exceptions\Http\Client\NotFound;
+use Sovia\Traits;
 
 abstract class Controller
 {
+    use Traits\DependencyContainer, Traits\Environment;
+
     protected $viewName;
 
     /**
@@ -28,11 +32,16 @@ abstract class Controller
      */
     protected $layoutName = 'layout';
 
+    public function __construct(Container $container)
+    {
+        $this->setDependencyContainer($container);
+    }
+
     public function init()
     {
     }
 
-    public function runAction($method, $name)
+    public function execute($method, $name)
     {
         $name      .= 'Action';
         $callback   = [];

@@ -81,4 +81,33 @@ trait DependencyContainer
             throw new \Exception('Container is not set');
         }
     }
+
+    /**
+     * Require dependencies to be injected
+     *
+     * @throws \ErrorException
+     */
+    protected function requireDependencies()
+    {
+        if (!$this->dependencyContainer instanceof Container) {
+            throw new \ErrorException('Invalid dependency container');
+        }
+        $injected    = $this->dependencyContainer->getKeys();
+        $notInjected = [];
+        foreach (func_get_args() as $argument) {
+            if (is_array($argument)) {
+                call_user_func_array(__METHOD__, $argument);
+            } else {
+                if (!in_array($argument, $injected)) {
+                    $notInjected[] = $argument;
+                }
+            }
+        }
+
+        if (!empty($notInjected)) {
+            $error = 'Required dependencies are not injected: '
+                . implode(', ', $notInjected);
+            throw new \ErrorException($error);
+        }
+    }
 }

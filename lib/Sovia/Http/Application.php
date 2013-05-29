@@ -8,17 +8,18 @@
 
 namespace Sovia\Http;
 
+use Sovia\Application\Controller;
 use Sovia\Config;
 use Sovia\Container;
 use Sovia\Router;
-use Sovia\Traits\DependencyContainer;
+use Sovia\Traits;
 
 /**
  * HTTP application
  */
 class Application
 {
-    use DependencyContainer;
+    use Traits\DependencyContainer, Traits\Environment;
 
     /**
      * Application directory
@@ -28,11 +29,11 @@ class Application
     protected $directory;
 
     /**
-     * Current environment
+     * Application name
      *
      * @var string
      */
-    protected $environment;
+    protected $name;
 
     /**
      * Constructor
@@ -43,7 +44,10 @@ class Application
      */
     public function __construct($directory)
     {
+        $name = ucfirst(strtolower(basename($directory)));
+
         $this->setDirectory($directory);
+        $this->setName($name);
         $this->setDependencyContainer(new Container);
         $this->bootstrap();
     }
@@ -59,21 +63,52 @@ class Application
         $this->initConfig();
     }
 
+    /**
+     * Run application
+     *
+     * Loads controller and runs it
+     */
     public function run()
     {
-        header('Content-Type: text/plain');
-        echo 'Oh, hi!', PHP_EOL;
-        echo $this->getEnvironment(), PHP_EOL;
+        $this->requireDependencies('request', 'router');
         try {
-            $uri   = $this->extractDependency('request')->getUri();
-            $route = $this->extractDependency('router')->matchRequest($uri);
+            /**
+             * @var Request $request
+             * @var Router  $router
+             */
+            $request = $this->extractDependency('request');
+            $router  = $this->extractDependency('router');
 
-            print_r($route);
+            $route = $router->matchRequest($request->getUri());
+            $parts = [
+                $this->directory,
+                'controllers',
+                $route->getControllerName() . 'Controller'
+            ];
+            $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
+            if (file_exists($file) && is_file($file)) {
+                include $file;
+                $parts[0]  = $this->getName();
+                $className = implode('\\', $parts);
+                if (!class_exists($className)) {
+                    throw new \Exception("Cannot find controller {$className}");
+                }
+                $controller = new $className($this->getDependencyContainer());
+                if (!$controller instanceof Controller) {
+                    throw new \Exception("Invalid controller: {$className}");
+                }
+            } else {
+                throw new \Exception("Cannot load controller from {$file}");
+            }
+
+            $controller->setEnvironment($this->getEnvironment());
+            $controller->init();
+            $controller->execute(
+                $request->getMethod(), $route->getActionName()
+            );
         } catch (\Exception $e) {
-            echo $e->getMessage(), PHP_EOL;
-            echo $e->getTraceAsString(), PHP_EOL;
+            $this->fallback($e);
         }
-        print_r($this->getDependencyContainer()->getKeys());
     }
 
     /**
@@ -104,26 +139,26 @@ class Application
     }
 
     /**
-     * Set current environment
-     *
-     * @param string $environment
-     * @return Application
-     */
-    public function setEnvironment($environment)
-    {
-        $this->environment = (string) $environment;
-
-        return $this;
-    }
-
-    /**
-     * Get current environment
+     * Get application name
      *
      * @return string
      */
-    public function getEnvironment()
+    public function getName()
     {
-        return $this->environment;
+        return $this->name;
+    }
+
+    /**
+     * Set application name
+     *
+     * @param string $name
+     * @return Application
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -196,8 +231,9 @@ class Application
         $this->injectDependency('config', $config);
     }
 
-    protected function runController()
+    protected function fallback(\Exception $e)
     {
-
+        echo $e->getMessage(), PHP_EOL;
+        echo $e->getTraceAsString(), PHP_EOL;
     }
 }

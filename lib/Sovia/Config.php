@@ -81,7 +81,7 @@ class Config
             $local = [];
         }
 
-        return static::merge($local, $config);
+        $this->container = static::merge($local, $config);
     }
 
     /**
