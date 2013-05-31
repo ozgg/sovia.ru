@@ -97,9 +97,8 @@ abstract class Controller
     {
         $renderer = Renderer::factory($this->renderFormat);
         $renderer->setDirectory($this->getViewsPath());
-        $renderer->setLayoutFile('layouts/' . $this->layoutName);
-        $renderer->setViewFile('scripts/' . $this->viewName);
-        $renderer->render($this->parameters);
+        $renderer->setDefaultView($this->viewName);
+        $renderer->render($this->layoutName, $this->parameters);
     }
 
     /**

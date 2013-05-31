@@ -17,19 +17,18 @@ abstract class Renderer
     const FORMAT_TEXT = 'text';
 
     /**
-     * @var string
-     */
-    protected $layoutFile;
-
-    /**
-     * @var string
-     */
-    protected $viewFile;
-
-    /**
+     * Directory with layouts and views
+     *
      * @var string
      */
     protected $directory;
+
+    /**
+     * Default view to use
+     *
+     * @var string
+     */
+    protected $defaultView;
 
     /**
      * @var string
@@ -44,17 +43,18 @@ abstract class Renderer
     /**
      * Render view
      *
-     * @param array $parameters
+     * @param string $layout
+     * @param array  $parameters
      * @return void
      */
-    abstract public function render(array $parameters);
+    abstract public function render($layout, array $parameters);
 
     /**
      * Factory
      *
      * @param string $format
-     * @return Renderer\Html|Renderer\Json|Renderer\Text
      * @throws \ErrorException
+     * @return Renderer\Html|Renderer\Json|Renderer\Text
      */
     public static function factory($format)
     {
@@ -73,44 +73,6 @@ abstract class Renderer
         }
 
         return $renderer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLayoutFile()
-    {
-        return $this->layoutFile;
-    }
-
-    /**
-     * @param string $layoutFile
-     * @return Renderer
-     */
-    public function setLayoutFile($layoutFile)
-    {
-        $this->layoutFile = $layoutFile;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getViewFile()
-    {
-        return $this->viewFile;
-    }
-
-    /**
-     * @param string $viewFile
-     * @return Renderer
-     */
-    public function setViewFile($viewFile)
-    {
-        $this->viewFile = $viewFile;
-
-        return $this;
     }
 
     /**
@@ -147,6 +109,25 @@ abstract class Renderer
     public function setCharset($charset)
     {
         $this->charset = $charset;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefaultView()
+    {
+        return $this->defaultView;
+    }
+
+    /**
+     * @param string $defaultView
+     * @return Renderer
+     */
+    public function setDefaultView($defaultView)
+    {
+        $this->defaultView = $defaultView;
 
         return $this;
     }

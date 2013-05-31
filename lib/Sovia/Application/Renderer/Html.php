@@ -18,33 +18,25 @@ class Html extends Renderer
     /**
      * Render view
      *
-     * @param array $parameters
+     * @param string $layout
+     * @param array  $parameters
      * @throws \ErrorException
      * @return void
      */
-    public function render(array $parameters)
+    public function render($layout, array $parameters)
     {
         header("Content-Type: text/html;charset={$this->charset}");
         $result = '';
 
         $this->parameters = $parameters;
-        if (!is_null($this->layoutFile)) {
-            $layout = $this->directory . '/' . $this->layoutFile . '.phtml';
+        if (!is_null($this->directory)) {
+            $layout = $this->directory . '/layouts/' . $layout . '.phtml';
             if (file_exists($layout) && is_file($layout)) {
                 ob_start();
                 include $layout;
                 $result .= ob_get_clean();
             } else {
                 throw new \ErrorException("Cannot load layout {$layout}");
-            }
-        } elseif (!is_null($this->viewFile)) {
-            $view = $this->directory . '/' . $this->viewFile . '.phtml';
-            if (file_exists($view) && is_file($view)) {
-                ob_start();
-                include $view;
-                $result .= ob_get_clean();
-            } else {
-                throw new \ErrorException("Cannot load view from {$view}");
             }
         } else {
             throw new \ErrorException('Cannot find layout/view to render');
@@ -55,7 +47,8 @@ class Html extends Renderer
 
     protected function renderContent()
     {
-        $view = $this->directory . '/' . $this->viewFile . '.phtml';
+        $view = $this->getDirectory() . '/scripts/'
+            . $this->getDefaultView() . '.phtml';
         if (file_exists($view) && is_file($view)) {
             include $view;
         } else {
@@ -71,7 +64,7 @@ class Html extends Renderer
     protected function partial($view)
     {
         if (!is_null($this->directory)) {
-            $file = $this->directory . "/scripts/{$view}.phtml";
+            $file = $this->directory . "/views/scripts/{$view}.phtml";
             if (file_exists($file) && is_file($file)) {
                 include $file;
             } else {

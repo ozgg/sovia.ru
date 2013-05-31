@@ -1,11 +1,9 @@
 <?php
 /**
- * 
- * 
- * Date: 31.05.13
- * Time: 17:31
+ * DI container that loads dependencies, if they are not injected
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
+ * @package Sovia\Traits\Dependency
  */
 
 namespace Sovia\Traits\Dependency;
@@ -13,8 +11,14 @@ namespace Sovia\Traits\Dependency;
 use Sovia\Http;
 use Sovia\Route;
 
+/**
+ * Loading DI container
+ */
 trait LoadingContainer
 {
+    /**
+     * Use DI container
+     */
     use Container;
 
     /**
