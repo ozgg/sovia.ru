@@ -19,7 +19,7 @@ use Sovia\Traits;
  */
 class Application
 {
-    use Traits\DependencyContainer, Traits\Environment;
+    use Traits\Dependency\LoadingContainer, Traits\Environment;
 
     /**
      * Application directory
@@ -57,7 +57,7 @@ class Application
      */
     public function bootstrap()
     {
-        $this->initRequest();
+        $this->guessEnvironment();
         $this->initRouter();
         $this->injectDependency('session', new Session);
         $this->initConfig();
@@ -188,18 +188,11 @@ class Application
     }
 
     /**
-     * Initialize request and guess environment
+     * Guess environment
      */
-    protected function initRequest()
+    protected function guessEnvironment()
     {
-        $request = new Request($_SERVER);
-        $request->setGet($_GET);
-        $request->setPost($_POST);
-        $request->setFiles($_FILES);
-        $request->setCookies($_COOKIE);
-        $request->setBody(file_get_contents('php://input'));
-
-        $this->injectDependency('request', $request);
+        $request = $this->getRequest();
 
         if (substr($request->getHost(), -5) == 'local') {
             $environment = 'development';

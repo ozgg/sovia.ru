@@ -6,19 +6,17 @@
  * @package Sovia\Traits
  */
 
-namespace Sovia\Traits;
-
-use Sovia\Container;
+namespace Sovia\Traits\Dependency;
 
 /**
  * Trait for dependency container
  */
-trait DependencyContainer
+trait Container
 {
     /**
      * Container
      *
-     * @var Container
+     * @var \Sovia\Container
      */
     protected $dependencyContainer;
 
@@ -36,9 +34,9 @@ trait DependencyContainer
      * Set container
      *
      * @param \Sovia\Container $dependencyContainer
-     * @return DependencyContainer
+     * @return Container
      */
-    public function setDependencyContainer(Container $dependencyContainer)
+    public function setDependencyContainer(\Sovia\Container $dependencyContainer)
     {
         $this->dependencyContainer = $dependencyContainer;
 
@@ -77,7 +75,7 @@ trait DependencyContainer
      */
     protected function checkContainerState()
     {
-        if (!$this->dependencyContainer instanceof Container) {
+        if (!$this->dependencyContainer instanceof \Sovia\Container) {
             throw new \Exception('Container is not set');
         }
     }
@@ -89,9 +87,8 @@ trait DependencyContainer
      */
     protected function requireDependencies()
     {
-        if (!$this->dependencyContainer instanceof Container) {
-            throw new \ErrorException('Invalid dependency container');
-        }
+        $this->checkContainerState();
+
         $injected    = $this->dependencyContainer->getKeys();
         $notInjected = [];
         foreach (func_get_args() as $argument) {

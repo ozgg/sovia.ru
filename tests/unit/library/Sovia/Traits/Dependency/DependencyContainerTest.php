@@ -6,21 +6,20 @@
  * @package Test\Unit\Library\Sovia\Traits
  */
 
-namespace Test\Unit\Library\Sovia\Traits;
+namespace Test\Unit\Library\Sovia\Traits\Dependency;
 
-use Sovia\Container;
 use Sovia\Test\TestCase;
-use Sovia\Traits\DependencyContainer;
+use Sovia\Traits\Dependency\Container;
 
 /**
  * Test of trait DependencyContainer
  *
- * @coversDefaultClass \Sovia\Traits\DependencyContainer
+ * @coversDefaultClass \Sovia\Traits\Dependency\Container
  */
 class DependencyContainerTest extends TestCase
 {
     /**
-     * @var DependencyContainer
+     * @var Container
      */
     protected $trait;
 
@@ -36,7 +35,7 @@ class DependencyContainerTest extends TestCase
      */
     public function setUp()
     {
-        $traitName   = '\\Sovia\\Traits\\DependencyContainer';
+        $traitName   = '\\Sovia\\Traits\\Dependency\\Container';
         $this->trait = $this->getObjectForTrait($traitName);
 
         $this->reflection = new \ReflectionClass($this->trait);
@@ -49,7 +48,7 @@ class DependencyContainerTest extends TestCase
      */
     public function testCheckContainerStateSet()
     {
-        $this->trait->setDependencyContainer(new Container);
+        $this->trait->setDependencyContainer(new \Sovia\Container);
         $method = $this->reflection->getMethod('checkContainerState');
         $method->setAccessible(true);
         $method->invoke($this->trait);
@@ -77,7 +76,7 @@ class DependencyContainerTest extends TestCase
      */
     public function testExtractDependency()
     {
-        $this->trait->setDependencyContainer(new Container);
+        $this->trait->setDependencyContainer(new \Sovia\Container);
         $element = new \stdClass;
 
         $element->foo = 'bar';

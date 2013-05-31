@@ -16,7 +16,7 @@ use Sovia\Traits;
 
 abstract class Controller
 {
-    use Traits\DependencyContainer, Traits\Environment;
+    use Traits\Dependency\LoadingContainer, Traits\Environment;
 
     /**
      * @var Application
@@ -73,23 +73,23 @@ abstract class Controller
     {
     }
 
-    public function execute($method, $name)
+    public function execute($method, $action)
     {
-        $name .= 'Action';
+        $action .= 'Action';
 
         $callback   = [];
-        $actionName = strtolower($method) . ucfirst($name);
+        $actionName = strtolower($method) . ucfirst($action);
         if (method_exists($this, $actionName)) {
             $callback = [$this, $actionName];
-        } elseif (method_exists($this, $name)) {
-            $callback = [$this, $name];
+        } elseif (method_exists($this, $action)) {
+            $callback = [$this, $action];
         }
 
         if (!empty($callback)) {
             call_user_func($callback);
             $this->render();
         } else {
-            throw new NotFound("Cannot {$method} {$name} action");
+            throw new NotFound("Cannot {$method} {$action} action");
         }
     }
 
@@ -142,29 +142,5 @@ abstract class Controller
         $this->viewsPath = $viewsPath;
 
         return $this;
-    }
-
-    /**
-     * Get used route
-     *
-     * @return \Sovia\Route
-     */
-    protected function getRoute()
-    {
-        $this->requireDependencies('route');
-
-        return $this->extractDependency('route');
-    }
-
-    /**
-     * Get request
-     *
-     * @return \Sovia\Http\Request
-     */
-    protected function getRequest()
-    {
-        $this->requireDependencies('request');
-
-        return $this->extractDependency('request');
     }
 }
