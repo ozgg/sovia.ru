@@ -12,6 +12,7 @@ use Sovia\Application\Controller;
 use Sovia\Config;
 use Sovia\Container;
 use Sovia\Exceptions\Http;
+use Sovia\Route\StaticRoute;
 use Sovia\Router;
 use Sovia\Traits;
 
@@ -74,38 +75,19 @@ class Application
         try {
             $request = $this->getRequest();
             $router  = $this->getRouter();
-
-            $route = $router->matchRequest($request->getUri());
+            $route   = $router->matchRequest($request->getUri());
             $this->injectDependency('route', $route);
-
-            $parts = [
-                $this->directory,
-                'controllers',
-                $route->getControllerName() . 'Controller'
-            ];
-            $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
-            if (file_exists($file) && is_file($file)) {
-                include $file;
-                $parts[0]  = $this->getName();
-                $className = implode('\\', $parts);
-                if (!class_exists($className)) {
-                    throw new \Exception("Cannot find controller {$className}");
-                }
-                $controller = new $className($this);
-                if (!$controller instanceof Controller) {
-                    throw new \Exception("Invalid controller: {$className}");
-                }
-            } else {
-                throw new \Exception("Cannot load controller from {$file}");
-            }
-
-            $controller->setEnvironment($this->getEnvironment());
-            $controller->init();
-            $controller->execute(
-                $request->getMethod(), $route->getActionName()
+            $this->executeController(
+                $route->getControllerName(),
+                $request->getMethod(),
+                $route->getActionName()
             );
         } catch (Http $e) {
-            $this->renderError($e);
+            try {
+                $this->renderError($e);
+            } catch (\Exception $e) {
+                $this->fallback($e);
+            }
         } catch (\Exception $e) {
             $this->fallback($e);
         }
@@ -224,9 +206,51 @@ class Application
         $this->injectDependency('config', $config);
     }
 
+    /**
+     * Load controller
+     *
+     * @param string $name
+     * @param string $method
+     * @param string $action
+     * @throws \Exception
+     * @return Controller
+     */
+    protected function executeController($name, $method, $action)
+    {
+        $parts = [
+            $this->directory,
+            'controllers',
+            "{$name}Controller"
+        ];
+        $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
+        if (file_exists($file) && is_file($file)) {
+            include $file;
+            $parts[0]  = $this->getName();
+            $className = implode('\\', $parts);
+            if (!class_exists($className)) {
+                throw new \Exception("Cannot find controller {$className}");
+            }
+            $controller = new $className($this);
+            if (!$controller instanceof Controller) {
+                throw new \Exception("Invalid controller: {$className}");
+            }
+        } else {
+            throw new \Exception("Cannot load controller from {$file}");
+        }
+
+        $controller->setEnvironment($this->getEnvironment());
+        $controller->init();
+        $controller->execute($method, $action);
+    }
+
     protected function renderError(Http $error)
     {
-        print_r($error);
+        $route = new StaticRoute;
+        $route->setActionName('error');
+        $route->setControllerName('error');
+        $route->setParameters(['error' => $error]);
+        $this->injectDependency('route', $route);
+        $this->executeController('error', 'get', 'error');
     }
 
     /**

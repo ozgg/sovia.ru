@@ -11,11 +11,22 @@
 namespace Web\Controllers;
  
 use Sovia\Application\Controller;
+use Sovia\Exceptions\Http;
 
 class ErrorController extends Controller
 {
     public function errorAction()
     {
-
+        $error = $this->getRoute()->getParameter('error');
+        if ($error instanceof Http) {
+            $this->setParameter('message', $error->getMessage());
+            $this->setParameter('trace', $error->getTraceAsString());
+            $this->setStatus($error->getStatus());
+        } else {
+            $this->setParameter('message', 'Error');
+            $this->setParameter('trace', []);
+        }
+        $this->setParameter('is_development', $this->isDevelopment());
+        $this->setParameter('error', $error);
     }
 }

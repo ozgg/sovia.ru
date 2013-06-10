@@ -342,6 +342,24 @@ abstract class Route
     }
 
     /**
+     * Get parameter
+     *
+     * @param string $name
+     * @param mixed  $default
+     * @return mixed
+     */
+    public function getParameter($name, $default = null)
+    {
+        if (isset($this->parameters[$name])) {
+            $value = $this->parameters[$name];
+        } else {
+            $value = $default;
+        }
+
+        return $value;
+    }
+
+    /**
      * Set reverse pattern
      *
      * @param string $reverse
