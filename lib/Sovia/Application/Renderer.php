@@ -10,8 +10,12 @@
 
 namespace Sovia\Application;
 
+use Sovia\Traits\ResponseStatus;
+
 abstract class Renderer
 {
+    use ResponseStatus;
+
     const FORMAT_HTML = 'html';
     const FORMAT_JSON = 'json';
     const FORMAT_TEXT = 'text';

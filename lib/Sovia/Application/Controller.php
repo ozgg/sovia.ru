@@ -10,16 +10,19 @@
 
 namespace Sovia\Application;
 
-use Sovia\Http\Application;
+use Sovia\Exceptions;
 use Sovia\Exceptions\Http\Client\NotFound;
+use Sovia\Http;
 use Sovia\Traits;
 
 abstract class Controller
 {
-    use Traits\Dependency\LoadingContainer, Traits\Environment;
+    use Traits\Dependency\LoadingContainer,
+        Traits\Environment,
+        Traits\ResponseStatus;
 
     /**
-     * @var Application
+     * @var Http\Application
      */
     protected $application;
 
@@ -56,7 +59,7 @@ abstract class Controller
      */
     protected $parameters = [];
 
-    public function __construct(Application $application)
+    public function __construct(Http\Application $application)
     {
         $this->application = $application;
         $this->setDependencyContainer($application->getDependencyContainer());
@@ -77,7 +80,7 @@ abstract class Controller
     {
         $action .= 'Action';
 
-        $callback   = [];
+        $callback = [];
         $actionName = strtolower($method) . ucfirst($action);
         if (method_exists($this, $actionName)) {
             $callback = [$this, $actionName];
@@ -87,9 +90,17 @@ abstract class Controller
 
         if (!empty($callback)) {
             call_user_func($callback);
-            $this->render();
+            if (!$this->status instanceof Http\Status) {
+                $this->setStatus(new Http\Status\Ok);
+            }
+            try {
+                $this->render();
+            } catch (Exceptions\Http $error) {
+                $this->renderError($error);
+            }
         } else {
-            throw new NotFound("Cannot {$method} {$action} action");
+            $error = new NotFound("Cannot {$method} {$action} action");
+            $this->renderError($error);
         }
     }
 
@@ -141,5 +152,58 @@ abstract class Controller
         $this->viewsPath = $viewsPath;
 
         return $this;
+    }
+
+    /**
+     * Set internal parameter
+     *
+     * @param string $parameter
+     * @param mixed  $value
+     */
+    protected function setParameter($parameter, $value)
+    {
+        $this->parameters[$parameter] = $value;
+    }
+
+    /**
+     * Get parameter
+     *
+     * @param string $parameter
+     * @param mixed  $default
+     * @return mixed
+     */
+    protected function getParameter($parameter, $default = null)
+    {
+        if (isset($this->parameters[$parameter])) {
+            $value = $this->parameters[$parameter];
+        } else {
+            $route = $this->getRoute()->getParameters();
+            if (isset($route[$parameter])) {
+                $value = $route[$parameter];
+            } else {
+                $value = $this->getRequest()->getParameter(
+                    $parameter, $default
+                );
+            }
+        }
+
+        return $value;
+    }
+
+    protected function renderError(Exceptions\Http $exception)
+    {
+        $status = $exception->getStatus();
+
+        header("HTTP/1.1 {$status->getCode()} {$status->getMessage()}");
+
+        ob_end_clean();
+
+        $this->setParameter('exception', $exception);
+        $this->setParameter('is_development', $this->isDevelopment());
+
+        $renderer = Renderer::factory(Renderer::FORMAT_HTML);
+        $renderer->render('error', $this->parameters);
+
+        // throw $exception;
     }
 }

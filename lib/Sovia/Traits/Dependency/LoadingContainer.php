@@ -10,6 +10,7 @@ namespace Sovia\Traits\Dependency;
  
 use Sovia\Http;
 use Sovia\Route;
+use Sovia\Router;
 
 /**
  * Loading DI container
@@ -77,5 +78,22 @@ trait LoadingContainer
         }
 
         return $route;
+    }
+
+    /**
+     * Get router
+     *
+     * @return Router
+     * @throws \ErrorException
+     */
+    protected function getRouter()
+    {
+        $router = $this->extractDependency('router');
+
+        if (!$router instanceof Router) {
+            throw new \ErrorException('Router is not injected');
+        }
+
+        return $router;
     }
 }

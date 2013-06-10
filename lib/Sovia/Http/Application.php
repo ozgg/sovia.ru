@@ -11,6 +11,7 @@ namespace Sovia\Http;
 use Sovia\Application\Controller;
 use Sovia\Config;
 use Sovia\Container;
+use Sovia\Exceptions\Http;
 use Sovia\Router;
 use Sovia\Traits;
 
@@ -59,7 +60,6 @@ class Application
     {
         $this->guessEnvironment();
         $this->initRouter();
-        $this->injectDependency('session', new Session);
         $this->initConfig();
     }
 
@@ -72,12 +72,8 @@ class Application
     {
         $this->requireDependencies('request', 'router');
         try {
-            /**
-             * @var Request $request
-             * @var Router  $router
-             */
-            $request = $this->extractDependency('request');
-            $router  = $this->extractDependency('router');
+            $request = $this->getRequest();
+            $router  = $this->getRouter();
 
             $route = $router->matchRequest($request->getUri());
             $this->injectDependency('route', $route);
@@ -108,6 +104,8 @@ class Application
             $controller->execute(
                 $request->getMethod(), $route->getActionName()
             );
+        } catch (Http $e) {
+            $this->renderError($e);
         } catch (\Exception $e) {
             $this->fallback($e);
         }
@@ -226,10 +224,25 @@ class Application
         $this->injectDependency('config', $config);
     }
 
+    protected function renderError(Http $error)
+    {
+        print_r($error);
+    }
+
+    /**
+     * Fallback if exception is caught
+     *
+     * @param \Exception $e
+     */
     protected function fallback(\Exception $e)
     {
+        header('HTTP/1.1 500 Internal Server Error');
         header('Content-Type: text/plain');
-        echo $e->getMessage(), PHP_EOL;
-        echo $e->getTraceAsString(), PHP_EOL;
+        if ($this->isDevelopment() || $this->isTest()) {
+            echo $e->getMessage(), PHP_EOL;
+            echo $e->getTraceAsString(), PHP_EOL;
+        } else {
+            echo 'Internal server error', PHP_EOL;
+        }
     }
 }
