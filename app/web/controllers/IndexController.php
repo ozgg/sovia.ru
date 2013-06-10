@@ -16,5 +16,6 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
+        $this->setParameter('title', 'Главная страница');
     }
 }

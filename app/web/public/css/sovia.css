@@ -1,0 +1,51 @@
+html {
+    background: url("/images/bg-icons.png") repeat scroll 0 0 #122129;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Palatino Linotype", "Book Antiqua", "Antiqua", serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+}
+
+body > header {
+    height: 160px;
+    margin: 0 300px 0 0;
+    background: #eeffff;
+}
+
+body footer:last-child {
+    background: #eeeeee;
+}
+
+section#content {
+    background: #FFFFFF;
+    border-radius: 20px;
+    margin: 0 300px 0 0;
+    min-height: 500px;
+    padding: 1em;
+}
+
+section#right-column {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+}
+
+section#right-column aside {
+    background: #DDDDDD;
+    border-radius: 15px 15px 15px 15px;
+    margin: 0 30px 1em;
+    padding: 0.5em;
+}
+
+aside header {
+    font-weight: bold;
+}

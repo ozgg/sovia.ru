@@ -2,10 +2,81 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Sovia 3.0.0a</title>
+    <title>Sovia 3.0.0a / <?php echo $this->get('title'); ?></title>
+    <link rel="stylesheet" href="/css/sovia.css" />
+    <script type="text/javascript" src="/js/sovia.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript">
+        document.createElement('nav');
+        document.createElement('header');
+        document.createElement('footer');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('hgroup');
+    </script>
+    <![endif]-->
 </head>
 <body>
+<header>
+    <div>Logo will be here</div>
+    <nav>
+        <ul>
+            <li><a href="/">Статьи</a></li>
+            <li><a href="/">Сны</a></li>
+            <li><a href="/">Сонник</a></li>
+            <li><a href="/">Сообщество</a></li>
+            <li><a href="/">О проекте</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="content">
 <?php $this->renderContent(); ?>
 
+</section>
+
+<section id="right-column">
+    <aside>
+        Авторизация
+    </aside>
+
+    <aside>
+        <header>Чаще всего снится</header>
+        <nav>
+            <ul>
+                <li><a href="/">Символ</a> (количество)</li>
+                <li><a href="/">Символ</a> (количество)</li>
+                <li><a href="/">Символ</a> (количество)</li>
+                <li><a href="/">Символ</a> (количество)</li>
+                <li><a href="/">Символ</a> (количество)</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <aside>
+        <header>Случайный сон (<a href="/">Название</a>)</header>
+        <p>Тут будет текст сна</p>
+    </aside>
+
+    <aside>
+        <header>Что ещё можно посмотреть</header>
+        <nav>
+            <ul>
+                <li><a href="/">Архив снов</a></li>
+                <li><a href="/">Случайный сон</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <aside class="sape">
+        <header>Реклама</header>
+    </aside>
+</section>
+
+<footer>
+    <div>&#0169; 2006&#0150;2013 sovia.ru</div>
+    <div><a href="/">Пользовательское соглашение</a></div>
+</footer>
 </body>
 </html>
