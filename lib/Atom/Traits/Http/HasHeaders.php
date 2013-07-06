@@ -3,10 +3,12 @@
  * Примесь для работы с HTTP-заголовками
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
- * @package Atom\Traits
+ * @package Atom\Traits\Http
  */
 
-namespace Atom\Traits;
+namespace Atom\Traits\Http;
+
+use Atom\Traits\GetElement;
 
 /**
  * Объект работает с заголовками

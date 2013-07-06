@@ -8,7 +8,7 @@
 
 namespace Atom\Http;
 
-use Atom\Traits\HasHeaders;
+use Atom\Traits\Http\HasHeaders;
 
 /**
  * HTTP-ответ

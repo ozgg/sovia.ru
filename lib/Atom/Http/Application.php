@@ -46,8 +46,15 @@ class Application
         $this->setDirectory($directory);
         $this->setName($name);
         $this->setDependencyContainer(new Container);
+        $this->initRequest();
+        $this->guessEnvironment();
     }
 
+    public function run()
+    {
+
+    }
+    
     /**
      * @return string
      */
@@ -84,5 +91,48 @@ class Application
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return Request
+     * @throws \RuntimeException
+     */
+    public function getRequest()
+    {
+        $request = $this->extractDependency('request');
+        if (!$request instanceof Request) {
+            $this->initRequest();
+            $request = $this->extractDependency('request');
+        }
+        if (!$request instanceof Request) {
+            throw new \RuntimeException('Cannot extract request');
+        }
+
+        return $request;
+    }
+
+    protected function initRequest()
+    {
+        $request = new Request($_SERVER);
+        $request->setPost($_POST);
+        $request->setGet($_GET);
+        $request->setBody(file_get_contents('php://input'));
+
+        $this->injectDependency('request', $request);
+    }
+
+    protected function guessEnvironment()
+    {
+        $request = $this->getRequest();
+        $host    = $request->getHost();
+        if (strpos($host, '.local') !== false) {
+            $environment = 'development';
+        } elseif (strpos($host, 'test.') !== false) {
+            $environment = 'test';
+        } else {
+            $environment = 'production';
+        }
+
+        $this->setEnvironment($environment);
     }
 }
