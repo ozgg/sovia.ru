@@ -56,14 +56,8 @@ class Controller
             if (!$this->status instanceof Status) {
                 $this->setStatus(new Status\Ok);
             }
-            try {
-                $this->render();
-            } catch (Error $error) {
-                $this->renderError($error);
-            }
         } else {
-            $error = new Error\NotFound("Cannot {$method} {$action} action");
-            $this->renderError($error);
+            throw new Error\NotFound("Cannot {$method} {$action} action");
         }
     }
 
@@ -117,16 +111,6 @@ class Controller
         }
 
         return $request;
-    }
-
-    protected function render()
-    {
-        echo 'Rendering', PHP_EOL;
-    }
-
-    protected function renderError(Error $exception)
-    {
-        throw $exception;
     }
 
     /**

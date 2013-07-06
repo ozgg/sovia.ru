@@ -246,6 +246,13 @@ class Application
         $controller->setEnvironment($this->getEnvironment());
         $controller->init();
         $controller->execute($method, $action);
+        $this->renderResponse($controller);
+    }
+
+    protected function renderResponse(Controller $controller)
+    {
+        header('Content-type: text/plain;charset=UTF-8');
+        print_r($controller);
     }
 
     /**
