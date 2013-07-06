@@ -52,9 +52,10 @@ class Application
 
     public function run()
     {
-
+        header('Content-Type: text/plain;charset=UTF-8');
+        echo 'Atom!';
     }
-    
+
     /**
      * @return string
      */

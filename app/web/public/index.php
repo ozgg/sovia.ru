@@ -7,5 +7,5 @@
 
 require __DIR__ . '/../../../bootstrap.php';
 
-$application = new \Sovia\Http\Application(realpath(__DIR__ . '/../'));
+$application = new \Atom\Http\Application(realpath(__DIR__ . '/../'));
 $application->run();
