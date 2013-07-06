@@ -16,4 +16,4 @@ $config = [
     ],
 ];
 
-return \Sovia\Config::merge($parent, $config);
+return \Atom\Configuration::merge($parent, $config);

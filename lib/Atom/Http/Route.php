@@ -148,8 +148,8 @@ abstract class Route
      * Route factory
      *
      * @param string $type
+     * @throws \InvalidArgumentException
      * @return Route\PatternRoute|Route\RegexRoute|Route\RestRoute|Route\StaticRoute
-     * @throws \ErrorException
      */
     public static function factory($type)
     {
@@ -167,7 +167,8 @@ abstract class Route
                 $route = new Route\RestRoute;
                 break;
             default:
-                throw new \ErrorException("Invalid route type: {$type}");
+                $error = "Invalid route type: {$type}";
+                throw new \InvalidArgumentException($error);
         }
 
         $route->setType($type);
@@ -284,7 +285,7 @@ abstract class Route
      * @param array $methods
      * @return Route
      */
-    public function setMethods($methods)
+    public function setMethods(array $methods)
     {
         $this->methods = $methods;
 

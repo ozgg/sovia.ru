@@ -18,7 +18,7 @@ class ErrorController extends Controller
     public function errorAction()
     {
         $error = $this->getRoute()->getParameter('error');
-        if ($error instanceof Http) {
+        if ($error instanceof Error) {
             $this->setParameter('message', $error->getMessage());
             $this->setParameter('trace', $error->getTraceAsString());
             $this->setStatus($error->getStatus());
