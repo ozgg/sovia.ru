@@ -1,7 +1,7 @@
 <?php
 /**
- * 
- * 
+ *
+ *
  * Date: 27.06.13
  * Time: 15:31
  *
@@ -10,7 +10,7 @@
  */
 
 namespace Atom\Http;
- 
+
 use Atom\Configuration;
 use Atom\Container;
 use Atom\Traits;
@@ -55,8 +55,23 @@ class Application
 
     public function run()
     {
-        header('Content-Type: text/plain;charset=UTF-8');
-        print_r($this->extractDependency('router'));
+        $this->requireDependencies('router', 'request');
+        try {
+            $request = $this->getRequest();
+            $router  = $this->getRouter();
+            $route   = $router->matchRequest($request->getUri());
+            $this->injectDependency('route', $route);
+
+            $this->executeController(
+                $route->getControllerName(),
+                $request->getMethod(),
+                $route->getActionName()
+            );
+        } catch (Error $e) {
+            $this->fallback($e);
+        } catch (\Exception $e) {
+            $this->fallback($e);
+        }
     }
 
     /**
@@ -113,6 +128,20 @@ class Application
         }
 
         return $request;
+    }
+
+    /**
+     * @return Router
+     * @throws \RuntimeException
+     */
+    public function getRouter()
+    {
+        $router = $this->extractDependency('router');
+        if (!$router instanceof Router) {
+            throw new \RuntimeException('Cannot extract router');
+        }
+
+        return $router;
     }
 
     /**
@@ -187,5 +216,52 @@ class Application
         }
 
         $this->setEnvironment($environment);
+    }
+
+    protected function executeController($name, $method, $action)
+    {
+        $parts = [
+            $this->directory,
+            'controllers',
+            "{$name}Controller"
+        ];
+        $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
+        if (is_file($file)) {
+            include $file;
+            $parts[0]  = $this->getName();
+            $className = implode('\\', $parts);
+            if (!class_exists($className)) {
+                $error = "Cannot find controller {$className}";
+                throw new \RuntimeException($error);
+            }
+            $controller = new $className($this);
+            if (!$controller instanceof Controller) {
+                $error = "Invalid controller: {$className}";
+                throw new \RuntimeException($error);
+            }
+        } else {
+            throw new \RuntimeException("Cannot load controller from {$file}");
+        }
+
+        $controller->setEnvironment($this->getEnvironment());
+        $controller->init();
+        $controller->execute($method, $action);
+    }
+
+    /**
+     * Fallback if exception is caught
+     *
+     * @param \Exception $e
+     */
+    protected function fallback(\Exception $e)
+    {
+        header('HTTP/1.1 500 Internal Server Error');
+        header('Content-Type: text/plain');
+        if ($this->isDevelopment() || $this->isTest()) {
+            echo $e->getMessage(), PHP_EOL;
+            echo $e->getTraceAsString(), PHP_EOL;
+        } else {
+            echo 'Internal server error', PHP_EOL;
+        }
     }
 }

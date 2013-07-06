@@ -10,7 +10,7 @@
 
 namespace Web\Controllers;
 
-use Sovia\Application\Controller;
+use Atom\Http\Controller;
 
 class IndexController extends Controller
 {

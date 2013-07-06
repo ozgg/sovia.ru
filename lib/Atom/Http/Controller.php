@@ -30,6 +30,15 @@ class Controller
         $this->setDependencyContainer($application->getDependencyContainer());
     }
 
+    public function init()
+    {
+    }
+
+    public function execute($method, $action)
+    {
+        echo "{$method}:{$action}";
+    }
+
     /**
      * @return \Atom\Http\Application
      */

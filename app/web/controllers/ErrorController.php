@@ -10,8 +10,8 @@
 
 namespace Web\Controllers;
  
-use Sovia\Application\Controller;
-use Sovia\Exceptions\Http;
+use Atom\Http\Controller;
+use Atom\Http\Error;
 
 class ErrorController extends Controller
 {
