@@ -11,6 +11,7 @@
 
 namespace Atom\Http;
  
+use Atom\Configuration;
 use Atom\Container;
 use Atom\Traits;
 
@@ -48,12 +49,14 @@ class Application
         $this->setDependencyContainer(new Container);
         $this->initRequest();
         $this->guessEnvironment();
+        $this->initConfig();
+        $this->initRouter();
     }
 
     public function run()
     {
         header('Content-Type: text/plain;charset=UTF-8');
-        echo 'Atom!';
+        print_r($this->extractDependency('router'));
     }
 
     /**
@@ -95,8 +98,8 @@ class Application
     }
 
     /**
-     * @return Request
      * @throws \RuntimeException
+     * @return Request
      */
     public function getRequest()
     {
@@ -112,6 +115,32 @@ class Application
         return $request;
     }
 
+    /**
+     * Import config from file
+     *
+     * @param string $name
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @return array
+     */
+    public function importConfig($name)
+    {
+        if (strpos($name, '..') !== false) {
+            $error = "Bad name for config to include: {$name}";
+            throw new \InvalidArgumentException($error);
+        }
+        $path = realpath($this->directory . DIRECTORY_SEPARATOR . 'config');
+        $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
+
+        if (file_exists($file) && is_file($file)) {
+            $config = include $file;
+        } else {
+            throw new \RuntimeException("Cannot read config from file {$file}");
+        }
+
+        return (array) $config;
+    }
+
     protected function initRequest()
     {
         $request = new Request($_SERVER);
@@ -120,6 +149,29 @@ class Application
         $request->setBody(file_get_contents('php://input'));
 
         $this->injectDependency('request', $request);
+    }
+
+    /**
+     * Initialize environment configuration
+     */
+    protected function initConfig()
+    {
+        $baseDir = $this->getDirectory() . '/../../config';
+        $config  = new Configuration($baseDir);
+        $config->setEnvironment($this->getEnvironment());
+        $this->injectDependency('config', $config);
+    }
+
+    /**
+     * Initialize router
+     */
+    protected function initRouter()
+    {
+        $routes = $this->importConfig('routes');
+        $router = new Router;
+        $router->import($routes);
+
+        $this->injectDependency('router', $router);
     }
 
     protected function guessEnvironment()
