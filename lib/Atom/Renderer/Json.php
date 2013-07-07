@@ -15,8 +15,19 @@ use Atom\Renderer;
 
 class Json extends Renderer
 {
+    /**
+     * @return string
+     */
     public function render()
     {
         return json_encode($this->getParameters(), JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return 'application/json;charset=UTF-8';
     }
 }

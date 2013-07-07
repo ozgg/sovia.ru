@@ -11,30 +11,14 @@
 
 namespace Atom;
  
-use Atom\Traits\HasParameters;
+use Atom\Traits;
 
 /**
  * Конфигурация
  */
 class Configuration
 {
-    use HasParameters;
-
-    /**
-     * Среда
-     *
-     * @var string
-     */
-    private $environment;
-
-    /**
-     * Базовая директория
-     *
-     * Путь к файлам с конфигурацией.
-     *
-     * @var string
-     */
-    private $baseDirectory;
+    use Traits\HasParameters, Traits\BaseDirectory, Traits\Environment;
 
     /**
      * @param string $baseDirectory
@@ -65,16 +49,6 @@ class Configuration
     }
 
     /**
-     * Получить среду
-     *
-     * @return string
-     */
-    public function getEnvironment()
-    {
-        return $this->environment;
-    }
-
-    /**
      * Задать среду
      *
      * @param string $environment
@@ -84,29 +58,6 @@ class Configuration
     {
         $this->environment = str_replace('../', '', $environment);
         $this->initialize();
-
-        return $this;
-    }
-
-    /**
-     * Получить базовую директорию
-     *
-     * @return string
-     */
-    public function getBaseDirectory()
-    {
-        return $this->baseDirectory;
-    }
-
-    /**
-     * Задать базовую директорию
-     *
-     * @param string $baseDirectory
-     * @return Configuration
-     */
-    public function setBaseDirectory($baseDirectory)
-    {
-        $this->baseDirectory = realpath($baseDirectory);
 
         return $this;
     }

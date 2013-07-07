@@ -12,6 +12,7 @@
 namespace Atom\Http;
 
 use Atom\Container;
+use Atom\Renderer;
 use Atom\Traits;
 
 class Controller
@@ -24,6 +25,8 @@ class Controller
      * @var Status
      */
     protected $status;
+
+    protected $format = Renderer::FORMAT_HTML;
 
     public function __construct(Container $container)
     {
@@ -71,6 +74,25 @@ class Controller
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param mixed $format
+     * @return Controller
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
 
         return $this;
     }

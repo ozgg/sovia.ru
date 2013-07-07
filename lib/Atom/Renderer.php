@@ -11,42 +11,48 @@
 
 namespace Atom;
  
-use Atom\Traits\HasParameters;
+use Atom\Traits;
 
 abstract class Renderer
 {
-    use HasParameters;
+    use Traits\HasParameters, Traits\BaseDirectory;
 
     /**
      * Render as JSON
      */
-    const TYPE_JSON = 'json';
+    const FORMAT_JSON = 'json';
 
     /**
      * Render as HTML
      */
-    const TYPE_HTML = 'html';
+    const FORMAT_HTML = 'html';
 
+    /**
+     * @var string
+     */
     protected $layoutName;
-
-    protected $baseDirectory;
 
     /**
      * @return string
      */
     abstract public function render();
 
-    public static function factory($type)
+    /**
+     * @return string
+     */
+    abstract public function getContentType();
+
+    public static function factory($format)
     {
-        switch ($type) {
-            case static::TYPE_JSON:
+        switch ($format) {
+            case static::FORMAT_JSON:
                 $renderer = new Renderer\Json;
                 break;
-            case static::TYPE_HTML:
+            case static::FORMAT_HTML:
                 $renderer = new Renderer\Html;
                 break;
             default:
-                $error = "Invalid renderer type {$type}";
+                $error = "Invalid renderer format: {$format}";
                 throw new \InvalidArgumentException($error);
         }
 

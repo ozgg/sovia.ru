@@ -30,7 +30,7 @@ trait Environment
      */
     public function setEnvironment($environment)
     {
-        $this->environment = trim($environment);
+        $this->environment = trim(str_replace('../', '', $environment));
 
         return $this;
     }

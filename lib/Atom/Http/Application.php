@@ -18,14 +18,9 @@ use Atom\Traits;
 
 class Application
 {
-    use Traits\Environment, Traits\Dependency\Container;
-
-    /**
-     * Application directory
-     *
-     * @var string
-     */
-    protected $directory;
+    use Traits\Environment,
+        Traits\Dependency\Container,
+        Traits\BaseDirectory;
 
     /**
      * Application name
@@ -45,7 +40,7 @@ class Application
     {
         $name = ucfirst(strtolower(basename($directory)));
 
-        $this->setDirectory($directory);
+        $this->setBaseDirectory($directory);
         $this->setName($name);
         $this->setDependencyContainer(new Container);
         $this->initRequest();
@@ -73,25 +68,6 @@ class Application
         } catch (\Exception $e) {
             $this->fallback($e);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getDirectory()
-    {
-        return $this->directory;
-    }
-
-    /**
-     * @param string $directory
-     * @return Application
-     */
-    public function setDirectory($directory)
-    {
-        $this->directory = $directory;
-
-        return $this;
     }
 
     /**
@@ -159,7 +135,7 @@ class Application
             $error = "Bad name for config to include: {$name}";
             throw new \InvalidArgumentException($error);
         }
-        $path = realpath($this->directory . DIRECTORY_SEPARATOR . 'config');
+        $path = realpath($this->baseDirectory . DIRECTORY_SEPARATOR . 'config');
         $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
 
         if (file_exists($file) && is_file($file)) {
@@ -186,7 +162,7 @@ class Application
      */
     protected function initConfig()
     {
-        $baseDir = $this->getDirectory() . '/../../config';
+        $baseDir = $this->getBaseDirectory() . '/../../config';
         $config  = new Configuration($baseDir);
         $config->setEnvironment($this->getEnvironment());
         $this->injectDependency('config', $config);
@@ -222,7 +198,7 @@ class Application
     protected function executeController($name, $method, $action)
     {
         $parts = [
-            $this->directory,
+            $this->baseDirectory,
             'controllers',
             "{$name}Controller"
         ];
@@ -254,11 +230,12 @@ class Application
     {
         $renderer = Renderer::factory('html');
         $renderer->setParameters($controller->getParameters());
+        $renderer->setBaseDirectory($this->baseDirectory . '/views');
 
         $body = $renderer->render();
 
         $response = new Response($body);
-        $response->setContentType('text/plain;charset=UTF-8');
+        $response->setContentType($renderer->getContentType());
         $response->send();
     }
 

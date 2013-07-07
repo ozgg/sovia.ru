@@ -15,8 +15,19 @@ use Atom\Renderer;
 
 class Html extends Renderer
 {
+    /**
+     * @return string
+     */
     public function render()
     {
         return print_r($this->getParameters(), true);
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentType()
+    {
+        return 'text/html;charset=UTF-8';
     }
 }
