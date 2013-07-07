@@ -15,7 +15,9 @@ use Atom\Traits;
 
 abstract class Renderer
 {
-    use Traits\HasParameters, Traits\BaseDirectory;
+    use Traits\HasParameters,
+        Traits\BaseDirectory,
+        Traits\Dependency\Container;
 
     /**
      * Render as JSON

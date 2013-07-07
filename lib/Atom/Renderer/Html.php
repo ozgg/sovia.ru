@@ -52,13 +52,25 @@ class Html extends Renderer
     protected function parseBlock($block)
     {
         if (isset($block[1])) {
-            $command = $block[1];
+            $command = trim($block[1]);
+            $pattern = '/([a-z]+):([a-z]+)(\s+.+)?/';
+            preg_match($pattern, $command, $data);
 
-            $result = $command;
+            if (isset($data[1], $data[2])) {
+                $arguments = isset($data[3]) ? trim($data[3]) : '';
+                $result    = $this->callHelper($data[1], $data[2], $arguments);
+            } else {
+                $result = "Invalid helper call: {$command}";
+            }
         } else {
             $result = 'Invalid block';
         }
 
         return $result;
+    }
+
+    protected function callHelper($helperName, $methodName, $arguments)
+    {
+        return "{$helperName}::{$methodName}({$arguments})";
     }
 }

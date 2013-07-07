@@ -9,11 +9,8 @@
 namespace Sovia\Http;
 
 use Sovia\Application\Controller;
-use Sovia\Config;
 use Sovia\Container;
 use Sovia\Exceptions\Http;
-use Sovia\Route\StaticRoute;
-use Sovia\Router;
 use Sovia\Traits;
 
 /**
@@ -59,9 +56,6 @@ class Application
      */
     public function bootstrap()
     {
-        $this->guessEnvironment();
-        $this->initRouter();
-        $this->initConfig();
     }
 
     /**
@@ -71,26 +65,6 @@ class Application
      */
     public function run()
     {
-        $this->requireDependencies('request', 'router');
-        try {
-            $request = $this->getRequest();
-            $router  = $this->getRouter();
-            $route   = $router->matchRequest($request->getUri());
-            $this->injectDependency('route', $route);
-            $this->executeController(
-                $route->getControllerName(),
-                $request->getMethod(),
-                $route->getActionName()
-            );
-        } catch (Http $e) {
-            try {
-                $this->renderError($e);
-            } catch (\Exception $e) {
-                $this->fallback($e);
-            }
-        } catch (\Exception $e) {
-            $this->fallback($e);
-        }
     }
 
     /**
@@ -184,29 +158,6 @@ class Application
     }
 
     /**
-     * Initialize router
-     */
-    protected function initRouter()
-    {
-        $routes = $this->importConfig('routes');
-        $router = new Router;
-        $router->import($routes);
-
-        $this->injectDependency('router', $router);
-    }
-
-    /**
-     * Initialize environment configuration
-     */
-    protected function initConfig()
-    {
-        $baseDir = $this->getDirectory() . '/../../config';
-        $config  = new Config($baseDir);
-        $config->load($this->getEnvironment());
-        $this->injectDependency('config', $config);
-    }
-
-    /**
      * Load controller
      *
      * @param string $name
@@ -245,12 +196,6 @@ class Application
 
     protected function renderError(Http $error)
     {
-        $route = new StaticRoute;
-        $route->setActionName('error');
-        $route->setControllerName('error');
-        $route->setParameters(['error' => $error]);
-        $this->injectDependency('route', $route);
-        $this->executeController('error', 'get', 'error');
     }
 
     /**
