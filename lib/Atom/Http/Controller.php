@@ -11,6 +11,7 @@
 
 namespace Atom\Http;
 
+use Atom\Container;
 use Atom\Traits;
 
 class Controller
@@ -20,19 +21,13 @@ class Controller
         Traits\Dependency\Container;
 
     /**
-     * @var Application
-     */
-    protected $application;
-
-    /**
      * @var Status
      */
     protected $status;
 
-    public function __construct(Application $application)
+    public function __construct(Container $container)
     {
-        $this->setApplication($application);
-        $this->setDependencyContainer($application->getDependencyContainer());
+        $this->setDependencyContainer($container);
     }
 
     public function init()
@@ -59,25 +54,6 @@ class Controller
         } else {
             throw new Error\NotFound("Cannot {$method} {$action} action");
         }
-    }
-
-    /**
-     * @return \Atom\Http\Application
-     */
-    public function getApplication()
-    {
-        return $this->application;
-    }
-
-    /**
-     * @param \Atom\Http\Application $application
-     * @return Controller
-     */
-    public function setApplication(Application $application)
-    {
-        $this->application = $application;
-
-        return $this;
     }
 
     /**

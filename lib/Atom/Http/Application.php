@@ -234,7 +234,7 @@ class Application
                 $error = "Cannot find controller {$className}";
                 throw new \RuntimeException($error);
             }
-            $controller = new $className($this);
+            $controller = new $className($this->getDependencyContainer());
             if (!$controller instanceof Controller) {
                 $error = "Invalid controller: {$className}";
                 throw new \RuntimeException($error);
@@ -251,8 +251,11 @@ class Application
 
     protected function renderResponse(Controller $controller)
     {
-        header('Content-type: text/plain;charset=UTF-8');
-        print_r($controller);
+        $body = print_r($controller, true);
+
+        $response = new Response($body);
+        $response->setContentType('text/plain;charset=UTF-8');
+        $response->send();
     }
 
     /**
