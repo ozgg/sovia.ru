@@ -16,4 +16,28 @@ use Atom\Traits\Dependency\Container;
 abstract class Helper
 {
     use Container;
+
+    /**
+     * @var Html
+     */
+    protected $renderer;
+
+    /**
+     * @return \Atom\Renderer\Html
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
+     * @param \Atom\Renderer\Html $renderer
+     * @return Helper
+     */
+    public function setRenderer($renderer)
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
 }

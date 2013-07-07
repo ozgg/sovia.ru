@@ -205,7 +205,7 @@ class Application
         $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
         if (is_file($file)) {
             include $file;
-            $parts[0]  = $this->getName();
+            $parts[0] = $this->getName();
             $className = implode('\\', $parts);
             if (!class_exists($className)) {
                 $error = "Cannot find controller {$className}";
@@ -228,7 +228,9 @@ class Application
 
     protected function renderResponse(Controller $controller)
     {
-        $renderer = Renderer::factory('html');
+        $renderer = Renderer::factory(
+            $controller->getFormat(), $this->getDependencyContainer()
+        );
         $renderer->setParameters($controller->getParameters());
         $renderer->setBaseDirectory($this->baseDirectory . '/views');
         $renderer->setLayoutName($controller->getLayoutName());

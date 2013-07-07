@@ -8,7 +8,7 @@
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
 
-use Sovia\Route;
+use Atom\Http\Route;
 
 return [
     'home'  => [

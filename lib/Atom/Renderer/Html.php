@@ -53,7 +53,7 @@ class Html extends Renderer
     {
         if (isset($block[1])) {
             $command = trim($block[1]);
-            $pattern = '/([a-z]+):([a-z]+)(\s+.+)?/';
+            $pattern = '/([a-z]+\.?[a-z]+):([a-z]+)(\s+.+)?/i';
             preg_match($pattern, $command, $data);
 
             if (isset($data[1], $data[2])) {
@@ -71,6 +71,55 @@ class Html extends Renderer
 
     protected function callHelper($helperName, $methodName, $arguments)
     {
-        return "{$helperName}::{$methodName}({$arguments})";
+        $helper = $this->getHelper($helperName);
+
+        if ($helper instanceof Helper) {
+            if (method_exists($helper, $methodName)) {
+                $callback = [$helper, $methodName];
+                if (is_callable($callback)) {
+                    $result = call_user_func($callback, $arguments);
+                } else {
+                    $result = "Cannot call {$helperName}:{$methodName}";
+                }
+            } else {
+                $result = "Helper {$helperName} has no method {$methodName}";
+            }
+        } else {
+            $result = "Non-existent helper: {$helperName}";
+        }
+
+        return $result;
+    }
+
+    protected function getHelper($helperName)
+    {
+        static $cache = [];
+
+        $helper = null;
+        if (!isset($cache[$helperName])) {
+            if (strpos($helperName, '.') > 0) {
+                $parts      = explode('.', $helperName);
+                $namespace  = array_shift($parts) . '\\Renderer';
+                $helperName = implode('_', $parts);
+            } else {
+                $namespace = __NAMESPACE__;
+            }
+
+            $helperClass = $namespace . '\\Helper\\' . ucfirst($helperName);
+            if (class_exists($helperClass)) {
+                $helper = new $helperClass;
+                if ($helper instanceof Helper) {
+                    $helper->setDependencyContainer(
+                        $this->getDependencyContainer()
+                    );
+                    $helper->setRenderer($this);
+                    $cache[$helperName] = $helper;
+                }
+            }
+        } else {
+            $helper = $cache[$helperName];
+        }
+
+        return $helper;
     }
 }

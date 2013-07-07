@@ -1,7 +1,7 @@
 <?php
 /**
- * 
- * 
+ *
+ *
  * Date: 07.07.13
  * Time: 12:25
  *
@@ -10,7 +10,7 @@
  */
 
 namespace Atom;
- 
+
 use Atom\Traits;
 
 abstract class Renderer
@@ -49,7 +49,7 @@ abstract class Renderer
      */
     abstract public function getContentType();
 
-    public static function factory($format)
+    public static function factory($format, Container $container)
     {
         switch ($format) {
             case static::FORMAT_JSON:
@@ -62,6 +62,8 @@ abstract class Renderer
                 $error = "Invalid renderer format: {$format}";
                 throw new \InvalidArgumentException($error);
         }
+
+        $renderer->setDependencyContainer($container);
 
         return $renderer;
     }
