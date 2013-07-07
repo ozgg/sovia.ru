@@ -13,6 +13,7 @@ namespace Atom\Http;
 
 use Atom\Configuration;
 use Atom\Container;
+use Atom\Renderer;
 use Atom\Traits;
 
 class Application
@@ -251,7 +252,10 @@ class Application
 
     protected function renderResponse(Controller $controller)
     {
-        $body = print_r($controller, true);
+        $renderer = Renderer::factory('html');
+        $renderer->setParameters($controller->getParameters());
+
+        $body = $renderer->render();
 
         $response = new Response($body);
         $response->setContentType('text/plain;charset=UTF-8');
