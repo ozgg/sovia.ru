@@ -26,7 +26,20 @@ class Controller
      */
     protected $status;
 
+    /**
+     * @var string
+     */
     protected $format = Renderer::FORMAT_HTML;
+
+    /**
+     * @var string
+     */
+    protected $layoutName = 'layout';
+
+    /**
+     * @var string
+     */
+    protected $viewName = 'index';
 
     public function __construct(Container $container)
     {
@@ -93,6 +106,44 @@ class Controller
     public function setFormat($format)
     {
         $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLayoutName()
+    {
+        return $this->layoutName;
+    }
+
+    /**
+     * @param string $layoutName
+     * @return Controller
+     */
+    public function setLayoutName($layoutName)
+    {
+        $this->layoutName = $layoutName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewName()
+    {
+        return $this->viewName;
+    }
+
+    /**
+     * @param string $viewName
+     * @return Controller
+     */
+    public function setViewName($viewName)
+    {
+        $this->viewName = $viewName;
 
         return $this;
     }

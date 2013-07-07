@@ -231,10 +231,9 @@ class Application
         $renderer = Renderer::factory('html');
         $renderer->setParameters($controller->getParameters());
         $renderer->setBaseDirectory($this->baseDirectory . '/views');
+        $renderer->setLayoutName($controller->getLayoutName());
 
-        $body = $renderer->render();
-
-        $response = new Response($body);
+        $response = new Response($renderer->render());
         $response->setContentType($renderer->getContentType());
         $response->send();
     }

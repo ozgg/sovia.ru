@@ -33,6 +33,11 @@ abstract class Renderer
     protected $layoutName;
 
     /**
+     * @var string
+     */
+    protected $viewName;
+
+    /**
      * @return string
      */
     abstract public function render();
@@ -57,5 +62,43 @@ abstract class Renderer
         }
 
         return $renderer;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLayoutName()
+    {
+        return $this->layoutName;
+    }
+
+    /**
+     * @param string $layoutName
+     * @return Renderer
+     */
+    public function setLayoutName($layoutName)
+    {
+        $this->layoutName = $layoutName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewName()
+    {
+        return $this->viewName;
+    }
+
+    /**
+     * @param string $viewName
+     * @return Renderer
+     */
+    public function setViewName($viewName)
+    {
+        $this->viewName = $viewName;
+
+        return $this;
     }
 }

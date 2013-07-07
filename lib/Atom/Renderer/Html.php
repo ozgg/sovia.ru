@@ -16,11 +16,21 @@ use Atom\Renderer;
 class Html extends Renderer
 {
     /**
+     * @throws \RuntimeException
      * @return string
      */
     public function render()
     {
-        return print_r($this->getParameters(), true);
+        $templatePath = $this->getBaseDirectory()
+            . '/layouts/'
+            . $this->getLayoutName()
+            . '.html';
+
+        if (!is_file($templatePath)) {
+            throw new \RuntimeException("Cannot find template {$templatePath}");
+        }
+
+        return $this->parseTemplate($templatePath);
     }
 
     /**
@@ -29,5 +39,26 @@ class Html extends Renderer
     public function getContentType()
     {
         return 'text/html;charset=UTF-8';
+    }
+
+    protected function parseTemplate($path)
+    {
+        $content  = file_get_contents($path);
+        $pattern  = '/\{\{ ([^\}]+) \}\}/';
+
+        return preg_replace_callback($pattern, [$this, 'parseBlock'], $content);
+    }
+
+    protected function parseBlock($block)
+    {
+        if (isset($block[1])) {
+            $command = $block[1];
+
+            $result = $command;
+        } else {
+            $result = 'Invalid block';
+        }
+
+        return $result;
     }
 }
