@@ -3,20 +3,20 @@
  * Test case for dependency container trait
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
- * @package Test\Unit\Library\Sovia\Traits
+ * @package Test\Unit\Atom\Traits
  */
 
-namespace Test\Unit\Library\Sovia\Traits\Dependency;
+namespace Test\Unit\Atom\Traits\Dependency;
 
-use Sovia\Test\TestCase;
-use Sovia\Traits\Dependency\Container;
+use Atom\Test\TestCase;
+use Atom\Traits\Dependency\Container;
 
 /**
  * Test of trait DependencyContainer
  *
- * @coversDefaultClass \Sovia\Traits\Dependency\Container
+ * @coversDefaultClass \Atom\Traits\Dependency\Container
  */
-class DependencyContainerTest extends TestCase
+class ContainerTest extends TestCase
 {
     /**
      * @var Container
@@ -35,7 +35,7 @@ class DependencyContainerTest extends TestCase
      */
     public function setUp()
     {
-        $traitName   = '\\Sovia\\Traits\\Dependency\\Container';
+        $traitName   = '\\Atom\\Traits\\Dependency\\Container';
         $this->trait = $this->getObjectForTrait($traitName);
 
         $this->reflection = new \ReflectionClass($this->trait);
@@ -44,11 +44,11 @@ class DependencyContainerTest extends TestCase
     /**
      * Tests checkContainerState when container is set
      *
-     * @covers \Sovia\Traits\DependencyContainer::checkContainerState
+     * @covers \Atom\Traits\Dependency\Container::checkContainerState
      */
     public function testCheckContainerStateSet()
     {
-        $this->trait->setDependencyContainer(new \Sovia\Container);
+        $this->trait->setDependencyContainer(new \Atom\Container);
         $method = $this->reflection->getMethod('checkContainerState');
         $method->setAccessible(true);
         $method->invoke($this->trait);
@@ -57,7 +57,7 @@ class DependencyContainerTest extends TestCase
     /**
      * Tests checkContainerState when container is not set
      *
-     * @covers \Sovia\Traits\DependencyContainer::checkContainerState
+     * @covers \Atom\Traits\Dependency\Container::checkContainerState
      * @expectedException \Exception
      */
     public function testCheckContainerStateUnset()
@@ -71,12 +71,12 @@ class DependencyContainerTest extends TestCase
      * Test extracting dependencies
      *
      * Extracts existing and non-existing dependencies
-     * @covers \Sovia\Traits\DependencyContainer::injectDependency
-     * @covers \Sovia\Traits\DependencyContainer::extractDependency
+     * @covers \Atom\Traits\Dependency\Container::injectDependency
+     * @covers \Atom\Traits\Dependency\Container::extractDependency
      */
     public function testExtractDependency()
     {
-        $this->trait->setDependencyContainer(new \Sovia\Container);
+        $this->trait->setDependencyContainer(new \Atom\Container);
         $element = new \stdClass;
 
         $element->foo = 'bar';

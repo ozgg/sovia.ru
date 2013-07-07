@@ -8,8 +8,6 @@
 
 namespace Sovia\Http;
 
-use Sovia\Application\Controller;
-use Sovia\Container;
 use Sovia\Exceptions\Http;
 use Sovia\Traits;
 
@@ -18,7 +16,6 @@ use Sovia\Traits;
  */
 class Application
 {
-    use Traits\Dependency\LoadingContainer, Traits\Environment;
 
     /**
      * Application directory
@@ -47,7 +44,6 @@ class Application
 
         $this->setDirectory($directory);
         $this->setName($name);
-        $this->setDependencyContainer(new Container);
         $this->bootstrap();
     }
 
@@ -146,52 +142,10 @@ class Application
      */
     protected function guessEnvironment()
     {
-        $request = $this->getRequest();
-
-        if (substr($request->getHost(), -5) == 'local') {
-            $environment = 'development';
-        } else {
-            $environment = 'production';
-        }
-
-        $this->setEnvironment($environment);
     }
 
-    /**
-     * Load controller
-     *
-     * @param string $name
-     * @param string $method
-     * @param string $action
-     * @throws \Exception
-     * @return Controller
-     */
     protected function executeController($name, $method, $action)
     {
-        $parts = [
-            $this->directory,
-            'controllers',
-            "{$name}Controller"
-        ];
-        $file  = implode(DIRECTORY_SEPARATOR, $parts) . '.php';
-        if (file_exists($file) && is_file($file)) {
-            include $file;
-            $parts[0]  = $this->getName();
-            $className = implode('\\', $parts);
-            if (!class_exists($className)) {
-                throw new \Exception("Cannot find controller {$className}");
-            }
-            $controller = new $className($this);
-            if (!$controller instanceof Controller) {
-                throw new \Exception("Invalid controller: {$className}");
-            }
-        } else {
-            throw new \Exception("Cannot load controller from {$file}");
-        }
-
-        $controller->setEnvironment($this->getEnvironment());
-        $controller->init();
-        $controller->execute($method, $action);
     }
 
     protected function renderError(Http $error)
@@ -205,13 +159,5 @@ class Application
      */
     protected function fallback(\Exception $e)
     {
-        header('HTTP/1.1 500 Internal Server Error');
-        header('Content-Type: text/plain');
-        if ($this->isDevelopment() || $this->isTest()) {
-            echo $e->getMessage(), PHP_EOL;
-            echo $e->getTraceAsString(), PHP_EOL;
-        } else {
-            echo 'Internal server error', PHP_EOL;
-        }
     }
 }

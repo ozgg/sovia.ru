@@ -3,25 +3,25 @@
  * Test case for DI container
  *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
- * @package Test\Unit\Library\Sovia
+ * @package Test\Unit\Atom
  */
 
-namespace Test\Unit\Library\Sovia;
+namespace Test\Unit\Atom;
 
-use Sovia\Container;
-use Sovia\Test\TestCase;
+use Atom\Container;
+use Atom\Test\TestCase;
 
 /**
  * Test for DI container
  *
- * @covers \Sovia\Container
+ * @covers \Atom\Container
  */
 class ContainerTest extends TestCase
 {
     /**
      * Test extracting existing element
      *
-     * @covers \Sovia\Container::extract
+     * @covers \Atom\Container::extract
      */
     public function testExtractExisting()
     {
@@ -38,7 +38,7 @@ class ContainerTest extends TestCase
     /**
      * Test extracting non-existent element
      *
-     * @covers \Sovia\Container::extract
+     * @covers \Atom\Container::extract
      */
     public function testExtractEmpty()
     {
@@ -51,7 +51,7 @@ class ContainerTest extends TestCase
     /**
      * Test checking existence of elements in container
      *
-     * @covers \Sovia\Container::check
+     * @covers \Atom\Container::check
      */
     public function testCheck()
     {
