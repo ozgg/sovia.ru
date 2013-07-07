@@ -11,11 +11,11 @@
 
 namespace Atom\Renderer;
  
-use Atom\Traits\Dependency\Container;
+use Atom\Traits;
 
 abstract class Helper
 {
-    use Container;
+    use Traits\Dependency\Container, Traits\HasParameters;
 
     /**
      * @var Html
@@ -39,5 +39,10 @@ abstract class Helper
         $this->renderer = $renderer;
 
         return $this;
+    }
+
+    public function escape($string)
+    {
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
 }

@@ -37,14 +37,14 @@ class Router
      *
      * @param $name
      * @return Route
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function getRoute($name)
     {
         if (isset($this->routes[$name])) {
             $route = $this->routes[$name];
         } else {
-            throw new \Exception("Cannot find route {$name}");
+            throw new \RuntimeException("Cannot find route {$name}");
         }
 
         return $route;

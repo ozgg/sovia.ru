@@ -69,7 +69,7 @@ class Html extends Renderer
         return $result;
     }
 
-    protected function callHelper($helperName, $methodName, $arguments)
+    protected function callHelper($helperName, $methodName, $input)
     {
         $helper = $this->getHelper($helperName);
 
@@ -77,7 +77,7 @@ class Html extends Renderer
             if (method_exists($helper, $methodName)) {
                 $callback = [$helper, $methodName];
                 if (is_callable($callback)) {
-                    $result = call_user_func($callback, $arguments);
+                    $result = call_user_func($callback, $input);
                 } else {
                     $result = "Cannot call {$helperName}:{$methodName}";
                 }
@@ -113,6 +113,7 @@ class Html extends Renderer
                         $this->getDependencyContainer()
                     );
                     $helper->setRenderer($this);
+                    $helper->setParameters($this->getParameters());
                     $cache[$helperName] = $helper;
                 }
             }
