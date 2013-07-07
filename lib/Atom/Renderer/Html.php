@@ -1,7 +1,7 @@
 <?php
 /**
- * 
- * 
+ *
+ *
  * Date: 07.07.13
  * Time: 12:32
  *
@@ -10,7 +10,7 @@
  */
 
 namespace Atom\Renderer;
- 
+
 use Atom\Renderer;
 
 class Html extends Renderer
@@ -43,8 +43,8 @@ class Html extends Renderer
 
     protected function parseTemplate($path)
     {
-        $content  = file_get_contents($path);
-        $pattern  = '/\{\{ ([^\}]+) \}\}/';
+        $content = file_get_contents($path);
+        $pattern = '/\{\{ (.+) \}\}/';
 
         return preg_replace_callback($pattern, [$this, 'parseBlock'], $content);
     }
@@ -69,13 +69,15 @@ class Html extends Renderer
         return $result;
     }
 
-    protected function callHelper($helperName, $methodName, $input)
+    protected function callHelper($helperName, $methodName, $arguments)
     {
         $helper = $this->getHelper($helperName);
 
         if ($helper instanceof Helper) {
             if (method_exists($helper, $methodName)) {
                 $callback = [$helper, $methodName];
+                $input    = (array) json_decode($arguments, true);
+
                 if (is_callable($callback)) {
                     $result = call_user_func($callback, $input);
                 } else {

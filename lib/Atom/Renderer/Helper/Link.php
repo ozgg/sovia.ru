@@ -16,28 +16,29 @@ use Atom\Renderer\Helper;
 
 class Link extends Helper
 {
-    public function render($input)
+    public function render(array $input)
     {
-        $arguments = explode(',', $input);
-        $routeName = array_shift($arguments);
+        if (isset($input['route'])) {
+            $routeName = $input['route'];
+            try {
+                $route   = $this->getRoute($routeName);
 
-        try {
-            $route   = $this->getRoute($routeName);
-            $pattern = '/"([^"]+)",?(.+)?/';
+                if (isset($input['text'])) {
+                    $text = $input['text'];
+                } else {
+                    $text = $routeName;
+                }
 
-            preg_match($pattern, implode(',', $arguments), $info);
-            if (isset($info[1])) {
-                $text = $info[1];
-            } else {
-                $text = $routeName;
+                unset($input['route'], $input['text']);
+
+                $uri    = $route->assemble($input);
+                $format = '<a href="%s">%s</a>';
+                $result = sprintf($format, $uri, $this->escape($text));
+            } catch (\RuntimeException $e) {
+                $result = $e->getMessage();
             }
-            $parameters = isset($info[2]) ? json_decode($info[2], true) : [];
-
-            $uri    = $route->assemble($parameters);
-            $format = '<a href="%s">%s</a>';
-            $result = sprintf($format, $uri, $this->escape($text));
-        } catch (\RuntimeException $e) {
-            $result = $e->getMessage();
+        } else {
+            $result = 'Route name is not set';
         }
 
         return $result;
