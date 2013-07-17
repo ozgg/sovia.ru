@@ -6,7 +6,7 @@
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
 
-use Atom\Http\Route;
+use Brujo\Http\Route;
 
 return [
     'home' => [

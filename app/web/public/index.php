@@ -7,5 +7,6 @@
 
 require __DIR__ . '/../../../bootstrap.php';
 
-$application = new \Atom\Http\Application(realpath(__DIR__ . '/../'));
+$application = new \Brujo\Http\Application(__DIR__ . '/../');
+$application->bootstrap();
 $application->run();

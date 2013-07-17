@@ -10,8 +10,8 @@
 
 namespace Web\Controllers;
  
-use Atom\Http\Controller;
-use Atom\Http\Error;
+use Brujo\Http\Controller;
+use Brujo\Http\Error;
 
 class ErrorController extends Controller
 {

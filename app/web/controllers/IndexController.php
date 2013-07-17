@@ -10,7 +10,7 @@
 
 namespace Web\Controllers;
 
-use Atom\Http\Controller;
+use Brujo\Http\Controller;
 
 class IndexController extends Controller
 {

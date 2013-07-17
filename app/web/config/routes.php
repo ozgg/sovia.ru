@@ -2,13 +2,10 @@
 /**
  * Application routes
  *
- * Date: 24.05.13
- * Time: 12:09
- *
  * @author Maxim Khan-Magomedov <maxim.km@gmail.com>
  */
 
-use Atom\Http\Route;
+use Brujo\Http\Route;
 
 return [
     'home'  => [

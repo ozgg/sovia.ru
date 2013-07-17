@@ -12,4 +12,4 @@ $config = [
     ]
 ];
 
-return \Atom\Configuration::merge($parent, $config);
+return \Brujo\Configuration::merge($parent, $config);
