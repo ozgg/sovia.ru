@@ -13,7 +13,7 @@ use Atom\Traits\Http\HasHeaders;
 /**
  * Абстрактная ошибка при работе с HTTP
  */
-abstract class Error extends \ErrorException
+abstract class Error extends \RuntimeException
 {
     use HasHeaders;
 
