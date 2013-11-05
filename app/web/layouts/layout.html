@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{{ title:render }}</title>
+    <title>{! title:render "Sovia" !}</title>
     <link rel="stylesheet" href="/css/sovia.css" />
     <script type="text/javascript" src="/js/sovia.js"></script>
     <!--[if lt IE 9]>
@@ -14,17 +14,17 @@
     <div><a href="/" title="На главную"><img src="/images/owl.png" width="250" height="50" alt="Sovia" /></a></div>
     <nav>
         <ul>
-            <li>{{ link:render {"route": "articles", "text": "Статьи"} }}</li>
-            <li>{{ link:render {"route": "dreams", "text": "Сны"} }}</li>
-            <li>{{ link:render {"route": "dreambook", "text": "Сонник"} }}</li>
-            <li>{{ link:render {"route": "forum", "text": "Сообщество"} }}</li>
-            <li>{{ link:render {"route": "about", "text": "О проекте"} }}</li>
+            <li>{! link:render ["articles", "Статьи"] !}</li>
+            <li>{! link:render ["dreams", "Сны"] !}</li>
+            <li>{! link:render ["dreambook", "Сонник"] !}</li>
+            <li>{! link:render ["forum", "Сообщество"] !}</li>
+            <li>{! link:render ["about", "О проекте"] !}</li>
         </ul>
     </nav>
 </header>
 
 <section id="content">
-{{ content:render }}
+{{content}}
 {{ Sovia.something:render }}
 </section>
 
@@ -55,8 +55,8 @@
         <header>Что ещё можно посмотреть</header>
         <nav>
             <ul>
-                <li>{{ link:render {"route": "archive", "text": "Архив снов"} }}</li>
-                <li>{{ link:render {"route": "random_dream", "text": "Случайный сон"} }}</li>
+                <li>{! link:render ["archive", "Архив снов"] !}</li>
+                <li>{! link:render ["random_dream", "Случайный сон"] !}</li>
             </ul>
         </nav>
     </aside>
@@ -68,7 +68,7 @@
 
 <footer>
     <div>&copy; 2006&ndash;2013 sovia.ru</div>
-    <div>{{ link:render {"route": "tos", "text": "Пользовательское соглашение"} }}</div>
+    <div>{! link:render ["tos", "Пользовательское соглашение"] !}</div>
 </footer>
 
 </body>
