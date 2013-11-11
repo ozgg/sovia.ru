@@ -42,3 +42,10 @@ gem 'mina', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'webrat'
+end
