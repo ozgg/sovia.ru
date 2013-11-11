@@ -45,7 +45,7 @@ gem 'mina', group: :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'webrat'
 end
