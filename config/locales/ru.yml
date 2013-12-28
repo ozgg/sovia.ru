@@ -6,3 +6,5 @@ ru:
           attributes:
             password_confirmation:
               blank: "Подтверждение пароля не может быть пустым"
+            email:
+              unreasonable: "Не выглядит как e-mail"

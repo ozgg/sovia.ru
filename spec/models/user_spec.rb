@@ -36,4 +36,9 @@ describe User do
     another_user = build(:user, email: 'noreply@example.com')
     expect(another_user).not_to be_valid
   end
+
+  it "is invalid when email does not look like email" do
+    @user.email = 'www'
+    expect(@user).not_to be_valid
+  end
 end
