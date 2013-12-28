@@ -1,4 +1,7 @@
 ru:
+  titles:
+    session:
+      login: "Вход"
   activerecord:
     errors:
       models:
@@ -8,3 +11,15 @@ ru:
               blank: "Подтверждение пароля не может быть пустым"
             email:
               unreasonable: "Не выглядит как e-mail"
+  session:
+    not_logged_in: "Вы вышли"
+    logged_in_successfully: "Вы вошли"
+    invalid_credentials: "Неправильный пароль"
+    already_logged_in: "Вы уже вошли"
+    logged_out: "Вы вышли"
+  sessions:
+    new:
+      enter_credentials: "Введите имя пользователя и пароль"
+      login: "Пользователь"
+      password: "Пароль"
+      enter: "Войти"
