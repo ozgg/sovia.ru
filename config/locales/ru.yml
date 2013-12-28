@@ -2,6 +2,7 @@ ru:
   titles:
     session:
       login: "Вход"
+    none: "Без названия"
   activerecord:
     errors:
       models:
@@ -19,7 +20,7 @@ ru:
     logged_out: "Вы вышли"
   sessions:
     new:
-      enter_credentials: "Введите имя пользователя и пароль"
-      login: "Пользователь"
+      enter_credentials: "Введите логин и пароль"
+      login: "Логин"
       password: "Пароль"
       enter: "Войти"

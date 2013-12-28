@@ -2,3 +2,38 @@
  *= require_self
  *= require_tree .
  */
+
+html {
+  background: #011848;
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Serif;
+}
+
+body {
+  margin: 1em;
+  padding: 0;
+
+  & > header {
+    min-height: 100px;
+  }
+
+  & footer:last-child {
+    color: #dadada;
+    font-size: 0.8em;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+
+section#main {
+  background: #ffffff;
+  border-radius: 1em;
+  padding: 1em;
+
+  & > article {
+    margin: 0;
+  }
+}
