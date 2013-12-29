@@ -30,3 +30,5 @@ ru:
   index:
     index:
       no_articles: "Статей нет"
+      main: "Добро пожаловать"
+      recent_articles: "Последние статьи"

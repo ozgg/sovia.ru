@@ -1,9 +1,11 @@
+<h1><%= t('.main') %></h1>
+<h2><%= t('.recent_articles') %></h2>
 <% if @articles.any? %>
     <%= @articles.each do |article| %>
         <article>
           <header><%= article.title %></header>
           <div><%= simple_format(article.body) %></div>
-          <footer></footer>
+          <footer><%= article.comments_count %></footer>
         </article>
     <% end %>
 <% else %>
