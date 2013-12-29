@@ -1,5 +1,20 @@
 require 'spec_helper'
 
 describe "index/index.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "when articles present" do
+    it "renders articles" do
+      article = create(:article)
+      assign(:articles, Article.last(3))
+      render
+      expect(rendered).to contain(article.title)
+    end
+  end
+
+  context "when no articles present" do
+    it "renders message 'Статей нет'" do
+      assign(:articles, Article.last(3))
+      render
+      expect(rendered).to contain(I18n.t('index.index.no_articles'))
+    end
+  end
 end

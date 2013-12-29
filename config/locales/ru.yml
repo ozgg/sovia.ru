@@ -27,3 +27,6 @@ ru:
       login: "Логин"
       password: "Пароль"
       enter: "Войти"
+  index:
+    index:
+      no_articles: "Статей нет"
