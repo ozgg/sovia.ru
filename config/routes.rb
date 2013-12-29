@@ -5,6 +5,8 @@ Sovia::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  resources :articles
+
   root 'index#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

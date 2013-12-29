@@ -4,8 +4,14 @@ ru:
       index: "Главная страница"
     session:
       login: "Вход"
+    articles:
+      index: "Статьи"
+      new: "Новая статья"
+      show: "Статья"
+      edit: "Редактирование статьи"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
+    page: "страница"
   activerecord:
     errors:
       models:
@@ -32,3 +38,7 @@ ru:
       no_articles: "Статей нет"
       main: "Добро пожаловать"
       recent_articles: "Последние статьи"
+  article:
+    added: "Статья добавлена"
+    updated: "Статья обновлена"
+    deleted: "Статья удалена"

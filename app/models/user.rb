@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  validates_uniqueness_of :login, :email
+  validates_uniqueness_of :login
+  validates_uniqueness_of :email, allow_nil: true
   validates_format_of :login, with: /\A[a-z0-9_]{1,30}\z/
   validate :email_should_be_reasonable
   before_validation :normalize_login, :normalize_email
