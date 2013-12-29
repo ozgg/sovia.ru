@@ -4,6 +4,28 @@ describe ArticlesController do
   let!(:article) { create(:article, title: 'Эталон') }
   let(:user) { create(:user) }
 
+  shared_examples "restricted area" do
+    it "refuses to render new article form" do
+      get :new
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "refuses to render existing article form" do
+      get :edit, id: article
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "refuses to update article" do
+      patch :update, id: article
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "refuses to delete article" do
+      delete :destroy, id: article
+      expect(response).to redirect_to(root_path)
+    end
+  end
+
   context "get index" do
     before(:each) { get :index }
 
@@ -170,9 +192,8 @@ describe ArticlesController do
   end
 
   context "anonymous user" do
-    it "refuses to render new article form"
-    it "refuses to render existing article form"
-    it "refuses to update article"
-    it "refuses to delete article"
+    before(:each) { session[:user_id] = nil }
+
+    it_should_behave_like "restricted area"
   end
 end

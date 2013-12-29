@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :check_user_rights, except: [:index, :show]
 
   # get /articles
   def index
@@ -59,5 +60,9 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
+  end
+
+  def check_user_rights
+    redirect_to(root_path) if session[:user_id].nil?
   end
 end
