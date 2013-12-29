@@ -1,8 +1,11 @@
 ru:
   titles:
+    index:
+      index: "Главная страница"
     session:
       login: "Вход"
     none: "Без названия"
+    sovia: "Совия, сайт о снах"
   activerecord:
     errors:
       models:

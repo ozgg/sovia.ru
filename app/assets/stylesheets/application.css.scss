@@ -4,16 +4,21 @@
  */
 
 html {
-  background: #011848;
+  background: #122129 image_url('bg-icons.png') 0 0;
   font-family: "Palatino Linotype", Palatino, "Book Antiqua", Serif;
 }
 
 body {
-  margin: 1em;
-  padding: 0;
+  background: image_url('moon.png') 0 0 no-repeat;
+  margin: 0;
+  padding: 1em 1em 1em 2em;
 
   & > header {
-    min-height: 100px;
+    min-height: 120px;
+
+    div#logo {
+      padding: 1em;
+    }
   }
 
   & footer:last-child {
@@ -28,12 +33,12 @@ h1, h2, h3, h4, h5, h6 {
   text-indent: 0;
 }
 
+img {
+  border: none;
+}
+
 section#main {
   background: #ffffff;
   border-radius: 1em;
   padding: 1em;
-
-  & > article {
-    margin: 0;
-  }
 }
