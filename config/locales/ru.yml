@@ -42,3 +42,6 @@ ru:
     added: "Статья добавлена"
     updated: "Статья обновлена"
     deleted: "Статья удалена"
+  layouts:
+    application:
+      articles: "Статьи"

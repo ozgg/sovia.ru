@@ -9,6 +9,11 @@
 <body>
 <header>
   <div id="logo"><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></div>
+  <nav>
+    <ul>
+      <li><%= link_to t('.articles'), articles_path %></li>
+    </ul>
+  </nav>
 </header>
 
 <section id="main">
