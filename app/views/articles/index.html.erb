@@ -1,0 +1,16 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+<% if @articles.any? %>
+    <% @articles.each do |article| %>
+        <article>
+          <header><%= article.title %></header>
+          <div><%= simple_format article.body %></div>
+          <footer><%= article.comments_count %></footer>
+        </article>
+    <% end %>
+
+    <%= paginate @articles %>
+<% else %>
+    <div class="message"><%= t('.no_articles') %></div>
+<% end %>

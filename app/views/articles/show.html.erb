@@ -1,0 +1,11 @@
+<article>
+  <header>
+    <%= @article.title %>
+  </header>
+  <div>
+    <%= simple_format @article.body %>
+  </div>
+  <footer>
+    <%= @article.comments_count %>
+  </footer>
+</article>

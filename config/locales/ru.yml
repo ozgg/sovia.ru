@@ -38,6 +38,11 @@ ru:
       no_articles: "Статей нет"
       main: "Добро пожаловать"
       recent_articles: "Последние статьи"
+  articles:
+    index:
+      no_articles: "Статей нет"
+    form:
+      submit: "Сохранить статью"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"

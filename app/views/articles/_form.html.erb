@@ -1,0 +1,25 @@
+<%= form_for(@article) do |f| %>
+    <% if @article.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@article.errors.count, 'error') %>:</h2>
+
+          <ul>
+            <% @article.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, required: true %>
+    </div>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_area :body, required: true %>
+    </div>
+    <div>
+      <%= f.button t('.submit'), type: 'submit' %>
+    </div>
+<% end %>
