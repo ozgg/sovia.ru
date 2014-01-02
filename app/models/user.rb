@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :articles, dependent: :restrict
-  has_many :dreams, dependent: :restrict
+  has_many :articles, dependent: :restrict_with_exception
+  has_many :dreams, dependent: :restrict_with_exception
 
   has_secure_password
 
