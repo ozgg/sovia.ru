@@ -6,6 +6,7 @@ Sovia::Application.routes.draw do
   end
 
   resources :articles
+  resources :dreams
 
   root 'index#index'
 

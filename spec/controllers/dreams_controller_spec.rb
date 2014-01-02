@@ -4,17 +4,36 @@ describe DreamsController do
   let(:user) { create(:user) }
 
   shared_examples "visible dream" do
-    it "assigns dream to @dream"
-    it "renders dreams/show"
+    it "assigns dream to @dream" do
+      expect(assigns[:dream]).to be_a(Dream)
+    end
+
+    it "renders dreams/show" do
+      expect(response).to render_template('dreams/show')
+    end
   end
 
   shared_examples "any user" do
     context "get index" do
-      it "assigns public dreams to @dreams"
-      it "renders dreams/index view"
+      before(:each) do
+        create(:dream)
+        get :index
+      end
+
+      it "assigns public dreams to @dreams" do
+        expect(assigns[:dreams]).not_to be_empty
+        expect(assigns[:dreams].first).to be_a(Dream)
+      end
+
+      it "renders dreams/index view" do
+        expect(response).to render_template('dreams/index')
+      end
     end
 
     context "get show for public dream" do
+      let(:dream) { create(:dream) }
+      before(:each) { get :show, id: dream }
+
       it_should_behave_like "visible dream"
     end
   end
@@ -87,10 +106,16 @@ describe DreamsController do
     end
 
     context "get show for user-only dream" do
+      let(:dream) { create(:dream, privacy: Dream::PRIVACY_OWNER) }
+      before(:each) { get :show, id: dream }
+
       it_should_behave_like "visible dream"
     end
 
     context "get show for own private dream" do
+      let(:dream) { create(:dream, user: user, privacy: Dream::PRIVACY_OWNER) }
+      before(:each) { get :show, id: dream }
+
       it_should_behave_like "visible dream"
     end
 
