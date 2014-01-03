@@ -28,7 +28,7 @@ body {
         li {
           list-style: none;
           margin: 0;
-          padding: 0;
+          padding: 0.3em 2em;
           font-size: 1.3em;
           display: inline-block;
 
@@ -38,6 +38,10 @@ body {
 
           & a:hover {
             color: #ff9600;
+          }
+
+          &:first-child {
+            padding-left: 0;
           }
         }
       }

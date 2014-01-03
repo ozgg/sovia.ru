@@ -1,0 +1,16 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+<% if @dreams.any? %>
+    <% @dreams.each do |dream| %>
+        <article>
+          <header><%= dream.title %></header>
+          <div><%= dream.body %></div>
+          <footer><%= dream.comments_count %></footer>
+        </article>
+    <% end %>
+
+    <%= paginate @dreams %>
+<% else %>
+    <div class="message"><%= t('.no_dreams') %></div>
+<% end %>

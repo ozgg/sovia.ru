@@ -1,0 +1,25 @@
+<%= form_for(@dream) do |f| %>
+    <% if @dream.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@dream.errors.count, 'error') %>:</h2>
+
+          <ul>
+            <% @dream.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_area :body, required: true %>
+    </div>
+    <div>
+      <%= f.button t('.submit'), type: 'submit' %>
+    </div>
+<% end %>

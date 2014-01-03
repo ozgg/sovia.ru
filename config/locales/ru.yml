@@ -9,6 +9,11 @@ ru:
       new: "Новая статья"
       show: "Статья"
       edit: "Редактирование статьи"
+    dreams:
+      index: "Сны"
+      new: "Описать сон"
+      show: "Сон"
+      edit: "Редактирование сна"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -43,6 +48,12 @@ ru:
       no_articles: "Статей нет"
     form:
       submit: "Сохранить статью"
+  dreams:
+    index:
+      no_dreams: "Снов нет"
+      new_dream: "Описать сон"
+    form:
+      submit: "Сохранить сон"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"
@@ -54,5 +65,7 @@ ru:
   layouts:
     application:
       articles: "Статьи"
+      dreams: "Сны"
+      new_dream: "Описать сон"
   roles:
     insufficient_rights: "Недостаточно прав"

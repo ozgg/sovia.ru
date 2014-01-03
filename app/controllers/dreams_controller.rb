@@ -7,6 +7,7 @@ class DreamsController < ApplicationController
   # get /dreams
   def index
     page    = params[:page] || 1
+    @title  = "#{t('titles.dreams.index')}, #{t('titles.page')} #{page}"
     @dreams = allowed_dreams.page(page).per(5)
   end
 
