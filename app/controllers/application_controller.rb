@@ -10,16 +10,4 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user = User.find(session[:user_id]) unless session[:user_id].nil?
   end
-
-  def increment_entries_count
-    unless @current_user.nil?
-      @current_user.increment!(:entries_count)
-    end
-  end
-
-  def decrement_entries_count
-    unless @current_user.nil?
-      @current_user.decrement!(:entries_count)
-    end
-  end
 end
