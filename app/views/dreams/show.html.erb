@@ -1,9 +1,18 @@
-<article>
+<h1><%= t('.header') %></h1>
+<article class="dream">
   <header>
-    <%= @dream.title %>
+    <div></div>
+    <h2><%= @dream.parsed_title %></h2>
+    <div class="author">
+      <%= user_link @dream.user %>
+      (<time datetime="<%= @dream.created_at %>"><%= @dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
+    </div>
+    <div class="tags">
+
+    </div>
   </header>
   <div>
-    <%= @dream.body %>
+    <%= raw @dream.parsed_body %>
   </div>
   <footer>
     <%= @dream.comments_count %>

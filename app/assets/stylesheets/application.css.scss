@@ -5,7 +5,7 @@
 
 html {
   background: #122129 image_url('bg-icons.png') 0 0;
-  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Serif;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Serif;
 }
 
 body {
@@ -48,7 +48,7 @@ body {
     }
   }
 
-  & footer:last-child {
+  > footer:last-child {
     color: #dadada;
     font-size: 0.8em;
   }
@@ -61,8 +61,32 @@ h1, h2, h3, h4, h5, h6 {
   font-variant: small-caps;
 }
 
+h1 {
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
 img {
   border: none;
+}
+
+input, textarea, button {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Serif;
+  font-size: 0.9em;
+}
+
+form {
+  div {
+    margin: 0 0 0.5em 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
 }
 
 section#main {

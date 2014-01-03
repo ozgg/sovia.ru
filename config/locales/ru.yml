@@ -14,6 +14,7 @@ ru:
       new: "Описать сон"
       show: "Сон"
       edit: "Редактирование сна"
+      untitled: "Без названия"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -26,6 +27,16 @@ ru:
               blank: "Подтверждение пароля не может быть пустым"
             email:
               unreasonable: "Не выглядит как e-mail"
+        dream:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+    models:
+      dream: "Сон"
+    attributes:
+      dream:
+        title: "Название"
+        body:  "Сюжет"
   session:
     not_logged_in: "Вы вышли"
     logged_in_successfully: "Вы вошли"
@@ -54,6 +65,8 @@ ru:
       new_dream: "Описать сон"
     form:
       submit: "Сохранить сон"
+    show:
+      header: "Описание сна"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"
@@ -69,3 +82,4 @@ ru:
       new_dream: "Описать сон"
   roles:
     insufficient_rights: "Недостаточно прав"
+  anonymous: "Анонимно"

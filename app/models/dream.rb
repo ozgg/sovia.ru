@@ -23,6 +23,14 @@ class Dream < ActiveRecord::Base
     privacy == PRIVACY_OWNER
   end
 
+  def parsed_title
+    title || t('titles.dreams.untitled')
+  end
+
+  def parsed_body
+    '<p>' + CGI::escapeHTML(body.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+  end
+
   private
 
   def increment_entries_counter

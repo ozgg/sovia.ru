@@ -13,11 +13,12 @@ class DreamsController < ApplicationController
 
   # get /dreams/:id
   def show
-
+    @title = "#{t('titles.dreams.show')} «#{@dream.parsed_title}»"
   end
 
   # get /dreams/new
   def new
+    @title = t('titles.dreams.new')
     @dream = Dream.new
   end
 

@@ -1,4 +1,4 @@
-<%= form_for(@dream) do |f| %>
+<%= form_for @dream do |f| %>
     <% if @dream.errors.any? %>
         <div class="errors">
           <h2><%= pluralize(@dream.errors.count, 'error') %>:</h2>
@@ -12,13 +12,19 @@
     <% end %>
 
     <div>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.label :title %><br />
+      <%= f.text_field :title, size: 75, maxlength: 255 %>
     </div>
     <div>
-      <%= f.label :body %>
-      <%= f.text_area :body, required: true %>
+      <%= f.label :body %><br />
+      <%= f.text_area :body, required: true, cols: 75, rows: 20 %>
     </div>
+    <% unless @current_user.nil? %>
+        <div>
+          <%= f.label :privacy %>
+          <%= f.select :privacy, [Dream::PRIVACY_NONE, Dream::PRIVACY_USERS, Dream::PRIVACY_OWNER] %>
+        </div>
+    <% end %>
     <div>
       <%= f.button t('.submit'), type: 'submit' %>
     </div>
