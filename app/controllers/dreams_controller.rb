@@ -7,7 +7,7 @@ class DreamsController < ApplicationController
   # get /dreams
   def index
     page    = params[:page] || 1
-    @dreams = Dream.order('id desc').page(page).per(5)
+    @dreams = allowed_dreams.page(page).per(5)
   end
 
   # get /dreams/:id
@@ -22,8 +22,9 @@ class DreamsController < ApplicationController
 
   # post /dreams
   def create
-    @dream = Dream.new(dream_parameters)
+    @dream = Dream.new(dream_parameters.merge(user: @current_user))
     if @dream.save
+      increment_entries_count
       flash[:message] = t('dream.added')
       redirect_to dream_path @dream
     else
@@ -38,12 +39,20 @@ class DreamsController < ApplicationController
 
   # patch /dreams/:id
   def update
-
+    if @dream.update(dream_parameters)
+      flash[:message] = t('dream.updated')
+      redirect_to dream_path(@dream)
+    else
+      render action: 'edit'
+    end
   end
 
   # delete /dreams/:id
   def destroy
-
+    @dream.destroy
+    decrement_entries_count
+    flash[:message] = t('dream.deleted')
+    redirect_to dreams_path
   end
 
   private
@@ -77,5 +86,11 @@ class DreamsController < ApplicationController
 
   def allow_only_owner
     restrict_access unless @dream.user == @current_user
+  end
+
+  def allowed_dreams
+    maximal_privacy = @current_user.nil? ? Dream::PRIVACY_NONE : Dream::PRIVACY_USERS
+
+    Dream.where("privacy <= #{maximal_privacy}").order('id desc')
   end
 end

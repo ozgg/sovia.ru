@@ -66,6 +66,8 @@ describe ArticlesController do
       expect(action).to change(Article, :count).by(1)
     end
 
+    it "increments entries_count for current user"
+
     it "adds flash message 'Статья добавлена'" do
       action.call
       expect(flash[:message]).to eq(I18n.t('article.added'))

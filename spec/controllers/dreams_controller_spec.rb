@@ -15,14 +15,17 @@ describe DreamsController do
 
   shared_examples "any user" do
     context "get index" do
-      before(:each) do
-        create(:dream)
-        get :index
-      end
+      let!(:public_dream) { create(:dream) }
+      let!(:private_dream) { create(:private_dream) }
+
+      before(:each) { get :index }
 
       it "assigns public dreams to @dreams" do
-        expect(assigns[:dreams]).not_to be_empty
-        expect(assigns[:dreams].first).to be_a(Dream)
+        expect(assigns[:dreams]).to include(public_dream)
+      end
+
+      it "doesn't assign private dreams to @dreams" do
+        expect(assigns[:dreams]).not_to include(private_dream)
       end
 
       it "renders dreams/index view" do
@@ -97,6 +100,14 @@ describe DreamsController do
 
     it_should_behave_like "any user"
 
+    context "get index" do
+      it "doesn't assign protected dreams to @dreams" do
+        protected_dream = create(:protected_dream)
+        get :index
+        expect(assigns[:dreams]).not_to include(protected_dream)
+      end
+    end
+
     context "get show for users-only dream" do
       before(:each) { get :show, id: create(:protected_dream) }
 
@@ -124,7 +135,10 @@ describe DreamsController do
     context "post create with valid parameters" do
       let(:action) { lambda { post :create, dream: { body: 'My good dream' } } }
 
-      it "adds new dream with anonymous owner"
+      it "adds new dream with anonymous owner" do
+        action.call
+        expect(Dream.last.user).to be_nil
+      end
 
       it_should_behave_like "added new dream"
     end
@@ -155,7 +169,11 @@ describe DreamsController do
     it_should_behave_like "any user"
 
     context "get index" do
-      it "assigns also user-only dreams to @dreams"
+      it "assigns also user-only dreams to @dreams" do
+        dream = create(:protected_dream)
+        get :index
+        expect(assigns[:dreams]).to include(dream)
+      end
     end
 
     context "get show for user-only dream" do
@@ -180,15 +198,32 @@ describe DreamsController do
     context "post create with valid parameters" do
       let(:action) { lambda { post :create, dream: { body: 'My good dream' } } }
 
-      it "adds new dream with current user as owner"
-      it "increments dreams_count for current user"
+      it "adds new dream with current user as owner" do
+        action.call
+        expect(Dream.last.user).to eq(user)
+      end
+
+      it "increments entries_count for current user" do
+        initial_count = user.entries_count
+        action.call
+        user.reload
+        expect(user.entries_count - initial_count).to eq(1)
+      end
 
       it_should_behave_like "added new dream"
     end
 
     context "get edit for own dream" do
-      it "assigns edited dream to @dream"
-      it "renders dreams/edit"
+      let(:dream) { create(:dream, user: user) }
+      before(:each) { get :edit, id: dream }
+
+      it "assigns edited dream to @dream" do
+        expect(assigns[:dream]).to eq(dream)
+      end
+
+      it "renders dreams/edit" do
+        expect(response).to render_template('dreams/edit')
+      end
     end
 
     context "get edit for others dream" do
@@ -197,10 +232,45 @@ describe DreamsController do
       it_should_behave_like "restricted access"
     end
 
-    context "patch update for own dream" do
-      it "updates dream"
-      it "adds flash message 'Сон изменён'"
-      it "redirects to dream page"
+    context "patch update for own dream with valid parameters" do
+      let(:dream) { create(:dream, user: user) }
+      before(:each) { patch :update, id: dream, dream: { body: 'My good dream' } }
+
+      it "assigns dream to @dream" do
+        expect(assigns[:dream]).to eq(dream)
+      end
+
+      it "updates dream" do
+        dream.reload
+        expect(dream.body).to eq('My good dream')
+      end
+
+      it "adds flash message 'Сон изменён'" do
+        expect(flash[:message]).to eq(I18n.t('dream.updated'))
+      end
+
+      it "redirects to dream page" do
+        expect(response).to redirect_to(dream_path(dream))
+      end
+    end
+
+    context "patch update for own dream with invalid parameters" do
+      let(:dream) { create(:dream, user: user) }
+      let(:action) { lambda { patch :update, id: dream, dream: {body: ' '} } }
+
+      it "assigns dream to @dream" do
+        action.call
+        expect(assigns[:dream]).to eq(dream)
+      end
+
+      it "leaves dream intact" do
+        expect(action).not_to change(dream, :body)
+      end
+
+      it "renders dreams/edit" do
+        action.call
+        expect(response).to render_template('dreams/edit')
+      end
     end
 
     context "patch update for others dream" do
@@ -216,14 +286,39 @@ describe DreamsController do
     end
 
     context "delete destroy for own dream" do
-      it "removes dream from database"
-      it "decrements dreams_count for current user"
-      it "redirects to all dreams page"
-      it "adds flash message 'Сон удалён'"
+      let!(:dream) { create(:dream, user: user) }
+      let(:action) { lambda { delete :destroy, id: dream } }
+
+      it "removes dream from database" do
+        expect(action).to change(Dream, :count).by(-1)
+      end
+
+      it "decrements entries_count for current user" do
+        initial_count = user.entries_count
+        action.call
+        user.reload
+        expect(user.entries_count - initial_count).to eq(-1)
+      end
+
+      it "redirects to all dreams page" do
+        action.call
+        expect(response).to redirect_to(dreams_path)
+      end
+
+      it "adds flash message 'Сон удалён'" do
+        action.call
+        expect(flash[:message]).to eq(I18n.t('dream.deleted'))
+      end
     end
 
-    context "delete destroy for others dream" do
+    context "delete destroy for others protected dream" do
       before(:each) { delete :destroy, id: create(:owned_dream) }
+
+      it_should_behave_like "restricted access"
+    end
+
+    context "delete destroy for others private dream" do
+      before(:each) { delete :destroy, id: create(:private_dream) }
 
       it_should_behave_like "restricted access"
     end
