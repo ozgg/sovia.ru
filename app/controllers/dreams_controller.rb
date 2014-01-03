@@ -49,9 +49,10 @@ class DreamsController < ApplicationController
 
   # delete /dreams/:id
   def destroy
-    @dream.destroy
-    decrement_entries_count
-    flash[:message] = t('dream.deleted')
+    if @dream.destroy
+      decrement_entries_count
+      flash[:message] = t('dream.deleted')
+    end
     redirect_to dreams_path
   end
 

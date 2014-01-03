@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_parameters.merge({ user_id: session[:user_id] }))
     if @article.save
+      increment_entries_count
       flash[:message] = t('article.added')
       redirect_to article_path(@article)
     else
@@ -48,7 +49,10 @@ class ArticlesController < ApplicationController
 
   # delete /articles/:id
   def destroy
-    flash[:message] = t('article.deleted') if @article.destroy
+    if @article.destroy
+      flash[:message] = t('article.deleted')
+      decrement_entries_count
+    end
     redirect_to articles_path
   end
 
