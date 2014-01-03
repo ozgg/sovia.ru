@@ -43,6 +43,8 @@ describe DreamsController do
     end
 
     context "post create with invalid parameters" do
+      let(:action) { lambda { post :create, dream: { body: ' ' } } }
+
       it_should_behave_like "failed dream creation"
     end
   end
@@ -74,9 +76,20 @@ describe DreamsController do
   end
 
   shared_examples "failed dream creation" do
-    it "doesn't create dream in database"
-    it "assigns new dream to @dream"
-    it "renders dreams/new"
+    it "doesn't create dream in database" do
+      expect(action).not_to change(Dream, :count)
+    end
+
+    it "assigns new dream to @dream" do
+      action.call
+      expect(assigns[:dream]).to be_a(Dream)
+      expect(assigns[:dream]).to be_new_record
+    end
+
+    it "renders dreams/new" do
+      action.call
+      expect(response).to render_template('dreams/new')
+    end
   end
 
   context "anonymous user" do

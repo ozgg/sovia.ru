@@ -6,7 +6,7 @@ class DreamsController < ApplicationController
 
   # get /dreams
   def index
-    page = params[:page] || 1
+    page    = params[:page] || 1
     @dreams = Dream.order('id desc').page(page).per(5)
   end
 
@@ -23,9 +23,12 @@ class DreamsController < ApplicationController
   # post /dreams
   def create
     @dream = Dream.new(dream_parameters)
-    @dream.save
-    flash[:message] = t('dream.added')
-    redirect_to dream_path @dream
+    if @dream.save
+      flash[:message] = t('dream.added')
+      redirect_to dream_path @dream
+    else
+      render action: 'new'
+    end
   end
 
   # get /dreams/:id/edit
