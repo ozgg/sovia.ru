@@ -8,6 +8,9 @@ class Dream < ActiveRecord::Base
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
+  after_create :increment_entries_counter
+  after_destroy :decrement_entries_counter
+
   def open?
     privacy == PRIVACY_NONE
   end
@@ -18,5 +21,19 @@ class Dream < ActiveRecord::Base
 
   def owner_only?
     privacy == PRIVACY_OWNER
+  end
+
+  private
+
+  def increment_entries_counter
+    unless user.nil?
+      user.increment! :entries_count
+    end
+  end
+
+  def decrement_entries_counter
+    unless user.nil?
+      user.decrement! :entries_count
+    end
   end
 end

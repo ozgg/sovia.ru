@@ -24,7 +24,6 @@ class DreamsController < ApplicationController
   def create
     @dream = Dream.new(dream_parameters.merge(user: @current_user))
     if @dream.save
-      increment_entries_count
       flash[:message] = t('dream.added')
       redirect_to dream_path @dream
     else
@@ -50,7 +49,6 @@ class DreamsController < ApplicationController
   # delete /dreams/:id
   def destroy
     if @dream.destroy
-      decrement_entries_count
       flash[:message] = t('dream.deleted')
     end
     redirect_to dreams_path

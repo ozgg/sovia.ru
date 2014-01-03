@@ -66,13 +66,6 @@ describe ArticlesController do
       expect(action).to change(Article, :count).by(1)
     end
 
-    it "increments entries_count for current user" do
-      initial_count = user.entries_count
-      action.call
-      user.reload
-      expect(user.entries_count - initial_count).to eq(1)
-    end
-
     it "adds flash message 'Статья добавлена'" do
       action.call
       expect(flash[:message]).to eq(I18n.t('article.added'))
@@ -185,13 +178,6 @@ describe ArticlesController do
 
     it "deletes article" do
       expect(action).to change(Article, :count).by(-1)
-    end
-
-    it "decrements entries_count for current user" do
-      initial_count = user.entries_count
-      action.call
-      user.reload
-      expect(user.entries_count - initial_count).to eq(-1)
     end
 
     it "adds flash message 'Статья удалена'" do

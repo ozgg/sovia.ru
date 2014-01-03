@@ -203,13 +203,6 @@ describe DreamsController do
         expect(Dream.last.user).to eq(user)
       end
 
-      it "increments entries_count for current user" do
-        initial_count = user.entries_count
-        action.call
-        user.reload
-        expect(user.entries_count - initial_count).to eq(1)
-      end
-
       it_should_behave_like "added new dream"
     end
 
@@ -291,13 +284,6 @@ describe DreamsController do
 
       it "removes dream from database" do
         expect(action).to change(Dream, :count).by(-1)
-      end
-
-      it "decrements entries_count for current user" do
-        initial_count = user.entries_count
-        action.call
-        user.reload
-        expect(user.entries_count - initial_count).to eq(-1)
       end
 
       it "redirects to all dreams page" do
