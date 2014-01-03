@@ -7,4 +7,16 @@ class Dream < ActiveRecord::Base
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
+
+  def open?
+    privacy == PRIVACY_NONE
+  end
+
+  def users_only?
+    privacy == PRIVACY_USERS
+  end
+
+  def owner_only?
+    privacy == PRIVACY_OWNER
+  end
 end

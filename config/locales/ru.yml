@@ -47,6 +47,12 @@ ru:
     added: "Статья добавлена"
     updated: "Статья обновлена"
     deleted: "Статья удалена"
+  dream:
+    added: "Сон добавлен"
+    updated: "Сон обновлён"
+    deleted: "Сон удалён"
   layouts:
     application:
       articles: "Статьи"
+  roles:
+    insufficient_rights: "Недостаточно прав"
