@@ -14,12 +14,4 @@ describe Post do
     post.valid?
     expect(post.errors).to have_key(:privacy)
   end
-
-  context "dream" do
-    let(:dream) { build(:dream) }
-
-    it "is valid with valid attributes" do
-      expect(dream).to be_valid
-    end
-  end
 end
