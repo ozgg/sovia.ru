@@ -12,17 +12,17 @@ class Post < ActiveRecord::Base
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
-  validates_inclusion_of :type, in: [TYPE_DREAM, TYPE_ARTICLE, TYPE_POST, TYPE_BLOG_ENTRY]
+  validates_inclusion_of :entry_type, in: [TYPE_DREAM, TYPE_ARTICLE, TYPE_POST, TYPE_BLOG_ENTRY]
 
   after_create :increment_entries_counter
   after_destroy :decrement_entries_counter
 
-  def dreams
-    where(type: TYPE_DREAM)
+  def self.dreams
+    where(entry_type: TYPE_DREAM)
   end
 
-  def articles
-    where(type: TYPE_ARTICLE)
+  def self.articles
+    where(entry_type: TYPE_ARTICLE)
   end
 
   def open?
@@ -43,6 +43,14 @@ class Post < ActiveRecord::Base
 
   def parsed_body
     '<p>' + CGI::escapeHTML(body.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+  end
+
+  def dream?
+    entry_type == TYPE_DREAM
+  end
+
+  def article?
+    entry_type == TYPE_ARTICLE
   end
 
   private

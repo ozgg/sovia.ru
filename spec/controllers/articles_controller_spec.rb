@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ArticlesController do
-  let!(:article) { create(:article, title: 'Эталон') }
+  let!(:article) { create(:article, body: 'Эталон') }
   let(:user) { create(:user) }
 
   shared_examples "restricted area" do
@@ -45,7 +45,7 @@ describe ArticlesController do
     end
 
     it "assigns new article to @article" do
-      expect(assigns[:article]).to be_an(Article)
+      expect(assigns[:article]).to be_a(Post)
     end
 
     it "renders articles/new" do
@@ -59,11 +59,11 @@ describe ArticlesController do
 
     it "assigns article to @article" do
       action.call
-      expect(assigns[:article]).to be_an(Article)
+      expect(assigns[:article]).to be_article
     end
 
     it "creates new article" do
-      expect(action).to change(Article, :count).by(1)
+      expect(action).to change(Post, :count).by(1)
     end
 
     it "adds flash message 'Статья добавлена'" do
@@ -73,7 +73,7 @@ describe ArticlesController do
 
     it "redirects to article page" do
       action.call
-      expect(response).to redirect_to(article_path(Article.last))
+      expect(response).to redirect_to(article_path(Post.last))
     end
   end
 
@@ -83,11 +83,11 @@ describe ArticlesController do
 
     it "assigns article to @article" do
       action.call
-      expect(assigns[:article]).to be_an(Article)
+      expect(assigns[:article]).to be_article
     end
 
     it "leaves Articles intact" do
-      expect(action).not_to change(Article, :count)
+      expect(action).not_to change(Post, :count)
     end
 
     it "leaves flash message empty" do
@@ -155,7 +155,7 @@ describe ArticlesController do
   context "patch update with invalid parameters" do
     before(:each) do
       session[:user_id] = user.id
-      patch :update, id: article, article: { title: ' ' }
+      patch :update, id: article, article: { body: ' ' }
     end
 
     it "assigns article to @article" do
@@ -164,7 +164,7 @@ describe ArticlesController do
 
     it "leaves article intact" do
       article.reload
-      expect(article.title).to eq('Эталон')
+      expect(article.body).to eq('Эталон')
     end
 
     it "renders article/edit" do
@@ -177,7 +177,7 @@ describe ArticlesController do
     before(:each) { session[:user_id] = user.id }
 
     it "deletes article" do
-      expect(action).to change(Article, :count).by(-1)
+      expect(action).to change(Post, :count).by(-1)
     end
 
     it "adds flash message 'Статья удалена'" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "articles/index.html.erb" do
-  let(:articles) { Article.order('id desc').page(1).per(5) }
+  let(:articles) { Post.articles.order('id desc').page(1).per(5) }
 
   context "when articles present" do
     it "shows articles list" do

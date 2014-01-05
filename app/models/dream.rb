@@ -1,0 +1,3 @@
+class Dream < Post
+
+end

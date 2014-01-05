@@ -4,7 +4,7 @@ describe "index/index.html.erb" do
   context "when articles present" do
     it "renders articles" do
       article = create(:article)
-      assign(:articles, Article.last(3))
+      assign(:articles, Post.articles.order('id desc').first(3))
       render
       expect(rendered).to contain(article.title)
     end
@@ -12,7 +12,7 @@ describe "index/index.html.erb" do
 
   context "when no articles present" do
     it "renders message 'Статей нет'" do
-      assign(:articles, Article.last(3))
+      assign(:articles, Post.articles.order('id desc').first(3))
       render
       expect(rendered).to contain(I18n.t('index.index.no_articles'))
     end

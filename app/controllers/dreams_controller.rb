@@ -24,7 +24,7 @@ class DreamsController < ApplicationController
 
   # post /dreams
   def create
-    @dream = Post.new(dream_parameters.merge(user: @current_user, type: Post::TYPE_DREAM))
+    @dream = Post.new(dream_parameters.merge(user: @current_user, entry_type: Post::TYPE_DREAM))
     if @dream.save
       flash[:message] = t('dream.added')
       redirect_to dream_path @dream

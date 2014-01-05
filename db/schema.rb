@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20131229191523) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
-    t.integer  "type",                       null: false
+    t.integer  "entry_type",                 null: false
     t.integer  "privacy",        default: 0, null: false
     t.string   "title"
     t.string   "url_title"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20131229191523) do
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["type", "privacy"], name: "index_posts_on_type_and_privacy", using: :btree
+  add_index "posts", ["entry_type", "privacy"], name: "index_posts_on_entry_type_and_privacy", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

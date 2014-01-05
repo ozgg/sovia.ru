@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   # post /articles
   def create
-    @article = Post.new(article_parameters.merge(user_id: session[:user_id], type: Post::TYPE_ARTICLE))
+    @article = Post.new(article_parameters.merge(user: @current_user, entry_type: Post::TYPE_ARTICLE))
     if @article.save
       flash[:message] = t('article.added')
       redirect_to article_path(@article)

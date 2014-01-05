@@ -5,7 +5,7 @@ describe DreamsController do
 
   shared_examples "visible dream" do
     it "assigns dream to @dream" do
-      expect(assigns[:dream]).to be_a(Dream)
+      expect(assigns[:dream]).to be_dream
     end
 
     it "renders dreams/show" do
@@ -64,12 +64,12 @@ describe DreamsController do
 
   shared_examples "added new dream" do
     it "creates new dream in database" do
-      expect(action).to change(Dream, :count).by(1)
+      expect(action).to change(Post, :count).by(1)
     end
 
     it "redirects to dream page" do
       action.call
-      expect(response).to redirect_to(dream_path(Dream.last))
+      expect(response).to redirect_to(dream_path(Post.last))
     end
 
     it "adds flash message 'Сон добален'" do
@@ -80,12 +80,12 @@ describe DreamsController do
 
   shared_examples "failed dream creation" do
     it "doesn't create dream in database" do
-      expect(action).not_to change(Dream, :count)
+      expect(action).not_to change(Post, :count)
     end
 
     it "assigns new dream to @dream" do
       action.call
-      expect(assigns[:dream]).to be_a(Dream)
+      expect(assigns[:dream]).to be_dream
       expect(assigns[:dream]).to be_new_record
     end
 
@@ -124,7 +124,7 @@ describe DreamsController do
       before(:each) { get :new }
 
       it "assigns new dream to @dream" do
-        expect(assigns[:dream]).to be_a(Dream)
+        expect(assigns[:dream]).to be_a(Post)
       end
 
       it "renders dreams/new" do
@@ -137,7 +137,7 @@ describe DreamsController do
 
       it "adds new dream with anonymous owner" do
         action.call
-        expect(Dream.last.user).to be_nil
+        expect(Post.last.user).to be_nil
       end
 
       it_should_behave_like "added new dream"
@@ -200,7 +200,7 @@ describe DreamsController do
 
       it "adds new dream with current user as owner" do
         action.call
-        expect(Dream.last.user).to eq(user)
+        expect(Post.last.user).to eq(user)
       end
 
       it_should_behave_like "added new dream"
@@ -283,7 +283,7 @@ describe DreamsController do
       let(:action) { lambda { delete :destroy, id: dream } }
 
       it "removes dream from database" do
-        expect(action).to change(Dream, :count).by(-1)
+        expect(action).to change(Post, :count).by(-1)
       end
 
       it "redirects to all dreams page" do
