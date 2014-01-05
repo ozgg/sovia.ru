@@ -11,34 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140101222748) do
+ActiveRecord::Schema.define(version: 20131229191523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: true do |t|
-    t.integer  "user_id",                    null: false
-    t.string   "title",                      null: false
-    t.text     "body",                       null: false
-    t.integer  "comments_count", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
-
-  create_table "dreams", force: true do |t|
+  create_table "posts", force: true do |t|
     t.integer  "user_id"
+    t.integer  "type",                       null: false
     t.integer  "privacy",        default: 0, null: false
-    t.integer  "comments_count", default: 0, null: false
     t.string   "title"
+    t.string   "url_title"
     t.text     "body",                       null: false
+    t.integer  "comments_count", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "dreams", ["privacy"], name: "index_dreams_on_privacy", using: :btree
-  add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree
+  add_index "posts", ["type", "privacy"], name: "index_posts_on_type_and_privacy", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                           null: false
@@ -49,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140101222748) do
     t.boolean  "allow_mail",      default: false, null: false
     t.integer  "entries_count",   default: 0,     null: false
     t.integer  "comments_count",  default: 0,     null: false
+    t.integer  "roles_mask",      default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :articles, dependent: :restrict_with_exception
-  has_many :dreams, dependent: :restrict_with_exception
+  ROLE_ANYONE    = 0
+  ROLE_MODERATOR = 1
+
+  has_many :posts, dependent: :restrict_with_exception
 
   has_secure_password
 
@@ -9,6 +11,14 @@ class User < ActiveRecord::Base
   validates_format_of :login, with: /\A[a-z0-9_]{1,30}\z/
   validate :email_should_be_reasonable
   before_validation :normalize_login, :normalize_email
+
+  def moderator?
+    has_role? ROLE_MODERATOR
+  end
+
+  def has_role?(role)
+    roles_mask & role == role
+  end
 
   protected
 

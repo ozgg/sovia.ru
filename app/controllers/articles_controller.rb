@@ -6,18 +6,18 @@ class ArticlesController < ApplicationController
   def index
     page      = params[:page] || 1
     @title    = "#{t('titles.articles.index')}, #{t('titles.page')} #{page}"
-    @articles = Article.order('id desc').page(page).per(5)
+    @articles = Post.articles.order('id desc').page(page).per(5)
   end
 
   # get /articles/new
   def new
     @title   = t('titles.articles.new')
-    @article = Article.new
+    @article = Post.new
   end
 
   # post /articles
   def create
-    @article = Article.new(article_parameters.merge({ user_id: session[:user_id] }))
+    @article = Post.new(article_parameters.merge(user_id: session[:user_id], type: Post::TYPE_ARTICLE))
     if @article.save
       flash[:message] = t('article.added')
       redirect_to article_path(@article)
@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
   end
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = Post.find(params[:id])
   end
 
   def check_user_rights

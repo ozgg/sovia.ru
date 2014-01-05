@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :allow_mail, null: false, default: false
       t.integer :entries_count, null: false, default: 0
       t.integer :comments_count, null: false, default: 0
+      t.integer :roles_mask, null: false, default: 0
 
       t.timestamps
     end
