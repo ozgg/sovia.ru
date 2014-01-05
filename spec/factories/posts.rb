@@ -4,10 +4,12 @@ FactoryGirl.define do
 
     factory :article do
       user
+      type Post::TYPE_ARTICLE
       title 'Статья о чём-то интересном'
     end
 
     factory :dream do
+      type Post::TYPE_DREAM
       body 'Что-то такое приснилось'
 
       factory :owned_dream do
