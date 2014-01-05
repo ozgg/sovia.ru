@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   def index
     page      = params[:page] || 1
     @title    = "#{t('titles.articles.index')}, #{t('titles.page')} #{page}"
-    @articles = Article.articles.order('id desc').page(page).per(5)
+    @articles = Article.recent.page(page).per(5)
   end
 
   # get /articles/new

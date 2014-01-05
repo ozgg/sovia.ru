@@ -92,6 +92,6 @@ class DreamsController < ApplicationController
   def allowed_dreams
     maximal_privacy = @current_user.nil? ? Post::PRIVACY_NONE : Post::PRIVACY_USERS
 
-    Dream.dreams.where("privacy <= #{maximal_privacy}").order('id desc')
+    Dream.recent.where("privacy <= #{maximal_privacy}")
   end
 end
