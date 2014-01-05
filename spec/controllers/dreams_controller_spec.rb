@@ -124,7 +124,7 @@ describe DreamsController do
       before(:each) { get :new }
 
       it "assigns new dream to @dream" do
-        expect(assigns[:dream]).to be_a(Post)
+        expect(assigns[:dream]).to be_a(Dream)
       end
 
       it "renders dreams/new" do

@@ -19,12 +19,12 @@ class DreamsController < ApplicationController
   # get /dreams/new
   def new
     @title = t('titles.dreams.new')
-    @dream = Post.new
+    @dream = Dream.new
   end
 
   # post /dreams
   def create
-    @dream = Post.new(dream_parameters.merge(user: @current_user, entry_type: Post::TYPE_DREAM))
+    @dream = Dream.new(dream_parameters.merge(user: @current_user, entry_type: Post::TYPE_DREAM))
     if @dream.save
       flash[:message] = t('dream.added')
       redirect_to dream_path @dream
@@ -59,7 +59,7 @@ class DreamsController < ApplicationController
   private
 
   def set_dream
-    @dream = Post.find(params[:id])
+    @dream = Dream.find(params[:id])
   end
 
   def dream_parameters
@@ -92,6 +92,6 @@ class DreamsController < ApplicationController
   def allowed_dreams
     maximal_privacy = @current_user.nil? ? Post::PRIVACY_NONE : Post::PRIVACY_USERS
 
-    Post.dreams.where("privacy <= #{maximal_privacy}").order('id desc')
+    Dream.dreams.where("privacy <= #{maximal_privacy}").order('id desc')
   end
 end

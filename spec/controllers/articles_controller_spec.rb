@@ -45,7 +45,7 @@ describe ArticlesController do
     end
 
     it "assigns new article to @article" do
-      expect(assigns[:article]).to be_a(Post)
+      expect(assigns[:article]).to be_a(Article)
     end
 
     it "renders articles/new" do
