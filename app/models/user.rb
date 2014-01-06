@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   ROLE_ANYONE    = 0
-  ROLE_MODERATOR = 1
+  ROLE_EDITOR    = 1
+  ROLE_MODERATOR = 2
 
   has_many :posts, dependent: :restrict_with_exception
 
@@ -14,6 +15,10 @@ class User < ActiveRecord::Base
 
   def moderator?
     has_role? ROLE_MODERATOR
+  end
+
+  def editor?
+    has_role? ROLE_EDITOR
   end
 
   def has_role?(role)

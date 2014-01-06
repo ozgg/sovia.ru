@@ -22,5 +22,7 @@ module Sovia
     config.i18n.enforce_available_locales = true
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
+
+    config.action_dispatch.rescue_responses.merge!('ApplicationController::UnauthorizedException' => :unauthorized)
   end
 end

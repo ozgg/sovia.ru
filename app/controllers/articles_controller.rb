@@ -66,6 +66,6 @@ class ArticlesController < ApplicationController
   end
 
   def check_user_rights
-    redirect_to(root_path) if session[:user_id].nil?
+    raise UnauthorizedException if @current_user.nil? || !@current_user.editor?
   end
 end
