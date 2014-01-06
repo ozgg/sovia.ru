@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe DreamsController do
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
 
   shared_examples "visible dream" do
     it "assigns dream to @dream" do
@@ -75,6 +76,18 @@ describe DreamsController do
     it "adds flash message 'Сон добален'" do
       action.call
       expect(flash[:message]).to eq(I18n.t('dream.added'))
+    end
+  end
+
+  shared_examples "editable dream" do
+    before(:each) { get :edit, id: dream }
+
+    it "assigns edited dream to @dream" do
+      expect(assigns[:dream]).to eq(dream)
+    end
+
+    it "renders dreams/edit" do
+      expect(response).to render_template('dreams/edit')
     end
   end
 
@@ -163,7 +176,6 @@ describe DreamsController do
   end
 
   context "authorized user" do
-    let(:other_user) { create(:user) }
     before(:each) { session[:user_id] = user.id }
 
     it_should_behave_like "any user"
@@ -208,15 +220,8 @@ describe DreamsController do
 
     context "get edit for own dream" do
       let(:dream) { create(:dream, user: user) }
-      before(:each) { get :edit, id: dream }
 
-      it "assigns edited dream to @dream" do
-        expect(assigns[:dream]).to eq(dream)
-      end
-
-      it "renders dreams/edit" do
-        expect(response).to render_template('dreams/edit')
-      end
+      it_should_behave_like "editable dream"
     end
 
     context "get edit for others dream" do
@@ -311,6 +316,29 @@ describe DreamsController do
 
     context "delete destroy for anonymous dream" do
       before(:each) { delete :destroy, id: create(:dream) }
+
+      it_should_behave_like "restricted access"
+    end
+  end
+
+  context "moderator" do
+    before(:each) { session[:user_id] = create(:moderator).id }
+
+    context "get edit for public dream" do
+      let(:dream) { create(:dream) }
+
+      it_should_behave_like "editable dream"
+    end
+
+    context "get edit for others protected dream" do
+      let(:dream) { create(:protected_dream) }
+
+      it_should_behave_like "editable dream"
+    end
+
+    context "get edit for others private dream" do
+      let(:dream) { create(:private_dream) }
+      before(:each) { get :edit, id: dream }
 
       it_should_behave_like "restricted access"
     end

@@ -2,7 +2,7 @@ class DreamsController < ApplicationController
   before_action :set_dream, only: [:show, :edit, :update, :destroy]
   before_action :check_rights, only: [:show]
   before_action :allow_only_registered, only: [:edit, :update, :destroy]
-  before_action :allow_only_owner, only: [:edit, :update, :destroy]
+  before_action :check_editing_rights, only: [:edit, :update, :destroy]
 
   # get /dreams
   def index
@@ -71,7 +71,7 @@ class DreamsController < ApplicationController
       if @dream.users_only?
         allow_only_registered
       else
-        allow_only_owner
+        check_editing_rights
       end
     end
   end
@@ -85,8 +85,13 @@ class DreamsController < ApplicationController
     restrict_access if @current_user.nil?
   end
 
-  def allow_only_owner
-    restrict_access unless @dream.user == @current_user
+  def check_editing_rights
+    user_is_owner = @dream.user == @current_user
+    if @dream.owner_only?
+      restrict_access unless user_is_owner
+    else
+      restrict_access unless user_is_owner || @current_user.moderator?
+    end
   end
 
   def allowed_dreams

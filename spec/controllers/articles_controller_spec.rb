@@ -130,7 +130,6 @@ describe ArticlesController do
       end
     end
 
-
     context "get edit" do
       before(:each) { get :edit, id: article }
 
