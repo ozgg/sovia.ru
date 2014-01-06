@@ -1,5 +1,6 @@
 class Article < Post
   after_initialize :set_specific_fields
+  validates_presence_of :user, :title
 
   def self.recent
     where(entry_type: TYPE_ARTICLE).order('id desc')
