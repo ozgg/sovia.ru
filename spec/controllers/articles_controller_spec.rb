@@ -101,7 +101,7 @@ describe ArticlesController do
     end
   end
 
-  context "get show" do
+  context "get show for article" do
     before(:each) { get :show, id: article }
 
     it "assigns article to @article" do
@@ -110,6 +110,14 @@ describe ArticlesController do
 
     it "renders article/show" do
       expect(response).to render_template('articles/show')
+    end
+  end
+
+  context "get show for non-article" do
+    let(:dream) { create(:dream) }
+
+    it "raises RecordNotFound for dream" do
+      expect { get :show, id: dream.id }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

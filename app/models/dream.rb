@@ -8,6 +8,6 @@ class Dream < Post
   private
 
   def set_specific_fields
-    self.entry_type = TYPE_DREAM
+    self.entry_type ||= TYPE_DREAM
   end
 end

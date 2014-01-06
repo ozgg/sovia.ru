@@ -62,6 +62,7 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
+    raise record_not_found unless @article.article?
   end
 
   def check_user_rights

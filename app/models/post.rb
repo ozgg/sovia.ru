@@ -46,11 +46,11 @@ class Post < ActiveRecord::Base
   end
 
   def dream?
-    entry_type == TYPE_DREAM
+    entry_type === TYPE_DREAM
   end
 
   def article?
-    entry_type == TYPE_ARTICLE
+    entry_type === TYPE_ARTICLE
   end
 
   private

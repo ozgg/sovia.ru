@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user = User.find(session[:user_id]) unless session[:user_id].nil?
   end
+
+  def record_not_found
+    ActiveRecord::RecordNotFound
+  end
 end

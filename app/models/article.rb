@@ -9,7 +9,7 @@ class Article < Post
   private
 
   def set_specific_fields
-    self.entry_type = TYPE_ARTICLE
-    self.privacy    = PRIVACY_NONE
+    self.entry_type ||= TYPE_ARTICLE
+    self.privacy    ||= PRIVACY_NONE
   end
 end

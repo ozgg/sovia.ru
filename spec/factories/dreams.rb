@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :dream do
-    entry_type Post::TYPE_DREAM
     body 'Что-то такое приснилось'
 
     factory :owned_dream do
