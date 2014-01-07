@@ -16,7 +16,7 @@ describe "articles/index.html.erb" do
     it "shows message 'Статей нет'" do
       assign(:articles, articles)
       render
-      expect(rendered).to contain(I18n.t('articles.index.no_articles'))
+      expect(rendered).to contain(I18n.t('articles.list.no_articles'))
     end
   end
 end

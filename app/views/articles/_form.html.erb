@@ -12,12 +12,12 @@
     <% end %>
 
     <div>
-      <%= f.label :title %>
-      <%= f.text_field :title, required: true %>
+      <%= f.label :title %><br />
+      <%= f.text_field :title, required: true, size: 80 %>
     </div>
     <div>
-      <%= f.label :body %>
-      <%= f.text_area :body, required: true %>
+      <%= f.label :body %><br />
+      <%= f.text_area :body, required: true, cols: 80, rows: 25 %>
     </div>
     <div>
       <%= f.button t('.submit'), type: 'submit' %>

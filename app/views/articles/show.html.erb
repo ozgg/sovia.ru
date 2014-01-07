@@ -1,9 +1,17 @@
-<article>
+<header>
+  <h1><%= t('.article') %></h1>
+</header>
+<article class="post article">
   <header>
-    <%= @article.title %>
+    <div></div>
+    <h2><%= @article.parsed_title %></h2>
+    <div class="author">
+      <%= user_link @article.user %>
+      (<time datetime="<%= @article.created_at %>"><%= @article.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
+    </div>
   </header>
   <div>
-    <%= simple_format @article.body %>
+    <%= raw @article.parsed_body %>
   </div>
   <footer>
     <%= @article.comments_count %>

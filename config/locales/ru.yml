@@ -42,6 +42,9 @@ ru:
       dream: "Сон"
       user: "Пользователь"
     attributes:
+      article:
+        title: "Название"
+        body:  "Текст"
       dream:
         title: "Название"
         body:  "Сюжет"
@@ -69,10 +72,14 @@ ru:
       main: "Добро пожаловать"
       recent_articles: "Последние статьи"
   articles:
-    index:
+    list:
       no_articles: "Статей нет"
     form:
       submit: "Сохранить статью"
+    index:
+      new_article: "Создать статью"
+    show:
+      article: "Просмотр статьи"
   dreams:
     index:
       no_dreams: "Снов нет"
