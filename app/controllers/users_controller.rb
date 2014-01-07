@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   # get /users/new
   def new
-    @user = User.new
+    @title = t('titles.users.new')
+    @user  = User.new
   end
 
   # post /users
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
       flash[:message]   = t('users.create.successfully')
       redirect_to root_path
     else
+      @title = t('titles.users.new')
       render action: 'new'
     end
   end
