@@ -13,5 +13,6 @@
         </fieldset>
     <% end %>
 <% else %>
-    logged in
+    <%= @current_user.login %><br />
+    <%= link_to t('.logout'), logout_path, method: :delete %>
 <% end %>
