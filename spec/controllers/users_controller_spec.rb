@@ -54,6 +54,24 @@ describe UsersController do
       end
     end
 
+    context "post create when bot checkbox is checked" do
+      let(:action) { lambda { post :create, user: attributes_for(:user), agree: true }}
+
+      it "doesn't add user to database" do
+        expect(action).not_to change(User, :count)
+      end
+
+      it "redirects to root path" do
+        action.call
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "adds flash message 'Вы зарегистрировались и вошли'" do
+        action.call
+        expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
+      end
+    end
+
     context "post create with invalid parameters" do
       let(:action) { lambda { post :create, user: { login: '  ' } } }
 
