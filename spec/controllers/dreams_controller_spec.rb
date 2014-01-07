@@ -108,6 +108,45 @@ describe DreamsController do
     end
   end
 
+  shared_examples "successful dream update" do
+    before(:each) { patch :update, id: dream, dream: { body: 'My good dream' } }
+
+    it "assigns dream to @dream" do
+      expect(assigns[:dream]).to eq(dream)
+    end
+
+    it "updates dream" do
+      dream.reload
+      expect(dream.body).to eq('My good dream')
+    end
+
+    it "adds flash message 'Сон изменён'" do
+      expect(flash[:message]).to eq(I18n.t('dream.updated'))
+    end
+
+    it "redirects to dream page" do
+      expect(response).to redirect_to(dream_path(dream))
+    end
+  end
+
+  shared_examples "successful dream deletion" do
+    let(:action) { lambda { delete :destroy, id: dream } }
+
+    it "removes dream from database" do
+      expect(action).to change(Post, :count).by(-1)
+    end
+
+    it "redirects to all dreams page" do
+      action.call
+      expect(response).to redirect_to(dreams_path)
+    end
+
+    it "adds flash message 'Сон удалён'" do
+      action.call
+      expect(flash[:message]).to eq(I18n.t('dream.deleted'))
+    end
+  end
+
   context "anonymous user" do
     before(:each) { session[:user_id] = nil }
 
@@ -232,24 +271,8 @@ describe DreamsController do
 
     context "patch update for own dream with valid parameters" do
       let(:dream) { create(:dream, user: user) }
-      before(:each) { patch :update, id: dream, dream: { body: 'My good dream' } }
 
-      it "assigns dream to @dream" do
-        expect(assigns[:dream]).to eq(dream)
-      end
-
-      it "updates dream" do
-        dream.reload
-        expect(dream.body).to eq('My good dream')
-      end
-
-      it "adds flash message 'Сон изменён'" do
-        expect(flash[:message]).to eq(I18n.t('dream.updated'))
-      end
-
-      it "redirects to dream page" do
-        expect(response).to redirect_to(dream_path(dream))
-      end
+      it_should_behave_like "successful dream update"
     end
 
     context "patch update for own dream with invalid parameters" do
@@ -285,21 +308,8 @@ describe DreamsController do
 
     context "delete destroy for own dream" do
       let!(:dream) { create(:dream, user: user) }
-      let(:action) { lambda { delete :destroy, id: dream } }
 
-      it "removes dream from database" do
-        expect(action).to change(Post, :count).by(-1)
-      end
-
-      it "redirects to all dreams page" do
-        action.call
-        expect(response).to redirect_to(dreams_path)
-      end
-
-      it "adds flash message 'Сон удалён'" do
-        action.call
-        expect(flash[:message]).to eq(I18n.t('dream.deleted'))
-      end
+      it_should_behave_like "successful dream deletion"
     end
 
     context "delete destroy for others protected dream" do
@@ -339,6 +349,44 @@ describe DreamsController do
     context "get edit for others private dream" do
       let(:dream) { create(:private_dream) }
       before(:each) { get :edit, id: dream }
+
+      it_should_behave_like "restricted access"
+    end
+
+    context "patch update for public dream" do
+      let(:dream) { create(:dream) }
+
+      it_should_behave_like "successful dream update"
+    end
+
+    context "patch update for protected dream" do
+      let(:dream) { create(:protected_dream) }
+
+      it_should_behave_like "successful dream update"
+    end
+
+    context "patch update for private dream" do
+      let(:dream) { create(:private_dream) }
+      before(:each) { patch :update, id: dream }
+
+      it_should_behave_like "restricted access"
+    end
+
+    context "delete destroy for others public dream" do
+      let!(:dream) { create(:dream) }
+
+      it_should_behave_like "successful dream deletion"
+    end
+
+    context "delete destroy for others protected dream" do
+      let!(:dream) { create(:protected_dream) }
+
+      it_should_behave_like "successful dream deletion"
+    end
+
+    context "delete destroy for others private dream" do
+      let(:dream) { create(:private_dream) }
+      before(:each) { delete :destroy, id: dream }
 
       it_should_behave_like "restricted access"
     end
