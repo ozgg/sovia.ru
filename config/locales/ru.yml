@@ -67,6 +67,9 @@ ru:
       submit: "Сохранить сон"
     show:
       header: "Описание сна"
+  users:
+    create:
+      successfully: "Вы зарегистрировались и вошли"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"

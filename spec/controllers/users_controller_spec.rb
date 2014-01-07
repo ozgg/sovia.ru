@@ -12,22 +12,64 @@ describe UsersController do
   end
 
   context "anonymous user" do
+    before(:each) { session[:user_id] = nil }
+
     context "get new" do
-      it "assigns new user to @user"
-      it "renders users/register"
+      before(:each) { get :new }
+
+      it "assigns new user to @user" do
+        expect(assigns[:user]).to be_a(User)
+      end
+
+      it "renders users/new" do
+        expect(response).to render_template('users/new')
+      end
     end
 
     context "post create with valid parameters" do
-      it "assigns new user to @user"
-      it "creates user in database"
-      it "sets user_id in session to new user"
-      it "redirects to root path"
+      let(:action) { lambda { post :create, user: attributes_for(:user) } }
+
+      it "assigns new user to @user" do
+        action.call
+        expect(assigns[:user]).to be_a(User)
+      end
+
+      it "creates user in database" do
+        expect(action).to change(User, :count).by(1)
+      end
+
+      it "sets user_id in session to new user" do
+        action.call
+        expect(session[:user_id]).to eq(User.last.id)
+      end
+
+      it "redirects to root path" do
+        action.call
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "adds flash message 'Вы зарегистрировались и вошли'" do
+        action.call
+        expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
+      end
     end
 
     context "post create with invalid parameters" do
-      it "assigns new user to @user"
-      it "doesn't create user in database"
-      it "renders users/register"
+      let(:action) { lambda { post :create, user: { login: '  ' } } }
+
+      it "assigns new user to @user" do
+        action.call
+        expect(assigns[:user]).to be_a(User)
+      end
+
+      it "doesn't create user in database" do
+        expect(action).not_to change(User, :count)
+      end
+
+      it "renders users/new" do
+        action.call
+        expect(response).to render_template('users/new')
+      end
     end
   end
 

@@ -3,12 +3,19 @@ class UsersController < ApplicationController
 
   # get /users/new
   def new
-
+    @user = User.new
   end
 
   # post /users
   def create
-
+    @user = User.new(user_parameters)
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:message]   = t('users.create.successfully')
+      redirect_to root_path
+    else
+      render action: 'new'
+    end
   end
 
   private
@@ -18,5 +25,9 @@ class UsersController < ApplicationController
       flash[:message] = t('session.already_logged_in')
       redirect_to root_path
     end
+  end
+
+  def user_parameters
+    params.require(:user).permit(:login, :email, :password, :password_confirmation)
   end
 end
