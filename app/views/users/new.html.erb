@@ -1,3 +1,4 @@
+<h1><%= t('.register') %></h1>
 <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
         <div class="errors">
@@ -12,20 +13,30 @@
     <% end %>
 
     <div>
-      <%= f.label :login %>
+      <%= f.label :login %><br />
       <%= f.text_field :login, required: true %>
+      <div class="notice"><%= t('.login_notice') %></div>
     </div>
     <div>
-      <%= f.label :email %>
+      <%= f.label :email %><br />
       <%= f.text_field :email %>
+      <div class="notice"><%= t('.email_notice') %></div>
     </div>
     <div>
-      <%= f.label :password %>
+      <%= f.label :password %><br />
       <%= f.password_field :password, required: true %>
     </div>
     <div>
-      <%= f.label :password_confirmation %>
+      <%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation, required: true %>
+    </div>
+    <div>
+      <%= f.check_box :allow_mail %>
+      <%= f.label :allow_mail %>
+    </div>
+    <div>
+      <%= check_box_tag :agree %>
+      <%= label_tag :agree, t('.i_am_bot') %>
     </div>
     <div>
       <%= f.button t('.register'), type: 'submit' %>
