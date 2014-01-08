@@ -31,5 +31,14 @@ article.post {
       margin: 0.5em 0;
       text-indent: 1.5em;
     }
+
+    .more {
+      &:before {
+        content: "( ";
+      }
+      &:after {
+        content: " )";
+      }
+    }
   }
 }

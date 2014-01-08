@@ -25,6 +25,10 @@ class Post < ActiveRecord::Base
     where(entry_type: TYPE_ARTICLE)
   end
 
+  def parse_body(input)
+    '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+  end
+
   def open?
     privacy == PRIVACY_NONE
   end
@@ -42,7 +46,11 @@ class Post < ActiveRecord::Base
   end
 
   def parsed_body
-    '<p>' + CGI::escapeHTML(body.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+    parse_body body
+  end
+
+  def preview
+    parse_body body.split("\n")[0..1].join("\n")
   end
 
   def dream?
@@ -51,6 +59,10 @@ class Post < ActiveRecord::Base
 
   def article?
     entry_type === TYPE_ARTICLE
+  end
+
+  def passages_count
+    body.count "\n"
   end
 
   private

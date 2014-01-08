@@ -119,3 +119,11 @@ ru:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"
   untitled: "Без названия"
+  read_more: "Читать дальше"
+  views:
+    pagination:
+      first: "Первая"
+      last: "Последняя"
+      previous: "Назад"
+      next: "Вперёд"
+      truncate: "..."

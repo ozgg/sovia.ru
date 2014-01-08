@@ -11,7 +11,12 @@
               (<time datetime="<%= article.created_at %>"><%= article.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
             </div>
           </header>
-          <div><%= raw article.parsed_body %></div>
+          <div>
+            <%= raw article.preview %>
+            <% if article.passages_count > 2 %>
+                <p class="more"><%= link_to t('read_more'), article %></p>
+            <% end %>
+          </div>
           <footer><%= article.comments_count %></footer>
         </article>
     <% end %>
