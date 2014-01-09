@@ -3,21 +3,7 @@
 </header>
 <% if @dreams.any? %>
     <% @dreams.each do |dream| %>
-        <article class="post dream">
-          <header>
-            <div></div>
-            <h2><%= link_to_dream dream %></h2>
-            <div class="author">
-              <%= user_link dream.user %>
-              (<time datetime="<%= dream.created_at %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
-            </div>
-            <div class="tags">
-
-            </div>
-          </header>
-          <div><%= raw dream.parsed_body %></div>
-          <footer><%= dream.comments_count %></footer>
-        </article>
+        <%= render partial: 'posts/post', object: dream, locals: { preview: true } %>
     <% end %>
 
     <%= paginate @dreams %>

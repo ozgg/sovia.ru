@@ -1,0 +1,27 @@
+<article class="post <%= post.class.to_s.downcase %>">
+  <header>
+    <div></div>
+    <h2><%= post.parsed_title %></h2>
+
+    <div class="author">
+      <%= user_link post.user %>
+      (<time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
+    </div>
+    <div class="tags">
+
+    </div>
+  </header>
+  <div>
+    <% if local_assigns[:preview] %>
+        <%= raw post.preview %>
+        <% if post.passages_count > 2 %>
+            <p class="more"><%= link_to t('read_more'), post %></p>
+        <% end %>
+    <% else %>
+        <%= raw post.parsed_body %>
+    <% end %>
+  </div>
+  <footer>
+    <%= post.comments_count %>
+  </footer>
+</article>
