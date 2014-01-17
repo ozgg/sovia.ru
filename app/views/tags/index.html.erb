@@ -1,0 +1,11 @@
+<% if @tags.any? %>
+    <ul>
+      <% @tags.each do |tag| %>
+      <li><%= link_to tag.name, tag %></li>
+      <% end %>
+    </ul>
+
+    <%= paginate @tags %>
+<% else %>
+    <div class="message"><%= t('tags.list.no_tags') %></div>
+<% end %>

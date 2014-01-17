@@ -9,6 +9,11 @@ ru:
       new: "Новая статья"
       show: "Статья"
       edit: "Редактирование статьи"
+    tags:
+      index: "Метки"
+      new: "Новая метка"
+      show: "Метка"
+      edit: "Редактирование метки"
     dreams:
       index: "Сны"
       new: "Описать сон"
@@ -45,6 +50,9 @@ ru:
       article:
         title: "Название"
         body:  "Текст"
+      entry_tag:
+        name: "Название"
+        description: "Текст"
       dream:
         title: "Название"
         body:  "Сюжет"
