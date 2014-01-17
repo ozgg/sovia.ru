@@ -1,9 +1,9 @@
 <h1><%= t('.main') %></h1>
-<h1><%= t('.recent_articles') %></h1>
-<% if @articles.any? %>
-    <% @articles.each do |article| %>
-        <%= render partial: 'posts/post', object: article, locals: { preview: true } %>
+<h1><%= t('.recent_posts') %></h1>
+<% if @posts.any? %>
+    <% @posts.each do |post| %>
+        <%= render partial: 'posts/post', object: post, locals: { preview: true } %>
     <% end %>
 <% else %>
-    <div class="message"><%= t('.no_articles') %></div>
+    <div class="message"><%= t('.no_posts') %></div>
 <% end %>

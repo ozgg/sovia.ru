@@ -17,6 +17,12 @@ describe EntryTag do
     expect(entry_tag.canonical_name).to eq('нечтоинтересное')
   end
 
+  it "leaves canonical name equal to stripped name for empty canonization" do
+    entry_tag.name = '???   '
+    entry_tag.valid?
+    expect(entry_tag.canonical_name).to eq('???')
+  end
+
   it "has unique canonical form" do
     entry_tag.save
     another_tag = build(:entry_tag, name: 'нечто интересное')

@@ -7,10 +7,16 @@ describe IndexController do
       expect(response).to render_template('index/index')
     end
 
-    it "assigns recent articles to @articles" do
+    it "assigns recent articles to @posts" do
       article = create(:article)
       get :index
-      expect(assigns[:articles]).to include(article)
+      expect(assigns[:posts]).to include(article)
+    end
+
+    it "assigns recend dreams to @posts" do
+      dream = create(:dream)
+      get :index
+      expect(assigns[:posts]).to include(dream)
     end
   end
 end

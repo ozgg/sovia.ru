@@ -8,7 +8,9 @@ class EntryTag < ActiveRecord::Base
   end
 
   def canonize(input)
-    input.mb_chars.downcase.to_s.gsub(/[^a-zа-я0-9ё]/, '')
+    downcased = input.mb_chars.downcase.to_s
+    canonized = downcased.gsub(/[^a-zа-я0-9ё]/, '')
+    canonized.empty? ? downcased.strip : canonized
   end
 
   private

@@ -68,9 +68,9 @@ ru:
       enter: "Войти"
   index:
     index:
-      no_articles: "Статей нет"
+      no_posts: "Публикаций нет"
       main: "Добро пожаловать"
-      recent_articles: "Последние статьи"
+      recent_posts: "Последние публикации"
   articles:
     list:
       no_articles: "Статей нет"
