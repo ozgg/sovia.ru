@@ -12,6 +12,12 @@ describe EntryTag do
     expect(entry_tag).not_to be_valid
   end
 
+  it "strips excessive spaces from name" do
+    entry_tag.name = " foo \t\r\n bar "
+    entry_tag.valid?
+    expect(entry_tag.name).to eq('foo bar')
+  end
+
   it "creates canonical form before validating" do
     entry_tag.valid?
     expect(entry_tag.canonical_name).to eq('нечтоинтересное')

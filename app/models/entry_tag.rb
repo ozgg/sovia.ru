@@ -1,7 +1,7 @@
 class EntryTag < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :canonical_name
-  before_validation :create_canonical_name, :create_letter
+  before_validation :normalize_name, :create_canonical_name, :create_letter
 
   def self.match_by_name(name)
     self.find_by_canonical_name(self.new.canonize name)
@@ -14,6 +14,10 @@ class EntryTag < ActiveRecord::Base
   end
 
   private
+
+  def normalize_name
+    self.name.squish!
+  end
 
   def create_canonical_name
     self.canonical_name = canonize name
