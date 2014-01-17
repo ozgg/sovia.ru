@@ -88,6 +88,15 @@ ru:
       submit: "Сохранить сон"
     show:
       header: "Описание сна"
+  tags:
+    list:
+      no_tags: "Меток нет"
+    form:
+      submit: "Сохранить метку"
+    index:
+      new_article: "Создать метку"
+    show:
+      article: "Просмотр метки"
   users:
     create:
       successfully: "Вы зарегистрировались и вошли"
@@ -107,6 +116,10 @@ ru:
     added: "Сон добавлен"
     updated: "Сон обновлён"
     deleted: "Сон удалён"
+  tag:
+    added: "Метка добавлена"
+    updated: "Метка обновлена"
+    deleted: "Метка удалена"
   layouts:
     application:
       articles: "Статьи"

@@ -8,6 +8,7 @@ Sovia::Application.routes.draw do
   resources :articles
   resources :dreams
   resources :users, only: [:new, :create]
+  resources :tags, as: :entry_tags
 
   root 'index#index'
 
