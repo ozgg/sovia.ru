@@ -1,4 +1,6 @@
 class EntryTag < ActiveRecord::Base
+  has_many :posts, through: :post_entry_tags
+
   validates_presence_of :name
   validates_uniqueness_of :canonical_name
   before_validation :normalize_name, :create_canonical_name, :create_letter
@@ -14,7 +16,7 @@ class EntryTag < ActiveRecord::Base
   end
 
   def parsed_description
-    text = description.strip
+    text = description ? description.strip : ''
     if text.length > 0
       '<p>' + text.gsub(/(\r?\n)+/, '</p><p>') + '</p>'
     else

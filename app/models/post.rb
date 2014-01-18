@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   TYPE_BLOG_ENTRY = 4
 
   belongs_to :user
+  has_many :entry_tags, through: :post_entry_tag
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "dreams/index.html.erb" do
-  let(:dreams) { Post.dreams.order('id desc').page(1).per(5) }
+  let(:dreams) { Dream.recent.page(1).per(5) }
 
   context "when dreams present" do
     it "shows dreams list" do

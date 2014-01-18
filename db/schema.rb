@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111215401) do
+ActiveRecord::Schema.define(version: 20140118140404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20140111215401) do
 
   add_index "posts", ["entry_type", "privacy"], name: "index_posts_on_entry_type_and_privacy", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "posts_entry_tags", force: true do |t|
+    t.integer "post_id",      null: false
+    t.integer "entry_tag_id", null: false
+  end
+
+  add_index "posts_entry_tags", ["entry_tag_id"], name: "index_posts_entry_tags_on_entry_tag_id", using: :btree
+  add_index "posts_entry_tags", ["post_id", "entry_tag_id"], name: "index_posts_entry_tags_on_post_id_and_entry_tag_id", unique: true, using: :btree
+  add_index "posts_entry_tags", ["post_id"], name: "index_posts_entry_tags_on_post_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                           null: false
