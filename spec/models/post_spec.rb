@@ -125,6 +125,11 @@ describe Post do
       post.tags_string = 'Другое, прочее'
       expect(post.entry_tags).not_to include(existing_tag)
     end
+
+    it "changes dreams_count for tag it is deleted" do
+      post.entry_tags << existing_tag
+      expect { post.tags_string = 'другое'}.to change(existing_tag, :dreams_count).by(-1)
+    end
   end
 
   context "#tags_string" do

@@ -72,13 +72,7 @@ class Post < ActiveRecord::Base
   end
 
   def tags_string=(new_tags_string)
-    new_tags = []
-    new_tags_string.split(',').each do |new_tag|
-      unless new_tag.strip == ''
-        entry_tag = EntryTag.match_by_name(new_tag) || EntryTag.create(name: new_tag)
-        new_tags << entry_tag unless new_tags.include?(entry_tag)
-      end
-    end
+    new_tags = new_tags_from_string new_tags_string
 
     (entry_tags - new_tags).each do |tag_to_delete|
       tag_to_delete.decrement! :dreams_count if dream?
@@ -123,6 +117,18 @@ class Post < ActiveRecord::Base
     unless user.nil?
       user.decrement! :entries_count
     end
+  end
+
+  def new_tags_from_string(new_tags_string)
+    new_tags = []
+    new_tags_string.split(',').each do |new_tag|
+      unless new_tag.strip == ''
+        entry_tag = EntryTag.match_by_name(new_tag) || EntryTag.create(name: new_tag)
+        new_tags << entry_tag unless new_tags.include?(entry_tag)
+      end
+    end
+
+    new_tags
   end
 
   def make_url_title
