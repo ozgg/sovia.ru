@@ -21,10 +21,23 @@ describe Post do
     let(:owner) { create(:user) }
     let(:post) { create(:owned_post, entry_type: Post::TYPE_DREAM, user: owner) }
 
-    it "is editable by owner"
-    it "is editable by other user with moderator role"
-    it "is not editable by other user without moderator role"
-    it "is not editable by anonymous user"
+    it "is editable by owner" do
+      expect(post.editable_by?(owner)).to be_true
+    end
+
+    it "is editable by other user with moderator role" do
+      moderator = create(:moderator)
+      expect(post.editable_by?(moderator)).to be_true
+    end
+
+    it "is not editable by other user without moderator role" do
+      editor = create(:user)
+      expect(post.editable_by?(editor)).to be_false
+    end
+
+    it "is not editable by anonymous user" do
+      expect(post.editable_by?(nil)).to be_false
+    end
   end
 
   context "#seen_to?" do

@@ -45,6 +45,10 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def editable_by?(editor)
+    !editor.nil? && ((editor == user) || editor.moderator?)
+  end
+
   def parse_body(input)
     '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end
