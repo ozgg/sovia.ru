@@ -6,12 +6,5 @@
     </ul>
   </nav>
 </header>
-<% if @dreams.any? %>
-    <% @dreams.each do |dream| %>
-        <%= render partial: 'posts/post', object: dream, locals: { preview: true } %>
-    <% end %>
 
-    <%= paginate @dreams %>
-<% else %>
-    <div class="message"><%= t('.no_dreams') %></div>
-<% end %>
+<%= render 'list' %>

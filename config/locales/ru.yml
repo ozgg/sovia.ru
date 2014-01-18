@@ -93,8 +93,9 @@ ru:
     show:
       article: "Просмотр статьи"
   dreams:
-    index:
+    list:
       no_dreams: "Снов нет"
+    index:
       new_dream: "Описать сон"
     form:
       submit: "Сохранить сон"

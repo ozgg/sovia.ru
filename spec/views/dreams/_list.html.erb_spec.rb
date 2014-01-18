@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "dreams/index.html.erb" do
+describe "dreams/_list.html.erb" do
   let(:dreams) { Dream.recent.page(1).per(5) }
 
   context "when dreams present" do
@@ -8,7 +8,7 @@ describe "dreams/index.html.erb" do
       dream = create(:dream, title: 'My dream')
       assign(:dreams, dreams)
       render
-      expect(rendered).to contain(dream.title)
+      expect(rendered).to contain(dream.parsed_title)
     end
   end
 
