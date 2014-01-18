@@ -1,7 +1,6 @@
 class DreamsController < ApplicationController
   before_action :set_dream, only: [:show, :edit, :update, :destroy]
-  before_action :check_rights, only: [:show]
-  before_action :allow_only_registered, only: [:edit, :update, :destroy]
+  before_action :check_visibility, only: [:show]
   before_action :check_editing_rights, only: [:edit, :update, :destroy]
 
   # get /dreams
@@ -60,20 +59,11 @@ class DreamsController < ApplicationController
 
   def set_dream
     @dream = Dream.find(params[:id])
+    raise record_not_found unless @dream.dream?
   end
 
   def dream_parameters
     params[:dream].permit(:title, :body)
-  end
-
-  def check_rights
-    unless @dream.open?
-      if @dream.users_only?
-        allow_only_registered
-      else
-        check_editing_rights
-      end
-    end
   end
 
   def restrict_access
@@ -81,17 +71,12 @@ class DreamsController < ApplicationController
     redirect_to dreams_path
   end
 
-  def allow_only_registered
-    restrict_access if @current_user.nil?
+  def check_visibility
+    restrict_access unless @dream.seen_to?(@current_user)
   end
 
   def check_editing_rights
-    user_is_owner = @dream.user == @current_user
-    if @dream.owner_only?
-      restrict_access unless user_is_owner
-    else
-      restrict_access unless user_is_owner || @current_user.moderator?
-    end
+    restrict_access unless @dream.seen_to?(@current_user) && @dream.editable_by?(@current_user)
   end
 
   def allowed_dreams

@@ -53,18 +53,6 @@ class Post < ActiveRecord::Base
     '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end
 
-  def open?
-    privacy == PRIVACY_NONE
-  end
-
-  def users_only?
-    privacy == PRIVACY_USERS
-  end
-
-  def owner_only?
-    privacy == PRIVACY_OWNER
-  end
-
   def parsed_title
     title || I18n.t('untitled')
   end

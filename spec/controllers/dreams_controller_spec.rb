@@ -12,6 +12,11 @@ describe DreamsController do
     it "renders dreams/show" do
       expect(response).to render_template('dreams/show')
     end
+
+    it "raises RecordNotFound for article" do
+      article = create(:article)
+      expect { get :show, id: article.id }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 
   shared_examples "any user" do
