@@ -1,2 +1,11 @@
-<h1><%= t('.header') %></h1>
+<header>
+  <h1><%= t('.header') %></h1>
+  <% if @dream.editable_by? @current_user %>
+  <nav>
+    <ul>
+      <li><%= link_to t('.edit'), edit_dream_path(@dream) %></li>
+    </ul>
+  </nav>
+  <% end %>
+</header>
 <%= render partial: 'posts/post', object: @dream %>

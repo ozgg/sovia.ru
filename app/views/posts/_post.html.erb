@@ -1,6 +1,6 @@
 <article class="post <%= post.class.to_s.downcase %>">
   <header>
-    <div></div>
+    <div><!-- user avatar --></div>
     <% if local_assigns[:preview] %>
         <h2><%= link_to post.parsed_title, post %></h2>
     <% else %>
@@ -11,9 +11,11 @@
       <%= user_link post.user %>
       (<time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
     </div>
-    <div class="tags">
-
-    </div>
+    <% if post.dream? %>
+        <div class="tags">
+          <%= post.tags_string %>
+        </div>
+    <% end %>
   </header>
   <div>
     <% if local_assigns[:preview] %>

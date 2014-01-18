@@ -63,7 +63,7 @@ class DreamsController < ApplicationController
   end
 
   def dream_parameters
-    params[:dream].permit(:title, :body)
+    params[:dream].permit(:title, :body, :privacy, :tags_string)
   end
 
   def restrict_access
@@ -76,7 +76,8 @@ class DreamsController < ApplicationController
   end
 
   def check_editing_rights
-    restrict_access unless @dream.seen_to?(@current_user) && @dream.editable_by?(@current_user)
+    enough_rights = @dream.seen_to?(@current_user) && @dream.editable_by?(@current_user)
+    restrict_access unless enough_rights
   end
 
   def allowed_dreams

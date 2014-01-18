@@ -99,6 +99,7 @@ ru:
       submit: "Сохранить сон"
     show:
       header: "Описание сна"
+      edit: "Редактировать сон"
   tags:
     list:
       no_tags: "Меток нет"
