@@ -59,7 +59,7 @@ class Post < ActiveRecord::Base
   end
 
   def tags_string
-    tags = self.entry_tags.order('dreams_count desc, name asc')
+    tags = ordered_tags
     if tags.any?
       buffer = []
       tags.each do |tag|
@@ -69,6 +69,26 @@ class Post < ActiveRecord::Base
     else
       ''
     end
+  end
+
+  def tags_string=(new_tags_string)
+    new_tags = []
+    new_tags_string.split(',').each do |new_tag|
+      unless new_tag.strip == ''
+        entry_tag = EntryTag.match_by_name(new_tag) || EntryTag.create(name: new_tag)
+        new_tags << entry_tag unless new_tags.include?(entry_tag)
+      end
+    end
+
+    (entry_tags - new_tags).each do |tag_to_delete|
+      tag_to_delete.decrement! :dreams_count if dream?
+    end
+
+    self.entry_tags = new_tags
+  end
+
+  def ordered_tags
+    self.entry_tags.order('dreams_count desc, name asc')
   end
 
   def parse_body(input)

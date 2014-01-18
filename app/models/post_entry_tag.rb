@@ -1,6 +1,13 @@
 class PostEntryTag < ActiveRecord::Base
   belongs_to :post
   belongs_to :entry_tag
+  validates_uniqueness_of :post_id, scope: :entry_tag_id
+  after_create :increment_dreams_count
+  before_destroy :decrement_dreams_count
+
+  def self.find_for_pair(post, tag)
+    where(post: post, entry_tag: tag).first
+  end
 
   private
 

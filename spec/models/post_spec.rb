@@ -94,15 +94,36 @@ describe Post do
   end
 
   context "#tags_string=" do
-    let(:exitsing_tag) { create(:entry_tag, name: 'Раз') }
+    let!(:existing_tag) { create(:entry_tag, name: 'Раз') }
+    let(:post) { create(:post, entry_type: Post::TYPE_DREAM) }
 
-    context "when delimiter is comma" do
-      let(:tags_string) { ',раз, два,,три четыре, ,два,Раз,' }
-
+    it "adds new tags to entry_tags" do
+      expect { post.tags_string = 'Слово, Дело'}.to change(EntryTag, :count).by(2)
     end
 
-    context "when delimiter is space" do
-      let(:tags_string) { 'слово слово воробей раз вылетел поймали!' }
+    it "doesn't add existing tag to entry_tags" do
+      expect { post.tags_string = 'Раз'}.not_to change(EntryTag, :count)
+    end
+
+    it "adds tags to post" do
+      post.tags_string = 'раз'
+      expect(post.entry_tags).to include(existing_tag)
+    end
+
+    it "ignores repeated tags" do
+      post.tags_string = 'люди, Люди, ЛЮДИ, люди, лЮди'
+      expect(post.entry_tags.length).to eq(1)
+    end
+
+    it "ignores empty tags" do
+      post.tags_string = ', ,,   раз,    ,'
+      expect(post.entry_tags.length).to eq(1)
+    end
+
+    it "destroys link for absent tags" do
+      post.entry_tags << existing_tag
+      post.tags_string = 'Другое, прочее'
+      expect(post.entry_tags).not_to include(existing_tag)
     end
   end
 

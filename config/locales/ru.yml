@@ -27,6 +27,8 @@ ru:
     page: "страница"
   activerecord:
     errors:
+      messages:
+        record_invalid: "Запись недействительна"
       models:
         user:
           attributes:
