@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :entry_type, in: [TYPE_DREAM, TYPE_ARTICLE, TYPE_POST, TYPE_BLOG_ENTRY]
 
   after_create :increment_entries_counter
-  after_destroy :decrement_entries_counter
+  before_destroy :decrement_entries_counter, :decrement_dreams_counter
 
   def self.dreams
     where(entry_type: TYPE_DREAM)
@@ -116,6 +116,14 @@ class Post < ActiveRecord::Base
   def decrement_entries_counter
     unless user.nil?
       user.decrement! :entries_count
+    end
+  end
+
+  def decrement_dreams_counter
+    if dream?
+      entry_tags.each do |tag|
+        tag.decrement! :dreams_count
+      end
     end
   end
 

@@ -146,4 +146,13 @@ describe Post do
       expect(post.tags_string).to eq('Первый символ, второй символ')
     end
   end
+
+  context "when destroyed" do
+    it "decrements dreams_count for used tags" do
+      entry_tag = create(:entry_tag)
+      dream     = create(:post, entry_type: Post::TYPE_DREAM)
+      dream.entry_tags << entry_tag
+      expect { dream.destroy }.to change(entry_tag, :dreams_count).by(-1)
+    end
+  end
 end
