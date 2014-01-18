@@ -1,4 +1,5 @@
 class EntryTag < ActiveRecord::Base
+  has_many :post_entry_tags
   has_many :posts, through: :post_entry_tags
 
   validates_presence_of :name

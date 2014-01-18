@@ -9,7 +9,8 @@ class Post < ActiveRecord::Base
   TYPE_BLOG_ENTRY = 4
 
   belongs_to :user
-  has_many :entry_tags, through: :post_entry_tag
+  has_many :post_entry_tags
+  has_many :entry_tags, through: :post_entry_tags
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
@@ -49,16 +50,29 @@ class Post < ActiveRecord::Base
     !editor.nil? && ((editor == user) || editor.moderator?)
   end
 
-  def parse_body(input)
-    '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
-  end
-
   def parsed_title
     title || I18n.t('untitled')
   end
 
   def parsed_body
     parse_body body
+  end
+
+  def tags_string
+    tags = self.entry_tags.order('dreams_count desc, name asc')
+    if tags.any?
+      buffer = []
+      tags.each do |tag|
+        buffer << tag.name
+      end
+      buffer.join(', ')
+    else
+      ''
+    end
+  end
+
+  def parse_body(input)
+    '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end
 
   def preview

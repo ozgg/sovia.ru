@@ -92,4 +92,32 @@ describe Post do
       end
     end
   end
+
+  context "#tags_string=" do
+    let(:exitsing_tag) { create(:entry_tag, name: 'Раз') }
+
+    context "when delimiter is comma" do
+      let(:tags_string) { ',раз, два,,три четыре, ,два,Раз,' }
+
+    end
+
+    context "when delimiter is space" do
+      let(:tags_string) { 'слово слово воробей раз вылетел поймали!' }
+    end
+  end
+
+  context "#tags_string" do
+    let(:post) { create(:post, entry_type: Post::TYPE_DREAM ) }
+
+    it "returns empty string when post has no tags" do
+      expect(post.tags_string).to eq('')
+    end
+
+    it "returns comma-separated tag names when post has tags" do
+      create(:entry_tag, name: 'второй символ')
+      create(:entry_tag, name: 'Первый символ')
+      post.entry_tags = EntryTag.last(2)
+      expect(post.tags_string).to eq('Первый символ, второй символ')
+    end
+  end
 end
