@@ -34,6 +34,17 @@ class Post < ActiveRecord::Base
     }
   end
 
+  def seen_to?(looker)
+    case privacy
+      when PRIVACY_NONE
+        true
+      when PRIVACY_USERS
+        !looker.nil?
+      else
+        user == looker
+    end
+  end
+
   def parse_body(input)
     '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end
