@@ -120,6 +120,41 @@ section#main {
   background: #ffffff;
   border-radius: 1em;
   padding: 1em;
+
+  > header {
+    nav {
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+          display: inline-block;
+          padding: 0 0.5em;
+
+          &:before {
+            content: '[ ';
+          }
+
+          &:after {
+            content: ' ]';
+          }
+        }
+      }
+    }
+  }
+}
+
+article {
+  margin: 1em 0;
+  max-width: 900px;
+
+  > div {
+    p {
+      margin: 0.5em 0;
+      text-indent: 1.5em;
+    }
+  }
 }
 
 div.message {

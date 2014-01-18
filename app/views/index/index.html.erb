@@ -1,5 +1,8 @@
-<h1><%= t('.main') %></h1>
-<h1><%= t('.recent_posts') %></h1>
+<header>
+  <h1><%= t('.main') %></h1>
+  <%= render 'management_links' %>
+  <h1><%= t('.recent_posts') %></h1>
+</header>
 <% if @posts.any? %>
     <% @posts.each do |post| %>
         <%= render partial: 'posts/post', object: post, locals: { preview: true } %>

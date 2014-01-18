@@ -13,6 +13,15 @@ class EntryTag < ActiveRecord::Base
     canonized.empty? ? downcased.strip : canonized
   end
 
+  def parsed_description
+    text = description.strip
+    if text.length > 0
+      '<p>' + text.gsub(/(\r?\n)+/, '</p><p>') + '</p>'
+    else
+      ''
+    end
+  end
+
   private
 
   def normalize_name

@@ -1,0 +1,7 @@
+<% if !@current_user.nil? && @current_user.roles_mask > 0 %>
+    <nav>
+      <ul>
+        <li><%= link_to t('titles.tags.index'), entry_tags_path %></li>
+      </ul>
+    </nav>
+<% end %>

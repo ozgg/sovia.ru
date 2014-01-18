@@ -5,13 +5,14 @@ class TagsController < ApplicationController
   # get /tags
   def index
     page = params[:page] || 1
-
+    @title = "#{t('titles.tags.index')}, #{t('titles.page')} #{page}"
     @tags = EntryTag.order('name asc').page(page).per(10)
   end
 
   # get /tags/new
   def new
-    @tag = EntryTag.new
+    @title = t('tags.index.new_tag')
+    @tag   = EntryTag.new
   end
 
   # post /tags
@@ -27,7 +28,7 @@ class TagsController < ApplicationController
 
   # post /tags/:id
   def show
-
+    @title = "#{t('tags.show.tag')} «#{@tag.name}»"
   end
 
   # get /tags/:id/edit

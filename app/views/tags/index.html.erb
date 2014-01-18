@@ -1,3 +1,12 @@
+<header>
+  <h1><%= @title %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('.new_tag'), new_entry_tag_path %></li>
+    </ul>
+  </nav>
+</header>
+
 <% if @tags.any? %>
     <ul>
       <% @tags.each do |tag| %>

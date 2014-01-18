@@ -1,6 +1,4 @@
 article.post {
-  max-width: 900px;
-
   header {
     min-height: 110px;
 
@@ -26,11 +24,6 @@ article.post {
 
   > div {
     padding: 0.5em 1em;
-
-    p {
-      margin: 0.5em 0;
-      text-indent: 1.5em;
-    }
 
     .more {
       &:before {

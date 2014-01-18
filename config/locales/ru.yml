@@ -52,7 +52,7 @@ ru:
         body:  "Текст"
       entry_tag:
         name: "Название"
-        description: "Текст"
+        description: "Интерпретация"
       dream:
         title: "Название"
         body:  "Сюжет"
@@ -102,9 +102,12 @@ ru:
     form:
       submit: "Сохранить метку"
     index:
-      new_article: "Создать метку"
+      new_tag: "Создать метку"
     show:
-      article: "Просмотр метки"
+      tag: "Просмотр метки"
+      delete: "Удалить метку"
+      list: "Все метки"
+      edit: "Редактировать метку"
   users:
     create:
       successfully: "Вы зарегистрировались и вошли"
@@ -148,3 +151,4 @@ ru:
       previous: "Назад"
       next: "Вперёд"
       truncate: "..."
+  are_you_sure: "Вы уверены?"
