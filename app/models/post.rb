@@ -26,6 +26,14 @@ class Post < ActiveRecord::Base
     where(entry_type: TYPE_ARTICLE)
   end
 
+  def self.privacy_modes
+    {
+        PRIVACY_NONE  => I18n.t('post.privacy.none'),
+        PRIVACY_USERS => I18n.t('post.privacy.users'),
+        PRIVACY_OWNER => I18n.t('post.privacy.owner')
+    }
+  end
+
   def parse_body(input)
     '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end

@@ -22,7 +22,7 @@
     <% unless @current_user.nil? %>
         <div>
           <%= f.label :privacy %>
-          <%= f.select :privacy, [Dream::PRIVACY_NONE, Dream::PRIVACY_USERS, Dream::PRIVACY_OWNER] %>
+          <%= f.select :privacy, Dream.privacy_modes.invert %>
         </div>
     <% end %>
     <div>

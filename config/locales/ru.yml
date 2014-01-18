@@ -56,6 +56,7 @@ ru:
       dream:
         title: "Название"
         body:  "Сюжет"
+        privacy: "Видимость"
       user:
         login: "Логин"
         password: "Пароль"
@@ -152,3 +153,8 @@ ru:
       next: "Вперёд"
       truncate: "..."
   are_you_sure: "Вы уверены?"
+  post:
+    privacy:
+      none: "Для всех"
+      users: "Для зарегистрированных"
+      owner: "Только для меня"
