@@ -12,9 +12,19 @@
       (<time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
     </div>
     <% if post.dream? %>
-        <div class="tags">
-          <%= post.tags_string %>
-        </div>
+        <% tags = post.entry_tags %>
+        <% if tags.any? %>
+            <div class="tags">
+              <div><%= t('.tags') %></div>
+              <nav>
+                <ul>
+                  <% tags.each do |tag| %>
+                    <li><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %></li>
+                  <% end %>
+                </ul>
+              </nav>
+            </div>
+        <% end %>
     <% end %>
   </header>
   <div>

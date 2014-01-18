@@ -57,14 +57,9 @@ class DreamsController < ApplicationController
 
   # get /dreams/tagged/:tag
   def tagged
-    page = params[:page] || 1
-
-    entry_tag = EntryTag.match_by_name(params[:tag])
-    if entry_tag.nil?
-      @dreams = []
-    else
-      @dreams = tagged_dreams(entry_tag).page(page).per(5)
-    end
+    page    = params[:page] || 1
+    @dreams = tagged_dreams.page(page).per(5)
+    @title  = "#{t('titles.dreams.tagged')} «#{@entry_tag.name}», #{t('titles.page')} #{page}"
   end
 
   private
@@ -98,7 +93,10 @@ class DreamsController < ApplicationController
     Dream.recent.where("privacy <= #{maximal_privacy}")
   end
 
-  def tagged_dreams(entry_tag)
-    allowed_dreams.joins(:post_entry_tags).where(post_entry_tags: { entry_tag: entry_tag })
+  def tagged_dreams
+    @entry_tag = EntryTag.match_by_name(params[:tag])
+    raise record_not_found if @entry_tag.nil?
+
+    allowed_dreams.joins(:post_entry_tags).where(post_entry_tags: { entry_tag: @entry_tag })
   end
 end
