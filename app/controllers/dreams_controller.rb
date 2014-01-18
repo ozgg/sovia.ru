@@ -34,7 +34,7 @@ class DreamsController < ApplicationController
 
   # get /dreams/:id/edit
   def edit
-
+    @title = t('titles.dreams.edit')
   end
 
   # patch /dreams/:id

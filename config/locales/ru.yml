@@ -59,6 +59,7 @@ ru:
         title: "Название"
         body:  "Сюжет"
         privacy: "Видимость"
+        tags_string: "Метки (ключевые символы)"
       user:
         login: "Логин"
         password: "Пароль"
@@ -100,6 +101,8 @@ ru:
     show:
       header: "Описание сна"
       edit: "Редактировать сон"
+    edit:
+      view: "К просмотру сна"
   tags:
     list:
       no_tags: "Меток нет"
