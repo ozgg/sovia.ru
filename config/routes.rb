@@ -5,6 +5,8 @@ Sovia::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  get 'dreams/tagged/:tag' => 'dreams#tagged', as: :tagged_dreams
+
   resources :articles
   resources :dreams
   resources :users, only: [:new, :create]

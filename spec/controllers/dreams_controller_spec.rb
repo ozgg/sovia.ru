@@ -398,6 +398,19 @@ describe DreamsController do
   end
 
   context "getting tagged dreams" do
-    pending "describe tagged dreams"
+    let(:dream) { create(:dream) }
+    let!(:entry_tag) { create(:entry_tag) }
+
+    it "assigns dreams with given tag to @dreams" do
+      dream.entry_tags << entry_tag
+      get :tagged, tag: entry_tag.name
+      expect(assigns[:dreams]).to include(dream)
+    end
+
+    it "doesn't assign dreams without given tag to @dreams" do
+      dream.entry_tags << create(:entry_tag, name: 'Не входит')
+      get :tagged, tag: entry_tag.name
+      expect(assigns[:dreams]).not_to include(dream)
+    end
   end
 end

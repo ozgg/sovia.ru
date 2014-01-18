@@ -55,6 +55,18 @@ class DreamsController < ApplicationController
     redirect_to dreams_path
   end
 
+  # get /dreams/tagged/:tag
+  def tagged
+    page = params[:page] || 1
+
+    entry_tag = EntryTag.match_by_name(params[:tag])
+    if entry_tag.nil?
+      @dreams = []
+    else
+      @dreams = tagged_dreams(entry_tag).page(page).per(5)
+    end
+  end
+
   private
 
   def set_dream
@@ -84,5 +96,9 @@ class DreamsController < ApplicationController
     maximal_privacy = @current_user.nil? ? Post::PRIVACY_NONE : Post::PRIVACY_USERS
 
     Dream.recent.where("privacy <= #{maximal_privacy}")
+  end
+
+  def tagged_dreams(entry_tag)
+    allowed_dreams.joins(:post_entry_tags).where(post_entry_tags: { entry_tag: entry_tag })
   end
 end
