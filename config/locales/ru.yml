@@ -47,7 +47,15 @@ ru:
               unreasonable: "не выглядит как e-mail"
             login:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+        article:
+          attributes:
+            body:
+              blank: "не может быть пустым"
         dream:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+        post:
           attributes:
             body:
               blank: "не может быть пустым"
@@ -116,6 +124,12 @@ ru:
       new_post: "Создать публикацию"
     show:
       post: "Просмотр публикации"
+      edit: "Редактировать запись"
+      delete: "Удалить запись"
+    post:
+      tags: "Метки"
+    edit:
+      edit: "Редактирование записи"
   dreams:
     list:
       no_dreams: "Снов нет"
@@ -188,6 +202,3 @@ ru:
       next: "Вперёд"
       truncate: "..."
   are_you_sure: "Вы уверены?"
-  posts:
-    post:
-      tags: "Метки"

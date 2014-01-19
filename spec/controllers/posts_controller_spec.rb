@@ -190,6 +190,11 @@ describe PostsController do
         action.call
         expect(flash[:message]).to eq(I18n.t('post.added'))
       end
+
+      it "adds post with current user as owner" do
+        action.call
+        expect(Post.posts.last.user).to eq(user)
+      end
     end
 
     context "post create with invalid parameters" do

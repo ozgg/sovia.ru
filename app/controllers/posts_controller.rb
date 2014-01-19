@@ -5,18 +5,21 @@ class PostsController < ApplicationController
 
   # get /posts
   def index
-    page = params[:page] || 1
+    page   = params[:page] || 1
+    @title = "#{t('titles.posts.index')}, #{t('titles.page')} #{page}"
     @posts = Post.posts.order('id desc').page(page).per(5)
   end
 
   # get /posts/new
   def new
-    @post = Post.new
+    @title = t('titles.posts.new')
+    @post  = Post.new
   end
 
   # post /posts
   def create
-    @post = Post.new(post_parameters)
+    @title = t('titles.posts.new')
+    @post  = Post.new(post_parameters.merge(user: @current_user))
     if @post.save
       flash[:message] = t('post.added')
       redirect_to @post
@@ -27,16 +30,17 @@ class PostsController < ApplicationController
 
   # get /posts/:id
   def show
-
+    @title = "#{t('titles.posts.show')} «#{@post.parsed_title}»"
   end
 
   # get /posts/:id/edit
   def edit
-
+    @title = t('titles.posts.edit')
   end
 
   # patch /posts/:id
   def update
+    @title = t('titles.posts.edit')
     if @post.update(post_parameters)
       flash[:message] = t('post.updated')
       redirect_to @post

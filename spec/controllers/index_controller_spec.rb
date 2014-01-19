@@ -13,10 +13,16 @@ describe IndexController do
       expect(assigns[:posts]).to include(article)
     end
 
-    it "assigns recend dreams to @posts" do
+    it "assigns recent dreams to @posts" do
       dream = create(:dream)
       get :index
       expect(assigns[:posts]).to include(dream)
+    end
+
+    it "assigns recent community posts to @posts" do
+      community_post = create(:post)
+      get :index
+      expect(assigns[:posts]).to include(community_post)
     end
   end
 end

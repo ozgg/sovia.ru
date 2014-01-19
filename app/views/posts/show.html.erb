@@ -1,1 +1,13 @@
+<header>
+  <h1><%= t('.post') %></h1>
+  <% if @post.editable_by? @current_user %>
+  <nav>
+    <ul>
+      <li><%= link_to t('.edit'), edit_post_path(@post) %></li>
+      <li><%= link_to t('.delete'), post_path(@post), method: :delete, data: { confirm: t('are_you_sure') } %></li>
+    </ul>
+  </nav>
+  <% end %>
+</header>
+
 <%= render partial: 'post', object: @post %>
