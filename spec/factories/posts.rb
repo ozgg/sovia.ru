@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :post do
+    entry_type Post::TYPE_POST
     body 'Текст записи с разным текстом'
 
     factory :owned_post do

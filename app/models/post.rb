@@ -27,11 +27,15 @@ class Post < ActiveRecord::Base
     where(entry_type: TYPE_ARTICLE)
   end
 
+  def self.posts
+    where(entry_type: TYPE_POST)
+  end
+
   def self.privacy_modes
     {
-        PRIVACY_NONE  => I18n.t('post.privacy.none'),
-        PRIVACY_USERS => I18n.t('post.privacy.users'),
-        PRIVACY_OWNER => I18n.t('post.privacy.owner')
+        PRIVACY_NONE  => I18n.t('activerecord.properties.post.privacy.none'),
+        PRIVACY_USERS => I18n.t('activerecord.properties.post.privacy.users'),
+        PRIVACY_OWNER => I18n.t('activerecord.properties.post.privacy.owner')
     }
   end
 
@@ -99,6 +103,10 @@ class Post < ActiveRecord::Base
 
   def article?
     entry_type === TYPE_ARTICLE
+  end
+
+  def post?
+    entry_type === TYPE_POST
   end
 
   def passages_count

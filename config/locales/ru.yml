@@ -9,6 +9,11 @@ ru:
       new: "Новая статья"
       show: "Статья"
       edit: "Редактирование статьи"
+    posts:
+      index: "Публикации"
+      new: "Новая запись"
+      show: "Публикация"
+      edit: "Редактирование записи"
     tags:
       index: "Метки"
       new: "Новая метка"
@@ -53,6 +58,9 @@ ru:
       article:
         title: "Название"
         body:  "Текст"
+      post:
+        title: "Название"
+        body:  "Текст"
       entry_tag:
         name: "Название"
         description: "Интерпретация"
@@ -67,6 +75,12 @@ ru:
         password_confirmation: "Подтверждение пароля"
         email: "E-mail"
         allow_mail: "Получать уведомления по электронной почте"
+    properties:
+      post:
+        privacy:
+          none: "Для всех"
+          users: "Для зарегистрированных"
+          owner: "Только для меня"
   session:
     not_logged_in: "Вы вышли"
     logged_in_successfully: "Вы вошли"
@@ -93,6 +107,15 @@ ru:
       new_article: "Создать статью"
     show:
       article: "Просмотр статьи"
+  posts:
+    list:
+      no_posts: "Записей нет"
+    form:
+      submit: "Сохранить запись"
+    index:
+      new_post: "Создать публикацию"
+    show:
+      post: "Просмотр публикации"
   dreams:
     list:
       no_dreams: "Снов нет"
@@ -132,6 +155,10 @@ ru:
     added: "Статья добавлена"
     updated: "Статья обновлена"
     deleted: "Статья удалена"
+  post:
+    added: "Публикация добавлена"
+    updated: "Публикация обновлена"
+    deleted: "Публикация удалена"
   dream:
     added: "Сон добавлен"
     updated: "Сон обновлён"
@@ -161,11 +188,6 @@ ru:
       next: "Вперёд"
       truncate: "..."
   are_you_sure: "Вы уверены?"
-  post:
-    privacy:
-      none: "Для всех"
-      users: "Для зарегистрированных"
-      owner: "Только для меня"
   posts:
     post:
       tags: "Метки"

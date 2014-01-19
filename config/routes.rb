@@ -7,9 +7,10 @@ Sovia::Application.routes.draw do
 
   get 'dreams/tagged/:tag' => 'dreams#tagged', as: :tagged_dreams
 
+  resources :users, only: [:new, :create]
   resources :articles
   resources :dreams
-  resources :users, only: [:new, :create]
+  resources :posts
   resources :tags, as: :entry_tags
 
   root 'index#index'
