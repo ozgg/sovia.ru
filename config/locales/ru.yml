@@ -60,8 +60,11 @@ ru:
             body:
               blank: "не может быть пустым"
     models:
-      dream: "Сон"
-      user: "Пользователь"
+      article: "статья"
+      dream: "сон"
+      post: "публикация"
+      user: "пользователь"
+      tag: "метка"
     attributes:
       article:
         title: "Название"
@@ -202,3 +205,4 @@ ru:
       next: "Вперёд"
       truncate: "..."
   are_you_sure: "Вы уверены?"
+  at: "от"

@@ -8,8 +8,9 @@
     <% end %>
 
     <div class="author">
-      <%= user_link post.user %>
-      (<time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>)
+      <%= user_link post.user %>,
+      <%= t("activerecord.models.#{post.class.to_s.downcase}") + ' ' + t('at') %>
+      <time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
     <% if post.dream? %>
         <% tags = post.entry_tags %>
