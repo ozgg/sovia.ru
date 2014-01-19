@@ -1,9 +1,0 @@
-<% if @articles.any? %>
-    <% @articles.each do |article| %>
-        <%= render partial: 'posts/post', object: article, locals: { preview: true } %>
-    <% end %>
-
-    <%= paginate @articles %>
-<% else %>
-    <div class="message"><%= t('.no_articles') %></div>
-<% end %>

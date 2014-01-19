@@ -1,0 +1,9 @@
+<% if list.any? %>
+    <% list.each do |post| %>
+        <%= render partial: 'posts/post', object: post, locals: { preview: true } %>
+    <% end %>
+
+    <%= paginate list if list.respond_to? :current_page %>
+<% else %>
+    <div class="message"><%= t('.no_posts') %></div>
+<% end %>

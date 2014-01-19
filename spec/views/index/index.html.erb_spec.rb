@@ -1,20 +1,9 @@
 require 'spec_helper'
 
 describe "index/index.html.erb" do
-  context "when articles present" do
-    it "renders articles" do
-      article = create(:article)
-      assign(:posts, Article.recent.first(3))
-      render
-      expect(rendered).to contain(article.title)
-    end
-  end
-
-  context "when no articles present" do
-    it "renders message 'Публикаций нет'" do
-      assign(:posts, Article.recent.first(3))
-      render
-      expect(rendered).to contain(I18n.t('index.index.no_posts'))
-    end
+  it "renders posts list" do
+    assign(:posts, Post.last(5))
+    render
+    expect(rendered).to render_template('posts/_list')
   end
 end
