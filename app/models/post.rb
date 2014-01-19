@@ -16,6 +16,7 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
   validates_inclusion_of :entry_type, in: [TYPE_DREAM, TYPE_ARTICLE, TYPE_POST, TYPE_BLOG_ENTRY]
 
+  after_initialize :set_specific_fields
   after_create :increment_entries_counter
   before_destroy :decrement_entries_counter, :decrement_dreams_counter
 
@@ -114,6 +115,10 @@ class Post < ActiveRecord::Base
   end
 
   private
+
+  def set_specific_fields
+    self.entry_type ||= TYPE_POST
+  end
 
   def increment_entries_counter
     unless user.nil?
