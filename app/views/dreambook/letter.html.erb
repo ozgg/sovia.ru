@@ -1,2 +1,13 @@
-<h1>Dreambook#letter</h1>
-<p>Find me in app/views/dreambook/letter.html.erb</p>
+<%= render 'letters' %>
+
+<% if @tags.any? %>
+    <nav>
+      <ul>
+        <% @tags.each do |word| %>
+        <li><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></li>
+        <% end %>
+      </ul>
+    </nav>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>

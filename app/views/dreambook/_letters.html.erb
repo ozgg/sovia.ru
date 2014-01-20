@@ -1,0 +1,11 @@
+<% if @letters.any? %>
+    <nav>
+      <ul>
+        <% @letters.each do |letter| %>
+        <li><%= link_to letter, dreambook_letter_path(letter: letter) %></li>
+        <% end %>
+      </ul>
+    </nav>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>

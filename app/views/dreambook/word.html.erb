@@ -1,2 +1,10 @@
-<h1>Dreambook#word</h1>
-<p>Find me in app/views/dreambook/word.html.erb</p>
+<%= render 'letters' %>
+
+<article>
+  <header>
+    <h2><%= @tag.name %></h2>
+  </header>
+  <div>
+    <%= raw @tag.parsed_description %>
+  </div>
+</article>
