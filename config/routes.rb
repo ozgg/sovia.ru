@@ -20,6 +20,9 @@ Sovia::Application.routes.draw do
   resources :posts
   resources :tags, as: :entry_tags
 
+  get 'forum/posts/:id', to: redirect('/posts/%{id}')
+  get 'forum/(:community)(/:id)', to: redirect('/posts')
+
   root 'index#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
