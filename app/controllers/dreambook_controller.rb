@@ -25,6 +25,6 @@ class DreambookController < ApplicationController
   private
 
   def collect_letters
-    @letters = EntryTag.uniq.pluck(:letter)
+    @letters = EntryTag.uniq.pluck(:letter).sort
   end
 end

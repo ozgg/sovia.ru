@@ -7,9 +7,9 @@ Sovia::Application.routes.draw do
 
   controller :dreambook do
     get 'dreambook' => :index
-    get 'dreambook/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /./ }
-    get 'dreambook/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /./ }
     get 'dreambook/read/:letter/(:word)' => :obsolete, constraints: { letter: /./ }
+    get 'dreambook/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
+    get 'dreambook/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
   end
 
   get 'dreams/tagged/:tag' => 'dreams#tagged', as: :tagged_dreams
