@@ -26,6 +26,10 @@ ru:
       edit: "Редактирование сна"
       untitled: "Без названия"
       tagged: "Сны с меткой"
+    dreambook:
+      index: "Сонник"
+      letters: "Символы снов на «%{letter}»"
+      word: "Символ «%{word}» в соннике"
     users:
       new: "Регистрация"
     none: "Без названия"
@@ -207,3 +211,8 @@ ru:
   are_you_sure: "Вы уверены?"
   at: "от"
   nothing_found: "Ничего не найдено"
+  dreambook:
+    letters:
+      select_letter: "Выберите букву, на которую начинается символ"
+    word:
+      read_dreams: "Сны с этим символом"

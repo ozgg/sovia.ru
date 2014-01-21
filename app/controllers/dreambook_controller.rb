@@ -2,16 +2,19 @@ class DreambookController < ApplicationController
   before_action :collect_letters
 
   def index
+    @title = t('titles.dreambook.index')
   end
 
   def letter
-    page  = params[:page] || 1
-    @tags = EntryTag.where(letter: params[:letter]).where.not(description: '').order('name asc').page(page).per(50)
+    page   = params[:page] || 1
+    @title = t 'titles.dreambook.letters', letter: params[:letter]
+    @tags  = EntryTag.where(letter: params[:letter]).where.not(description: '').order('name asc').page(page).per(50)
   end
 
   def word
     @tag = EntryTag.match_by_name(params[:word])
     raise record_not_found if @tag.nil?
+    @title = t 'titles.dreambook.word', word: @tag.name
   end
 
   def obsolete
