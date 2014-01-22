@@ -1,17 +1,22 @@
 <article class="post">
   <header>
-    <div><!-- user avatar --></div>
-    <% if local_assigns[:preview] %>
-        <h2><%= link_to post.parsed_title, post %></h2>
+    <figure><!-- user avatar --></figure>
+    <h2>
+      <% if local_assigns[:preview] %>
+        <%= link_to post.parsed_title, post %>
     <% else %>
-        <h2><%= post.parsed_title %></h2>
+        <%= post.parsed_title %>
     <% end %>
+    </h2>
+
+    <div class="privacy privacy-<%= post.privacy %>">&nbsp;</div>
 
     <div class="author">
       <%= user_link post.user %>,
       <%= t("activerecord.models.#{post.class.to_s.downcase}") + ' ' + t('at') %>
       <time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
+
     <% if post.dream? %>
         <% tags = post.entry_tags %>
         <% if tags.any? %>
