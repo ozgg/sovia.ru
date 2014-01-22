@@ -1,6 +1,6 @@
 <article class="post">
   <header>
-    <figure><!-- user avatar --></figure>
+    <figure><%= raw user_avatar(post.user) %></figure>
     <h2>
       <% if local_assigns[:preview] %>
         <%= link_to post.parsed_title, post %>
