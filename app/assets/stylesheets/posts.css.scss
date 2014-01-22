@@ -58,6 +58,15 @@ article.post {
             margin: 0;
             padding: 0;
 
+            span {
+              &:before {
+                content: '(';
+              }
+              &:after {
+                content: ')';
+              }
+            }
+
             &:after {
               content: ', '
             }

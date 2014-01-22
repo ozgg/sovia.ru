@@ -25,7 +25,12 @@
               <nav>
                 <ul>
                   <% tags.each do |tag| %>
-                    <li><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %></li>
+                    <li><!--
+                      --><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %><!--
+                      --><% if tag.description %>
+                         <span><%= link_to '?', dreambook_word_path(letter: tag.letter, word: tag.name) %></span><!--
+                      --><% end %><!--
+                    --></li>
                   <% end %>
                 </ul>
               </nav>
