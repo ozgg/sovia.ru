@@ -7,7 +7,7 @@ class Dream < Post
 
   def self.random_dream
     max_id = public_dreams.maximum(:id)
-    public_dreams.where("id >= #{max_id}").first
+    public_dreams.where("id >= #{rand(max_id)}").first
   end
 
   private

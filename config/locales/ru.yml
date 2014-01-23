@@ -149,6 +149,8 @@ ru:
       edit: "Редактировать сон"
     edit:
       view: "К просмотру сна"
+    random:
+      title: "Случайный сон"
   tags:
     list:
       no_tags: "Меток нет"

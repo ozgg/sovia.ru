@@ -63,6 +63,7 @@ class DreamsController < ApplicationController
   end
 
   def random
+    @title = t('dreams.random.title')
     @dream = Dream.random_dream
   end
 

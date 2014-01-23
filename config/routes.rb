@@ -12,7 +12,6 @@ Sovia::Application.routes.draw do
     get 'dreambook/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
   end
 
-  get 'dreams/tagged/:tag' => 'dreams#tagged', as: :tagged_dreams
 
   resources :users, only: [:new, :create]
   resources :articles
@@ -20,7 +19,8 @@ Sovia::Application.routes.draw do
   resources :tags, as: :entry_tags
   resources :dreams do
     collection do
-      get 'random' => :random, as: :random_dream
+      get 'random' => :random
+      get 'dreams/tagged/:tag' => :tagged, as: :tagged
     end
   end
 
