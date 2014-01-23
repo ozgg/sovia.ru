@@ -16,9 +16,13 @@ Sovia::Application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :articles
-  resources :dreams
   resources :posts
   resources :tags, as: :entry_tags
+  resources :dreams do
+    collection do
+      get 'random' => :random, as: :random_dream
+    end
+  end
 
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')

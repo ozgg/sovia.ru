@@ -62,6 +62,10 @@ class DreamsController < ApplicationController
     @title  = "#{t('titles.dreams.tagged')} «#{@entry_tag.name}», #{t('titles.page')} #{page}"
   end
 
+  def random
+    @dream = Dream.random_dream
+  end
+
   private
 
   def set_dream

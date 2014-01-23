@@ -413,4 +413,19 @@ describe DreamsController do
       expect(assigns[:dreams]).not_to include(dream)
     end
   end
+
+  context "getting random dream" do
+    before(:each) do
+      create(:dream)
+      get :random
+    end
+
+    it "assigns random dream to @dream" do
+      expect(assigns[:dream]).to be_a(Dream)
+    end
+
+    it "renders dreams/random" do
+      expect(response).to render_template('dreams/random')
+    end
+  end
 end
