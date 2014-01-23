@@ -19,9 +19,6 @@
     </ul>
   </nav>
 
-  <aside>
-    <%= render 'layouts/auth_block' %>
-  </aside>
 </header>
 
 <section id="main">
@@ -29,6 +26,11 @@
   <div class="message"><%= flash[:message] %></div>
   <% end %>
   <%= yield %>
+</section>
+
+<section id="right-column">
+  <%= render 'layouts/auth_block' %>
+  <%= render 'layouts/random_dream' %>
 </section>
 
 <footer>

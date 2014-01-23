@@ -1,0 +1,13 @@
+<% dream = Dream.random_dream %>
+<aside>
+  <% unless dream.nil? %>
+  <hgroup>
+    <h1><%= t('dreams.random.title') %></h1>
+    <h2><%= link_to dream.parsed_title, dream %></h2>
+  </hgroup>
+  <div>
+    <%= raw dream.preview %>
+    <p>&#0133;</p>
+  </div>
+  <% end %>
+</aside>

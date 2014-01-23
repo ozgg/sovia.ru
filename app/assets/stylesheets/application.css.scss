@@ -14,7 +14,7 @@ body {
   padding: 1em 1em 1em 2em;
 
   & > header {
-    min-height: 120px;
+    height: 150px;
     position: relative;
 
     div#logo {
@@ -45,27 +45,6 @@ body {
             padding-left: 0;
           }
         }
-      }
-    }
-
-    aside {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 300px;
-      color: #F7F7F7;
-
-      form {
-        float: right;
-      }
-
-      label {
-        display: inline-block;
-        width: 70px;
-      }
-
-      button {
-        width: 70px;
       }
     }
   }
@@ -120,6 +99,7 @@ section#main {
   background: #ffffff;
   border-radius: 1em;
   padding: 1em;
+  margin: 0 300px 0 0;
 
   > header {
     margin: 0 0 1em 0;
@@ -145,6 +125,52 @@ section#main {
       }
     }
   }
+}
+
+section#right-column {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300px;
+
+  aside {
+    background: #dddddd;
+    border-radius: 15px;
+    margin: 1em;
+    padding: 0.5em;
+    font-size: 0.9em;
+
+
+    &:first-child {
+      height: 134px;
+      color: #F7F7F7;
+      background: none;
+      font-size: 1em;
+      padding: 0;
+
+      form {
+        float: right;
+      }
+
+      label {
+        display: inline-block;
+        width: 70px;
+      }
+
+      button {
+        width: 70px;
+      }
+
+      & a:link, & a:visited {
+        color: #bdd4da;
+      }
+
+      & a:hover {
+        color: #ff9600;
+      }
+    }
+  }
+
 }
 
 article {
