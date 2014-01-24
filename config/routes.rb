@@ -27,6 +27,11 @@ Sovia::Application.routes.draw do
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
 
+  get 'user/profile' => 'index#gone'
+  get 'user/profile/of/:login' => 'index#gone'
+  get 'entities/(:id)'  => 'index#gone'
+  get 'fun/(:type)'   => 'index#gone'
+
   root 'index#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

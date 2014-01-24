@@ -8,4 +8,11 @@ class IndexController < ApplicationController
 
     @posts.sort! { |a, b| b.created_at <=> a.created_at }
   end
+
+  # Obsolete actions
+  def gone
+    @title = t('page_gone')
+
+    render status: :gone
+  end
 end
