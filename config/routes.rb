@@ -20,7 +20,7 @@ Sovia::Application.routes.draw do
   resources :dreams do
     collection do
       get 'random' => :random
-      get 'dreams/tagged/:tag' => :tagged, as: :tagged
+      get 'tagged/:tag' => :tagged, as: :tagged
     end
   end
 

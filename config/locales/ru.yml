@@ -198,6 +198,8 @@ ru:
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"
+    statistics:
+      statistics: "Чаще всего снится"
   roles:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"

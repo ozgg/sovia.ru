@@ -71,6 +71,10 @@ article.post {
               content: ', '
             }
 
+            &:first-child {
+              text-transform: capitalize;
+            }
+
             &:last-child:after {
               content: '';
             }
