@@ -33,6 +33,9 @@ ru:
       word: "Символ «%{word}» в соннике"
     users:
       new: "Регистрация"
+    statistics:
+      index: "Статистика"
+      symbols: "Символы снов, страница %{page}"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -222,3 +225,6 @@ ru:
     word:
       read_dreams: "Сны с этим символом"
   page_gone: "Страницы больше нет"
+  statistics:
+    index:
+      symbols: "Статистика по символам снов"

@@ -1,0 +1,17 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+
+<% if @tags.any? %>
+    <nav class="dream-symbols">
+      <ul>
+        <% @tags.each do |tag| %>
+            <li><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %> (<%= tag.dreams_count %>)</li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <%= paginate @tags %>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>

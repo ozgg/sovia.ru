@@ -12,6 +12,10 @@ Sovia::Application.routes.draw do
     get 'dreambook/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
   end
 
+  controller :statistics do
+    get 'statistics' => :index
+    get 'statistics/symbols' => :symbols
+  end
 
   resources :users, only: [:new, :create]
   resources :articles
