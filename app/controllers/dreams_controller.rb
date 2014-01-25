@@ -67,6 +67,12 @@ class DreamsController < ApplicationController
     @dream = Dream.random_dream
   end
 
+  def dreams_of_user
+    user = User.find_by_login(params[:login])
+    page = params[:page] || 1
+    @dreams = allowed_dreams.where(user: user).page(page).per(5)
+  end
+
   private
 
   def set_dream

@@ -428,4 +428,55 @@ describe DreamsController do
       expect(response).to render_template('dreams/random')
     end
   end
+
+  context "getting dreams of user" do
+    let!(:public_dream) { create(:dream, user: user) }
+    let!(:protected_dream) { create(:protected_dream, user: user) }
+    let!(:private_dream) { create(:private_dream, user: user) }
+    let!(:other_dream) { create(:dream) }
+
+    shared_examples "common visible dreams" do
+      it "has public dream in @dreams" do
+        expect(assigns[:dreams]).to include(public_dream)
+      end
+
+      it "hasn't private dream in @dreams" do
+        expect(assigns[:dreams]).not_to include(private_dream)
+      end
+
+      it "hasn't other dream in @dreams" do
+        expect(assigns[:dreams]).not_to include(other_dream)
+      end
+
+      it "renders dreams/dreams_of_user" do
+        expect(response).to render_template('dreams/dreams_of_user')
+      end
+    end
+
+    context "anonymous user" do
+      before(:each) do
+        session[:user_id] = nil
+        get :dreams_of_user, login: user.login
+      end
+
+      it_should_behave_like "common visible dreams"
+
+      it "hasn't protected dream in @dreams" do
+        expect(assigns[:dreams]).not_to include(protected_dream)
+      end
+    end
+
+    context "loogged in user" do
+      before(:each) do
+        session[:user_id] = create(:user).id
+        get :dreams_of_user, login: user.login
+      end
+
+      it_should_behave_like "common visible dreams"
+
+      it "has protected dream in @dreams" do
+        expect(assigns[:dreams]).to include(protected_dream)
+      end
+    end
+  end
 end

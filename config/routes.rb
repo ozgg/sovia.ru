@@ -21,6 +21,7 @@ Sovia::Application.routes.draw do
     collection do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged
+      get 'of/:login' => :dreams_of_user, as: :user_dreams
     end
   end
 
