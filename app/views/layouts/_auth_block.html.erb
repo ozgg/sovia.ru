@@ -15,6 +15,11 @@
       <% end %>
   <% else %>
       <%= @current_user.login %><br />
-      <%= link_to t('.logout'), logout_path, method: :delete %>
+      <nav>
+        <ul>
+          <li><%= link_to t('.private'), my_path %></li>
+          <li><%= link_to t('.logout'), logout_path, method: :delete %></li>
+        </ul>
+      </nav>
   <% end %>
 </aside>

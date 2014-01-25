@@ -71,7 +71,7 @@ article.post {
               content: ', '
             }
 
-            &:first-child {
+            &:first-child:first-letter {
               text-transform: capitalize;
             }
 

@@ -205,6 +205,7 @@ ru:
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"
+      private: "Личный кабинет"
     statistics:
       statistics: "Чаще всего снится"
   roles:

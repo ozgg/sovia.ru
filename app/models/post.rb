@@ -111,7 +111,7 @@ class Post < ActiveRecord::Base
   end
 
   def passages_count
-    body.count "\n"
+    body.gsub(/(\r?\n)+/, "\n").count "\n"
   end
 
   private
