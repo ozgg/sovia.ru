@@ -26,6 +26,7 @@ ru:
       edit: "Редактирование сна"
       untitled: "Без названия"
       tagged: "Сны с меткой"
+      dreams_of_user: "Сны пользователя %{login}, страница %{page}"
     dreambook:
       index: "Сонник"
       letters: "Символы снов на «%{letter}»"

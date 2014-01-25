@@ -70,6 +70,8 @@ class DreamsController < ApplicationController
   def dreams_of_user
     user = User.find_by_login(params[:login])
     page = params[:page] || 1
+
+    @title  = t('titles.dreams.dreams_of_user', login: user.login, page: page)
     @dreams = allowed_dreams.where(user: user).page(page).per(5)
   end
 
