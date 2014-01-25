@@ -1,6 +1,4 @@
 Sovia::Application.routes.draw do
-  get "my/index"
-  get "my/dreams"
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -17,6 +15,11 @@ Sovia::Application.routes.draw do
   controller :statistics do
     get 'statistics' => :index
     get 'statistics/symbols' => :symbols
+  end
+
+  controller :my do
+    get 'my' => :index
+    get 'my/dreams' => :dreams
   end
 
   resources :users, only: [:new, :create]

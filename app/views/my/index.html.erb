@@ -1,2 +1,9 @@
-<h1>My#index</h1>
-<p>Find me in app/views/my/index.html.erb</p>
+<header>
+  <h1><%= @title %></h1>
+</header>
+
+<nav>
+  <ul>
+    <li><%= link_to t('.dreams'), my_dreams_path %></li>
+  </ul>
+</nav>

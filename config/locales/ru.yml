@@ -36,6 +36,9 @@ ru:
     statistics:
       index: "Статистика"
       symbols: "Символы снов, страница %{page}"
+    my:
+      index: "Кабинет"
+      dreams: "Мои сны, страница %{page}"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -229,3 +232,6 @@ ru:
   statistics:
     index:
       symbols: "Статистика по символам снов"
+  my:
+    index:
+      dreams: "Мои сны"

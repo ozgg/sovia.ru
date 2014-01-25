@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe "my/dreams.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "renders dreams list" do
+    assign(:dreams, [])
+    render
+    expect(rendered).to render_template('posts/_list')
+  end
 end
