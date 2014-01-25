@@ -219,6 +219,7 @@ ru:
   are_you_sure: "Вы уверены?"
   at: "от"
   nothing_found: "Ничего не найдено"
+  please_log_in: "Пожалуйста, авторизуйтесь"
   dreambook:
     letters:
       select_letter: "Выберите букву, на которую начинается символ"

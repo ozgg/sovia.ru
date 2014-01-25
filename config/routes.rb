@@ -1,4 +1,6 @@
 Sovia::Application.routes.draw do
+  get "my/index"
+  get "my/dreams"
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
