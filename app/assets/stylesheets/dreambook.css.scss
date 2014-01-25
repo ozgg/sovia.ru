@@ -51,6 +51,9 @@ article.dreambook-word {
       font-weight: normal;
       font-variant: small-caps;
 
+      &:first-letter {
+        text-transform: capitalize;
+      }
     }
 
     dd {

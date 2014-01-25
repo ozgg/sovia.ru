@@ -9,6 +9,7 @@
     <dd><%= raw @tag.parsed_description %></dd>
   </dl>
   <footer>
-    <%= link_to t('.read_dreams'), tagged_dreams_path(tag: @tag.name) %> (<%= @tag.dreams_count %>)
+    <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag: @tag.name) %> (<%= @tag.dreams_count %>)</nav>
+    <%= render 'layouts/social' %>
   </footer>
 </article>

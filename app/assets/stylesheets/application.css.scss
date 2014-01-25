@@ -187,7 +187,7 @@ section#right-column {
 }
 
 article {
-  margin: 1em 0;
+  margin: 1em 0 0 0;
   max-width: 900px;
 
   > div {
@@ -207,4 +207,17 @@ div.message {
   text-align: center;
   margin: 1em 2em;
   padding: 0.5em;
+}
+
+div.social-buttons {
+  position: relative;
+  margin: 1em 0 0 0;
+  padding: 0.5em;
+  border-top: dashed 1px;
+
+  div.addthis-container {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+  }
 }

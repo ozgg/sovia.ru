@@ -50,5 +50,6 @@
   </div>
   <footer>
     <%= post.comments_count %>
+    <%= render 'layouts/social' unless local_assigns[:preview] %>
   </footer>
 </article>
