@@ -5,21 +5,29 @@ Sovia::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  controller :dreambook do
-    get 'dreambook' => :index
-    get 'dreambook/read/:letter/(:word)' => :obsolete, constraints: { letter: /./ }
-    get 'dreambook/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
-    get 'dreambook/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
+  scope '/dreambook' do
+    controller :dreambook do
+      get '/' => :index, as: :dreambook
+      get '/read/:letter/(:word)' => :obsolete, constraints: { letter: /./ }
+      get '/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
+      get '/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
+    end
   end
 
-  controller :statistics do
-    get 'statistics' => :index
-    get 'statistics/symbols' => :symbols
+  scope '/statistics' do
+    controller :statistics do
+      get '/' => :index, as: :statistics
+      get '/symbols' => :symbols, as: :statistics_symbols
+    end
   end
 
-  controller :my do
-    get 'my' => :index
-    get 'my/dreams' => :dreams
+  scope '/my' do
+    controller :my do
+      get '/' => :index, as: :my
+      get '/dreams' => :dreams, as: :my_dreams
+      get '/profile' => :profile, as: :my_profile
+      patch '/profile' => :update_profile
+    end
   end
 
   resources :users, only: [:new, :create]
@@ -34,15 +42,16 @@ Sovia::Application.routes.draw do
     end
   end
 
+  root 'index#index'
+
+  # Obsolete routes
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
-
   get 'user/profile' => 'index#gone'
   get 'user/profile/of/:login' => 'index#gone'
-  get 'entities/(:id)'  => 'index#gone'
-  get 'fun/(:type)'   => 'index#gone'
+  get 'entities/(:id)' => 'index#gone'
+  get 'fun/(:type)' => 'index#gone'
 
-  root 'index#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -81,7 +90,7 @@ Sovia::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

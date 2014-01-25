@@ -13,6 +13,14 @@ class MyController < ApplicationController
     @title = t('titles.my.dreams', page: page)
   end
 
+  def profile
+
+  end
+
+  def update_profile
+
+  end
+
   private
 
   def allow_authorized_only

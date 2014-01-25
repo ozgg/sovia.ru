@@ -25,6 +25,18 @@ describe MyController do
 
       it_should_behave_like "login redirector"
     end
+
+    context "get profile" do
+      before(:each) { get :profile }
+
+      it_should_behave_like "login redirector"
+    end
+
+    context "patch profile" do
+      before(:each) { patch :profile }
+
+      it_should_behave_like "login redirector"
+    end
   end
 
   context "logged in user" do
