@@ -236,3 +236,6 @@ ru:
   my:
     index:
       dreams: "Мои сны"
+  profile:
+    updated: "Профиль обновлён"
+    incorrect_password: "Старый пароль неправильный"
