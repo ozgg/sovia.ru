@@ -38,16 +38,8 @@ class MyController < ApplicationController
 
   def update_sensitive_data
     if @current_user.authenticate(params[:profile][:old_password])
-      unless params[:profile][:email].empty?
-        @current_user.email = params[:profile][:email]
-        @current_user.mail_confirmed = false
-      end
-
-      unless params[:profile][:password].empty?
-        @current_user.password = params[:profile][:password]
-        @current_user.password_confirmation = params[:profile][:password_confirmation]
-      end
-
+      update_email
+      update_password
       @current_user.save
     else
       flash[:message] = t('profile.incorrect_password')
@@ -56,5 +48,19 @@ class MyController < ApplicationController
 
   def usual_parameters
     params.require(:profile).permit(:allow_mail)
+  end
+
+  def update_email
+    unless params[:profile][:email].empty?
+      @current_user.email = params[:profile][:email]
+      @current_user.mail_confirmed = false
+    end
+  end
+
+  def update_password
+    unless params[:profile][:password].empty?
+      @current_user.password = params[:profile][:password]
+      @current_user.password_confirmation = params[:profile][:password_confirmation]
+    end
   end
 end
