@@ -1,0 +1,8 @@
+<%= form_tag my_profile_path, method: :patch do %>
+    <%= text_field_tag 'profile[email]' %>
+    <%= password_field_tag 'profile[old_password]' %>
+    <%= password_field_tag 'profile[password]' %>
+    <%= password_field_tag 'profile[password_confirmation]' %>
+    <%= check_box_tag 'profile[allow_mail]', checked: @current_user.allow_mail %>
+    <%= button_tag type: :submit %>
+<% end %>
