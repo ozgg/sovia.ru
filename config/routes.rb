@@ -1,17 +1,31 @@
 Sovia::Application.routes.draw do
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  root 'index#index'
 
   scope '/dreambook' do
     controller :dreambook do
       get '/' => :index, as: :dreambook
-      get '/read/:letter/(:word)' => :obsolete, constraints: { letter: /./ }
+      get '/read/:letter/(:word)' => :obsolete, constraints: { letter: /.{,6}/ }
       get '/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
       get '/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
     end
+  end
+
+  resources :users, only: [:new, :create]
+  resources :articles
+  resources :posts
+  resources :tags, as: :entry_tags
+  resources :dreams do
+    collection do
+      get 'random' => :random
+      get 'tagged/:tag' => :tagged, as: :tagged
+      get 'of/:login' => :dreams_of_user, as: :user_dreams
+    end
+  end
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
   end
 
   scope '/statistics' do
@@ -30,20 +44,6 @@ Sovia::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:new, :create]
-  resources :articles
-  resources :posts
-  resources :tags, as: :entry_tags
-  resources :dreams do
-    collection do
-      get 'random' => :random
-      get 'tagged/:tag' => :tagged, as: :tagged
-      get 'of/:login' => :dreams_of_user, as: :user_dreams
-    end
-  end
-
-  root 'index#index'
-
   # Obsolete routes
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
@@ -51,7 +51,6 @@ Sovia::Application.routes.draw do
   get 'user/profile/of/:login' => 'index#gone'
   get 'entities/(:id)' => 'index#gone'
   get 'fun/(:type)' => 'index#gone'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
