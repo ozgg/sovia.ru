@@ -15,14 +15,15 @@ class MyController < ApplicationController
 
   # get /my/profile
   def profile
-
+    @title = t('titles.my.profile')
   end
 
   # patch /my/profile
   def update_profile
-    @current_user.update(usual_parameters)
+    update_usual_data
     flash[:message] = t('profile.updated')
-    update_sensitive_data if params[:profile][:old_password]
+    update_sensitive_data unless params[:profile][:old_password].blank?
+    @current_user.save
 
     redirect_to my_profile_path
   end
@@ -36,23 +37,23 @@ class MyController < ApplicationController
     end
   end
 
+  def update_usual_data
+    @current_user.allow_mail = !params[:profile][:allow_mail].blank?
+  end
+
   def update_sensitive_data
     if @current_user.authenticate(params[:profile][:old_password])
       update_email
       update_password
-      @current_user.save
     else
       flash[:message] = t('profile.incorrect_password')
     end
   end
 
-  def usual_parameters
-    params.require(:profile).permit(:allow_mail)
-  end
-
   def update_email
-    unless params[:profile][:email].empty?
-      @current_user.email = params[:profile][:email]
+    new_email = params[:profile][:email]
+    unless new_email == @current_user.email
+      @current_user.email = new_email.blank? ? nil : new_email
       @current_user.mail_confirmed = false
     end
   end

@@ -1,8 +1,43 @@
+<header>
+  <h1><%= @title %></h1>
+  <h2><%= @current_user.login %></h2>
+</header>
+
+<figure>
+  <%= user_avatar @current_user %>
+</figure>
 <%= form_tag my_profile_path, method: :patch do %>
-    <%= text_field_tag 'profile[email]' %>
-    <%= password_field_tag 'profile[old_password]' %>
-    <%= password_field_tag 'profile[password]' %>
-    <%= password_field_tag 'profile[password_confirmation]' %>
-    <%= check_box_tag 'profile[allow_mail]', checked: @current_user.allow_mail %>
-    <%= button_tag type: :submit %>
+    <fieldset>
+      <legend><%= t('.common_parameters') %></legend>
+      <div>
+        <%= check_box_tag 'profile[allow_mail]', '1', @current_user.allow_mail %>
+        <%= label_tag :profile_allow_mail, t('.allow_mail') %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend><%= t('.sensitive_parameters') %></legend>
+      <div>
+        <%= label_tag :profile_old_password, t('.current_password') %>
+        <br/>
+        <%= password_field_tag 'profile[old_password]', '', size: 30 %>
+      </div>
+      <div>
+        <%= label_tag :profile_email, t('.email') %>
+        <br/>
+        <%= text_field_tag 'profile[email]', @current_user.email, size: 30 %>
+      </div>
+      <div>
+        <%= label_tag :profile_password, t('.new_password') %>
+        <br/>
+        <%= password_field_tag 'profile[password]', '', size: 30 %>
+      </div>
+      <div>
+        <%= label_tag :profile_password_confirmation, t('.password_confirmation') %>
+        <br/>
+        <%= password_field_tag 'profile[password_confirmation]', '', size: 30 %>
+      </div>
+    </fieldset>
+    <div>
+      <%= button_tag t('.update'), type: :submit %>
+    </div>
 <% end %>

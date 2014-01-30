@@ -39,6 +39,7 @@ ru:
     my:
       index: "Кабинет"
       dreams: "Мои сны, страница %{page}"
+      profile: "Мой профиль"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -237,6 +238,15 @@ ru:
     index:
       dreams: "Мои сны"
       profile: "Мой профиль"
+    profile:
+      update: "Обновить профиль"
+      email: "Электронная почта"
+      current_password: "Текущий пароль"
+      allow_mail: "Получать письма по электронной почте"
+      common_parameters: "Общие параметры"
+      sensitive_parameters: "Особые параметры"
+      new_password: "Новый пароль"
+      password_confirmation: "Подтверждение нового пароля"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
