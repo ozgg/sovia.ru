@@ -16,6 +16,7 @@
     </fieldset>
     <fieldset>
       <legend><%= t('.sensitive_parameters') %></legend>
+      <div class="notice"><%= t('.sensitive_parameters_notice') %></div>
       <div>
         <%= label_tag :profile_old_password, t('.current_password') %>
         <br/>
@@ -26,6 +27,7 @@
         <br/>
         <%= text_field_tag 'profile[email]', @current_user.email, size: 30 %>
       </div>
+      <div class="notice"><%= t('.leave_blank_if_necessary') %></div>
       <div>
         <%= label_tag :profile_password, t('.new_password') %>
         <br/>

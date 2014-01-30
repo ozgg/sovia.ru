@@ -247,6 +247,8 @@ ru:
       sensitive_parameters: "Особые параметры"
       new_password: "Новый пароль"
       password_confirmation: "Подтверждение нового пароля"
+      sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль"
+      leave_blank_if_necessary: "Если не меняете пароль, новый пароль вводить не нужно"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
