@@ -28,4 +28,8 @@ describe Code do
     another_code = build(:code, body: code.body)
     expect(another_code).not_to be_valid
   end
+
+  it "has non-empty body on creation" do
+    expect(Code.new.body).not_to be_blank
+  end
 end

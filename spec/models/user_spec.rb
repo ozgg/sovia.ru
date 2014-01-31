@@ -41,4 +41,48 @@ describe User do
     @user.email = 'www'
     expect(@user).not_to be_valid
   end
+
+  context "#email_confirmation" do
+    let(:user) { create(:user) }
+
+    context "when email is not set" do
+      it "returns nil" do
+        user.email = nil
+        expect(user.email_confirmation).to be_nil
+      end
+    end
+
+    context "when mail_confirmed is true" do
+      before(:each) { user.mail_confirmed = true }
+
+      it "returns nil" do
+        expect(user.email_confirmation).to be_nil
+      end
+    end
+
+    context "when email_confirmed is not set" do
+      before(:each) do
+        user.email = 'noreply@example.com'
+        user.mail_confirmed = false
+      end
+
+      it "returns existing code if it exists and isn't activated" do
+        code = create(:email_confirmation, user: user)
+        expect(user.email_confirmation).to eq(code)
+      end
+
+      it "returns new code if no codes exist" do
+        code = user.email_confirmation
+        expect(code).to be_persisted
+        expect(code).to be_email_confirmation
+      end
+
+      it "returns new code if all codes are used" do
+        create(:email_confirmation, user: user, activated: true)
+        code = user.email_confirmation
+        expect(code).to be_persisted
+        expect(code).to be_email_confirmation
+      end
+    end
+  end
 end

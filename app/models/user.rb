@@ -26,6 +26,19 @@ class User < ActiveRecord::Base
     roles_mask & role == role
   end
 
+  def email_confirmation
+    if mail_confirmed? || email.blank?
+      code = nil
+    else
+      code = Code.email_confirmation.where(user: self).first
+      if code.nil?
+        code = Code.create!(user: self, code_type: Code::TYPE_EMAIL_CONFIRMATION)
+      end
+    end
+
+    code
+  end
+
   protected
 
   def normalize_login
