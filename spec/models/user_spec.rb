@@ -60,7 +60,7 @@ describe User do
       end
     end
 
-    context "when email_confirmed is not set" do
+    context "when email_confirmed is false" do
       before(:each) do
         user.email = 'noreply@example.com'
         user.mail_confirmed = false
@@ -82,6 +82,53 @@ describe User do
         code = user.email_confirmation
         expect(code).to be_persisted
         expect(code).to be_email_confirmation
+      end
+    end
+  end
+
+  context "#password_recovery" do
+    let(:user) { create(:user) }
+
+    context "when email is not set" do
+      it "returns nil" do
+        user.email = nil
+        expect(user.password_recovery).to be_nil
+      end
+    end
+
+    context "when mail_confirmed is true" do
+      before(:each) do
+        user.email = 'noreply@example.com'
+        user.mail_confirmed = true
+      end
+
+      it "returns existing code if it exists and isn't activated" do
+        code = create(:password_recovery, user: user)
+        expect(user.password_recovery).to eq(code)
+      end
+
+      it "returns new code if no codes exist" do
+        code = user.password_recovery
+        expect(code).to be_persisted
+        expect(code).to be_password_recovery
+      end
+
+      it "returns new code if all codes are used" do
+        create(:password_recovery, user: user, activated: true)
+        code = user.password_recovery
+        expect(code).to be_persisted
+        expect(code).to be_password_recovery
+      end
+    end
+
+    context "when email_confirmed is false" do
+      before(:each) do
+        user.email = 'noreply@example.com'
+        user.mail_confirmed = false
+      end
+
+      it "returns nil" do
+        expect(user.password_recovery).to be_nil
       end
     end
   end

@@ -9,5 +9,10 @@ FactoryGirl.define do
       user
       code_type Code::TYPE_EMAIL_CONFIRMATION
     end
+
+    factory :password_recovery do
+      user
+      code_type Code::TYPE_PASSWORD_RECOVERY
+    end
   end
 end

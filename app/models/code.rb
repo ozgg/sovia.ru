@@ -13,8 +13,16 @@ class Code < ActiveRecord::Base
     code_type == TYPE_EMAIL_CONFIRMATION
   end
 
-  def self.email_confirmation
-    where(code_type: TYPE_EMAIL_CONFIRMATION, activated: false)
+  def password_recovery?
+    code_type == TYPE_PASSWORD_RECOVERY
+  end
+
+  def self.email_confirmation(user)
+    where(code_type: TYPE_EMAIL_CONFIRMATION, activated: false, user: user)
+  end
+
+  def self.password_recovery(user)
+    where(code_type: TYPE_PASSWORD_RECOVERY, activated: false, user: user)
   end
 
   private
