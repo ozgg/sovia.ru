@@ -116,6 +116,8 @@ ru:
       login: "Логин"
       password: "Пароль"
       enter: "Войти"
+      forgot_password: "Забыли пароль?"
+      recovery_form: "Форма восстановления пароля"
   index:
     index:
       no_posts: "Публикаций нет"

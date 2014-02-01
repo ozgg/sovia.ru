@@ -10,7 +10,17 @@ Sovia::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    collection do
+      get  'confirm'
+      post 'confirm' => :send_confirmation
+      get  'recover'
+      post 'recover' => :send_recovery
+      get  'recover-form' => :recover_form, as: :recover_form
+      post 'code'
+    end
+  end
+
   resources :articles
   resources :posts
   resources :tags, as: :entry_tags

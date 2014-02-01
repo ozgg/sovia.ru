@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'sessions/new.html.erb' do
-  it 'displays form with login and password field' do
-    render
+  before(:each) { render }
 
+  it 'displays form with login and password field' do
     form_parameters = {
       method: 'post',
       action: login_path
@@ -13,5 +13,9 @@ describe 'sessions/new.html.erb' do
       expect(form).to have_selector('input', name: 'password', type: 'password')
       expect(form).to have_selector('button', type: 'submit')
     end
+  end
+
+  it "displays link to password recovery form" do
+    expect(rendered).to have_selector('a', href: recover_form_users_path)
   end
 end
