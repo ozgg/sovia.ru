@@ -33,6 +33,7 @@ ru:
       word: "Символ «%{word}» в соннике"
     users:
       new: "Регистрация"
+      recover_form: "Восстановление пароля"
     statistics:
       index: "Статистика"
       symbols: "Символы снов, страница %{page}"
@@ -254,3 +255,4 @@ ru:
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
+  submit: "Отправить"

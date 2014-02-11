@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def recover_form
+    @title = t('titles.users.recover_form')
+  end
+
   private
 
   def bounce_authorized
