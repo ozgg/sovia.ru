@@ -1,5 +1,5 @@
 class CodeSender < ActionMailer::Base
-  default from: "from@example.com"
+  default from: 'support@sovia.ru'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -17,9 +17,9 @@ class CodeSender < ActionMailer::Base
   #
   #   en.code_sender.password.subject
   #
-  def password
+  def password(code)
     @greeting = "Hi"
 
-    mail to: "to@example.org"
+    mail to: code.user.email
   end
 end

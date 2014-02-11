@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :bounce_authorized, only: [:new, :create]
+  before_action :bounce_authorized, only: [:new, :create, :recover_form]
 
   # get /users/new
   def new
@@ -16,8 +16,21 @@ class UsersController < ApplicationController
     end
   end
 
+  # get /users/recover-form
   def recover_form
     @title = t('titles.users.recover_form')
+  end
+
+  # post /users/recover
+  def send_recovery
+    user = User.find_by(email: params[:email].to_s.downcase)
+    if user.nil?
+      flash[:message] = t('email_not_found')
+      redirect_to recover_form_users_path
+    else
+      send_recovery_code user
+      redirect_to recover_users_path
+    end
   end
 
   private
@@ -47,5 +60,10 @@ class UsersController < ApplicationController
   def after_registration
     flash[:message] = t('users.create.successfully')
     redirect_to root_path
+  end
+
+  def send_recovery_code(user)
+    code = user.password_recovery
+    CodeSender.password(code).deliver
   end
 end

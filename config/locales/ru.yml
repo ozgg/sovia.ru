@@ -256,3 +256,4 @@ ru:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
   submit: "Отправить"
+  email_not_found: "Указанный e-mail адрес не найден"
