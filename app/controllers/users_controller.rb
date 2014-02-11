@@ -64,6 +64,11 @@ class UsersController < ApplicationController
 
   def send_recovery_code(user)
     code = user.password_recovery
-    CodeSender.password(code).deliver
+    if code.nil?
+      flash[:message] = t('recovery_code_failure')
+    else
+      CodeSender.password(code).deliver
+      flash[:message] = t('recovery_code_sent')
+    end
   end
 end

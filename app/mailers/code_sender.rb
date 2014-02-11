@@ -18,7 +18,7 @@ class CodeSender < ActionMailer::Base
   #   en.code_sender.password.subject
   #
   def password(code)
-    @greeting = "Hi"
+    @code = code
 
     mail to: code.user.email
   end

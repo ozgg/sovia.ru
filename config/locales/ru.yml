@@ -257,3 +257,8 @@ ru:
     incorrect_password: "Старый пароль неправильный"
   submit: "Отправить"
   email_not_found: "Указанный e-mail адрес не найден"
+  recovery_code_sent: "Код сброса пароля отправлен"
+  recovery_code_failure: "Не удалось создать код"
+  code_sender:
+    password:
+      subject: "Сброс пароля на сайте sovia.ru"

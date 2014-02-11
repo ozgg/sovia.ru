@@ -116,6 +116,11 @@ describe UsersController do
         post :send_recovery, email: user.email
         expect(response).to redirect_to(recover_users_path)
       end
+
+      it "adds flash message #{I18n.t('recovery_code_sent')}" do
+        post :send_recovery, email: user.email
+        expect(flash[:message]).to eq(I18n.t('recovery_code_sent'))
+      end
     end
 
     context "post recover with unknown email" do
