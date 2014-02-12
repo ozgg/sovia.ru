@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :bounce_authorized, only: [:new, :create, :recover_form]
+  before_action :bounce_authorized, only: [:new, :create, :recover_form, :recover]
 
   # get /users/new
   def new
@@ -31,6 +31,11 @@ class UsersController < ApplicationController
       send_recovery_code user
       redirect_to recover_users_path
     end
+  end
+
+  # get /users/recover
+  def recover
+
   end
 
   private

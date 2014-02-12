@@ -156,5 +156,11 @@ describe UsersController do
 
       it_should_behave_like "logged in bouncer"
     end
+
+    context "get recover" do
+      before(:each) { get :recover }
+
+      it_should_behave_like "logged in bouncer"
+    end
   end
 end

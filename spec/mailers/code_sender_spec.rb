@@ -7,7 +7,7 @@ describe CodeSender do
     it "renders the headers" do
       mail.subject.should eq("Email")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq(["support@sovia.ru"])
     end
 
     it "renders the body" do
@@ -16,17 +16,17 @@ describe CodeSender do
   end
 
   describe "password" do
-    let(:mail) { CodeSender.password }
+    let(:code) { create(:password_recovery, user: create(:confirmed_user)) }
+    let(:mail) { CodeSender.password(code) }
 
     it "renders the headers" do
-      mail.subject.should eq("Password")
-      mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.subject.should eq(I18n.t('code_sender.password.subject'))
+      mail.to.should eq([code.user.email])
+      mail.from.should eq(['support@sovia.ru'])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Hi")
+      expect(mail.body.encoded).to match(code.body)
     end
   end
-
 end
