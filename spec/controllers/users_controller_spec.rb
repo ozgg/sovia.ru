@@ -134,6 +134,14 @@ describe UsersController do
         expect(response).to redirect_to(recover_form_users_path)
       end
     end
+
+    context "get recover" do
+      before(:each) { get :recover }
+
+      it "renders users/recover" do
+        expect(response).to render_template('users/recover')
+      end
+    end
   end
 
   context "logged in user" do

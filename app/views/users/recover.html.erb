@@ -1,0 +1,17 @@
+<%= form_tag code_users_path do %>
+    <div>
+      <%= email_field_tag :email, params[:email], required: true %>
+    </div>
+    <div>
+      <%= text_field_tag :code, params[:code], required: true %>
+    </div>
+    <div>
+      <%= password_field_tag 'user[password]', '', required: true %>
+    </div>
+    <div>
+      <%= password_field_tag 'user[password_confirmation]', '', required: true %>
+    </div>
+    <div>
+      <%= button_tag t('submit'), type: :submit %>
+    </div>
+<% end %>
