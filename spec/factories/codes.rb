@@ -1,17 +1,15 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :code do
     code_type Code::TYPE_EMAIL_CONFIRMATION
     sequence(:body) { |n| "code_#{n}" }
 
     factory :email_confirmation do
-      user
+      association :user, factory: :unconfirmed_user
       code_type Code::TYPE_EMAIL_CONFIRMATION
     end
 
     factory :password_recovery do
-      user
+      association :user, factory: :confirmed_user
       code_type Code::TYPE_PASSWORD_RECOVERY
     end
   end

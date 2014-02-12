@@ -4,9 +4,12 @@ FactoryGirl.define do
     password 'secret'
     password_confirmation 'secret'
 
-    factory :confirmed_user do
+    factory :unconfirmed_user do
       sequence(:email) { |n| "no-reply#{n}@example.com" }
-      mail_confirmed true
+
+      factory :confirmed_user do
+        mail_confirmed true
+      end
     end
 
     factory :editor do

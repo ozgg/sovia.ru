@@ -262,3 +262,5 @@ ru:
   code_sender:
     password:
       subject: "Сброс пароля на сайте sovia.ru"
+    email:
+      subject: "Подтверждение email-адреса на сайте sovia.ru"

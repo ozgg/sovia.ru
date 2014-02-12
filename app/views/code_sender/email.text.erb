@@ -1,3 +1,9 @@
-CodeSender#email
+Здравствуйте, <%= @code.user.login %>
 
-<%= @greeting %>, find me in app/views/app/views/code_sender/email.text.erb
+Для подтверждения вашего адреса электронной почты зайдите на эту страницу:
+<%= confirm_users_url %>
+и введите код <%= @code.body %> в соответствующее поле.
+
+--
+  С уважением,
+  sovia.ru
