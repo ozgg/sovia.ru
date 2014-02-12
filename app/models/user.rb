@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def password_recovery
-    if !mail_confirmed? || email.blank?
+    if email.blank?
       code = nil
     else
       code = Code.password_recovery(self).first

@@ -96,10 +96,9 @@ describe User do
       end
     end
 
-    context "when mail_confirmed is true" do
+    context "email is set" do
       before(:each) do
         user.email = 'noreply@example.com'
-        user.mail_confirmed = true
       end
 
       it "returns existing code if it exists and isn't activated" do
@@ -118,17 +117,6 @@ describe User do
         code = user.password_recovery
         expect(code).to be_persisted
         expect(code).to be_password_recovery
-      end
-    end
-
-    context "when email_confirmed is false" do
-      before(:each) do
-        user.email = 'noreply@example.com'
-        user.mail_confirmed = false
-      end
-
-      it "returns nil" do
-        expect(user.password_recovery).to be_nil
       end
     end
   end
