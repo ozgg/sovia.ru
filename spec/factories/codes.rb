@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :code do
-    code_type Code::TYPE_EMAIL_CONFIRMATION
     sequence(:body) { |n| "code_#{n}" }
 
     factory :email_confirmation do

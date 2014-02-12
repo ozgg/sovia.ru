@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :bounce_authorized, only: [:new, :create, :recover_form, :recover]
+  before_action :bounce_authorized, only: [:new, :create, :recover_form, :recover, :confirm]
 
   # get /users/new
   def new
@@ -36,6 +36,22 @@ class UsersController < ApplicationController
   # get /users/recover
   def recover
 
+  end
+
+  # get /users/confirm
+  def confirm
+
+  end
+
+  # post /users/code
+  def code
+    given_code = Code.find_by(body: params[:body], activated: false)
+    if given_code.nil?
+      flash[:message] = t('user.code_invalid')
+      render action: params.has_key?(:user) ? :recover : :confirm
+    else
+
+    end
   end
 
   private

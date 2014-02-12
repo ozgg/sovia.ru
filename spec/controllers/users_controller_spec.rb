@@ -55,7 +55,7 @@ describe UsersController do
     end
 
     context "post create when bot checkbox is checked" do
-      let(:action) { lambda { post :create, user: attributes_for(:user), agree: true }}
+      let(:action) { lambda { post :create, user: attributes_for(:user), agree: true } }
 
       it "doesn't add user to database" do
         expect(action).not_to change(User, :count)
@@ -142,6 +142,14 @@ describe UsersController do
         expect(response).to render_template('users/recover')
       end
     end
+
+    context "get confirm" do
+      before(:each) { get :confirm }
+
+      it "renders users/confirm" do
+        expect(response).to render_template('users/confirm')
+      end
+    end
   end
 
   context "logged in user" do
@@ -169,6 +177,93 @@ describe UsersController do
       before(:each) { get :recover }
 
       it_should_behave_like "logged in bouncer"
+    end
+
+    context "get confirm" do
+      before(:each) { get :confirm }
+
+      it_should_behave_like "logged in bouncer"
+    end
+  end
+
+  context "posting email confirmation" do
+    shared_examples "invalid email code" do
+      it "renders users/confirm" do
+        expect(response).to render_template('users/confirm')
+      end
+
+      it "adds flash message #{I18n.t('user.code_invalid')}" do
+        expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
+      end
+    end
+
+    context "when code is valid" do
+      let(:code) { create(:email_confirmation) }
+      before(:each) { post :code, code: code.body }
+
+      it "sets user's mail_confirmed to true"
+      it "adds flash message #{I18n.t('user.email_confirmed')}"
+      it "redirects to root path"
+      it "sets code's activated to true"
+    end
+
+    context "when code is invalid" do
+      before(:each) { post :code, code: 'non-existent' }
+
+      it_should_behave_like "invalid email code"
+    end
+
+    context "when code is inactive" do
+      let(:code) { create(:email_confirmation, activated: true) }
+      before(:each) { post :code, code: code.body }
+
+      it_should_behave_like "invalid email code"
+    end
+  end
+
+  context "posting password recovery" do
+    shared_examples "invalid password code" do
+      it "renders users/recover" do
+        expect(response).to render_template('users/recover')
+      end
+
+      it "adds flash message #{I18n.t('user.code_invalid')}" do
+        expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
+      end
+    end
+
+    context "when code is valid" do
+      let(:code) { create(:password_recovery) }
+      before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '123' } }
+
+      it "sets user's mail_confirmed to true"
+      it "updates user's password"
+      it "adds flash message #{I18n.t('user.password_changed')}"
+      it "redirects to root path"
+      it "sets code's activated to true"
+    end
+
+    context "when code is invalid" do
+      before(:each) { post :code, code: 'non-existent', user: { password: 'secret' } }
+
+      it_should_behave_like "invalid password code"
+    end
+
+    context "when code is activated" do
+      let(:code) { create(:password_recovery, activated: true) }
+      before(:each) { post :code, code: code.body, user: { password: '123' } }
+
+      it_should_behave_like "invalid password code"
+    end
+
+    context "when passwords differ" do
+      let(:code) { create(:password_recovery) }
+      before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '234' } }
+
+      it "renders users/recover"
+      it "adds flash message #{I18n.t('user.recovery_failed')}"
+      it "leaves digest intact"
+      it "leaves code intact"
     end
   end
 end
