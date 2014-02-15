@@ -201,10 +201,24 @@ describe UsersController do
       let(:code) { create(:email_confirmation) }
       before(:each) { post :code, code: code.body }
 
-      it "sets user's mail_confirmed to true"
-      it "adds flash message #{I18n.t('user.email_confirmed')}"
-      it "redirects to root path"
-      it "sets code's activated to true"
+      it "sets user's mail_confirmed to true" do
+        user = code.user
+        user.reload
+        expect(user.mail_confirmed?).to be_true
+      end
+
+      it "adds flash message #{I18n.t('user.email_confirmed')}" do
+        expect(flash[:message]).to eq(I18n.t('user.email_confirmed'))
+      end
+
+      it "redirects to root path" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "sets code's activated to true" do
+        code.reload
+        expect(code).to be_activated
+      end
     end
 
     context "when code is invalid" do

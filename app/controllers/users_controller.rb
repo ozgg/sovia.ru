@@ -53,6 +53,7 @@ class UsersController < ApplicationController
       if given_code.password_recovery?
         recover_password(given_code)
       else
+        confirm_email(given_code)
       end
     end
   end
@@ -105,6 +106,13 @@ class UsersController < ApplicationController
       flash[:message] = t('user.recovery_failed')
       render action: :recover
     end
+  end
+
+  def confirm_email(code)
+    code.user.update(mail_confirmed: true)
+    code.update(activated: true)
+    flash[:message] = t('user.email_confirmed')
+    redirect_to root_path
   end
 
   def recovered_password_parameters
