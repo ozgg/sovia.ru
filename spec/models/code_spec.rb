@@ -4,6 +4,7 @@ describe Code do
   let(:code) { build(:code) }
 
   it "is valid with valid parameters" do
+    code.code_type = Code::TYPE_PASSWORD_RECOVERY
     expect(code).to be_valid
   end
 
