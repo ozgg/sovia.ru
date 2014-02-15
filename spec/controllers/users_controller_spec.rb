@@ -222,6 +222,8 @@ describe UsersController do
   end
 
   context "posting password recovery" do
+    before(:each) { session[:user_id] = nil }
+
     shared_examples "invalid password code" do
       it "renders users/recover" do
         expect(response).to render_template('users/recover')
@@ -236,11 +238,30 @@ describe UsersController do
       let(:code) { create(:password_recovery) }
       before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '123' } }
 
-      it "sets user's mail_confirmed to true"
-      it "updates user's password"
-      it "adds flash message #{I18n.t('user.password_changed')}"
-      it "redirects to root path"
-      it "sets code's activated to true"
+      it "sets user's mail_confirmed to true" do
+        user = code.user
+        user.reload
+        expect(user.mail_confirmed).to be_true
+      end
+
+      it "updates user's password" do
+        user = code.user
+        user.reload
+        expect(user.authenticate('123')).to be_true
+      end
+
+      it "adds flash message #{I18n.t('user.password_changed')}" do
+        expect(flash[:message]).to eq(I18n.t('user.password_changed'))
+      end
+
+      it "redirects to root path" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "sets code's activated to true" do
+        code.reload
+        expect(code).to be_activated
+      end
     end
 
     context "when code is invalid" do
@@ -260,10 +281,26 @@ describe UsersController do
       let(:code) { create(:password_recovery) }
       before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '234' } }
 
-      it "renders users/recover"
-      it "adds flash message #{I18n.t('user.recovery_failed')}"
-      it "leaves digest intact"
-      it "leaves code intact"
+      it "renders users/recover" do
+        expect(response).to render_template('users/recover')
+      end
+
+      it "adds flash message #{I18n.t('user.recovery_failed')}" do
+        expect(flash[:message]).to eq(I18n.t('user.recovery_failed'))
+      end
+
+      it "leaves digest intact" do
+        user = code.user
+        user.reload
+        expect(user.authenticate('123')).to be_false
+        expect(user.authenticate('234')).to be_false
+        expect(user.authenticate('secret')).to be_true
+      end
+
+      it "leaves code intact" do
+        code.reload
+        expect(code).not_to be_activated
+      end
     end
   end
 end

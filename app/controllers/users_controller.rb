@@ -45,12 +45,15 @@ class UsersController < ApplicationController
 
   # post /users/code
   def code
-    given_code = Code.find_by(body: params[:body], activated: false)
+    given_code = Code.find_by(body: params[:code], activated: false)
     if given_code.nil?
       flash[:message] = t('user.code_invalid')
       render action: params.has_key?(:user) ? :recover : :confirm
     else
-
+      if given_code.password_recovery?
+        recover_password(given_code)
+      else
+      end
     end
   end
 
@@ -91,5 +94,20 @@ class UsersController < ApplicationController
       CodeSender.password(code).deliver
       flash[:message] = t('recovery_code_sent')
     end
+  end
+
+  def recover_password(code)
+    if code.user.update(recovered_password_parameters)
+      flash[:message] = t('user.password_changed')
+      code.update(activated: true)
+      redirect_to root_path
+    else
+      flash[:message] = t('user.recovery_failed')
+      render action: :recover
+    end
+  end
+
+  def recovered_password_parameters
+    params.require(:user).permit(:password, :password_confirmation).merge(mail_confirmed: true)
   end
 end

@@ -8,7 +8,7 @@ FactoryGirl.define do
     end
 
     factory :password_recovery do
-      association :user, factory: :confirmed_user
+      association :user, factory: :unconfirmed_user
       code_type Code::TYPE_PASSWORD_RECOVERY
     end
   end
