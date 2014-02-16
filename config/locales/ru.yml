@@ -34,6 +34,7 @@ ru:
     users:
       new: "Регистрация"
       recover_form: "Восстановление пароля"
+      recover: "Сброс пароля"
     statistics:
       index: "Статистика"
       symbols: "Символы снов, страница %{page}"
@@ -185,6 +186,13 @@ ru:
       password_notice: "Выбирайте надёжный пароль"
       password_confirmation_notice: "Введите пароль ещё раз"
       agreement: "Регистрируясь на сайте, вы обязуетесь соблюдать пользовательское соглашение"
+    recover_form:
+      instructions: "Для восстановления пароля укажите адрес электронной почты, на него придёт код для сброса пароля и инструкции."
+    recover:
+      email: "E-mail"
+      code: "Код из письма"
+      password: "Новый пароль"
+      password_confirmation: "Подтверждение пароля"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"

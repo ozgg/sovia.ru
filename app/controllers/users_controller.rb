@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   # get /users/recover
   def recover
-
+    @title = t('titles.users.recover')
   end
 
   # get /users/confirm

@@ -1,6 +1,13 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+
+<p><%= t('.instructions') %></p>
+
 <%= form_tag recover_users_path, method: :post do %>
     <div>
-      <%= email_field_tag :email %>
+      <%= label_tag :email %>
+      <%= email_field_tag :email, params[:email].to_s, required: true %>
     </div>
     <div>
       <%= button_tag t('submit'), type: :submit %>
