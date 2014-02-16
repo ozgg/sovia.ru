@@ -35,6 +35,7 @@ ru:
       new: "Регистрация"
       recover_form: "Восстановление пароля"
       recover: "Сброс пароля"
+      confirm: "Подтверждение электронной почты"
     statistics:
       index: "Статистика"
       symbols: "Символы снов, страница %{page}"
@@ -193,6 +194,8 @@ ru:
       code: "Код из письма"
       password: "Новый пароль"
       password_confirmation: "Подтверждение пароля"
+    confirm:
+      code: "Код из письма"
   article:
     added: "Статья добавлена"
     updated: "Статья обновлена"

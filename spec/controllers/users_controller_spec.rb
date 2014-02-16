@@ -179,12 +179,6 @@ describe UsersController do
       it_should_behave_like "logged in bouncer"
     end
 
-    context "get confirm" do
-      before(:each) { get :confirm }
-
-      it_should_behave_like "logged in bouncer"
-    end
-
     context "sending email confirmation" do
       let(:user) { create(:unconfirmed_user) }
       before(:each) { session[:user_id] = user.id }

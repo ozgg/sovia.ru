@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :bounce_authorized, only: [:new, :create, :recover_form, :recover, :confirm]
+  before_action :bounce_authorized, only: [:new, :create, :recover_form, :recover ]
 
   # get /users/new
   def new
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 
   # get /users/confirm
   def confirm
-
+    @title = t('titles.users.confirm')
   end
 
   # post /users/code

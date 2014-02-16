@@ -1,0 +1,13 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+
+<%= form_tag code_users_path, method: :post do %>
+    <div>
+      <%= label_tag :code, t('.code') %>
+      <%= text_field_tag :code, params[:code], required: true %>
+    </div>
+    <div>
+      <%= button_tag t('submit'), type: :submit %>
+    </div>
+<% end %>
