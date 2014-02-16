@@ -8,3 +8,9 @@
     <li><%= link_to t('.profile'), my_profile_path %></li>
   </ul>
 </nav>
+
+<% unless @current_user.mail_confirmed? %>
+    <%= form_tag confirm_users_path, method: :post do %>
+    <%= button_tag t('.confirm_email'), type: :submit %>
+    <% end %>
+<% end %>

@@ -249,6 +249,7 @@ ru:
     index:
       dreams: "Мои сны"
       profile: "Мой профиль"
+      confirm_email: "Отправить код подтверждения почты"
     profile:
       update: "Обновить профиль"
       email: "Электронная почта"
