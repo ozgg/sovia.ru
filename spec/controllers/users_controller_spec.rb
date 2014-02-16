@@ -184,6 +184,32 @@ describe UsersController do
 
       it_should_behave_like "logged in bouncer"
     end
+
+    context "sending email confirmation" do
+      let(:user) { create(:unconfirmed_user) }
+      before(:each) { session[:user_id] = user.id }
+
+      it "sends email_confirmation to user's instance" do
+        expect(User).to receive(:find).and_return(user)
+        expect(user).to receive(:email_confirmation).and_return(create(:email_confirmation, user: user))
+        post :send_confirmation
+      end
+
+      it "sends code to user's email" do
+        post :send_confirmation
+        expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
+      end
+
+      it "adds flash message #{I18n.t('email_confirmation_sent')}" do
+        post :send_confirmation
+        expect(flash[:message]).to eq(I18n.t('email_confirmation_sent'))
+      end
+
+      it "redirects to confirm action" do
+        post :send_confirmation
+        expect(response).to redirect_to(confirm_users_path)
+      end
+    end
   end
 
   context "posting email confirmation" do

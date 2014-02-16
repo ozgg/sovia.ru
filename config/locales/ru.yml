@@ -278,3 +278,4 @@ ru:
     code_invalid: "Недействительный код"
     recovery_failed: "Не удалось сменить пароль, проверьте правильность ввода"
     password_changed: "Пароль изменён"
+  email_confirmation_sent: "Код подтверждения отправлен"

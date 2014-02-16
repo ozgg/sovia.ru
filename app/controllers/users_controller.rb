@@ -38,6 +38,17 @@ class UsersController < ApplicationController
     @title = t('titles.users.recover')
   end
 
+  # post /users/confirm
+  def send_confirmation
+    code = @current_user.email_confirmation
+    unless code.nil?
+      CodeSender.email(code).deliver
+      flash[:message] = t('email_confirmation_sent')
+    end
+
+    redirect_to confirm_users_path
+  end
+
   # get /users/confirm
   def confirm
 
