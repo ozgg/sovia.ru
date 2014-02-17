@@ -13,7 +13,7 @@ describe Dream do
     it "selects random public dream" do
       3.times { create(:article) }
       create(:dream)
-      3.times { create(:post) }
+      3.times { create(:article) }
       create(:dream)
       3.times { create(:protected_dream) }
       create(:dream)

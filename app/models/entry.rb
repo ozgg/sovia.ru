@@ -40,7 +40,7 @@ class Entry < ActiveRecord::Base
     }
   end
 
-  def seen_to?(looker)
+  def visible_to?(looker)
     case privacy
       when PRIVACY_NONE
         true
