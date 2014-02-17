@@ -1,6 +1,6 @@
-class CreateEntryTags < ActiveRecord::Migration
+class CreateTags < ActiveRecord::Migration
   def change
-    create_table :entry_tags do |t|
+    create_table :tags do |t|
       t.string :letter, null: false
       t.string :name, null: false
       t.string :canonical_name, null: false
@@ -11,8 +11,8 @@ class CreateEntryTags < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :entry_tags, :letter
-    add_index :entry_tags, :name
-    add_index :entry_tags, :canonical_name, unique: true
+    add_index :tags, :letter
+    add_index :tags, :canonical_name, unique: true
+    add_index :tags, :dreams_count
   end
 end
