@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20140130133354) do
 
   create_table "entries", force: true do |t|
     t.integer  "user_id"
-    t.integer  "entry_type",                 null: false
+    t.integer  "entry_type_id",              null: false
     t.integer  "privacy",        default: 0, null: false
     t.string   "title"
     t.string   "url_title"
@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 20140130133354) do
     t.datetime "updated_at"
   end
 
-  add_index "entries", ["entry_type", "privacy"], name: "index_entries_on_entry_type_and_privacy", using: :btree
+  add_index "entries", ["entry_type_id", "privacy"], name: "index_entries_on_entry_type_id_and_privacy", using: :btree
+  add_index "entries", ["entry_type_id"], name: "index_entries_on_entry_type_id", using: :btree
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "entry_tags", force: true do |t|
@@ -52,20 +53,30 @@ ActiveRecord::Schema.define(version: 20140130133354) do
   add_index "entry_tags", ["entry_id"], name: "index_entry_tags_on_entry_id", using: :btree
   add_index "entry_tags", ["tag_id"], name: "index_entry_tags_on_tag_id", using: :btree
 
+  create_table "entry_types", force: true do |t|
+    t.string  "name",                      null: false
+    t.integer "entries_count", default: 0, null: false
+    t.integer "tags_count",    default: 0, null: false
+  end
+
+  add_index "entry_types", ["name"], name: "index_entry_types_on_name", unique: true, using: :btree
+
   create_table "tags", force: true do |t|
+    t.integer  "entry_type_id",              null: false
     t.string   "letter",                     null: false
     t.string   "name",                       null: false
     t.string   "canonical_name",             null: false
-    t.integer  "dreams_count",   default: 0, null: false
+    t.integer  "entries_count",  default: 0, null: false
     t.integer  "users_count",    default: 0, null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tags", ["canonical_name"], name: "index_tags_on_canonical_name", unique: true, using: :btree
-  add_index "tags", ["dreams_count"], name: "index_tags_on_dreams_count", using: :btree
-  add_index "tags", ["letter"], name: "index_tags_on_letter", using: :btree
+  add_index "tags", ["canonical_name", "entry_type_id"], name: "index_tags_on_canonical_name_and_entry_type_id", unique: true, using: :btree
+  add_index "tags", ["entry_type_id", "entries_count"], name: "index_tags_on_entry_type_id_and_entries_count", using: :btree
+  add_index "tags", ["entry_type_id", "letter"], name: "index_tags_on_entry_type_id_and_letter", using: :btree
+  add_index "tags", ["entry_type_id"], name: "index_tags_on_entry_type_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                           null: false

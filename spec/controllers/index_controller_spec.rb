@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe IndexController do
+  pending "Omnious refactoring"
+
   context "get index" do
     it "renders index/index" do
       get :index

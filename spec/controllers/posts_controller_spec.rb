@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PostsController do
+  pending "Omnious refactoring"
+
   let!(:user) { create(:user) }
   let!(:entry) { create(:post, user: user, body: 'Эталон') }
 

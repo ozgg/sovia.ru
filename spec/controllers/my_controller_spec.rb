@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe MyController do
+  pending "Omnious refactoring"
+
   context "anonymous user" do
     before(:each) { session[:user_id] = nil }
 

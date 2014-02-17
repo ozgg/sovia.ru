@@ -5,12 +5,14 @@ describe Dream do
     let(:dream) { Dream.new }
 
     it "sets type to dream" do
+      pending
       expect(dream.entry_type).to eq(Dream::TYPE_DREAM)
     end
   end
 
   context "#random_dream" do
     it "selects random public dream" do
+      pending
       3.times { create(:article) }
       create(:dream)
       3.times { create(:article) }

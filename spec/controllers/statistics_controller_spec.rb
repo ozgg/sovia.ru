@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe StatisticsController do
+  pending "Omnious refactoring"
+
   context "get index" do
     before(:each) { get :index }
 

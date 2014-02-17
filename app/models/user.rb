@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   ROLE_EDITOR    = 1
   ROLE_MODERATOR = 2
 
-  has_many :posts, dependent: :restrict_with_exception
+  has_many :entries, dependent: :restrict_with_exception
   has_many :codes, dependent: :destroy
 
   has_secure_password

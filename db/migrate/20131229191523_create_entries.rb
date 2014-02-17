@@ -2,7 +2,7 @@ class CreateEntries < ActiveRecord::Migration
   def change
     create_table :entries do |t|
       t.references :user, index: true
-      t.integer :entry_type, null: false
+      t.references :entry_type, index: true, null: false
       t.integer :privacy, null: false, default: Entry::PRIVACY_NONE
       t.string :title
       t.string :url_title
@@ -12,6 +12,6 @@ class CreateEntries < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :entries, [:entry_type, :privacy]
+    add_index :entries, [:entry_type_id, :privacy]
   end
 end

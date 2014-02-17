@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe UsersController do
+  pending "Omnious refactoring"
+
   shared_examples "logged in bouncer" do
     it "redirects to root path" do
       expect(response).to redirect_to(root_path)

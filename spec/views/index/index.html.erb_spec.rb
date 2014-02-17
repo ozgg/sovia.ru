@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe "index/index.html.erb" do
-  it "renders posts list" do
-    assign(:posts, Post.last(5))
+  it "renders entries list" do
+    assign(:entries, Entry.last(5))
     render
-    expect(rendered).to render_template('posts/_list')
+    expect(rendered).to render_template('entries/_list')
   end
 end

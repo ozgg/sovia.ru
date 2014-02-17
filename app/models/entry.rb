@@ -9,6 +9,7 @@ class Entry < ActiveRecord::Base
   TYPE_BLOG_ENTRY = 4
 
   belongs_to :user
+  belongs_to :entry_type
   has_many :entry_tags
   has_many :tags, through: :entry_tags
 

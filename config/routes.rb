@@ -22,8 +22,9 @@ Sovia::Application.routes.draw do
   end
 
   resources :articles
+  resources :entries
   resources :posts
-  resources :tags, as: :entry_tags
+  resources :tags
   resources :dreams do
     collection do
       get 'random' => :random

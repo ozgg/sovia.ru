@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+%w(dream article post thought).each_with_index do |name, index|
+  EntryType.create(id: index + 1, name: name)
+end
