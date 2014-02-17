@@ -1,4 +1,4 @@
-class Dream < Post
+class Dream < Entry
   after_initialize :set_specific_fields
 
   def self.recent

@@ -6,11 +6,11 @@ FactoryGirl.define do
       user
 
       factory :protected_dream do
-        privacy Post::PRIVACY_USERS
+        privacy Entry::PRIVACY_USERS
       end
 
       factory :private_dream do
-        privacy Post::PRIVACY_OWNER
+        privacy Entry::PRIVACY_OWNER
       end
     end
   end

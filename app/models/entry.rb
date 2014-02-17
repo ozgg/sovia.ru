@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Entry < ActiveRecord::Base
   PRIVACY_NONE  = 0
   PRIVACY_USERS = 1
   PRIVACY_OWNER = 255
@@ -9,8 +9,8 @@ class Post < ActiveRecord::Base
   TYPE_BLOG_ENTRY = 4
 
   belongs_to :user
-  has_many :post_entry_tags
-  has_many :entry_tags, through: :post_entry_tags
+  has_many :entry_tags
+  has_many :tags, through: :entry_tags
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
@@ -79,15 +79,15 @@ class Post < ActiveRecord::Base
   def tags_string=(new_tags_string)
     new_tags = new_tags_from_string new_tags_string
 
-    (entry_tags - new_tags).each do |tag_to_delete|
+    (tags - new_tags).each do |tag_to_delete|
       tag_to_delete.decrement! :dreams_count if dream?
     end
 
-    self.entry_tags = new_tags
+    self.tags = new_tags
   end
 
   def ordered_tags
-    self.entry_tags.order('dreams_count desc, name asc')
+    self.tags.order('dreams_count desc, name asc')
   end
 
   def parse_body(input)
@@ -121,20 +121,16 @@ class Post < ActiveRecord::Base
   end
 
   def increment_entries_counter
-    unless user.nil?
-      user.increment! :entries_count
-    end
+    user.increment! :entries_count unless user.nil?
   end
 
   def decrement_entries_counter
-    unless user.nil?
-      user.decrement! :entries_count
-    end
+    user.decrement! :entries_count unless user.nil?
   end
 
   def decrement_dreams_counter
     if dream?
-      entry_tags.each do |tag|
+      tags.each do |tag|
         tag.decrement! :dreams_count
       end
     end
@@ -144,8 +140,8 @@ class Post < ActiveRecord::Base
     new_tags = []
     new_tags_string.split(',').each do |new_tag|
       unless new_tag.strip == ''
-        entry_tag = EntryTag.match_by_name(new_tag) || EntryTag.create(name: new_tag)
-        new_tags << entry_tag unless new_tags.include?(entry_tag)
+        tag = Tag.match_by_name(new_tag) || Tag.create(name: new_tag)
+        new_tags << tag unless new_tags.include?(tag)
       end
     end
 
