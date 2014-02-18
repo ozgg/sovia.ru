@@ -3,11 +3,6 @@ class Entry < ActiveRecord::Base
   PRIVACY_USERS = 1
   PRIVACY_OWNER = 255
 
-  TYPE_DREAM      = 1
-  TYPE_ARTICLE    = 2
-  TYPE_POST       = 3
-  TYPE_BLOG_ENTRY = 4
-
   belongs_to :user
   belongs_to :entry_type
   has_many :entry_tags
@@ -15,22 +10,24 @@ class Entry < ActiveRecord::Base
 
   validates_presence_of :body
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
-  validates_inclusion_of :entry_type, in: [TYPE_DREAM, TYPE_ARTICLE, TYPE_POST, TYPE_BLOG_ENTRY]
 
-  after_initialize :set_specific_fields
-  after_create :increment_entries_counter
-  before_destroy :decrement_entries_counter, :decrement_dreams_counter
+  after_create :increment_entries_counter, :make_url_title
+  before_destroy :decrement_entries_counter
 
   def self.dreams
-    where(entry_type: TYPE_DREAM)
+    where(entry_type: EntryType.dream)
   end
 
   def self.articles
-    where(entry_type: TYPE_ARTICLE)
+    where(entry_type: EntryType.article)
   end
 
   def self.posts
-    where(entry_type: TYPE_POST)
+    where(entry_type: EntryType.post)
+  end
+
+  def self.thoughts
+    where(entry_type: EntryType.thought)
   end
 
   def self.privacy_modes
@@ -80,9 +77,7 @@ class Entry < ActiveRecord::Base
   def tags_string=(new_tags_string)
     new_tags = new_tags_from_string new_tags_string
 
-    (tags - new_tags).each do |tag_to_delete|
-      tag_to_delete.decrement! :dreams_count if dream?
-    end
+    (tags - new_tags).each { |tag_to_delete| tag_to_delete.decrement! :entries_count }
 
     self.tags = new_tags
   end
@@ -100,15 +95,19 @@ class Entry < ActiveRecord::Base
   end
 
   def dream?
-    entry_type === TYPE_DREAM
+    entry_type_id === EntryType.dream.id
   end
 
   def article?
-    entry_type === TYPE_ARTICLE
+    entry_type_id === EntryType.article.id
   end
 
   def post?
-    entry_type === TYPE_POST
+    entry_type_id === EntryType.post.id
+  end
+
+  def thought?
+    entry_type_id === EntryType.thought.id
   end
 
   def passages_count
@@ -117,23 +116,14 @@ class Entry < ActiveRecord::Base
 
   private
 
-  def set_specific_fields
-    self.entry_type ||= TYPE_POST
-  end
-
   def increment_entries_counter
     user.increment! :entries_count unless user.nil?
   end
 
   def decrement_entries_counter
     user.decrement! :entries_count unless user.nil?
-  end
-
-  def decrement_dreams_counter
-    if dream?
-      tags.each do |tag|
-        tag.decrement! :dreams_count
-      end
+    tags.each do |tag|
+      tag.decrement! :entries_count
     end
   end
 
@@ -141,7 +131,7 @@ class Entry < ActiveRecord::Base
     new_tags = []
     new_tags_string.split(',').each do |new_tag|
       unless new_tag.strip == ''
-        tag = Tag.match_by_name(new_tag) || Tag.create(name: new_tag)
+        tag = Tag.match_or_create_by_name(new_tag, entry_type)
         new_tags << tag unless new_tags.include?(tag)
       end
     end

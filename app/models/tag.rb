@@ -1,4 +1,5 @@
 class Tag < ActiveRecord::Base
+  belongs_to :entry_type
   has_many :entry_tags
   has_many :entries, through: :entry_tags
 
@@ -6,23 +7,18 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :canonical_name
   before_validation :normalize_name, :create_canonical_name, :create_letter
 
-  def self.match_by_name(name)
-    self.find_by_canonical_name(self.new.canonize name)
+  def self.match_by_name(name, entry_type)
+    self.find_by(canonical_name: self.canonize(name), entry_type: entry_type)
   end
 
-  def canonize(input)
-    downcased = input.mb_chars.downcase.to_s
-    canonized = downcased.gsub(/[^a-zа-я0-9ё]/, '')
-    canonized.empty? ? downcased.strip : canonized
+  def self.match_or_create_by_name(name, entry_type)
+    self.find_or_create_by(canonical_name: self.canonize(name), entry_type: entry_type)
   end
 
-  def parsed_description
-    text = description ? description.strip : ''
-    if text.length > 0
-      '<p>' + text.gsub(/(\r?\n)+/, '</p><p>') + '</p>'
-    else
-      ''
-    end
+  def self.canonize(input)
+    lowered   = input.mb_chars.downcase.to_s.strip
+    canonized = lowered.gsub(/[^a-zа-я0-9ё]/, '')
+    canonized.empty? ? lowered : canonized
   end
 
   private
@@ -32,7 +28,7 @@ class Tag < ActiveRecord::Base
   end
 
   def create_canonical_name
-    self.canonical_name = canonize name
+    self.canonical_name = Tag.canonize name
   end
 
   def create_letter
