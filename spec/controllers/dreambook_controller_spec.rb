@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe DreambookController do
-  pending "Omnious refactoring"
-
   before(:each) do
     @tag_a = create(:entry_tag, name: 'Акула', description: 'Про акулу')
     @tag_b = create(:entry_tag, name: 'Белка', description: 'Тут про белку')
@@ -11,6 +9,7 @@ describe DreambookController do
 
   shared_examples "letter assigner" do
     it "assigns letters to @letters" do
+      pending
       expect(assigns[:letters]).to include(@tag_a.letter)
       expect(assigns[:letters]).to include(@tag_b.letter)
       expect(assigns[:letters].length).to eq(2)
@@ -21,6 +20,7 @@ describe DreambookController do
     before(:each) { get :index }
 
     it "renders dreambook/index" do
+      pending
       expect(response).to render_template('dreambook/index')
     end
 
@@ -31,12 +31,14 @@ describe DreambookController do
     before(:each) { get :letter, letter: @tag_a.letter }
 
     it "assigns described tags with given letter to @tags" do
+      pending
       expect(assigns[:tags]).to include(@tag_a)
       expect(assigns[:tags]).not_to include(@tag_b)
       expect(assigns[:tags]).not_to include(@tag_c)
     end
 
     it "renders dreambook/letter" do
+      pending
       expect(response).to render_template('dreambook/letter')
     end
 
@@ -47,10 +49,12 @@ describe DreambookController do
     before(:each) { get :word, letter: @tag_a.letter, word: @tag_a.name }
 
     it "assigns word to @tag" do
+      pending
       expect(assigns[:tag]).to eq(@tag_a)
     end
 
     it "renders dreambook/word" do
+      pending
       expect(response).to render_template('dreambook/word')
     end
 
@@ -59,11 +63,13 @@ describe DreambookController do
 
   context "get obsolete" do
     it "redirects to letter when only letter given" do
+      pending
       get :obsolete, letter: @tag_a.letter
       expect(response).to redirect_to(dreambook_letter_path(letter: @tag_a.letter))
     end
 
     it "redirects to word when word given" do
+      pending
       get :obsolete, letter: @tag_a.letter, word: @tag_a.name
       expect(response).to redirect_to(dreambook_word_path(letter: @tag_a.letter, word: @tag_a.name))
     end

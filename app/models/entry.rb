@@ -151,7 +151,7 @@ class Entry < ActiveRecord::Base
 
   def make_url_title
     if title.nil?
-      self.url_title = nil
+      self.url_title = 'bez-nazvaniya'
     else
       self.url_title = title.mb_chars.downcase.to_s
       {

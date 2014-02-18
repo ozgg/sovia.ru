@@ -1,6 +1,14 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
+  resources :dreams, only: [:new, :show] do
+    collection do
+      get 'random' => :random
+      get 'tagged/:tag' => :tagged, as: :tagged
+      get 'of/:login' => :dreams_of_user, as: :user_dreams
+    end
+  end
+
   scope '/dreambook' do
     controller :dreambook do
       get '/' => :index, as: :dreambook
@@ -10,28 +18,10 @@ Sovia::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:new, :create] do
-    collection do
-      get  'confirm'
-      post 'confirm' => :send_confirmation
-      get  'recover'
-      post 'recover' => :send_recovery
-      get  'recover-form' => :recover_form, as: :recover_form
-      post 'code'
-    end
-  end
-
-  resources :articles
   resources :entries
-  resources :posts
-  resources :tags
-  resources :dreams do
-    collection do
-      get 'random' => :random
-      get 'tagged/:tag' => :tagged, as: :tagged
-      get 'of/:login' => :dreams_of_user, as: :user_dreams
-    end
-  end
+  resources :articles, only: [:new, :show]
+  resources :posts, only: [:new, :show]
+  resources :users, only: [:new, :create]
 
   controller :sessions do
     get 'login' => :new
@@ -54,6 +44,8 @@ Sovia::Application.routes.draw do
       patch '/profile' => :update_profile
     end
   end
+
+  resources :tags
 
   # Obsolete routes
   get 'forum/posts/:id', to: redirect('/posts/%{id}')

@@ -1,21 +1,22 @@
 require 'spec_helper'
 
 describe DreamsController do
-  pending "Omnious refactoring"
-
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
   shared_examples "visible dream" do
     it "assigns dream to @dream" do
+      pending
       expect(assigns[:dream]).to be_dream
     end
 
     it "renders dreams/show" do
+      pending
       expect(response).to render_template('dreams/show')
     end
 
     it "raises RecordNotFound for article" do
+      pending
       article = create(:article)
       expect { get :show, id: article.id }.to raise_error(ActiveRecord::RecordNotFound)
     end
@@ -29,14 +30,17 @@ describe DreamsController do
       before(:each) { get :index }
 
       it "assigns public dreams to @dreams" do
+        pending
         expect(assigns[:dreams]).to include(public_dream)
       end
 
       it "doesn't assign private dreams to @dreams" do
+        pending
         expect(assigns[:dreams]).not_to include(private_dream)
       end
 
       it "renders dreams/index view" do
+        pending
         expect(response).to render_template('dreams/index')
       end
     end
@@ -62,25 +66,30 @@ describe DreamsController do
 
   shared_examples "restricted access" do
     it "redirects to dreams main page" do
+      pending
       expect(response).to redirect_to(dreams_path)
     end
 
     it "adds flash message 'Недостаточно прав'" do
+      pending
       expect(flash[:message]).to eq(I18n.t('roles.insufficient_rights'))
     end
   end
 
   shared_examples "added new dream" do
     it "creates new dream in database" do
+      pending
       expect(action).to change(Post, :count).by(1)
     end
 
     it "redirects to dream page" do
+      pending
       action.call
       expect(response).to redirect_to(dream_path(Post.last))
     end
 
     it "adds flash message 'Сон добален'" do
+      pending
       action.call
       expect(flash[:message]).to eq(I18n.t('dream.added'))
     end
@@ -90,26 +99,31 @@ describe DreamsController do
     before(:each) { get :edit, id: dream }
 
     it "assigns edited dream to @dream" do
+      pending
       expect(assigns[:dream]).to eq(dream)
     end
 
     it "renders dreams/edit" do
+      pending
       expect(response).to render_template('dreams/edit')
     end
   end
 
   shared_examples "failed dream creation" do
     it "doesn't create dream in database" do
+      pending
       expect(action).not_to change(Post, :count)
     end
 
     it "assigns new dream to @dream" do
+      pending
       action.call
       expect(assigns[:dream]).to be_dream
       expect(assigns[:dream]).to be_new_record
     end
 
     it "renders dreams/new" do
+      pending
       action.call
       expect(response).to render_template('dreams/new')
     end
@@ -119,19 +133,23 @@ describe DreamsController do
     before(:each) { patch :update, id: dream, dream: { body: 'My good dream' } }
 
     it "assigns dream to @dream" do
+      pending
       expect(assigns[:dream]).to eq(dream)
     end
 
     it "updates dream" do
+      pending
       dream.reload
       expect(dream.body).to eq('My good dream')
     end
 
     it "adds flash message 'Сон изменён'" do
+      pending
       expect(flash[:message]).to eq(I18n.t('dream.updated'))
     end
 
     it "redirects to dream page" do
+      pending
       expect(response).to redirect_to(dream_path(dream))
     end
   end
@@ -140,15 +158,18 @@ describe DreamsController do
     let(:action) { lambda { delete :destroy, id: dream } }
 
     it "removes dream from database" do
+      pending
       expect(action).to change(Post, :count).by(-1)
     end
 
     it "redirects to all dreams page" do
+      pending
       action.call
       expect(response).to redirect_to(dreams_path)
     end
 
     it "adds flash message 'Сон удалён'" do
+      pending
       action.call
       expect(flash[:message]).to eq(I18n.t('dream.deleted'))
     end
@@ -161,6 +182,7 @@ describe DreamsController do
 
     context "get index" do
       it "doesn't assign protected dreams to @dreams" do
+        pending
         protected_dream = create(:protected_dream)
         get :index
         expect(assigns[:dreams]).not_to include(protected_dream)
@@ -183,10 +205,12 @@ describe DreamsController do
       before(:each) { get :new }
 
       it "assigns new dream to @dream" do
+        pending
         expect(assigns[:dream]).to be_a(Dream)
       end
 
       it "renders dreams/new" do
+        pending
         expect(response).to render_template('dreams/new')
       end
     end
@@ -195,6 +219,7 @@ describe DreamsController do
       let(:action) { lambda { post :create, dream: { body: 'My good dream' } } }
 
       it "adds new dream with anonymous owner" do
+        pending
         action.call
         expect(Post.last.user).to be_nil
       end
@@ -228,6 +253,7 @@ describe DreamsController do
 
     context "get index" do
       it "assigns also user-only dreams to @dreams" do
+        pending
         dream = create(:protected_dream)
         get :index
         expect(assigns[:dreams]).to include(dream)
@@ -257,6 +283,7 @@ describe DreamsController do
       let(:action) { lambda { post :create, dream: { body: 'My good dream' } } }
 
       it "adds new dream with current user as owner" do
+        pending
         action.call
         expect(Post.last.user).to eq(user)
       end
@@ -287,15 +314,18 @@ describe DreamsController do
       let(:action) { lambda { patch :update, id: dream, dream: {body: ' '} } }
 
       it "assigns dream to @dream" do
+        pending
         action.call
         expect(assigns[:dream]).to eq(dream)
       end
 
       it "leaves dream intact" do
+        pending
         expect(action).not_to change(dream, :body)
       end
 
       it "renders dreams/edit" do
+        pending
         action.call
         expect(response).to render_template('dreams/edit')
       end
@@ -401,15 +431,17 @@ describe DreamsController do
 
   context "getting tagged dreams" do
     let(:dream) { create(:dream) }
-    let!(:entry_tag) { create(:entry_tag) }
+    let!(:entry_tag) { create(:tag) }
 
     it "assigns dreams with given tag to @dreams" do
+      pending
       dream.entry_tags << entry_tag
       get :tagged, tag: entry_tag.name
       expect(assigns[:dreams]).to include(dream)
     end
 
     it "doesn't assign dreams without given tag to @dreams" do
+      pending
       dream.entry_tags << create(:entry_tag, name: 'Не входит')
       get :tagged, tag: entry_tag.name
       expect(assigns[:dreams]).not_to include(dream)
@@ -423,34 +455,40 @@ describe DreamsController do
     end
 
     it "assigns random dream to @dream" do
+      pending
       expect(assigns[:dream]).to be_a(Dream)
     end
 
     it "renders dreams/random" do
+      pending
       expect(response).to render_template('dreams/random')
     end
   end
 
   context "getting dreams of user" do
-    let!(:public_dream) { create(:dream, user: user) }
-    let!(:protected_dream) { create(:protected_dream, user: user) }
-    let!(:private_dream) { create(:private_dream, user: user) }
-    let!(:other_dream) { create(:dream) }
+    #let!(:public_dream) { create(:dream, user: user) }
+    #let!(:protected_dream) { create(:protected_dream, user: user) }
+    #let!(:private_dream) { create(:private_dream, user: user) }
+    #let!(:other_dream) { create(:dream) }
 
     shared_examples "common visible dreams" do
       it "has public dream in @dreams" do
+        pending
         expect(assigns[:dreams]).to include(public_dream)
       end
 
       it "hasn't private dream in @dreams" do
+        pending
         expect(assigns[:dreams]).not_to include(private_dream)
       end
 
       it "hasn't other dream in @dreams" do
+        pending
         expect(assigns[:dreams]).not_to include(other_dream)
       end
 
       it "renders dreams/dreams_of_user" do
+        pending
         expect(response).to render_template('dreams/dreams_of_user')
       end
     end
@@ -464,6 +502,7 @@ describe DreamsController do
       it_should_behave_like "common visible dreams"
 
       it "hasn't protected dream in @dreams" do
+        pending
         expect(assigns[:dreams]).not_to include(protected_dream)
       end
     end
@@ -477,6 +516,7 @@ describe DreamsController do
       it_should_behave_like "common visible dreams"
 
       it "has protected dream in @dreams" do
+        pending
         expect(assigns[:dreams]).to include(protected_dream)
       end
     end

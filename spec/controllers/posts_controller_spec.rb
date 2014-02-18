@@ -1,20 +1,20 @@
 require 'spec_helper'
 
 describe PostsController do
-  pending "Omnious refactoring"
-
   let!(:user) { create(:user) }
-  let!(:entry) { create(:post, user: user, body: 'Эталон') }
+  let!(:entry) { create(:entry, user: user, body: 'Эталон') }
 
   shared_examples "visible posts" do
     context "get index" do
       before(:each) { get :index }
 
       it "assigns posts to @posts" do
+        pending
         expect(assigns[:posts]).to include(entry)
       end
 
       it "renders posts/index" do
+        pending
         expect(response).to render_template('posts/index')
       end
     end
@@ -23,16 +23,19 @@ describe PostsController do
       before(:each) { get :show, id: entry }
 
       it "assigns post to @post" do
+        pending
         expect(assigns[:post]).to eq(entry)
       end
 
       it "renders posts/show" do
+        pending
         expect(response).to render_template('posts/show')
       end
     end
 
     context "when id is not post id" do
       it "raises record_not_found" do
+        pending
         article = create(:article)
         expect { get :show, id: article.id }.to raise_error(ActiveRecord::RecordNotFound)
       end
@@ -41,6 +44,7 @@ describe PostsController do
 
   shared_examples "restricted area" do
     it "raises unauthorized exception" do
+      pending
       expect(action).to raise_error(ApplicationController::UnauthorizedException)
     end
   end
@@ -50,10 +54,12 @@ describe PostsController do
       before(:each) { get :edit, id: entry }
 
       it "assigns post to @post" do
+        pending
         expect(assigns[:post]).to eq(entry)
       end
 
       it "renders posts/edit" do
+        pending
         expect(response).to render_template('posts/edit')
       end
     end
@@ -62,19 +68,23 @@ describe PostsController do
       before(:each) { patch :update, id: entry, post: { body: 'Lalala' } }
 
       it "assigns post to @post" do
+        pending
         expect(assigns[:post]).to eq(entry)
       end
 
       it "updates post data" do
+        pending
         entry.reload
         expect(entry.body).to eq('Lalala')
       end
 
       it "redirects to post page" do
+        pending
         expect(response).to redirect_to(entry)
       end
 
       it "adds flash message #{I18n.t('post.updated')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('post.updated'))
       end
     end
@@ -83,15 +93,18 @@ describe PostsController do
       before(:each) { patch :update, id: entry, post: { body: ' ' } }
 
       it "assigns post to @post" do
+        pending
         expect(assigns[:post]).to eq(entry)
       end
 
       it "leaves post intact" do
+        pending
         entry.reload
         expect(entry.body).to eq('Эталон')
       end
 
       it "renders posts/edit" do
+        pending
         expect(response).to render_template('posts/edit')
       end
     end
@@ -100,20 +113,24 @@ describe PostsController do
       let(:action) { lambda { delete :destroy, id: entry } }
 
       it "assigns post to @post" do
+        pending
         action.call
         expect(assigns[:post]).to eq(entry)
       end
 
       it "destroys post" do
+        pending
         expect(action).to change(Post, :count).by(-1)
       end
 
       it "redirects to posts path" do
+        pending
         action.call
         expect(response).to redirect_to(posts_path)
       end
 
       it "adds flash message #{I18n.t('post.deleted')}" do
+        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('post.deleted'))
       end
@@ -163,10 +180,12 @@ describe PostsController do
       before(:each) { get :new }
 
       it "assigns new post to @post" do
+        pending
         expect(assigns[:post]).to be_a_new(Post)
       end
 
       it "renders posts/new" do
+        pending
         expect(response).to render_template('posts/new')
       end
     end
@@ -175,25 +194,30 @@ describe PostsController do
       let(:action) { -> { post :create, post: attributes_for(:post) } }
 
       it "assigns post to @post" do
+        pending
         action.call
         expect(assigns[:post]).to be_a(Post)
       end
 
       it "creates post in database" do
+        pending
         expect(action).to change(Post, :count).by(1)
       end
 
       it "redirects to post path" do
+        pending
         action.call
         expect(response).to redirect_to(Post.last)
       end
 
       it "adds flash message #{I18n.t('post.added')}" do
+        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('post.added'))
       end
 
       it "adds post with current user as owner" do
+        pending
         action.call
         expect(Post.posts.last.user).to eq(user)
       end
@@ -203,15 +227,18 @@ describe PostsController do
       let(:action) { -> { post :create, post: { body: ' ' } } }
 
       it "assigns post to @post" do
+        pending
         action.call
         expect(assigns[:post]).to be_a(Post)
       end
 
       it "doesn't create post in database" do
+        pending
         expect(action).not_to change(Post, :count)
       end
 
       it "renders posts/new" do
+        pending
         action.call
         expect(response).to render_template('posts/new')
       end

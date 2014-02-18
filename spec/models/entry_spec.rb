@@ -4,7 +4,7 @@ describe Entry do
   context "new entry" do
     let(:entry) { Entry.new }
 
-    it "is invalid with empty body" do
+    it "is invalid with blank body" do
       entry.body = ' '
       entry.valid?
       expect(entry.errors).to have_key(:body)
@@ -160,6 +160,13 @@ describe Entry do
       expect(entry).to be_dream
       expect(entry.privacy).to eq(Entry::PRIVACY_NONE)
     end
+  end
+
+  context "#recent_posts" do
+    it "selects public article"
+    it "selects public dream"
+    it "selects public post"
+    it "selects public thought"
   end
 
   context "when destroyed" do

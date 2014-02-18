@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe UsersController do
-  pending "Omnious refactoring"
-
   shared_examples "logged in bouncer" do
     it "redirects to root path" do
+      pending
       expect(response).to redirect_to(root_path)
     end
 
     it "adds flash message 'Вы уже вошли'" do
+      pending
       expect(flash[:message]).to eq(I18n.t('session.already_logged_in'))
     end
   end
@@ -20,10 +20,12 @@ describe UsersController do
       before(:each) { get :new }
 
       it "assigns new user to @user" do
+        pending
         expect(assigns[:user]).to be_a(User)
       end
 
       it "renders users/new" do
+        pending
         expect(response).to render_template('users/new')
       end
     end
@@ -32,25 +34,30 @@ describe UsersController do
       let(:action) { lambda { post :create, user: attributes_for(:user) } }
 
       it "assigns new user to @user" do
+        pending
         action.call
         expect(assigns[:user]).to be_a(User)
       end
 
       it "creates user in database" do
+        pending
         expect(action).to change(User, :count).by(1)
       end
 
       it "sets user_id in session to new user" do
+        pending
         action.call
         expect(session[:user_id]).to eq(User.last.id)
       end
 
       it "redirects to root path" do
+        pending
         action.call
         expect(response).to redirect_to(root_path)
       end
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
+        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
       end
@@ -60,15 +67,18 @@ describe UsersController do
       let(:action) { lambda { post :create, user: attributes_for(:user), agree: true } }
 
       it "doesn't add user to database" do
+        pending
         expect(action).not_to change(User, :count)
       end
 
       it "redirects to root path" do
+        pending
         action.call
         expect(response).to redirect_to(root_path)
       end
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
+        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
       end
@@ -78,15 +88,18 @@ describe UsersController do
       let(:action) { lambda { post :create, user: { login: '  ' } } }
 
       it "assigns new user to @user" do
+        pending
         action.call
         expect(assigns[:user]).to be_a(User)
       end
 
       it "doesn't create user in database" do
+        pending
         expect(action).not_to change(User, :count)
       end
 
       it "renders users/new" do
+        pending
         action.call
         expect(response).to render_template('users/new')
       end
@@ -96,6 +109,7 @@ describe UsersController do
       before(:each) { get :recover_form }
 
       it "renders users/recover_form" do
+        pending
         expect(response).to render_template('users/recover_form')
       end
     end
@@ -104,22 +118,26 @@ describe UsersController do
       let(:user) { create(:confirmed_user) }
 
       it "sends password_recovery to user object" do
+        pending
         expect(User).to receive(:find_by).with(email: user.email).and_return(user)
         expect(user).to receive(:password_recovery).and_return(create(:password_recovery, user: user))
         post :send_recovery, email: user.email
       end
 
       it "sends code to user's email" do
+        pending
         post :send_recovery, email: user.email
         expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
       end
 
       it "redirects to recover action" do
+        pending
         post :send_recovery, email: user.email
         expect(response).to redirect_to(recover_users_path)
       end
 
       it "adds flash message #{I18n.t('recovery_code_sent')}" do
+        pending
         post :send_recovery, email: user.email
         expect(flash[:message]).to eq(I18n.t('recovery_code_sent'))
       end
@@ -129,10 +147,12 @@ describe UsersController do
       before(:each) { post :send_recovery, email: 'non-existent@example.org' }
 
       it "adds flash message #{I18n.t('email_not_found')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('email_not_found'))
       end
 
       it "redirects to password recovery form" do
+        pending
         expect(response).to redirect_to(recover_form_users_path)
       end
     end
@@ -141,6 +161,7 @@ describe UsersController do
       before(:each) { get :recover }
 
       it "renders users/recover" do
+        pending
         expect(response).to render_template('users/recover')
       end
     end
@@ -149,6 +170,7 @@ describe UsersController do
       before(:each) { get :confirm }
 
       it "renders users/confirm" do
+        pending
         expect(response).to render_template('users/confirm')
       end
     end
@@ -186,22 +208,26 @@ describe UsersController do
       before(:each) { session[:user_id] = user.id }
 
       it "sends email_confirmation to user's instance" do
+        pending
         expect(User).to receive(:find).and_return(user)
         expect(user).to receive(:email_confirmation).and_return(create(:email_confirmation, user: user))
         post :send_confirmation
       end
 
       it "sends code to user's email" do
+        pending
         post :send_confirmation
         expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
       end
 
       it "adds flash message #{I18n.t('email_confirmation_sent')}" do
+        pending
         post :send_confirmation
         expect(flash[:message]).to eq(I18n.t('email_confirmation_sent'))
       end
 
       it "redirects to confirm action" do
+        pending
         post :send_confirmation
         expect(response).to redirect_to(confirm_users_path)
       end
@@ -211,10 +237,12 @@ describe UsersController do
   context "posting email confirmation" do
     shared_examples "invalid email code" do
       it "renders users/confirm" do
+        pending
         expect(response).to render_template('users/confirm')
       end
 
       it "adds flash message #{I18n.t('user.code_invalid')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
       end
     end
@@ -224,20 +252,24 @@ describe UsersController do
       before(:each) { post :code, code: code.body }
 
       it "sets user's mail_confirmed to true" do
+        pending
         user = code.user
         user.reload
         expect(user.mail_confirmed?).to be_true
       end
 
       it "adds flash message #{I18n.t('user.email_confirmed')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('user.email_confirmed'))
       end
 
       it "redirects to root path" do
+        pending
         expect(response).to redirect_to(root_path)
       end
 
       it "sets code's activated to true" do
+        pending
         code.reload
         expect(code).to be_activated
       end
@@ -262,10 +294,12 @@ describe UsersController do
 
     shared_examples "invalid password code" do
       it "renders users/recover" do
+        pending
         expect(response).to render_template('users/recover')
       end
 
       it "adds flash message #{I18n.t('user.code_invalid')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
       end
     end
@@ -275,26 +309,31 @@ describe UsersController do
       before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '123' } }
 
       it "sets user's mail_confirmed to true" do
+        pending
         user = code.user
         user.reload
         expect(user.mail_confirmed).to be_true
       end
 
       it "updates user's password" do
+        pending
         user = code.user
         user.reload
         expect(user.authenticate('123')).to be_true
       end
 
       it "adds flash message #{I18n.t('user.password_changed')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('user.password_changed'))
       end
 
       it "redirects to root path" do
+        pending
         expect(response).to redirect_to(root_path)
       end
 
       it "sets code's activated to true" do
+        pending
         code.reload
         expect(code).to be_activated
       end
@@ -318,14 +357,17 @@ describe UsersController do
       before(:each) { post :code, code: code.body, user: { password: '123', password_confirmation: '234' } }
 
       it "renders users/recover" do
+        pending
         expect(response).to render_template('users/recover')
       end
 
       it "adds flash message #{I18n.t('user.recovery_failed')}" do
+        pending
         expect(flash[:message]).to eq(I18n.t('user.recovery_failed'))
       end
 
       it "leaves digest intact" do
+        pending
         user = code.user
         user.reload
         expect(user.authenticate('123')).to be_false
@@ -334,6 +376,7 @@ describe UsersController do
       end
 
       it "leaves code intact" do
+        pending
         code.reload
         expect(code).not_to be_activated
       end
