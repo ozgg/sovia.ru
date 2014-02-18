@@ -147,6 +147,21 @@ describe Entry do
     end
   end
 
+  context "#random_dream" do
+    it "selects random public dream" do
+      entry_type = create(:entry_type_dream)
+      create(:entry)
+      create(:entry, entry_type: entry_type)
+      create(:protected_entry, entry_type: create(:entry_type_article))
+      create(:entry, entry_type: entry_type)
+      create(:private_entry, entry_type: entry_type)
+
+      entry = Entry.random_dream
+      expect(entry).to be_dream
+      expect(entry.privacy).to eq(Entry::PRIVACY_NONE)
+    end
+  end
+
   context "when destroyed" do
     it "decrements entries_count for used tags" do
       tag   = create(:tag)

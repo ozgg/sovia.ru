@@ -1,4 +1,49 @@
 ru:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Запись недействительна"
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              blank: "не может быть пустым"
+              confirmation: "не совпадает с паролем"
+            password:
+              blank: "не может быть пустым"
+            email:
+              unreasonable: "не выглядит как e-mail"
+            login:
+              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+        entry:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+    models:
+      entry: "публикация"
+      user: "пользователь"
+      tag: "метка"
+    attributes:
+      entry:
+        title: "Название"
+        body:  "Текст"
+        privacy: "Видимость"
+        tags_string: "Метки"
+      tag:
+        name: "Название"
+        description: "Интерпретация"
+      user:
+        login: "Логин"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        email: "E-mail"
+        allow_mail: "Получать уведомления по электронной почте"
+    properties:
+      entry:
+        privacy:
+          none: "Для всех"
+          users: "Для сообщества"
+          owner: "Только для меня"
   titles:
     index:
       index: "Главная страница"
@@ -46,67 +91,6 @@ ru:
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
-  activerecord:
-    errors:
-      messages:
-        record_invalid: "Запись недействительна"
-      models:
-        user:
-          attributes:
-            password_confirmation:
-              blank: "не может быть пустым"
-              confirmation: "не совпадает с паролем"
-            password:
-              blank: "не может быть пустым"
-            email:
-              unreasonable: "не выглядит как e-mail"
-            login:
-              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
-        article:
-          attributes:
-            body:
-              blank: "не может быть пустым"
-        dream:
-          attributes:
-            body:
-              blank: "не может быть пустым"
-        post:
-          attributes:
-            body:
-              blank: "не может быть пустым"
-    models:
-      article: "статья"
-      dream: "сон"
-      post: "публикация"
-      user: "пользователь"
-      tag: "метка"
-    attributes:
-      article:
-        title: "Название"
-        body:  "Текст"
-      post:
-        title: "Название"
-        body:  "Текст"
-      entry_tag:
-        name: "Название"
-        description: "Интерпретация"
-      dream:
-        title: "Название"
-        body:  "Сюжет"
-        privacy: "Видимость"
-        tags_string: "Метки (ключевые символы)"
-      user:
-        login: "Логин"
-        password: "Пароль"
-        password_confirmation: "Подтверждение пароля"
-        email: "E-mail"
-        allow_mail: "Получать уведомления по электронной почте"
-    properties:
-      post:
-        privacy:
-          none: "Для всех"
-          users: "Для зарегистрированных"
-          owner: "Только для меня"
   session:
     not_logged_in: "Вы вышли"
     logged_in_successfully: "Вы вошли"

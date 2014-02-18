@@ -9,10 +9,19 @@ class Entry < ActiveRecord::Base
   has_many :tags, through: :entry_tags
 
   validates_presence_of :body
+  validates_presence_of :entry_type_id
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
   after_create :increment_entries_counter, :make_url_title
   before_destroy :decrement_entries_counter
+
+  def self.privacy_modes
+    {
+        PRIVACY_NONE  => I18n.t('activerecord.properties.entry.privacy.none'),
+        PRIVACY_USERS => I18n.t('activerecord.properties.entry.privacy.users'),
+        PRIVACY_OWNER => I18n.t('activerecord.properties.entry.privacy.owner')
+    }
+  end
 
   def self.dreams
     where(entry_type: EntryType.dream)
@@ -30,12 +39,9 @@ class Entry < ActiveRecord::Base
     where(entry_type: EntryType.thought)
   end
 
-  def self.privacy_modes
-    {
-        PRIVACY_NONE  => I18n.t('activerecord.properties.post.privacy.none'),
-        PRIVACY_USERS => I18n.t('activerecord.properties.post.privacy.users'),
-        PRIVACY_OWNER => I18n.t('activerecord.properties.post.privacy.owner')
-    }
+  def self.random_dream
+    max_id = public_dreams.maximum(:id)
+    public_dreams.where("id >= #{rand(max_id)}").first
   end
 
   def visible_to?(looker)
@@ -115,6 +121,10 @@ class Entry < ActiveRecord::Base
   end
 
   private
+
+  def self.public_dreams
+    dreams.where(privacy: PRIVACY_NONE)
+  end
 
   def increment_entries_counter
     user.increment! :entries_count unless user.nil?
