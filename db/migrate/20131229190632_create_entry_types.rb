@@ -7,5 +7,7 @@ class CreateEntryTypes < ActiveRecord::Migration
     end
 
     add_index :entry_types, :name, unique: true
+
+    EntryType.create([{name: 'dream'}, {name: 'article'}, {name: 'post'}, {name: 'thought'}])
   end
 end
