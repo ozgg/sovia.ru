@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :entry do
+    entry_type
     body 'Текст записи с разным текстом'
 
     factory :owned_entry do

@@ -12,7 +12,8 @@ class Tag < ActiveRecord::Base
   end
 
   def self.match_or_create_by_name(name, entry_type)
-    self.find_or_create_by(canonical_name: self.canonize(name), entry_type: entry_type)
+    tag = self.find_by(canonical_name: self.canonize(name), entry_type: entry_type)
+    tag || self.create(name: name, entry_type: entry_type)
   end
 
   def self.canonize(input)

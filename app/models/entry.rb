@@ -83,7 +83,7 @@ class Entry < ActiveRecord::Base
   end
 
   def ordered_tags
-    self.tags.order('dreams_count desc, name asc')
+    self.tags.order('entries_count desc, name asc')
   end
 
   def parse_body(input)

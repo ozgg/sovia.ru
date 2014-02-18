@@ -2,8 +2,8 @@ class EntryTag < ActiveRecord::Base
   belongs_to :entry
   belongs_to :tag
   validates_uniqueness_of :entry_id, scope: :tag_id
-  after_create :increment_dreams_count
-  before_destroy :decrement_dreams_count
+  after_create :increment_entries_count
+  before_destroy :decrement_entries_count
 
   def self.find_for_pair(entry, tag)
     find_by(entry: entry, tag: tag)
@@ -11,11 +11,11 @@ class EntryTag < ActiveRecord::Base
 
   private
 
-  def increment_dreams_count
-    tag.increment! :dreams_count if entry.dream?
+  def increment_entries_count
+    tag.increment! :entries_count
   end
 
-  def decrement_dreams_count
-    tag.decrement! :dreams_count if entry.dream?
+  def decrement_entries_count
+    tag.decrement! :entries_count
   end
 end
