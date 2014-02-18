@@ -63,10 +63,7 @@ describe User do
     end
 
     context "when email_confirmed is false" do
-      before(:each) do
-        user.email = 'noreply@example.com'
-        user.mail_confirmed = false
-      end
+      let(:user) { create(:unconfirmed_user) }
 
       it "returns existing code if it exists and isn't activated" do
         code = create(:email_confirmation, user: user)
@@ -89,19 +86,17 @@ describe User do
   end
 
   context "#password_recovery" do
-    let(:user) { create(:user) }
-
     context "when email is not set" do
+      let(:user) { create(:user) }
+
       it "returns nil" do
         user.email = nil
         expect(user.password_recovery).to be_nil
       end
     end
 
-    context "email is set" do
-      before(:each) do
-        user.email = 'noreply@example.com'
-      end
+    context "when email is set" do
+      let(:user) { create(:user, email: 'noreply@example.com') }
 
       it "returns existing code if it exists and isn't activated" do
         code = create(:password_recovery, user: user)
