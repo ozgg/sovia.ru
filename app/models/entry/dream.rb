@@ -8,4 +8,8 @@ class Entry::Dream < Entry
   def self.public_dreams
     where(privacy: PRIVACY_NONE)
   end
+
+  def matching_tag(name)
+    Tag::Dream.match_or_create_by_name(name)
+  end
 end

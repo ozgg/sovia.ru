@@ -96,6 +96,12 @@ class Entry < ActiveRecord::Base
 
   private
 
+  # @abstract, get matching tag by name for this type of entry
+  # @param [string] name tag name
+  def matching_tag(name)
+    raise 'Implement me in children classes'
+  end
+
   def increment_entries_counter
     user.increment! :entries_count unless user.nil?
   end
@@ -111,7 +117,7 @@ class Entry < ActiveRecord::Base
     new_tags = []
     new_tags_string.split(',').each do |new_tag|
       unless new_tag.strip == ''
-        tag = Tag.match_or_create_by_name(new_tag, entry_type)
+        tag = matching_tag(new_tag)
         new_tags << tag unless new_tags.include?(tag)
       end
     end

@@ -2,48 +2,41 @@ require 'spec_helper'
 
 describe Entry::Dream do
   context "#tags_string=" do
-    #let!(:existing_tag) { create(:tag, name: 'Раз') }
-    let(:dream) { create(:entry, type: Entry::Dream) }
+    let!(:existing_tag) { create(:dream_tag, name: 'Раз') }
+    let(:dream) { create(:dream) }
 
     it "adds new tags to entry_tags" do
-      pending
-      expect { entry.tags_string = 'Слово, Дело' }.to change(Tag, :count).by(2)
+      expect { dream.tags_string = 'Слово, Дело' }.to change(Tag, :count).by(2)
     end
 
     it "doesn't add existing tag to entry_tags" do
-      pending
-      expect { entry.tags_string = 'Раз' }.not_to change(Tag, :count)
+      expect { dream.tags_string = 'Раз' }.not_to change(Tag, :count)
     end
 
     it "adds tags to entry" do
-      pending
-      entry.tags_string = 'раз'
-      expect(entry.tags).to include(existing_tag)
+      dream.tags_string = 'раз'
+      expect(dream.tags).to include(existing_tag)
     end
 
     it "ignores repeated tags" do
-      pending
-      entry.tags_string = 'люди, Люди, ЛЮДИ, люди, лЮди'
-      expect(entry.tags.length).to eq(1)
+      dream.tags_string = 'люди, Люди, ЛЮДИ, люди, лЮди'
+      expect(dream.tags.length).to eq(1)
     end
 
     it "ignores empty tags" do
-      pending
-      entry.tags_string = ', ,,   раз,    ,'
-      expect(entry.tags.length).to eq(1)
+      dream.tags_string = ', ,,   раз,    ,'
+      expect(dream.tags.length).to eq(1)
     end
 
     it "destroys link for absent tags" do
-      pending
-      entry.tags << existing_tag
-      entry.tags_string = 'Другое, прочее'
-      expect(entry.tags).not_to include(existing_tag)
+      dream.tags << existing_tag
+      dream.tags_string = 'Другое, прочее'
+      expect(dream.tags).not_to include(existing_tag)
     end
 
     it "changes dreams_count for tag when it is deleted" do
-      pending
-      entry.tags << existing_tag
-      expect { entry.tags_string = 'другое' }.to change(existing_tag, :entries_count).by(-1)
+      dream.tags << existing_tag
+      expect { dream.tags_string = 'другое' }.to change(existing_tag, :entries_count).by(-1)
     end
   end
 
