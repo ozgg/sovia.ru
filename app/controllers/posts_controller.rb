@@ -7,22 +7,22 @@ class PostsController < ApplicationController
   def index
     page   = params[:page] || 1
     @title = "#{t('titles.posts.index')}, #{t('titles.page')} #{page}"
-    @posts = Post.posts.order('id desc').page(page).per(5)
+    @posts = Entry::Post.recent.page(page).per(5)
   end
 
   # get /posts/new
   def new
     @title = t('titles.posts.new')
-    @post  = Post.new
+    @post  = Entry::Post.new
   end
 
   # post /posts
   def create
     @title = t('titles.posts.new')
-    @post  = Post.new(post_parameters.merge(user: @current_user))
+    @post  = Entry::Post.new(post_parameters.merge(user: @current_user))
     if @post.save
       flash[:message] = t('post.added')
-      redirect_to @post
+      redirect_to post_path(@post)
     else
       render action: :new
     end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     @title = t('titles.posts.edit')
     if @post.update(post_parameters)
       flash[:message] = t('post.updated')
-      redirect_to @post
+      redirect_to post_path(@post)
     else
       render action: :edit
     end
@@ -59,8 +59,7 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
-    raise record_not_found unless @post.post?
+    @post = Entry::Post.find(params[:id])
   end
 
   def post_parameters

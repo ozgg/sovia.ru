@@ -25,8 +25,8 @@ class Entry < ActiveRecord::Base
     where(privacy: PRIVACY_NONE)
   end
 
-  def self.recent(page = 1, per_page = 5)
-    order('created_at desc').page(page).per(per_page)
+  def self.recent
+    order('id desc')
   end
 
   def self.recent_entries

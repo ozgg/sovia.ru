@@ -8,11 +8,11 @@ class DreambookController < ApplicationController
   def letter
     page   = params[:page] || 1
     @title = t 'titles.dreambook.letters', letter: params[:letter]
-    @tags  = EntryTag.where(letter: params[:letter]).where.not(description: '').order('name asc').page(page).per(50)
+    @tags  = Tag::Dream.where(letter: params[:letter]).where.not(description: '').order('name asc').page(page).per(50)
   end
 
   def word
-    @tag = EntryTag.match_by_name(params[:word])
+    @tag = Tag::Dream.match_by_name(params[:word])
     raise record_not_found if @tag.nil?
     @title = t 'titles.dreambook.word', word: @tag.name
   end
@@ -28,6 +28,6 @@ class DreambookController < ApplicationController
   private
 
   def collect_letters
-    @letters = EntryTag.uniq.pluck(:letter).sort
+    @letters = Tag::Dream.uniq.pluck(:letter).sort
   end
 end

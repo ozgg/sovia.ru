@@ -1,26 +1,26 @@
 class TagsController < ApplicationController
   before_action :check_user_rights
-  before_action :set_entry_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   # get /tags
   def index
     page = params[:page] || 1
     @title = "#{t('titles.tags.index')}, #{t('titles.page')} #{page}"
-    @tags = EntryTag.order('name asc').page(page).per(10)
+    @tags = Tag.order('name asc').page(page).per(10)
   end
 
   # get /tags/new
   def new
     @title = t('tags.index.new_tag')
-    @tag   = EntryTag.new
+    @tag   = Tag::Dream.new
   end
 
   # post /tags
   def create
-    @tag = EntryTag.new(entry_tag_parameters)
+    @tag = Tag::Dream.new(tag_parameters)
     if @tag.save
       flash[:message] = t('tag.added')
-      redirect_to @tag
+      redirect_to tag_path(@tag)
     else
       render action: :new
     end
@@ -38,9 +38,9 @@ class TagsController < ApplicationController
 
   # patch /tags/:id
   def update
-    if @tag.update(entry_tag_parameters)
+    if @tag.update(tag_parameters)
       flash[:message] = t('tag.updated')
-      redirect_to @tag
+      redirect_to tag_path(@tag)
     else
       render action: :edit
     end
@@ -50,7 +50,7 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     flash[:message] = t('tag.deleted')
-    redirect_to entry_tags_path
+    redirect_to tags_path
   end
 
   private
@@ -59,11 +59,11 @@ class TagsController < ApplicationController
     raise UnauthorizedException if @current_user.nil? || !@current_user.editor?
   end
 
-  def set_entry_tag
-    @tag = EntryTag.find(params[:id])
+  def set_tag
+    @tag = Tag.find(params[:id])
   end
 
-  def entry_tag_parameters
-    params[:entry_tag].permit(:name, :description)
+  def tag_parameters
+    params[:tag].permit(:name, :description)
   end
 end

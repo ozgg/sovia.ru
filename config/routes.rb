@@ -1,7 +1,7 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
-  resources :dreams, only: [:index, :new, :show] do
+  resources :dreams do
     collection do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged
@@ -19,8 +19,9 @@ Sovia::Application.routes.draw do
   end
 
   resources :entries
-  resources :articles, only: [:index, :new, :show]
-  resources :posts, only: [:index, :new, :show]
+  resources :articles
+  resources :posts
+  resources :tags
   resources :users, only: [:new, :create]
 
   controller :sessions do
@@ -44,8 +45,6 @@ Sovia::Application.routes.draw do
       patch '/profile' => :update_profile
     end
   end
-
-  resources :tags
 
   # Obsolete routes
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
