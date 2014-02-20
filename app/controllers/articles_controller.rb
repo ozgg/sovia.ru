@@ -4,23 +4,23 @@ class ArticlesController < ApplicationController
 
   # get /articles
   def index
-    page      = params[:page] || 1
-    @title    = "#{t('titles.articles.index')}, #{t('titles.page')} #{page}"
-    @articles = Article.recent.page(page).per(5)
+    page     = params[:page] || 1
+    @title   = "#{t('titles.articles.index')}, #{t('titles.page')} #{page}"
+    @entries = Entry::Article.recent.page(page).per(5)
   end
 
   # get /articles/new
   def new
-    @title   = t('titles.articles.new')
-    @article = Article.new
+    @title = t('titles.articles.new')
+    @entry = Entry::Article.new
   end
 
   # post /articles
   def create
-    @article = Article.new(article_parameters.merge(user: @current_user))
-    if @article.save
-      flash[:message] = t('article.added')
-      redirect_to article_path(@article)
+    @entry = Entry::Article.new(article_parameters.merge(user: @current_user))
+    if @entry.save
+      flash[:notice] = t('entry.article.created')
+      redirect_to @entry
     else
       render action: 'new'
     end
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 
   # get /articles/:id
   def show
-    @title = "#{t('titles.articles.show')} #{@article.title}"
+    @title = "#{t('titles.articles.show')} #{@entry.title}"
   end
 
   # get /articles/:id/edit
@@ -38,9 +38,9 @@ class ArticlesController < ApplicationController
 
   # patch /articles/:id
   def update
-    if @article.update(article_parameters)
-      flash[:message] = t('article.updated')
-      redirect_to article_path(@article)
+    if @entry.update(article_parameters)
+      flash[:notice] = t('entry.article.updated')
+      redirect_to @entry
     else
       render action: 'edit'
     end
@@ -48,21 +48,20 @@ class ArticlesController < ApplicationController
 
   # delete /articles/:id
   def destroy
-    if @article.destroy
-      flash[:message] = t('article.deleted')
+    if @entry.destroy
+      flash[:notice] = t('entry.article.deleted')
     end
-    redirect_to articles_path
+    redirect_to entry_articles_path
   end
 
   private
 
   def article_parameters
-    params.require(:article).permit(:title, :body)
+    params.require(:entry_article).permit(:title, :body)
   end
 
   def set_article
-    @article = Article.find(params[:id])
-    raise record_not_found unless @article.article?
+    @entry = Entry::Article.find(params[:id])
   end
 
   def check_user_rights

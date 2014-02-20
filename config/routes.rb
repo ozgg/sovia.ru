@@ -19,7 +19,7 @@ Sovia::Application.routes.draw do
   end
 
   resources :entries
-  resources :articles
+  resources :articles, as: :entry_articles
   resources :posts
   resources :tags
   resources :users, only: [:new, :create]

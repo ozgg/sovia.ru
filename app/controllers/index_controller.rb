@@ -2,7 +2,7 @@ class IndexController < ApplicationController
   # get /
   def index
     @title = t('titles.index.index')
-    @posts = Entry.recent_entries
+    @entries = Entry.recent_entries
   end
 
   # Obsolete actions

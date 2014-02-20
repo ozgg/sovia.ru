@@ -180,18 +180,19 @@ ru:
       password_confirmation: "Подтверждение пароля"
     confirm:
       code: "Код из письма"
-  article:
-    added: "Статья добавлена"
-    updated: "Статья обновлена"
-    deleted: "Статья удалена"
-  post:
-    added: "Публикация добавлена"
-    updated: "Публикация обновлена"
-    deleted: "Публикация удалена"
-  dream:
-    added: "Сон добавлен"
-    updated: "Сон обновлён"
-    deleted: "Сон удалён"
+  entry:
+    article:
+      created: "Статья добавлена"
+      updated: "Статья обновлена"
+      deleted: "Статья удалена"
+    post:
+      added: "Публикация добавлена"
+      updated: "Публикация обновлена"
+      deleted: "Публикация удалена"
+    dream:
+      added: "Сон добавлен"
+      updated: "Сон обновлён"
+      deleted: "Сон удалён"
   tag:
     added: "Метка добавлена"
     updated: "Метка обновлена"

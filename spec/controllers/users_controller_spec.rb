@@ -3,12 +3,10 @@ require 'spec_helper'
 describe UsersController do
   shared_examples "logged in bouncer" do
     it "redirects to root path" do
-      pending
       expect(response).to redirect_to(root_path)
     end
 
     it "adds flash message 'Вы уже вошли'" do
-      pending
       expect(flash[:message]).to eq(I18n.t('session.already_logged_in'))
     end
   end
@@ -20,12 +18,10 @@ describe UsersController do
       before(:each) { get :new }
 
       it "assigns new user to @user" do
-        pending
-        expect(assigns[:user]).to be_a(User)
+        expect(assigns[:user]).to be_a_new(User)
       end
 
       it "renders users/new" do
-        pending
         expect(response).to render_template('users/new')
       end
     end
@@ -34,30 +30,25 @@ describe UsersController do
       let(:action) { lambda { post :create, user: attributes_for(:user) } }
 
       it "assigns new user to @user" do
-        pending
         action.call
         expect(assigns[:user]).to be_a(User)
       end
 
       it "creates user in database" do
-        pending
         expect(action).to change(User, :count).by(1)
       end
 
       it "sets user_id in session to new user" do
-        pending
         action.call
         expect(session[:user_id]).to eq(User.last.id)
       end
 
       it "redirects to root path" do
-        pending
         action.call
         expect(response).to redirect_to(root_path)
       end
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
-        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
       end
@@ -67,18 +58,15 @@ describe UsersController do
       let(:action) { lambda { post :create, user: attributes_for(:user), agree: true } }
 
       it "doesn't add user to database" do
-        pending
         expect(action).not_to change(User, :count)
       end
 
       it "redirects to root path" do
-        pending
         action.call
         expect(response).to redirect_to(root_path)
       end
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
-        pending
         action.call
         expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
       end
@@ -88,18 +76,15 @@ describe UsersController do
       let(:action) { lambda { post :create, user: { login: '  ' } } }
 
       it "assigns new user to @user" do
-        pending
         action.call
         expect(assigns[:user]).to be_a(User)
       end
 
       it "doesn't create user in database" do
-        pending
         expect(action).not_to change(User, :count)
       end
 
       it "renders users/new" do
-        pending
         action.call
         expect(response).to render_template('users/new')
       end
