@@ -39,7 +39,7 @@ FactoryGirl.define do
     end
 
     factory :dream, class: Entry::Dream do
-      factory :owner_dream do
+      factory :owned_dream do
         user
 
         factory :protected_dream do

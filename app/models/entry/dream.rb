@@ -1,12 +1,8 @@
 class Entry::Dream < Entry
 
   def self.random_dream
-    max_id = public_dreams.maximum(:id)
-    public_dreams.where("id >= #{rand(max_id)}").first
-  end
-
-  def self.public_dreams
-    where(privacy: PRIVACY_NONE)
+    max_id = public_entries.maximum(:id)
+    public_entries.where("id >= #{rand(max_id)}").first
   end
 
   def matching_tag(name)

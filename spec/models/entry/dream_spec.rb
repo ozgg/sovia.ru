@@ -41,53 +41,46 @@ describe Entry::Dream do
   end
 
   context "#tags_string" do
-    let(:entry) { create(:entry) }
+    let(:dream) { create(:dream) }
 
     it "returns empty string when entry has no tags" do
-      pending
-      expect(entry.tags_string).to eq('')
+      expect(dream.tags_string).to eq('')
     end
 
     it "returns comma-separated tag names when entry has tags" do
-      pending
-      create(:tag, name: 'второй символ', entry_type: entry.entry_type)
-      create(:tag, name: 'Первый символ', entry_type: entry.entry_type)
-      entry.tags = Tag.last(2)
-      expect(entry.tags_string).to eq('Первый символ, второй символ')
+      create(:dream_tag, name: 'второй символ')
+      create(:dream_tag, name: 'Первый символ')
+      dream.tags = Tag::Dream.last(2)
+      expect(dream.tags_string).to eq('Первый символ, второй символ')
     end
   end
 
   context "#random_dream" do
     it "selects random public dream" do
-      pending
-      entry_type = create(:entry_type_dream)
-      create(:entry)
-      create(:entry, entry_type: entry_type)
-      create(:protected_entry, entry_type: create(:entry_type_article))
-      create(:entry, entry_type: entry_type)
-      create(:private_entry, entry_type: entry_type)
+      create(:article)
+      create(:thought)
+      create(:dream)
+      create(:owned_dream)
+      create(:protected_dream)
+      create(:private_dream)
 
-      entry = Entry.random_dream
-      expect(entry).to be_dream
-      expect(entry.privacy).to eq(Entry::PRIVACY_NONE)
+      dream = Entry::Dream.random_dream
+      expect(dream.privacy).to eq(Entry::PRIVACY_NONE)
     end
   end
 
   context "when destroyed" do
     it "decrements entries_count for used tags" do
-      pending
-      tag   = create(:tag)
-      entry = create(:entry, entry_type: tag.entry_type)
-      entry.tags << tag
-      expect { entry.destroy }.to change(tag, :entries_count).by(-1)
+      tag   = create(:dream_tag)
+      dream = create(:dream)
+      dream.tags << tag
+      expect { dream.destroy }.to change(tag, :entries_count).by(-1)
     end
 
     it "decrements entries_count for user" do
-      pending
       user  = create(:user)
-      entry = create(:owned_entry, user: user)
-      expect { entry.destroy }.to change(user, :entries_count).by(-1)
+      dream = create(:dream, user: user)
+      expect { dream.destroy }.to change(user, :entries_count).by(-1)
     end
   end
-
 end
