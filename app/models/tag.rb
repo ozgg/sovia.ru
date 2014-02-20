@@ -1,19 +1,18 @@
 class Tag < ActiveRecord::Base
-  belongs_to :entry_type
   has_many :entry_tags
   has_many :entries, through: :entry_tags
 
-  validates_presence_of :name
-  validates_uniqueness_of :canonical_name
+  validates_presence_of :name, :type
+  validates_uniqueness_of :canonical_name, scope: [:type]
   before_validation :normalize_name, :create_canonical_name, :create_letter
 
-  def self.match_by_name(name, entry_type)
-    self.find_by(canonical_name: self.canonize(name), entry_type: entry_type)
+  def self.match_by_name(name)
+    find_by(canonical_name: self.canonize(name))
   end
 
-  def self.match_or_create_by_name(name, entry_type)
-    tag = self.find_by(canonical_name: self.canonize(name), entry_type: entry_type)
-    tag || self.create(name: name, entry_type: entry_type)
+  def self.match_or_create_by_name(name)
+    tag = find_by(canonical_name: self.canonize(name))
+    tag || create(name: name)
   end
 
   def self.canonize(input)
