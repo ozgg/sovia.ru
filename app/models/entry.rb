@@ -25,6 +25,10 @@ class Entry < ActiveRecord::Base
     where(privacy: PRIVACY_NONE)
   end
 
+  def self.recent(page = 1, per_page = 5)
+    order('created_at desc').page(page).per(per_page)
+  end
+
   def self.recent_entries
     posts = Entry::Dream.public_entries.last(2)
     posts += Entry::Article.last(1)
