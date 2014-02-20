@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Entry do
   context "new entry" do
-    let(:entry) { Entry.new }
+    let(:entry) { build(:entry) }
 
     it "is invalid with blank body" do
       entry.body = ' '
@@ -93,94 +93,26 @@ describe Entry do
     end
   end
 
-  context "#tags_string=" do
-    let!(:existing_tag) { create(:tag, name: 'Раз') }
-    let(:entry) { create(:entry, entry_type: existing_tag.entry_type) }
+  context "#recent_entries" do
+    let!(:dream) { create(:dream) }
+    let!(:article) { create(:article)}
+    let!(:post) { create(:post)}
+    let!(:thought) { create(:thought)}
 
-    it "adds new tags to entry_tags" do
-      expect { entry.tags_string = 'Слово, Дело' }.to change(Tag, :count).by(2)
+    it "selects public article" do
+      expect(Entry.recent_entries).to include(article)
     end
 
-    it "doesn't add existing tag to entry_tags" do
-      expect { entry.tags_string = 'Раз' }.not_to change(Tag, :count)
+    it "selects public dream" do
+      expect(Entry.recent_entries).to include(dream)
     end
 
-    it "adds tags to entry" do
-      entry.tags_string = 'раз'
-      expect(entry.tags).to include(existing_tag)
+    it "selects public post" do
+      expect(Entry.recent_entries).to include(post)
     end
 
-    it "ignores repeated tags" do
-      entry.tags_string = 'люди, Люди, ЛЮДИ, люди, лЮди'
-      expect(entry.tags.length).to eq(1)
-    end
-
-    it "ignores empty tags" do
-      entry.tags_string = ', ,,   раз,    ,'
-      expect(entry.tags.length).to eq(1)
-    end
-
-    it "destroys link for absent tags" do
-      entry.tags << existing_tag
-      entry.tags_string = 'Другое, прочее'
-      expect(entry.tags).not_to include(existing_tag)
-    end
-
-    it "changes dreams_count for tag when it is deleted" do
-      entry.tags << existing_tag
-      expect { entry.tags_string = 'другое' }.to change(existing_tag, :entries_count).by(-1)
-    end
-  end
-
-  context "#tags_string" do
-    let(:entry) { create(:entry) }
-
-    it "returns empty string when entry has no tags" do
-      expect(entry.tags_string).to eq('')
-    end
-
-    it "returns comma-separated tag names when entry has tags" do
-      create(:tag, name: 'второй символ', entry_type: entry.entry_type)
-      create(:tag, name: 'Первый символ', entry_type: entry.entry_type)
-      entry.tags = Tag.last(2)
-      expect(entry.tags_string).to eq('Первый символ, второй символ')
-    end
-  end
-
-  context "#random_dream" do
-    it "selects random public dream" do
-      entry_type = create(:entry_type_dream)
-      create(:entry)
-      create(:entry, entry_type: entry_type)
-      create(:protected_entry, entry_type: create(:entry_type_article))
-      create(:entry, entry_type: entry_type)
-      create(:private_entry, entry_type: entry_type)
-
-      entry = Entry.random_dream
-      expect(entry).to be_dream
-      expect(entry.privacy).to eq(Entry::PRIVACY_NONE)
-    end
-  end
-
-  context "#recent_posts" do
-    it "selects public article"
-    it "selects public dream"
-    it "selects public post"
-    it "selects public thought"
-  end
-
-  context "when destroyed" do
-    it "decrements entries_count for used tags" do
-      tag   = create(:tag)
-      entry = create(:entry, entry_type: tag.entry_type)
-      entry.tags << tag
-      expect { entry.destroy }.to change(tag, :entries_count).by(-1)
-    end
-
-    it "decrement entries_count for user" do
-      user  = create(:user)
-      entry = create(:owned_entry, user: user)
-      expect { entry.destroy }.to change(user, :entries_count).by(-1)
+    it "selects public thought" do
+      expect(Entry.recent_entries).to include(thought)
     end
   end
 end

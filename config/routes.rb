@@ -1,7 +1,7 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
-  resources :dreams, only: [:new, :show] do
+  resources :dreams, only: [:index, :new, :show] do
     collection do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged
@@ -19,8 +19,8 @@ Sovia::Application.routes.draw do
   end
 
   resources :entries
-  resources :articles, only: [:new, :show]
-  resources :posts, only: [:new, :show]
+  resources :articles, only: [:index, :new, :show]
+  resources :posts, only: [:index, :new, :show]
   resources :users, only: [:new, :create]
 
   controller :sessions do

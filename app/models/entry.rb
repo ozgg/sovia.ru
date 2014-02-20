@@ -4,12 +4,10 @@ class Entry < ActiveRecord::Base
   PRIVACY_OWNER = 255
 
   belongs_to :user
-  belongs_to :entry_type
   has_many :entry_tags
   has_many :tags, through: :entry_tags
 
-  validates_presence_of :body
-  validates_presence_of :entry_type_id
+  validates_presence_of :body, :type
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
   after_create :increment_entries_counter, :make_url_title
@@ -23,25 +21,17 @@ class Entry < ActiveRecord::Base
     }
   end
 
-  def self.dreams
-    where(entry_type: EntryType.dream)
+  def self.public_entries
+    where(privacy: PRIVACY_NONE)
   end
 
-  def self.articles
-    where(entry_type: EntryType.article)
-  end
+  def self.recent_entries
+    posts = Entry::Dream.public_entries.last(2)
+    posts += Entry::Article.last(1)
+    posts += Entry::Post.public_entries.last(1)
+    posts += Entry::Thought.public_entries.last(1)
 
-  def self.posts
-    where(entry_type: EntryType.post)
-  end
-
-  def self.thoughts
-    where(entry_type: EntryType.thought)
-  end
-
-  def self.random_dream
-    max_id = public_dreams.maximum(:id)
-    public_dreams.where("id >= #{rand(max_id)}").first
+    posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
   def visible_to?(looker)
@@ -100,31 +90,11 @@ class Entry < ActiveRecord::Base
     parse_body body.gsub(/(\r?\n)+/, "\n").split("\n")[0..1].join("\n")
   end
 
-  def dream?
-    entry_type_id === EntryType.dream.id
-  end
-
-  def article?
-    entry_type_id === EntryType.article.id
-  end
-
-  def post?
-    entry_type_id === EntryType.post.id
-  end
-
-  def thought?
-    entry_type_id === EntryType.thought.id
-  end
-
   def passages_count
     body.gsub(/(\r?\n)+/, "\n").count "\n"
   end
 
   private
-
-  def self.public_dreams
-    dreams.where(privacy: PRIVACY_NONE)
-  end
 
   def increment_entries_counter
     user.increment! :entries_count unless user.nil?
