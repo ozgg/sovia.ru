@@ -18,4 +18,11 @@ class ApplicationController < ActionController::Base
   def record_not_found
     ActiveRecord::RecordNotFound
   end
+
+  def allow_authorized_only
+    unless @current_user
+      flash[:notice] = t('please_log_in')
+      redirect_to login_path
+    end
+  end
 end

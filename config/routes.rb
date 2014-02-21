@@ -5,7 +5,7 @@ Sovia::Application.routes.draw do
     collection do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged
-      get 'of/:login' => :dreams_of_user, as: :user_dreams
+      get 'of/:login' => :dreams_of_user, as: :user
     end
   end
 
@@ -24,6 +24,14 @@ Sovia::Application.routes.draw do
   resources :tags
   resources :users, only: [:new, :create]
 
+  namespace :my do
+    get '/' => 'index#index'
+
+    resource :profile, only: [:show, :edit, :update]
+    resource :confirmation, :recovery, only: [:show, :create, :update]
+    resources :dreams, only: [:index]
+  end
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -34,15 +42,6 @@ Sovia::Application.routes.draw do
     controller :statistics do
       get '/' => :index, as: :statistics
       get '/symbols' => :symbols, as: :statistics_symbols
-    end
-  end
-
-  scope '/my' do
-    controller :my do
-      get '/' => :index, as: :my
-      get '/dreams' => :dreams, as: :my_dreams
-      get '/profile' => :profile, as: :my_profile
-      patch '/profile' => :update_profile
     end
   end
 

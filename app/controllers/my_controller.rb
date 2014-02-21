@@ -3,7 +3,6 @@ class MyController < ApplicationController
 
   # get /my
   def index
-    @title = t('titles.my.index')
   end
 
   # get /my/dreams
@@ -30,12 +29,6 @@ class MyController < ApplicationController
 
   private
 
-  def allow_authorized_only
-    unless @current_user
-      flash[:message] = t('please_log_in')
-      redirect_to login_path
-    end
-  end
 
   def update_usual_data
     @current_user.allow_mail = !params[:profile][:allow_mail].blank?
