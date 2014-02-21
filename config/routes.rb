@@ -1,7 +1,7 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
-  resources :dreams do
+  resources :dreams, as: :entry_dreams do
     collection do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged

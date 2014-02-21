@@ -82,14 +82,14 @@ describe PostsController do
       end
 
       it "creates a new post" do
-        expect(Entry::Post.last).to be_persisted
+        expect(assigns[:entry]).to be_persisted
       end
 
       it "adds flash notice #{I18n.t('entry.post.created')}" do
         expect(flash[:notice]).to eq(I18n.t('entry.post.created'))
       end
 
-      it "redirects to created entry" do
+      it "redirects to created post" do
         expect(response).to redirect_to(Entry::Post.last)
       end
     end
@@ -97,7 +97,7 @@ describe PostsController do
     context "post create with invalid parameters" do
       before(:each) { post :create, entry_post: { title: ' ', body: ' ' } }
 
-      it "assigns a new entry to @entry" do
+      it "assigns a new post to @entry" do
         expect(assigns[:entry]).to be_an(Entry::Post)
       end
 

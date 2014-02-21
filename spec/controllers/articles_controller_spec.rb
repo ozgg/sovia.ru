@@ -90,7 +90,7 @@ describe ArticlesController do
       end
 
       it "creates a new article" do
-        expect(Entry::Article.last).to be_persisted
+        expect(assigns[:entry]).to be_persisted
       end
 
       it "adds flash notice #{I18n.t('entry.article.created')}" do
