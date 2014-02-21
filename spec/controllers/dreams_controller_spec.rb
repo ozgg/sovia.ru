@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe DreamsController do
+  let(:tag) { create(:dream_tag, name: 'Волшебство') }
   let(:owner) { create(:user) }
-  let(:user)  { create(:user) }
-  let(:entry) { create(:dream, user: owner, body: 'Эталон') }
+  let(:user) { create(:user) }
+  let(:entry) { create(:dream, user: owner, body: 'Эталон', tags: [tag]) }
 
   shared_examples "dream assigner" do
     it "assigns dream to @entry" do
@@ -34,7 +35,7 @@ describe DreamsController do
   shared_examples "allowed showing" do
     context "get index" do
       let!(:private_entry) { create(:private_dream) }
-      
+
       before(:each) { get :index }
 
       it "assigns dreams list to @entries" do
@@ -176,7 +177,7 @@ describe DreamsController do
     it_should_behave_like "restricted management"
 
     context "when dream is protected" do
-      let!(:entry) { create(:protected_dream, user: owner)}
+      let!(:entry) { create(:protected_dream, user: owner) }
 
       it_should_behave_like "restricted showing"
       it_should_behave_like "restricted management"
@@ -190,7 +191,7 @@ describe DreamsController do
     end
 
     context "when dream is private" do
-      let!(:entry) { create(:private_dream, user: owner)}
+      let!(:entry) { create(:private_dream, user: owner) }
 
       it_should_behave_like "restricted showing"
       it_should_behave_like "restricted management"
@@ -205,14 +206,14 @@ describe DreamsController do
     it_should_behave_like "allowed creating"
 
     context "when dream is protected" do
-      let(:entry) { create(:protected_dream, user: owner)}
+      let(:entry) { create(:protected_dream, user: owner) }
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "restricted management"
     end
 
     context "when dream is private" do
-      let!(:entry) { create(:private_dream, user: owner)}
+      let!(:entry) { create(:private_dream, user: owner) }
 
       it_should_behave_like "restricted showing"
       it_should_behave_like "restricted management"
@@ -227,14 +228,14 @@ describe DreamsController do
     it_should_behave_like "allowed management"
 
     context "when dream is protected" do
-      let(:entry) { create(:protected_dream, user: owner, body: 'Эталон')}
+      let(:entry) { create(:protected_dream, user: owner, body: 'Эталон') }
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "allowed management"
     end
 
     context "when dream is private" do
-      let(:entry) { create(:private_dream, user: owner, body: 'Эталон')}
+      let(:entry) { create(:private_dream, user: owner, body: 'Эталон') }
 
       context "get show" do
         before(:each) { get :show, id: entry }
@@ -258,14 +259,14 @@ describe DreamsController do
     it_should_behave_like "allowed management"
 
     context "when dream is protected" do
-      let(:entry) { create(:protected_dream, user: owner, body: 'Эталон')}
+      let(:entry) { create(:protected_dream, user: owner, body: 'Эталон') }
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "allowed management"
     end
 
     context "when dream is private" do
-      let!(:entry) { create(:private_dream, user: owner)}
+      let!(:entry) { create(:private_dream, user: owner) }
 
       it_should_behave_like "restricted showing"
       it_should_behave_like "restricted management"
@@ -339,6 +340,46 @@ describe DreamsController do
   end
 
   context "getting tagged dreams" do
-    
+    let!(:other_dream) { create(:dream, tags: [create(:dream_tag)]) }
+    let!(:protected_dream) { create(:protected_dream, tags: [tag]) }
+    let!(:private_dream) { create(:private_dream, tags: [tag]) }
+
+    shared_examples "visible public tagged dreams" do
+      before(:each) { get :tagged, tag: tag.name }
+
+      it "includes tagged dream to @entries" do
+        expect(assigns[:entries]).to include(entry)
+      end
+
+      it "doesn't include another dream to @entries" do
+        expect(assigns[:entries]).not_to include(other_dream)
+      end
+
+      it "doesn't include private dream to @entries" do
+        expect(assigns[:entries]).not_to include(private_dream)
+      end
+    end
+
+    context "anonymous user" do
+      before(:each) { session[:user_id] = nil }
+
+      it_should_behave_like "visible public tagged dreams"
+
+      it "doesn't include protected dream to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).not_to include(protected_dream)
+      end
+    end
+
+    context "logged in user" do
+      before(:each) { session[:user_id] = user.id }
+
+      it_should_behave_like "visible public tagged dreams"
+
+      it "includes protected dream to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).to include(protected_dream)
+      end
+    end
   end
 end
