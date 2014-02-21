@@ -1,6 +1,6 @@
 <header>
   <h1><%= t('.header') %></h1>
-  <% if @entry.editable_by? @current_user %>
+  <% if @entry.editable_by? current_user %>
   <nav>
     <ul>
       <li><%= link_to t('.edit'), edit_entry_dream_path(@entry) %></li>

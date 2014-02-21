@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   # post /users/confirm
   def send_confirmation
-    code = @current_user.email_confirmation
+    code = current_user.email_confirmation
     unless code.nil?
       CodeSender.email(code).deliver
       flash[:notice] = t('email_confirmation_sent')
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   private
 
   def bounce_authorized
-    unless @current_user.nil?
+    unless current_user.nil?
       flash[:notice] = t('session.already_logged_in')
       redirect_to root_path
     end

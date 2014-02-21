@@ -1,6 +1,6 @@
 <header>
   <h1><%= t('.post') %></h1>
-  <% if @entry.editable_by? @current_user %>
+  <% if @entry.editable_by? current_user %>
   <nav>
     <ul>
       <li><%= link_to t('.edit'), edit_entry_post_path(@entry) %></li>

@@ -7,20 +7,20 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_current_user
+  helper_method :current_user
+
+  def current_user
+    @current_user ||= User.find_by_id(session[:user_id])
+  end
 
   protected
-
-  def set_current_user
-    @current_user = User.find(session[:user_id]) unless session[:user_id].nil?
-  end
 
   def record_not_found
     ActiveRecord::RecordNotFound
   end
 
   def allow_authorized_only
-    unless @current_user
+    unless current_user
       flash[:notice] = t('please_log_in')
       redirect_to login_path
     end

@@ -56,7 +56,7 @@ class TagsController < ApplicationController
   private
 
   def check_user_rights
-    raise UnauthorizedException if @current_user.nil? || !@current_user.editor?
+    raise UnauthorizedException if current_user.nil? || !current_user.editor?
   end
 
   def set_tag

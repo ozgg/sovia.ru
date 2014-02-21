@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   # post /posts
   def create
     @title = t('titles.posts.new')
-    @entry = Entry::Post.new(post_parameters.merge(user: @current_user))
+    @entry = Entry::Post.new(post_parameters.merge(user: current_user))
     if @entry.save
       flash[:notice] = t('entry.post.created')
       redirect_to @entry
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
 
   def set_post
     @entry = Entry::Post.find(params[:id])
-    raise UnauthorizedException unless @entry.visible_to? @current_user
+    raise UnauthorizedException unless @entry.visible_to? current_user
   end
 
   def post_parameters
@@ -68,15 +68,15 @@ class PostsController < ApplicationController
   end
 
   def restrict_anonymous_access
-    raise UnauthorizedException if @current_user.nil?
+    raise UnauthorizedException if current_user.nil?
   end
 
   def restrict_editor_access
-    raise UnauthorizedException unless @entry.editable_by? @current_user
+    raise UnauthorizedException unless @entry.editable_by? current_user
   end
 
   def allowed_posts
-    maximal_privacy = @current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+    maximal_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
 
     Entry::Post.recent.where("privacy <= #{maximal_privacy}")
   end

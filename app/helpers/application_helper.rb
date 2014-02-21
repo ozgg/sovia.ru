@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def user_link(user)
     if user.nil?
       t('anonymous')
@@ -17,8 +18,7 @@ module ApplicationHelper
     end
   end
 
-
   def link_to_dream(dream)
-    link_to dream.parsed_title, dream_path(dream)
+    link_to dream.parsed_title, entry_dream_path(dream)
   end
 end

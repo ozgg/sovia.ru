@@ -22,7 +22,7 @@ class DreamsController < ApplicationController
 
   # post /dreams
   def create
-    @entry = Entry::Dream.new(dream_parameters.merge(user: @current_user))
+    @entry = Entry::Dream.new(dream_parameters.merge(user: current_user))
     if @entry.save
       flash[:notice] = t('entry.dream.created')
       redirect_to @entry
@@ -78,7 +78,7 @@ class DreamsController < ApplicationController
 
   def set_dream
     @entry = Entry::Dream.find(params[:id])
-    raise UnauthorizedException unless @entry.visible_to? @current_user
+    raise UnauthorizedException unless @entry.visible_to? current_user
   end
 
   def dream_parameters
@@ -86,11 +86,11 @@ class DreamsController < ApplicationController
   end
 
   def restrict_editor_access
-    raise UnauthorizedException unless @entry.editable_by? @current_user
+    raise UnauthorizedException unless @entry.editable_by? current_user
   end
 
   def allowed_dreams
-    maximal_privacy = @current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+    maximal_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
 
     Entry::Dream.recent.where("privacy <= #{maximal_privacy}")
   end

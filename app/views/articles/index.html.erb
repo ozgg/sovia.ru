@@ -1,6 +1,6 @@
 <header>
   <h1><%= @title %></h1>
-  <% if @current_user && @current_user.editor? %>
+  <% if current_user && current_user.editor? %>
       <nav>
         <ul>
           <li><%= link_to t('.new_article'), new_entry_article_path %></li>

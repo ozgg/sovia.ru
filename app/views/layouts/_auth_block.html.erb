@@ -1,5 +1,5 @@
 <aside>
-  <% if @current_user.nil? %>
+  <% if current_user.nil? %>
       <%= form_tag login_path do %>
           <fieldset>
             <legend><%= t('.authorize') %></legend>
@@ -14,7 +14,7 @@
           </fieldset>
       <% end %>
   <% else %>
-      <%= @current_user.login %><br />
+      <%= current_user.login %><br />
       <nav>
         <ul>
           <li><%= link_to t('.private'), my_path %></li>

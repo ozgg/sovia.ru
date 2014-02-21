@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   # post /articles
   def create
-    @entry = Entry::Article.new(article_parameters.merge(user: @current_user))
+    @entry = Entry::Article.new(article_parameters.merge(user: current_user))
     if @entry.save
       flash[:notice] = t('entry.article.created')
       redirect_to @entry
@@ -65,6 +65,6 @@ class ArticlesController < ApplicationController
   end
 
   def check_user_rights
-    raise UnauthorizedException if @current_user.nil? || !@current_user.editor?
+    raise UnauthorizedException if current_user.nil? || !current_user.editor?
   end
 end
