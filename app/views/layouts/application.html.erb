@@ -22,8 +22,8 @@
 </header>
 
 <section id="main">
-  <% if flash[:message] %>
-  <div class="message"><%= flash[:message] %></div>
+  <% if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
   <% end %>
   <%= yield %>
 </section>

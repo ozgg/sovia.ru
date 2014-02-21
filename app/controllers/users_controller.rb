@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def send_recovery
     user = User.find_by(email: params[:email].to_s.downcase)
     if user.nil?
-      flash[:message] = t('email_not_found')
+      flash[:notice] = t('email_not_found')
       redirect_to recover_form_users_path
     else
       send_recovery_code user
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     code = @current_user.email_confirmation
     unless code.nil?
       CodeSender.email(code).deliver
-      flash[:message] = t('email_confirmation_sent')
+      flash[:notice] = t('email_confirmation_sent')
     end
 
     redirect_to confirm_users_path
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   def code
     given_code = Code.find_by(body: params[:code], activated: false)
     if given_code.nil?
-      flash[:message] = t('user.code_invalid')
+      flash[:notice] = t('user.code_invalid')
       render action: params.has_key?(:user) ? :recover : :confirm
     else
       if given_code.password_recovery?
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
 
   def bounce_authorized
     unless @current_user.nil?
-      flash[:message] = t('session.already_logged_in')
+      flash[:notice] = t('session.already_logged_in')
       redirect_to root_path
     end
   end
@@ -94,27 +94,27 @@ class UsersController < ApplicationController
   end
 
   def after_registration
-    flash[:message] = t('users.create.successfully')
+    flash[:notice] = t('users.create.successfully')
     redirect_to root_path
   end
 
   def send_recovery_code(user)
     code = user.password_recovery
     if code.nil?
-      flash[:message] = t('recovery_code_failure')
+      flash[:notice] = t('recovery_code_failure')
     else
       CodeSender.password(code).deliver
-      flash[:message] = t('recovery_code_sent')
+      flash[:notice] = t('recovery_code_sent')
     end
   end
 
   def recover_password(code)
     if code.user.update(recovered_password_parameters)
-      flash[:message] = t('user.password_changed')
+      flash[:notice] = t('user.password_changed')
       code.update(activated: true)
       redirect_to root_path
     else
-      flash[:message] = t('user.recovery_failed')
+      flash[:notice] = t('user.recovery_failed')
       render action: :recover
     end
   end
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
   def confirm_email(code)
     code.user.update(mail_confirmed: true)
     code.update(activated: true)
-    flash[:message] = t('user.email_confirmed')
+    flash[:notice] = t('user.email_confirmed')
     redirect_to root_path
   end
 

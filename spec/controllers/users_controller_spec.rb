@@ -7,7 +7,7 @@ describe UsersController do
     end
 
     it "adds flash message 'Вы уже вошли'" do
-      expect(flash[:message]).to eq(I18n.t('session.already_logged_in'))
+      expect(flash[:notice]).to eq(I18n.t('session.already_logged_in'))
     end
   end
 
@@ -50,7 +50,7 @@ describe UsersController do
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
         action.call
-        expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
+        expect(flash[:notice]).to eq(I18n.t('users.create.successfully'))
       end
     end
 
@@ -68,7 +68,7 @@ describe UsersController do
 
       it "adds flash message 'Вы зарегистрировались и вошли'" do
         action.call
-        expect(flash[:message]).to eq(I18n.t('users.create.successfully'))
+        expect(flash[:notice]).to eq(I18n.t('users.create.successfully'))
       end
     end
 
@@ -124,7 +124,7 @@ describe UsersController do
     #  it "adds flash message #{I18n.t('recovery_code_sent')}" do
     #    pending
     #    post :send_recovery, email: user.email
-    #    expect(flash[:message]).to eq(I18n.t('recovery_code_sent'))
+    #    expect(flash[:notice]).to eq(I18n.t('recovery_code_sent'))
     #  end
     #end
 
@@ -133,7 +133,7 @@ describe UsersController do
     #
     #  it "adds flash message #{I18n.t('email_not_found')}" do
     #    pending
-    #    expect(flash[:message]).to eq(I18n.t('email_not_found'))
+    #    expect(flash[:notice]).to eq(I18n.t('email_not_found'))
     #  end
     #
     #  it "redirects to password recovery form" do
@@ -208,7 +208,7 @@ describe UsersController do
     #  it "adds flash message #{I18n.t('email_confirmation_sent')}" do
     #    pending
     #    post :send_confirmation
-    #    expect(flash[:message]).to eq(I18n.t('email_confirmation_sent'))
+    #    expect(flash[:notice]).to eq(I18n.t('email_confirmation_sent'))
     #  end
     #
     #  it "redirects to confirm action" do
@@ -228,7 +228,7 @@ describe UsersController do
   #
   #    it "adds flash message #{I18n.t('user.code_invalid')}" do
   #      pending
-  #      expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
+  #      expect(flash[:notice]).to eq(I18n.t('user.code_invalid'))
   #    end
   #  end
   #
@@ -245,7 +245,7 @@ describe UsersController do
   #
   #    it "adds flash message #{I18n.t('user.email_confirmed')}" do
   #      pending
-  #      expect(flash[:message]).to eq(I18n.t('user.email_confirmed'))
+  #      expect(flash[:notice]).to eq(I18n.t('user.email_confirmed'))
   #    end
   #
   #    it "redirects to root path" do
@@ -285,7 +285,7 @@ describe UsersController do
   #
   #    it "adds flash message #{I18n.t('user.code_invalid')}" do
   #      pending
-  #      expect(flash[:message]).to eq(I18n.t('user.code_invalid'))
+  #      expect(flash[:notice]).to eq(I18n.t('user.code_invalid'))
   #    end
   #  end
   #
@@ -309,7 +309,7 @@ describe UsersController do
   #
   #    it "adds flash message #{I18n.t('user.password_changed')}" do
   #      pending
-  #      expect(flash[:message]).to eq(I18n.t('user.password_changed'))
+  #      expect(flash[:notice]).to eq(I18n.t('user.password_changed'))
   #    end
   #
   #    it "redirects to root path" do
@@ -348,7 +348,7 @@ describe UsersController do
   #
   #    it "adds flash message #{I18n.t('user.recovery_failed')}" do
   #      pending
-  #      expect(flash[:message]).to eq(I18n.t('user.recovery_failed'))
+  #      expect(flash[:notice]).to eq(I18n.t('user.recovery_failed'))
   #    end
   #
   #    it "leaves digest intact" do

@@ -21,7 +21,7 @@ describe SessionsController do
 
       it 'adds flash message "Вы вышли"' do
         delete :destroy
-        expect(flash[:message]).to eq(I18n.t('session.not_logged_in'))
+        expect(flash[:notice]).to eq(I18n.t('session.not_logged_in'))
       end
     end
   end
@@ -38,7 +38,7 @@ describe SessionsController do
     end
 
     it 'adds flash message "Вы вошли"' do
-      expect(flash[:message]).to eq(I18n.t('session.logged_in_successfully'))
+      expect(flash[:notice]).to eq(I18n.t('session.logged_in_successfully'))
     end
   end
 
@@ -50,7 +50,7 @@ describe SessionsController do
     end
 
     it 'adds flash message "Неправильный пароль"' do
-      expect(flash[:message]).to eq(I18n.t('session.invalid_credentials'))
+      expect(flash[:notice]).to eq(I18n.t('session.invalid_credentials'))
     end
   end
 
@@ -67,7 +67,7 @@ describe SessionsController do
       end
 
       it 'adds flash message "Вы уже вошли"' do
-        expect(flash[:message]).to eq(I18n.t('session.already_logged_in'))
+        expect(flash[:notice]).to eq(I18n.t('session.already_logged_in'))
       end
     end
 
@@ -79,7 +79,7 @@ describe SessionsController do
       end
 
       it 'adds flash message "Вы уже вошли"' do
-        expect(flash[:message]).to eq(I18n.t('session.already_logged_in'))
+        expect(flash[:notice]).to eq(I18n.t('session.already_logged_in'))
       end
     end
 
@@ -95,7 +95,7 @@ describe SessionsController do
       end
 
       it 'adds flash message "Вы вышли"' do
-        expect(flash[:message]).to eq(I18n.t('session.logged_out'))
+        expect(flash[:notice]).to eq(I18n.t('session.logged_out'))
       end
     end
   end

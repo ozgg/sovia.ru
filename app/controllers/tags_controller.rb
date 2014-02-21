@@ -19,7 +19,7 @@ class TagsController < ApplicationController
   def create
     @tag = Tag::Dream.new(tag_parameters)
     if @tag.save
-      flash[:message] = t('tag.added')
+      flash[:notice] = t('tag.added')
       redirect_to tag_path(@tag)
     else
       render action: :new
@@ -39,7 +39,7 @@ class TagsController < ApplicationController
   # patch /tags/:id
   def update
     if @tag.update(tag_parameters)
-      flash[:message] = t('tag.updated')
+      flash[:notice] = t('tag.updated')
       redirect_to tag_path(@tag)
     else
       render action: :edit
@@ -49,7 +49,7 @@ class TagsController < ApplicationController
   # delete /tags/:id
   def destroy
     @tag.destroy
-    flash[:message] = t('tag.deleted')
+    flash[:notice] = t('tag.deleted')
     redirect_to tags_path
   end
 

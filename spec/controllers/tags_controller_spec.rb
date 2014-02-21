@@ -95,7 +95,7 @@ describe TagsController do
 
       it "adds flash message #{I18n.t('tag.added')}" do
         action.call
-        expect(flash[:message]).to eq(I18n.t('tag.added'))
+        expect(flash[:notice]).to eq(I18n.t('tag.added'))
       end
     end
 
@@ -146,7 +146,7 @@ describe TagsController do
       end
 
       it "adds flash message #{I18n.t('tag.updated')}" do
-        expect(flash[:message]).to eq(I18n.t('tag.updated'))
+        expect(flash[:notice]).to eq(I18n.t('tag.updated'))
       end
     end
 
@@ -180,7 +180,7 @@ describe TagsController do
 
       it "adds flash message #{I18n.t('tag.deleted')}" do
         action.call
-        expect(flash[:message]).to eq(I18n.t('tag.deleted'))
+        expect(flash[:notice]).to eq(I18n.t('tag.deleted'))
       end
     end
   end
