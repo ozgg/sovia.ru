@@ -7,22 +7,22 @@ class PostsController < ApplicationController
   def index
     page   = params[:page] || 1
     @title = "#{t('titles.posts.index')}, #{t('titles.page')} #{page}"
-    @posts = Entry::Post.recent.page(page).per(5)
+    @entries = allowed_posts.page(page).per(5)
   end
 
   # get /posts/new
   def new
     @title = t('titles.posts.new')
-    @post  = Entry::Post.new
+    @entry = Entry::Post.new
   end
 
   # post /posts
   def create
     @title = t('titles.posts.new')
-    @post  = Entry::Post.new(post_parameters.merge(user: @current_user))
-    if @post.save
-      flash[:message] = t('post.added')
-      redirect_to post_path(@post)
+    @entry = Entry::Post.new(post_parameters.merge(user: @current_user))
+    if @entry.save
+      flash[:notice] = t('entry.post.created')
+      redirect_to @entry
     else
       render action: :new
     end
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
   # get /posts/:id
   def show
-    @title = "#{t('titles.posts.show')} «#{@post.parsed_title}»"
+    @title = "#{t('titles.posts.show')} «#{@entry.parsed_title}»"
   end
 
   # get /posts/:id/edit
@@ -41,9 +41,9 @@ class PostsController < ApplicationController
   # patch /posts/:id
   def update
     @title = t('titles.posts.edit')
-    if @post.update(post_parameters)
-      flash[:message] = t('post.updated')
-      redirect_to post_path(@post)
+    if @entry.update(post_parameters)
+      flash[:notice] = t('entry.post.updated')
+      redirect_to @entry
     else
       render action: :edit
     end
@@ -51,19 +51,20 @@ class PostsController < ApplicationController
 
   # delete /posts/:id
   def destroy
-    @post.destroy
-    flash[:message] = t('post.deleted')
-    redirect_to posts_path
+    @entry.destroy
+    flash[:notice] = t('entry.post.deleted')
+    redirect_to entry_posts_path
   end
 
   private
 
   def set_post
-    @post = Entry::Post.find(params[:id])
+    @entry = Entry::Post.find(params[:id])
+    raise UnauthorizedException unless @entry.visible_to? @current_user
   end
 
   def post_parameters
-    params.require(:post).permit(:title, :body)
+    params.require(:entry_post).permit(:title, :body)
   end
 
   def restrict_anonymous_access
@@ -71,6 +72,12 @@ class PostsController < ApplicationController
   end
 
   def restrict_editor_access
-    raise UnauthorizedException unless @post.editable_by? @current_user
+    raise UnauthorizedException unless @entry.editable_by? @current_user
+  end
+
+  def allowed_posts
+    maximal_privacy = @current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+
+    Entry::Post.recent.where("privacy <= #{maximal_privacy}")
   end
 end

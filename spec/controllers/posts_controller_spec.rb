@@ -75,7 +75,7 @@ describe PostsController do
     end
 
     context "post create with valid parameters" do
-      before(:each) { post :create, entry_entry: { title: 'a', body: 'b' } }
+      before(:each) { post :create, entry_post: { title: 'a', body: 'b' } }
 
       it "assigns a new post to @entry" do
         expect(assigns[:entry]).to be_an(Entry::Post)
@@ -95,7 +95,7 @@ describe PostsController do
     end
 
     context "post create with invalid parameters" do
-      before(:each) { post :create, entry_entry: { title: ' ', body: ' ' } }
+      before(:each) { post :create, entry_post: { title: ' ', body: ' ' } }
 
       it "assigns a new entry to @entry" do
         expect(assigns[:entry]).to be_an(Entry::Post)
@@ -123,7 +123,7 @@ describe PostsController do
     end
 
     context "patch update with valid parameters" do
-      before(:each) { patch :update, id: entry, entry_entry: { title: 'a', body: 'b' } }
+      before(:each) { patch :update, id: entry, entry_post: { title: 'a', body: 'b' } }
 
       it "updates entry" do
         entry.reload
@@ -139,7 +139,7 @@ describe PostsController do
     end
 
     context "patch update with invalid parameters" do
-      before(:each) { patch :update, id: entry, entry_entry: { body: ' ' } }
+      before(:each) { patch :update, id: entry, entry_post: { body: ' ' } }
 
       it "leaves post intact" do
         entry.reload
@@ -172,14 +172,21 @@ describe PostsController do
   context "when current user is anonymous" do
     before(:each) { session[:user_id] = nil }
 
-    it_should_behave_like "visible public posts"
+    it_should_behave_like "allowed showing"
     it_should_behave_like "restricted creating"
     it_should_behave_like "restricted management"
 
     context "when post is protected" do
-      let(:entry) { create(:protected_post, user: owner)}
+      let!(:entry) { create(:protected_post, user: owner)}
 
       it_should_behave_like "restricted showing"
+
+      context "get index" do
+        it "doesn't add protected post to @entries" do
+          get :index
+          expect(assigns[:entries]).not_to include(entry)
+        end
+      end
     end
   end
 
@@ -206,7 +213,7 @@ describe PostsController do
     it_should_behave_like "allowed management"
 
     context "when post is protected" do
-      let(:entry) { create(:protected_post, user: owner)}
+      let(:entry) { create(:protected_post, user: owner, body: 'Эталон')}
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "allowed management"
@@ -221,7 +228,7 @@ describe PostsController do
     it_should_behave_like "allowed management"
 
     context "when post is protected" do
-      let(:entry) { create(:protected_post, user: owner)}
+      let(:entry) { create(:protected_post, user: owner, body: 'Эталон')}
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "allowed management"

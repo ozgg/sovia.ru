@@ -25,7 +25,7 @@ class DreamsController < ApplicationController
   def create
     @dream = Entry::Dream.new(dream_parameters.merge(user: @current_user))
     if @dream.save
-      flash[:message] = t('dream.added')
+      flash[:message] = t('entry.dream.added')
       redirect_to dream_path @dream
     else
       render action: 'new'
@@ -40,7 +40,7 @@ class DreamsController < ApplicationController
   # patch /dreams/:id
   def update
     if @dream.update(dream_parameters)
-      flash[:message] = t('dream.updated')
+      flash[:message] = t('entry.dream.updated')
       redirect_to dream_path(@dream)
     else
       render action: 'edit'
@@ -50,7 +50,7 @@ class DreamsController < ApplicationController
   # delete /dreams/:id
   def destroy
     if @dream.destroy
-      flash[:message] = t('dream.deleted')
+      flash[:message] = t('entry.dream.deleted')
     end
     redirect_to dreams_path
   end
