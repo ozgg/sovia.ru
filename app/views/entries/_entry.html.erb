@@ -1,55 +1,53 @@
-<article class="post">
+<article class="entry">
   <header>
-    <figure><%= raw user_avatar(post.user) %></figure>
+    <figure><%= raw user_avatar(entry.user) %></figure>
     <h2>
       <% if local_assigns[:preview] %>
-        <%= link_to post.parsed_title, post %>
+        <%= link_to entry.parsed_title, post %>
     <% else %>
-        <%= post.parsed_title %>
+        <%= entry.parsed_title %>
     <% end %>
     </h2>
 
-    <div class="privacy privacy-<%= post.privacy %>">&nbsp;</div>
+    <div class="privacy privacy-<%= entry.privacy %>">&nbsp;</div>
 
     <div class="author">
-      <%= user_link post.user %>,
-      <%= t("activerecord.models.#{post.class.to_s.downcase}") + ' ' + t('at') %>
-      <time datetime="<%= post.created_at %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+      <%= user_link entry.user %>,
+      <%= t("activerecord.models.#{entry.class.to_s.downcase.gsub('::', '.')}") + ' ' + t('at') %>
+      <time datetime="<%= entry.created_at %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
 
-    <% if post.dream? %>
-        <% tags = post.entry_tags %>
-        <% if tags.any? %>
-            <div class="tags">
-              <div><%= t('.tags') %></div>
-              <nav>
-                <ul>
-                  <% tags.each do |tag| %>
-                    <li><!--
-                      --><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %><!--
-                      --><% if tag.description %>
-                         <span><%= link_to '?', dreambook_word_path(letter: tag.letter, word: tag.name) %></span><!--
-                      --><% end %><!--
-                    --></li>
-                  <% end %>
-                </ul>
-              </nav>
-            </div>
-        <% end %>
+    <% tags = entry.tags %>
+    <% if tags.any? %>
+        <div class="tags">
+          <div><%= t('.tags') %></div>
+          <nav>
+            <ul>
+              <% tags.each do |tag| %>
+                <li><!--
+                  --><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name) %><!--
+                  --><% if tag.description %>
+                     <span><%= link_to '?', dreambook_word_path(letter: tag.letter, word: tag.name) %></span><!--
+                  --><% end %><!--
+                --></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
     <% end %>
   </header>
   <div>
     <% if local_assigns[:preview] %>
-        <%= raw post.preview %>
-        <% if post.passages_count > 2 %>
-            <p class="more"><%= link_to t('read_more'), post %></p>
+        <%= raw entry.preview %>
+        <% if entry.passages_count > 2 %>
+            <p class="more"><%= link_to t('read_more'), entry %></p>
         <% end %>
     <% else %>
-        <%= raw post.parsed_body %>
+        <%= raw entry.parsed_body %>
     <% end %>
   </div>
   <footer>
-    <%= post.comments_count %>
+    <%= entry.comments_count %>
     <%= render 'layouts/social' unless local_assigns[:preview] %>
   </footer>
 </article>

@@ -3,7 +3,7 @@ FactoryGirl.define do
     name 'Нечто Интересное'
 
     factory :dream_tag, class: Tag::Dream do
-
+      description 'Интерпретация символа сна'
     end
 
     factory :article_tag, class: Tag::Article do

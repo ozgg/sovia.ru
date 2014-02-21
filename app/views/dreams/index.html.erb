@@ -2,9 +2,9 @@
   <h1><%= @title %></h1>
   <nav>
     <ul>
-      <li><%= link_to t('dreams.index.new_dream'), new_dream_path %></li>
+      <li><%= link_to t('dreams.index.new_dream'), new_entry_dream_path %></li>
     </ul>
   </nav>
 </header>
 
-<%= render partial: 'posts/list', object: @dreams %>
+<%= render 'entries/list' %>

@@ -11,11 +11,11 @@ describe "dreambook/letter.html.erb" do
   end
 
   context "when words present" do
-    let!(:word) { create(:tag) }
+    let!(:word) { create(:dream_tag) }
 
     before(:each) do
       assign(:letters, [word.letter])
-      assign(:tags, Tag.page(1).per(50) )
+      assign(:tags, Tag::Dream.where(letter: word.letter).page(1).per(50) )
       render
     end
 

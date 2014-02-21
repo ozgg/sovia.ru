@@ -4,7 +4,7 @@ describe DreambookController do
   before(:each) do
     @tag_a = create(:dream_tag, name: 'Акула', description: 'Про акулу')
     @tag_b = create(:dream_tag, name: 'Белка', description: 'Тут про белку')
-    @tag_c = create(:dream_tag, name: 'Арка')
+    @tag_c = create(:dream_tag, name: 'Арка', description: '')
   end
 
   shared_examples "letter assigner" do

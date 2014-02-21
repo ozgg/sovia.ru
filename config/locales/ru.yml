@@ -20,7 +20,10 @@ ru:
             body:
               blank: "не может быть пустым"
     models:
-      entry: "публикация"
+      entry_dream: "сон"
+      entry_article: "статья"
+      entry_post: "публикация"
+      entry_thought: "мысль"
       user: "пользователь"
       tag: "метка"
     attributes:

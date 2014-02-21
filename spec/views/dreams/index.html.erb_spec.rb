@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe "dreams/index.html.erb" do
-  it "renders posts/list" do
-    assign(:dreams, [])
+  it "renders entries/list" do
+    assign(:entries, [])
     render
-    expect(rendered).to render_template('posts/_list')
+    expect(rendered).to render_template('entries/_list')
   end
 end

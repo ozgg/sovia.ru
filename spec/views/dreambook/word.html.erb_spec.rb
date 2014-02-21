@@ -1,20 +1,20 @@
 require 'spec_helper'
 
 describe "dreambook/word.html.erb" do
-  let(:word) { create(:entry_tag) }
+  let(:tag) { create(:dream_tag) }
 
   it "renders dreambook/letters" do
     assign(:letters, [])
-    assign(:tag, word)
+    assign(:tag, tag)
     render
     expect(rendered).to render_template('dreambook/_letters')
   end
 
   it "renders word description" do
-    assign(:letters, [word.letter])
-    assign(:tag, word)
+    assign(:letters, [tag.letter])
+    assign(:tag, tag)
     render
-    expect(rendered).to contain(word.name)
-    expect(rendered).to contain(word.parsed_description)
+    expect(rendered).to contain(tag.name)
+    expect(rendered).to contain(tag.description)
   end
 end

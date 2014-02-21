@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "posts/show.html.erb" do
   it "renders post" do
-    assign(:post, create(:post))
+    assign(:entry, create(:post))
     render
-    expect(rendered).to render_template('posts/_post')
+    expect(rendered).to render_template('entries/_entry')
   end
 end

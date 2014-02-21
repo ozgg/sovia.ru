@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "dreams/show.html.erb" do
-  it "renders dream" do
+  it "renders entries/_entry" do
     dream = create(:dream, title: 'Some dream')
-    assign(:dream, dream)
+    assign(:entry, dream)
     render
-    expect(rendered).to contain(dream.title)
+    expect(rendered).to render_template('entries/_entry')
   end
 end

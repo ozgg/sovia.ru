@@ -6,7 +6,7 @@
     <nav class="dream-symbols">
       <ul>
         <% @tags.each do |tag| %>
-            <li><%= link_to tag.name, tagged_dreams_path(tag: tag.name) %> (<%= tag.dreams_count %>)</li>
+            <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name) %> (<%= tag.entries_count %>)</li>
         <% end %>
       </ul>
     </nav>
