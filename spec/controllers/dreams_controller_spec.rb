@@ -75,7 +75,7 @@ describe DreamsController do
 
     it "adds flash message 'Сон добален'" do
       action.call
-      expect(flash[:message]).to eq(I18n.t('dream.added'))
+      expect(flash[:message]).to eq(I18n.t('entry.dream.added'))
     end
   end
 
@@ -120,7 +120,7 @@ describe DreamsController do
     end
 
     it "adds flash message 'Сон изменён'" do
-      expect(flash[:message]).to eq(I18n.t('dream.updated'))
+      expect(flash[:message]).to eq(I18n.t('entry.dream.updated'))
     end
 
     it "redirects to dream page" do
@@ -142,7 +142,7 @@ describe DreamsController do
 
     it "adds flash message 'Сон удалён'" do
       action.call
-      expect(flash[:message]).to eq(I18n.t('dream.deleted'))
+      expect(flash[:message]).to eq(I18n.t('entry.dream.deleted'))
     end
   end
 

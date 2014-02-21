@@ -21,10 +21,6 @@ FactoryGirl.define do
         factory :protected_post do
           privacy Entry::PRIVACY_USERS
         end
-
-        factory :private_post do
-          privacy Entry::PRIVACY_OWNER
-        end
       end
 
       factory :thought, class: Entry::Thought do

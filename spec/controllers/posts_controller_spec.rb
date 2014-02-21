@@ -1,15 +1,48 @@
 require 'spec_helper'
 
 describe PostsController do
-  let!(:user) { create(:user) }
-  let!(:entry) { create(:post, user: user, body: 'Эталон') }
+  let(:owner) { create(:user) }
+  let(:entry) { create(:post, user: owner, body: 'Эталон') }
 
-  shared_examples "visible posts" do
+  shared_examples "post assigner" do
+    it "assigns post to @entry" do
+      expect(assigns[:entry]).to eq(entry)
+    end
+  end
+
+  shared_examples "post redirector" do
+    it "redirects to post path" do
+      expect(response).to redirect_to(entry)
+    end
+  end
+
+  shared_examples "restricted creating" do
+    it "raises error for posts creation" do
+      expect { get :new }.to raise_error(ApplicationController::UnauthorizedException)
+      expect { post :create }.to raise_error(ApplicationController::UnauthorizedException)
+    end
+  end
+  
+  shared_examples "restricted management" do
+    it "raises error for posts management" do
+      expect { get :edit, id: entry }.to raise_error(ApplicationController::UnauthorizedException)
+      expect { patch :update, id: entry }.to raise_error(ApplicationController::UnauthorizedException)
+      expect { delete :destroy, id: entry }.to raise_error(ApplicationController::UnauthorizedException)
+    end
+  end
+
+  shared_examples "restricted showing" do
+    it "raises error for post showing" do
+      expect { get :show, id: entry }.to raise_error(ApplicationController::UnauthorizedException)
+    end
+  end
+
+  shared_examples "allowed showing" do
     context "get index" do
       before(:each) { get :index }
 
-      it "assigns posts to @posts" do
-        expect(assigns[:posts]).to include(entry)
+      it "assigns posts list to @entries" do
+        expect(assigns[:entries]).to include(entry)
       end
 
       it "renders posts/index" do
@@ -20,69 +53,93 @@ describe PostsController do
     context "get show" do
       before(:each) { get :show, id: entry }
 
-      it "assigns post to @post" do
-        expect(assigns[:post]).to eq(entry)
-      end
-
       it "renders posts/show" do
         expect(response).to render_template('posts/show')
       end
+
+      it_should_behave_like "post assigner"
+    end
+  end
+
+  shared_examples "allowed creating" do
+    context "get new" do
+      before(:each) { get :new }
+
+      it "renders posts/new" do
+        expect(response).to render_template('posts/new')
+      end
+
+      it "assigns new post to @entry" do
+        expect(assigns[:entry]).to be_a_new(Entry::Post)
+      end
     end
 
-    context "when id is not post id" do
-      it "raises record_not_found" do
-        article = create(:article)
-        expect { get :show, id: article.id }.to raise_error(ActiveRecord::RecordNotFound)
+    context "post create with valid parameters" do
+      before(:each) { post :create, entry_entry: { title: 'a', body: 'b' } }
+
+      it "assigns a new post to @entry" do
+        expect(assigns[:entry]).to be_an(Entry::Post)
+      end
+
+      it "creates a new post" do
+        expect(Entry::Post.last).to be_persisted
+      end
+
+      it "adds flash notice #{I18n.t('entry.post.created')}" do
+        expect(flash[:notice]).to eq(I18n.t('entry.post.created'))
+      end
+
+      it "redirects to created entry" do
+        expect(response).to redirect_to(Entry::Post.last)
+      end
+    end
+
+    context "post create with invalid parameters" do
+      before(:each) { post :create, entry_entry: { title: ' ', body: ' ' } }
+
+      it "assigns a new entry to @entry" do
+        expect(assigns[:entry]).to be_an(Entry::Post)
+      end
+
+      it "leaves entries table intact" do
+        expect(assigns[:entry]).not_to be_persisted
+      end
+
+      it "renders posts/new" do
+        expect(response).to render_template('posts/new')
       end
     end
   end
-
-  shared_examples "restricted area" do
-    it "raises unauthorized exception" do
-      expect(action).to raise_error(ApplicationController::UnauthorizedException)
-    end
-  end
-
-  shared_examples "editable post" do
+  
+  shared_examples "allowed management" do
     context "get edit" do
       before(:each) { get :edit, id: entry }
-
-      it "assigns post to @post" do
-        expect(assigns[:post]).to eq(entry)
-      end
 
       it "renders posts/edit" do
         expect(response).to render_template('posts/edit')
       end
+
+      it_should_behave_like "post assigner"
     end
 
     context "patch update with valid parameters" do
-      before(:each) { patch :update, id: entry, post: { body: 'Lalala' } }
+      before(:each) { patch :update, id: entry, entry_entry: { title: 'a', body: 'b' } }
 
-      it "assigns post to @post" do
-        expect(assigns[:post]).to eq(entry)
-      end
-
-      it "updates post data" do
+      it "updates entry" do
         entry.reload
-        expect(entry.body).to eq('Lalala')
+        expect(entry.title).to eq('a')
       end
 
-      it "redirects to post page" do
-        expect(response).to redirect_to(post_path(entry))
+      it "adds flash notice #{I18n.t('entry.post.updated')}" do
+        expect(flash[:notice]).to eq(I18n.t('entry.post.updated'))
       end
 
-      it "adds flash message #{I18n.t('post.updated')}" do
-        expect(flash[:message]).to eq(I18n.t('post.updated'))
-      end
+      it_should_behave_like "post assigner"
+      it_should_behave_like "post redirector"
     end
 
     context "patch update with invalid parameters" do
-      before(:each) { patch :update, id: entry, post: { body: ' ' } }
-
-      it "assigns post to @post" do
-        expect(assigns[:post]).to eq(entry)
-      end
+      before(:each) { patch :update, id: entry, entry_entry: { body: ' ' } }
 
       it "leaves post intact" do
         entry.reload
@@ -92,154 +149,82 @@ describe PostsController do
       it "renders posts/edit" do
         expect(response).to render_template('posts/edit')
       end
-    end
 
-    context "delete destroy" do
-      let(:action) { lambda { delete :destroy, id: entry } }
-
-      it "assigns post to @post" do
-        action.call
-        expect(assigns[:post]).to eq(entry)
-      end
-
-      it "destroys post" do
-        expect(action).to change(Entry, :count).by(-1)
-      end
-
-      it "redirects to posts path" do
-        action.call
-        expect(response).to redirect_to(posts_path)
-      end
-
-      it "adds flash message #{I18n.t('post.deleted')}" do
-        action.call
-        expect(flash[:message]).to eq(I18n.t('post.deleted'))
-      end
-    end
-  end
-
-  context "for anonymous user" do
-    before(:each) { session[:user_id] = nil }
-
-    context "get new" do
-      let(:action) { -> { get :new } }
-
-      it_should_behave_like "restricted area"
-    end
-
-    context "get edit" do
-      let(:action) { -> { get :edit, id: entry } }
-
-      it_should_behave_like "restricted area"
-    end
-
-    context "post create" do
-      let(:action) { -> { post :create, post: attributes_for(:post) } }
-
-      it_should_behave_like "restricted area"
-    end
-
-    context "patch update" do
-      let(:action) { -> { patch :update, id: entry } }
-
-      it_should_behave_like "restricted area"
+      it_should_behave_like "post assigner"
     end
 
     context "delete destroy" do
       let(:action) { -> { delete :destroy, id: entry } }
 
-      it_should_behave_like "restricted area"
-    end
+      before(:each) { entry.valid? }
 
-    it_should_behave_like "visible posts"
+      it "removes post from database" do
+        expect(action).to change(Entry::Post, :count).by(-1)
+      end
+
+      it "adds flash notice #{I18n.t('entry.post.deleted')}" do
+        action.call
+        expect(flash[:notice]).to eq(I18n.t('entry.post.deleted'))
+      end
+    end
   end
 
-  context "for registered user" do
-    before(:each) { session[:user_id] = user.id }
+  context "when current user is anonymous" do
+    before(:each) { session[:user_id] = nil }
 
-    context "get new" do
-      before(:each) { get :new }
+    it_should_behave_like "visible public posts"
+    it_should_behave_like "restricted creating"
+    it_should_behave_like "restricted management"
 
-      it "assigns new post to @post" do
-        expect(assigns[:post]).to be_a_new(Entry::Post)
-      end
+    context "when post is protected" do
+      let(:entry) { create(:protected_post, user: owner)}
 
-      it "renders posts/new" do
-        expect(response).to render_template('posts/new')
-      end
+      it_should_behave_like "restricted showing"
     end
-
-    context "post create with valid parameters" do
-      let(:action) { -> { post :create, post: attributes_for(:post) } }
-
-      it "assigns post to @post" do
-        action.call
-        expect(assigns[:post]).to be_a(Entry::Post)
-      end
-
-      it "creates post in database" do
-        expect(action).to change(Entry, :count).by(1)
-      end
-
-      it "redirects to post path" do
-        action.call
-        expect(response).to redirect_to(post_path(Entry::Post.last))
-      end
-
-      it "adds flash message #{I18n.t('post.added')}" do
-        action.call
-        expect(flash[:message]).to eq(I18n.t('post.added'))
-      end
-
-      it "adds post with current user as owner" do
-        action.call
-        expect(Entry::Post.last.user).to eq(user)
-      end
-    end
-
-    context "post create with invalid parameters" do
-      let(:action) { -> { post :create, post: { body: ' ' } } }
-
-      it "assigns post to @post" do
-        action.call
-        expect(assigns[:post]).to be_an(Entry::Post)
-      end
-
-      it "doesn't create post in database" do
-        expect(action).not_to change(Entry, :count)
-      end
-
-      it "renders posts/new" do
-        action.call
-        expect(response).to render_template('posts/new')
-      end
-    end
-
-    context "get edit for others post" do
-      let(:action) { -> { get :edit, id: create(:post) } }
-
-      it_should_behave_like "restricted area"
-    end
-
-    context "patch update for others post" do
-      let(:action) { -> { patch :update, id: create(:post) }}
-
-      it_should_behave_like "restricted area"
-    end
-
-    context "delete destroy for others post" do
-      let(:action) { -> { delete :destroy, id: create(:post) }}
-
-      it_should_behave_like "restricted area"
-    end
-
-    it_should_behave_like "visible posts"
-    it_should_behave_like "editable post"
   end
 
-  context "for moderator" do
+  context "when current user is not moderator or owner" do
+    before(:each) { session[:user_id] = create(:user).id }
+
+    it_should_behave_like "allowed showing"
+    it_should_behave_like "restricted management"
+    it_should_behave_like "allowed creating"
+
+    context "when post is protected" do
+      let(:entry) { create(:protected_post, user: owner)}
+
+      it_should_behave_like "allowed showing"
+      it_should_behave_like "restricted management"
+    end
+  end
+
+  context "when current user is owner" do
+    before(:each) { session[:user_id] = owner.id }
+
+    it_should_behave_like "allowed showing"
+    it_should_behave_like "allowed creating"
+    it_should_behave_like "allowed management"
+
+    context "when post is protected" do
+      let(:entry) { create(:protected_post, user: owner)}
+
+      it_should_behave_like "allowed showing"
+      it_should_behave_like "allowed management"
+    end
+  end
+
+  context "when current user is moderator" do
     before(:each) { session[:user_id] = create(:moderator).id }
 
-    it_should_behave_like "editable post"
+    it_should_behave_like "allowed showing"
+    it_should_behave_like "allowed creating"
+    it_should_behave_like "allowed management"
+
+    context "when post is protected" do
+      let(:entry) { create(:protected_post, user: owner)}
+
+      it_should_behave_like "allowed showing"
+      it_should_behave_like "allowed management"
+    end
   end
 end
