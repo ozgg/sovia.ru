@@ -1,4 +1,6 @@
-<%= form_for(@tag) do |f| %>
+<% url = @tag.new_record? ? admin_dream_tags_path : admin_dream_tag_path(@tag) %>
+
+<%= form_for(@tag, url: url) do |f| %>
     <% if @tag.errors.any? %>
         <div class="errors">
           <h2><%= pluralize(@tag.errors.count, 'error') %>:</h2>
@@ -20,6 +22,6 @@
       <%= f.text_area :description, required: true, cols: 80, rows: 25 %>
     </div>
     <div>
-      <%= f.button t('.submit'), type: 'submit' %>
+      <%= f.button t('tags.form.submit'), type: 'submit' %>
     </div>
 <% end %>

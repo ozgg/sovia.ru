@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-describe "tags/show.html.erb" do
+describe "admin/dream_tags/show.html.erb" do
   it "renders tag" do
-    pending
     tag = create(:dream_tag)
     assign(:tag, tag)
     render

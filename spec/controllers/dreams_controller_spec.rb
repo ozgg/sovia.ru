@@ -4,7 +4,7 @@ describe DreamsController do
   let(:tag) { create(:dream_tag, name: 'Волшебство') }
   let(:owner) { create(:user) }
   let(:user) { create(:user) }
-  let(:entry) { create(:dream, user: owner, body: 'Эталон', tags: [tag]) }
+  let(:entry) { create(:dream, user: owner, body: 'Эталон', dream_tags: [tag]) }
 
   shared_examples "dream assigner" do
     it "assigns dream to @entry" do
@@ -340,9 +340,9 @@ describe DreamsController do
   end
 
   context "getting tagged dreams" do
-    let!(:other_dream) { create(:dream, tags: [create(:dream_tag)]) }
-    let!(:protected_dream) { create(:protected_dream, tags: [tag]) }
-    let!(:private_dream) { create(:private_dream, tags: [tag]) }
+    let!(:other_dream) { create(:dream, dream_tags: [create(:dream_tag)]) }
+    let!(:protected_dream) { create(:protected_dream, dream_tags: [tag]) }
+    let!(:private_dream) { create(:private_dream, dream_tags: [tag]) }
 
     shared_examples "visible public tagged dreams" do
       before(:each) { get :tagged, tag: tag.name }

@@ -29,9 +29,9 @@ describe DreambookController do
     before(:each) { get :letter, letter: @tag_a.letter }
 
     it "assigns described tags with given letter to @tags" do
-      expect(assigns[:tags]).to include(@tag_a)
-      expect(assigns[:tags]).not_to include(@tag_b)
-      expect(assigns[:tags]).not_to include(@tag_c)
+      expect(assigns[:dream_tags]).to include(@tag_a)
+      expect(assigns[:dream_tags]).not_to include(@tag_b)
+      expect(assigns[:dream_tags]).not_to include(@tag_c)
     end
 
     it "renders dreambook/letter" do

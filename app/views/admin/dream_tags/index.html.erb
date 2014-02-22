@@ -1,0 +1,20 @@
+<header>
+  <h1><%= @title %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('tags.index.new_tag'), new_admin_dream_tag_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<% if @tags.any? %>
+    <ul>
+      <% @tags.each do |tag| %>
+      <li><%= link_to tag.name, admin_dream_tag_path(tag) %></li>
+      <% end %>
+    </ul>
+
+    <%= paginate @tags %>
+<% else %>
+    <div class="message"><%= t('tags.list.no_tags') %></div>
+<% end %>
