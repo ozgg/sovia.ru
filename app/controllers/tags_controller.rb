@@ -19,7 +19,7 @@ class TagsController < ApplicationController
   def create
     @tag = Tag::Dream.new(tag_parameters)
     if @tag.save
-      flash[:notice] = t('tag.added')
+      flash[:notice] = t('tag.created')
       redirect_to tag_path(@tag)
     else
       render action: :new

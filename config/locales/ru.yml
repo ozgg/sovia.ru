@@ -197,7 +197,7 @@ ru:
       updated: "Сон обновлён"
       deleted: "Сон удалён"
   tag:
-    added: "Метка добавлена"
+    created: "Метка добавлена"
     updated: "Метка обновлена"
     deleted: "Метка удалена"
   layouts:

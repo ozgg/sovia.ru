@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+    User.find(session[:user_id]) unless session[:user_id].nil?
   end
 
   protected
@@ -24,5 +24,9 @@ class ApplicationController < ActionController::Base
       flash[:notice] = t('please_log_in')
       redirect_to login_path
     end
+  end
+
+  def demand_role(role)
+    raise UnauthorizedException if current_user.nil? || !current_user.has_role?(role)
   end
 end
