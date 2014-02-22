@@ -1,31 +1,17 @@
 class Code < ActiveRecord::Base
-  TYPE_EMAIL_CONFIRMATION = 1
-  TYPE_PASSWORD_RECOVERY  = 2
-
   belongs_to :user
-  validates_presence_of :code_type, :body
-  validates_inclusion_of :code_type, in: [TYPE_EMAIL_CONFIRMATION, TYPE_PASSWORD_RECOVERY]
+  validates_presence_of :body
   validates_uniqueness_of :body
 
   after_initialize :generate_body
 
-  def email_confirmation?
-    code_type == TYPE_EMAIL_CONFIRMATION
-  end
+  protected
 
-  def password_recovery?
-    code_type == TYPE_PASSWORD_RECOVERY
+  def set_email_as_payload
+    unless user.email.blank?
+      self.payload = user.email
+    end
   end
-
-  def self.email_confirmation(user)
-    where(code_type: TYPE_EMAIL_CONFIRMATION, activated: false, user: user)
-  end
-
-  def self.password_recovery(user)
-    where(code_type: TYPE_PASSWORD_RECOVERY, activated: false, user: user)
-  end
-
-  private
 
   def generate_body
     if self.body.nil?
