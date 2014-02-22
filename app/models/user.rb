@@ -30,9 +30,9 @@ class User < ActiveRecord::Base
     if mail_confirmed? || email.blank?
       code = nil
     else
-      code = Code.email_confirmation(self).first
+      code = Code::Confirmation.find_for_user(self)
       if code.nil?
-        code = Code.create!(user: self, code_type: Code::TYPE_EMAIL_CONFIRMATION)
+        code = Code::Confirmation.create!(user: self)
       end
     end
 
@@ -43,9 +43,9 @@ class User < ActiveRecord::Base
     if email.blank?
       code = nil
     else
-      code = Code.password_recovery(self).first
+      code = Code::Recovery.find_for_user(self)
       if code.nil?
-        code = Code.create!(user: self, code_type: Code::TYPE_PASSWORD_RECOVERY)
+        code = Code::Recovery.create!(user: self)
       end
     end
 

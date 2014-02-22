@@ -5,6 +5,10 @@ class Code < ActiveRecord::Base
 
   after_initialize :generate_body
 
+  def self.find_for_user(user)
+    find_by(user: user, activated: false)
+  end
+
   protected
 
   def set_email_as_payload

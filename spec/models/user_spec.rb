@@ -66,24 +66,21 @@ describe User do
       let(:user) { create(:unconfirmed_user) }
 
       it "returns existing code if it exists and isn't activated" do
-        pending
         code = create(:email_confirmation, user: user)
         expect(user.email_confirmation).to eq(code)
       end
 
       it "returns new code if no codes exist" do
-        pending
         code = user.email_confirmation
         expect(code).to be_persisted
-        expect(code).to be_email_confirmation
+        expect(code).to be_a(Code::Confirmation)
       end
 
       it "returns new code if all codes are used" do
-        pending
         create(:email_confirmation, user: user, activated: true)
         code = user.email_confirmation
         expect(code).to be_persisted
-        expect(code).to be_email_confirmation
+        expect(code).to be_a(Code::Confirmation)
       end
     end
   end
@@ -93,7 +90,6 @@ describe User do
       let(:user) { create(:user) }
 
       it "returns nil" do
-        pending
         user.email = nil
         expect(user.password_recovery).to be_nil
       end
@@ -103,24 +99,21 @@ describe User do
       let(:user) { create(:user, email: 'noreply@example.com') }
 
       it "returns existing code if it exists and isn't activated" do
-        pending
         code = create(:password_recovery, user: user)
         expect(user.password_recovery).to eq(code)
       end
 
       it "returns new code if no codes exist" do
-        pending
         code = user.password_recovery
         expect(code).to be_persisted
-        expect(code).to be_password_recovery
+        expect(code).to be_a(Code::Recovery)
       end
 
       it "returns new code if all codes are used" do
-        pending
         create(:password_recovery, user: user, activated: true)
         code = user.password_recovery
         expect(code).to be_persisted
-        expect(code).to be_password_recovery
+        expect(code).to be_a(Code::Recovery)
       end
     end
   end
