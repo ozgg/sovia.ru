@@ -18,8 +18,9 @@ ActiveRecord::Schema.define(version: 20140130133354) do
 
   create_table "codes", force: true do |t|
     t.integer  "user_id"
-    t.integer  "code_type",                  null: false
+    t.string   "type",                       null: false
     t.string   "body",                       null: false
+    t.string   "payload"
     t.boolean  "activated",  default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

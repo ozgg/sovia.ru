@@ -17,7 +17,6 @@ describe "my/index/index.html.erb" do
 
     before(:each) do
       view.stub(:current_user).and_return(user)
-      session[:user_id] = user.id
       render
     end
 
@@ -33,7 +32,6 @@ describe "my/index/index.html.erb" do
 
     before(:each) do
       view.stub(:current_user).and_return(user)
-      session[:user_id] = user.id
       render
     end
 
