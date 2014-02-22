@@ -14,7 +14,7 @@ describe StatisticsController do
     before(:each) { get :symbols }
 
     it "assigns entry tags to @tags" do
-      expect(assigns[:dream_tags]).to include(tag)
+      expect(assigns[:tags]).to include(tag)
     end
 
     it "renders statistics/symbols" do

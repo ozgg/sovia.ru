@@ -16,7 +16,6 @@ describe 'sessions/new.html.erb' do
   end
 
   it "displays link to password recovery form" do
-    pending
-    expect(rendered).to have_selector('a', href: recover_form_users_path)
+    expect(rendered).to have_selector('a', href: my_recovery_path)
   end
 end

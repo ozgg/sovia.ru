@@ -46,7 +46,7 @@ describe Admin::DreamTagsController do
       before(:each) { get :index }
 
       it "assigns tags list to @tags" do
-        expect(assigns[:dream_tags]).to include(dream_tag)
+        expect(assigns[:tags]).to include(dream_tag)
       end
 
       it "renders admin/dream_tags/index" do

@@ -21,7 +21,6 @@ Sovia::Application.routes.draw do
   #resources :entries
   resources :articles, as: :entry_articles
   resources :posts, as: :entry_posts
-  resources :tags
   resources :users, only: [:new, :create]
 
   namespace :my do
