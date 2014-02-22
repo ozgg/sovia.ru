@@ -27,29 +27,11 @@ class User < ActiveRecord::Base
   end
 
   def email_confirmation
-    if mail_confirmed? || email.blank?
-      code = nil
-    else
-      code = Code::Confirmation.find_for_user(self)
-      if code.nil?
-        code = Code::Confirmation.create!(user: self)
-      end
-    end
-
-    code
+    Code::Confirmation.code_for_user(self) unless mail_confirmed? || email.blank?
   end
 
   def password_recovery
-    if email.blank?
-      code = nil
-    else
-      code = Code::Recovery.find_for_user(self)
-      if code.nil?
-        code = Code::Recovery.create!(user: self)
-      end
-    end
-
-    code
+    Code::Recovery.code_for_user(self) unless email.blank?
   end
 
   protected

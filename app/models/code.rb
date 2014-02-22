@@ -5,8 +5,8 @@ class Code < ActiveRecord::Base
 
   after_initialize :generate_body
 
-  def self.find_for_user(user)
-    find_by(user: user, activated: false)
+  def self.code_for_user(user)
+    find_by(user: user, activated: false) || self.create!(user: user)
   end
 
   protected
