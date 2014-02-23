@@ -10,7 +10,7 @@
     <fieldset>
       <legend><%= t('.common_parameters') %></legend>
       <div>
-        <%= check_box_tag 'profile[allow_mail]', '1', @current_user.allow_mail %>
+        <%= check_box_tag 'profile[allow_mail]', '1', current_user.allow_mail %>
         <%= label_tag :profile_allow_mail, t('.allow_mail') %>
       </div>
     </fieldset>
@@ -18,9 +18,9 @@
       <legend><%= t('.sensitive_parameters') %></legend>
       <div class="notice"><%= t('.sensitive_parameters_notice') %></div>
       <div>
-        <%= label_tag :profile_old_password, t('.current_password') %>
+        <%= label_tag :password, t('.current_password') %>
         <br/>
-        <%= password_field_tag 'profile[old_password]', '', size: 30 %>
+        <%= password_field_tag 'password', '', size: 30 %>
       </div>
       <div>
         <%= label_tag :profile_email, t('.email') %>

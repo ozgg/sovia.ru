@@ -21,7 +21,7 @@ class MyController < ApplicationController
   def update_profile
     update_usual_data
     flash[:message] = t('profile.updated')
-    update_sensitive_data unless params[:profile][:old_password].blank?
+    update_sensitive_data unless params[:profiles][:old_password].blank?
     @current_user.save
 
     redirect_to my_profile_path
@@ -31,11 +31,11 @@ class MyController < ApplicationController
 
 
   def update_usual_data
-    @current_user.allow_mail = !params[:profile][:allow_mail].blank?
+    @current_user.allow_mail = !params[:profiles][:allow_mail].blank?
   end
 
   def update_sensitive_data
-    if @current_user.authenticate(params[:profile][:old_password])
+    if @current_user.authenticate(params[:profiles][:old_password])
       update_email
       update_password
     else
@@ -44,7 +44,7 @@ class MyController < ApplicationController
   end
 
   def update_email
-    new_email = params[:profile][:email]
+    new_email = params[:profiles][:email]
     unless new_email == @current_user.email
       @current_user.email = new_email.blank? ? nil : new_email
       @current_user.mail_confirmed = false
@@ -52,9 +52,9 @@ class MyController < ApplicationController
   end
 
   def update_password
-    unless params[:profile][:password].empty?
-      @current_user.password = params[:profile][:password]
-      @current_user.password_confirmation = params[:profile][:password_confirmation]
+    unless params[:profiles][:password].empty?
+      @current_user.password = params[:profiles][:password]
+      @current_user.password_confirmation = params[:profiles][:password_confirmation]
     end
   end
 end

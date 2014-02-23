@@ -23,8 +23,9 @@ class Code < ActiveRecord::Base
       Time.now.to_i.to_s(36).reverse.each_char do |char|
         self.body += char + rand(36).to_s(36)
       end
+      4.times { self.body += rand(36).to_s(36) }
 
-      self.body = self.body.scan(/.{4}/)[0..2].join('-')
+      self.body = self.body.scan(/.{4}/)[0..3].join('-')
     end
   end
 end
