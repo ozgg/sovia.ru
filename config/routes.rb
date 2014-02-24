@@ -1,4 +1,5 @@
 Sovia::Application.routes.draw do
+  get "confirmations/index"
   root 'index#index'
 
   resources :dreams, as: :entry_dreams do
@@ -18,7 +19,6 @@ Sovia::Application.routes.draw do
     end
   end
 
-  #resources :entries
   resources :articles, as: :entry_articles
   resources :posts, as: :entry_posts
   resources :users, only: [:new, :create]

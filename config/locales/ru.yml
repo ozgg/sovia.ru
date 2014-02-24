@@ -276,3 +276,6 @@ ru:
     recovery_failed: "Не удалось сменить пароль, проверьте правильность ввода"
     password_changed: "Пароль изменён"
   email_confirmation_sent: "Код подтверждения отправлен"
+  confirmation:
+    send_code: "Отправить код подтверждения"
+    set_email: "Задайте адрес электронной почты"
