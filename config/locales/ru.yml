@@ -279,3 +279,5 @@ ru:
   confirmation:
     send_code: "Отправить код подтверждения"
     set_email: "Задайте адрес электронной почты"
+  code:
+    generation_error: "Ошибка создания кода"
