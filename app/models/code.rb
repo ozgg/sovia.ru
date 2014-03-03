@@ -12,7 +12,7 @@ class Code < ActiveRecord::Base
   protected
 
   def set_email_as_payload
-    unless user.email.blank?
+    unless user.email.blank? || !payload.blank?
       self.payload = user.email
     end
   end

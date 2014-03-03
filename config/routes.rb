@@ -1,4 +1,5 @@
 Sovia::Application.routes.draw do
+  get "recoveries/show"
   get "confirmations/index"
   root 'index#index'
 
