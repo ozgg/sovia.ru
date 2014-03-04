@@ -1,2 +1,14 @@
-<h1>My::Recoveries#show</h1>
-<p>Find me in app/views/my/recoveries/show.html.erb</p>
+<%= form_tag my_recovery_path, method: :patch do %>
+    <div>
+      <%= text_field_tag :code %>
+    </div>
+    <div>
+      <%= password_field_tag 'user[password]' %>
+    </div>
+    <div>
+      <%= password_field_tag 'user[password_confirmation]' %>
+    </div>
+    <div>
+      <%= button_tag t('submit'), type: :submit %>
+    </div>
+<% end %>
