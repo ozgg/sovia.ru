@@ -1,2 +1,18 @@
-<h1>My::Confirmations#index</h1>
-<p>Find me in app/views/my/confirmations/index.html.erb</p>
+<% if current_user && current_user.mail_confirmed? %>
+    <div class="information"><%= t('user.email_confirmed') %></div>
+<% else %>
+    <%= form_tag my_confirmation_path, method: :patch do %>
+        <div>
+          <%= text_field_tag :code %>
+        </div>
+        <div>
+          <%= button_tag t('submit'), type: :submit %>
+        </div>
+    <% end %>
+
+    <%= form_tag my_confirmation_path, method: :post do %>
+        <div>
+          <%= button_tag t('confirmation.send_code'), type: :submit %>
+        </div>
+    <% end %>
+<% end %>
