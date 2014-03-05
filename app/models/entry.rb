@@ -3,14 +3,15 @@ class Entry < ActiveRecord::Base
   PRIVACY_USERS = 1
   PRIVACY_OWNER = 255
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
+  has_many :comments, dependent: :destroy
   has_many :entry_tags
   has_many :tags, through: :entry_tags
 
   validates_presence_of :body, :type
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
-  after_create :increment_entries_counter, :make_url_title
+  after_create :make_url_title
   before_destroy :decrement_entries_counter
 
   def self.privacy_modes
@@ -106,12 +107,7 @@ class Entry < ActiveRecord::Base
     raise 'Implement me in children classes'
   end
 
-  def increment_entries_counter
-    user.increment! :entries_count unless user.nil?
-  end
-
   def decrement_entries_counter
-    user.decrement! :entries_count unless user.nil?
     tags.each do |tag|
       tag.decrement! :entries_count
     end

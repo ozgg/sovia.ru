@@ -76,11 +76,5 @@ describe Entry::Dream do
       dream.tags << tag
       expect { dream.destroy }.to change(tag, :entries_count).by(-1)
     end
-
-    it "decrements entries_count for user" do
-      user  = create(:user)
-      dream = create(:dream, user: user)
-      expect { dream.destroy }.to change(user, :entries_count).by(-1)
-    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130133354) do
+ActiveRecord::Schema.define(version: 20140305104237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 20140130133354) do
 
   add_index "codes", ["body"], name: "index_codes_on_body", unique: true, using: :btree
   add_index "codes", ["user_id"], name: "index_codes_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "entry_id"
+    t.integer  "parent_id"
+    t.integer  "user_id"
+    t.boolean  "is_visible", default: true, null: false
+    t.text     "body",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["entry_id"], name: "index_comments_on_entry_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "entries", force: true do |t|
     t.integer  "user_id"

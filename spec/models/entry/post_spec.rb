@@ -21,11 +21,5 @@ describe Entry::Post do
       post.tags << tag
       expect { post.destroy }.to change(tag, :entries_count).by(-1)
     end
-
-    it "decrements entries_count for user" do
-      user = create(:user)
-      post = create(:post, user: user)
-      expect { post.destroy }.to change(user, :entries_count).by(-1)
-    end
   end
 end
