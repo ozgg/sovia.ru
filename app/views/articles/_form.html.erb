@@ -1,7 +1,7 @@
 <%= form_for(@entry) do |f| %>
     <% if @entry.errors.any? %>
         <div class="errors">
-          <h2><%= pluralize(@entry.errors.count, 'error') %>:</h2>
+          <h2><%= t('error', count: @entry.errors.count) %>:</h2>
 
           <ul>
             <% @entry.errors.full_messages.each do |msg| %>

@@ -297,3 +297,13 @@ ru:
     comments:
       add_comment: "Добавить комментарий"
       comments: "Комментарии"
+  error:
+    zero: "нет ошибок"
+    one: "%{count} ошибка"
+    few: "%{count} ошибки"
+    other: "%{count} ошибок"
+  comment:
+    zero: "нет комментариев"
+    one: "%{count} комментарий"
+    few: "%{count} комментария"
+    other: "%{count} комментариев"

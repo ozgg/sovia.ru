@@ -1,7 +1,7 @@
 <%= form_for @entry do |f| %>
     <% if @entry.errors.any? %>
         <div class="errors">
-          <h2><%= pluralize(@entry.errors.count, 'error') %>:</h2>
+          <h2><%= t('error', count: @entry.errors.count) %>:</h2>
 
           <ul>
             <% @entry.errors.full_messages.each do |msg| %>
@@ -26,7 +26,7 @@
     <% unless current_user.nil? || (!@entry.new_record? && @entry.user.nil?) %>
         <div>
           <%= f.label :privacy %>
-          <%= f.select :privacy, Dream.privacy_modes.invert %>
+          <%= f.select :privacy, Entry::Dream.privacy_modes.invert %>
         </div>
     <% end %>
     <div>

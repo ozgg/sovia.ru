@@ -47,7 +47,7 @@
     <% end %>
   </div>
   <footer>
-    <%= entry.comments_count %>
+    <%= t('comment', count: entry.comments_count) %>
     <%= render 'layouts/social' unless local_assigns[:preview] %>
   </footer>
 </article>
