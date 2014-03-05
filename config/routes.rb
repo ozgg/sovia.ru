@@ -1,6 +1,5 @@
 Sovia::Application.routes.draw do
-  get "recoveries/show"
-  get "confirmations/index"
+
   root 'index#index'
 
   resources :dreams, as: :entry_dreams do
@@ -47,6 +46,14 @@ Sovia::Application.routes.draw do
     controller :statistics do
       get '/' => :index, as: :statistics
       get '/symbols' => :symbols, as: :statistics_symbols
+    end
+  end
+
+  scope '/about' do
+    controller :about do
+      get '/' => :index
+      get '/features' => :features
+      get '/changelog' => :changelog
     end
   end
 
