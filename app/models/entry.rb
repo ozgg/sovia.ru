@@ -11,7 +11,7 @@ class Entry < ActiveRecord::Base
   validates_presence_of :body, :type
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
-  after_create :make_url_title
+  before_validation :make_url_title
   before_destroy :decrement_entries_counter
 
   def self.privacy_modes
