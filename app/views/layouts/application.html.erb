@@ -36,6 +36,9 @@
 
 <footer>
   <div class="copyright">&#0169; 2006&#0150;2014 sovia.ru</div>
+  <% if Rails.env.production? %>
+      <%= render 'index/metrics' %>
+  <% end %>
 </footer>
 </body>
 </html>
