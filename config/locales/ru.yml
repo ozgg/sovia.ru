@@ -19,6 +19,12 @@ ru:
           attributes:
             body:
               blank: "не может быть пустым"
+        comment:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+            entry_id:
+              blank: "не может быть пустым"
     models:
       entry_dream: "сон"
       entry_article: "статья"
@@ -26,6 +32,7 @@ ru:
       entry_thought: "мысль"
       user: "пользователь"
       tag: "метка"
+      comment: "комментарий"
     attributes:
       entry:
         title: "Название"
@@ -41,6 +48,8 @@ ru:
         password_confirmation: "Подтверждение пароля"
         email: "E-mail"
         allow_mail: "Получать уведомления по электронной почте"
+      comment:
+        body: "Комментарий"
     properties:
       entry:
         privacy:
@@ -205,6 +214,7 @@ ru:
       articles: "Статьи"
       dreams: "Сны"
       new_dream: "Описать сон"
+      about: "О проекте"
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"
@@ -283,3 +293,7 @@ ru:
     generation_error: "Ошибка создания кода"
   comment:
     created: "Комментарий добавлен"
+  entries:
+    comments:
+      add_comment: "Добавить комментарий"
+      comments: "Комментарии"

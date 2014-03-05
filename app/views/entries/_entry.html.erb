@@ -3,7 +3,7 @@
     <figure><%= raw user_avatar(entry.user) %></figure>
     <h2>
       <% if local_assigns[:preview] %>
-        <%= link_to entry.parsed_title, post %>
+        <%= link_to entry.parsed_title, entry %>
     <% else %>
         <%= entry.parsed_title %>
     <% end %>
@@ -13,14 +13,14 @@
 
     <div class="author">
       <%= user_link entry.user %>,
-      <%= t("activerecord.models.#{entry.class.to_s.downcase.gsub('::', '.')}") + ' ' + t('at') %>
+      <%= t("activerecord.models.#{entry.class.to_s.downcase.gsub('::', '_')}") + ' ' + t('at') %>
       <time datetime="<%= entry.created_at %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
 
     <% tags = entry.tags %>
     <% if tags.any? %>
         <div class="tags">
-          <div><%= t('.tags') %></div>
+          <div><%= t('posts.post.tags') %></div>
           <nav>
             <ul>
               <% tags.each do |tag| %>
@@ -51,3 +51,7 @@
     <%= render 'layouts/social' unless local_assigns[:preview] %>
   </footer>
 </article>
+
+<% unless local_assigns[:preview] %>
+    <%= render partial: 'entries/comments', locals: { entry: entry } %>
+<% end %>

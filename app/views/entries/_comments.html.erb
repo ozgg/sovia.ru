@@ -1,0 +1,17 @@
+<% @comment = Comment.new(entry: entry) %>
+<% if entry.comments.any? %>
+    <h3><%= t('.comments') %></h3>
+    <ul class="comments">
+      <% entry.comments.each do |comment| %>
+      <li>
+        <div><%= user_link(comment.user) %>, <%= comment.created_at %></div>
+        <%= comment.body %>
+      </li>
+      <% end %>
+    </ul>
+<% end %>
+
+<div>
+  <h3><%= t('.add_comment') %></h3>
+  <%= render 'comments/form' %>
+</div>

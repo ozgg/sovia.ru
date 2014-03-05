@@ -51,7 +51,7 @@ Sovia::Application.routes.draw do
 
   scope '/about' do
     controller :about do
-      get '/' => :index
+      get '/' => :index, as: :about
       get '/features' => :features
       get '/changelog' => :changelog
     end
