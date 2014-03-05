@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    check_rights
     if @comment.save
       flash[:notice] = t('comment.created')
       redirect_to @comment.entry
@@ -19,6 +20,7 @@ class CommentsController < ApplicationController
   end
 
   def check_rights
-    raise ForbiddenException unless @comment.visible_to?(current_user)
+    entry = @comment.entry
+    raise ForbiddenException unless entry.nil? || entry.visible_to?(current_user)
   end
 end
