@@ -23,6 +23,7 @@ Sovia::Application.routes.draw do
   resources :articles, as: :entry_articles
   resources :posts, as: :entry_posts
   resources :users, only: [:new, :create]
+  resources :comments, only: [:create]
 
   namespace :my do
     get '/' => 'index#index'

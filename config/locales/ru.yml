@@ -281,3 +281,5 @@ ru:
     set_email: "Задайте адрес электронной почты"
   code:
     generation_error: "Ошибка создания кода"
+  comment:
+    created: "Комментарий добавлен"
