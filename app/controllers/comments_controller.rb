@@ -5,11 +5,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     check_rights
-    if @comment.save
-      flash[:notice] = t('comment.created')
-      redirect_to @comment.entry
+    if suspect_spam?(@comment.user, @comment.body)
+      redirect_with_confirmation
     else
-      render action: :new
+      save_comment
     end
   end
 
@@ -22,5 +21,18 @@ class CommentsController < ApplicationController
   def check_rights
     entry = @comment.entry
     raise ForbiddenException unless entry.nil? || entry.visible_to?(current_user)
+  end
+
+  def save_comment
+    if @comment.save
+      redirect_with_confirmation
+    else
+      render action: :new
+    end
+  end
+
+  def redirect_with_confirmation
+    flash[:notice] = t('comment.created')
+    redirect_to @comment.entry
   end
 end

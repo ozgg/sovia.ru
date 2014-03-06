@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   ROLE_ANYONE    = 0
   ROLE_EDITOR    = 1
   ROLE_MODERATOR = 2
+  ROLE_DECENT    = 4
 
   has_many :entries, dependent: :restrict_with_exception
   has_many :codes, dependent: :destroy
@@ -21,6 +22,10 @@ class User < ActiveRecord::Base
 
   def editor?
     has_role? ROLE_EDITOR
+  end
+
+  def decent?
+    has_role? ROLE_DECENT
   end
 
   def has_role?(role)

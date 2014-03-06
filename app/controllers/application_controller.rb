@@ -32,4 +32,12 @@ class ApplicationController < ActionController::Base
   def demand_role(role)
     raise UnauthorizedException if current_user.nil? || !current_user.has_role?(role)
   end
+
+  def suspect_spam?(user, text, tolerance = 1)
+    if user.nil? || !user.decent?
+      text.scan(/https?:\/\//).length >= tolerance
+    else
+      false
+    end
+  end
 end
