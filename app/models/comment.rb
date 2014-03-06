@@ -5,4 +5,9 @@ class Comment < ActiveRecord::Base
   has_many :comments
 
   validates_presence_of :entry, :body
+
+  def notify_entry_owner?
+    owner = entry.user
+    !owner.nil? && owner.can_receive_letters? && owner != user
+  end
 end

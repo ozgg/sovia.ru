@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     roles_mask & role == role
   end
 
+  def can_receive_letters?
+    mail_confirmed? && allow_mail? && !email.blank?
+  end
+
   def email_confirmation
     Code::Confirmation.code_for_user(self) unless mail_confirmed? || email.blank?
   end

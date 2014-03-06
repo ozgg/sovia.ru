@@ -17,4 +17,41 @@ describe Comment do
       expect(comment.errors).to have_key(:entry)
     end
   end
+
+  context "#notify_entry_owner?" do
+    shared_examples "non-notifier" do
+      it "returns false" do
+        expect(comment).not_to be_notify_entry_owner
+      end
+    end
+
+    context "when entry is anonymous" do
+      let(:comment) { create(:comment, entry: create(:dream)) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when entry owner cannot receive letters" do
+      let(:user) { create(:user) }
+      let(:comment) { create(:comment, entry: create(:owned_dream, user: user) ) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when commentator is entry owner" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:comment) { create(:comment, entry: create(:owned_dream, user: user), user: user ) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when commentator is not entry owner who can receive letters" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:comment) { create(:comment, entry: create(:owned_dream, user: user))}
+
+      it "returns true" do
+        expect(comment).to be_notify_entry_owner
+      end
+    end
+  end
 end
