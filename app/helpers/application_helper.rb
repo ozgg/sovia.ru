@@ -21,4 +21,18 @@ module ApplicationHelper
   def link_to_dream(dream)
     link_to dream.parsed_title, entry_dream_path(dream)
   end
+
+  def comment_url(comment)
+    entry  = comment.entry
+    anchor = "comment-#{comment.id}"
+    if entry.is_a? Entry::Article
+      entry_article_url entry, anchor: anchor
+    elsif entry.is_a? Entry::Dream
+      entry_dream_url entry, anchor: anchor
+    elsif entry.is_a? Entry::Post
+      entry_post_url entry, anchor: anchor
+    else
+      "Entry #{entry.id}"
+    end
+  end
 end
