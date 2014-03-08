@@ -23,11 +23,10 @@ class DreamsController < ApplicationController
   # post /dreams
   def create
     @entry = Entry::Dream.new(dream_parameters.merge(user: current_user))
-    if @entry.save
-      flash[:notice] = t('entry.dream.created')
-      redirect_to @entry
+    if suspect_spam?(current_user, @entry.body, 2)
+      emulate_saving
     else
-      render action: 'new'
+      create_dream
     end
   end
 
@@ -100,5 +99,19 @@ class DreamsController < ApplicationController
     raise record_not_found if @tag.nil?
 
     allowed_dreams.joins(:entry_tags).where(entry_tags: { tag: @tag })
+  end
+
+  def create_dream
+    if @entry.save
+      flash[:notice] = t('entry.dream.created')
+      redirect_to @entry
+    else
+      render action: 'new'
+    end
+  end
+
+  def emulate_saving
+    flash[:notice] = t('entry.dream.created')
+    redirect_to entry_dreams_path
   end
 end

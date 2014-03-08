@@ -76,7 +76,10 @@ describe DreamsController do
     end
 
     context "post create with valid parameters" do
-      before(:each) { post :create, entry_dream: { body: 'b' } }
+      before(:each) do
+        allow(controller).to receive(:'suspect_spam?')
+        post :create, entry_dream: { body: 'b' }
+      end
 
       it "assigns a new dream to @entry" do
         expect(assigns[:entry]).to be_an(Entry::Dream)
@@ -92,6 +95,10 @@ describe DreamsController do
 
       it "redirects to created dream" do
         expect(response).to redirect_to(Entry::Dream.last)
+      end
+
+      it "checks suspects spam" do
+        expect(controller).to have_received(:'suspect_spam?')
       end
     end
 
