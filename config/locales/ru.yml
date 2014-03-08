@@ -215,6 +215,7 @@ ru:
       dreams: "Сны"
       new_dream: "Описать сон"
       about: "О проекте"
+      terms_of_service: "Пользовательское соглашение"
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"

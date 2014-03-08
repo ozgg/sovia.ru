@@ -40,6 +40,7 @@
   <% if Rails.env.production? %>
       <%= render 'index/metrics' %>
   <% end %>
+  <p><%= link_to t('.terms_of_service'), tos_path %></p>
 </footer>
 </body>
 </html>

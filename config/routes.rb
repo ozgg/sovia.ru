@@ -57,6 +57,9 @@ Sovia::Application.routes.draw do
     end
   end
 
+  get 'tos' => 'about#terms_of_service'
+  get 'privacy' => 'about#privacy'
+
   # Obsolete routes
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')

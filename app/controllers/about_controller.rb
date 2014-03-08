@@ -7,4 +7,10 @@ class AboutController < ApplicationController
 
   def changelog
   end
+
+  def terms_of_service
+  end
+
+  def privacy
+  end
 end
