@@ -1,10 +1,17 @@
 require 'spec_helper'
 
 describe CommentsController do
-  let(:entry) { create(:dream) }
+  let(:owner) { create(:confirmed_user, allow_mail: true) }
+  let(:entry) { create(:owned_dream, user: owner) }
 
   context "post create with valid parameters" do
     let(:comment_parameters) { { entry_id: entry.id, body: 'Oh, hi!' } }
+    let(:mailer) { double(Comments).as_null_object }
+
+    before (:each) do
+      allow(Comments).to receive(:entry_reply).and_return (mailer)
+      allow(mailer).to receive(:send)
+    end
 
     it "assigns a new Comment to @comment" do
       post :create, comment: comment_parameters
@@ -23,6 +30,11 @@ describe CommentsController do
     it "redirects to entry path" do
       post :create, comment: comment_parameters
       expect(response).to redirect_to(entry)
+    end
+
+    it "notifies entry owner" do
+      expect(mailer).to receive(:send)
+      post :create, comment: comment_parameters
     end
   end
 
