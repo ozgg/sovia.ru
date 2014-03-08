@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
 
   def suspect_spam?(user, text, tolerance = 1)
     if user.nil? || !user.decent?
+      unless user.nil?
+        tolerance += 1 if user.mail_confirmed?
+        tolerance += 1 if user.entries_count > 10 && user.comments_count > 30
+      end
       text.scan(/https?:\/\//).length >= tolerance
     else
       false

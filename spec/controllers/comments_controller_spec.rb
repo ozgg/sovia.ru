@@ -11,6 +11,7 @@ describe CommentsController do
     before (:each) do
       allow(Comments).to receive(:entry_reply).and_return (mailer)
       allow(mailer).to receive(:send)
+      allow(controller).to receive(:'suspect_spam?')
     end
 
     it "assigns a new Comment to @comment" do
@@ -34,6 +35,11 @@ describe CommentsController do
 
     it "notifies entry owner" do
       expect(mailer).to receive(:send)
+      post :create, comment: comment_parameters
+    end
+
+    it "calls suspect_spam? for controller" do
+      expect(controller).to receive(:'suspect_spam?')
       post :create, comment: comment_parameters
     end
   end
