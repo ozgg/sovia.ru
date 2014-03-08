@@ -75,7 +75,10 @@ describe PostsController do
     end
 
     context "post create with valid parameters" do
-      before(:each) { post :create, entry_post: { title: 'a', body: 'b' } }
+      before(:each) do
+        allow(controller).to receive(:'suspect_spam?')
+        post :create, entry_post: { title: 'a', body: 'b' }
+      end
 
       it "assigns a new post to @entry" do
         expect(assigns[:entry]).to be_an(Entry::Post)
@@ -91,6 +94,10 @@ describe PostsController do
 
       it "redirects to created post" do
         expect(response).to redirect_to(Entry::Post.last)
+      end
+
+      it "suspects spam" do
+        expect(controller).to have_received(:'suspect_spam?')
       end
     end
 

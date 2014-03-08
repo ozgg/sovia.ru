@@ -20,11 +20,10 @@ class PostsController < ApplicationController
   def create
     @title = t('titles.posts.new')
     @entry = Entry::Post.new(post_parameters.merge(user: current_user))
-    if @entry.save
-      flash[:notice] = t('entry.post.created')
-      redirect_to @entry
+    if suspect_spam?(current_user, @entry.body, 2)
+      emulate_saving
     else
-      render action: :new
+      create_post
     end
   end
 
@@ -79,5 +78,19 @@ class PostsController < ApplicationController
     maximal_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
 
     Entry::Post.recent.where("privacy <= #{maximal_privacy}")
+  end
+
+  def emulate_saving
+    flash[:notice] = t('entry.post.created')
+    redirect_to entry_posts_path
+  end
+
+  def create_post
+    if @entry.save
+      flash[:notice] = t('entry.post.created')
+      redirect_to @entry
+    else
+      render action: :new
+    end
   end
 end
