@@ -13,9 +13,11 @@ class EntryTag < ActiveRecord::Base
 
   def increment_entries_count
     tag.increment! :entries_count
+    UserTag.consider_increment(self)
   end
 
   def decrement_entries_count
     tag.decrement! :entries_count
+    UserTag.consider_decrement(self)
   end
 end

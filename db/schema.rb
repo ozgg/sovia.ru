@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305104237) do
+ActiveRecord::Schema.define(version: 20140309103829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(version: 20140305104237) do
   add_index "tags", ["type", "canonical_name"], name: "index_tags_on_type_and_canonical_name", unique: true, using: :btree
   add_index "tags", ["type", "entries_count"], name: "index_tags_on_type_and_entries_count", using: :btree
   add_index "tags", ["type", "letter"], name: "index_tags_on_type_and_letter", using: :btree
+
+  create_table "user_tags", force: true do |t|
+    t.integer "user_id",                   null: false
+    t.integer "tag_id",                    null: false
+    t.integer "entries_count", default: 0, null: false
+  end
+
+  add_index "user_tags", ["tag_id"], name: "index_user_tags_on_tag_id", using: :btree
+  add_index "user_tags", ["user_id", "tag_id"], name: "index_user_tags_on_user_id_and_tag_id", unique: true, using: :btree
+  add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                           null: false

@@ -38,6 +38,17 @@ describe Entry::Dream do
       dream.tags << existing_tag
       expect { dream.tags_string = 'другое' }.to change(existing_tag, :entries_count).by(-1)
     end
+
+    it "adds user's tags" do
+      expect(UserTag).to receive(:consider_increment)
+      dream.tags << existing_tag
+    end
+
+    it "subtracts user's tags" do
+      expect(UserTag).to receive(:subtract_tag)
+      dream.tags << existing_tag
+      dream.tags_string = 'Другое, прочее'
+    end
   end
 
   context "#tags_string" do

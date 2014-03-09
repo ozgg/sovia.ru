@@ -11,7 +11,7 @@ class Entry < ActiveRecord::Base
   validates_presence_of :body, :type
   validates_inclusion_of :privacy, in: [PRIVACY_NONE, PRIVACY_USERS, PRIVACY_OWNER]
 
-  before_validation :make_url_title
+  before_save :make_url_title
   before_destroy :decrement_entries_counter
 
   def self.privacy_modes
@@ -78,7 +78,10 @@ class Entry < ActiveRecord::Base
   def tags_string=(new_tags_string)
     new_tags = new_tags_from_string new_tags_string
 
-    (tags - new_tags).each { |tag_to_delete| tag_to_delete.decrement! :entries_count }
+    (tags - new_tags).each do |tag_to_delete|
+      tag_to_delete.decrement! :entries_count
+      UserTag.subtract_tag user, tag_to_delete
+    end
 
     self.tags = new_tags
   end

@@ -1,6 +1,7 @@
 class Tag < ActiveRecord::Base
   has_many :entry_tags
   has_many :entries, through: :entry_tags
+  has_many :user_tags, dependent: :destroy
 
   validates_presence_of :name, :type
   validates_uniqueness_of :canonical_name, scope: [:type]
