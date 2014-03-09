@@ -1,7 +1,7 @@
 class Entry::Dream < Entry
 
   def self.random_dream
-    max_id = public_entries.maximum(:id)
+    max_id = public_entries.maximum(:id) + 1
     public_entries.where("id >= #{rand(max_id)}").first
   end
 

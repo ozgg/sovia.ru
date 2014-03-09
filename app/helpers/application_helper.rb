@@ -23,16 +23,33 @@ module ApplicationHelper
   end
 
   def comment_url(comment)
-    entry  = comment.entry
-    anchor = "comment-#{comment.id}"
+    parameters = {
+        id: comment.entry.id,
+        uri_title: comment.entry.url_title || 'bez-nazvaniya',
+        anchor: "comment-#{comment.id}"
+    }
     if entry.is_a? Entry::Article
-      entry_article_url entry, anchor: anchor
+      verbose_entry_articles_url parameters
     elsif entry.is_a? Entry::Dream
-      entry_dream_url entry, anchor: anchor
+      verbose_entry_dreams_url parameters
     elsif entry.is_a? Entry::Post
-      entry_post_url entry, anchor: anchor
+      verbose_entry_posts_url parameters
     else
       "Entry #{entry.id}"
+    end
+  end
+
+  def verbose_entry_path(entry)
+    parameters = {
+        id:        entry.id,
+        uri_title: entry.url_title || 'bez-nazvaniya'
+    }
+    if entry.is_a? Entry::Article
+      verbose_entry_articles_path(parameters)
+    elsif entry.is_a? Entry::Dream
+      verbose_entry_dreams_path(parameters)
+    elsif entry.is_a? Entry::Post
+      verbose_entry_posts_path(parameters)
     end
   end
 end
