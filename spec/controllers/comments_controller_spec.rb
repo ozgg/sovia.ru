@@ -30,7 +30,7 @@ describe CommentsController do
 
     it "redirects to entry path" do
       post :create, comment: comment_parameters
-      expect(response).to redirect_to(entry)
+      expect(response).to redirect_to(verbose_entry_dreams_path(id: entry, uri_title: entry.url_title))
     end
 
     it "notifies entry owner" do

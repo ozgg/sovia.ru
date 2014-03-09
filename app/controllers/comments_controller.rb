@@ -34,6 +34,6 @@ class CommentsController < ApplicationController
 
   def redirect_with_confirmation
     flash[:notice] = t('comment.created')
-    redirect_to @comment.entry
+    redirect_to view_context.verbose_entry_path(@comment.entry)
   end
 end
