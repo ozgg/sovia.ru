@@ -292,8 +292,6 @@ ru:
     set_email: "Задайте адрес электронной почты"
   code:
     generation_error: "Ошибка создания кода"
-  comment:
-    created: "Комментарий добавлен"
   entries:
     comments:
       add_comment: "Добавить комментарий"
@@ -308,3 +306,4 @@ ru:
     one: "%{count} комментарий"
     few: "%{count} комментария"
     other: "%{count} комментариев"
+    created: "Комментарий добавлен"

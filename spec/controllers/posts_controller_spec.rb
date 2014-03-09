@@ -12,7 +12,7 @@ describe PostsController do
 
   shared_examples "post redirector" do
     it "redirects to post path" do
-      expect(response).to redirect_to(entry)
+      expect(response).to redirect_to(verbose_entry_posts_path(id: entry.id, uri_title: entry.url_title))
     end
   end
 
@@ -93,7 +93,8 @@ describe PostsController do
       end
 
       it "redirects to created post" do
-        expect(response).to redirect_to(Entry::Post.last)
+        entry = Entry::Post.last
+        expect(response).to redirect_to(verbose_entry_posts_path(id: entry.id, uri_title: entry.url_title))
       end
 
       it "suspects spam" do
@@ -130,10 +131,12 @@ describe PostsController do
     end
 
     context "patch update with valid parameters" do
-      before(:each) { patch :update, id: entry, entry_post: { title: 'a', body: 'b' } }
+      before(:each) do
+        patch :update, id: entry, entry_post: { title: 'a', body: 'b' }
+        entry.reload
+      end
 
       it "updates entry" do
-        entry.reload
         expect(entry.title).to eq('a')
       end
 

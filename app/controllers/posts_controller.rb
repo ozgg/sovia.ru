@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     @title = t('titles.posts.edit')
     if @entry.update(post_parameters)
       flash[:notice] = t('entry.post.updated')
-      redirect_to @entry
+      redirect_to verbose_entry_posts_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: :edit
     end
@@ -88,7 +88,7 @@ class PostsController < ApplicationController
   def create_post
     if @entry.save
       flash[:notice] = t('entry.post.created')
-      redirect_to @entry
+      redirect_to verbose_entry_posts_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: :new
     end
