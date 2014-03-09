@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     @entry = Entry::Article.new(article_parameters.merge(user: current_user))
     if @entry.save
       flash[:notice] = t('entry.article.created')
-      redirect_to @entry
+      redirect_to verbose_entry_articles_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'new'
     end
@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
   def update
     if @entry.update(article_parameters)
       flash[:notice] = t('entry.article.updated')
-      redirect_to @entry
+      redirect_to verbose_entry_articles_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'edit'
     end

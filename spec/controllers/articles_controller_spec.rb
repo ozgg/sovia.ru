@@ -11,7 +11,7 @@ describe ArticlesController do
 
   shared_examples "article redirector" do
     it "redirects to article path" do
-      expect(response).to redirect_to(article)
+      expect(response).to redirect_to(verbose_entry_articles_path(id: article.id, uri_title: article.url_title))
     end
   end
 
@@ -98,7 +98,8 @@ describe ArticlesController do
       end
 
       it "redirects to created article" do
-        expect(response).to redirect_to(Entry::Article.last)
+        entry = Entry::Article.last
+        expect(response).to redirect_to(verbose_entry_articles_path(id: entry.id, uri_title: entry.url_title))
       end
     end
 
@@ -129,10 +130,12 @@ describe ArticlesController do
     end
 
     context "patch update with valid parameters" do
-      before(:each) { patch :update, id: article, entry_article: { title: 'a', body: 'b' } }
+      before(:each) do
+        patch :update, id: article, entry_article: { title: 'a', body: 'b' }
+        article.reload
+      end
 
       it "updates article" do
-        article.reload
         expect(article.title).to eq('a')
       end
 
