@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Entry::Dream do
+  context "before saving" do
+    it "generates url_title" do
+      dream = Entry::Dream.new(body: 'Просто сон', title: 'Проверка')
+      dream.save
+      expect(dream.url_title).to eq('proverka')
+    end
+  end
+
   context "#tags_string=" do
     let!(:existing_tag) { create(:dream_tag, name: 'Раз') }
     let(:dream) { create(:dream) }

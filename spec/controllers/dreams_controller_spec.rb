@@ -14,7 +14,7 @@ describe DreamsController do
 
   shared_examples "dream redirector" do
     it "redirects to dream path" do
-      expect(response).to redirect_to(entry)
+      expect(response).to redirect_to(verbose_entry_dreams_path(id: entry.id, uri_title: entry.url_title))
     end
   end
 
@@ -94,7 +94,8 @@ describe DreamsController do
       end
 
       it "redirects to created dream" do
-        expect(response).to redirect_to(Entry::Dream.last)
+        dream = Entry::Dream.last
+        expect(response).to redirect_to(verbose_entry_dreams_path(id: dream.id, uri_title: dream.url_title))
       end
 
       it "checks suspects spam" do
@@ -131,10 +132,12 @@ describe DreamsController do
     end
 
     context "patch update with valid parameters" do
-      before(:each) { patch :update, id: entry, entry_dream: { title: 'a', body: 'b' } }
+      before(:each) do
+        patch :update, id: entry, entry_dream: { title: 'a', body: 'b' }
+        entry.reload
+      end
 
       it "updates dream" do
-        entry.reload
         expect(entry.title).to eq('a')
       end
 

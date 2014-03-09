@@ -7,6 +7,7 @@ Sovia::Application.routes.draw do
       get 'random' => :random
       get 'tagged/:tag' => :tagged, as: :tagged
       get 'of/:login' => :dreams_of_user, as: :user
+      get ':id-:uri_title' => :show, as: :verbose
     end
   end
 
@@ -19,8 +20,18 @@ Sovia::Application.routes.draw do
     end
   end
 
-  resources :articles, as: :entry_articles
-  resources :posts, as: :entry_posts
+  resources :articles, as: :entry_articles do
+    collection do
+      get ':id-:uri_title' => :show, as: :verbose
+    end
+  end
+  
+  resources :posts, as: :entry_posts do
+    collection do
+      get ':id-:uri_title' => :show, as: :verbose
+    end
+  end
+
   resources :users, only: [:new, :create]
   resources :comments, only: [:create]
 

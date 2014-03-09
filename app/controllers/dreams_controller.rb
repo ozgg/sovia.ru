@@ -39,7 +39,7 @@ class DreamsController < ApplicationController
   def update
     if @entry.update(dream_parameters)
       flash[:notice] = t('entry.dream.updated')
-      redirect_to @entry
+      redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'edit'
     end
@@ -104,7 +104,7 @@ class DreamsController < ApplicationController
   def create_dream
     if @entry.save
       flash[:notice] = t('entry.dream.created')
-      redirect_to @entry
+      redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'new'
     end
