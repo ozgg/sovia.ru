@@ -160,6 +160,8 @@ ru:
       view: "К просмотру сна"
     random:
       title: "Случайный сон"
+    archive:
+      year: "%{year} год"
   tags:
     list:
       no_tags: "Меток нет"
@@ -307,3 +309,11 @@ ru:
     few: "%{count} комментария"
     other: "%{count} комментариев"
     created: "Комментарий добавлен"
+  controllers:
+    dreams:
+      archive: "Архив снов"
+      archive_year: ", %{year} год"
+  date:
+    month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
+    formats:
+      short: "%B %Y"

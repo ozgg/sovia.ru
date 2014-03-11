@@ -73,6 +73,14 @@ class DreamsController < ApplicationController
     @entries = allowed_dreams.where(user: user).page(page).per(5)
   end
 
+  def archive
+    @title = t('controllers.dreams.archive')
+    @title += t('controllers.dreams.archive_year', year: params[:year]) unless params[:year].nil?
+    @title += ', ' + t('date.month_names')[params[:month].to_i] unless params[:month].nil?
+    collect_months
+    collect_archive unless params[:month].nil?
+  end
+
   private
 
   def set_dream
@@ -113,5 +121,22 @@ class DreamsController < ApplicationController
   def emulate_saving
     flash[:notice] = t('entry.dream.created')
     redirect_to entry_dreams_path
+  end
+
+  def collect_months
+    @dates = {}
+
+    Entry::Dream.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
+      if @dates[date.year].nil?
+        @dates[date.year] = []
+      end
+      @dates[date.year] << date.month
+    end
+  end
+
+  def collect_archive
+    first_day = Date.new(params[:year].to_i, params[:month].to_i)
+    page      = params[:page] || 1
+    @dreams   = allowed_dreams.where(created_at: first_day..first_day.at_end_of_month).page(page).per(20)
   end
 end
