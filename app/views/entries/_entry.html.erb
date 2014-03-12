@@ -1,6 +1,6 @@
 <article class="entry">
   <header>
-    <figure><%= raw user_avatar(entry.user) %></figure>
+    <figure><%= raw entry_avatar(entry.user) %></figure>
     <h2>
       <% if local_assigns[:preview] %>
         <%= link_to entry.parsed_title, verbose_entry_path(entry) %>

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validate :email_should_be_reasonable
   before_validation :normalize_login, :normalize_email
 
-  mount_uploader :image, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   def moderator?
     has_role? ROLE_MODERATOR

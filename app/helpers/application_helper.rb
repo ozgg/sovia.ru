@@ -18,6 +18,15 @@ module ApplicationHelper
     end
   end
 
+  def entry_avatar(user)
+    attributes = { width: 100, height: 100 }
+    if user.nil?
+      image_tag 'fallback/entry_default.png', attributes
+    else
+      image_tag user.avatar.entry.url, attributes
+    end
+  end
+
   def link_to_dream(dream)
     link_to dream.parsed_title, entry_dream_path(dream)
   end
