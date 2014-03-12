@@ -30,6 +30,8 @@ group :doc do
 end
 
 gem 'kaminari'
+gem 'mini_magick'
+gem 'carrierwave'
 
 gem 'bcrypt-ruby', '~> 3.1.2'
 
