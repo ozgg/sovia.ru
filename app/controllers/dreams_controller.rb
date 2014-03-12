@@ -135,8 +135,8 @@ class DreamsController < ApplicationController
   end
 
   def collect_archive
-    first_day = Date.new(params[:year].to_i, params[:month].to_i)
     page      = params[:page] || 1
-    @dreams   = allowed_dreams.where(created_at: first_day..first_day.at_end_of_month).page(page).per(20)
+    first_day = "%04d-%02d-01 00:00:00" % [params[:year], params[:month]]
+    @dreams   = allowed_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(page).per(20)
   end
 end

@@ -17,7 +17,7 @@
               <% @dreams.each do |dream| %>
               <li>
                 <%= link_to dream.parsed_title, verbose_entry_path(dream) %>
-                (<time datetime="<%= dream.created_at %>"><%= dream.created_at.strftime('%d.%m.%Y') %></time>)
+                (<time datetime="<%= dream.created_at %>"><%= dream.created_at.utc.strftime('%d.%m.%Y') %></time>)
               </li>
               <% end %>
             </ul>
