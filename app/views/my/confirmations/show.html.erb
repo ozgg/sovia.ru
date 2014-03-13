@@ -1,18 +1,29 @@
+<header>
+  <h1><%= @title %></h1>
+</header>
+
 <% if current_user && current_user.mail_confirmed? %>
     <div class="information"><%= t('user.email_confirmed') %></div>
 <% else %>
-    <%= form_tag my_confirmation_path, method: :patch do %>
-        <div>
-          <%= text_field_tag :code %>
-        </div>
-        <div>
-          <%= button_tag t('submit'), type: :submit %>
-        </div>
-    <% end %>
+    <article class="confirmation">
+      <h2><%= t('.got_code') %></h2>
+      <%= form_tag my_confirmation_path, method: :patch do %>
+          <div>
+            <%= label_tag :code, t('.code') %>
+            <%= text_field_tag :code, params[:code], required: true %>
+          </div>
+          <div>
+            <%= button_tag t('.confirm'), type: :submit %>
+          </div>
+      <% end %>
+    </article>
 
-    <%= form_tag my_confirmation_path, method: :post do %>
-        <div>
-          <%= button_tag t('confirmation.send_code'), type: :submit %>
-        </div>
-    <% end %>
+    <article class="confirmation">
+      <h2><%= t('.no_code') %></h2>
+      <%= form_tag my_confirmation_path, method: :post do %>
+          <div>
+            <%= button_tag t('confirmation.send_code'), type: :submit %>
+          </div>
+      <% end %>
+    </article>
 <% end %>

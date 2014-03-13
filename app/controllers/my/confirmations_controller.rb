@@ -4,6 +4,7 @@ class My::ConfirmationsController < ApplicationController
   before_action :redirect_confirmed_user
 
   def show
+    @title = t('controllers.my.confirmations.show')
   end
 
   def create
