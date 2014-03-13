@@ -35,6 +35,15 @@ module ApplicationHelper
     end
   end
 
+  def comment_avatar(user)
+    attributes = { width: 50, height: 50 }
+    if user.nil?
+      image_tag 'fallback/avatar/comment_default.png', attributes
+    else
+      image_tag user.avatar.comment.url, attributes
+    end
+  end
+
   def link_to_dream(dream)
     link_to dream.parsed_title, entry_dream_path(dream)
   end

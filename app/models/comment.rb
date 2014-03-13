@@ -10,4 +10,8 @@ class Comment < ActiveRecord::Base
     owner = entry.user
     !owner.nil? && owner.can_receive_letters? && owner != user
   end
+
+  def parsed_body
+    '<p>' + CGI::escapeHTML(body.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+  end
 end

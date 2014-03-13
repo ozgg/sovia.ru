@@ -314,13 +314,15 @@ ru:
     comments:
       add_comment: "Добавить комментарий"
       comments: "Комментарии"
+    entry:
+      link: "Ссылка"
   error:
     zero: "нет ошибок"
     one: "%{count} ошибка"
     few: "%{count} ошибки"
     other: "%{count} ошибок"
   comment:
-    zero: "нет комментариев"
+    zero: "0 комментариев"
     one: "%{count} комментарий"
     few: "%{count} комментария"
     other: "%{count} комментариев"

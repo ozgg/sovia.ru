@@ -2,10 +2,16 @@
 <% if entry.comments.any? %>
     <h3><%= t('.comments') %></h3>
     <ul class="comments">
-      <% entry.comments.each do |comment| %>
+      <% entry.comments.order('id asc').each do |comment| %>
       <li>
-        <div><%= user_link(comment.user) %>, <%= comment.created_at %></div>
-        <%= comment.body %>
+        <div>
+          <figure>
+            <%= comment_avatar(comment.user) %>
+          </figure>
+          <%= user_link(comment.user) %><br />
+          <time datetime="<%= comment.created_at %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+        </div>
+        <%= raw comment.parsed_body %>
       </li>
       <% end %>
     </ul>

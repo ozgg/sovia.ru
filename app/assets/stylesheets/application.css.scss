@@ -8,6 +8,14 @@ html {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, Serif;
 }
 
+a:link {
+  color: #3d6d88;
+}
+
+a:visited {
+  color: #3e5c88;
+}
+
 body {
   background: image_url('moon.png') 0 0 no-repeat;
   margin: 0;
@@ -192,7 +200,7 @@ article {
 
   > div {
     p {
-      margin: 0.5em 0;
+      margin: 0.3em 0;
       text-indent: 1.5em;
     }
   }
@@ -222,9 +230,8 @@ div#notice {
 
 div.social-buttons {
   position: relative;
-  margin: 1em 0 0 0;
   padding: 0.5em;
-  border-top: dashed 1px;
+  margin: 0 300px;
 
   div.addthis-container {
     position: absolute;
