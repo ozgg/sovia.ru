@@ -48,6 +48,7 @@ ru:
         password_confirmation: "Подтверждение пароля"
         email: "E-mail"
         allow_mail: "Получать уведомления по электронной почте"
+        avatar: "Картинка пользователя"
       comment:
         body: "Комментарий"
     properties:
@@ -268,6 +269,9 @@ ru:
         password_confirmation: "Подтверждение нового пароля"
         sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль"
         leave_blank_if_necessary: "Если не меняете пароль, новый пароль вводить не нужно"
+        view: "В режим просмотра"
+        update_avatar: "Новая картинка пользователя"
+        avatar_demands: "Допустимые форматы – JPG, PNG. Лучше всего – квадратная картинка примерно 400x400."
       show:
         avatar: "Текущая картинка пользователя"
         created_at: "Дата регистрации на сайте"
@@ -328,9 +332,14 @@ ru:
     my:
       profiles:
         show: "Мой профиль"
+        edit: "Редактирование профиля"
       recoveries:
         show: "Сброс пароля"
   date:
     month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
     formats:
       short: "%B %Y"
+  edit: "Редактировать"
+  errors:
+    messages:
+      extension_white_list_error: "имеет недопустимое расширение"

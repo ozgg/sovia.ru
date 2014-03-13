@@ -6,13 +6,13 @@ class My::ProfilesController < ApplicationController
   end
 
   def edit
-
+    @title = t('controllers.my.profiles.edit')
   end
 
   def update
+    @title = t('controllers.my.profiles.edit')
     if params[:password].blank?
       update_common_parameters
-      redirect_to my_profile_path
     else
       if current_user.authenticate(params[:password])
         update_sensitive_parameters
@@ -26,8 +26,12 @@ class My::ProfilesController < ApplicationController
   protected
 
   def update_common_parameters
-    current_user.update(params.require(:profile).permit(:allow_mail))
-    flash[:notice] = t('profile.updated')
+    if current_user.update(params.require(:profile).permit(:allow_mail, :avatar))
+      flash[:notice] = t('profile.updated')
+      redirect_to my_profile_path
+    else
+      render action: :edit
+    end
   end
 
   def update_sensitive_parameters

@@ -1,45 +1,71 @@
 <header>
   <h1><%= @title %></h1>
   <h2><%= current_user.login %></h2>
+  <nav>
+    <ul>
+      <li><%= link_to t('.view'), my_profile_path %></li>
+    </ul>
+  </nav>
 </header>
 
-<figure>
-  <%= user_avatar current_user %>
-</figure>
-<%= form_tag my_profile_path, method: :patch do %>
-    <fieldset>
-      <legend><%= t('.common_parameters') %></legend>
-      <div>
-        <%= check_box_tag 'profile[allow_mail]', '1', current_user.allow_mail %>
-        <%= label_tag :profile_allow_mail, t('.allow_mail') %>
+<article class="profile">
+  <figure>
+    <%= profile_avatar current_user %>
+    <figcaption><%= t('my.profiles.show.avatar') %></figcaption>
+  </figure>
+
+  <% if current_user.errors.any? %>
+      <div class="errors">
+        <h2><%= t('error', count: current_user.errors.count) %>:</h2>
+
+        <ul>
+          <% current_user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
       </div>
-    </fieldset>
-    <fieldset>
-      <legend><%= t('.sensitive_parameters') %></legend>
-      <div class="notice"><%= t('.sensitive_parameters_notice') %></div>
+  <% end %>
+
+  <%= form_tag my_profile_path, method: :patch, multipart: true do %>
+      <fieldset>
+        <legend><%= t('.common_parameters') %></legend>
+        <div>
+          <%= label_tag :profile_avatar, t('.update_avatar') %><br />
+          <%= file_field_tag 'profile[avatar]', accept: 'image/jpeg, image/png' %>
+        </div>
+        <div class="notice"><%= t('.avatar_demands') %></div>
+        <div>
+          <%= check_box_tag 'profile[allow_mail]', '1', current_user.allow_mail %>
+          <%= label_tag :profile_allow_mail, t('.allow_mail') %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><%= t('.sensitive_parameters') %></legend>
+        <div class="notice"><%= t('.sensitive_parameters_notice') %></div>
+        <div>
+          <%= label_tag :password, t('.current_password') %>
+          <br/>
+          <%= password_field_tag 'password', '', size: 30 %>
+        </div>
+        <div>
+          <%= label_tag :profile_email, t('.email') %>
+          <br/>
+          <%= text_field_tag 'profile[email]', current_user.email, size: 30 %>
+        </div>
+        <div class="notice"><%= t('.leave_blank_if_necessary') %></div>
+        <div>
+          <%= label_tag :profile_password, t('.new_password') %>
+          <br/>
+          <%= password_field_tag 'profile[password]', '', size: 30 %>
+        </div>
+        <div>
+          <%= label_tag :profile_password_confirmation, t('.password_confirmation') %>
+          <br/>
+          <%= password_field_tag 'profile[password_confirmation]', '', size: 30 %>
+        </div>
+      </fieldset>
       <div>
-        <%= label_tag :password, t('.current_password') %>
-        <br/>
-        <%= password_field_tag 'password', '', size: 30 %>
+        <%= button_tag t('.update'), type: :submit %>
       </div>
-      <div>
-        <%= label_tag :profile_email, t('.email') %>
-        <br/>
-        <%= text_field_tag 'profile[email]', current_user.email, size: 30 %>
-      </div>
-      <div class="notice"><%= t('.leave_blank_if_necessary') %></div>
-      <div>
-        <%= label_tag :profile_password, t('.new_password') %>
-        <br/>
-        <%= password_field_tag 'profile[password]', '', size: 30 %>
-      </div>
-      <div>
-        <%= label_tag :profile_password_confirmation, t('.password_confirmation') %>
-        <br/>
-        <%= password_field_tag 'profile[password_confirmation]', '', size: 30 %>
-      </div>
-    </fieldset>
-    <div>
-      <%= button_tag t('.update'), type: :submit %>
-    </div>
-<% end %>
+  <% end %>
+</article>
