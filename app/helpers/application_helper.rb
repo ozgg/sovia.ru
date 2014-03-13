@@ -18,10 +18,18 @@ module ApplicationHelper
     end
   end
 
+  def profile_avatar(user)
+    if user.nil?
+      image_tag 'fallback/avatar/default.png'
+    else
+      image_tag user.avatar.url
+    end
+  end
+
   def entry_avatar(user)
     attributes = { width: 100, height: 100 }
     if user.nil?
-      image_tag 'fallback/entry_default.png', attributes
+      image_tag 'fallback/avatar/entry_default.png', attributes
     else
       image_tag user.avatar.entry.url, attributes
     end
