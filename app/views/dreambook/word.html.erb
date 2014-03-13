@@ -6,7 +6,7 @@
   </header>
   <dl>
     <dt><%= @tag.name %></dt>
-    <dd><%= @tag.description %></dd>
+    <dd><%= raw parse_body(@tag.description, true) %></dd>
   </dl>
   <footer>
     <nav><%= link_to t('.read_dreams'), tagged_entry_dreams_path(tag: @tag.name) %> (<%= @tag.entries_count %>)</nav>

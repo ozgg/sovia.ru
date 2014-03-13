@@ -6,6 +6,19 @@ class Entry::Article < Entry
     Tag::Article.match_or_create_by_name(name)
   end
 
+  def parse_body(input)
+    output = ''
+    input.strip.split(/(?:\r?\n)+/).each do |s|
+      if s[0] == '<'
+        output += s
+      else
+        output += "<p>#{s}</p>"
+      end
+    end
+
+    output
+  end
+
   private
 
   def set_specific_fields

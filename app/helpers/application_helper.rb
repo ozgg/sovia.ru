@@ -50,9 +50,9 @@ module ApplicationHelper
 
   def comment_url(comment)
     parameters = {
-        id: comment.entry.id,
+        id:        comment.entry.id,
         uri_title: comment.entry.url_title || 'bez-nazvaniya',
-        anchor: "comment-#{comment.id}"
+        anchor:    "comment-#{comment.id}"
     }
     if entry.is_a? Entry::Article
       verbose_entry_articles_url parameters
@@ -90,6 +90,34 @@ module ApplicationHelper
       verbose_entry_dreams_url(parameters)
     elsif entry.is_a? Entry::Post
       verbose_entry_posts_url(parameters)
+    end
+  end
+
+  def parse_body(body, allow_raw = false)
+    output = ''
+    body.strip.split(/(?:\r?\n)+/).each do |fragment|
+      fragment = CGI::escapeHTML(fragment) unless allow_raw
+      link_dreambook_symbols(fragment)
+      if fragment[0] == '<'
+        output += fragment
+      else
+        output += "<p>#{fragment}</p>"
+      end
+    end
+
+    output
+  end
+
+  def link_dreambook_symbols(fragment)
+    pattern  = /[\[<]symbol name="(?<name>[^"]+)"[^\]>]*[\]>]/
+    fragment.gsub! pattern do |chunk|
+      match = pattern.match chunk
+      tag   = Tag::Dream.match_by_name(match[:name])
+      if tag.nil?
+        match[:name]
+      else
+        link_to(match[:name], dreambook_word_path(letter: tag.letter, word: tag.name))
+      end
     end
   end
 end
