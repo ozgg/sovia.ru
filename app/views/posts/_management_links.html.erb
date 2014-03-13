@@ -1,0 +1,7 @@
+<% unless current_user.nil? %>
+    <nav>
+      <ul>
+        <li><%= link_to t('titles.posts.new'), new_entry_post_path %></li>
+      </ul>
+    </nav>
+<% end %>

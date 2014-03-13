@@ -1,0 +1,69 @@
+nav.dreambook-letters {
+  margin: 0 0 1em;
+  padding: 0.3em;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      padding: 0 0.2em;
+
+      a:link, a:visited {
+        color: #0000ff;
+      }
+
+      a:hover {
+        color: #ff0000;
+      }
+    }
+  }
+}
+
+dl.dreambook-symbols {
+  margin: 0;
+  padding: 0;
+
+  dt {
+    padding: 0 1em;
+
+    &:nth-of-type(2n) {
+      background: #f0f0ff;
+    }
+
+    &:nth-of-type(2n+1) {
+      background: #f7f7ff;
+    }
+  }
+}
+
+article.dreambook-word {
+  dl {
+    margin: 0;
+    padding: 0;
+
+    dt {
+      background: #feefd0;
+      padding: 0.5em;
+      font-size: 1.2em;
+      font-weight: normal;
+      font-variant: small-caps;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
+
+    dd {
+      margin: 0;
+      padding: 0;
+
+      p {
+        margin: 0.5em 0;
+        text-indent: 1.5em;
+      }
+    }
+  }
+}

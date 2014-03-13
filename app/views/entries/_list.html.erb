@@ -1,0 +1,9 @@
+<% if @entries.any? %>
+    <% @entries.each do |entry| %>
+        <%= render partial: 'entries/entry', object: entry, locals: { preview: true } %>
+    <% end %>
+
+    <%= paginate @entries if @entries.respond_to? :current_page %>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>

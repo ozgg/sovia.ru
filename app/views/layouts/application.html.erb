@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title || t('titles.none') %> :: <%= t('titles.sovia') %></title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header>
+  <div id="logo"><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></div>
+  <nav>
+    <ul>
+      <li><%= link_to t('.articles'), entry_articles_path %></li>
+      <li><%= link_to t('.dreams'), entry_dreams_path %></li>
+      <li><%= link_to t('.new_dream'), new_entry_dream_path %></li>
+      <li><%= link_to t('titles.posts.index'), entry_posts_path %></li>
+      <li><%= link_to t('titles.dreambook.index'), dreambook_path %></li>
+      <li><%= link_to t('.about'), about_path %></li>
+    </ul>
+  </nav>
+
+</header>
+
+<section id="main">
+  <% if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <%= yield %>
+</section>
+
+<section id="right-column">
+  <%= render 'layouts/auth_block' %>
+  <%= render 'layouts/statistics' %>
+  <%= render 'layouts/random_dream' %>
+</section>
+
+<footer>
+  <div class="copyright">&#0169; 2006&#0150;2014 sovia.ru</div>
+  <% if Rails.env.production? %>
+      <%= render 'index/metrics' %>
+  <% end %>
+  <p><%= link_to t('.terms_of_service'), tos_path %></p>
+</footer>
+</body>
+</html>

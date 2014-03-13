@@ -1,0 +1,35 @@
+<%= form_for @entry do |f| %>
+    <% if @entry.errors.any? %>
+        <div class="errors">
+          <h2><%= t('error', count: @entry.errors.count) %>:</h2>
+
+          <ul>
+            <% @entry.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :title %><br />
+      <%= f.text_field :title, size: 75, maxlength: 255 %>
+    </div>
+    <div>
+      <%= f.label :body %><br />
+      <%= f.text_area :body, required: true, cols: 75, rows: 20 %>
+    </div>
+    <div>
+      <%= f.label :tags_string %><br />
+      <%= f.text_area :tags_string, cols: 75, rows: 5 %>
+    </div>
+    <% unless current_user.nil? || (!@entry.new_record? && @entry.user.nil?) %>
+        <div>
+          <%= f.label :privacy %>
+          <%= f.select :privacy, Entry::Dream.privacy_modes.invert %>
+        </div>
+    <% end %>
+    <div>
+      <%= f.button t('.submit'), type: 'submit' %>
+    </div>
+<% end %>

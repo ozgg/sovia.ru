@@ -1,0 +1,15 @@
+<%= render 'letters' %>
+
+<article class="dreambook-word">
+  <header>
+    <h2><%= link_to t('titles.dreambook.letters', letter: @tag.letter), dreambook_letter_path(letter: @tag.letter) %></h2>
+  </header>
+  <dl>
+    <dt><%= @tag.name %></dt>
+    <dd><%= raw parse_body(@tag.description, true) %></dd>
+  </dl>
+  <footer>
+    <nav><%= link_to t('.read_dreams'), tagged_entry_dreams_path(tag: @tag.name) %> (<%= @tag.entries_count %>)</nav>
+    <%= render 'layouts/social' %>
+  </footer>
+</article>

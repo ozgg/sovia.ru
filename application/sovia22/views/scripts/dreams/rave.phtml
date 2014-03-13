@@ -1,6 +1,0 @@
-<h1>Бредовый генератор снов</h1>
-<h2><?php echo $this->escape($this->title); ?></h2>
-<?php
-$body = BodyParser::parseEntry($this->body, array(BodyParser::OPTION_ESCAPE => true));
-echo $body['body'];
-?>

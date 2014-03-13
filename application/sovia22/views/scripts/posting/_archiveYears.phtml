@@ -1,9 +1,0 @@
-<ul class="archive-years">
-<?php
-    foreach ($this->years as $row) {
-?>
-    <li><a href="<?php echo $this->url(array('year' => $row->y), $this->route, true); ?>"><?php echo $row->y; ?></a></li>
-<?php
-    }
-?>
-</ul>

@@ -1,0 +1,14 @@
+<%= render 'letters' %>
+
+<h2><%= @title %></h2>
+<% if @tags.any? %>
+    <nav>
+      <dl class="dreambook-symbols">
+        <% @tags.each do |word| %>
+        <dt><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></dt>
+        <% end %>
+      </dl>
+    </nav>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>

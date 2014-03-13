@@ -1,0 +1,21 @@
+<article class="login">
+  <h2><%= t('titles.session.login') %></h2>
+  <%= form_tag do %>
+      <fieldset>
+        <legend><%= t('.enter_credentials') %></legend>
+        <div>
+          <%= label_tag :login, t('.login') %>
+          <%= text_field_tag :login, params[:login], required: true %>
+        </div>
+        <div>
+          <%= label_tag :password, t('.password') %>
+          <%= password_field_tag :password, params[:password], required: true %>
+        </div>
+        <div>
+          <%= button_tag t('.enter'), type: :submit %>
+        </div>
+      </fieldset>
+  <% end %>
+  <h2><%= t('.forgot_password') %></h2>
+  <p><%= link_to t('.recovery_form'), my_recovery_path %></p>
+</article>

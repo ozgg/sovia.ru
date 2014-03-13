@@ -1,0 +1,357 @@
+ru:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Запись недействительна"
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              blank: "не может быть пустым"
+              confirmation: "не совпадает с паролем"
+            password:
+              blank: "не может быть пустым"
+            email:
+              unreasonable: "не выглядит как e-mail"
+            login:
+              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+        entry:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+        comment:
+          attributes:
+            body:
+              blank: "не может быть пустым"
+            entry_id:
+              blank: "не может быть пустым"
+    models:
+      entry_dream: "сон"
+      entry_article: "статья"
+      entry_post: "публикация"
+      entry_thought: "мысль"
+      user: "пользователь"
+      tag: "метка"
+      comment: "комментарий"
+    attributes:
+      entry:
+        title: "Название"
+        body:  "Текст"
+        privacy: "Видимость"
+        tags_string: "Метки"
+      tag:
+        name: "Название"
+        description: "Интерпретация"
+      user:
+        login: "Логин"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        email: "E-mail"
+        allow_mail: "Получать уведомления по электронной почте"
+        avatar: "Картинка пользователя"
+      comment:
+        body: "Комментарий"
+    properties:
+      entry:
+        privacy:
+          none: "Для всех"
+          users: "Для сообщества"
+          owner: "Только для меня"
+  titles:
+    index:
+      index: "Главная страница"
+    session:
+      login: "Вход"
+    articles:
+      index: "Статьи"
+      new: "Новая статья"
+      show: "Статья"
+      edit: "Редактирование статьи"
+    posts:
+      index: "Публикации"
+      new: "Новая запись"
+      show: "Публикация"
+      edit: "Редактирование записи"
+    tags:
+      index: "Метки"
+      new: "Новая метка"
+      show: "Метка"
+      edit: "Редактирование метки"
+    dreams:
+      index: "Сны"
+      new: "Описать сон"
+      show: "Сон"
+      edit: "Редактирование сна"
+      untitled: "Без названия"
+      tagged: "Сны с меткой"
+      dreams_of_user: "Сны пользователя %{login}, страница %{page}"
+    dreambook:
+      index: "Сонник"
+      letters: "Символы снов на «%{letter}»"
+      word: "Символ «%{word}» в соннике"
+    users:
+      new: "Регистрация"
+      recover_form: "Восстановление пароля"
+      recover: "Сброс пароля"
+      confirm: "Подтверждение электронной почты"
+    statistics:
+      index: "Статистика"
+      symbols: "Символы снов, страница %{page}"
+    my:
+      index: "Кабинет"
+      dreams: "Мои сны, страница %{page}"
+      profile: "Мой профиль"
+    none: "Без названия"
+    sovia: "Совия, сайт о снах"
+    page: "страница"
+  session:
+    not_logged_in: "Вы вышли"
+    logged_in_successfully: "Вы вошли"
+    invalid_credentials: "Неправильный пароль"
+    already_logged_in: "Вы уже вошли"
+    logged_out: "Вы вышли"
+  sessions:
+    new:
+      enter_credentials: "Введите логин и пароль"
+      login: "Логин"
+      password: "Пароль"
+      enter: "Войти"
+      forgot_password: "Забыли пароль?"
+      recovery_form: "Форма восстановления пароля"
+  index:
+    index:
+      no_posts: "Публикаций нет"
+      main: "Добро пожаловать"
+      recent_posts: "Последние публикации"
+  articles:
+    list:
+      no_articles: "Статей нет"
+    form:
+      submit: "Сохранить статью"
+    index:
+      new_article: "Создать статью"
+    show:
+      article: "Просмотр статьи"
+  posts:
+    list:
+      no_posts: "Записей нет"
+    form:
+      submit: "Сохранить запись"
+    index:
+      new_post: "Создать публикацию"
+    show:
+      post: "Просмотр публикации"
+      edit: "Редактировать запись"
+      delete: "Удалить запись"
+    post:
+      tags: "Метки"
+    edit:
+      edit: "Редактирование записи"
+  dreams:
+    list:
+      no_dreams: "Снов нет"
+    index:
+      new_dream: "Описать сон"
+    form:
+      submit: "Сохранить сон"
+    show:
+      header: "Описание сна"
+      edit: "Редактировать сон"
+    edit:
+      view: "К просмотру сна"
+    random:
+      title: "Случайный сон"
+    archive:
+      year: "%{year} год"
+  tags:
+    list:
+      no_tags: "Меток нет"
+    form:
+      submit: "Сохранить метку"
+    index:
+      new_tag: "Создать метку"
+    show:
+      tag: "Просмотр метки"
+      delete: "Удалить метку"
+      list: "Все метки"
+      edit: "Редактировать метку"
+  users:
+    create:
+      successfully: "Вы зарегистрировались и вошли"
+    new:
+      register: "Зарегистрироваться"
+      login_notice: "Может содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+      email_notice: "Используется для восстановления пароля и отправки уведомлений"
+      i_am_bot: "Я бот и не собираюсь пользоваться сайтом"
+      password_notice: "Выбирайте надёжный пароль"
+      password_confirmation_notice: "Введите пароль ещё раз"
+      agreement: "Регистрируясь на сайте, вы обязуетесь соблюдать пользовательское соглашение"
+    recover_form:
+      instructions: "Для восстановления пароля укажите адрес электронной почты, на него придёт код для сброса пароля и инструкции."
+    recover:
+      email: "E-mail"
+      code: "Код из письма"
+      password: "Новый пароль"
+      password_confirmation: "Подтверждение пароля"
+  entry:
+    article:
+      created: "Статья добавлена"
+      updated: "Статья обновлена"
+      deleted: "Статья удалена"
+    post:
+      created: "Публикация добавлена"
+      updated: "Публикация обновлена"
+      deleted: "Публикация удалена"
+    dream:
+      created: "Сон добавлен"
+      updated: "Сон обновлён"
+      deleted: "Сон удалён"
+  tag:
+    created: "Метка добавлена"
+    updated: "Метка обновлена"
+    deleted: "Метка удалена"
+  layouts:
+    application:
+      articles: "Статьи"
+      dreams: "Сны"
+      new_dream: "Описать сон"
+      about: "О проекте"
+      terms_of_service: "Пользовательское соглашение"
+    auth_block:
+      authorize: "Авторизация"
+      logout: "Выйти"
+      private: "Личный кабинет"
+    statistics:
+      statistics: "Чаще всего снится"
+  roles:
+    insufficient_rights: "Недостаточно прав"
+  anonymous: "Анонимно"
+  untitled: "Без названия"
+  read_more: "Читать дальше"
+  views:
+    pagination:
+      first: "Первая"
+      last: "Последняя"
+      previous: "Назад"
+      next: "Вперёд"
+      truncate: "..."
+  are_you_sure: "Вы уверены?"
+  at: "от"
+  nothing_found: "Ничего не найдено"
+  please_log_in: "Пожалуйста, авторизуйтесь"
+  dreambook:
+    letters:
+      select_letter: "Выберите букву, на которую начинается символ"
+    word:
+      read_dreams: "Сны с этим символом"
+  page_gone: "Страницы больше нет"
+  statistics:
+    index:
+      symbols: "Статистика по символам снов"
+  my:
+    index:
+      dreams: "Мои сны"
+      profile: "Мой профиль"
+      confirm_email: "Отправить код подтверждения почты"
+      index:
+        dreams: "Мои сны"
+        profile: "Мой профиль"
+        confirm_email: "Подтверждение почты"
+    profiles:
+      edit:
+        update: "Обновить профиль"
+        email: "Электронная почта"
+        current_password: "Текущий пароль"
+        allow_mail: "Получать письма по электронной почте"
+        common_parameters: "Общие параметры"
+        sensitive_parameters: "Особые параметры"
+        new_password: "Новый пароль"
+        password_confirmation: "Подтверждение нового пароля"
+        sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль"
+        leave_blank_if_necessary: "Если не меняете пароль, новый пароль вводить не нужно"
+        view: "В режим просмотра"
+        update_avatar: "Новая картинка пользователя"
+        avatar_demands: "Допустимые форматы – JPG, PNG. Лучше всего – квадратная картинка примерно 400x400."
+      show:
+        avatar: "Текущая картинка пользователя"
+        created_at: "Дата регистрации на сайте"
+        send_code: "Получить код подтверждения почты"
+        statistics: "Статистика"
+        entries_count: "Количество публикаций"
+        comments_count: "Количество комментариев"
+    recoveries:
+      show:
+        code: "Код из письма"
+        update_password: "Обновить пароль"
+        no_code: "Нет кода сброса?"
+        send_code: "Получить код"
+        got_code: "Код сброса уже есть?"
+    confirmations:
+      show:
+        got_code: "Код подтверждения есть"
+        no_code: "Кода подтверждения нет?"
+        code: "Код из письма"
+        confirm: "Подтвердить адрес"
+  profile:
+    updated: "Профиль обновлён"
+    incorrect_password: "Старый пароль неправильный"
+    update_error: "Ошибка обновления профиля"
+  submit: "Отправить"
+  email_not_found: "Указанный e-mail адрес не найден"
+  recovery_code_sent: "Код сброса пароля отправлен"
+  recovery_code_failure: "Не удалось создать код"
+  code_sender:
+    password:
+      subject: "Сброс пароля на сайте sovia.ru"
+    email:
+      subject: "Подтверждение email-адреса на сайте sovia.ru"
+  user:
+    email_confirmed: "Почта подтверждена"
+    code_invalid: "Недействительный код"
+    recovery_failed: "Не удалось сменить пароль, проверьте правильность ввода"
+    password_changed: "Пароль изменён"
+  email_confirmation_sent: "Код подтверждения отправлен"
+  confirmation:
+    send_code: "Отправить код подтверждения"
+    set_email: "Задайте адрес электронной почты"
+  code:
+    generation_error: "Ошибка создания кода"
+  entries:
+    comments:
+      add_comment: "Добавить комментарий"
+      comments: "Комментарии"
+    entry:
+      link: "Ссылка"
+  error:
+    zero: "нет ошибок"
+    one: "%{count} ошибка"
+    few: "%{count} ошибки"
+    other: "%{count} ошибок"
+  comment:
+    zero: "0 комментариев"
+    one: "%{count} комментарий"
+    few: "%{count} комментария"
+    other: "%{count} комментариев"
+    created: "Комментарий добавлен"
+  controllers:
+    dreams:
+      archive: "Архив снов"
+      archive_year: ", %{year} год"
+    my:
+      profiles:
+        show: "Мой профиль"
+        edit: "Редактирование профиля"
+      recoveries:
+        show: "Сброс пароля"
+      confirmations:
+        show: "Подтверждение электронной почты"
+  date:
+    month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
+    formats:
+      short: "%B %Y"
+      w3c: "%Y-%m-%dT%H:%M:%S%z"
+  edit: "Редактировать"
+  errors:
+    messages:
+      extension_white_list_error: "имеет недопустимое расширение"
+  delete: "Удалить"

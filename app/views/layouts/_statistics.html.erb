@@ -1,0 +1,15 @@
+<% tags = Tag::Dream.order('entries_count desc').first(10) %>
+<aside>
+  <header><h2><%= t('.statistics') %></h2></header>
+  <% if tags.any? %>
+  <nav>
+    <ul>
+      <% tags.each do |tag| %>
+      <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name) %> (<%= tag.entries_count %>)</li>
+      <% end %>
+    </ul>
+  </nav>
+  <% else %>
+  <p><%= t('nothing_found') %></p>
+  <% end %>
+</aside>

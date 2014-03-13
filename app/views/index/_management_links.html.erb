@@ -1,0 +1,7 @@
+<% if !current_user.nil? && current_user.editor? %>
+    <nav>
+      <ul>
+        <li><%= link_to t('titles.tags.index'), admin_dream_tags_path %></li>
+      </ul>
+    </nav>
+<% end %>

@@ -1,0 +1,29 @@
+<% unless params[:year].nil? %>
+    <h2><%= t('dreams.archive.year', year: params[:year]) %></h2>
+    <% if params[:month].nil? %>
+        <% if @dates[params[:year].to_i] %>
+            <ul>
+              <% @dates[params[:year].to_i].each do |month| %>
+                  <li><%= link_to t('date.month_names')[month], archive_entry_dreams_path(year: params[:year], month: month) %></li>
+              <% end %>
+            </ul>
+        <% else %>
+            <div class="message"><%= t('nothing_found') %></div>
+        <% end %>
+    <% else %>
+        <h3><%= t('date.month_names')[params[:month].to_i] %></h3>
+        <% if @dreams.any? %>
+            <ul>
+              <% @dreams.each do |dream| %>
+              <li>
+                <%= link_to dream.parsed_title, verbose_entry_path(dream) %>
+                (<time datetime="<%= dream.created_at %>"><%= dream.created_at.utc.strftime('%d.%m.%Y') %></time>)
+              </li>
+              <% end %>
+            </ul>
+            <%= paginate @dreams %>
+        <% else %>
+            <div class="message"><%= t('nothing_found') %></div>
+        <% end %>
+    <% end %>
+<% end %>

@@ -1,0 +1,23 @@
+<% @comment = Comment.new(entry: entry) %>
+<% if entry.comments.any? %>
+    <h3><%= t('.comments') %></h3>
+    <ul class="comments">
+      <% entry.comments.order('id asc').each do |comment| %>
+      <li>
+        <div>
+          <figure>
+            <%= comment_avatar(comment.user) %>
+          </figure>
+          <%= user_link(comment.user) %><br />
+          <time datetime="<%= comment.created_at %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+        </div>
+        <%= raw comment.parsed_body %>
+      </li>
+      <% end %>
+    </ul>
+<% end %>
+
+<div>
+  <h3><%= t('.add_comment') %></h3>
+  <%= render 'comments/form' %>
+</div>
