@@ -94,7 +94,7 @@ describe My::RecoveriesController do
       end
 
       it "redirects to my_recovery_path" do
-        post :create
+        post :create, email: user.email
         expect(response).to redirect_to(my_recovery_path)
       end
     end
@@ -112,9 +112,9 @@ describe My::RecoveriesController do
         expect(flash[:notice]).to eq(I18n.t('email_not_found'))
       end
 
-      it "redirects to my_recovery_path" do
+      it "renders show again" do
         post :create, email: email
-        expect(response).to redirect_to(my_recovery_path)
+        expect(response).to render_template('my/recoveries/show')
       end
     end
 
@@ -123,7 +123,7 @@ describe My::RecoveriesController do
 
       context "when email matches payload" do
         before(:each) do
-          allow(Code::Confirmation).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
+          allow(Code::Recovery).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
         end
 
         it_should_behave_like "password reset"
@@ -138,7 +138,7 @@ describe My::RecoveriesController do
       context "when email doesn't match payload" do
         before(:each) do
           code.update(payload: 'noreply@example.org')
-          allow(Code::Confirmation).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
+          allow(Code::Recovery).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
           patch :update, code: code.body, user: { password: '123', password_confirmation: '123' }
         end
 
@@ -164,7 +164,7 @@ describe My::RecoveriesController do
       let(:code) { create(:password_recovery, user: user) }
 
       before(:each) do
-        allow(Code::Confirmation).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
+        allow(Code::Recovery).to receive(:find_by).with(body: code.body, activated: false).and_return(code)
         patch :update, code: code.body, user: { password: '123', password_confirmation: '321' }
       end
 

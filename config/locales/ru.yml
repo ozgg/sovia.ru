@@ -192,8 +192,6 @@ ru:
       code: "Код из письма"
       password: "Новый пароль"
       password_confirmation: "Подтверждение пароля"
-    confirm:
-      code: "Код из письма"
   entry:
     article:
       created: "Статья добавлена"
@@ -270,6 +268,13 @@ ru:
         password_confirmation: "Подтверждение нового пароля"
         sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль"
         leave_blank_if_necessary: "Если не меняете пароль, новый пароль вводить не нужно"
+    recoveries:
+      show:
+        code: "Код из письма"
+        update_password: "Обновить пароль"
+        no_code: "Нет кода сброса?"
+        send_code: "Получить код"
+        got_code: "Код сброса уже есть?"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
@@ -313,6 +318,11 @@ ru:
     dreams:
       archive: "Архив снов"
       archive_year: ", %{year} год"
+    my:
+      profiles:
+        show: "Мой профиль"
+      recoveries:
+        show: "Сброс пароля"
   date:
     month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
     formats:

@@ -2,7 +2,7 @@ class My::ProfilesController < ApplicationController
   before_action :allow_authorized_only
 
   def show
-
+    @title = t('controllers.my.profiles.show')
   end
 
   def edit

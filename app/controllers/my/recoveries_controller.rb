@@ -2,26 +2,23 @@ class My::RecoveriesController < ApplicationController
   before_action :allow_unauthorized_only
 
   def show
+    @title = t('controllers.my.recoveries.show')
   end
 
   def create
-    user = User.find_by(email: params[:email])
+    @title = t('controllers.my.recoveries.show')
+    user   = User.find_by(email: params[:email])
     if user.nil?
       flash[:notice] = t('email_not_found')
+      render action: :show
     else
-      code = user.password_recovery
-      if code.nil?
-        flash[:notice] = t('code.generation_error')
-      else
-        CodeSender.password(code).deliver
-        flash[:notice] = t('recovery_code_sent')
-      end
+      send_code(user)
+      redirect_to my_recovery_path
     end
-    redirect_to my_recovery_path
   end
 
   def update
-    code = Code::Confirmation.find_by(body: params[:code], activated: false)
+    code = Code::Recovery.find_by(body: params[:code], activated: false)
     if code.nil?
       flash[:notice] = t('user.code_invalid')
       redirect_to my_recovery_path
@@ -52,5 +49,15 @@ class My::RecoveriesController < ApplicationController
 
   def new_password
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def send_code(user)
+    code = user.password_recovery
+    if code.nil?
+      flash[:notice] = t('code.generation_error')
+    else
+      CodeSender.password(code).deliver
+      flash[:notice] = t('recovery_code_sent')
+    end
   end
 end
