@@ -69,4 +69,18 @@ module ApplicationHelper
       verbose_entry_posts_path(parameters)
     end
   end
+
+  def verbose_entry_url(entry)
+    parameters = {
+        id:        entry.id,
+        uri_title: entry.url_title || 'bez-nazvaniya'
+    }
+    if entry.is_a? Entry::Article
+      verbose_entry_articles_url(parameters)
+    elsif entry.is_a? Entry::Dream
+      verbose_entry_dreams_url(parameters)
+    elsif entry.is_a? Entry::Post
+      verbose_entry_posts_url(parameters)
+    end
+  end
 end
