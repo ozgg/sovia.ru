@@ -33,6 +33,7 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'carrierwave'
 
+gem 'bcrypt-ruby'
 gem 'bcrypt'
 
 gem 'puma'
