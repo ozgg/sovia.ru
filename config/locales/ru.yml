@@ -354,3 +354,4 @@ ru:
   errors:
     messages:
       extension_white_list_error: "имеет недопустимое расширение"
+  delete: "Удалить"

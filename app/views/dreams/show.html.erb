@@ -3,7 +3,8 @@
   <% if @entry.editable_by? current_user %>
   <nav>
     <ul>
-      <li><%= link_to t('.edit'), edit_entry_dream_path(@entry) %></li>
+      <li><%= link_to t('edit'), edit_entry_dream_path(@entry) %></li>
+      <li><%= link_to t('delete'), @entry, method: :delete, data: { confirm: t('are_you_sure') } %></li>
     </ul>
   </nav>
   <% end %>
