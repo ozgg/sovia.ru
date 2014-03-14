@@ -78,7 +78,7 @@ Sovia::Application.configure do
       from: 'sovia.ru <support@sovia.ru>',
       reply_to: 'support@sovia.ru'
   }
-  config.action_mailer.default_url_options = { :host => 'sovia.ru:3000' }
+  config.action_mailer.default_url_options = { :host => 'sovia.ru' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
