@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
 
   def save_comment
     if @comment.save
-      Comments.entry_reply(@comment).send if @comment.notify_entry_owner?
+      Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
       redirect_with_confirmation
     else
       render action: :new

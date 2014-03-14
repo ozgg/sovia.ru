@@ -10,7 +10,7 @@ describe CommentsController do
 
     before (:each) do
       allow(Comments).to receive(:entry_reply).and_return (mailer)
-      allow(mailer).to receive(:send)
+      allow(mailer).to receive(:deliver)
       allow(controller).to receive(:'suspect_spam?')
     end
 
@@ -34,7 +34,7 @@ describe CommentsController do
     end
 
     it "notifies entry owner" do
-      expect(mailer).to receive(:send)
+      expect(mailer).to receive(:deliver)
       post :create, comment: comment_parameters
     end
 
