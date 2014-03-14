@@ -49,9 +49,10 @@ module ApplicationHelper
   end
 
   def comment_url(comment)
+    entry = comment.entry
     parameters = {
-        id:        comment.entry.id,
-        uri_title: comment.entry.url_title || 'bez-nazvaniya',
+        id:        entry.id,
+        uri_title: entry.url_title || 'bez-nazvaniya',
         anchor:    "comment-#{comment.id}"
     }
     if entry.is_a? Entry::Article
