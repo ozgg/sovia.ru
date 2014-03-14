@@ -1,5 +1,11 @@
 <%= render 'letters' %>
-
+<% if !current_user.nil? && current_user.editor? %>
+    <nav>
+      <ul>
+        <li><%= link_to t('edit'), admin_dream_tag_path(@tag) %></li>
+      </ul>
+    </nav>
+<% end %>
 <article class="dreambook-word">
   <header>
     <h2><%= link_to t('titles.dreambook.letters', letter: @tag.letter), dreambook_letter_path(letter: @tag.letter) %></h2>

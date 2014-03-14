@@ -53,6 +53,6 @@ class Admin::DreamTagsController < ApplicationController
   end
 
   def tag_parameters
-    params.require(:dream_tag).permit(:name, :description)
+    params.require(:tag_dream).permit(:name, :description)
   end
 end
