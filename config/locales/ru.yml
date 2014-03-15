@@ -305,6 +305,8 @@ ru:
       subject: "Сброс пароля на сайте sovia.ru"
     email:
       subject: "Подтверждение email-адреса на сайте sovia.ru"
+  comments:
+    entry_reply: "Ответ на вашу запись"
   user:
     email_confirmed: "Почта подтверждена"
     code_invalid: "Недействительный код"

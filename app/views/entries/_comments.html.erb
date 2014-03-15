@@ -3,7 +3,7 @@
     <h3><%= t('.comments') %></h3>
     <ul class="comments">
       <% entry.comments.order('id asc').each do |comment| %>
-      <li>
+      <li id="comment-<%= comment.id %>">
         <div>
           <figure>
             <%= comment_avatar(comment.user) %>

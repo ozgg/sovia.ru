@@ -65,7 +65,7 @@ describe Admin::DreamTagsController do
     end
 
     context "post create with invalid parameters" do
-      before(:each) { post :create, dream_tag: { name: ' ' } }
+      before(:each) { post :create, tag_dream: { name: ' ' } }
 
       it_should_behave_like "tag assigner"
       it_should_behave_like "new tag page renderer"
@@ -76,7 +76,7 @@ describe Admin::DreamTagsController do
     end
 
     context "post create with valid parameters" do
-      before(:each) { post :create, dream_tag: { name: 'Создание' } }
+      before(:each) { post :create, tag_dream: { name: 'Создание' } }
 
       it_should_behave_like "tag assigner"
 
@@ -101,7 +101,7 @@ describe Admin::DreamTagsController do
     end
 
     context "patch update with invalid arrtibutes" do
-      before(:each) { patch :update, id: dream_tag, dream_tag: { name: ' ', description: ' ' } }
+      before(:each) { patch :update, id: dream_tag, tag_dream: { name: ' ', description: ' ' } }
 
       it_should_behave_like "tag assigner"
       it_should_behave_like "edit tag page renderer"
@@ -114,7 +114,7 @@ describe Admin::DreamTagsController do
     end
 
     context "patch update with valid attributes" do
-      before(:each) { patch :update, id: dream_tag, dream_tag: { name: 'a', description: 'b' } }
+      before(:each) { patch :update, id: dream_tag, tag_dream: { name: 'a', description: 'b' } }
 
       it_should_behave_like "tag assigner"
 
