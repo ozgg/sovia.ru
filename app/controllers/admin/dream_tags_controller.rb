@@ -3,16 +3,19 @@ class Admin::DreamTagsController < ApplicationController
   before_action :set_dream_tag, only: [:show, :edit, :update, :destroy]
 
   def index
-    page = params[:page] || 1
-    @tags = Tag::Dream.order('name asc').page(page).per(20)
+    page  = params[:page] || 1
+    @tags = Tag::Dream.order('name asc').page(page).per(30)
+    @title = t('controllers.admin.dream_tags.index', page: page)
   end
 
   def new
-    @tag = Tag::Dream.new
+    @tag   = Tag::Dream.new
+    @title = t('controllers.admin.dream_tags.new')
   end
 
   def create
-    @tag = Tag::Dream.new(tag_parameters)
+    @title = t('controllers.admin.dream_tags.new')
+    @tag   = Tag::Dream.new(tag_parameters)
     if @tag.save
       flash[:notice] = t('tag.created')
       redirect_to admin_dream_tag_path(@tag)
@@ -22,14 +25,15 @@ class Admin::DreamTagsController < ApplicationController
   end
 
   def show
-
+    @title = t('controllers.admin.dream_tags.show', name: @tag.name)
   end
 
   def edit
-
+    @title = t('controllers.admin.dream_tags.edit')
   end
 
   def update
+    @title = t('controllers.admin.dream_tags.edit')
     if @tag.update(tag_parameters)
       flash[:notice] = t('tag.updated')
       redirect_to admin_dream_tag_path(@tag)
