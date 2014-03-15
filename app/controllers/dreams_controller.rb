@@ -4,24 +4,25 @@ class DreamsController < ApplicationController
 
   # get /dreams
   def index
-    page    = params[:page] || 1
-    @title  = "#{t('titles.dreams.index')}, #{t('titles.page')} #{page}"
+    page     = params[:page] || 1
     @entries = allowed_dreams.page(page).per(5)
+    @title   = t('controllers.dreams.index', page: page)
   end
 
   # get /dreams/:id
   def show
-    @title = "#{t('titles.dreams.show')} «#{@entry.parsed_title}»"
+    @title = t('controllers.dreams.show', title: @entry.parsed_title)
   end
 
   # get /dreams/new
   def new
-    @title = t('titles.dreams.new')
+    @title = t('controllers.dreams.new')
     @entry = Entry::Dream.new
   end
 
   # post /dreams
   def create
+    @title = t('controllers.dreams.new')
     @entry = Entry::Dream.new(dream_parameters.merge(user: current_user))
     if suspect_spam?(current_user, @entry.body, 2)
       emulate_saving
@@ -32,11 +33,12 @@ class DreamsController < ApplicationController
 
   # get /dreams/:id/edit
   def edit
-    @title = t('titles.dreams.edit')
+    @title = t('controllers.dreams.edit')
   end
 
   # patch /dreams/:id
   def update
+    @title = t('controllers.dreams.edit')
     if @entry.update(dream_parameters)
       flash[:notice] = t('entry.dream.updated')
       redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
@@ -55,13 +57,13 @@ class DreamsController < ApplicationController
 
   # get /dreams/tagged/:tag
   def tagged
-    page    = params[:page] || 1
+    page     = params[:page] || 1
     @entries = tagged_dreams.page(page).per(5)
-    @title  = "#{t('titles.dreams.tagged')} «#{@tag.name}», #{t('titles.page')} #{page}"
+    @title   = t('controllers.dreams.tagged', tag: @tag.name, page: page)
   end
 
   def random
-    @title = t('dreams.random.title')
+    @title = t('controllers.dreams.random')
     @entry = Entry::Dream.random_dream
   end
 
@@ -69,8 +71,8 @@ class DreamsController < ApplicationController
     user = User.find_by_login(params[:login])
     page = params[:page] || 1
 
-    @title  = t('titles.dreams.dreams_of_user', login: user.login, page: page)
     @entries = allowed_dreams.where(user: user).page(page).per(5)
+    @title   = t('controllers.dreams.dreams_of_user', user: user, page: page)
   end
 
   def archive

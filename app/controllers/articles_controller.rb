@@ -5,18 +5,19 @@ class ArticlesController < ApplicationController
   # get /articles
   def index
     page     = params[:page] || 1
-    @title   = "#{t('titles.articles.index')}, #{t('titles.page')} #{page}"
     @entries = Entry::Article.recent.page(page).per(5)
+    @title   = t('controllers.articles.index', page: page)
   end
 
   # get /articles/new
   def new
-    @title = t('titles.articles.new')
     @entry = Entry::Article.new
+    @title = t('controllers.articles.new')
   end
 
   # post /articles
   def create
+    @title = t('controllers.articles.new')
     @entry = Entry::Article.new(article_parameters.merge(user: current_user))
     if @entry.save
       flash[:notice] = t('entry.article.created')
@@ -28,16 +29,17 @@ class ArticlesController < ApplicationController
 
   # get /articles/:id
   def show
-    @title = "#{t('titles.articles.show')} #{@entry.title}"
+    @title = t('controllers.articles.show', title: @entry.title)
   end
 
   # get /articles/:id/edit
   def edit
-    @title = t('titles.articles.edit')
+    @title = t('controllers.articles.edit')
   end
 
   # patch /articles/:id
   def update
+    @title = t('controllers.articles.edit')
     if @entry.update(article_parameters)
       flash[:notice] = t('entry.article.updated')
       redirect_to verbose_entry_articles_path(id: @entry.id, uri_title: @entry.url_title)

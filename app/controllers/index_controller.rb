@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   # get /
   def index
-    @title = t('titles.index.index')
+    @title   = t('controllers.index.index')
     @entries = Entry.recent_entries
   end
 

@@ -339,6 +339,13 @@ ru:
     dreams:
       archive: "Архив снов"
       archive_year: ", %{year} год"
+      index: "Сны, страница %{page}"
+      show: "Сон «%{title}»"
+      new: "Описать сон"
+      edit: "Редактирование сна"
+      tagged: "Сны с меткой «%{tag}», страница %{page}"
+      random: "Случайный сон"
+      dreams_of_user: "Сны пользователя %{user}, страница %{page}"
     my:
       profiles:
         show: "Мой профиль"
@@ -347,6 +354,8 @@ ru:
         show: "Сброс пароля"
       confirmations:
         show: "Подтверждение электронной почты"
+      dreams:
+        index: "Мои сны, страница %{page}"
     about:
       index: "О проекте"
       features: "Возможности"
@@ -359,6 +368,31 @@ ru:
         new: "Новый символ"
         show: "Символ сна «%{name}»"
         edit: "Редактирование символа сна"
+    articles:
+      index: "Статьи, страница %{page}"
+      new: "Новая статья"
+      show: "Статья «%{title}»"
+      edit: "Редактирование статьи"
+    comments:
+      new: "Добавление комментария"
+    dreambook:
+      index: "Сонник"
+      letter: "Символы снов на «%{letter}», страница %{page}"
+      word: "Сонник: %{word}"
+    index:
+      index: "Главная страница"
+    posts:
+      index: "Сообщество, страница %{page}"
+      new: "Новая запись"
+      show: "Публикация «%{title}» в сообществе"
+      edit: "Редактирование записи"
+    sessions:
+      new: "Авторизация"
+    statistics:
+      index: "Статистика"
+      symbols: "Статистика по символам снов, страница %{page}"
+    users:
+      new: "Регистрация"
   date:
     month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
     formats:

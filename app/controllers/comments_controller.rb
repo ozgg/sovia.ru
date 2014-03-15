@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @title   = t('controllers.comments.new')
     @comment = Comment.new(comment_params)
     check_rights
     if suspect_spam?(@comment.user, @comment.body)
