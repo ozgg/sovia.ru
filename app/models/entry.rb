@@ -99,7 +99,7 @@ class Entry < ActiveRecord::Base
   end
 
   def passages_count
-    body.gsub(/(\r?\n)+/, "\n").count "\n"
+    body.strip.gsub(/(\r?\n)+/, "\n").count("\n") + 1
   end
 
   private
