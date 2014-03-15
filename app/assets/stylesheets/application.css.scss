@@ -233,11 +233,28 @@ div.social-buttons {
   position: relative;
   padding: 0.5em;
   clear: both;
-//  margin: 0 300px;
 
   div.addthis-container {
     position: absolute;
     right: 0.5em;
     top: 0.5em;
+  }
+}
+
+nav.pagination {
+  margin: 1em 1em 0;
+
+  span {
+    display: inline-block;
+    padding: 0 0.3em;
+    border: solid #eeeeee 1px;
+
+    &.current {
+      background: #eeeeee;
+    }
+
+    &.gap {
+      border: none;
+    }
   }
 }
