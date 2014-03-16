@@ -98,6 +98,10 @@ class Entry < ActiveRecord::Base
     parse_body body.gsub(/(\r?\n)+/, "\n").split("\n")[0..1].join("\n")
   end
 
+  def glimpse
+    body.strip.split(/\s+/)[0..50].join(' ')
+  end
+
   def passages_count
     body.strip.gsub(/(\r?\n)+/, "\n").count("\n") + 1
   end
