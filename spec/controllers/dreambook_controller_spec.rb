@@ -9,9 +9,9 @@ describe DreambookController do
 
   shared_examples "letter assigner" do
     it "assigns letters to @letters" do
-      expect(assigns[:letters]).to include(@tag_a.letter)
-      expect(assigns[:letters]).to include(@tag_b.letter)
-      expect(assigns[:letters].length).to eq(2)
+      expect(assigns[:letters][:r]).to include(@tag_a.letter)
+      expect(assigns[:letters][:r]).to include(@tag_b.letter)
+      expect(assigns[:letters][:r].length).to eq(2)
     end
   end
 

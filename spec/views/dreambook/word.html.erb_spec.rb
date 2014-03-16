@@ -13,7 +13,7 @@ describe "dreambook/word.html.erb" do
   end
 
   it "renders word description" do
-    assign(:letters, [tag_dream.letter])
+    assign(:letters, { r: [tag_dream.letter] })
     assign(:tag, tag_dream)
     render
     expect(rendered).to contain(tag_dream.name)

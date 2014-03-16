@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'dreambook/_letters.html.erb' do
   context "when letters found" do
     it "renders letters list" do
-      assign :letters, %W(А Б)
+      assign :letters, { r: %W(А Б) }
       render
       expect(rendered).to have_selector('a', href: url_for(dreambook_letter_path(letter: 'А')))
       expect(rendered).to have_selector('a', href: url_for(dreambook_letter_path(letter: 'Б')))

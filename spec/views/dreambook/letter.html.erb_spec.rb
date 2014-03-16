@@ -14,8 +14,8 @@ describe "dreambook/letter.html.erb" do
     let!(:word) { create(:dream_tag) }
 
     before(:each) do
-      assign(:letters, [word.letter])
-      assign(:tags, Tag::Dream.where(letter: word.letter).page(1).per(50) )
+      assign(:letters, { r: [word.letter] })
+      assign(:tags, Tag::Dream.where(letter: word.letter).page(1).per(50))
       render
     end
 
@@ -27,7 +27,7 @@ describe "dreambook/letter.html.erb" do
 
   context "when no words present" do
     before(:each) do
-      assign(:letters, ['А'])
+      assign(:letters, { r: ['А'] })
       assign(:tags, [])
       render
     end
