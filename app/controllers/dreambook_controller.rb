@@ -30,6 +30,17 @@ class DreambookController < ApplicationController
   private
 
   def collect_letters
-    @letters = Tag::Dream.uniq.pluck(:letter).sort
+    @letters = { o: [], e: [], r: [] }
+    english_range = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    russian_range = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+    Tag::Dream.uniq.pluck(:letter).each do |letter|
+      if english_range.include? letter
+        @letters[:e] << letter
+      elsif russian_range.include? letter
+        @letters[:r] << letter
+      else
+        @letters[:o] << letter
+      end
+    end
   end
 end

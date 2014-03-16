@@ -1,11 +1,15 @@
 <% if @letters.any? %>
     <h2><%= t('.select_letter') %></h2>
     <nav class="dreambook-letters">
-      <ul>
-        <% @letters.each do |letter| %>
-        <li><%= link_to letter, dreambook_letter_path(letter: letter) %></li>
-        <% end %>
-      </ul>
+      <% @letters.values.each do |letters_set| %>
+          <% unless letters_set.empty? %>
+              <ul>
+                <% letters_set.sort.each do |letter| %>
+                    <li><%= link_to letter, dreambook_letter_path(letter: letter) %></li>
+                <% end %>
+              </ul>
+          <% end %>
+      <% end %>
     </nav>
 <% else %>
     <div class="message"><%= t('nothing_found') %></div>
