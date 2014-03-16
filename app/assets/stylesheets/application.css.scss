@@ -56,11 +56,6 @@ body {
       }
     }
   }
-
-  > footer:last-child {
-    color: #dadada;
-    font-size: 0.8em;
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -256,5 +251,21 @@ nav.pagination {
     &.gap {
       border: none;
     }
+  }
+}
+
+div.copyright {
+  color: #dadada;
+  font-size: 0.8em;
+  float: left;
+}
+
+div.tos {
+  float: left;
+  font-size: 0.8em;
+  padding: 0 1em;
+
+  a:link, a:visited {
+    color: #bdd4da;
   }
 }
