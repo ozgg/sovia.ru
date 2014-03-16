@@ -39,6 +39,14 @@ class Entry < ActiveRecord::Base
     posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
+  def previous_entry(user)
+    raise 'Implement me in children classes'
+  end
+
+  def next_entry(user)
+    raise 'Implement me in children classes'
+  end
+
   def visible_to?(looker)
     case privacy
       when PRIVACY_NONE
