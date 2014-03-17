@@ -39,12 +39,14 @@ class Entry < ActiveRecord::Base
     posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
-  def previous_entry(user)
-    raise 'Implement me in children classes'
+  def previous_entry_for(user)
+    max_privacy = user.nil? ? PRIVACY_NONE : PRIVACY_USERS
+    Entry.where(type: type).where("privacy <= #{max_privacy} and id < #{id}").order('id desc').first
   end
 
-  def next_entry(user)
-    raise 'Implement me in children classes'
+  def next_entry_for(user)
+    max_privacy = user.nil? ? PRIVACY_NONE : PRIVACY_USERS
+    Entry.where(type: type).where("privacy <= #{max_privacy} and id > #{id}").order('id asc').first
   end
 
   def visible_to?(looker)

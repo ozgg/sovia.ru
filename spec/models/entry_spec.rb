@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Entry do
+  let!(:dreams) do
+    [
+        create(:dream), create(:protected_dream), create(:private_dream), create(:dream),
+        create(:private_dream), create(:protected_dream), create(:dream)
+    ]
+  end
+
   context "new entry" do
     let(:entry) { build(:entry) }
 
@@ -95,9 +102,9 @@ describe Entry do
 
   context "#recent_entries" do
     let!(:dream) { create(:dream) }
-    let!(:article) { create(:article)}
-    let!(:post) { create(:post)}
-    let!(:thought) { create(:thought)}
+    let!(:article) { create(:article) }
+    let!(:post) { create(:post) }
+    let!(:thought) { create(:thought) }
 
     it "selects public article" do
       expect(Entry.recent_entries).to include(article)
@@ -113,6 +120,54 @@ describe Entry do
 
     it "selects public thought" do
       expect(Entry.recent_entries).to include(thought)
+    end
+  end
+
+  context "#previous entry_for" do
+    context "for anonymous user" do
+      it "returns nil for leftmost entry" do
+        expect(Entry::Dream.first.previous_entry_for(nil)).to be_nil
+      end
+
+      it "returns nearest public dream for right dream" do
+        expect(dreams[3].previous_entry_for(nil)).to eq(dreams[0])
+      end
+    end
+
+    context "for registered user" do
+      let(:user) { create(:user) }
+
+      it "returns nil for leftmost entry" do
+        expect(Entry::Dream.first.previous_entry_for(user)).to be_nil
+      end
+
+      it "returns nearest non-private dream for right dream" do
+        expect(dreams[3].previous_entry_for(user)).to eq(dreams[1])
+      end
+    end
+  end
+
+  context "#next entry_for" do
+    context "for anonymous user" do
+      it "returns nil for rightmost entry" do
+        expect(Entry::Dream.last.next_entry_for(nil)).to be_nil
+      end
+
+      it "returns nearest public dream for left dream" do
+        expect(dreams[3].next_entry_for(nil)).to eq(dreams[6])
+      end
+    end
+
+    context "for registered user" do
+      let(:user) { create(:user) }
+
+      it "returns nil for rightmost entry" do
+        expect(Entry::Dream.last.next_entry_for(user)).to be_nil
+      end
+
+      it "returns nearest non-private dream for left dream" do
+        expect(dreams[3].next_entry_for(user)).to eq(dreams[5])
+      end
     end
   end
 end
