@@ -1,5 +1,4 @@
 Sovia::Application.routes.draw do
-
   root 'index#index'
 
   resources :dreams, as: :entry_dreams do
@@ -42,6 +41,13 @@ Sovia::Application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
     resources :dreams, only: [:index]
+
+    scope '/statistics' do
+      controller :statistics do
+        get '/' => :index
+        get '/symbols' => :tags
+      end
+    end
   end
 
   namespace :admin do
