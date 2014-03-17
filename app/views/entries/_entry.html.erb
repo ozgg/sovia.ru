@@ -1,3 +1,18 @@
+<% unless local_assigns[:preview] %>
+    <% adjacent = [entry.previous_entry_for(current_user), entry.next_entry_for(current_user)] %>
+    <% unless adjacent[0].nil? && adjacent[1].nil? %>
+        <nav class="adjacent-entries">
+          <ul>
+            <% unless adjacent[0].nil? %>
+                <li class="previous"><%= link_to t('.previous'), verbose_entry_path(adjacent[0]) %></li>
+            <% end %>
+            <% unless adjacent[1].nil? %>
+                <li class="next"><%= link_to t('.next'), verbose_entry_path(adjacent[1]) %></li>
+            <% end %>
+          </ul>
+        </nav>
+    <% end %>
+<% end %>
 <article class="entry">
   <header>
     <figure><%= raw entry_avatar(entry.user) %></figure>

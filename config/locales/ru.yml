@@ -325,6 +325,8 @@ ru:
       comments: "Комментарии"
     entry:
       link: "Ссылка"
+      previous: "Предыдущая запись"
+      next: "Следующая запись"
   error:
     zero: "нет ошибок"
     one: "%{count} ошибка"

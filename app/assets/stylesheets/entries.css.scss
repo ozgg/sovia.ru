@@ -110,3 +110,33 @@ article.entry {
     }
   }
 }
+
+nav.adjacent-entries {
+  min-height: 1.4em;
+  max-width: 900px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &.previous {
+        float: left;
+
+        &:before {
+          content: "← ";
+        }
+      }
+
+      &.next {
+        float: right;
+
+        &:after {
+          content: " →";
+        }
+      }
+    }
+  }
+}
