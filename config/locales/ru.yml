@@ -217,6 +217,7 @@ ru:
       new_dream: "Описать сон"
       about: "О проекте"
       terms_of_service: "Пользовательское соглашение"
+      dreambook: "Сонник"
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"

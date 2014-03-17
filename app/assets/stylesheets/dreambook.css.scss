@@ -41,30 +41,25 @@ dl.dreambook-symbols {
 }
 
 article.dreambook-word {
-  dl {
+  h2 {
+    background: #feefd0;
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-weight: normal;
+    font-variant: small-caps;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  div {
     margin: 0;
     padding: 0;
 
-    dt {
-      background: #feefd0;
-      padding: 0.5em;
-      font-size: 1.2em;
-      font-weight: normal;
-      font-variant: small-caps;
-
-      &:first-letter {
-        text-transform: capitalize;
-      }
-    }
-
-    dd {
-      margin: 0;
-      padding: 0;
-
-      p {
-        margin: 0.5em 0;
-        text-indent: 1.5em;
-      }
+    p {
+      margin: 0.5em 0;
+      text-indent: 1.5em;
     }
   }
 }
