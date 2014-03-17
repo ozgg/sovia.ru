@@ -5,8 +5,8 @@
 <% if @tags.any? %>
     <nav class="dream-symbols">
       <ul>
-        <% @tags.each do |tag| %>
-            <li><%= tag.name %> (<%= tag.entries_count %>)</li>
+        <% @tags.each do |personal_tag| %>
+            <li><%= personal_tag.tag.name %> (<%= personal_tag.entries_count %>)</li>
         <% end %>
       </ul>
     </nav>

@@ -54,11 +54,8 @@ describe My::StatisticsController do
       end
 
       it "assigns used tags to @tags" do
-        expect(assigns[:tags]).to include(used_tag)
-      end
-
-      it "doesn't assign unused tags to @tags" do
-        expect(assigns[:tags]).not_to include(unused_tag)
+        personal_tag = UserTag.find_by(user: user, tag: used_tag)
+        expect(assigns[:tags]).to include(personal_tag)
       end
     end
   end
