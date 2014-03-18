@@ -3,11 +3,11 @@
   <header><h2><%= t('.statistics') %></h2></header>
   <% if tags.any? %>
   <nav>
-    <ul>
+    <ol>
       <% tags.each do |tag| %>
-      <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name) %> (<%= tag.entries_count %>)</li>
+      <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name), rel: 'tag' %> (<%= tag.entries_count %>)</li>
       <% end %>
-    </ul>
+    </ol>
   </nav>
   <% else %>
   <p><%= t('nothing_found') %></p>

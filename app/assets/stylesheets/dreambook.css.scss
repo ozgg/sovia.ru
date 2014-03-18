@@ -9,15 +9,20 @@ nav.dreambook-letters {
     li {
       list-style: none;
       display: inline-block;
-      padding: 0 0.2em;
+      padding: 0;
       border: solid 1px #eeeeee;
+      min-width: 1.2em;
+      text-align: center;
 
       a:link, a:visited {
-        color: #0000ff;
+        display: inline-block;
+        width: 100%;
+        color: #3d6d88;
       }
 
       a:hover {
         color: #ff0000;
+        background: #eeffee;
       }
     }
   }

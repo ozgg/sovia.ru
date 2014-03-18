@@ -30,7 +30,7 @@ class DreambookController < ApplicationController
   private
 
   def collect_letters
-    @letters = { o: [], e: [], r: [] }
+    @letters = { o: [], r: [], e: [] }
     english_range = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     russian_range = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
     Tag::Dream.uniq.pluck(:letter).each do |letter|

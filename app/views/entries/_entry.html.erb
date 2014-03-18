@@ -4,10 +4,10 @@
         <nav class="adjacent-entries">
           <ul>
             <% unless adjacent[0].nil? %>
-                <li class="previous"><%= link_to t('.previous'), verbose_entry_path(adjacent[0]) %></li>
+                <li class="previous"><%= link_to t('.previous'), verbose_entry_path(adjacent[0]), rel: 'prev' %></li>
             <% end %>
             <% unless adjacent[1].nil? %>
-                <li class="next"><%= link_to t('.next'), verbose_entry_path(adjacent[1]) %></li>
+                <li class="next"><%= link_to t('.next'), verbose_entry_path(adjacent[1]), rel: 'next' %></li>
             <% end %>
           </ul>
         </nav>
@@ -40,7 +40,7 @@
             <ul>
               <% tags.each do |tag| %>
                 <li><!--
-                  --><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name) %><!--
+                  --><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name), rel: 'tag' %><!--
                   --><% if tag.description %>
                      <span><%= link_to '?', dreambook_word_path(letter: tag.letter, word: tag.name) %></span><!--
                   --><% end %><!--

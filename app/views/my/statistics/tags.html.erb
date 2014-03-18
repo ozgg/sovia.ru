@@ -4,11 +4,11 @@
 
 <% if @tags.any? %>
     <nav class="dream-symbols">
-      <ul>
+      <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
         <% @tags.each do |personal_tag| %>
             <li><%= personal_tag.tag.name %> (<%= personal_tag.entries_count %>)</li>
         <% end %>
-      </ul>
+      </ol>
     </nav>
 
     <%= paginate @tags %>

@@ -6,8 +6,8 @@ class StatisticsController < ApplicationController
 
   # get /statistics/symbols
   def symbols
-    page  = params[:page] || 1
-    @tags = Tag::Dream.order('entries_count desc, canonical_name asc').page(page).per(20)
+    page   = params[:page] || 1
+    @tags  = Tag::Dream.order('entries_count desc, canonical_name asc').page(page).per(20)
     @title = t('controllers.statistics.symbols', page: page)
   end
 end

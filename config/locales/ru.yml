@@ -163,6 +163,8 @@ ru:
       title: "Случайный сон"
     archive:
       year: "%{year} год"
+    tagged:
+      edit_tag: "Редактировать метку"
   tags:
     list:
       no_tags: "Меток нет"
