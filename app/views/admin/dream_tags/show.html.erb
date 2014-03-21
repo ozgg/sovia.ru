@@ -15,6 +15,6 @@
     <h2><%= @tag.name %></h2>
   </header>
   <div>
-    <%= @tag.description %>
+    <%= raw parse_body(@tag.description.to_s, true) %>
   </div>
 </article>

@@ -17,7 +17,7 @@
     <h2 itemprop="headline"><%= @tag.name %></h2>
   </header>
   <div itemprop="articleBody">
-    <%= raw parse_body(@tag.description, true) unless @tag.description.blank? %>
+    <%= raw parse_body(@tag.description.to_s, true) %>
   </div>
   <footer>
     <nav><%= link_to t('.read_dreams'), tagged_entry_dreams_path(tag: @tag.name) %> (<%= @tag.entries_count %>)</nav>
