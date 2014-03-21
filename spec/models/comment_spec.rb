@@ -60,8 +60,49 @@ describe Comment do
       let(:parent) { create(:comment, entry: dream, user: user) }
       let(:comment) { create(:comment, entry: dream, parent: parent) }
 
+      it_should_behave_like "non-notifier"
+    end
+  end
+
+  context "#notify_parent_owner?" do
+    let(:dream) { create(:owned_dream) }
+
+    shared_examples "non-notifier" do
       it "returns false" do
-        expect(comment).not_to be_notify_entry_owner
+        expect(comment).not_to be_notify_parent_owner
+      end
+    end
+
+    context "when parent is anonymous" do
+      let(:parent) { create(:comment, entry: dream) }
+      let(:comment) { create(:comment, parent: parent, entry: dream) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when parent owner cannot receive letters" do
+      let(:user) { create(:user) }
+      let(:parent) { create(:comment, entry: dream, user: user ) }
+      let(:comment) { create(:comment, parent: parent, entry: dream) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when commentator is parent owner" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:parent) { create(:comment, entry: dream, user: user ) }
+      let(:comment) { create(:comment, parent: parent, entry: dream, user: user ) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when commentator is not parent owner who can receive letters" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:parent) { create(:comment, entry: dream, user: user) }
+      let(:comment) { create(:comment, parent: parent, entry: dream) }
+
+      it "returns true" do
+        expect(comment).to be_notify_parent_owner
       end
     end
   end
