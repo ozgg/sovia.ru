@@ -22,6 +22,10 @@ class Tag < ActiveRecord::Base
     canonized.empty? ? lowered : canonized
   end
 
+  def uri_name
+    name.chomp('.').sub('.', '-')
+  end
+
   private
 
   def normalize_name
