@@ -48,10 +48,12 @@
     разработчиками.</p>
   <p>Проект написан на Ruby on Rails.</p>
   <footer>
-    <p>Версия проекта — 3.0.0</p>
+    <p>
+      Версия проекта — 3.0.0
     <% if File.exist?('/var/www/sovia.ru/last_version') %>
-    <p>Build: <%= File.read('/var/www/sovia.ru/last_version') %></p>
+    , build <%= File.read('/var/www/sovia.ru/last_version').to_i %>
     <% end %>
+    </p>
   </footer>
 </article>
 <aside><img src="http://yandex.ru/cycounter?sovia.ru" alt="Индекс цитируемости" width="88" height="33" /></aside>

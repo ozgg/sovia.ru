@@ -226,6 +226,10 @@ ru:
       private: "Личный кабинет"
     statistics:
       statistics: "Чаще всего снится"
+    more:
+      more: "Кроме того"
+      archive: "Архив снов"
+      statistics: "Статистика"
   roles:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"
