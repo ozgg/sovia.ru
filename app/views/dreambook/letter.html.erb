@@ -7,11 +7,11 @@
 <h2><%= @title %></h2>
 <% if @tags.any? %>
     <nav>
-      <dl class="dreambook-symbols">
+      <ul class="dreambook-symbols">
         <% @tags.each do |word| %>
-        <dt><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></dt>
+        <li><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></li>
         <% end %>
-      </dl>
+      </ul>
     </nav>
 
     <%= paginate @tags %>

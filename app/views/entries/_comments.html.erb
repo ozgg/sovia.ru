@@ -3,21 +3,34 @@
     <h3><%= t('.comments') %></h3>
     <ul class="comments">
       <% entry.comments.order('id asc').each do |comment| %>
-      <li id="comment-<%= comment.id %>">
-        <div>
-          <figure>
-            <%= comment_avatar(comment.user) %>
-          </figure>
-          <%= user_link(comment.user) %><br />
-          <time datetime="<%= comment.created_at %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-        </div>
-        <%= raw parse_body(comment.body) %>
-      </li>
+          <li id="comment-<%= comment.id %>">
+            <div>
+              <figure>
+                <%= comment_avatar(comment.user) %>
+              </figure>
+              <%= user_link(comment.user) %>
+              <br/>
+              <time datetime="<%= comment.created_at %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+            </div>
+
+            <div>
+              <%= raw parse_body(comment.body) %>
+            </div>
+
+            <ul class="actions">
+              <li>
+                <div><%= t('.reply') %></div>
+                <div></div>
+              </li>
+            </ul>
+          </li>
       <% end %>
     </ul>
 <% end %>
 
-<div>
+<div class="reply-container">
   <h3><%= t('.add_comment') %></h3>
-  <%= render 'comments/form' %>
+  <div>
+    <%= render 'comments/form' %>
+  </div>
 </div>

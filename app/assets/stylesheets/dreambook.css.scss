@@ -28,12 +28,14 @@ nav.dreambook-letters {
   }
 }
 
-dl.dreambook-symbols {
+ul.dreambook-symbols {
   margin: 0;
   padding: 0;
 
-  dt {
+  li {
+    list-style: none;
     padding: 0 1em;
+    text-transform: capitalize;
 
     &:nth-of-type(2n) {
       background: #f0f0ff;

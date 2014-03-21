@@ -16,17 +16,22 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :entry_id).merge(user: current_user)
+    params.require(:comment).permit(:body, :entry_id, :parent_id).merge(user: current_user)
   end
 
   def check_rights
     entry = @comment.entry
     raise ForbiddenException unless entry.nil? || entry.visible_to?(current_user)
+    unless @comment.parent.nil?
+      parent = @comment.parent
+      raise ForbiddenException unless parent.entry_id == @comment.entry_id
+    end
   end
 
   def save_comment
     if @comment.save
       Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
+      Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
       redirect_with_confirmation
     else
       render action: :new

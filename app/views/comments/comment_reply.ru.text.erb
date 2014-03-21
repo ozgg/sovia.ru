@@ -1,0 +1,12 @@
+Здравствуйте, <%= @comment.parent.user.login %>.
+
+На ваш комментарий к записи «<%= @comment.entry.parsed_title %>» на сайте sovia.ru был оставлен комментарий.
+Посмотреть его можно по этому адресу:
+<%= comment_url @comment %>
+
+Сам комментарий (<%= @comment.user.nil? ? 'анонимный' : @comment.user.login %>):
+<%= @comment.body %>
+
+--
+  С уважением.
+  автоматический уведомитель

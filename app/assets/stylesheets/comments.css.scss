@@ -8,7 +8,7 @@ ul.comments {
     margin: 0.5em 0.5em 1em;
     border-bottom: solid #eeeeee 1px;
 
-    > div {
+    > div:first-child {
       background: #fef9ee;
       min-height: 60px;
 
@@ -27,5 +27,42 @@ ul.comments {
       margin: 0.5em;
       text-indent: 1em;
     }
+
+    ul.actions {
+      margin: 0 1em;
+      padding: 0;
+      background: #fef9ee;
+
+      li {
+        border: none;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+
+        > div {
+          min-height: 0;
+          background: none;
+
+          &:first-child {
+            cursor: pointer;
+            color: #3d6d88;
+
+            &:before {
+              content: '[ ';
+            }
+
+            &:after {
+              content: ' ]';
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+div.reply-container {
+  h3 {
+    cursor: pointer;
   }
 }

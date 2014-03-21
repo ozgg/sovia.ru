@@ -347,6 +347,8 @@ ru:
   comments:
     entry_reply:
       subject: "Ответ на вашу запись"
+    comment_reply:
+      subject: "Ответ на ваш комментарий"
   user:
     email_confirmed: "Почта подтверждена"
     code_invalid: "Недействительный код"
@@ -362,6 +364,7 @@ ru:
     comments:
       add_comment: "Добавить комментарий"
       comments: "Комментарии"
+      reply: "Ответить"
     entry:
       link: "Ссылка"
       previous: "Предыдущая запись"

@@ -8,7 +8,7 @@ class DreambookController < ApplicationController
   def letter
     page   = params[:page] || 1
     letter = params[:letter]
-    @tags  = Tag::Dream.where(letter: letter).where.not(description: '').order('name asc').page(page).per(50)
+    @tags  = Tag::Dream.where(letter: letter).where.not(description: '').order('canonical_name asc').page(page).per(50)
     @title = t('controllers.dreambook.letter', letter: letter, page: page)
   end
 

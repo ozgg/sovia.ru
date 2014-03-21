@@ -6,4 +6,10 @@ class Comments < ActionMailer::Base
 
     mail to: comment.entry.user.email
   end
+
+  def comment_reply(comment)
+    @comment = comment
+
+    mail to: comment.parent.user.email
+  end
 end
