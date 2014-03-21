@@ -53,5 +53,16 @@ describe Comment do
         expect(comment).to be_notify_entry_owner
       end
     end
+
+    context "when commentator replies to owner's comment" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:dream) { create(:owned_dream, user: user) }
+      let(:parent) { create(:comment, entry: dream, user: user) }
+      let(:comment) { create(:comment, entry: dream, parent: parent) }
+
+      it "returns false" do
+        expect(comment).not_to be_notify_entry_owner
+      end
+    end
   end
 end

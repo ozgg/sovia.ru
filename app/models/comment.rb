@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
       notify_owner?(entry.user)
     else
       parent_owner = parent.user
-      !parent_owner.nil? && parent_owner != user
+      !parent_owner.nil? && parent_owner != entry.user
     end
   end
 
