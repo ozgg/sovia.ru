@@ -105,7 +105,7 @@ class Entry < ActiveRecord::Base
   end
 
   def preview
-    parse_body body.gsub(/(\r?\n)+/, "\n").split("\n")[0..1].join("\n")
+    body.gsub(/(\r?\n)+/, "\n").split("\n")[0..1].join("\n")
   end
 
   def glimpse

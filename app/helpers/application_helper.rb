@@ -97,8 +97,12 @@ module ApplicationHelper
   def parse_body(body, allow_raw = false)
     output = ''
     body.strip.split(/(?:\r?\n)+/).each do |fragment|
-      fragment = CGI::escapeHTML(fragment) unless allow_raw
+      unless allow_raw
+        fragment.gsub!('<', '&lt;')
+        fragment.gsub!('>', '&gt;')
+      end
       link_dreambook_symbols(fragment)
+      link_entries(fragment)
       if fragment[0] == '<'
         output += fragment
       else
@@ -110,14 +114,27 @@ module ApplicationHelper
   end
 
   def link_dreambook_symbols(fragment)
-    pattern  = /[\[<]symbol name="(?<name>[^"]+)"[^\]>]*[\]>]/
+    pattern = /[\[<]symbol name="(?<name>[^"]+)"[^\]>]*[\]>]/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       tag   = Tag::Dream.match_by_name(match[:name])
       if tag.nil?
-        match[:name]
+        '<span class="not-found">' + match[:name] + '</span>'
       else
         link_to(match[:name], dreambook_word_path(letter: tag.letter, word: tag.name))
+      end
+    end
+  end
+
+  def link_entries(fragment)
+    pattern = /\[(?:entry|article|dream|post)\s+id="(?<id>[^"]+)"[^\]]*\]/
+    fragment.gsub! pattern do |chunk|
+      match = pattern.match chunk
+      entry = Entry::find_by(id: match[:id])
+      if entry.nil?
+        "<span class=\"not-found\">#{match[:id]}</span>"
+      else
+        '&laquo;' + link_to(entry.parsed_title, verbose_entry_path(entry)) + '&raquo;'
       end
     end
   end

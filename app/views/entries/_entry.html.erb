@@ -53,12 +53,12 @@
   </header>
   <div>
     <% if local_assigns[:preview] %>
-        <%= raw entry.preview %>
+        <%= raw parse_body(entry.preview, entry.is_a?(Entry::Article)) %>
         <% if entry.passages_count > 2 %>
             <p class="more"><%= link_to t('read_more'), verbose_entry_path(entry) %></p>
         <% end %>
     <% else %>
-        <%= raw entry.parsed_body %>
+        <%= raw parse_body(entry.body, entry.is_a?(Entry::Article)) %>
     <% end %>
   </div>
   <footer>

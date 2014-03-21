@@ -11,7 +11,7 @@
           <%= user_link(comment.user) %><br />
           <time datetime="<%= comment.created_at %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
         </div>
-        <%= raw comment.parsed_body %>
+        <%= raw parse_body(comment.body) %>
       </li>
       <% end %>
     </ul>
