@@ -1,0 +1,7 @@
+<p>Совия – это сайт о снах, где можно вести дневник снов, читать тематические статьи, а также пользоваться
+инструментами для анализа и самоанализа. И всё это бесплатно.</p>
+<p>На данный момент <%= t('.users_count', count: User.count) %>
+<%= t('.described_dreams', count: Entry::Dream.count) %>,
+<%= t('.written_articles', count: Entry::Article.count) %> и
+<%= t('.left_comments', count: Comment.count) %>.</p>
+<p>Каждый день происходит что-то новое, присоединяйтесь.</p>

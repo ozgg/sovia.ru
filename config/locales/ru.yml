@@ -123,6 +123,31 @@ ru:
       no_posts: "Публикаций нет"
       main: "Добро пожаловать"
       recent_posts: "Последние публикации"
+    greeting:
+      users_count:
+        zero: "ни одним пользователем"
+        one: "%{count} пользователем"
+        few: "%{count} пользователями"
+        many: "%{count} пользователями"
+        other: "%{count} пользователями"
+      described_dreams:
+        zero: "не описано ни одного сна"
+        one: "описан %{count} сон"
+        few: "описано %{count} сна"
+        many: "описано %{count} снов"
+        other: "описано %{count} снов"
+      written_articles:
+        zero: "не опубликовано ни одной статьи"
+        one: "опубликована %{count} статья"
+        few: "опубликовано %{count} статьи"
+        many: "опубликовано %{count} статей"
+        other: "опубликовано %{count} статей"
+      left_comments:
+        zero: "не оставлено ни одного комментария"
+        one: "оставлен %{count} комментарий"
+        few: "оставлено %{count} комментария"
+        many: "оставлено %{count} комментариев"
+        other: "оставлено %{count} комментариев"
   articles:
     list:
       no_articles: "Статей нет"
@@ -341,11 +366,13 @@ ru:
     zero: "нет ошибок"
     one: "%{count} ошибка"
     few: "%{count} ошибки"
+    many: "%{count} ошибок"
     other: "%{count} ошибок"
   comment:
     zero: "0 комментариев"
     one: "%{count} комментарий"
     few: "%{count} комментария"
+    many: "%{count} комментариев"
     other: "%{count} комментариев"
     created: "Комментарий добавлен"
   controllers:
