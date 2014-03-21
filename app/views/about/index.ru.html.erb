@@ -51,7 +51,7 @@
     <p>
       Версия проекта — 3.0.0
     <% if File.exist?('/var/www/sovia.ru/last_version') %>
-    , build <%= File.read('/var/www/sovia.ru/last_version').to_i %>
+      build <%= File.read('/var/www/sovia.ru/last_version').to_i %>
     <% end %>
     </p>
   </footer>

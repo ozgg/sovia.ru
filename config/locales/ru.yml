@@ -202,6 +202,10 @@ ru:
       delete: "Удалить метку"
       list: "Все метки"
       edit: "Редактировать метку"
+  admin:
+    dream_tags:
+      show:
+        in_dreambook: "Посмотреть в соннике"
   users:
     create:
       successfully: "Вы зарегистрировались и вошли"
