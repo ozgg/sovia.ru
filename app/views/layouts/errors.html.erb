@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @title || t('titles.none') %> :: <%= t('titles.sovia') %></title>
+  <title><%= @title || params[:code].to_s %> :: <%= t('titles.sovia') %></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -14,24 +14,14 @@
 
 <section id="main">
   <% if flash[:notice] %>
-  <div id="notice"><%= flash[:notice] %></div>
+      <div id="notice"><%= flash[:notice] %></div>
   <% end %>
   <%= yield %>
 </section>
 
-<section id="right-column">
-  <%= render 'layouts/auth_block' %>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/random_dream' %>
-  <%= render 'layouts/more' %>
-</section>
-
 <footer>
   <div class="copyright">&copy; 2006&ndash;2014 sovia.ru</div>
-  <div class="tos"><%= link_to t('.terms_of_service'), tos_path %></div>
-  <% if Rails.env.production? %>
-      <%= render 'index/metrics' %>
-<% end %>
+  <div class="tos"><%= link_to t('layouts.application.terms_of_service'), tos_path %></div>
 </footer>
 </body>
 </html>

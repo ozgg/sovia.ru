@@ -1,6 +1,10 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
+  %w( 401 404 422 500 ).each do |code|
+    get code, :to => "errors#show", :code => code
+  end
+
   resources :dreams, as: :entry_dreams do
     collection do
       get 'random' => :random

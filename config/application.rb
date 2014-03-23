@@ -24,5 +24,7 @@ module Sovia
     config.i18n.default_locale = :ru
 
     config.action_dispatch.rescue_responses.merge!('ApplicationController::UnauthorizedException' => :unauthorized)
+
+    config.exceptions_app = self.routes
   end
 end
