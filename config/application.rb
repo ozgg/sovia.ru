@@ -23,10 +23,7 @@ module Sovia
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
 
-    config.action_dispatch.rescue_responses.merge!(
-        'ApplicationController::UnauthorizedException' => :unauthorized,
-        'ActiveRecord::RecordNotFound' => :not_found
-    )
+    config.action_dispatch.rescue_responses.merge!('ApplicationController::UnauthorizedException' => :unauthorized)
 
     config.exceptions_app = self.routes
   end

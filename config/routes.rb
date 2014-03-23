@@ -1,9 +1,11 @@
 Sovia::Application.routes.draw do
   root 'index#index'
 
-  %w( 401 404 422 500 ).each do |code|
+  %w( 401 422 500 ).each do |code|
     get code, :to => "errors#show", :code => code
   end
+
+  get '/404' => 'errors#not_found'
 
   resources :dreams, as: :entry_dreams do
     collection do

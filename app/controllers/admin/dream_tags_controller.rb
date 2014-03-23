@@ -4,7 +4,7 @@ class Admin::DreamTagsController < ApplicationController
 
   def index
     page  = params[:page] || 1
-    @tags = Tag::Dream.order('name asc').page(page).per(30)
+    @tags = collect_tags.page(page).per(30)
     @title = t('controllers.admin.dream_tags.index', page: page)
   end
 
@@ -58,5 +58,14 @@ class Admin::DreamTagsController < ApplicationController
 
   def tag_parameters
     params.require(:tag_dream).permit(:name, :description)
+  end
+
+  def collect_tags
+    collector = Tag::Dream.order('name asc')
+    unless params[:letter].blank?
+      collector.where!(letter: params[:letter])
+    end
+
+    collector
   end
 end
