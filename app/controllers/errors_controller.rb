@@ -2,7 +2,7 @@ class ErrorsController < ApplicationController
   layout 'errors'
 
   def not_found
-    render view: '404', status: :not_found
+    render '404', status: :not_found
   end
 
   def show
