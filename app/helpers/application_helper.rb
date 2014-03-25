@@ -141,7 +141,7 @@ module ApplicationHelper
   end
 
   def find_links(fragment)
-    pattern = /(?:\[(?<href>[^\]]+)\]\((?<text>[^\)]+)\))/
+    pattern = /(?:\[(?<href>(?:https?:\/\/|\/)[a-zA-Z0-9\.\/?=&%+\-_]+)\]\((?<text>[^\)]+)\))/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       '<a href="' + match[:href] + '">' + match[:text] + '</a>'
