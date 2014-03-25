@@ -13,6 +13,7 @@
       <li>
         <time datetime="<%= deed.created_at %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
         <%= deed.name %>
+        <%= link_to '*', deed_path(deed) %>
       </li>
       <% end %>
     </ul>
