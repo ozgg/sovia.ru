@@ -19,6 +19,10 @@ ru:
           attributes:
             body:
               blank: "не может быть пустым"
+        deed:
+          attributes:
+            name:
+              blank: "не может быть пустой строкой"
         comment:
           attributes:
             body:
@@ -33,6 +37,7 @@ ru:
       user: "пользователь"
       tag: "метка"
       comment: "комментарий"
+      deed: "хорошее дело"
     attributes:
       entry:
         title: "Название"
@@ -51,6 +56,8 @@ ru:
         avatar: "Картинка пользователя"
       comment:
         body: "Комментарий"
+      deed:
+        name: "Суть"
     properties:
       entry:
         privacy:
@@ -336,6 +343,10 @@ ru:
     statistics:
       index:
         tags: "Мои символы снов"
+    deeds:
+      index:
+        empty: "Ничего не описано"
+        create: "Добавить запись об успехе"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"

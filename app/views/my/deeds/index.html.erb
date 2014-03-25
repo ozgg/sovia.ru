@@ -1,3 +1,23 @@
 <header>
   <h1><%= @title %></h1>
 </header>
+
+<div>
+  <h2><%= t('.create') %></h2>
+  <%= render 'deeds/form' %>
+</div>
+
+<% if @deeds.any? %>
+    <ul class="deeds">
+      <% @deeds.each do |deed| %>
+      <li>
+        <time datetime="<%= deed.created_at %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
+        <%= deed.name %>
+      </li>
+      <% end %>
+    </ul>
+
+    <%= paginate @deeds %>
+<% else %>
+    <div class="message"><%= t('.empty') %></div>
+<% end %>
