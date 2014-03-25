@@ -39,6 +39,10 @@ class Entry < ActiveRecord::Base
     posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
+  def shareable?
+    privacy == PRIVACY_NONE
+  end
+
   def previous_entry_for(user)
     max_privacy = user.nil? ? PRIVACY_NONE : PRIVACY_USERS
     Entry.where(type: type).where("privacy <= #{max_privacy} and id < #{id}").order('id desc').first
