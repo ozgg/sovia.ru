@@ -1,0 +1,2 @@
+class DeedsController < ApplicationController
+end

@@ -40,13 +40,14 @@ Sovia::Application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :comments, only: [:create]
+  resources :deeds
 
   namespace :my do
     get '/' => 'index#index'
 
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
-    resources :dreams, only: [:index]
+    resources :dreams, :deeds, only: [:index]
 
     scope '/statistics' do
       controller :statistics do

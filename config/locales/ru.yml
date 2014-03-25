@@ -406,6 +406,8 @@ ru:
       statistics:
         index: "Моя статистика"
         tags: "Мои символы снов, страница %{page}"
+      deeds:
+        index: "Мои хорошие дела, страница %{page}"
     about:
       index: "О проекте"
       features: "Возможности"
