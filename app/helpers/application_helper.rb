@@ -103,7 +103,7 @@ module ApplicationHelper
       end
       link_dreambook_symbols(fragment)
       link_entries(fragment)
-      find_links(fragment) if allow_raw
+      find_links(fragment)
       if fragment[0] == '<'
         output += fragment
       else
