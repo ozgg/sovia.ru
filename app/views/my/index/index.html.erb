@@ -7,6 +7,7 @@
     <li><%= link_to t('.dreams'), my_dreams_path %></li>
     <li><%= link_to t('.profile'), my_profile_path %></li>
     <li><%= link_to t('my.statistics.index.tags'), my_symbols_path %></li>
+    <li><%= link_to t('.my_deeds'), my_deeds_path %></li>
     <% unless current_user.mail_confirmed? %>
         <li><%= link_to t('.confirm_email'), my_confirmation_path %></li>
     <% end %>

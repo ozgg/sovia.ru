@@ -1,0 +1,20 @@
+<%= form_for(@deed || Deed.new) do |form| %>
+    <% unless @deed.nil? %>
+        <% if @deed.errors.any? %>
+            <div class="errors">
+              <h2><%= t('error', count: @deed.errors.count) %>:</h2>
+
+              <ul>
+                <% @deed.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+    <% end %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+      <%= form.button t('submit'), type: :submit %>
+    </div>
+<% end %>

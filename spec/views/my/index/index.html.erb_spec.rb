@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "my/index/index.html.erb" do
   shared_examples "mandatory links" do
-
     it "has link to profile page" do
       expect(rendered).to have_selector('a', href: my_profile_path)
     end
@@ -13,6 +12,10 @@ describe "my/index/index.html.erb" do
 
     it "has link to user's tags page" do
       expect(rendered).to have_selector('a', href: my_symbols_path)
+    end
+
+    it "has link to user's deeds page" do
+      expect(rendered).to have_selector('a', href: my_deeds_path)
     end
   end
 

@@ -297,6 +297,7 @@ ru:
         dreams: "Мои сны"
         profile: "Мой профиль"
         confirm_email: "Подтверждение почты"
+        my_deeds: "Мой журнал успеха"
     profiles:
       edit:
         update: "Обновить профиль"
