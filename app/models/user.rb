@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :codes, dependent: :destroy
   has_many :comments, dependent: :nullify
   has_many :user_tags, dependent: :destroy
+  has_many :deeds, dependent: :destroy
 
   has_secure_password
 
