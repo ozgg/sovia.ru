@@ -103,6 +103,7 @@ module ApplicationHelper
       end
       link_dreambook_symbols(fragment)
       link_entries(fragment)
+      find_links(fragment) if allow_raw
       if fragment[0] == '<'
         output += fragment
       else
@@ -136,6 +137,14 @@ module ApplicationHelper
       else
         '&laquo;' + link_to(entry.parsed_title, verbose_entry_path(entry)) + '&raquo;'
       end
+    end
+  end
+
+  def find_links(fragment)
+    pattern = /(?:\[(?<href>[^\]]+)\]\((?<text>[^\)]+)\))/
+    fragment.gsub! pattern do |chunk|
+      match = pattern.match chunk
+      '<a href="' + match[:href] + '">' + match[:text] + '</a>'
     end
   end
 end
