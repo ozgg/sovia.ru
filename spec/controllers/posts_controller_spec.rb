@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe PostsController do
+  let(:tag) { create(:post_tag, name: 'Волшебство') }
   let(:owner) { create(:user) }
-  let(:entry) { create(:post, user: owner, body: 'Эталон') }
+  let(:user) { create(:user) }
+  let(:entry) { create(:post, user: owner, body: 'Эталон', tags: [tag]) }
 
   shared_examples "post assigner" do
     it "assigns post to @entry" do
@@ -242,6 +244,45 @@ describe PostsController do
 
       it_should_behave_like "allowed showing"
       it_should_behave_like "allowed management"
+    end
+  end
+
+  context "getting tagged posts" do
+    let!(:other_post) { create(:post, tags: [create(:post_tag)]) }
+    let!(:protected_post) { create(:protected_post, tags: [tag]) }
+
+    shared_examples "visible public tagged posts" do
+      before(:each) { get :tagged, tag: tag.name }
+
+      it "includes tagged post to @entries" do
+        expect(assigns[:entries]).to include(entry)
+      end
+
+      it "doesn't include another post to @entries" do
+        expect(assigns[:entries]).not_to include(other_post)
+      end
+    end
+
+    context "anonymous user" do
+      before(:each) { session[:user_id] = nil }
+
+      it_should_behave_like "visible public tagged posts"
+
+      it "doesn't include protected post to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).not_to include(protected_post)
+      end
+    end
+
+    context "logged in user" do
+      before(:each) { session[:user_id] = user.id }
+
+      it_should_behave_like "visible public tagged posts"
+
+      it "includes protected post to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).to include(protected_post)
+      end
     end
   end
 end

@@ -7,15 +7,12 @@ FactoryGirl.define do
     end
 
     factory :article_tag, class: Tag::Article do
-
     end
 
     factory :post_tag, class: Tag::Post do
-
     end
 
     factory :thought_tag, class: Tag::Thought do
-
     end
   end
 end
