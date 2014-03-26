@@ -5,6 +5,10 @@ class ErrorsController < ApplicationController
     render '404', status: :not_found
   end
 
+  def unauthorized
+    render '401', status: :unauthorized
+  end
+
   def show
     render status_code.to_s, :status => status_code
   end
