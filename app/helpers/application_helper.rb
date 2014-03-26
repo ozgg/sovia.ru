@@ -48,6 +48,22 @@ module ApplicationHelper
     link_to dream.parsed_title, entry_dream_path(dream)
   end
 
+  def tagged_entries_path(tag)
+    parameters = { tag: tag.uri_name }
+    attributes = { rel: 'tag' }
+    if tag.is_a? Tag::Dream
+      link_to tag.name, tagged_entry_dreams_path(parameters), attributes
+    elsif tag.is_a? Tag::Article
+      link_to tag.name, tagged_entry_articles_path(parameters), attributes
+    elsif tag.is_a? Tag::Post
+      link_to tag.name, tagged_entry_posts_path(parameters), attributes
+    elsif tag.is_a? Tag::Thought
+      link_to tag.name, tagged_entry_thoughts_path(parameters), attributes
+    else
+      tag.name
+    end
+  end
+
   def comment_url(comment)
     entry = comment.entry
     parameters = {

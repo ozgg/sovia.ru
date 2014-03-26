@@ -39,12 +39,10 @@
           <nav>
             <ul>
               <% tags.each do |tag| %>
-                <li><!--
-                  --><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.uri_name), rel: 'tag' %><!--
+                <li><%= tagged_entries_path(tag) %><!--
                   --><% if tag.description %>
                      <span><%= link_to '?', dreambook_word_path(letter: tag.letter, word: tag.uri_name) %></span><!--
-                  --><% end %><!--
-                --></li>
+                  --><% end %></li>
               <% end %>
             </ul>
           </nav>
