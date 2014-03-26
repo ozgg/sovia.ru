@@ -8,30 +8,28 @@
 </head>
 <body>
 <header>
-  <div id="logo"><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></div>
+  <figure><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></figure>
   <%= render 'layouts/main_navigation' %>
+  <%= render 'layouts/auth_block' %>
 </header>
 
-<section id="main">
+<section>
   <% if flash[:notice] %>
-  <div id="notice"><%= flash[:notice] %></div>
+      <div id="notice"><%= flash[:notice] %></div>
   <% end %>
   <%= yield %>
-</section>
 
-<section id="right-column">
-  <%= render 'layouts/auth_block' %>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/random_dream' %>
-  <%= render 'layouts/more' %>
+  <section>
+    <%= render 'layouts/statistics' %>
+    <%= render 'layouts/random_dream' %>
+    <%= render 'layouts/more' %>
+  </section>
 </section>
 
 <footer>
-  <div class="copyright">&copy; 2006&ndash;2014 sovia.ru</div>
-  <div class="tos"><%= link_to t('.terms_of_service'), tos_path %></div>
-  <% if Rails.env.production? %>
-      <%= render 'index/metrics' %>
-<% end %>
+  <div>&copy; 2006&ndash;2014 sovia.ru</div>
+  <div><%= link_to t('.terms_of_service'), tos_path %></div>
+  <%= render 'index/metrics' if Rails.env.production? %>
 </footer>
 </body>
 </html>

@@ -1,7 +1,19 @@
 article.entry {
+  &:first-of-type {
+    margin-top: 1em;
+  }
+
   header {
     min-height: 110px;
     background: #feefd0;
+
+    h2 {
+      font-weight: normal;
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+    }
 
     > figure:first-child {
       float: left;
@@ -88,11 +100,11 @@ article.entry {
     border-top: solid #eeeeee 1px;
     min-height: 1.4em;
 
-    div.permalink {
+    > div:first-of-type {
       float: left;
     }
 
-    div.comments-count {
+    > div:last-of-type {
       float: right;
     }
   }
@@ -113,7 +125,7 @@ article.entry {
 
 nav.adjacent-entries {
   min-height: 1.4em;
-  max-width: 900px;
+  margin: 16px 284px 16px 0;
 
   ul {
     margin: 0;

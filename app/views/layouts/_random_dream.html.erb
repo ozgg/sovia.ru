@@ -1,12 +1,11 @@
 <% dream = Entry::Dream.random_dream %>
-<aside>
+<div>
   <% unless dream.nil? %>
-  <hgroup>
-    <h1><%= t('dreams.random.title') %></h1>
-    <h2><%= link_to dream.parsed_title, verbose_entry_path(dream) %></h2>
-  </hgroup>
-  <div>
-    <p><%= dream.glimpse %>&hellip;</p>
-  </div>
+      <h1><%= t('dreams.random.title') %></h1>
+      <h2><%= link_to dream.parsed_title, verbose_entry_path(dream) %></h2>
+
+      <div>
+        <p><%= dream.glimpse %>&hellip;</p>
+      </div>
   <% end %>
-</aside>
+</div>

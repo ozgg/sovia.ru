@@ -1,15 +1,15 @@
 <% tags = Tag::Dream.order('entries_count desc').first(10) %>
-<aside>
-  <header><h2><%= t('.statistics') %></h2></header>
+<div>
+  <h2><%= t('.statistics') %></h2>
   <% if tags.any? %>
-  <nav>
-    <ol>
-      <% tags.each do |tag| %>
-      <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name), rel: 'tag' %> (<%= tag.entries_count %>)</li>
-      <% end %>
-    </ol>
-  </nav>
+      <nav>
+        <ol>
+          <% tags.each do |tag| %>
+              <li><%= tagged_entries_path(tag) %> (<%= tag.entries_count %>)</li>
+          <% end %>
+        </ol>
+      </nav>
   <% else %>
-  <p><%= t('nothing_found') %></p>
+      <div><%= t('nothing_found') %></div>
   <% end %>
-</aside>
+</div>
