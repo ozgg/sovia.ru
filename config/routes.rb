@@ -39,6 +39,12 @@ Sovia::Application.routes.draw do
     end
   end
 
+  resources :thoughts, as: :entry_thoughts do
+    collection do
+      get ':id-:uri_title' => :show, as: :verbose
+    end
+  end
+
   resources :users, only: [:new, :create]
   resources :comments, only: [:create]
   resources :deeds
@@ -48,7 +54,7 @@ Sovia::Application.routes.draw do
 
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
-    resources :dreams, :deeds, only: [:index]
+    resources :dreams, :posts, :thoughts, :deeds, only: [:index]
 
     scope '/statistics' do
       controller :statistics do
