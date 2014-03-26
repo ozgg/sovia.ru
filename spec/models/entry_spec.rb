@@ -104,7 +104,6 @@ describe Entry do
     let!(:dream) { create(:dream) }
     let!(:article) { create(:article) }
     let!(:post) { create(:post) }
-    let!(:thought) { create(:thought) }
 
     it "selects public article" do
       expect(Entry.recent_entries).to include(article)
@@ -116,10 +115,6 @@ describe Entry do
 
     it "selects public post" do
       expect(Entry.recent_entries).to include(post)
-    end
-
-    it "selects public thought" do
-      expect(Entry.recent_entries).to include(thought)
     end
   end
 

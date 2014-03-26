@@ -61,6 +61,8 @@ module ApplicationHelper
       verbose_entry_dreams_url parameters
     elsif entry.is_a? Entry::Post
       verbose_entry_posts_url parameters
+    elsif entry.is_a? Entry::Thought
+      verbose_entry_thoughts_url parameters
     else
       "Entry #{entry.id}"
     end
@@ -77,6 +79,8 @@ module ApplicationHelper
       verbose_entry_dreams_path(parameters)
     elsif entry.is_a? Entry::Post
       verbose_entry_posts_path(parameters)
+    elsif entry.is_a? Entry::Thought
+      verbose_entry_thoughts_path(parameters)
     end
   end
 
@@ -91,6 +95,8 @@ module ApplicationHelper
       verbose_entry_dreams_url(parameters)
     elsif entry.is_a? Entry::Post
       verbose_entry_posts_url(parameters)
+    elsif entry.is_a? Entry::Thought
+      verbose_entry_thoughts_url(parameters)
     end
   end
 

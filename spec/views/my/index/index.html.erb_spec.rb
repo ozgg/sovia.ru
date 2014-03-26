@@ -17,6 +17,14 @@ describe "my/index/index.html.erb" do
     it "has link to user's deeds page" do
       expect(rendered).to have_selector('a', href: my_deeds_path)
     end
+
+    it "has link to user's posts page" do
+      expect(rendered).to have_selector('a', href: my_posts_path)
+    end
+
+    it "has link to user's thoughts page" do
+      expect(rendered).to have_selector('a', href: my_thoughts_path)
+    end
   end
 
   context "when user's email is confirmed" do

@@ -34,7 +34,6 @@ class Entry < ActiveRecord::Base
     posts = Entry::Dream.public_entries.last(2)
     posts += Entry::Article.last(1)
     posts += Entry::Post.public_entries.last(1)
-    posts += Entry::Thought.public_entries.last(1)
 
     posts.sort { |a, b| b.created_at <=> a.created_at }
   end

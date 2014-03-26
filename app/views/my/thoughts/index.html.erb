@@ -1,5 +1,10 @@
 <header>
   <h1><%= @title %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('thoughts.management_links.create'), new_entry_thought_path %></li>
+    </ul>
+  </nav>
 </header>
 
 <%= render 'entries/list' %>
