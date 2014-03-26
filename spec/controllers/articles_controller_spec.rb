@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe ArticlesController do
-  let!(:article) { create(:article, title: 'Эталон', body: 'Статья') }
+  let(:tag) { create(:article_tag, name: 'Волшебство') }
+  let(:user) { create(:user) }
+  let!(:article) { create(:article, title: 'Эталон', body: 'Статья', tags: [ tag ] ) }
 
   shared_examples "article assigner" do
     it "assigns article to @entry" do
@@ -174,6 +176,34 @@ describe ArticlesController do
         action.call
         expect(flash[:notice]).to eq(I18n.t('entry.article.deleted'))
       end
+    end
+  end
+
+  context "getting tagged articles" do
+    let!(:other_article) { create(:article, tags: [create(:article_tag)]) }
+
+    shared_examples "visible public tagged articles" do
+      before(:each) { get :tagged, tag: tag.name }
+
+      it "includes tagged article to @entries" do
+        expect(assigns[:entries]).to include(article)
+      end
+
+      it "doesn't include another article to @entries" do
+        expect(assigns[:entries]).not_to include(other_article)
+      end
+    end
+
+    context "anonymous user" do
+      before(:each) { session[:user_id] = nil }
+
+      it_should_behave_like "visible public tagged articles"
+    end
+
+    context "logged in user" do
+      before(:each) { session[:user_id] = user.id }
+
+      it_should_behave_like "visible public tagged articles"
     end
   end
 end
