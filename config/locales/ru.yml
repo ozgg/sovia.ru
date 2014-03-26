@@ -244,6 +244,10 @@ ru:
       created: "Сон добавлен"
       updated: "Сон обновлён"
       deleted: "Сон удалён"
+    thought:
+      created: "Мысль добавлена"
+      updated: "Мысль обновлена"
+      deleted: "Мысль удалена"
   tag:
     created: "Метка добавлена"
     updated: "Метка обновлена"
@@ -458,6 +462,11 @@ ru:
       new: "Новая запись"
       show: "Публикация «%{title}» в сообществе"
       edit: "Редактирование записи"
+    thoughts:
+      index: "Мысли пользователей, страница %{page}"
+      new: "Новая мысль"
+      show: "Мысль «%{title}»"
+      edit: "Редактирование мысли"
     sessions:
       new: "Авторизация"
     statistics:
@@ -481,3 +490,10 @@ ru:
       extension_white_list_error: "имеет недопустимое расширение"
   delete: "Удалить"
   reset: "Сброс"
+  thoughts:
+    show:
+      thought: "Просмотр мысли"
+      edit: "Редактировать"
+      delete: "Удалить"
+    management_links:
+      create: "Новая мысль"

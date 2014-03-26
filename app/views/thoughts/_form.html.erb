@@ -1,0 +1,29 @@
+<%= form_for(@entry) do |f| %>
+    <% if @entry.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@entry.errors.count, 'error') %>:</h2>
+
+          <ul>
+            <% @entry.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :title %><br />
+      <%= f.text_field :title, required: true, size: 80 %>
+    </div>
+    <div>
+      <%= f.label :body %><br />
+      <%= f.text_area :body, required: true, cols: 80, rows: 25 %>
+    </div>
+    <div>
+      <%= f.label :privacy %>
+      <%= f.select :privacy, Entry::Thought.privacy_modes.invert %>
+    </div>
+    <div>
+      <%= f.button t('submit'), type: 'submit' %>
+    </div>
+<% end %>
