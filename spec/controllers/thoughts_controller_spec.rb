@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe ThoughtsController do
+  let(:tag) { create(:thought_tag, name: 'Волшебство') }
   let(:owner) { create(:user) }
-  let(:entry) { create(:thought, user: owner, body: 'Эталон') }
+  let(:user) { create(:user) }
+  let(:entry) { create(:thought, user: owner, body: 'Эталон', tags: [tag]) }
 
   shared_examples "thought assigner" do
     it "assigns thought to @entry" do
@@ -284,6 +286,50 @@ describe ThoughtsController do
 
       it_should_behave_like "restricted showing"
       it_should_behave_like "restricted management"
+    end
+  end
+
+  context "getting tagged thoughts" do
+    let!(:other_thought) { create(:thought, tags: [create(:thought_tag)]) }
+    let!(:protected_thought) { create(:protected_thought, tags: [tag]) }
+    let!(:private_thought) { create(:private_thought, tags: [tag]) }
+
+    shared_examples "visible public tagged thoughts" do
+      before(:each) { get :tagged, tag: tag.name }
+
+      it "includes tagged thought to @entries" do
+        expect(assigns[:entries]).to include(entry)
+      end
+
+      it "doesn't include another thought to @entries" do
+        expect(assigns[:entries]).not_to include(other_thought)
+      end
+
+      it "doesn't include private thought to @entries" do
+        expect(assigns[:entries]).not_to include(private_thought)
+      end
+    end
+
+    context "anonymous user" do
+      before(:each) { session[:user_id] = nil }
+
+      it_should_behave_like "visible public tagged thoughts"
+
+      it "doesn't include protected thought to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).not_to include(protected_thought)
+      end
+    end
+
+    context "logged in user" do
+      before(:each) { session[:user_id] = user.id }
+
+      it_should_behave_like "visible public tagged thoughts"
+
+      it "includes protected thought to @entries" do
+        get :tagged, tag: tag.name
+        expect(assigns[:entries]).to include(protected_thought)
+      end
     end
   end
 end
