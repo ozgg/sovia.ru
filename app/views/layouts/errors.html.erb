@@ -12,11 +12,15 @@
   <%= render 'layouts/main_navigation' %>
 </header>
 
-<section id="main">
+<section>
   <% if flash[:notice] %>
       <div id="notice"><%= flash[:notice] %></div>
   <% end %>
   <%= yield %>
+
+  <section>
+    <%= render 'layouts/more' %>
+  </section>
 </section>
 
 <footer>
