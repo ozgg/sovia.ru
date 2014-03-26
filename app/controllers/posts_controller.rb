@@ -55,6 +55,13 @@ class PostsController < ApplicationController
     redirect_to entry_posts_path
   end
 
+  # get /posts/tagged/:tag
+  def tagged
+    page     = params[:page] || 1
+    @entries = tagged_posts.page(page).per(5)
+    @title   = t('controllers.posts.tagged', tag: @tag.name, page: page)
+  end
+
   private
 
   def set_post
@@ -63,7 +70,7 @@ class PostsController < ApplicationController
   end
 
   def post_parameters
-    params.require(:entry_post).permit(:title, :body)
+    params.require(:entry_post).permit(:title, :body, :tags_string)
   end
 
   def restrict_anonymous_access
@@ -78,6 +85,13 @@ class PostsController < ApplicationController
     maximal_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
 
     Entry::Post.recent.where("privacy <= #{maximal_privacy}")
+  end
+
+  def tagged_posts
+    @tag = Tag::Post.match_by_name(params[:tag])
+    raise record_not_found if @tag.nil?
+
+    allowed_posts.joins(:entry_tags).where(entry_tags: { tag: @tag })
   end
 
   def emulate_saving

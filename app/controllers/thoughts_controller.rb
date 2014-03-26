@@ -55,6 +55,13 @@ class ThoughtsController < ApplicationController
     redirect_to entry_thoughts_path
   end
 
+  # get /thoughts/tagged/:tag
+  def tagged
+    page     = params[:page] || 1
+    @entries = tagged_thoughts.page(page).per(5)
+    @title   = t('controllers.thoughts.tagged', tag: @tag.name, page: page)
+  end
+
   private
 
   def set_thought
@@ -63,7 +70,7 @@ class ThoughtsController < ApplicationController
   end
 
   def thought_parameters
-    params.require(:entry_thought).permit(:title, :body, :privacy)
+    params.require(:entry_thought).permit(:title, :body, :privacy, :tags_string)
   end
 
   def restrict_anonymous_access
@@ -92,5 +99,12 @@ class ThoughtsController < ApplicationController
     else
       render action: :new
     end
+  end
+
+  def tagged_thoughts
+    @tag = Tag::Thought.match_by_name(params[:tag])
+    raise record_not_found if @tag.nil?
+
+    allowed_thoughts.joins(:entry_tags).where(entry_tags: { tag: @tag })
   end
 end

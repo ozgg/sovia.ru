@@ -56,14 +56,28 @@ class ArticlesController < ApplicationController
     redirect_to entry_articles_path
   end
 
+  # get /articles/tagged/:tag
+  def tagged
+    page     = params[:page] || 1
+    @entries = tagged_articles.page(page).per(5)
+    @title   = t('controllers.articles.tagged', tag: @tag.name, page: page)
+  end
+
   private
 
   def article_parameters
-    params.require(:entry_article).permit(:title, :body)
+    params.require(:entry_article).permit(:title, :body, :tags_string)
   end
 
   def set_article
     @entry = Entry::Article.find(params[:id])
+  end
+
+  def tagged_articles
+    @tag = Tag::Article.match_by_name(params[:tag])
+    raise record_not_found if @tag.nil?
+
+    Entry::Article.recent.joins(:entry_tags).where(entry_tags: { tag: @tag })
   end
 
   def check_user_rights
