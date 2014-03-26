@@ -4,6 +4,6 @@ class My::DeedsController < ApplicationController
   def index
     page   = params[:page] || 1
     @title = t('controllers.my.deeds.index', page: page)
-    @deeds = current_user.deeds.page(page).per(20)
+    @deeds = current_user.deeds.order('id desc').page(page).per(20)
   end
 end
