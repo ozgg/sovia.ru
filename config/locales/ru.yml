@@ -274,6 +274,7 @@ ru:
       more: "Кроме того"
       archive: "Архив снов"
       statistics: "Статистика"
+      thoughts: "Мысли пользователей"
   roles:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"

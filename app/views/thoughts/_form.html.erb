@@ -20,6 +20,10 @@
       <%= f.text_area :body, required: true, cols: 80, rows: 25 %>
     </div>
     <div>
+      <%= f.label :tags_string %><br />
+      <%= f.text_area :tags_string, cols: 75, rows: 5 %>
+    </div>
+    <div>
       <%= f.label :privacy %>
       <%= f.select :privacy, Entry::Thought.privacy_modes.invert %>
     </div>
