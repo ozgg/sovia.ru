@@ -113,7 +113,7 @@ class Entry < ActiveRecord::Base
   end
 
   def glimpse
-    body.strip.split(/\s+/)[0..50].join(' ')
+    body.gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..50].join(' ')
   end
 
   def passages_count
