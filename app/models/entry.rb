@@ -69,7 +69,7 @@ class Entry < ActiveRecord::Base
 
   def parsed_title
     result = title || I18n.t('untitled')
-    result.gsub('<', '&lt;').gsub('>', '&gt;')
+    result.gsub(/(\S{30})/, '\1 ').gsub('<', '&lt;').gsub('>', '&gt;')
   end
 
   def parsed_body

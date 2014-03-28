@@ -119,6 +119,7 @@ module ApplicationHelper
   def parse_body(body, allow_raw = false)
     output = ''
     body.strip.split(/(?:\r?\n)+/).each do |fragment|
+      fragment.gsub!(/(\S{30})/, '\1 ')
       unless allow_raw
         fragment.gsub!('<', '&lt;')
         fragment.gsub!('>', '&gt;')
