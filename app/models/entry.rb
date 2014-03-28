@@ -137,7 +137,7 @@ class Entry < ActiveRecord::Base
   def new_tags_from_string(new_tags_string)
     new_tags = []
     new_tags_string.split(',').each do |new_tag|
-      unless new_tag.strip == ''
+      unless new_tag.strip == '' || new_tag.length > 50
         tag = matching_tag(new_tag)
         new_tags << tag unless new_tags.include?(tag)
       end
