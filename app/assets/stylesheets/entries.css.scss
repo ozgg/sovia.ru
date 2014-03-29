@@ -121,6 +121,59 @@ article.entry {
       }
     }
   }
+
+  aside {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 1;
+
+    > div {
+      float: right;
+      border: outset 1px;
+      border-radius: 10px;
+      width: 50px;
+      height: 50px;
+      background: #f0fff0;
+      font-size: 30px;
+      overflow: hidden;
+      text-align: center;
+      line-height: 48px;
+      cursor: pointer;
+      text-shadow: -1px -1px 2px #fff, 1px 1px 2px #000;
+      color: #333333;
+      font-weight: bold;
+
+      &.pressed {
+        border: inset 1px;
+        background: #aaffaa;
+      }
+    }
+
+    > ul {
+      background: #f7f7f7;
+      border-radius: 10px;
+      margin-top: 58px;
+      padding: 0;
+      min-width: 200px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+      li {
+        list-style: none;
+        padding: 0 8px;
+        border-radius: inherit;
+
+        &:hover {
+          background: #ffffff;
+        }
+
+        a {
+          display: inline-block;
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 nav.adjacent-entries {
