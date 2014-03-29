@@ -66,6 +66,7 @@
     <div class="comments-count"><%= t('comment', count: entry.comments_count) %></div>
   </footer>
   <% if described_tags.any? %>
+      <% described_tags.sort! { |a, b| a.name <=> b.name } %>
       <aside>
         <div title="<%= t('.described') %>">i</div>
         <ul>

@@ -161,10 +161,6 @@ article.entry {
         padding: 0 8px;
         border-radius: inherit;
 
-        &:first-letter {
-          text-transform: capitalize;
-        }
-
         &:hover {
           background: #ffffff;
         }
@@ -172,6 +168,10 @@ article.entry {
         a {
           display: inline-block;
           width: 100%;
+
+          &:first-letter {
+            text-transform: capitalize;
+          }
         }
       }
     }
