@@ -73,13 +73,8 @@ article.entry {
             margin: 0;
             padding: 0;
 
-            span {
-              &:before {
-                content: '(';
-              }
-              &:after {
-                content: ')';
-              }
+            a.described {
+              font-weight: bold;
             }
 
             &:after {

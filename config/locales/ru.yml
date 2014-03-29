@@ -197,6 +197,7 @@ ru:
       year: "%{year} год"
     tagged:
       edit_tag: "Редактировать метку"
+      tag_description: "Описание метки в соннике"
   tags:
     list:
       no_tags: "Меток нет"

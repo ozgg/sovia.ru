@@ -51,6 +51,7 @@ module ApplicationHelper
   def tagged_entries_path(tag)
     parameters = { tag: tag.uri_name }
     attributes = { rel: 'tag' }
+    attributes[:class] = 'described' unless tag.description.blank?
     if tag.is_a? Tag::Dream
       link_to tag.name, tagged_entry_dreams_path(parameters), attributes
     elsif tag.is_a? Tag::Article

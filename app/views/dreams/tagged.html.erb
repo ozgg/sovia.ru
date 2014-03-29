@@ -9,6 +9,10 @@
   <% end %>
 </header>
 
+<% unless @tag.description.blank? %>
+    <p><%= link_to t('.tag_description'), dreambook_word_path(letter: @tag.letter, word: @tag.name) %></p>
+<% end %>
+
 <%= render 'entries/list' %>
 
 <section>
