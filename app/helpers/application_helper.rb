@@ -119,7 +119,7 @@ module ApplicationHelper
   def parse_body(body, allow_raw = false)
     output = ''
     body.strip.split(/(?:\r?\n)+/).each do |fragment|
-      fragment.gsub!(/(\S{30})/, '\1 ')
+      fragment.gsub!(/(\S{30})/, '\1&shy;')
       unless allow_raw
         fragment.gsub!('<', '&lt;')
         fragment.gsub!('>', '&gt;')
@@ -127,7 +127,7 @@ module ApplicationHelper
       link_dreambook_symbols(fragment)
       link_entries(fragment)
       find_links(fragment)
-      if fragment[0] == '<'
+      if fragment.match(/\A<(?:p|li|h|ol|ul)/)
         output += fragment
       else
         output += "<p>#{fragment}</p>"
@@ -151,7 +151,7 @@ module ApplicationHelper
   end
 
   def link_entries(fragment)
-    pattern = /\[(?:entry|article|dream|post)\s+id="(?<id>[^"]+)"[^\]]*\]/
+    pattern = /\[(?:entry|article|dream|post)\s+id="(?<id>[^"]{1,8})"[^\]]*\]/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       entry = Entry::find_by(id: match[:id])
