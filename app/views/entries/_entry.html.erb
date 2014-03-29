@@ -69,7 +69,7 @@
       <% described_tags.sort! { |a, b| a.name <=> b.name } %>
       <aside>
         <div title="<%= t('.described') %>">i</div>
-        <ul>
+        <ul aria-label="<%= t('.described') %>">
           <% described_tags.each do |tag| %>
               <li><%= link_to tag.name, dreambook_word_path(letter: tag.letter, word: tag.uri_name) %></li>
           <% end %>
