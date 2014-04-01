@@ -3,9 +3,28 @@ article.entry {
     margin-top: 1em;
   }
 
+  &.dream > header {
+    background: #feefd0;
+  }
+
+  &.article > header {
+    background: #fedfc0;
+  }
+
+  &.post > header {
+    background: #fed7b8;
+  }
+
+  &.thought > header {
+    background: #fef0e3;
+  }
+
+  &.grain > header {
+    background: #f8e3c8;
+  }
+
   header {
     min-height: 110px;
-    background: #feefd0;
     border-radius: 0 25px 0 0;
 
     h2 {
@@ -128,7 +147,6 @@ article.entry {
 
     > div {
       float: right;
-//      border: outset 1px;
       border-radius: 25px;
       width: 50px;
       height: 50px;

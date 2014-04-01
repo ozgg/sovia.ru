@@ -14,7 +14,7 @@
     <% end %>
 <% end %>
 
-<article class="entry">
+<article class="entry <%= entry.class.to_s.downcase.gsub('entry::', '') %>">
   <header>
     <figure><%= raw entry_avatar(entry.user) %></figure>
     <h2>
