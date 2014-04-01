@@ -7,3 +7,5 @@
     <%= t('.left_comments', count: Comment.count) %>.</p>
   <p>Каждый день происходит что-то новое, присоединяйтесь.</p>
 </article>
+
+<%= render 'deed_form' unless current_user.nil? %>
