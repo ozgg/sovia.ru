@@ -20,10 +20,12 @@
     <%= raw parse_body(@tag.description.to_s, true) %>
   </div>
   <footer>
+    <%= render 'call' %>
     <nav><%= link_to t('.read_dreams'), tagged_entry_dreams_path(tag: @tag.name) %> (<%= @tag.entries_count %>)</nav>
-    <%= render 'layouts/social' %>
   </footer>
 </article>
+
+<%= render 'layouts/social' %>
 
 <section>
   <%= render 'layouts/statistics' %>
