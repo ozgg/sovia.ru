@@ -1,8 +1,8 @@
 <div>
   <% if current_user.nil? %>
       <%= form_tag login_path do %>
-          <fieldset>
-            <legend><%= t('.authorize') %></legend>
+          <div>
+            <div><%= t('.authorize') %></div>
             <%= label_tag :login, t('activerecord.attributes.user.login') %>
             <%= text_field_tag :login %>
             <br/>
@@ -11,11 +11,11 @@
             <br/>
             <%= button_tag t('sessions.new.enter'), type: 'submit' %>
             <%= link_to t('users.new.register'), new_user_path %>
-          </fieldset>
+          </div>
       <% end %>
   <% else %>
       <figure><%= comment_avatar(current_user) %></figure>
-      <%= current_user.login %>
+      <div><%= current_user.login %></div>
       <nav>
         <ul>
           <li><%= link_to t('.private'), my_path %></li>

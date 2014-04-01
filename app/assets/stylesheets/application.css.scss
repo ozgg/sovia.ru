@@ -58,9 +58,11 @@ body {
 
   > header {
     position: relative;
+    min-height: 150px;
 
-    figure {
-      padding: 2em 1em 1em 3em;
+    > figure {
+      padding: 40px 0 28px 45px;
+      margin: 0 300px 0 0;
     }
 
     & a:link, & a:visited {
@@ -72,19 +74,32 @@ body {
     }
 
     > nav {
+      margin: 0 300px 0 0;
+
       ul {
-        margin: 0 300px 0 0;
-        padding: 1em 3em 0;
+        margin: 0;
+        padding: 0;
 
         li {
           list-style: none;
           margin: 0;
-          padding: 0.3em 1em;
           font-size: 1.2em;
           display: inline-block;
+          width: 150px;
+          text-align: center;
 
           &:first-child {
             padding-left: 0;
+          }
+
+          > a {
+            display: inline-block;
+            width: 100%;
+
+            &:hover {
+              background: rgba(155, 127, 127, 0.3);
+              border-radius: 5px;
+            }
           }
         }
       }
@@ -94,28 +109,39 @@ body {
       position: absolute;
       right: 0;
       top: 0;
-      min-width: 252px;
-      max-height: 134px;
+      width: 300px;
+      height: 150px;
       color: #F7F7F7;
-      background: none;
-      font-size: 1em;
-      padding: 1em;
       background: rgba(127, 127, 127, 0.3);
       border-radius: 16px;
 
+      > form {
+        margin: 0;
+        padding: 16px;
+
+        > div {
+          width: 230px;
+          margin: 0 auto;
+        }
+
+        label {
+          display: inline-block;
+          width: 70px;
+        }
+
+        button {
+          width: 70px;
+        }
+      }
+
+      > div {
+        padding: 15px 0 0 15px;
+      }
+
       > figure {
         margin: 0;
-        padding: 0;
+        padding: 15px;
         float: right;
-      }
-
-      label {
-        display: inline-block;
-        width: 70px;
-      }
-
-      button {
-        width: 70px;
       }
 
       a:link, a:visited {
