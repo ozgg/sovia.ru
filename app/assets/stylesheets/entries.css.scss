@@ -70,43 +70,45 @@ article.entry {
       }
     }
 
-    div.tags {
+    nav.tags {
       border-top: dotted 1px;
       margin: 0.5em 0.5em 0 110px;
 
-      > div {
-        font-weight: bold;
+      > h3 {
+        font-weight: normal;
+        font-size: 1em;
+        margin: 0;
+        padding: 0;
+        font-variant: normal;
 
         &:after {
           content: ':';
         }
       }
 
-      nav {
-        ul {
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
           margin: 0;
           padding: 0;
 
-          li {
-            display: inline-block;
-            margin: 0;
-            padding: 0;
+          a.described {
+            font-weight: bold;
+          }
 
-            a.described {
-              font-weight: bold;
-            }
+          &:after {
+            content: ', '
+          }
 
-            &:after {
-              content: ', '
-            }
+          &:first-child:first-letter {
+            text-transform: capitalize;
+          }
 
-            &:first-child:first-letter {
-              text-transform: capitalize;
-            }
-
-            &:last-child:after {
-              content: '';
-            }
+          &:last-child:after {
+            content: '';
           }
         }
       }

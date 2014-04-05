@@ -271,6 +271,7 @@ ru:
       private: "Личный кабинет"
       deeds: "Журнал успеха"
       thoughts: "Мои мысли"
+      aria_label_nav: "Пользовательское меню"
     statistics:
       statistics: "Чаще всего снится"
     more:
@@ -278,6 +279,8 @@ ru:
       archive: "Архив снов"
       statistics: "Статистика"
       thoughts: "Мысли пользователей"
+    main_navigation:
+      aria_label: "Главное меню"
   roles:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"
@@ -397,6 +400,7 @@ ru:
       previous: "Предыдущая запись"
       next: "Следующая запись"
       described: "Метки описаны в соннике"
+      adjacent: "Соседние записи"
   error:
     zero: "нет ошибок"
     one: "%{count} ошибка"

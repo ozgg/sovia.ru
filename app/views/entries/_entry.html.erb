@@ -2,7 +2,7 @@
     <% adjacent = [entry.previous_entry_for(current_user), entry.next_entry_for(current_user)] %>
     <% unless adjacent[0].nil? && adjacent[1].nil? %>
         <nav class="adjacent-entries">
-          <ul>
+          <ul aria-label="<%= t('.adjacent') %>">
             <% unless adjacent[0].nil? %>
                 <li class="previous"><%= link_to t('.previous'), verbose_entry_path(adjacent[0]), rel: 'prev' %></li>
             <% end %>
@@ -38,17 +38,15 @@
        described_tags = []
     %>
     <% if tags.any? %>
-        <div class="tags">
-          <div><%= t('posts.post.tags') %></div>
-          <nav>
-            <ul>
-              <% tags.each do |tag| %>
-                <li><%= tagged_entries_path(tag) %></li>
-                <% described_tags << tag unless tag.description.blank? %>
-              <% end %>
-            </ul>
-          </nav>
-        </div>
+      <nav class="tags">
+        <h3><%= t('posts.post.tags') %></h3>
+        <ul>
+          <% tags.each do |tag| %>
+            <li><%= tagged_entries_path(tag) %></li>
+            <% described_tags << tag unless tag.description.blank? %>
+          <% end %>
+        </ul>
+      </nav>
     <% end %>
   </header>
   <div>

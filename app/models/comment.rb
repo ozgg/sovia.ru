@@ -26,8 +26,8 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def parsed_body
-    '<p>' + CGI::escapeHTML(body.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
+  def datetime
+    created_at.strftime '%Y-%m-%dT%H:%M:%S%:z'
   end
 
   private

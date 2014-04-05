@@ -2,7 +2,7 @@
   <% if current_user.nil? %>
       <%= form_tag login_path do %>
           <div>
-            <div><%= t('.authorize') %></div>
+            <h3><%= t('.authorize') %></h3>
             <%= label_tag :login, t('activerecord.attributes.user.login') %>
             <%= text_field_tag :login %>
             <br/>
@@ -14,11 +14,13 @@
           </div>
       <% end %>
   <% else %>
-      <figure><%= comment_avatar(current_user) %></figure>
-      <div><%= current_user.login %></div>
-      <nav>
+      <figure>
+        <%= comment_avatar(current_user) %>
+        <figcaption><%= current_user.login %></figcaption>
+      </figure>
+      <nav aria-label="<%= t('.aria_label_nav') %>">
         <ul>
-          <li><%= link_to t('.private'), my_path %></li>
+          <li><%= link_to t('.private'), my_path, accesskey: '0' %></li>
           <li><%= link_to t('.deeds'), my_deeds_path %></li>
           <li><%= link_to t('.thoughts'), my_thoughts_path %></li>
           <li><%= link_to t('.logout'), logout_path, method: :delete %></li>

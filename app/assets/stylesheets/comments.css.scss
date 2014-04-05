@@ -8,16 +8,23 @@ ul.comments {
     border-bottom: solid #eeeeee 1px;
 
     > div:first-child {
-      background: #fef9ee;
-      min-height: 60px;
+      position: relative;
 
       figure {
-        margin: 5px;
-        padding: 0;
-        float: left;
+        background: #fef9ee;
+        min-height: 60px;
+
+        img {
+          margin: 5px;
+          padding: 0;
+          float: left;
+        }
       }
 
       time {
+        position: absolute;
+        left: 60px;
+        top: 30px;
         font-size: 0.8em;
       }
     }
