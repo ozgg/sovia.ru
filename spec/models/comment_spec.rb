@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Comment do
-  let(:comment) { build(:comment) }
-  let(:user) { create(:user) }
-  let(:dream) { create(:dream) }
-
   context "integrity" do
+    let(:comment) { build(:comment) }
+    let(:user) { create(:user) }
+    let(:dream) { create(:dream) }
+
     it "has non-blank body" do
       comment.body = ' '
       comment.valid?
@@ -59,6 +59,15 @@ describe Comment do
       let(:dream) { create(:owned_dream, user: user) }
       let(:parent) { create(:comment, entry: dream, user: user) }
       let(:comment) { create(:comment, entry: dream, parent: parent) }
+
+      it_should_behave_like "non-notifier"
+    end
+
+    context "when entry owner replies to another comment" do
+      let(:user) { create(:confirmed_user, allow_mail: true) }
+      let(:dream) { create(:owned_dream, user: user) }
+      let(:parent) { create(:comment, entry: dream) }
+      let(:comment) { create(:comment, entry: dream, parent: parent, user: user) }
 
       it_should_behave_like "non-notifier"
     end

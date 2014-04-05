@@ -7,7 +7,10 @@ class Comment < ActiveRecord::Base
   validates_presence_of :entry, :body
 
   def notify_entry_owner?
-    if parent.nil?
+    owner = entry.user
+    if owner.nil? || owner == user
+      false
+    elsif parent.nil?
       notify_owner?(entry.user)
     else
       parent_owner = parent.user
