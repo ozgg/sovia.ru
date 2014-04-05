@@ -120,6 +120,10 @@ class Entry < ActiveRecord::Base
     body.strip.gsub(/(\r?\n)+/, "\n").count("\n") + 1
   end
 
+  def datetime
+    created_at.strftime '%Y-%m-%dT%H:%M:%S%:z'
+  end
+
   private
 
   # @abstract, get matching tag by name for this type of entry

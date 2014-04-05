@@ -30,7 +30,7 @@
     <div class="author">
       <%= user_link entry.user %>,
       <%= t("activerecord.models.#{entry.class.to_s.downcase.gsub('::', '_')}") + ' ' + t('at') %>
-      <time datetime="<%= entry.created_at %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+      <time datetime="<%= entry.datetime %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
 
     <%
