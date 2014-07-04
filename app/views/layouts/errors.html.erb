@@ -9,11 +9,11 @@
 </head>
 <body>
 <header>
-  <figure><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></figure>
+  <figure role="banner"><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></figure>
   <%= render 'layouts/main_navigation' %>
 </header>
 
-<section>
+<section role="main">
   <% if flash[:notice] %>
       <div id="notice"><%= flash[:notice] %></div>
   <% end %>
@@ -25,8 +25,8 @@
 </section>
 
 <footer>
-  <div class="copyright">&copy; 2006&ndash;2014 sovia.ru</div>
-  <div class="tos"><%= link_to t('layouts.application.terms_of_service'), tos_path %></div>
+  <div role="contentinfo">&copy; 2006&ndash;2014 sovia.ru</div>
+  <div role="contentinfo"><%= link_to t('layouts.application.terms_of_service'), tos_path %></div>
 </footer>
 </body>
 </html>

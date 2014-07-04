@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def profile
+
+  end
+
   private
 
   def bounce_authorized
@@ -43,5 +47,10 @@ class UsersController < ApplicationController
   def after_registration
     flash[:notice] = t('users.create.successfully')
     redirect_to root_path
+  end
+
+  def find_user_by_login(login)
+    @user = User.find_by(login: login)
+    raise record_not_found if @user.nil?
   end
 end

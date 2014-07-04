@@ -8,16 +8,6 @@ module ApplicationHelper
     end
   end
 
-  def user_avatar(user)
-    if user.nil? || user.email.nil? || user.email.empty?
-      image_tag 'smile.png'
-    else
-      hash = Digest::MD5.hexdigest(user.email.downcase)
-      url  = "http://www.gravatar.com/avatar/#{hash}?s=100&amp;d=identicon"
-      image_tag url
-    end
-  end
-
   def profile_avatar(user)
     if user.nil?
       image_tag 'fallback/avatar/default.png'
@@ -27,7 +17,7 @@ module ApplicationHelper
   end
 
   def entry_avatar(user)
-    attributes = { width: 100, height: 100 }
+    attributes = { width: 100, height: 100, alt: user.nil? ? I18n.t('anonymous') : user.login }
     if user.nil?
       image_tag 'fallback/avatar/entry_default.png', attributes
     else
@@ -36,7 +26,7 @@ module ApplicationHelper
   end
 
   def comment_avatar(user)
-    attributes = { width: 50, height: 50 }
+    attributes = { width: 50, height: 50, alt: user.nil? ? I18n.t('anonymous') : user.login }
     if user.nil?
       image_tag 'fallback/avatar/comment_default.png', attributes
     else
