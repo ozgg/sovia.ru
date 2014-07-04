@@ -214,6 +214,16 @@ ru:
     dream_tags:
       show:
         in_dreambook: "Посмотреть в соннике"
+        title: "Символ сна %{name}"
+        header: "Символ сна %{name}"
+      index:
+        title: "Символы снов, страница %{page}"
+        header: "Символы снов"
+      new:
+        title: "Новый символ сна"
+        header: "Новый символ сна"
+      edit:
+        title: "Редактирование символа сна"
   users:
     create:
       successfully: "Вы зарегистрировались и вошли"
@@ -271,6 +281,7 @@ ru:
       about: "О проекте"
       terms_of_service: "Пользовательское соглашение"
       dreambook: "Сонник"
+      title: "Совия, сайт о снах"
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"
@@ -518,3 +529,4 @@ ru:
       delete: "Удалить"
     management_links:
       create: "Новая мысль"
+  page: "Страница %{page}"
