@@ -92,7 +92,7 @@ Sovia::Application.routes.draw do
     end
   end
 
-  get 'u/:login' => 'users#profile'
+  get 'u/:login' => 'users#profile', as: :user_profile
 
   get 'tos' => 'about#terms_of_service'
   get 'privacy' => 'about#privacy'

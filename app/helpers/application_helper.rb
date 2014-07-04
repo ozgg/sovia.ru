@@ -4,7 +4,7 @@ module ApplicationHelper
     if user.nil?
       t('anonymous')
     else
-      user.login
+      link_to user.login, user_profile_path(login: user.login)
     end
   end
 
