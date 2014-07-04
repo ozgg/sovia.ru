@@ -232,6 +232,12 @@ ru:
       code: "Код из письма"
       password: "Новый пароль"
       password_confirmation: "Подтверждение пароля"
+    profile:
+      user_info: "Информация о пользователе"
+      registration_date: "Дата регистрации"
+      entries_count: "Количество записей"
+      comments_count: "Количество комментариев"
+      read_dreams: "Читать сны этого пользователя"
   entry:
     article:
       created: "Статья добавлена"

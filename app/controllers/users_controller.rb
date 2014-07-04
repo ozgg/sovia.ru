@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-
+    find_user_by_login params[:login]
   end
 
   private

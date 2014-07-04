@@ -72,7 +72,7 @@ class DreamsController < ApplicationController
     page = params[:page] || 1
 
     @entries = allowed_dreams.where(user: user).page(page).per(5)
-    @title   = t('controllers.dreams.dreams_of_user', user: user, page: page)
+    @title   = t('controllers.dreams.dreams_of_user', user: user.login, page: page)
   end
 
   def archive

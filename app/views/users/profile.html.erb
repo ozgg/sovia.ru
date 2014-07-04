@@ -1,1 +1,30 @@
-Profile.
+<header>
+  <h1><%= @user.login %></h1>
+</header>
+
+<article class="user-profile">
+  <figure>
+    <%= raw profile_avatar(@user) %>
+    <figcaption><%= @user.login %></figcaption>
+  </figure>
+
+  <table>
+    <caption><%= t('.user_info') %></caption>
+    <tbody>
+    <tr>
+      <th><%= t('.registration_date') %></th>
+      <td><time datetime="<%= @user.created_at.w3c %>"><%= @user.created_at.strftime('%d.%m.%Y') %></time></td>
+    </tr>
+    <tr>
+      <th><%= t('.entries_count') %></th>
+      <td><%= @user.entries_count %></td>
+    </tr>
+    <tr>
+      <th><%= t('.comments_count') %></th>
+      <td><%= @user.comments_count %></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p><%= link_to t('.read_dreams'), user_entry_dreams_path(login: @user.login) %></p>
+</article>
