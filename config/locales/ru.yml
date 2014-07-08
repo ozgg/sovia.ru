@@ -404,6 +404,10 @@ ru:
       index:
         title: "Мои публикации в сообществе, страница %{page}"
         header: "Мои публикации в сообществе"
+    thoughts:
+      index:
+        title: "Мои мысли, страница %{page}"
+        header: "Мои мысли"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
@@ -468,9 +472,6 @@ ru:
       tagged: "Сны с меткой «%{tag}», страница %{page}"
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
-    my:
-      thoughts:
-        index: "Мои мысли, страница %{page}"
     about:
       index: "О проекте"
       features: "Возможности"
