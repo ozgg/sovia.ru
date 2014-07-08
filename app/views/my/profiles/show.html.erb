@@ -1,5 +1,7 @@
+<% content_for :title, t('.title') %>
+
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header') %></h1>
   <nav>
     <ul>
       <li><%= link_to t('edit'), edit_my_profile_path %></li>
