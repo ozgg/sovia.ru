@@ -382,6 +382,10 @@ ru:
         about: "Что это такое"
         title: "Мой журнал успеха, страница %{page}"
         header: "Мой журнал успеха"
+    dreams:
+      index:
+        title: "Мои сны, страница %{page}"
+        header: "Мои сны"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
@@ -452,8 +456,6 @@ ru:
         edit: "Редактирование профиля"
       recoveries:
         show: "Сброс пароля"
-      dreams:
-        index: "Мои сны, страница %{page}"
       statistics:
         index: "Моя статистика"
         tags: "Мои символы снов, страница %{page}"
