@@ -389,6 +389,10 @@ ru:
       index:
         title: "Мои сны, страница %{page}"
         header: "Мои сны"
+    posts:
+      index:
+        title: "Мои публикации в сообществе, страница %{page}"
+        header: "Мои публикации в сообществе"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
@@ -462,8 +466,6 @@ ru:
       statistics:
         index: "Моя статистика"
         tags: "Мои символы снов, страница %{page}"
-      posts:
-        index: "Мои публикации в сообществе, страница %{page}"
       thoughts:
         index: "Мои мысли, страница %{page}"
     about:
