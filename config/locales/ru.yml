@@ -371,6 +371,8 @@ ru:
         no_code: "Нет кода сброса?"
         send_code: "Получить код"
         got_code: "Код сброса уже есть?"
+        title: "Сброс пароля"
+        header: "Сброс пароля"
     confirmations:
       show:
         got_code: "Код подтверждения есть"
@@ -462,8 +464,6 @@ ru:
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
     my:
-      recoveries:
-        show: "Сброс пароля"
       statistics:
         index: "Моя статистика"
         tags: "Мои символы снов, страница %{page}"

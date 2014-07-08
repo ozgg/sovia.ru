@@ -2,11 +2,9 @@ class My::RecoveriesController < ApplicationController
   before_action :allow_unauthorized_only
 
   def show
-    @title = t('controllers.my.recoveries.show')
   end
 
   def create
-    @title = t('controllers.my.recoveries.show')
     user   = User.find_by(email: params[:email])
     if user.nil?
       flash[:notice] = t('email_not_found')
