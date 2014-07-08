@@ -1,5 +1,7 @@
+<% content_for :title, t('.title', page: params[:page] || 1) %>
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header') %></h1>
+  <h2><%= t('page', page: params[:page] || 1) %></h2>
   <nav>
     <ul>
       <li><%= link_to t('.about'), deeds_path %></li>
@@ -16,7 +18,7 @@
     <ul class="deeds">
       <% @deeds.each do |deed| %>
       <li>
-        <time datetime="<%= deed.created_at %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
+        <time datetime="<%= deed.created_at.w3c %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
         <%= deed.name %>
         <%= link_to '*', deed_path(deed) %>
       </li>
