@@ -104,10 +104,6 @@ ru:
     statistics:
       index: "Статистика"
       symbols: "Символы снов, страница %{page}"
-    my:
-      index: "Кабинет"
-      dreams: "Мои сны, страница %{page}"
-      profile: "Мой профиль"
     none: "Без названия"
     sovia: "Совия, сайт о снах"
     page: "страница"
@@ -437,6 +433,9 @@ ru:
       subject: "Ответ на вашу запись"
     comment_reply:
       subject: "Ответ на ваш комментарий"
+    new:
+      title: "Добавление комментария"
+      header: "Добавление комментария"
   user:
     email_confirmed: "Почта подтверждена"
     code_invalid: "Недействительный код"
@@ -483,8 +482,6 @@ ru:
       tagged: "Сны с меткой «%{tag}», страница %{page}"
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
-    comments:
-      new: "Добавление комментария"
     dreambook:
       index: "Сонник"
       letter: "Символы снов на «%{letter}», страница %{page}"
