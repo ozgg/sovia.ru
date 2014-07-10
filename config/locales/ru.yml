@@ -472,12 +472,6 @@ ru:
       tagged: "Сны с меткой «%{tag}», страница %{page}"
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
-    about:
-      index: "О проекте"
-      features: "Возможности"
-      changelog: "История изменений"
-      terms_of_service: "Пользовательское соглашение"
-      privacy: "Соглашение о конфиденциальности"
     articles:
       index: "Статьи, страница %{page}"
       new: "Новая статья"
@@ -535,3 +529,14 @@ ru:
     management_links:
       create: "Новая мысль"
   page: "Страница %{page}"
+  about:
+    index:
+      title: "О проекте"
+    features:
+      title: "Возможности"
+    changelog:
+      title: "История изменений"
+    terms_of_service:
+      title: "Пользовательское соглашение"
+    privacy:
+      title: "Соглашение о конфиденциальности"
