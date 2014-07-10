@@ -162,8 +162,19 @@ ru:
       submit: "Сохранить статью"
     index:
       new_article: "Создать статью"
+      title: "Статьи, страница %{page}"
+      header: "Статьи"
     show:
       article: "Просмотр статьи"
+      title: "Статья «%{title}»"
+    new:
+      header: "Новая статья"
+      title: "Новая статья"
+    edit:
+      title: "Редактирование статьи"
+    tagged:
+      title: "Статьи с меткой «%{tag}», страница %{page}"
+      header: "Статьи с меткой «%{tag}»"
   posts:
     list:
       no_posts: "Записей нет"
@@ -472,12 +483,6 @@ ru:
       tagged: "Сны с меткой «%{tag}», страница %{page}"
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
-    articles:
-      index: "Статьи, страница %{page}"
-      new: "Новая статья"
-      show: "Статья «%{title}»"
-      edit: "Редактирование статьи"
-      tagged: "Статьи с меткой «%{tag}», страница %{page}"
     comments:
       new: "Добавление комментария"
     dreambook:

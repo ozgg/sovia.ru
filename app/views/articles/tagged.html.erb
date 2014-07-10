@@ -1,5 +1,7 @@
+<% content_for :title, t('.title', tag: @tag.name, page: params[:page] || 1) %>
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header', tag: @tag.name) %></h1>
+  <h2><%= t('page', page: params[:page] || 1) %></h2>
 </header>
 
 <%= render 'entries/list' %>

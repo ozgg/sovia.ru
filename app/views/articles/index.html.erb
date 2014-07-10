@@ -1,5 +1,8 @@
+<% content_for :title, t('.title', page: params[:page] || 1) %>
+
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header') %></h1>
+  <h2><%= t('page', page: params[:page] || 1) %></h2>
   <% if current_user && current_user.editor? %>
       <nav>
         <ul>
