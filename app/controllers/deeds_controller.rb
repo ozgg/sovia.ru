@@ -10,12 +10,10 @@ class DeedsController < ApplicationController
   # get /deeds/new
   def new
     @deed  = Deed.new
-    @title = t('controllers.deeds.new')
   end
 
   # post /deeds
   def create
-    @title = t('controllers.deeds.new')
     @deed  = Deed.new(deed_parameters.merge(user: current_user))
     if @deed.save
       flash[:notice] = t('deed.created')
