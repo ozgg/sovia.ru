@@ -191,20 +191,36 @@ ru:
       no_dreams: "Снов нет"
     index:
       new_dream: "Описать сон"
+      title: "Сны, страница %{page}"
+      header: "Дневник снов"
     form:
       submit: "Сохранить сон"
     show:
       header: "Описание сна"
       edit: "Редактировать сон"
+      title: "Сон «%{title}»"
     edit:
       view: "К просмотру сна"
+      title: "Редактирование сна"
+      header: "Редактирование сна"
     random:
       title: "Случайный сон"
+      header: "Случайный сон"
     archive:
       year: "%{year} год"
+      title: "Архив снов"
+      header: "Архив снов"
     tagged:
       edit_tag: "Редактировать метку"
       tag_description: "Описание метки в соннике"
+      title: "Сны с меткой «%{tag}», страница %{page}"
+      header: "Сны с меткой «%{tag}»"
+    new:
+      title: "Описать сон"
+      header: "Описать сон"
+    dreams_of_user:
+      title: "Сны пользователя %{user}, страница %{page}"
+      header: "Сны пользователя %{user}"
   tags:
     list:
       no_tags: "Меток нет"
@@ -303,6 +319,7 @@ ru:
       archive: "Архив снов"
       statistics: "Статистика"
       thoughts: "Мысли пользователей"
+      random: "Случайный сон"
     main_navigation:
       aria_label: "Главное меню"
   roles:
@@ -480,16 +497,6 @@ ru:
     other: "%{count} комментариев"
     created: "Комментарий добавлен"
   controllers:
-    dreams:
-      archive: "Архив снов"
-      archive_year: ", %{year} год"
-      index: "Сны, страница %{page}"
-      show: "Сон «%{title}»"
-      new: "Описать сон"
-      edit: "Редактирование сна"
-      tagged: "Сны с меткой «%{tag}», страница %{page}"
-      random: "Случайный сон"
-      dreams_of_user: "Сны пользователя %{user}, страница %{page}"
     index:
       index: "Главная страница"
     posts:
@@ -511,11 +518,6 @@ ru:
       symbols: "Статистика по символам снов, страница %{page}"
     users:
       new: "Регистрация"
-    deeds:
-      index: "Журнал успеха"
-      new: "Создание записи в журнале успеха"
-      show: "Просмотр успеха «%{deed}»"
-      edit: "Редактирование записи в журнале успеха"
   date:
     month_names: [~, январь, февраль, март, апрель, май, июнь, июль, вагуст, сентябрь, октябрь, ноябрь, декабрь]
     formats:

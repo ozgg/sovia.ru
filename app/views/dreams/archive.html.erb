@@ -1,5 +1,11 @@
+<% content_for :title do %>
+    <%= t('.title')
+  %><%= (', ' + t('.year', year: params[:year])) unless params[:year].nil?
+  %><%= (', ' + t('date.month_names')[params[:month].to_i].to_s + ', ' + t('page', page: params[:page] || 1)) unless params[:month].nil? %>
+<% end %>
+
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header') %></h1>
 </header>
 <ul>
   <% @dates.keys.each do |year| %>

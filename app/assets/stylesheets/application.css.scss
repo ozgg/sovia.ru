@@ -23,6 +23,10 @@ h2 {
   font-size: 1.2em;
 }
 
+h3:first-letter {
+  text-transform: uppercase;
+}
+
 img {
   border: none;
 }

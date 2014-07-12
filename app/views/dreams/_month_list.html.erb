@@ -11,7 +11,7 @@
             <div class="message"><%= t('nothing_found') %></div>
         <% end %>
     <% else %>
-        <h3><%= t('date.month_names')[params[:month].to_i] %></h3>
+        <h3><%= t('date.month_names')[params[:month].to_i] %> (<%= t('page', page: params[:page] || 1) %>)</h3>
         <% if @dreams.any? %>
             <ul>
               <% @dreams.each do |dream| %>

@@ -4,25 +4,20 @@ class DreamsController < ApplicationController
 
   # get /dreams
   def index
-    page     = params[:page] || 1
-    @entries = allowed_dreams.page(page).per(5)
-    @title   = t('controllers.dreams.index', page: page)
+    @entries = allowed_dreams.page(params[:page] || 1).per(5)
   end
 
   # get /dreams/:id
   def show
-    @title = t('controllers.dreams.show', title: @entry.parsed_title)
   end
 
   # get /dreams/new
   def new
-    @title = t('controllers.dreams.new')
     @entry = Entry::Dream.new
   end
 
   # post /dreams
   def create
-    @title = t('controllers.dreams.new')
     @entry = Entry::Dream.new(dream_parameters.merge(user: current_user))
     if suspect_spam?(current_user, @entry.body, 2)
       emulate_saving
@@ -33,12 +28,10 @@ class DreamsController < ApplicationController
 
   # get /dreams/:id/edit
   def edit
-    @title = t('controllers.dreams.edit')
   end
 
   # patch /dreams/:id
   def update
-    @title = t('controllers.dreams.edit')
     if @entry.update(dream_parameters)
       flash[:notice] = t('entry.dream.updated')
       redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
@@ -57,28 +50,20 @@ class DreamsController < ApplicationController
 
   # get /dreams/tagged/:tag
   def tagged
-    page     = params[:page] || 1
-    @entries = tagged_dreams.page(page).per(5)
-    @title   = t('controllers.dreams.tagged', tag: @tag.name, page: page)
+    @entries = tagged_dreams.page(params[:page] || 1).per(5)
   end
 
   def random
-    @title = t('controllers.dreams.random')
     @entry = Entry::Dream.random_dream
   end
 
   def dreams_of_user
     user = User.find_by_login(params[:login])
-    page = params[:page] || 1
 
-    @entries = allowed_dreams.where(user: user).page(page).per(5)
-    @title   = t('controllers.dreams.dreams_of_user', user: user.login, page: page)
+    @entries = allowed_dreams.where(user: user).page(params[:page] || 1).per(5)
   end
 
   def archive
-    @title = t('controllers.dreams.archive')
-    @title += t('controllers.dreams.archive_year', year: params[:year]) unless params[:year].nil?
-    @title += ', ' + t('date.month_names')[params[:month].to_i] unless params[:month].nil?
     collect_months
     collect_archive unless params[:month].nil?
   end
