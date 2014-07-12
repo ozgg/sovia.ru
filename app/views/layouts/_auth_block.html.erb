@@ -4,10 +4,10 @@
           <div>
             <h3><%= t('.authorize') %></h3>
             <%= label_tag :login, t('activerecord.attributes.user.login') %>
-            <%= text_field_tag :login %>
+            <%= text_field_tag :login, '', required: true %>
             <br/>
             <%= label_tag :password, t('activerecord.attributes.user.password') %>
-            <%= password_field_tag :password %>
+            <%= password_field_tag :password, '', required: true %>
             <br/>
             <%= button_tag t('sessions.new.enter'), type: 'submit' %>
             <%= link_to t('users.new.register'), new_user_path %>
