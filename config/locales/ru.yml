@@ -126,6 +126,7 @@ ru:
       no_posts: "Публикаций нет"
       main: "Добро пожаловать"
       recent_posts: "Последние публикации"
+      title: "Главная страница"
     greeting:
       users_count:
         zero: "0 пользователей"
@@ -151,6 +152,8 @@ ru:
         few: "%{count} комментария"
         many: "%{count} комментариев"
         other: "%{count} комментариев"
+    gone:
+      title: "Этой страницы больше нет"
   articles:
     list:
       no_articles: "Статей нет"
@@ -497,8 +500,6 @@ ru:
     other: "%{count} комментариев"
     created: "Комментарий добавлен"
   controllers:
-    index:
-      index: "Главная страница"
     posts:
       index: "Сообщество, страница %{page}"
       new: "Новая запись"

@@ -1,7 +1,6 @@
 class IndexController < ApplicationController
   # get /
   def index
-    @title   = t('controllers.index.index')
     @entries = Entry.recent_entries
   end
 
@@ -12,8 +11,6 @@ class IndexController < ApplicationController
 
   # Obsolete actions
   def gone
-    @title = t('page_gone')
-
     render status: :gone
   end
 end
