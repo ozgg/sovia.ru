@@ -1,3 +1,5 @@
+<% content_for :title, t('.title', thought: @entry.parsed_title) %>
+
 <header>
   <h1><%= t('.thought') %></h1>
   <% if @entry.editable_by? current_user %>

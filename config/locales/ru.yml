@@ -518,12 +518,6 @@ ru:
     other: "%{count} комментариев"
     created: "Комментарий добавлен"
   controllers:
-    thoughts:
-      index: "Мысли пользователей, страница %{page}"
-      new: "Новая мысль"
-      show: "Мысль «%{title}»"
-      edit: "Редактирование мысли"
-      tagged: "Мысли с меткой «%{tag}», страница %{page}"
     users:
       new: "Регистрация"
   date:
@@ -542,8 +536,21 @@ ru:
       thought: "Просмотр мысли"
       edit: "Редактировать"
       delete: "Удалить"
+      title: "Мысль «%{thought}»"
     management_links:
       create: "Новая мысль"
+    index:
+      header: "Мысли пользователей"
+      title: "Мысли пользователей, страница %{page}"
+    new:
+      header: "Новая мысль"
+      title: "Новая мысль"
+    edit:
+      header: "Редактирование мысли"
+      title: "Редактирование мысли"
+    tagged:
+      title: "Мысли с меткой «%{tag}», страница %{page}"
+      header: "Мысли с меткой «%{tag}»"
   page: "Страница %{page}"
   about:
     index:

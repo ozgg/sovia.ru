@@ -5,20 +5,16 @@ class ThoughtsController < ApplicationController
 
   # get /thoughts
   def index
-    page     = params[:page] || 1
-    @entries = allowed_thoughts.page(page).per(5)
-    @title   = t('controllers.thoughts.index', page: page)
+    @entries = allowed_thoughts.page(params[:page] || 1).per(5)
   end
 
   # get /thoughts/new
   def new
     @entry = Entry::Thought.new
-    @title = t('controllers.thoughts.new')
   end
 
   # post /thoughts
   def create
-    @title = t('controllers.thoughts.new')
     @entry = Entry::Thought.new(thought_parameters.merge(user: current_user))
     if suspect_spam?(current_user, @entry.body, 2)
       emulate_saving
@@ -29,17 +25,14 @@ class ThoughtsController < ApplicationController
 
   # get /thoughts/:id
   def show
-    @title = t('controllers.thoughts.show', title: @entry.parsed_title)
   end
 
   # get /thoughts/:id/edit
   def edit
-    @title = t('controllers.thoughts.edit')
   end
 
   # patch /thoughts/:id
   def update
-    @title = t('controllers.thoughts.edit')
     if @entry.update(thought_parameters)
       flash[:notice] = t('entry.thought.updated')
       redirect_to verbose_entry_thoughts_path(id: @entry.id, uri_title: @entry.url_title)
@@ -57,9 +50,7 @@ class ThoughtsController < ApplicationController
 
   # get /thoughts/tagged/:tag
   def tagged
-    page     = params[:page] || 1
-    @entries = tagged_thoughts.page(page).per(5)
-    @title   = t('controllers.thoughts.tagged', tag: @tag.name, page: page)
+    @entries = tagged_thoughts.page(params[:page] || 1).per(5)
   end
 
   private
