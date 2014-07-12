@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   # get /users/new
   def new
-    @title = t('controllers.users.new')
     @user  = User.new
   end
 
@@ -16,6 +15,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # get /u/:login
   def profile
     find_user_by_login params[:login]
   end
