@@ -371,6 +371,11 @@ ru:
   statistics:
     index:
       symbols: "Статистика по символам снов"
+      title: "Статистика"
+      header: "Статистика"
+    symbols:
+      header: "Статистика по символам снов"
+      title: "Статистика по символам снов, страница %{page}"
   my:
     index:
       dreams: "Мои сны"
@@ -519,9 +524,6 @@ ru:
       show: "Мысль «%{title}»"
       edit: "Редактирование мысли"
       tagged: "Мысли с меткой «%{tag}», страница %{page}"
-    statistics:
-      index: "Статистика"
-      symbols: "Статистика по символам снов, страница %{page}"
     users:
       new: "Регистрация"
   date:
