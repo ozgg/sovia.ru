@@ -121,6 +121,8 @@ ru:
       enter: "Войти"
       forgot_password: "Забыли пароль?"
       recovery_form: "Форма восстановления пароля"
+      title: "Авторизация"
+      header: "Авторизация"
   index:
     index:
       no_posts: "Публикаций нет"
@@ -517,8 +519,6 @@ ru:
       show: "Мысль «%{title}»"
       edit: "Редактирование мысли"
       tagged: "Мысли с меткой «%{tag}», страница %{page}"
-    sessions:
-      new: "Авторизация"
     statistics:
       index: "Статистика"
       symbols: "Статистика по символам снов, страница %{page}"

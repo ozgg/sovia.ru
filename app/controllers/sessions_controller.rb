@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   # get /login
   def new
-    @title = t('controllers.sessions.new')
     unless session[:user_id].nil?
       redirect_authorized_user
     end
