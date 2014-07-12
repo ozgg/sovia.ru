@@ -7,18 +7,15 @@ class PostsController < ApplicationController
   def index
     page     = params[:page] || 1
     @entries = allowed_posts.page(page).per(5)
-    @title   = t('controllers.posts.index', page: page)
   end
 
   # get /posts/new
   def new
     @entry = Entry::Post.new
-    @title = t('controllers.posts.new')
   end
 
   # post /posts
   def create
-    @title = t('controllers.posts.new')
     @entry = Entry::Post.new(post_parameters.merge(user: current_user))
     if suspect_spam?(current_user, @entry.body, 2)
       emulate_saving
@@ -29,17 +26,14 @@ class PostsController < ApplicationController
 
   # get /posts/:id
   def show
-    @title = t('controllers.posts.show', title: @entry.parsed_title)
   end
 
   # get /posts/:id/edit
   def edit
-    @title = t('controllers.posts.edit')
   end
 
   # patch /posts/:id
   def update
-    @title = t('controllers.posts.edit')
     if @entry.update(post_parameters)
       flash[:notice] = t('entry.post.updated')
       redirect_to verbose_entry_posts_path(id: @entry.id, uri_title: @entry.url_title)
@@ -59,7 +53,6 @@ class PostsController < ApplicationController
   def tagged
     page     = params[:page] || 1
     @entries = tagged_posts.page(page).per(5)
-    @title   = t('controllers.posts.tagged', tag: @tag.name, page: page)
   end
 
   private
