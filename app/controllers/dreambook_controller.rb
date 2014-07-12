@@ -2,21 +2,17 @@ class DreambookController < ApplicationController
   before_action :collect_letters
 
   def index
-    @title = t('controllers.dreambook.index')
   end
 
   def letter
     page   = params[:page] || 1
     letter = params[:letter]
     @tags  = Tag::Dream.where(letter: letter).where.not(description: '').order('canonical_name asc').page(page).per(50)
-    @title = t('controllers.dreambook.letter', letter: letter, page: page)
   end
 
   def word
-    word = params[:word]
-    @tag = Tag::Dream.match_by_name(word)
+    @tag = Tag::Dream.match_by_name(params[:word])
     raise record_not_found if @tag.nil?
-    @title = t('controllers.dreambook.word', word: word)
   end
 
   def obsolete

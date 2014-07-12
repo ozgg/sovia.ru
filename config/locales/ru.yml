@@ -326,6 +326,14 @@ ru:
       select_letter: "Выберите букву, на которую начинается символ"
     word:
       read_dreams: "Сны с этим символом"
+      title: "Сонник: %{word}"
+      header: "Сонник"
+    index:
+      title: "Сонник"
+      header: "Сонник"
+    letter:
+      title: "Символы снов на «%{letter}», страница %{page}"
+      header: "Сонник на «%{letter}»"
   page_gone: "Страницы больше нет"
   statistics:
     index:
@@ -482,10 +490,6 @@ ru:
       tagged: "Сны с меткой «%{tag}», страница %{page}"
       random: "Случайный сон"
       dreams_of_user: "Сны пользователя %{user}, страница %{page}"
-    dreambook:
-      index: "Сонник"
-      letter: "Символы снов на «%{letter}», страница %{page}"
-      word: "Сонник: %{word}"
     index:
       index: "Главная страница"
     posts:

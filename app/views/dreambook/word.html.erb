@@ -1,5 +1,7 @@
+<% content_for :title, t('.title', word: @tag.name) %>
+
 <header>
-  <h1><%= @title %></h1>
+  <h1><%= t('.header') %></h1>
   <% if !current_user.nil? && current_user.editor? %>
       <nav>
         <ul>
@@ -8,8 +10,6 @@
       </nav>
   <% end %>
 </header>
-
-<%= render 'letters' %>
 
 <article class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
   <meta itemprop="articleSection" content="<%= t('layouts.application.dreambook') %>"/>
@@ -26,6 +26,8 @@
 </article>
 
 <%= render 'layouts/social' %>
+
+<%= render 'letters' %>
 
 <section>
   <%= render 'layouts/statistics' %>
