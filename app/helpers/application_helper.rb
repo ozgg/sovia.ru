@@ -115,6 +115,7 @@ module ApplicationHelper
         fragment.gsub!('<', '&lt;')
         fragment.gsub!('>', '&gt;')
       end
+      link_old_dreambook_symbols(fragment)
       link_dreambook_symbols(fragment)
       link_entries(fragment)
       find_links(fragment)
@@ -128,7 +129,7 @@ module ApplicationHelper
     output
   end
 
-  def link_dreambook_symbols(fragment)
+  def link_old_dreambook_symbols(fragment)
     pattern = /[\[<]symbol name="(?<name>[^"]+)"[^\]>]*[\]>]/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
@@ -137,6 +138,23 @@ module ApplicationHelper
         '<span class="not-found">' + match[:name] + '</span>'
       else
         link_to(match[:name], dreambook_word_path(letter: tag.letter, word: tag.name))
+      end
+    end
+  end
+
+  def link_dreambook_symbols(fragment)
+    pattern = /\[\[(?<name>[^\]]+)\]\](?:\((?<text>[^)]+)\))?/
+    fragment.gsub! pattern do |chunk|
+      match = pattern.match chunk
+      tag   = Tag::Dream.match_by_name(match[:name])
+      text  = match[:text] || match[:name]
+      text.gsub!('<', '&lt;')
+      text.gsub!('>', '&gt;')
+
+      if tag.nil?
+        "<span class=\"not-found\" title=\"#{match[:name]}\">#{text}</span>"
+      else
+        link_to(text, dreambook_word_path(letter: tag.letter, word: tag.name), title: tag.name)
       end
     end
   end
