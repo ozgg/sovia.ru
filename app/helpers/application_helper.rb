@@ -143,13 +143,14 @@ module ApplicationHelper
   end
 
   def link_dreambook_symbols(fragment)
-    pattern = /\[\[(?<name>[^\]]+)\]\](?:\((?<text>[^)]+)\))?/
+    pattern = /\[\[(?<name>[^\]]+)\]\](?:\((?<text>[^)]{1,32})\))?/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       tag   = Tag::Dream.match_by_name(match[:name])
       text  = match[:text] || match[:name]
       text.gsub!('<', '&lt;')
       text.gsub!('>', '&gt;')
+      text.gsub!('"', '&quot;')
 
       if tag.nil?
         "<span class=\"not-found\" title=\"#{match[:name]}\">#{text}</span>"
@@ -160,14 +161,19 @@ module ApplicationHelper
   end
 
   def link_entries(fragment)
-    pattern = /\[(?:entry|article|dream|post)\s+id="(?<id>[^"]{1,8})"[^\]]*\]/
+    pattern = /\[(?:entry|article|dream|post)\s+(?:id=")?(?<id>[^"]{1,8})"?[^\]]*\](?:\((?<text>[^)]{1,30})\))?/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       entry = Entry::find_by(id: match[:id])
-      if entry.nil?
-        "<span class=\"not-found\">#{match[:id]}</span>"
+      if match[:text]
+        title = match[:text]
       else
-        '&laquo;' + link_to(entry.parsed_title, verbose_entry_path(entry)) + '&raquo;'
+        title = entry.parsed_title
+      end
+      if entry.nil?
+        "<span class=\"not-found\" title=\"#{title.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')}\">#{match[:id]}</span>"
+      else
+        '&laquo;' + link_to(title, verbose_entry_path(entry), title: entry.parsed_title) + '&raquo;'
       end
     end
   end
