@@ -68,7 +68,7 @@ class Entry < ActiveRecord::Base
   end
 
   def parsed_title
-    result = title || I18n.t('untitled')
+    result = title.blank? ? I18n.t('untitled') : title
     result.gsub(/(\S{30})/, '\1 ').gsub('<', '&lt;').gsub('>', '&gt;')
   end
 
@@ -151,7 +151,7 @@ class Entry < ActiveRecord::Base
   end
 
   def make_url_title
-    if title.nil?
+    if title.blank?
       self.url_title = 'bez-nazvaniya'
     else
       self.url_title = title.mb_chars.downcase.to_s

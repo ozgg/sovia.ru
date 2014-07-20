@@ -168,7 +168,7 @@ module ApplicationHelper
       if match[:text]
         title = match[:text]
       else
-        title = entry.parsed_title
+        title = entry.nil? ? match[:id] : entry.parsed_title
       end
       if entry.nil?
         "<span class=\"not-found\" title=\"#{title.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')}\">#{match[:id]}</span>"
