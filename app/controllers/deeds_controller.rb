@@ -4,7 +4,6 @@ class DeedsController < ApplicationController
 
   # get /deeds
   def index
-    @title = t('controllers.deeds.index')
   end
 
   # get /deeds/new
@@ -25,17 +24,14 @@ class DeedsController < ApplicationController
 
   # get /deeds/:id
   def show
-    @title = t('controllers.deeds.show', deed: @deed.name)
   end
 
   # get /deeds/:id/edit
   def edit
-    @title = t('controllers.deeds.edit')
   end
 
   # patch /deeds/:id
   def update
-    @title = t('controllers.deeds.edit')
     if @deed.update(deed_parameters)
       flash[:notice] = t('deed.updated')
       redirect_to @deed
