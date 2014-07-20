@@ -1,17 +1,7 @@
 <% url = @tag.new_record? ? admin_dream_tags_path : admin_dream_tag_path(@tag) %>
 
 <%= form_for(@tag, url: url) do |f| %>
-    <% if @tag.errors.any? %>
-        <div class="errors">
-          <h2><%= pluralize(@tag.errors.count, 'error') %>:</h2>
-
-          <ul>
-            <% @tag.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render partial: 'common/errors_list', locals: { entity: @tag } %>
 
     <div>
       <%= f.label :name %><br />

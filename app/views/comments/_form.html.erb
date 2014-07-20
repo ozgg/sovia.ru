@@ -1,15 +1,5 @@
 <%= form_for(@comment) do |f| %>
-    <% if @comment.errors.any? %>
-        <div class="errors">
-          <h2><%= t('error', count: @comment.errors.count) %>:</h2>
-
-          <ul>
-            <% @comment.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render partial: 'common/errors_list', locals: { entity: @comment } %>
 
     <div>
       <%= f.hidden_field :entry_id %>
