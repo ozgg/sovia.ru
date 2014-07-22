@@ -57,7 +57,7 @@ Sovia::Application.routes.draw do
 
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
-    resources :dreams, :posts, :thoughts, :deeds, only: [:index]
+    resources :dreams, :posts, :thoughts, :deeds, :grains, only: [:index]
 
     scope '/statistics' do
       controller :statistics do

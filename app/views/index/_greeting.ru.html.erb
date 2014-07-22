@@ -5,7 +5,8 @@
     <%= t('.described_dreams', count: Entry::Dream.count) %>,
     <%= t('.written_articles', count: Entry::Article.count) %> и
     <%= t('.left_comments', count: Comment.count) %>.</p>
-  <p>Каждый день происходит что-то новое, присоединяйтесь.</p>
+  <p>Каждый день происходит что-то новое,
+    <%= current_user ? 'присоединяйтесь' : link_to('присоединяйтесь', new_user_path) %>.</p>
 </article>
 
 <%= render 'deed_form' unless current_user.nil? %>

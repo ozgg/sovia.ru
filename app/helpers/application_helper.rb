@@ -172,6 +172,8 @@ module ApplicationHelper
       end
       if entry.nil?
         "<span class=\"not-found\" title=\"#{title.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')}\">#{match[:id]}</span>"
+      elsif entry.is_a? Entry::Grain
+        "<span class=\"not-found\">Grain #{match[:id]}</span>"
       else
         '&laquo;' + link_to(title, verbose_entry_path(entry), title: entry.parsed_title) + '&raquo;'
       end
