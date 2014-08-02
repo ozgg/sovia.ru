@@ -161,7 +161,7 @@ module ApplicationHelper
   end
 
   def link_entries(fragment)
-    pattern = /\[(?:entry|article|dream|post)\s+(?:id=")?(?<id>[^"]{1,8})"?[^\]]*\](?:\((?<text>[^)]{1,30})\))?/
+    pattern = /\[(?:entry|article|dream|post)\s+(?:id=")?(?<id>[^"]{1,8})"?[^\]]*\](?:\((?<text>[^)]{1,64})\))?/
     fragment.gsub! pattern do |chunk|
       match = pattern.match chunk
       entry = Entry::find_by(id: match[:id])
