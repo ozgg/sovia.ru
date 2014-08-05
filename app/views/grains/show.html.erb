@@ -1,0 +1,16 @@
+<% content_for :title, t('.title', deed: @deed.name) %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+</header>
+
+<p>
+  <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
+  <%= @deed.name %>
+</p>
+<nav>
+  <ul>
+    <li><%= link_to t('edit'), edit_deed_path(@deed) %></li>
+    <li><%= link_to t('delete'), deed_path(@deed), method: :delete, data: { confirm: t('are_you_sure') }  %></li>
+  </ul>
+</nav>

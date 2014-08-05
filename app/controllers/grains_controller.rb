@@ -4,7 +4,6 @@ class GrainsController < ApplicationController
 
   # get /grains
   def index
-    @entries = allowed_grains.page(params[:page] || 1).per(5)
   end
 
   # get /grains/:id
@@ -49,26 +48,6 @@ class GrainsController < ApplicationController
     redirect_to entry_grains_path
   end
 
-  # get /grains/tagged/:tag
-  def tagged
-    @entries = tagged_grains.page(params[:page] || 1).per(5)
-  end
-
-  def random
-    @entry = Entry::Grain.random_grain
-  end
-
-  def grains_of_user
-    user = User.find_by_login(params[:login])
-
-    @entries = allowed_grains.where(user: user).page(params[:page] || 1).per(5)
-  end
-
-  def archive
-    collect_months
-    collect_archive unless params[:month].nil?
-  end
-
   private
 
   def set_grain
@@ -82,35 +61,5 @@ class GrainsController < ApplicationController
 
   def restrict_editor_access
     raise UnauthorizedException unless @entry.editable_by? current_user
-  end
-
-  def allowed_grains
-    maximal_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
-
-    Entry::Grain.recent.where("privacy <= #{maximal_privacy}")
-  end
-
-  def tagged_grains
-    @tag = Tag::Grain.match_by_name(params[:tag])
-    raise record_not_found if @tag.nil?
-
-    allowed_grains.joins(:entry_tags).where(entry_tags: { tag: @tag })
-  end
-
-  def collect_months
-    @dates = {}
-
-    Entry::Grain.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
-      if @dates[date.year].nil?
-        @dates[date.year] = []
-      end
-      @dates[date.year] << date.month
-    end
-  end
-
-  def collect_archive
-    page      = params[:page] || 1
-    first_day = "%04d-%02d-01 00:00:00" % [params[:year], params[:month]]
-    @grains   = allowed_grains.where("date_trunc('month', created_at) = '#{first_day}'").page(page).per(20)
   end
 end

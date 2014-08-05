@@ -48,6 +48,12 @@ Sovia::Application.routes.draw do
     end
   end
 
+  resources :grains, as: :entry_grains do
+    collection do
+      get ':id-:uri_title' => :show, as: :verbose
+    end
+  end
+
   resources :users, only: [:new, :create]
   resources :comments, only: [:create]
   resources :deeds

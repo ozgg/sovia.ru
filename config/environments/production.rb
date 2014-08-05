@@ -67,7 +67,7 @@ Sovia::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address: 'smtp.gmail.com',
-      post: 587,
+      port: 587,
       domain: 'sovia.ru',
       user_name: 'support@sovia.ru',
       password: ENV['MAIL_PASSWORD'],

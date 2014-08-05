@@ -1,0 +1,9 @@
+<%= form_for(@deed || Deed.new) do |form| %>
+    <%= render partial: 'common/errors_list', locals: { entity: @deed } unless @deed.nil?  %>
+
+    <div>
+      <%= form.label :name %><br />
+      <%= form.text_field :name, size: 100, required: true %><br />
+      <%= form.button t('submit'), type: :submit %>
+    </div>
+<% end %>

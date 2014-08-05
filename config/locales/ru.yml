@@ -342,6 +342,7 @@ ru:
       statistics: "Статистика"
       thoughts: "Мысли пользователей"
       random: "Случайный сон"
+      grains: "Зёрна восприятия"
     main_navigation:
       aria_label: "Главное меню"
   roles:
@@ -583,3 +584,7 @@ ru:
     edit:
       title: "Редактирование успеха"
       header: "Редактирование успеха"
+  grains:
+    index:
+      title: "Зёрна восприятия"
+      header: "Зёрна восприятия"

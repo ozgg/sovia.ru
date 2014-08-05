@@ -18,7 +18,7 @@ Sovia::Application.configure do
   config.action_mailer.delivery_method = :sendmail
   #config.action_mailer.smtp_settings = {
   #    address: 'smtp.gmail.com',
-  #    post: 587,
+  #    port: 587,
   #    domain: 'MacBook-Pro-Maksim.local',
   #    user_name: 'support@sovia.ru',
   #    password: ENV['MAIL_PASSWORD'],
