@@ -3,6 +3,11 @@
 <header>
   <h1><%= t('.header') %></h1>
   <h2><%= t('page', page: params[:page] || 1) %></h2>
+  <nav>
+    <ul>
+      <li><%= link_to t('.about'), entry_grains_path %></li>
+    </ul>
+  </nav>
 </header>
 
 <%= render 'entries/list' %>

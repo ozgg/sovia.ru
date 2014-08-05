@@ -1,16 +1,20 @@
-<% content_for :title, t('.title', deed: @deed.name) %>
+<% content_for :title, t('.title', title: @entry.parsed_title) %>
 
 <header>
   <h1><%= t('.header') %></h1>
+  <% if @entry.editable_by? current_user %>
+      <nav>
+        <ul>
+          <li><%= link_to t('edit'), edit_entry_grain_path(@entry) %></li>
+          <li><%= link_to t('delete'), @entry, method: :delete, data: { confirm: t('are_you_sure') } %></li>
+        </ul>
+      </nav>
+  <% end %>
 </header>
 
-<p>
-  <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
-  <%= @deed.name %>
-</p>
-<nav>
-  <ul>
-    <li><%= link_to t('edit'), edit_deed_path(@deed) %></li>
-    <li><%= link_to t('delete'), deed_path(@deed), method: :delete, data: { confirm: t('are_you_sure') }  %></li>
-  </ul>
-</nav>
+<%= render partial: 'entries/entry', object: @entry %>
+
+<section>
+  <%= render 'layouts/statistics' %>
+  <%= render 'layouts/more' %>
+</section>

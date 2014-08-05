@@ -88,6 +88,8 @@ module ApplicationHelper
       verbose_entry_posts_path(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_path(parameters)
+    elsif entry.is_a? Entry::Grain
+      verbose_entry_grains_path(parameters)
     end
   end
 
@@ -104,6 +106,8 @@ module ApplicationHelper
       verbose_entry_posts_url(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_url(parameters)
+    elsif entry.is_a? Entry::Grain
+      verbose_entry_grains_url(parameters)
     end
   end
 
@@ -167,15 +171,17 @@ module ApplicationHelper
       entry = Entry::find_by(id: match[:id])
       if match[:text]
         title = match[:text]
+        prefix, postfix = '', ''
       else
         title = entry.nil? ? match[:id] : entry.parsed_title
+        prefix, postfix = '&laquo;', '&raquo;'
       end
       if entry.nil?
         "<span class=\"not-found\" title=\"#{title.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')}\">#{match[:id]}</span>"
       elsif entry.is_a? Entry::Grain
         "<span class=\"not-found\">Grain #{match[:id]}</span>"
       else
-        '&laquo;' + link_to(title, verbose_entry_path(entry), title: entry.parsed_title) + '&raquo;'
+        prefix + link_to(title, verbose_entry_path(entry), title: entry.parsed_title) + postfix
       end
     end
   end
