@@ -4,6 +4,20 @@
   <h1><%= t('.header') %></h1>
 </header>
 
+<% adjacent = [@deed.previous_entry, @deed.next_entry] %>
+<% unless adjacent[0].nil? && adjacent[1].nil? %>
+    <nav class="adjacent-entries">
+      <ul aria-label="<%= t('.adjacent') %>">
+        <% unless adjacent[0].nil? %>
+            <li class="previous"><%= link_to t('.previous'), deed_path(adjacent[0]), rel: 'prev' %></li>
+        <% end %>
+        <% unless adjacent[1].nil? %>
+            <li class="next"><%= link_to t('.next'), deed_path(adjacent[1]), rel: 'next' %></li>
+        <% end %>
+      </ul>
+    </nav>
+<% end %>
+
 <p>
   <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
   <%= @deed.name %>
