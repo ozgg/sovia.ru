@@ -1,4 +1,7 @@
 Sovia::Application.routes.draw do
+  get "tags_controller/index"
+  get "tags_controller/show"
+  get "tags_controller/edit"
   root 'index#index'
 
   %w( 422 500 ).each do |code|
@@ -64,6 +67,7 @@ Sovia::Application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
     resources :dreams, :posts, :thoughts, :deeds, :grains, only: [:index]
+    resources :tags, only: [:index, :show, :edit, :update]
 
     scope '/statistics' do
       controller :statistics do

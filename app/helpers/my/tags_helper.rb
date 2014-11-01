@@ -1,0 +1,2 @@
+module My::TagsHelper
+end

@@ -1,0 +1,22 @@
+<% content_for :title, t('.title', tag: @user_tag.tag.name) %>
+
+<header>
+  <h1><%= t('.header', tag: @user_tag.tag.name) %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('.view'), my_tag_path(@user_tag) %></li>
+    </ul>
+  </nav>
+</header>
+
+<%= form_tag my_tag_path(@user_tag), method: :patch do %>
+    <%= render partial: 'common/errors_list', locals: { entity: @user_tag } %>
+
+    <div>
+      <%= label_tag :user_tag_description, t('activerecord.attributes.tag.description') %><br />
+      <%= text_area_tag 'user_tag[description]', @user_tag.description, cols: 75, rows: 20 %>
+    </div>
+    <div>
+      <%= button_tag t('submit'), type: 'submit' %>
+    </div>
+<% end %>

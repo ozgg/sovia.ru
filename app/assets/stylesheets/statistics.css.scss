@@ -1,7 +1,15 @@
 nav.dream-symbols {
   ol {
-    li:first-letter {
-      text-transform: capitalize;
+    li {
+      &.described {
+        a {
+          font-weight: bold;
+        }
+      }
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
     }
   }
 }
