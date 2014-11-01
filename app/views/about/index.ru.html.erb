@@ -51,7 +51,7 @@
   <p>Проект написан на Ruby on Rails.</p>
   <footer>
     <p>
-      Версия проекта — 3.0.1
+      Версия проекта — 3.0.2
     <% if File.exist?('/var/www/sovia.ru/last_version') %>
       build <%= File.read('/var/www/sovia.ru/last_version').to_i %>
     <% end %>
@@ -60,7 +60,6 @@
 
   <aside><img src="http://yandex.ru/cycounter?sovia.ru" alt="Индекс цитируемости" width="88" height="33" /></aside>
 </article>
-
 
 <section>
   <%= render 'layouts/statistics' %>
