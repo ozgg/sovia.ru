@@ -1,4 +1,10 @@
 class CommentsController < ApplicationController
+  def index
+    max_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+
+    @comments = Comment.joins(:entry).where("entries.privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
+  end
+
   def new
   end
 

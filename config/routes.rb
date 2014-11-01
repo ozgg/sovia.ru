@@ -55,7 +55,7 @@ Sovia::Application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
-  resources :comments, only: [:create]
+  resources :comments, only: [:index, :create]
   resources :deeds
 
   namespace :my do

@@ -346,6 +346,7 @@ ru:
       thoughts: "Мысли пользователей"
       random: "Случайный сон"
       grains: "Зёрна восприятия"
+      comments: "Все комментарии"
     main_navigation:
       aria_label: "Главное меню"
   roles:
@@ -499,6 +500,10 @@ ru:
     new:
       title: "Добавление комментария"
       header: "Добавление комментария"
+    index:
+      title: "Все комментарии, страница %{page}"
+      header: "Все комментарии"
+      for: "к записи"
   user:
     email_confirmed: "Почта подтверждена"
     code_invalid: "Недействительный код"

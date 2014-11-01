@@ -1,0 +1,31 @@
+<% content_for :title, t('.title', page: params[:page] || 1) %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+  <h2><%= t('page', page: params[:page] || 1) %></h2>
+</header>
+
+<% if @comments.any? %>
+
+    <ul class="comments">
+      <% @comments.each do |comment| %>
+          <li>
+            <div>
+              <figure>
+                <%= comment_avatar(comment.user) %>
+                <figcaption><%= user_link(comment.user) %> <%= t('.for') %> <%= link_to comment.entry.parsed_title, verbose_entry_path(comment.entry) %></figcaption>
+              </figure>
+
+              <time datetime="<%= comment.datetime %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+            </div>
+
+            <div>
+              <%= raw parse_body(comment.body) %>
+            </div>
+          </li>
+      <% end %>
+    </ul>
+    <%= paginate @comments %>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>
