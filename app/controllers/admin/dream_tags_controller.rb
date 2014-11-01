@@ -3,6 +3,7 @@ class Admin::DreamTagsController < ApplicationController
   before_action :set_dream_tag, only: [:show, :edit, :update, :destroy]
 
   def index
+    check_search
     @tags = collect_tags.page(params[:page] || 1).per(30)
   end
 
@@ -51,6 +52,18 @@ class Admin::DreamTagsController < ApplicationController
 
   def tag_parameters
     params.require(:tag_dream).permit(:name, :description)
+  end
+
+  def check_search
+    unless params[:word].blank?
+      tag = Tag::Dream.match_by_name(params[:word])
+      if tag
+        redirect_to admin_dream_tag_path(tag)
+      else
+        flash[:notice] = params[:word]
+        redirect_to new_admin_dream_tag_path
+      end
+    end
   end
 
   def collect_tags
