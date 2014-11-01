@@ -23,12 +23,20 @@ class My::ProfilesController < ApplicationController
   protected
 
   def update_common_parameters
-    if current_user.update(params.require(:profile).permit(:allow_mail, :avatar))
+    if current_user.update(common_parameters)
       flash[:notice] = t('profile.updated')
       redirect_to my_profile_path
     else
       render action: :edit
     end
+  end
+
+  def common_parameters
+    new_parameters = params.require(:profile).permit(:allow_mail, :avatar, :use_gravatar)
+    new_parameters[:allow_mail] = false if new_parameters[:allow_mail].nil?
+    new_parameters[:use_gravatar] = false if new_parameters[:use_gravatar].nil?
+
+    new_parameters
   end
 
   def update_sensitive_parameters
@@ -50,6 +58,6 @@ class My::ProfilesController < ApplicationController
   end
 
   def profile_parameters
-    params.require(:profile).permit(:allow_mail, :email, :password, :password_confirmation, :avatar)
+    params.require(:profile).permit(:allow_mail, :email, :password, :password_confirmation, :avatar, :use_gravatar)
   end
 end

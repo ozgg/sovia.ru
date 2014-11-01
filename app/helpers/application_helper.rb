@@ -11,6 +11,8 @@ module ApplicationHelper
   def profile_avatar(user)
     if user.nil?
       image_tag 'fallback/avatar/default.png'
+    elsif user.should_use_gravatar?
+      image_tag user.gravatar_image(400)
     else
       image_tag user.avatar.url
     end
@@ -20,6 +22,8 @@ module ApplicationHelper
     attributes = { width: 100, height: 100, alt: user.nil? ? I18n.t('anonymous') : user.login }
     if user.nil?
       image_tag 'fallback/avatar/entry_default.png', attributes
+    elsif user.should_use_gravatar?
+      image_tag user.gravatar_image(200)
     else
       image_tag user.avatar.entry.url, attributes
     end
@@ -29,6 +33,8 @@ module ApplicationHelper
     attributes = { width: 50, height: 50, alt: user.nil? ? I18n.t('anonymous') : user.login }
     if user.nil?
       image_tag 'fallback/avatar/comment_default.png', attributes
+    elsif user.should_use_gravatar?
+      image_tag user.gravatar_image(100)
     else
       image_tag user.avatar.comment.url, attributes
     end

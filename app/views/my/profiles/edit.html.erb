@@ -32,6 +32,10 @@
       <fieldset>
         <legend><%= t('.common_parameters') %></legend>
         <div>
+          <%= check_box_tag 'profile[use_gravatar]', '1', current_user.use_gravatar %>
+          <%= label_tag :profile_use_gravatar, t('.use_gravatar') %>
+        </div>
+        <div>
           <%= label_tag :profile_avatar, t('.update_avatar') %><br />
           <%= file_field_tag 'profile[avatar]', accept: 'image/jpeg, image/png' %>
         </div>
