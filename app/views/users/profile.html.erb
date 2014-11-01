@@ -30,3 +30,9 @@
 
   <p><%= link_to t('.read_dreams'), user_entry_dreams_path(login: @user.login) %></p>
 </article>
+
+<h2><%= t('.entries', page: params[:page] || 1) %></h2>
+
+<%= render 'entries/list' %>
+
+<section></section>

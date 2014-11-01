@@ -5,7 +5,7 @@
 
 html {
   background: #122129 image_url('bg-icons.png') 0 0;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Serif;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -252,7 +252,7 @@ body {
 }
 
 input, textarea, button {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Serif;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 0.9em;
 }
 
@@ -321,4 +321,8 @@ ul.features li span {
   background: #eeeeee;
   padding: 0 3px;
   font-family: monospace;
+}
+
+section.entries {
+  position: relative;
 }

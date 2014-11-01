@@ -291,6 +291,7 @@ ru:
       entries_count: "Количество записей"
       comments_count: "Количество комментариев"
       read_dreams: "Читать сны этого пользователя"
+      entries: "Записи этого пользователя, страница %{page}"
   entry:
     article:
       created: "Статья добавлена"
