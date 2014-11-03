@@ -1,4 +1,6 @@
 <% content_for :title, t('.title', page: params[:page] || 1) %>
+<% content_for :description, t('.description', page: params[:page] || 1) %>
+
 <header>
   <h1><%= t('.header') %></h1>
   <h2><%= t('page', page: params[:page] || 1) %></h2>
