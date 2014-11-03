@@ -72,6 +72,10 @@ class Entry < ActiveRecord::Base
     result.gsub(/(\S{30})/, '\1 ').gsub('<', '&lt;').gsub('>', '&gt;')
   end
 
+  def author_name
+    user.nil? ? I18n.t('anonymous') : user.login
+  end
+
   def parsed_body
     parse_body body
   end

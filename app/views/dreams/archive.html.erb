@@ -3,6 +3,11 @@
   %><%= (', ' + t('.year', year: params[:year])) unless params[:year].nil?
   %><%= (', ' + t('date.month_names')[params[:month].to_i].to_s + ', ' + t('page', page: params[:page] || 1)) unless params[:month].nil? %>
 <% end %>
+<% content_for :description do %>
+    <%= t('.description')
+  %><%= (', ' + t('.year', year: params[:year])) unless params[:year].nil?
+  %><%= (', ' + t('date.month_names')[params[:month].to_i].to_s + ', ' + t('page', page: params[:page] || 1)) unless params[:month].nil? %>
+<% end %>
 
 <header>
   <h1><%= t('.header') %></h1>

@@ -1,9 +1,10 @@
 <% content_for :title, t('.title', tag: @tag.name, page: params[:page] || 1) %>
+<% content_for :description, t('.description', tag: @tag.name, page: params[:page] || 1) %>
 
 <header>
   <h1><%= t('.header', tag: @tag.name) %></h1>
   <h2><%= t('page', page: params[:page] || 1) %></h2>
-  <% if !current_user.nil? && current_user.editor? %>
+  <% if current_user && current_user.editor? %>
   <nav>
     <ul>
       <li><%= link_to t('.edit_tag'), admin_dream_tag_path(@tag) %></li>
