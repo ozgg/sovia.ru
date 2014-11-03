@@ -129,7 +129,7 @@ ru:
       no_posts: "Публикаций нет"
       main: "Добро пожаловать"
       recent_posts: "Последние публикации"
-      title: "Главная страница"
+      title: "Сайт о снах"
     greeting:
       users_count:
         zero: "0 пользователей"
@@ -329,7 +329,9 @@ ru:
       about: "О проекте"
       terms_of_service: "Пользовательское соглашение"
       dreambook: "Сонник"
-      title: "Совия, сайт о снах"
+      title: "Совия"
+      sidebar: "Боковая панель"
+      notice: "Замечание"
     auth_block:
       authorize: "Авторизация"
       logout: "Выйти"
