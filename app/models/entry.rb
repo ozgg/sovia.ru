@@ -76,6 +76,10 @@ class Entry < ActiveRecord::Base
     user.nil? ? I18n.t('anonymous') : user.login
   end
 
+  def publication_date
+    created_at.strftime '%d.%m.%Y'
+  end
+
   def parsed_body
     parse_body body
   end

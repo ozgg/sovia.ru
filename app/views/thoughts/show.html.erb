@@ -1,4 +1,5 @@
 <% content_for :title, t('.title', thought: @entry.parsed_title) %>
+<% content_for :description, t('.description', thought: @entry.parsed_title, user: @entry.author_name, date: @entry.publication_date) %>
 
 <header>
   <h1><%= t('.thought') %></h1>
