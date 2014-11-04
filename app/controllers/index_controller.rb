@@ -2,6 +2,7 @@ class IndexController < ApplicationController
   # get /
   def index
     @entries = Entry.recent_entries
+    @recent_tags = Tag::Dream.recently_updated
   end
 
   # get /sitemap

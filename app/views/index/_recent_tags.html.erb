@@ -1,0 +1,12 @@
+<% if @recent_tags.any? %>
+    <div>
+      <h2><%= t('.header') %></h2>
+      <nav>
+        <ul class="tags">
+          <% @recent_tags.each do |tag| %>
+              <li><%= link_to tag.name, dreambook_word_path(letter: tag.letter, word: tag.name) %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+<% end %>

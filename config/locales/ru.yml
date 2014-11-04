@@ -162,6 +162,8 @@ ru:
       description: "Вы пытаетесь посмотреть страницу, которой больше не существует."
     management_links:
       tags_queue: "Очередь меток"
+    recent_tags:
+      header: "Обновления сонника"
   articles:
     list:
       no_articles: "Статей нет"

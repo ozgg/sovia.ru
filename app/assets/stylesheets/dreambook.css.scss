@@ -35,7 +35,10 @@ ul.dreambook-symbols {
   li {
     list-style: none;
     padding: 0 1em;
-    text-transform: capitalize;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
 
     &:nth-of-type(2n) {
       background: #f0f0ff;
@@ -44,6 +47,12 @@ ul.dreambook-symbols {
     &:nth-of-type(2n+1) {
       background: #f7f7ff;
     }
+  }
+}
+
+ul.tags {
+  li:first-letter {
+    text-transform: capitalize;
   }
 }
 
