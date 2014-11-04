@@ -7,7 +7,10 @@
 <% if @tags.any? %>
     <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
       <% @tags.each do |tag| %>
-          <li><%= link_to tag.name, edit_admin_dream_tag_path(tag) %> (<%= tag.entries_count %>)</li>
+          <li>
+            <%= link_to tag.name, edit_admin_dream_tag_path(tag) %>
+            (<%= tag.entries_count %>)
+            [<%= link_to t('tags.show.delete'), admin_dream_tag_path(@tag), method: :delete, data: { confirm: t('are_you_sure') } %>]          </li>
       <% end %>
     </ol>
 

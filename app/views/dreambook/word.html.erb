@@ -6,7 +6,7 @@
   <% if current_user && current_user.editor? %>
       <nav>
         <ul>
-          <li><%= link_to t('edit'), admin_dream_tag_path(@tag) %></li>
+          <li><%= link_to t('edit'), edit_admin_dream_tag_path(@tag) %></li>
         </ul>
       </nav>
   <% end %>
