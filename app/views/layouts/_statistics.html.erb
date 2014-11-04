@@ -1,11 +1,11 @@
-<% tags = Tag::Dream.order('entries_count desc').first(10) %>
+<% tags = Tag::Dream.trends %>
 <div>
   <h2><%= t('.statistics') %></h2>
   <% if tags.any? %>
       <nav>
         <ol>
-          <% tags.each do |tag| %>
-              <li><%= tagged_entries_path(tag) %> (<%= tag.entries_count %>)</li>
+          <% tags.each do |tag, weight| %>
+              <li><%= tagged_entries_path(tag) %> (<%= weight %>)</li>
           <% end %>
         </ol>
       </nav>
