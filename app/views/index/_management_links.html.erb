@@ -1,7 +1,8 @@
-<% if !current_user.nil? && current_user.editor? %>
+<% if current_user && current_user.editor? %>
     <nav>
       <ul>
         <li><%= link_to t('titles.tags.index'), admin_dream_tags_path %></li>
+        <li><%= link_to t('.tags_queue'), admin_queues_tags_path %></li>
       </ul>
     </nav>
 <% end %>

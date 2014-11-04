@@ -79,6 +79,7 @@ Sovia::Application.routes.draw do
 
   namespace :admin do
     resources :dream_tags
+    get "queues/tags"
   end
 
   controller :sessions do
