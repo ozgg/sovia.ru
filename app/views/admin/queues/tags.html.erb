@@ -1,16 +1,21 @@
 <% content_for :title, t('.title', page: params[:page] || 1) %>
 <% content_for :description, t('.description', page: params[:page] || 1) %>
 
-<h1><%= t('.header') %></h1>
-<h2><%= t('page', page: params[:page] || 1) %></h2>
+<header>
+  <h1><%= t('.header') %></h1>
+  <h2><%= t('page', page: params[:page] || 1) %></h2>
+  <nav>
+    <ul>
+      <li><%= link_to t('tags.show.list'), admin_dream_tags_path %></li>
+    </ul>
+  </nav>
+</header>
 
 <% if @tags.any? %>
     <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
       <% @tags.each do |tag| %>
           <li>
-            <%= link_to tag.name, edit_admin_dream_tag_path(tag) %>
-            (<%= tag.entries_count %>)
-            [<%= link_to t('tags.show.delete'), admin_dream_tag_path(@tag), method: :delete, data: { confirm: t('are_you_sure') } %>]          </li>
+            <%= link_to tag.name, edit_admin_dream_tag_path(tag) %> (<%= tag.entries_count %>)
       <% end %>
     </ol>
 
