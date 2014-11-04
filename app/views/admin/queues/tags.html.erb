@@ -11,6 +11,8 @@
   </nav>
 </header>
 
+<progress value="<%= @progress[0] %>" max="<%= @progress[1] %>"></progress>
+
 <% if @tags.any? %>
     <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
       <% @tags.each do |tag| %>
