@@ -32,7 +32,9 @@ class UsersController < ApplicationController
   end
 
   def user_parameters
-    params.require(:user).permit(:login, :email, :password, :password_confirmation, :allow_mail)
+    parameters = params.require(:user).permit(:login, :email, :password, :password_confirmation, :allow_mail)
+    parameters[:email] = nil if parameters[:email].blank?
+    parameters
   end
 
   def create_user
