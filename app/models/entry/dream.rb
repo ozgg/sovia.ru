@@ -1,9 +1,9 @@
 class Entry::Dream < Entry
 
   def self.random_dream
-    max_id  = (public_entries.maximum(:id) || 0) + 1
-    rand_id = Time.now.getutc.to_i % max_id
-    public_entries.where("id <= #{rand_id}").last
+    max_offset = public_entries.count - 1
+    offset = Time.now.getutc.to_i % max_offset
+    public_entries.offset(offset).first
   end
 
   def matching_tag(name)
