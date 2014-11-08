@@ -39,7 +39,7 @@ class DreambookController < ApplicationController
     @letters = { o: [], r: [], e: [] }
     english_range = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     russian_range = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-    Tag::Dream.uniq.pluck(:letter).each do |letter|
+    Tag::Dream.order('letter asc').uniq.pluck(:letter).each do |letter|
       if english_range.include? letter
         @letters[:e] << letter
       elsif russian_range.include? letter

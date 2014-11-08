@@ -4,7 +4,7 @@
       <% @letters.values.each do |letters_set| %>
           <% unless letters_set.empty? %>
               <ul>
-                <% letters_set.sort.each do |letter| %>
+                <% letters_set.each do |letter| %>
                     <li><%= link_to letter, dreambook_letter_path(letter: letter) %></li>
                 <% end %>
               </ul>

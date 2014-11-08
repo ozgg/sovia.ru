@@ -432,6 +432,7 @@ ru:
       title: "Поиск %{word} по соннику"
       header: "Поиск по соннику"
       result: "Результат поиска"
+      description: "Результат поиска слова %{word} в соннике Совии."
   page_gone: "Страницы больше нет"
   statistics:
     index:
