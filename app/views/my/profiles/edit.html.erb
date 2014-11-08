@@ -45,6 +45,10 @@
           <%= check_box_tag 'profile[allow_mail]', '1', current_user.allow_mail %>
           <%= label_tag :profile_allow_mail, t('.allow_mail') %>
         </div>
+        <div>
+          <%= label_tag :profile_gender, t('activerecord.attributes.user.gender') %>
+          <%= select_tag 'profile[gender]', options_for_select(User.genders_for_select, selected: current_user.gender) %>
+        </div>
       </fieldset>
       <fieldset>
         <legend><%= t('.sensitive_parameters') %></legend>

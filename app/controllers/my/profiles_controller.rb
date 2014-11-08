@@ -32,9 +32,10 @@ class My::ProfilesController < ApplicationController
   end
 
   def common_parameters
-    new_parameters = params.require(:profile).permit(:allow_mail, :avatar, :use_gravatar)
+    new_parameters = params.require(:profile).permit(:allow_mail, :avatar, :use_gravatar, :gender)
     new_parameters[:allow_mail] = false if new_parameters[:allow_mail].nil?
     new_parameters[:use_gravatar] = false if new_parameters[:use_gravatar].nil?
+    new_parameters[:gender] = nil if new_parameters[:gender].blank?
 
     new_parameters
   end

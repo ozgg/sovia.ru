@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   ROLE_MODERATOR = 2
   ROLE_DECENT    = 4
 
+  GENDER_FEMALE = 0
+  GENDER_MALE   = 1
+
   has_many :entries, dependent: :restrict_with_exception
   has_many :codes, dependent: :destroy
   has_many :comments, dependent: :nullify
@@ -19,6 +22,14 @@ class User < ActiveRecord::Base
   before_validation :normalize_login, :normalize_email
 
   mount_uploader :avatar, AvatarUploader
+
+  def self.genders_for_select
+    prefix  = 'activerecord.attributes.user.enums.genders.'
+    genders = [[I18n.t('not_selected'), '']]
+    genders << [I18n.t(prefix + 'female'), GENDER_FEMALE]
+    genders << [I18n.t(prefix + 'male'), GENDER_MALE]
+    genders
+  end
 
   def moderator?
     has_role? ROLE_MODERATOR
