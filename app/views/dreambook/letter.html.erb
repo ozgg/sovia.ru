@@ -6,6 +6,7 @@
   <h2><%= t('page', page: params[:page] || 1) %></h2>
 </header>
 
+<%= render 'search' %>
 <%= render 'letters' %>
 
 <% if @tags.any? %>

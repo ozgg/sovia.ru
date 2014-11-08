@@ -15,6 +15,16 @@ class DreambookController < ApplicationController
     raise record_not_found if @tag.nil?
   end
 
+  def search
+    word = Tag::canonize(params[:query] || '')
+    if word.blank?
+      flash[:notice] = t('query_is_not_set')
+      redirect_to dreambook_path
+    else
+      @tags = Tag::Dream.where('canonical_name like ? and description is not null', "%#{word}%").order('canonical_name asc').limit(50)
+    end
+  end
+
   def obsolete
     if params[:word]
       redirect_to dreambook_word_path(letter: params[:letter], word: params[:word]), status: :moved_permanently

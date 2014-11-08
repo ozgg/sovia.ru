@@ -24,6 +24,7 @@ Sovia::Application.routes.draw do
   scope '/dreambook' do
     controller :dreambook do
       get '/' => :index, as: :dreambook
+      get '/search' => :search, as: :dreambook_search
       get '/read/:letter/(:word)' => :obsolete, constraints: { letter: /.{,6}/ }
       get '/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
       get '/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }

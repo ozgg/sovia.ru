@@ -1,0 +1,19 @@
+<% content_for :title, t('.title', word: params[:query] || '') %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+</header>
+<%= render 'search' %>
+
+<h2><%= t('.result') %></h2>
+<% if @tags.any? %>
+    <nav>
+      <ul class="dreambook-symbols">
+        <% @tags.each do |word| %>
+            <li><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></li>
+        <% end %>
+      </ul>
+    </nav>
+<% else %>
+    <div class="message"><%= t('nothing_found') %></div>
+<% end %>
