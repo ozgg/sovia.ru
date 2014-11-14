@@ -10,6 +10,8 @@
 <%= render 'letters' %>
 
 <% if @tags.any? %>
+    <%= paginate @tags %>
+
     <nav>
       <ul class="dreambook-symbols">
         <% @tags.each do |word| %>

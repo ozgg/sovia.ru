@@ -17,7 +17,7 @@
       <%= label_tag :letter, t('dreambook.letters.select_letter') %>
       <%= text_field_tag :letter, params[:letter].to_s, size: 1, maxlength: 1 %><br />
       <%= label_tag :word, t('.select_word') %>
-      <%= text_field_tag :word %>
+      <%= search_field_tag :word %>
       <%= button_tag t('submit'), type: :submit %>
       <%= link_to t('reset'), admin_dream_tags_path %>
     </div>
