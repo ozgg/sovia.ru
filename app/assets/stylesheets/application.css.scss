@@ -4,7 +4,7 @@
  */
 
 html {
-  background: #122129 image_url('bg-icons.png') 0 0;
+  background: #122129 image_url('bg-icons.png') repeat 0 0;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
@@ -49,14 +49,14 @@ figure {
 }
 
 p {
-  margin: 0.3em 0;
+  margin: 0.5em 0 0.3em 0;
   text-indent: 1.5em;
 }
 
 body {
   max-width: 1200px;
   min-width: 700px;
-  background: image_url('moon.png') 0 0 no-repeat;
+  background: image_url('moon.png') no-repeat 0 0;
   margin: 0 auto;
   padding: 0;
 
