@@ -11,10 +11,10 @@
   </nav>
 </header>
 
-<progress value="<%= @progress[0] %>" max="<%= @progress[1] %>"></progress>
+<progress value="<%= @progress[0] %>" max="<%= @progress[1] %>" title="<%= "#{@progress[0]}/#{@progress[1]}" %>"></progress>
 
 <% if @tags.any? %>
-    <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
+    <ol start="<%= ((params[:page] || 1).to_i - 1) * 25 + 1 %>">
       <% @tags.each do |tag| %>
           <li>
             <%= link_to tag.name, edit_admin_dream_tag_path(tag) %> (<%= tag.entries_count %>)
