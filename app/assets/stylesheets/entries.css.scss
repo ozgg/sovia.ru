@@ -34,6 +34,10 @@ article.entry {
       &:first-letter {
         text-transform: capitalize;
       }
+
+      &.lucid:after {
+        content: ' *'
+      }
     }
 
     > figure:first-child {

@@ -76,7 +76,7 @@ class DreamsController < ApplicationController
   end
 
   def dream_parameters
-    params[:entry_dream].permit(:title, :body, :privacy, :tags_string)
+    params[:entry_dream].permit(:title, :body, :privacy, :tags_string, :lucid)
   end
 
   def restrict_editor_access

@@ -45,6 +45,7 @@ ru:
         body:  "Текст"
         privacy: "Видимость"
         tags_string: "Метки"
+        lucid: "Была осознанность"
       tag:
         name: "Название"
         description: "Интерпретация"

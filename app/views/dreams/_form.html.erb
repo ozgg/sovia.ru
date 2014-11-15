@@ -13,6 +13,10 @@
       <%= f.label :tags_string %><br />
       <%= f.text_area :tags_string, cols: 75, rows: 5 %>
     </div>
+    <div>
+      <%= f.check_box :lucid %>
+      <%= f.label :lucid %>
+    </div>
     <% unless current_user.nil? || (!@entry.new_record? && @entry.user.nil?) %>
         <div>
           <%= f.label :privacy %>
