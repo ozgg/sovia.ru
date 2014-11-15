@@ -34,7 +34,7 @@
     </div>
 
     <%
-       tags = entry.tags
+       tags = entry.tags.order('canonical_name asc')
        described_tags = []
     %>
     <% if tags.any? %>
