@@ -43,11 +43,11 @@ gem 'mina', group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
-  gem 'webrat'
-  gem 'factory_girl_rails'
-  gem 'dotenv-rails'
-end
+# group :development, :test do
+#   gem 'rspec-rails'
+#   gem 'cucumber-rails', require: false
+#   gem 'database_cleaner'
+#   gem 'webrat'
+#   gem 'factory_girl_rails'
+#   gem 'dotenv-rails'
+# end
