@@ -1,2 +1,23 @@
-<h1>Admin::Comments#edit</h1>
-<p>Find me in app/views/admin/comments/edit.html.erb</p>
+<% content_for :title, t('.title', id: @comment.id) %>
+<% content_for :description, t('.description') %>
+
+<header>
+  <h1><%= t('.header', id: @comment.id) %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('admin.comments.show.comments'), admin_comments_path %></li>
+      <li><%= link_to t('view'), admin_comment_path(@comment) %></li>
+      <li><%= link_to t('delete'), admin_comment_path(@comment), method: :delete, data: { confirm: t('are_you_sure') } %></li>
+    </ul>
+  </nav>
+</header>
+
+<%= form_tag admin_comment_path(@comment), method: :patch do %>
+    <div>
+      <%= label_tag :comment_body, t('activerecord.attributes.comment.body') %><br />
+      <%= text_area_tag 'comment[body]', @comment.body, required: true, cols: 80, rows: 20 %>
+    </div>
+    <div>
+      <%= button_tag t('submit'), type: :submit %>
+    </div>
+<% end %>
