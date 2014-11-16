@@ -72,3 +72,19 @@ div.reply-container {
     cursor: pointer;
   }
 }
+
+ul.admin-comments {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+
+    &:nth-of-type(2n) {
+      background: #eeffee;
+    }
+
+    &:nth-of-type(2n-1) {
+      background: #f7fff7;
+    }
+  }
+}
