@@ -21,6 +21,7 @@
           <p><%= comment.body %></p>
         </div>
         <div>
+          <p><%= link_to t('view'), admin_comment_path(comment) %></p>
           <p><%= link_to t('edit'), edit_admin_comment_path(comment) %></p>
           <p><%= link_to t('delete'), admin_comment_path(comment), method: :delete, data: { confirm: t('are_you_sure') } %></p>
         </div>
