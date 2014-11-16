@@ -1,7 +1,4 @@
 Sovia::Application.routes.draw do
-  get "tags_controller/index"
-  get "tags_controller/show"
-  get "tags_controller/edit"
   root 'index#index'
 
   %w( 422 500 ).each do |code|
@@ -80,6 +77,7 @@ Sovia::Application.routes.draw do
 
   namespace :admin do
     resources :dream_tags
+    resources :comments, only: [:index, :show, :edit, :update, :destroy]
     get "queues/tags"
   end
 
