@@ -35,8 +35,12 @@ class CommentsController < ApplicationController
 
   def save_comment
     if @comment.save
-      Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
-      Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
+      begin
+        Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
+        Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
+      rescue Net::SMTPAuthenticationError => e
+        logger.warn e.message
+      end
       redirect_with_confirmation
     else
       render action: :new
