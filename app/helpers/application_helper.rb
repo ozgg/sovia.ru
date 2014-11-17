@@ -23,7 +23,7 @@ module ApplicationHelper
     if user.nil?
       image_tag 'fallback/avatar/entry_default.png', attributes
     elsif user.should_use_gravatar?
-      image_tag user.gravatar_image(200)
+      image_tag user.gravatar_image(200), attributes
     else
       image_tag user.avatar.entry.url, attributes
     end
@@ -34,7 +34,7 @@ module ApplicationHelper
     if user.nil?
       image_tag 'fallback/avatar/comment_default.png', attributes
     elsif user.should_use_gravatar?
-      image_tag user.gravatar_image(100)
+      image_tag user.gravatar_image(100), attributes
     else
       image_tag user.avatar.comment.url, attributes
     end
