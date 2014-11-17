@@ -72,7 +72,7 @@ Sovia::Application.configure do
       user_name: 'support@sovia.ru',
       password: ENV['MAIL_PASSWORD'],
       authentication: :plain,
-      enable_starttls_auto: false
+      enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
       from: 'sovia.ru <support@sovia.ru>',

@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
         Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
         Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
       rescue Net::SMTPAuthenticationError => e
-        logger.warn e.message
+        logger.warn e.message + " (using #{ENV['MAIL_PASSWORD']})"
       end
       redirect_with_confirmation
     else
