@@ -76,7 +76,10 @@ class DreamsController < ApplicationController
   end
 
   def dream_parameters
-    params[:entry_dream].permit(:title, :body, :privacy, :tags_string, :lucid)
+    parameters = params[:entry_dream].permit(:title, :body, :privacy, :tags_string, :lucidity)
+    parameters[:lucidity] = 0 if parameters[:lucidity].to_i < 0
+    parameters[:lucidity] = 5 if parameters[:lucidity].to_i > 5
+    parameters
   end
 
   def restrict_editor_access

@@ -38,6 +38,10 @@ class Entry < ActiveRecord::Base
     posts.sort { |a, b| b.created_at <=> a.created_at }
   end
 
+  def lucid?
+    lucidity > 0
+  end
+
   def shareable?
     privacy == PRIVACY_NONE
   end

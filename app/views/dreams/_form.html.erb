@@ -14,8 +14,7 @@
       <%= f.text_area :tags_string, cols: 75, rows: 5 %>
     </div>
     <div>
-      <%= f.check_box :lucid %>
-      <%= f.label :lucid %>
+      <%= f.label :lucidity %>: [0<%= f.range_field :lucidity, min: 0, max: 5 %>5]
     </div>
     <% unless current_user.nil? || (!@entry.new_record? && @entry.user.nil?) %>
         <div>
