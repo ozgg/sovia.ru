@@ -235,3 +235,13 @@ nav.adjacent-entries {
     }
   }
 }
+
+input[type=range] + span {
+  &:before {
+    content: '('
+  }
+
+  &:after {
+    content: ')'
+  }
+}
