@@ -12,7 +12,7 @@
 </header>
 
 <p><progress value="<%= @progress[0] %>" max="<%= @progress[1] %>" title="<%= "#{@progress[0]}/#{@progress[1]}" %>"></progress>
-<%= (Time.now + ((@progress[1] - @progress[0]) / 25).ceil.to_i.days).strftime('%d.%m.%Y') %></p>
+<%= (Time.now + @tags.total_pages.days).strftime('%d.%m.%Y') %></p>
 
 <% if @tags.any? %>
     <ol start="<%= ((params[:page] || 1).to_i - 1) * 25 + 1 %>">

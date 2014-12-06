@@ -59,6 +59,7 @@ class DreamsController < ApplicationController
 
   def dreams_of_user
     user = User.find_by_login(params[:login])
+    raise record_not_found if user.nil?
 
     @entries = allowed_dreams.where(user: user).page(params[:page] || 1).per(5)
   end
