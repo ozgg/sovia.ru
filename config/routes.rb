@@ -57,14 +57,14 @@ Sovia::Application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :comments, only: [:index, :create]
-  resources :deeds
+  resources :deeds, :goals
 
   namespace :my do
     get '/' => 'index#index'
 
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
-    resources :dreams, :posts, :thoughts, :deeds, :grains, only: [:index]
+    resources :dreams, :posts, :thoughts, :deeds, :grains, :goals, only: [:index]
     resources :tags, only: [:index, :show, :edit, :update]
 
     scope '/statistics' do
