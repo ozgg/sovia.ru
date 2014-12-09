@@ -70,7 +70,7 @@ Sovia::Application.configure do
       port: 587,
       domain: 'sovia.ru',
       user_name: 'support@sovia.ru',
-      password: ENV['MAIL_PASSWORD'],
+      password: Rails.application.secrets.mail_password,
       authentication: :plain,
       enable_starttls_auto: true
   }
