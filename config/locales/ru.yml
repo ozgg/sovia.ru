@@ -23,6 +23,10 @@ ru:
           attributes:
             name:
               blank: "не может быть пустой строкой"
+        goal:
+          attributes:
+            name:
+              blank: "не может быть пустой строкой"
         comment:
           attributes:
             body:
@@ -39,6 +43,7 @@ ru:
       tag: "метка"
       comment: "комментарий"
       deed: "хорошее дело"
+      goal: "цель"
     attributes:
       entry:
         title: "Название"
@@ -66,6 +71,14 @@ ru:
         body: "Комментарий"
       deed:
         name: "Суть"
+      goal:
+        name: "название"
+        status: "состояние"
+        description: "описание"
+        statuses:
+          issued: "поставлена"
+          achieved: "достигнута"
+          rejected: "отказ от цели"
     properties:
       entry:
         privacy:
@@ -744,3 +757,12 @@ ru:
   search: "Искать"
   query_is_not_set: "Не задан поисковый запрос"
   view: "Посмотреть"
+  goal:
+    created: "Цель добавлена"
+    updated: "Цель обновлена"
+    deleted: "Цель удалена"
+  goals:
+    new:
+      title: "Создать цель"
+      description: "Страница с формой создания новой цели."
+      header: "Добавить цель"

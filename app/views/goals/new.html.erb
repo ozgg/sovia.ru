@@ -1,2 +1,11 @@
-<h1>Goals#new</h1>
-<p>Find me in app/views/goals/new.html.erb</p>
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+  </header>
+
+  <%= render 'form' %>
+</article>
+

@@ -13,6 +13,12 @@
 </header>
 
 <% if @goals.any? %>
+    <ul class="goals">
+      <% @goals.each do |goal| %>
+      <li><%= link_to goal.name, goal %></li>
+      <% end %>
+    </ul>
+
     <%= paginate @goals %>
 <% else %>
     <div class="message"><%= t('nothing_found') %></div>
