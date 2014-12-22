@@ -14,6 +14,7 @@
     <li><%= link_to t('.tags'), my_symbols_path %></li>
     <li><%= link_to t('.my_deeds'), my_deeds_path %></li>
     <li><%= link_to t('.my_grains'), my_grains_path %></li>
+    <li><%= link_to t('.my_goals'), my_goals_path %></li>
     <% unless current_user.mail_confirmed? %>
         <li><%= link_to t('.confirm_email'), my_confirmation_path %></li>
     <% end %>

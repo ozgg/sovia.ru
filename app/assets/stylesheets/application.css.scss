@@ -275,6 +275,10 @@ form {
   }
 }
 
+label:first-letter {
+  text-transform: capitalize;
+}
+
 div.message, div#notice {
   border: solid #478043 2px;
   border-radius: 0.5em;

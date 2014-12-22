@@ -15,7 +15,7 @@
 <% if @goals.any? %>
     <ul class="goals">
       <% @goals.each do |goal| %>
-      <li><%= link_to goal.name, goal %></li>
+      <li><%= link_to goal.name, goal %> (<%= t("activerecord.attributes.goal.statuses." + goal.status) %>)</li>
       <% end %>
     </ul>
 

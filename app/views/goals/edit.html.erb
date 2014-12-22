@@ -1,2 +1,16 @@
-<h1>Goals#edit</h1>
-<p>Find me in app/views/goals/edit.html.erb</p>
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <nav>
+      <ul>
+        <li><%= link_to t('view'), @goal %></li>
+        <li><%= link_to t('.goals'), my_goals_path %></li>
+      </ul>
+    </nav>
+  </header>
+
+  <%= render 'form' %>
+</article>

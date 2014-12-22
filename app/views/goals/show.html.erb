@@ -1,0 +1,15 @@
+<% content_for :title, t('.title', goal: @goal.name) %>
+<% content_for :description, t('.description', goal: @goal.name) %>
+
+<article>
+  <header>
+    <h1><%= @goal.name %></h1>
+    <nav>
+      <ul>
+        <li><%= link_to t('edit'), edit_goal_path(@goal) %></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div><%= raw parse_body(@goal.description, false) %></div>
+</article>

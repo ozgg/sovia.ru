@@ -3,8 +3,8 @@
     <%= render partial: 'common/errors_list', locals: { entity: @goal } %>
 
     <div>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.label :name %><br />
+      <%= f.text_field :name, required: true, size: 60 %>
     </div>
 
     <% unless @goal.id.blank? %>
@@ -16,7 +16,7 @@
 
     <div>
       <%= f.label :description %><br />
-      <%= f.text_area :description %>
+      <%= f.text_area :description, cols: 60, rows: 5 %>
     </div>
 
     <div>
