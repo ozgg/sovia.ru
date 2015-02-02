@@ -103,6 +103,9 @@ Sovia::Application.routes.draw do
   end
 
   get 'u/:login' => 'users#profile', as: :user_profile
+  get 'u/:login/posts' => 'users#posts', as: :user_posts
+  get 'u/:login/dreams' => 'users#dreams', as: :user_dreams
+  get 'u/:login/comments' => 'users#comments', as: :user_comments
 
   get 'tos' => 'about#terms_of_service'
   get 'privacy' => 'about#privacy'

@@ -18,8 +18,12 @@ class UsersController < ApplicationController
   # get /u/:login
   def profile
     find_user_by_login params[:login]
+  end
+
+  def posts
+    find_user_by_login params[:login]
     max_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
-    @entries = Entry.where(user_id: @user.id).where("privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
+    @entries = Entry::Article.where(user_id: @user.id).where("privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
   end
 
   private

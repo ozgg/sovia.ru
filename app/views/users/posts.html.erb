@@ -1,0 +1,10 @@
+<% content_for :title, t('.title', user: @user.login, page: params[:page] || 1) %>
+
+<h1><%= t('.header', user: @user.login) %></h1>
+<h2><%= t('page', page: params[:page] || 1) %></h2>
+
+<%= render 'entries/list' %>
+
+<section></section>
+
+<%= render 'common/metrics' %>
