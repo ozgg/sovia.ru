@@ -26,6 +26,18 @@ class UsersController < ApplicationController
     @entries = Entry::Article.where(user_id: @user.id).where("privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
   end
 
+  def dreams
+    find_user_by_login params[:login]
+    max_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+    @entries = Entry::Dream.where(user_id: @user.id).where("privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
+  end
+
+  def comments
+    find_user_by_login params[:login]
+    max_privacy = current_user.nil? ? Entry::PRIVACY_NONE : Entry::PRIVACY_USERS
+    @comments = Comment.where(user_id: @user.id).joins(:entry).where("entries.privacy <= #{max_privacy}").order('id desc').page(params[:page] || 1).per(5)
+  end
+
   private
 
   def bounce_authorized
