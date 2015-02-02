@@ -2,7 +2,7 @@
 <html lang="<%= locale %>">
 <head>
   <meta charset="utf-8" />
-  <title><%= @title || params[:code].to_s %> :: <%= t('titles.sovia') %></title>
+  <title><%= yield :title %> :: <%= t('titles.sovia') %></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -27,6 +27,7 @@
 
 <footer>
   <div role="contentinfo">&copy; 2006&ndash;2014 sovia.ru</div>
+  <div><%= yield :metrics %></div>
   <div role="contentinfo"><%= link_to t('layouts.application.terms_of_service'), tos_path %></div>
 </footer>
 </body>
