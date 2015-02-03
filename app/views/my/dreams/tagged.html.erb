@@ -4,20 +4,10 @@
 <header>
   <h1><%= t('.header', tag: @tag.name) %></h1>
   <h2><%= t('page', page: params[:page] || 1) %></h2>
-  <% if current_user %>
-  <nav>
-    <ul>
-      <li><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag: @tag.name) %></li>
-      <% if current_user.editor? %>
-      <li><%= link_to t('.edit_tag'), admin_dream_tag_path(@tag) %></li>
-      <% end %>
-    </ul>
-  </nav>
-  <% end %>
 </header>
 
 <% unless @tag.description.blank? %>
-    <p><%= link_to t('.tag_description'), dreambook_word_path(letter: @tag.letter, word: @tag.name) %></p>
+    <p><%= link_to t('dreams.tagged.tag_description'), dreambook_word_path(letter: @tag.letter, word: @tag.name) %></p>
 <% end %>
 
 <%= render 'entries/list' %>

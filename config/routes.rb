@@ -64,8 +64,14 @@ Sovia::Application.routes.draw do
 
     resource :profile, only: [:show, :edit, :update]
     resource :confirmation, :recovery, only: [:show, :create, :update]
-    resources :dreams, :posts, :thoughts, :deeds, :grains, :goals, only: [:index]
+    resources :posts, :thoughts, :deeds, :grains, :goals, only: [:index]
     resources :tags, only: [:index, :show, :edit, :update]
+
+    resources :dreams, only: [:index] do
+      collection do
+        get 'tagged/:tag' => :tagged, as: :tagged
+      end
+    end
 
     scope '/statistics' do
       controller :statistics do
