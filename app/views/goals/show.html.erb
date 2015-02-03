@@ -11,7 +11,7 @@
     </nav>
   </header>
 
-  <div><%= raw parse_body(@goal.description, false) %></div>
+  <div><%= raw parse_body(@goal.description, false, true) %></div>
 </article>
 
 <%= render 'common/metrics' %>

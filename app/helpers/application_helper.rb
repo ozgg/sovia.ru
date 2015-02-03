@@ -117,7 +117,7 @@ module ApplicationHelper
     end
   end
 
-  def parse_body(body, allow_raw = false)
+  def parse_body(body, allow_raw = false, show_names = false)
     output = ''
     body.strip.split(/(?:\r?\n)+/).each do |fragment|
       unless allow_raw
@@ -128,6 +128,7 @@ module ApplicationHelper
       link_dreambook_symbols(fragment)
       link_entries(fragment)
       find_links(fragment)
+      find_names(fragment, show_names)
       if fragment.match(/\A<(?:p|li|h|ol|ul)/)
         output += fragment
       else
@@ -182,7 +183,7 @@ module ApplicationHelper
         prefix, postfix = '&laquo;', '&raquo;'
       end
       if entry.nil?
-        "<span class=\"not-found\" title=\"#{title.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')}\">#{match[:id]}</span>"
+        "<span class=\"not-found\" title=\"#{escape(title)}\">#{match[:id]}</span>"
       elsif entry.is_a? Entry::Grain
         "<span class=\"not-found\">Grain #{match[:id]}</span>"
       else
@@ -197,5 +198,30 @@ module ApplicationHelper
       match = pattern.match chunk
       '<a href="' + match[:href] + '">' + match[:text] + '</a>'
     end
+  end
+
+  def find_names(fragment, show_names)
+    pattern = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
+    fragment.gsub! pattern do |chunk|
+      match = pattern.match chunk
+      if match[:text]
+        name = match[:text]
+      else
+        name = ''
+        match[:name].split(/[\s-]+/).each do |word|
+          name += word.first
+        end
+      end
+      if show_names
+        attribute = " title=\"#{escape(match[:name])}\""
+      else
+        attribute = ''
+      end
+      "<span class=\"name\"#{attribute}>#{escape(name)}</span>"
+    end
+  end
+
+  def escape(string)
+    string.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')
   end
 end

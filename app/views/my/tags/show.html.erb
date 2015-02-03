@@ -22,7 +22,7 @@
     <% if @user_tag.description.blank? %>
     <%= t('.no_description') %>
     <% else %>
-    <%= raw parse_body(@user_tag.description.to_s, true) %>
+    <%= raw parse_body(@user_tag.description.to_s, true, true) %>
     <% end %>
   </div>
 </article>

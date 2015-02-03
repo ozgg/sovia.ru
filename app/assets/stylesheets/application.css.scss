@@ -325,6 +325,11 @@ span.not-found {
   color: #ff8080;
 }
 
+span.name {
+  border-bottom: dotted 1px;
+  cursor: default;
+}
+
 ul.features li span {
   background: #eeeeee;
   padding: 0 3px;

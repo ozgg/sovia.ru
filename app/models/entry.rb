@@ -56,6 +56,10 @@ class Entry < ActiveRecord::Base
     Entry.where(type: type).where("privacy <= #{max_privacy} and id > #{id}").order('id asc').first
   end
 
+  def owned_by?(user)
+    self.user == user
+  end
+
   def visible_to?(looker)
     case privacy
       when PRIVACY_NONE
@@ -84,10 +88,6 @@ class Entry < ActiveRecord::Base
     created_at.strftime '%d.%m.%Y'
   end
 
-  def parsed_body
-    parse_body body
-  end
-
   def tags_string
     tags = ordered_tags
     if tags.any?
@@ -114,10 +114,6 @@ class Entry < ActiveRecord::Base
 
   def ordered_tags
     self.tags.order('entries_count desc, name asc')
-  end
-
-  def parse_body(input)
-    '<p>' + CGI::escapeHTML(input.strip).gsub(/(?:\r?\n)+/, '</p><p>') + '</p>'
   end
 
   def preview
