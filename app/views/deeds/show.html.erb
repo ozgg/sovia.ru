@@ -21,7 +21,7 @@
 
 <p>
   <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
-  <%= @deed.name %>
+  <%= @deed.name %><%= @deed.goal_postfix %>
 </p>
 <nav>
   <ul>

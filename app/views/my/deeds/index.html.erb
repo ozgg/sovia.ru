@@ -21,7 +21,7 @@
       <% @deeds.each do |deed| %>
       <li>
         <time datetime="<%= deed.created_at.w3c %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
-        <%= deed.name %>
+        <%= deed.name %><%= deed.goal_postfix %>
         <%= link_to '*', deed_path(deed) %>
       </li>
       <% end %>

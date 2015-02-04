@@ -8,12 +8,13 @@ class DeedsController < ApplicationController
 
   # get /deeds/new
   def new
-    @deed  = Deed.new
+    @deed = Deed.new
   end
 
   # post /deeds
   def create
-    @deed  = Deed.new(deed_parameters.merge(user: current_user))
+    @deed = Deed.new(deed_parameters.merge(user: current_user))
+    check_deed
     if @deed.save
       flash[:notice] = t('deed.created')
       redirect_to my_deeds_path
@@ -52,11 +53,19 @@ class DeedsController < ApplicationController
   private
 
   def deed_parameters
-    params.require(:deed).permit(:name)
+    params.require(:deed).permit(:name, :goal_id)
   end
 
   def set_deed
     @deed = Deed.find(params[:id])
     raise UnauthorizedException unless @deed.user == current_user
+  end
+
+  def check_deed
+    if @deed.goal
+      unless @deed.goal.owned_by?(@deed.user)
+        @deed.goal = nil
+      end
+    end
   end
 end
