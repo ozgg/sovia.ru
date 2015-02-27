@@ -186,6 +186,8 @@ ru:
       tags_queue: "Очередь меток"
     recent_tags:
       header: "Обновления сонника"
+    dreambook_letters:
+      dreambook_letters: "Первые буквы символов в соннике"
   articles:
     list:
       no_articles: "Статей нет"
