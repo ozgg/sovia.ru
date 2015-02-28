@@ -29,6 +29,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'rails-i18n', '~> 4.0.0'
 gem 'http_accept_language'
 gem 'kaminari'
 gem 'mini_magick'

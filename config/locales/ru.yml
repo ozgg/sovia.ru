@@ -1,38 +1,13 @@
 ru:
   activerecord:
     errors:
-      messages:
-        record_invalid: "Запись недействительна"
       models:
         user:
           attributes:
-            password_confirmation:
-              blank: "не может быть пустым"
-              confirmation: "не совпадает с паролем"
-            password:
-              blank: "не может быть пустым"
             email:
               unreasonable: "не выглядит как e-mail"
             login:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
-        entry:
-          attributes:
-            body:
-              blank: "не может быть пустым"
-        deed:
-          attributes:
-            name:
-              blank: "не может быть пустой строкой"
-        goal:
-          attributes:
-            name:
-              blank: "не может быть пустой строкой"
-        comment:
-          attributes:
-            body:
-              blank: "не может быть пустым"
-            entry_id:
-              blank: "не может быть пустым"
     models:
       entry_dream: "сон"
       entry_article: "статья"
