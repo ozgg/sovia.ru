@@ -29,6 +29,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'http_accept_language'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'carrierwave'

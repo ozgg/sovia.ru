@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_locale
 
   class UnauthorizedException < Exception
   end
@@ -16,7 +17,16 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) unless session[:user_id].nil?
   end
 
+  def default_url_options(options = {})
+    { locale: I18n.locale }.merge options
+  end
+
   protected
+
+  def set_locale
+    locale_from_params = params[:locale] || http_accept_language.compatible_language_from(I18n.available_locales)
+    I18n.locale = locale_from_params || I18n.default_locale
+  end
 
   def record_not_found
     ActiveRecord::RecordNotFound
