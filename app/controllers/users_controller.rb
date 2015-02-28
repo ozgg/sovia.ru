@@ -59,7 +59,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       after_registration
     else
-      @title = t('titles.users.new')
       render action: 'new'
     end
   end

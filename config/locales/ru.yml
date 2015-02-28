@@ -62,48 +62,10 @@ ru:
           users: "Для сообщества"
           owner: "Только для меня"
   titles:
-    index:
-      index: "Главная страница"
-    session:
-      login: "Вход"
-    articles:
-      index: "Статьи"
-      new: "Новая статья"
-      show: "Статья"
-      edit: "Редактирование статьи"
     posts:
       index: "Сообщество"
-      new: "Новая запись"
-      show: "Публикация"
-      edit: "Редактирование записи"
     tags:
       index: "Метки"
-      new: "Новая метка"
-      show: "Метка"
-      edit: "Редактирование метки"
-    dreams:
-      index: "Сны"
-      new: "Описать сон"
-      show: "Сон"
-      edit: "Редактирование сна"
-      untitled: "Без названия"
-      tagged: "Сны с меткой"
-      dreams_of_user: "Сны пользователя %{login}, страница %{page}"
-    dreambook:
-      index: "Сонник"
-      letters: "Символы снов на «%{letter}»"
-      word: "Символ «%{word}» в соннике"
-    users:
-      new: "Регистрация"
-      recover_form: "Восстановление пароля"
-      recover: "Сброс пароля"
-      confirm: "Подтверждение электронной почты"
-    statistics:
-      index: "Статистика"
-      symbols: "Символы снов, страница %{page}"
-    none: "Без названия"
-    sovia: "Совия, сайт о снах"
-    page: "страница"
   session:
     not_logged_in: "Вы вышли"
     logged_in_successfully: "Вы вошли"
