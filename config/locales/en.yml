@@ -1,0 +1,752 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              unreasonable: "doesn't look like как e-mail"
+            login:
+              invalid: "must contain 1 to 30 english letters, digits or underscores"
+    models:
+      entry_dream: "dream"
+      entry_article: "article"
+      entry_post: "post"
+      entry_thought: "thought"
+      entry_grain: "grain of perception"
+      user: "user"
+      tag: "tag"
+      comment: "comment"
+      deed: "deed"
+      goal: "goal"
+    attributes:
+      entry:
+        title: "title"
+        body:  "body"
+        privacy: "visibility"
+        tags_string: "tags"
+        lucidity: "lucidity"
+      tag:
+        name: "name"
+        description: "interpretation"
+      user:
+        login: "login"
+        password: "password"
+        password_confirmation: "password confirmation"
+        email: "e-mail"
+        allow_mail: "allow email notifications"
+        avatar: "user picture (avatar)"
+        gender: "gender"
+        enums:
+          genders:
+            female: "female"
+            male: "male"
+      comment:
+        body: "comment"
+      deed:
+        name: "name"
+        goal_id: "goal"
+      goal:
+        name: "name"
+        status: "status"
+        description: "description"
+        statuses:
+          issued: "issued"
+          achieved: "achieved"
+          rejected: "rejected"
+    properties:
+      entry:
+        privacy:
+          none: "for everybody"
+          users: "for community"
+          owner: "only for me"
+  titles:
+    posts:
+      index: "Community"
+    tags:
+      index: "Tags"
+  session:
+    not_logged_in: "You are not logged in"
+    logged_in_successfully: "Logged in successfully"
+    invalid_credentials: "Invalid credentials"
+    already_logged_in: "You are already logged in"
+    logged_out: "You have logged out"
+  sessions:
+    new:
+      enter_credentials: "Enter login and password"
+      login: "login"
+      password: "password"
+      enter: "enter"
+      forgot_password: "Forgot password?"
+      recovery_form: "Password recovery form"
+      title: "Authentication"
+      header: "Authentication"
+      description: "Authentication page on sovia, the site about dreams."
+  index:
+    index:
+      no_posts: "No posts"
+      main: "Welcome"
+      recent_posts: "Recent posts"
+      title: "The site about dreams"
+      description: "Main page of the project about dreams called Sovia. Dreams of users, articles, discussions, free online diary of dreams and constantly enriched dreambook."
+      quick_dreambook_access: "Quick access to dreambook"
+      users_count:
+        zero: "0 users"
+        one: "%{count} user added"
+        many: "%{count} users added"
+      described_dreams:
+        zero: "0 dreams"
+        one: "%{count} dream"
+        many: "%{count} dreams"
+      left_comments:
+        zero: "no comments"
+        one: "%{count} comment"
+        many: "%{count} comments"
+    gone:
+      title: "This page is gone"
+      description: "You are trying to see page that doesn't exist anymore."
+      header: "This page is gone"
+      page_does_not_exist_anymore: "This page does not exist anymore. It was here some time ago, but turned out to be irrelevant."
+    management_links:
+      tags_queue: "Tags queue"
+    recent_tags:
+      header: "Recent tags"
+    dreambook_letters:
+      dreambook_letters: "First letters of symbols in dreambook"
+  articles:
+    list:
+      no_articles: "No articles"
+    form:
+      submit: "Save article"
+    index:
+      new_article: "New article"
+      title: "Articles, page %{page}"
+      header: "Articles"
+      description: "Articles about dreams and similar topics on Sovia, the site about dreams. Page %{page}."
+    show:
+      article: "Viewing article"
+      title: "Article \"%{title}\""
+      description: "Article \"%{title}\" on Sovia, the site about dreams."
+    new:
+      header: "New article"
+      title: "New article"
+      description: "Page with adding article"
+    edit:
+      title: "Edit article"
+      description: "Page for editing article"
+    tagged:
+      title: "Articles tagged \"%{tag}\", page %{page}"
+      header: "Articles tagged \"%{tag}\""
+      description: "
+      Articles about dreams and close topics tagged \"%{tag}\" on Sovia, page %{page}."
+  posts:
+    list:
+      no_posts: "No posts"
+    form:
+      submit: "Save post"
+    index:
+      new_post: "New post"
+      title: "Community, page %{page}"
+      header: "Community"
+      description: "Posts of users of Sovia in community (forum about dreams) on Sovia, the site about dreams practice. Page %{page}."
+    show:
+      post: "View post"
+      edit: "Edit post"
+      delete: "Delete post"
+      title: "Post \"%{title}\" in community"
+      description: "Post \"%{title}\" on forum about dreams \"Sovia\", added by user %{user} on %{date}."
+    post:
+      tags: "Tags"
+    edit:
+      edit: "Edit post"
+      title: "Edit post"
+      header: "Edit post"
+      description: "Page for editing post on Sovia."
+    new:
+      title: "New post"
+      header: "New post"
+      description: "Page for adding a new post in Sovia community."
+    tagged:
+      title: "Entries tagged \"%{tag}\", page %{page}"
+      header: "Entries tagged \"%{tag}\""
+      description: "Discussing of dreams practice tagged \"%{tag}\" on Sovia, the site about dreams. Page %{page}."
+  dreams:
+    list:
+      no_dreams: "No dreams"
+    index:
+      new_dream: "Describe a dream"
+      title: "Dreams, page %{page}"
+      header: "Diary of dreams"
+      description: "Dreams described by users of Sovia, page %{page}."
+    form:
+      submit: "Save dream"
+      title_description: "Select a title that briefly reflects dream's plot."
+      body_description: "Describe your dreams in details. Remember about passages in text."
+      body_markup_header: "You can use the following markup:"
+      short_dream_markup: "link to dream 123. Dream name will appear as link text."
+      long_dream_markup: "link to dream 123. Text in parentheses will appear as link text."
+      short_name_markup: "name in braces will be shortened to initials: JD. Author (and only author) can see full name hovering mouse over text. Maximum 30 letters."
+      long_name_markup: "name in braces will be replaced with text in parentheses (up to 30 letters in both cases). Author will be able to see initial text by hovering mouse over text."
+      tags_description: "You can enumerate tags using comma. Tag is a separate dream symbol. It is convenient to use them for search and own statistics."
+      lucidity_description: "Lucidity is a subjective measure from 0 (no lucidity at all) to 5 (maximal control). The main purpose is your own statistics."
+    show:
+      header: "Dream description"
+      edit: "Edit dream"
+      title: "Dream \"%{title}\""
+      description: "Dream \"%{title}\" described on Sovia by user %{user} on %{date}"
+    edit:
+      view: "View dream"
+      title: "Edit dream"
+      header: "Edit dream"
+      description: "Page for editing dream on Sovia."
+    random:
+      title: "Random dream"
+      header: "Random dream"
+      description: "Randomly selected dream."
+    archive:
+      year: "year %{year}"
+      title: "Dreams archive"
+      header: "Dreams archive"
+      description: "Page with archive of dreams on Sovia, the site about dreams."
+    tagged:
+      edit_tag: "Edit tag"
+      tag_description: "Tag description in dreambook"
+      title: "Dreams tagged \"%{tag}\", page %{page}"
+      header: "Dreams tagged \"%{tag}\""
+      description: "Dreams tagged \"%{tag}\" described by users of Sovia, the site about dreams. Page %{page}."
+      my_dreams: "Your dreams with this tag"
+    new:
+      title: "Describe a dream"
+      header: "Describe a dream"
+      description: "You can describe your dreams and find their meaning on this page on Sovia, the site about dreams."
+    dreams_of_user:
+      title: "Dreams of user %{user}, page %{page}"
+      header: "Dreams of user %{user}"
+      description: "Dreams of user %{user} on Sovia, the site about dreams. Page %{page}."
+  tags:
+    list:
+      no_tags: "No tags"
+    form:
+      submit: "Save tag"
+    index:
+      new_tag: "New tag"
+    show:
+      tag: "View tag"
+      delete: "Delete tag"
+      list: "All tags"
+      edit: "Edit tag"
+  admin:
+    dream_tags:
+      show:
+        in_dreambook: "See in dreambook"
+        title: "Dream symbol %{name}"
+        header: "Dream symbol %{name}"
+        description: "Administrative page for dream symbol \"%{name}\""
+      index:
+        title: "Dream symbols, page %{page}"
+        header: "Dream symbols"
+        select_word: "Search for symbol"
+        description: "Administrative section for managing dream symbols, page %{page}"
+      new:
+        title: "New dream symbol"
+        header: "New dream symbol"
+        description: "Page for adding a new dream symbol"
+      edit:
+        title: "Edit dream symbol"
+        description: "Administrative page for editing dream symbol"
+        header: "Edit dream symbol"
+        view: "View dream symbol"
+    queues:
+      tags:
+        title: "Tags queue, page %{page}"
+        description: "Managing tags queue, page %{page}"
+        header: "Queue of dream symbols"
+    comments:
+      index:
+        title: "Managing comments, page %{page}"
+        description: "Administrative section for managing comments, page %{page}"
+        header: "Manage comments"
+      show:
+        title: "Comment %{id}"
+        description: "Administrative page for managing comment"
+        header: "Comment %{id}"
+        comments: "All comments"
+      edit:
+        title: "Editing comment %{id}"
+        description: "Administrative page for editing comment."
+        header: "Edit comment %{id}"
+  users:
+    create:
+      successfully: "You have registered ang logged in"
+    new:
+      register: "Sign up"
+      login_notice: "Can contain 1 to 30 english letters, digits or underscores"
+      email_notice: "Used for password recovery and notifications"
+      i_am_bot: "I am bot and will not use this site"
+      password_notice: "Choose string password"
+      password_confirmation_notice: "Enter password one more time"
+      agreement: "By registering on this site, you agree to follow user agreement"
+      title: "Singing up"
+      description: "Page with sign-up form on Sovia, the site about dreams."
+    recover_form:
+      instructions: "Enter e-mail address to recover your password. Instructions and code for resetting password will be sent to this address."
+      title: "Password recovery"
+    recover:
+      email: "E-mail"
+      code: "Code from letter"
+      password: "New password"
+      password_confirmation: "Password confirmation"
+    profile:
+      user_info: "User information"
+      registration_date: "Registration date"
+      entries_count: "Number of entries"
+      comments_count: "Number of comments"
+      read_dreams: "Read dreams of this user"
+      description: "What dreams does user %{user} see and what do they write about dreams can be known on Sovia, the site about dreams, where they are registered and describe their dreams"
+      read_posts: "Posts of this user"
+      read_comments: "Comments of this user"
+    posts:
+      title: "Posts of user %{user}, page %{page}"
+      header: "Posts of user %{user}"
+      description: "Page %{page} with list of posts of user %{user}."
+    dreams:
+      title: "Dreams of user %{user}, page %{page}"
+      description: "Page %{page} with dreams of user %{user}."
+      header: "Dreams of user %{user}"
+    comments:
+      title: "Comments of user %{user}, page %{page}"
+      description: "Page %{page} with comments by user %{user}."
+      header: "Comments of user %{user}"
+  entry:
+    article:
+      created: "Article added"
+      updated: "Article updated"
+      deleted: "Article deleted"
+    post:
+      created: "Post added"
+      updated: "Post updated"
+      deleted: "Post deleted"
+    dream:
+      created: "Dream added"
+      updated: "Dream updated"
+      deleted: "Dream deleted"
+    thought:
+      created: "Thought added"
+      updated: "Thought updated"
+      deleted: "Thought deleted"
+    grain:
+      created: "Grain of perception added"
+      updated: "Grain of perception updated"
+      deleted: "Grain of perception deleted"
+  tag:
+    created: "Tag added"
+    updated: "Tag updated"
+    deleted: "Tag deleted"
+  deed:
+    created: "Deed added"
+    updated: "Deed updated"
+    deleted: "Deed deleted"
+  layouts:
+    application:
+      articles: "Articles"
+      dreams: "Dreams"
+      new_dream: "Describe a dream"
+      about: "About"
+      terms_of_service: "User agreement"
+      dreambook: "Dreambook"
+      title: "Sovia"
+      sidebar: "Sidebar"
+      notice: "Notice"
+    auth_block:
+      authorize: "Authorization"
+      logout: "Logout"
+      private: "Personal office"
+      deeds: "Journal of success"
+      thoughts: "My thoughts"
+      aria_label_nav: "Menu for user"
+    statistics:
+      statistics: "Trends in dream tags"
+    more:
+      more: "More"
+      archive: "Archive of dreams"
+      statistics: "Statistics"
+      thoughts: "Thoughts of users"
+      random: "Random dream"
+      grains: "Grains of perception"
+      comments: "All comments"
+    main_navigation:
+      aria_label: "Main menu"
+  roles:
+    insufficient_rights: "Insufficient rights"
+  anonymous: "Anonymous"
+  untitled: "Untitled"
+  read_more: "Read more"
+  views:
+    pagination:
+      first: "⇤"
+      last: "⇥"
+      previous: "←"
+      next: "→"
+      truncate: "..."
+  are_you_sure: "Are you sure?"
+  at: "at"
+  nothing_found: "Nothing was found"
+  please_log_in: "Please log in"
+  dreambook:
+    letters:
+      select_letter: "Select the sirst letter of dream symbol"
+    word:
+      read_dreams: "Dreams with this tag"
+      title: "Dreambook: %{word}"
+      header: "Dreambook"
+      description: "What does it mean when you see %{word} in a dream: interpretation, dreams with the symbol \"%{word}\" in free online-dreambook Sovia."
+    index:
+      title: "Dreambook"
+      header: "Dreambook"
+      description: "Free online-dreambook on Sovia, the site about dreams. Содержание и выбор буквы, on которую начинается слово."
+    letter:
+      title: "Dream symbols statring with \"%{letter}\", page %{page}"
+      header: "Dreambook for \"%{letter}\""
+      description: "Free online-dreambook Sovia with symbols starting on \"%{letter}\", page %{page}."
+    search:
+      search: "Search for dream symbol"
+      query: "Query"
+      title: "Search %{word} in dreambook"
+      header: "Search for dream symbol"
+      result: "Search result"
+      description: "Search result for word %{word} in the dreambook of Sovia."
+  page_gone: "This page is gone"
+  statistics:
+    index:
+      symbols: "Statistics for dream symbols"
+      title: "Statistics"
+      header: "Statistics"
+      description: "Page with list of available statistics for the site about dreams \"Sovia\"."
+    symbols:
+      header: "Statistics for dream symbols"
+      title: "Statistics for dream symbols, page %{page}"
+      description: "What dreams symbols appear the most in dreams? Statistics of the site about dreams \"Sovia\", page %{page}."
+  my:
+    index:
+      dreams: "My dreams"
+      profile: "My profile"
+      confirm_email: "Send e-mail confirmation code"
+      index:
+        dreams: "My dreams"
+        profile: "My profile"
+        confirm_email: "E-mail confirmation"
+        my_deeds: "My journal of success"
+        posts: "My posts in community"
+        thoughts: "My thoughts (blog)"
+        title: "Private office"
+        header: "Private office"
+        tags: "My dream symbols"
+        my_grains: "My grains of perception"
+        description: "Page with your private office on Sovia."
+        my_goals: "My goals"
+    profiles:
+      edit:
+        update: "Update profile"
+        email: "E-mail"
+        current_password: "Current password"
+        allow_mail: "Receive e-mail from this site"
+        common_parameters: "Common parameters"
+        sensitive_parameters: "Sensitive parameters"
+        new_password: "New password"
+        password_confirmation: "Confirmation of new password"
+        sensitive_parameters_notice: "Current password required for changing these parameters"
+        leave_blank_if_necessary: "If you do not change password, leave blank"
+        view: "Into view mode"
+        update_avatar: "New user picture"
+        avatar_demands: "Allowed formats are JPG, PNG. The best image is square picture approximately 400×400."
+        title: "Edit profile"
+        header: "Edit profile"
+        use_gravatar: "Use image from gravatar.com"
+        description: "Page for editing profile of user on Sovia."
+      show:
+        avatar: "Current avatar"
+        created_at: "Registration date"
+        send_code: "Receive confirmation code"
+        statistics: "Statistics"
+        entries_count: "Number of posts"
+        comments_count: "Number of comments"
+        title: "My profile"
+        header: "My profile"
+        description: "Page with your profile on Sovia."
+    recoveries:
+      show:
+        code: "The code from letter"
+        update_password: "Update password"
+        no_code: "No recovery code?"
+        send_code: "Receive code"
+        got_code: "Have recoverry code?"
+        title: "Reset password"
+        header: "Reset password"
+        description: "Page for password recovery on Sovia."
+    confirmations:
+      show:
+        got_code: "Have confirmation code"
+        no_code: "No confirmation code?"
+        code: "The code from letter"
+        confirm: "Confirm e-mail"
+        title: "Confirm e-mail"
+        header: "Confirming e-mail"
+        description: "Page with confirmation of e-mail on Sovia."
+    statistics:
+      index:
+        tags: "My dream symbols"
+        title: "My statistics"
+        header: "My statistics"
+        description: "Page with available statistics data"
+      tags:
+        title: "My dream symbols, page %{page}"
+        header: "My dream symbols"
+        description: "Statistics with frequency of your dream symbols, page %{page}"
+    deeds:
+      index:
+        empty: "Nothing added"
+        create: "Add success"
+        about: "What is this"
+        title: "My journal of success, page %{page}"
+        header: "My journal of success"
+        description: "View entries in your journal of success, page %{page}"
+    dreams:
+      index:
+        title: "My dreams, page %{page}"
+        header: "My dreams"
+        description: "Entries in your diary of dreams, page %{page}"
+      tagged:
+        title: "My dreams tagged %{tag}, page %{page}"
+        description: "Dreams, described by you and tagged \"%{tag}\", page %{page}."
+        header: "My dreams tagged \"%{tag}\""
+    posts:
+      index:
+        title: "My posts in community, page %{page}"
+        header: "My posts in community"
+        description: "List of posts in community added by you, page %{page}"
+    thoughts:
+      index:
+        title: "My thoughts, page %{page}"
+        header: "My thoughts"
+        description: "Your thoughts in blog, page %{page}"
+    grains:
+      index:
+        title: "My grains of perception, page %{page}"
+        header: "My grains of perception"
+        about: "What is this?"
+        add: "Describe"
+        description: "Description of your grains of perception, page %{page}"
+    tags:
+      index:
+        title: "My dream symbols, page %{page}"
+        header: "My dream symbols"
+      show:
+        title: "My dream symbol \"%{tag}\""
+        header: "My dream symbol \"%{tag}\""
+        all_symbols: "All symbols"
+        read_dreams: "View dreams with this tag"
+        view_in_dreambook: "View in dreambook"
+        no_description: "Description is not added"
+        description: "Your interpretation of dream symbol \"%{tag}\""
+      edit:
+        title: "Edit my dream symbol \"%{tag}\""
+        header: "Edit my dream symbol \"%{tag}\""
+        view: "Into view"
+        description: "Edit your interpretation of dream symbol \"%{tag}\""
+    goals:
+      index:
+        title: "Your goals, page %{page}"
+        description: "List of goals, that you've issued for yourself, page %{page}."
+        header: "Your goals"
+        about: "About goals"
+        create: "Issue a new goal"
+  profile:
+    updated: "Profile updated"
+    incorrect_password: "Old password is incorrect"
+    update_error: "Error updating profile"
+  submit: "Submit"
+  email_not_found: "Given e-mail was not found"
+  recovery_code_sent: "Password recovery code has been sent"
+  recovery_code_failure: "Could not create a new code"
+  code_sender:
+    password:
+      subject: "Resetting password for site sovia.ru"
+    email:
+      subject: "Confirming email-address for site sovia.ru"
+  comments:
+    entry_reply:
+      subject: "New reply to you post"
+    comment_reply:
+      subject: "New reply to your comment"
+    new:
+      title: "Add comment"
+      header: "Add comment"
+      description: "Add comment on entry on Sovia, the site about dreams."
+    index:
+      title: "All comments, page %{page}"
+      header: "All comments"
+      for: "for"
+      description: "All comments from the users of Sovia, the site about dreams. Page %{page}."
+  user:
+    email_confirmed: "E-mail confirmed"
+    code_invalid: "Invalid code"
+    recovery_failed: "Could not change password, check everything and try again"
+    password_changed: "Password changes"
+  email_confirmation_sent: "Confirmation code has been sent"
+  confirmation:
+    send_code: "Send confirmation code"
+    set_email: "Set e-mail address"
+  code:
+    generation_error: "Error while generating code"
+  entries:
+    comments:
+      add_comment: "Add comment"
+      comments: "Comments"
+      reply: "Reply"
+    entry:
+      link: "Link"
+      previous: "Previous entry"
+      next: "Next entry"
+      described: "Tags that described in dreambook"
+      adjacent: "Adjacent entries"
+  error:
+    zero: "no errors"
+    one: "%{count} error"
+    many: "%{count} errors"
+  comment:
+    zero: "0 comments"
+    one: "%{count} comment"
+    many: "%{count} comments"
+    created: "Comment added"
+    updated: "Comment updated"
+    deleted: "Comment deleted"
+  date:
+    month_names: [~, january, february, march, april, may, june, july, august, september, october, november, december]
+    formats:
+      short: "%B %Y"
+      w3c: "%Y-%m-%dT%H:%M:%S%:z"
+  edit: "Edit"
+  errors:
+    messages:
+      extension_white_list_error: "has invalid extension"
+    401:
+      title: "Authorization required"
+      description: "If you are on this page, that means that you've tried to see some information that requires authorization."
+    404:
+      title: "Page not found"
+      description: "Page that you've requested was not found, because it doesn't exist or was deleted."
+    422:
+      title: "Unprocessible entry (422)"
+      description: "Something was not processed. Try to refresh page or retry what you did later."
+    500:
+      title: "Server error (500)"
+      description: "Something went wrong. Try to return in several minutes, most likely everything will work."
+  delete: "Delete"
+  reset: "Reset"
+  thoughts:
+    show:
+      thought: "View thoughts"
+      edit: "Edit"
+      delete: "Delete"
+      title: "Thought \"%{thought}\""
+      description: "Thought \"%{thought}\" in journal of practice of user %{user} on Sovia from %{date}."
+    management_links:
+      create: "New thought"
+    index:
+      header: "Thoughts of users"
+      title: "Thoughts of users, page %{page}"
+      description: "Thoughts of users of Sovia, page %{page}."
+    new:
+      header: "New thought"
+      title: "New thought"
+      description: "Page for adding entries into the journal of thoughts and practice"
+    edit:
+      header: "Edit thoughts"
+      title: "Edit thoughts"
+      description: "Page for editing entries in the journal of thoughts"
+    tagged:
+      title: "Thoughts tagged \"%{tag}\", page %{page}"
+      header: "Thoughts tagged \"%{tag}\""
+      description: "Thoughts of users of Sovia tagged \"%[tag}\", page %{page}."
+  page: "Page %{page}"
+  about:
+    index:
+      title: "About"
+    features:
+      title: "Features"
+    changelog:
+      title: "Changelog"
+    terms_of_service:
+      title: "Terms of service"
+    privacy:
+      title: "Privacy"
+  deeds:
+    index:
+      title: "Journal of success"
+      header: "Journal of success"
+      description: "What is journal of success, how to use and take advantage of it."
+    new:
+      header: "Creating entries in the journal of success"
+      title: "Creating entries in the journal of success"
+      description: "Page for creating a new entry in the journal of success on Sovia."
+    show:
+      title: "View deed \"%{deed}\""
+      header: "View journal of success"
+      adjacent: "Adjacent entries"
+      previous: "Previous entry"
+      next: "Next entry"
+      description: "Deed in the journal of success: %{deed}."
+    edit:
+      title: "Edit deed"
+      header: "Edit deed"
+      description: "Page for editing entries in the journal of success."
+    form:
+      today_i: "Today I"
+      to_accomplish: ", to"
+  grains:
+    index:
+      title: "Grains of perception"
+      header: "Grains of perception"
+      description: "What are grains of perception, why one should describe them and how to use them. You can find out on this page of Sovia, the site about dreams."
+    form:
+      submit: "Save grain"
+    new:
+      title: "Add grain of perception"
+      header: "Add grain of perception"
+      description: "Page for adding grains of perception"
+    show:
+      title: "Grain of perception \"%{title}\""
+      header: "View grain of perception"
+      description: "Page for viewing grain of perception \"%{title}\""
+    edit:
+      title: "Edit grain of perception"
+      description: "Page for editing grain of perception"
+      header: "Edit grain of perception"
+  not_selected: "Not selected"
+  search: "Search"
+  query_is_not_set: "Query is not set"
+  view: "View"
+  goal:
+    created: "Goal added"
+    updated: "Goal updated"
+    deleted: "Goal deleted"
+  goals:
+    new:
+      title: "Create goal"
+      description: "Page with form for creating new goals."
+      header: "Add goal"
+    show:
+      title: "Your goal \"%{goal}\""
+      description: "Page with description of your goal, that you issued as \"%{goal}\"."
+    edit:
+      title: "Edit goals"
+      description: "Page with form for editing your goal."
+      header: "Edit goals"
+      goals: "All your goals"
+    index:
+      title: "Issuing goals and succeeding in goals"
+      description: "How to issue own goals and how to succeed in them. How to motivate yourself and track your progress."
+      header: "Issuing goals and succeeding in goals"
+  text: "text"
+  dummy_name: "John Doe"
+  be_better: "be better"
