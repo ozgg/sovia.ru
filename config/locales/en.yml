@@ -58,7 +58,6 @@ en:
       language:
         code: "code"
         name: "name"
-        i18n_name: "i18n name"
     properties:
       entry:
         privacy:
@@ -759,9 +758,26 @@ en:
     created: "Language created"
     updated: "Language updated"
     deleted: "Language deleted"
+    names:
+      russian: "Russian"
+      english: "English"
+      no_translation: "Name is not translated"
   create: "Create"
   languages:
     index:
       title: "Managing languages"
       description: "Administrative section for language management with list of available languages."
       header: "Managing languages"
+    new:
+      title: "Adding language"
+      description: "Administrative page with form to add a new language."
+      header: "Adding language"
+    show:
+      header: "Language information"
+      description: "Page with information about language \"%{name}\""
+      title: "Language \"%{name}\""
+    edit:
+      title: "Editing language"
+      description: "Page with language editing form."
+      header: "Edit language"
+  list: "List"

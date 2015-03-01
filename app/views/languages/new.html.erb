@@ -1,2 +1,8 @@
-<h1>Languages#new</h1>
-<p>Find me in app/views/languages/new.html.erb</p>
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+</header>
+
+<%= render 'form' %>

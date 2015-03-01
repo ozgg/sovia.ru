@@ -1,2 +1,14 @@
-<h1>Languages#edit</h1>
-<p>Find me in app/views/languages/edit.html.erb</p>
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t('view'), @language %></li>
+      <li><%= link_to t('list'), languages_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<%= render 'form' %>

@@ -90,9 +90,8 @@ ActiveRecord::Schema.define(version: 20150227234632) do
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "languages", force: true do |t|
-    t.string "code",      null: false
-    t.string "name",      null: false
-    t.string "i18n_name", null: false
+    t.string "code", null: false
+    t.string "name", null: false
   end
 
   add_index "languages", ["code"], name: "index_languages_on_code", unique: true, using: :btree
