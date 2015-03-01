@@ -1,5 +1,13 @@
 Sovia::Application.routes.draw do
 
+  get 'languages/index'
+
+  get 'languages/new'
+
+  get 'languages/show'
+
+  get 'languages/edit'
+
   get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
 
   root 'index#index'
@@ -61,7 +69,7 @@ Sovia::Application.routes.draw do
 
     resources :users, only: [:new, :create]
     resources :comments, only: [:index, :create]
-    resources :deeds, :goals
+    resources :deeds, :goals, :languages
 
     namespace :my do
       get '/' => 'index#index'

@@ -19,6 +19,7 @@ en:
       comment: "comment"
       deed: "deed"
       goal: "goal"
+      language: "language"
     attributes:
       entry:
         title: "title"
@@ -54,6 +55,10 @@ en:
           issued: "issued"
           achieved: "achieved"
           rejected: "rejected"
+      language:
+        code: "code"
+        name: "name"
+        i18n_name: "i18n name"
     properties:
       entry:
         privacy:
@@ -750,3 +755,13 @@ en:
   text: "text"
   dummy_name: "John Doe"
   be_better: "be better"
+  language:
+    created: "Language created"
+    updated: "Language updated"
+    deleted: "Language deleted"
+  create: "Create"
+  languages:
+    index:
+      title: "Managing languages"
+      description: "Administrative section for language management with list of available languages."
+      header: "Managing languages"

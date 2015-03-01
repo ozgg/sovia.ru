@@ -19,6 +19,7 @@ ru:
       comment: "комментарий"
       deed: "хорошее дело"
       goal: "цель"
+      language: "язык"
     attributes:
       entry:
         title: "Название"
@@ -54,6 +55,10 @@ ru:
           issued: "поставлена"
           achieved: "достигнута"
           rejected: "отказ от цели"
+      language:
+        code: "код"
+        name: "название"
+        i18n_name: "название для i18n"
     properties:
       entry:
         privacy:
@@ -759,3 +764,13 @@ ru:
   text: "текст"
   dummy_name: "Вася Пупкин"
   be_better: "Быть лучше"
+  language:
+    created: "Язык добавлен"
+    updated: "Язык изменён"
+    deleted: "Язык удалён"
+  create: "Создать"
+  languages:
+    index:
+      header: "Управление языками"
+      title: "Управление языками"
+      description: "Административный раздел для управления языками со списком доступных языков."
