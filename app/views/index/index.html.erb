@@ -6,6 +6,7 @@
   <%= render 'management_links' %>
 </header>
 
+<article>
   <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
     а также искать интерпретацию того, что приснилось, в соннике.</p>
   <p>На данный момент <%= t('.users_count', count: User.count) %>
@@ -13,6 +14,7 @@
     <%= t('.left_comments', count: Comment.count) %>.</p>
   <p>Каждый день происходит что-то новое,
     <%= current_user ? 'присоединяйтесь' : link_to('присоединяйтесь', new_user_path) %>.</p>
+</article>
 
 
 <h1><%= t('.quick_dreambook_access') %></h1>

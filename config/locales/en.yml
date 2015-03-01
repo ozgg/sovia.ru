@@ -93,15 +93,15 @@ en:
       users_count:
         zero: "0 users"
         one: "%{count} user added"
-        many: "%{count} users added"
+        other: "%{count} users added"
       described_dreams:
         zero: "0 dreams"
         one: "%{count} dream"
-        many: "%{count} dreams"
+        other: "%{count} dreams"
       left_comments:
         zero: "no comments"
         one: "%{count} comment"
-        many: "%{count} comments"
+        other: "%{count} comments"
     gone:
       title: "This page is gone"
       description: "You are trying to see page that doesn't exist anymore."
@@ -612,11 +612,11 @@ en:
   error:
     zero: "no errors"
     one: "%{count} error"
-    many: "%{count} errors"
+    other: "%{count} errors"
   comment:
     zero: "0 comments"
     one: "%{count} comment"
-    many: "%{count} comments"
+    other: "%{count} comments"
     created: "Comment added"
     updated: "Comment updated"
     deleted: "Comment deleted"
