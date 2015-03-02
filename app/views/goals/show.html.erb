@@ -4,6 +4,7 @@
 <article>
   <header>
     <h1><%= @goal.name %></h1>
+    <h2><%= t("activerecord.attributes.goal.statuses.#{@goal.status}") %> <%= @goal.updated_at.strftime('%d.%m.%Y') %></h2>
     <nav>
       <ul>
         <li><%= link_to t('edit'), edit_goal_path(@goal) %></li>

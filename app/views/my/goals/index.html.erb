@@ -15,7 +15,7 @@
 <% if @goals.any? %>
     <ul class="goals">
       <% @goals.each do |goal| %>
-      <li><%= link_to goal.name, goal %> (<%= t("activerecord.attributes.goal.statuses." + goal.status) %>)</li>
+      <li><%= link_to goal.name, goal %> (<%= t("activerecord.attributes.goal.statuses.#{goal.status}") %> <%= goal.updated_at.strftime('%d.%m.%Y') %>)</li>
       <% end %>
     </ul>
 
