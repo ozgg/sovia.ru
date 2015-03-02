@@ -6,6 +6,6 @@ class UserRole < ActiveRecord::Base
   enum role: [:administrator, :moderator, :dreams_manager, :dreambook_editor, :dreambook_manager, :posts_manager]
 
   def self.roles_for_select
-    self.roles.keys.to_a.map { |e| [t("activerecord.attributes.user_role.roles.#{e}"), e] }
+    self.roles.keys.to_a.map { |e| [I18n.t("activerecord.attributes.user_role.roles.#{e}"), e] }
   end
 end

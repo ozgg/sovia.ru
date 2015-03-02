@@ -1,2 +1,15 @@
-<h1>Admin::Users#new</h1>
-<p>Find me in app/views/admin/users/new.html.erb</p>
+<% content_for :title, t('.title') %>
+<% content_for :description, t('.description') %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t(:list), admin_users_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<article class="profile">
+  <%= render 'form' %>
+</article>

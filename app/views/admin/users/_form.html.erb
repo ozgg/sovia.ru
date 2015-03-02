@@ -1,0 +1,56 @@
+<% url = @user.new_record? ? admin_users_path : admin_user_path(@user) %>
+
+<%= form_for(@user, url: url) do |f| %>
+    <%= render partial: 'common/errors_list', locals: { entity: @user } %>
+
+    <% unless @user.new_record? %>
+        <figure>
+          <%= profile_avatar @user %>
+          <figcaption><%= t('my.profiles.show.avatar') %></figcaption>
+        </figure>
+    <% end %>
+    <div>
+      <%= f.label :login %><br/>
+      <%= f.text_field :login, required: true, size: 30 %>
+    </div>
+    <div>
+      <%= f.label :email %><br/>
+      <%= f.email_field :email, size: 50 %>
+    </div>
+    <% if @user.new_record? %>
+        <div>
+          <%= f.label :password %><br/>
+          <%= f.password_field :password, required: true, size: 30 %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %><br/>
+          <%= f.password_field :password_confirmation, required: true, size: 30 %>
+        </div>
+    <% end %>
+    <div>
+      <%= f.label :avatar %><br/>
+      <%= f.file_field :avatar, accept: 'image/jpeg, image/png' %>
+    </div>
+    <div>
+      <%= f.check_box :allow_mail %>
+      <%= f.label :allow_mail %>
+    </div>
+    <div>
+      <%= f.check_box :mail_confirmed %>
+      <%= f.label :mail_confirmed %>
+    </div>
+    <div>
+      <%= f.check_box :use_gravatar %>
+      <%= f.label :use_gravatar %>
+    </div>
+    <div>
+      <%= f.label :gender, t('activerecord.attributes.user.gender') %>
+      <%= f.select :gender, options_for_select(User.genders_for_select, selected: @user.gender) %>
+    </div>
+    <div>
+      <%= UserRole.roles_for_select %>
+    </div>
+    <div>
+      <%= f.button t(:submit), type: 'submit' %>
+    </div>
+<% end %>

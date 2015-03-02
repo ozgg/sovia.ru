@@ -14,7 +14,13 @@ class Admin::UsersController < ApplicationController
 
   # post /admin/users
   def create
-
+    @user = User.new(user_parameters)
+    if @user.save
+      flash[:notice] = t('user.created')
+      redirect_to admin_user_path(@user)
+    else
+      render action: :new
+    end
   end
 
   # get /admin/users/:id
@@ -27,12 +33,17 @@ class Admin::UsersController < ApplicationController
 
   # patch /admin/users/:id
   def update
-
+    if @user.update user_parameters
+      flash[:notice] = t('user.updated')
+      redirect_to admin_user_path(@user)
+    else
+      render action: :edit
+    end
   end
 
   # delete /admin/users/:id
   def destroy
-
+    redirect_to admin_users_path
   end
 
   protected
@@ -42,6 +53,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_parameters
-    params.require(:user).permit(:login, :email, :password, :password_confirmation, :allow_mail, :avatar, :roles)
+    allowed = [:login, :email, :password, :password_confirmation, :allow_mail, :mail_confirmed, :avatar, :roles, :use_gravatar, :gender]
+    parameters = params.require(:user).permit(allowed)
+    parameters[:email] = nil if parameters[:email].blank?
+
+    parameters
   end
 end

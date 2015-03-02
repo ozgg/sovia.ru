@@ -73,6 +73,17 @@ class User < ActiveRecord::Base
 
   end
 
+  def gender_string
+    case gender
+      when GENDER_MALE
+        I18n.t 'activerecord.attributes.user.enums.genders.male'
+      when GENDER_FEMALE
+        I18n.t 'activerecord.attributes.user.enums.genders.female'
+      else
+        I18n.t 'not_selected'
+    end
+  end
+
   protected
 
   def normalize_login

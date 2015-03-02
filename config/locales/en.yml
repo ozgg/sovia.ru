@@ -37,7 +37,9 @@ en:
         password_confirmation: "password confirmation"
         email: "e-mail"
         allow_mail: "allow email notifications"
+        mail_confirmed: "e-mail address is confirmed"
         avatar: "user picture (avatar)"
+        use_gravatar: "use avatar from gravatar.com"
         gender: "gender"
         enums:
           genders:
@@ -295,6 +297,14 @@ en:
         title: "Manage users, page %{page}"
         description: "Alministrative section for editing users, page %{page}"
         header: "Users administration"
+      new:
+        title: "Adding user"
+        description: "Administrative page with form for adding a new user"
+        header: "Adding user"
+      show:
+        title: "Managing: user %{user}"
+        description: "Administrative page with profile of user %{user}"
+        header: "User profile"
   users:
     create:
       successfully: "You have registered ang logged in"
@@ -612,6 +622,8 @@ en:
     code_invalid: "Invalid code"
     recovery_failed: "Could not change password, check everything and try again"
     password_changed: "Password changes"
+    created: "User created"
+    updated: "User updated"
   email_confirmation_sent: "Confirmation code has been sent"
   confirmation:
     send_code: "Send confirmation code"
@@ -797,3 +809,4 @@ en:
       description: "Page with language editing form."
       header: "Edit language"
   list: "List"
+  empty: "empty"
