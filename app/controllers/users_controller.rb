@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :bounce_authorized, only: [:new, :create ]
+  before_action :bounce_authorized, only: [:new, :create]
 
   # get /users/new
   def new

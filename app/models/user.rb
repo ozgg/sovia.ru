@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{image}?s=#{size}&d=identicon"
   end
 
+  def roles=(roles)
+
+  end
+
   protected
 
   def normalize_login

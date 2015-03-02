@@ -1,13 +1,4 @@
 Sovia::Application.routes.draw do
-
-  get 'languages/index'
-
-  get 'languages/new'
-
-  get 'languages/show'
-
-  get 'languages/edit'
-
   get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
 
   root 'index#index'
@@ -94,7 +85,7 @@ Sovia::Application.routes.draw do
     end
 
     namespace :admin do
-      resources :dream_tags
+      resources :dream_tags, :users
       resources :comments, only: [:index, :show, :edit, :update, :destroy]
       get "queues/tags"
     end

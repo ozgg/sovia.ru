@@ -290,6 +290,11 @@ en:
         title: "Editing comment %{id}"
         description: "Administrative page for editing comment."
         header: "Edit comment %{id}"
+    users:
+      index:
+        title: "Manage users, page %{page}"
+        description: "Alministrative section for editing users, page %{page}"
+        header: "Users administration"
   users:
     create:
       successfully: "You have registered ang logged in"

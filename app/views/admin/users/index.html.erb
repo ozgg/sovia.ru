@@ -1,0 +1,26 @@
+<% content_for :title, t('.title', page: params[:page] || 1) %>
+<% content_for :description, t('.description', page: params[:page] || 1) %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+  <h2><%= t(:page, page: params[:page] || 1) %></h2>
+  <nav>
+    <ul>
+      <li><%= link_to t('create'), new_admin_user_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<% if @users.any? %>
+    <%= paginate @users %>
+
+    <ul>
+      <% @users.each do |user| %>
+      <li><%= link_to user.login, edit_admin_user_path(user) %> (<%= user.entries_count %> / <%= user.comments_count %>)</li>
+      <% end %>
+    </ul>
+
+    <%= paginate @users %>
+<% else %>
+    <%= render 'common/nothing_found' %>
+<% end %>
