@@ -1,2 +1,16 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<% content_for :title, t('.title', user: @user.login) %>
+<% content_for :description, t('.description', user: @user.login) %>
+
+<header>
+  <h1><%= t('.header') %></h1>
+  <nav>
+    <ul>
+      <li><%= link_to t(:view), admin_user_path(@user) %></li>
+      <li><%= link_to t(:list), admin_users_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<article class="profile">
+  <%= render 'form' %>
+</article>

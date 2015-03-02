@@ -305,6 +305,10 @@ en:
         title: "Managing: user %{user}"
         description: "Administrative page with profile of user %{user}"
         header: "User profile"
+      edit:
+        title: "Editing user %{user}"
+        description: "Administrative page with editing form for user %{user}"
+        header: "Editing user"
   users:
     create:
       successfully: "You have registered ang logged in"
