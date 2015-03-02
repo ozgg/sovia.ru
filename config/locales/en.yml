@@ -20,6 +20,7 @@ en:
       deed: "deed"
       goal: "goal"
       language: "language"
+      user_role: "роль пользователя"
     attributes:
       entry:
         title: "title"
@@ -58,6 +59,16 @@ en:
       language:
         code: "code"
         name: "name"
+      user_role:
+        user: "user"
+        role: "role"
+        roles:
+          administrator: "Administrator"
+          moderator:  "Moderator"
+          dreams_manager: "Dreams manager"
+          dreambook_editor: "Dreambook editor"
+          dreambook_manager: "Dreambook manager"
+          posts_manager: "Posts manager"
     properties:
       entry:
         privacy:

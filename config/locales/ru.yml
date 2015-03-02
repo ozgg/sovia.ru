@@ -20,6 +20,7 @@ ru:
       deed: "хорошее дело"
       goal: "цель"
       language: "язык"
+      user_role: "роль пользователя"
     attributes:
       entry:
         title: "Название"
@@ -58,6 +59,16 @@ ru:
       language:
         code: "код"
         name: "название"
+      user_role:
+        user: "пользователь"
+        role: "роль"
+        roles:
+          administrator: "Администратор"
+          moderator:  "Модератор"
+          dreams_manager: "Менеджер снов"
+          dreambook_editor: "Редактор сонника"
+          dreambook_manager: "Менеджер сонника"
+          posts_manager: "Менеджер публикаций"
     properties:
       entry:
         privacy:
