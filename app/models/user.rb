@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :nullify
   has_many :user_tags, dependent: :destroy
   has_many :deeds, dependent: :destroy
+  has_many :user_roles, dependent: :destroy
 
   has_secure_password
 
@@ -45,7 +46,10 @@ class User < ActiveRecord::Base
   end
 
   def has_role?(role)
-    roles_mask & role == role
+    via_mask  = role.is_a?(Integer) ? roles_mask & role == role : false
+    via_roles = (role.is_a?(String) || role.is_a?(Symbol)) ? UserRole.exists_for_user?(role.to_s, self) : false
+
+    via_mask | via_roles
   end
 
   def can_receive_letters?
@@ -70,7 +74,14 @@ class User < ActiveRecord::Base
   end
 
   def roles=(roles)
-
+    roles.each do |role, flag|
+      user_role = UserRole.role_for_user(role, self)
+      if flag.to_i > 0
+        UserRole.create!(user: self, role: role.to_s) if user_role.nil?
+      else
+        user_role.destroy unless user_role.nil?
+      end
+    end
   end
 
   def gender_string

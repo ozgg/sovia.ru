@@ -45,6 +45,7 @@ en:
           genders:
             female: "female"
             male: "male"
+        roles: "roles"
       comment:
         body: "comment"
       deed:

@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <th><%= t('activerecord.attributes.user.email') %></th>
-      <td><%= @user.email || t('empty') %></td>
+      <td><%= @user.email || t(:empty) %></td>
     </tr>
     <tr>
       <th><%= t('activerecord.attributes.user.gender') %></th>
@@ -51,6 +51,20 @@
     <tr>
       <th><%= t('users.profile.comments_count') %></th>
       <td><%= @user.comments_count %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.user.roles') %></th>
+      <td>
+        <% if @user.user_roles.any? %>
+        <ul>
+          <% @user.user_roles.each do |role| %>
+          <li><%= role.name %></li>
+          <% end %>
+        </ul>
+        <% else %>
+        <%= t(:empty) %>
+        <% end %>
+      </td>
     </tr>
     </tbody>
   </table>

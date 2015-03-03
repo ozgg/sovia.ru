@@ -16,6 +16,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_parameters)
     if @user.save
+      update_roles
       flash[:notice] = t('user.created')
       redirect_to admin_user_path(@user)
     else
@@ -34,11 +35,12 @@ class Admin::UsersController < ApplicationController
   # patch /admin/users/:id
   def update
     if @user.update user_parameters
+      update_roles
       flash[:notice] = t('user.updated')
-      redirect_to admin_user_path(@user)
+      # redirect_to admin_user_path(@user)
     else
-      render action: :edit
     end
+    render action: :edit
   end
 
   # delete /admin/users/:id
@@ -53,10 +55,20 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_parameters
-    allowed = [:login, :email, :password, :password_confirmation, :allow_mail, :mail_confirmed, :avatar, :roles, :use_gravatar, :gender]
+    allowed = [
+        :login, :email, :password, :password_confirmation, :allow_mail, :mail_confirmed,
+        :avatar, :use_gravatar, :gender, :roles
+    ]
     parameters = params.require(:user).permit(allowed)
     parameters[:email] = nil if parameters[:email].blank?
 
     parameters
+  end
+
+  def update_roles
+    if params[:user]
+      roles = params[:user][:roles] || {}
+      @user.roles = roles unless roles.empty?
+    end
   end
 end

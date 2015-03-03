@@ -48,7 +48,16 @@
       <%= f.select :gender, options_for_select(User.genders_for_select, selected: @user.gender) %>
     </div>
     <div>
-      <%= UserRole.roles_for_select %>
+      <p><%= t('activerecord.attributes.user.roles') %></p>
+      <ul>
+        <% UserRole.roles_for_select.each do |role| %>
+        <li>
+          <%= hidden_field_tag "user[roles][#{role[1]}]", 0, id: nil %>
+          <%= check_box_tag "user[roles][#{role[1]}]", 1, @user.has_role?(role[1].to_s) %>
+          <%= label_tag "user_roles_#{role[1]}", role[0] %>
+        </li>
+        <% end %>
+      </ul>
     </div>
     <div>
       <%= f.button t(:submit), type: 'submit' %>

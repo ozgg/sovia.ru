@@ -56,6 +56,6 @@ class ApplicationController < ActionController::Base
   end
 
   def allow_administrators_only
-    demand_role User::ROLE_ADMINISTRATOR
+    demand_role :administrator
   end
 end

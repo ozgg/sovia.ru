@@ -45,6 +45,7 @@ ru:
           genders:
             female: "Женский"
             male: "Мужской"
+        roles: "Роли"
       comment:
         body: "Комментарий"
       deed:
