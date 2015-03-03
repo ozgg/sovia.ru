@@ -108,10 +108,6 @@ en:
       title: "The site about dreams"
       description: "Main page of the project about dreams called Sovia. Dreams of users, articles, discussions, free online diary of dreams and constantly enriched dreambook."
       quick_dreambook_access: "Quick access to dreambook"
-      users_count:
-        zero: "0 users"
-        one: "%{count} user added"
-        other: "%{count} users added"
       described_dreams:
         zero: "0 dreams"
         one: "%{count} dream"
@@ -120,6 +116,7 @@ en:
         zero: "no comments"
         one: "%{count} comment"
         other: "%{count} comments"
+      our_users_added: "Our users added"
     gone:
       title: "This page is gone"
       description: "You are trying to see page that doesn't exist anymore."

@@ -9,8 +9,8 @@
 <article>
   <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
     а также искать интерпретацию того, что приснилось, в соннике.</p>
-  <p>На данный момент <%= t('.users_count', count: User.count) %>
-    <%= t('.described_dreams', count: Entry::Dream.count) %> и
+  <p><%= t('.our_users_added') %>
+    <%= t('.described_dreams', count: Entry::Dream.count) %><%= t('support.array.two_words_connector') %>
     <%= t('.left_comments', count: Comment.count) %>.</p>
   <p>Каждый день происходит что-то новое,
     <%= current_user ? 'присоединяйтесь' : link_to('присоединяйтесь', new_user_path) %>.</p>
