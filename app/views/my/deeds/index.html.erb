@@ -22,7 +22,7 @@
       <li>
         <time datetime="<%= deed.created_at.w3c %>"><%= deed.created_at.strftime('%d.%m.%Y') %></time>
         <%= deed.name %><%= deed.goal_postfix %>
-        <%= link_to '*', deed_path(deed) %>
+        <%= link_to '*', deed %>
       </li>
       <% end %>
     </ul>
