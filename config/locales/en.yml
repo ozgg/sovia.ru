@@ -772,6 +772,8 @@ en:
     show:
       title: "Your goal \"%{goal}\""
       description: "Page with description of your goal, that you issued as \"%{goal}\"."
+      steps_to_achieve: "My steps to achive this goal."
+      nothing_done_to_achieve: "Nothing done yet to achieve this goal."
     edit:
       title: "Edit goals"
       description: "Page with form for editing your goal."
@@ -812,3 +814,4 @@ en:
       header: "Edit language"
   list: "List"
   empty: "empty"
+  i: "I"

@@ -1,6 +1,7 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :name
+  has_many :deeds, dependent: :nullify
 
   enum status: [:issued, :achieved, :rejected]
 
