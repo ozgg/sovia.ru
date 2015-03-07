@@ -15,5 +15,6 @@
 /config/secrets.yml
 
 /public/uploads
+/public/sitemap.*.xml
 
 /.env
