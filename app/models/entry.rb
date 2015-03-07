@@ -72,7 +72,7 @@ class Entry < ActiveRecord::Base
   end
 
   def editable_by?(editor)
-    !editor.nil? && ((editor == user) || editor.moderator?)
+    !editor.nil? && ((editor == user) || editor.has_role?(:dreams_manager))
   end
 
   def parsed_title

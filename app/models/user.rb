@@ -34,15 +34,15 @@ class User < ActiveRecord::Base
   end
 
   def moderator?
-    has_role? ROLE_MODERATOR
+    has_role? :moderator
   end
 
   def editor?
-    has_role? ROLE_EDITOR
+    has_role? :posts_manager
   end
 
   def decent?
-    has_role? ROLE_DECENT
+    entries_count >= 5
   end
 
   def has_role?(role)
