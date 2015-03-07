@@ -17,7 +17,7 @@ FactoryGirl.define do
     end
 
     factory :moderator do
-      roles_mask User::ROLE_MODERATOR
+      roles moderator: 1
     end
   end
 end
