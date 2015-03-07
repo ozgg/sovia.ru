@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://sovia.ru</loc>
+    <loc>http://sovia.ru/</loc>
     <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>http://sovia.ru/about</loc>
+  </url>
+  <url>
+    <loc>http://sovia.ru/comments</loc>
+  </url>
+  <url>
+    <loc>http://sovia.ru/tos</loc>
+  </url>
+  <url>
+    <loc>http://sovia.ru/privacy</loc>
   </url>
 </urlset>

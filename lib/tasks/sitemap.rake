@@ -17,14 +17,16 @@ namespace :sitemap do
   end
 
   desc "Generate sitemap for dreambook"
-  task :dreambook do
+  task dreambook: :environment do
     sitemap = "#{Rails.root}/public/sitemap.dreambook.xml"
     File.open sitemap, 'w' do |f|
+      f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
       Tag::Dream.all.each do |entry|
         unless entry.description.blank?
-          "<url><loc>#{dreambook_word_url letter: entry.letter, word: entry.name}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+          f.puts "<url><loc>#{dreambook_word_url letter: entry.letter, word: entry.name}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
         end
       end
+      f.puts "</urlset>\n"
     end
   end
 
