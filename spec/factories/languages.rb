@@ -1,5 +1,8 @@
 FactoryGirl.define do
   factory :language do
+    sequence(:code) { |n| "lng#{n}" }
+    name 'some_language'
+
     factory :russian_language do
       code 'ru'
       name 'russian'
