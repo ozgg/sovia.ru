@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe User do
+RSpec.describe User, type: :model do
   context "validation" do
     let(:user) { build(:user, login: 'random_guy') }
 
