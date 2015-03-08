@@ -47,7 +47,5 @@ gem 'mina', group: :development
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'webrat'
   gem 'factory_girl_rails'
-  gem 'dotenv-rails'
 end

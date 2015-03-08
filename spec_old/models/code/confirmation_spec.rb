@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Code::Confirmation do
   it "adds user's email to payload before saving" do
     code = create(:email_confirmation)
