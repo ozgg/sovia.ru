@@ -28,8 +28,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_locale
+    locale_for_user = Language.locale_for_user current_user
     locale_from_params = params[:locale] || http_accept_language.compatible_language_from(I18n.available_locales)
-    I18n.locale = locale_from_params || I18n.default_locale
+    I18n.locale = locale_for_user || locale_from_params || I18n.default_locale
   end
 
   def record_not_found

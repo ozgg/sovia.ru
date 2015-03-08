@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :user_tags, dependent: :destroy
   has_many :deeds, dependent: :destroy
   has_many :user_roles, dependent: :destroy
+  belongs_to :language
 
   has_secure_password
 
