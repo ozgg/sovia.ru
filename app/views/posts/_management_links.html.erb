@@ -1,7 +1,7 @@
 <% unless current_user.nil? %>
     <nav>
       <ul>
-        <li><%= link_to t('posts.new.title'), new_entry_post_path %></li>
+        <li><%= link_to t(:create), new_post_path %></li>
       </ul>
     </nav>
 <% end %>

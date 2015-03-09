@@ -1,0 +1,9 @@
+<% if @entries.any? %>
+    <% @entries.each do |entry| %>
+        <%= entry.title %>
+    <% end %>
+
+    <%= paginate @entries if @entries.respond_to? :current_page %>
+<% else %>
+    <%= render 'common/nothing_found' %>
+<% end %>
