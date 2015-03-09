@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  context "validating", wip: true do
+  context "validating" do
     let(:language) { create :russian_language }
     let(:user)     { create :user }
 
@@ -28,6 +28,29 @@ RSpec.describe Post, type: :model do
     it "is valid with valid attributes" do
       post = build :post
       expect(post).to be_valid
+    end
+  end
+
+  context "editable_by?", wip: true do
+    let(:user) { create :user }
+    let(:post) { create :post, user: user }
+
+    it "returns true for author" do
+      expect(post).to be_editable_by user
+    end
+
+    it "returns true for posts manager" do
+      manager = create :posts_manager
+      expect(post).to be_editable_by manager
+    end
+
+    it "returns false for anonymous user" do
+      expect(post).not_to be_editable_by nil
+    end
+
+    it "returns false for another user" do
+      another_user = create :user
+      expect(post).not_to be_editable_by another_user
     end
   end
 end
