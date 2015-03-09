@@ -1,6 +1,28 @@
 <% if @entries.any? %>
     <% @entries.each do |entry| %>
-        <%= entry.title %>
+        <article class="entry post">
+          <header>
+            <figure><%= raw entry_avatar(entry.user) %></figure>
+            <h2><%= link_to entry.title, entry %></h2>
+
+            <div class="author">
+              <%= user_link entry.user %>
+              <time datetime="<%= entry.created_at.w3c %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+              [<%= entry.language.code %>]
+            </div>
+
+          </header>
+          <div>
+            <% if entry.image.url %>
+                <div class="image"><%= image_tag entry.image.lead, alt: entry.title %></div>
+            <% end %>
+            <p><%= entry.preview %></p>
+          </div>
+          <footer>
+            <div class="permalink"><%= link_to t(:link), entry %></div>
+            <div class="comments-count"><%= t('comment', count: entry.comments_count) %></div>
+          </footer>
+        </article>
     <% end %>
 
     <%= paginate @entries if @entries.respond_to? :current_page %>

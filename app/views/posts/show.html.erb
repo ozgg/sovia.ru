@@ -1,19 +1,19 @@
-<% content_for :title, t('.title', title: @entry.parsed_title) %>
-<% content_for :description, t('.description', title: @entry.parsed_title, user: @entry.author_name, date: @entry.created_at.strftime('%d.%m.%Y')) %>
+<% content_for :title, t('.title', title: @entry.title) %>
+<% content_for :description, t('.description', title: @entry.title, user: @entry.author_name, date: @entry.created_at.strftime('%d.%m.%Y')) %>
 
 <header>
   <h1><%= t('.post') %></h1>
   <% if @entry.editable_by? current_user %>
   <nav>
     <ul>
-      <li><%= link_to t('.edit'), edit_entry_post_path(@entry) %></li>
-      <li><%= link_to t('.delete'), @entry, method: :delete, data: { confirm: t('are_you_sure') } %></li>
+      <li><%= link_to t(:edit), edit_post_path(@entry) %></li>
+      <li><%= link_to t(:delete), @entry, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
     </ul>
   </nav>
   <% end %>
 </header>
 
-<%= render partial: 'entries/entry', object: @entry %>
+<%= render @entry %>
 
 <section>
   <%= render 'layouts/statistics' %>

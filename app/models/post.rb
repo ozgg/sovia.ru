@@ -8,4 +8,16 @@ class Post < ActiveRecord::Base
   def editable_by?(user)
     user.is_a?(User) && (self.user == user || user.has_role?(:posts_manager))
   end
+
+  def author_name
+    user.login
+  end
+
+  def preview
+    lead || first_passage
+  end
+
+  def first_passage
+    body.split("\n").first
+  end
 end
