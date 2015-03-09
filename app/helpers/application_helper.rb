@@ -50,10 +50,6 @@ module ApplicationHelper
     attributes[:class] = 'described' unless tag.description.blank?
     if tag.is_a? Tag::Dream
       link_to tag.name, tagged_entry_dreams_path(parameters), attributes
-    elsif tag.is_a? Tag::Article
-      link_to tag.name, tagged_entry_articles_path(parameters), attributes
-    elsif tag.is_a? Tag::Post
-      link_to tag.name, tagged_entry_posts_path(parameters), attributes
     elsif tag.is_a? Tag::Thought
       link_to tag.name, tagged_entry_thoughts_path(parameters), attributes
     else
@@ -68,12 +64,8 @@ module ApplicationHelper
         uri_title: entry.url_title || 'bez-nazvaniya',
         anchor:    "comment-#{comment.id}"
     }
-    if entry.is_a? Entry::Article
-      verbose_entry_articles_url parameters
-    elsif entry.is_a? Entry::Dream
+    if entry.is_a? Entry::Dream
       verbose_entry_dreams_url parameters
-    elsif entry.is_a? Entry::Post
-      verbose_entry_posts_url parameters
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_url parameters
     else
@@ -86,12 +78,8 @@ module ApplicationHelper
         id:        entry.id,
         uri_title: entry.url_title || 'bez-nazvaniya'
     }
-    if entry.is_a? Entry::Article
-      verbose_entry_articles_path(parameters)
-    elsif entry.is_a? Entry::Dream
+    if  entry.is_a? Entry::Dream
       verbose_entry_dreams_path(parameters)
-    elsif entry.is_a? Entry::Post
-      verbose_entry_posts_path(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_path(parameters)
     elsif entry.is_a? Entry::Grain
@@ -104,12 +92,8 @@ module ApplicationHelper
         id:        entry.id,
         uri_title: entry.url_title || 'bez-nazvaniya'
     }
-    if entry.is_a? Entry::Article
-      verbose_entry_articles_url(parameters)
-    elsif entry.is_a? Entry::Dream
+    if entry.is_a? Entry::Dream
       verbose_entry_dreams_url(parameters)
-    elsif entry.is_a? Entry::Post
-      verbose_entry_posts_url(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_url(parameters)
     elsif entry.is_a? Entry::Grain

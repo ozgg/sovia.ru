@@ -31,13 +31,6 @@ Sovia::Application.routes.draw do
       end
     end
 
-    resources :articles, as: :entry_articles do
-      collection do
-        get 'tagged/:tag' => :tagged, as: :tagged
-        get ':id-:uri_title' => :show, as: :verbose
-      end
-    end
-
     resources :thoughts, as: :entry_thoughts do
       collection do
         get 'tagged/:tag' => :tagged, as: :tagged
@@ -116,6 +109,9 @@ Sovia::Application.routes.draw do
   end
 
   # Obsolete routes
+  get 'articles', to: redirect('/posts')
+  get 'articles/:id', to: redirect('/posts/%{id}')
+  get 'articles/tagged/:tag', to: redirect('/posts')
   get 'posts/tagged/:tag', to: redirect('/posts')
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
