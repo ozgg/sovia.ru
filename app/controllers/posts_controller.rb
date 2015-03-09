@@ -5,8 +5,7 @@ class PostsController < ApplicationController
 
   # get /posts
   def index
-    page     = params[:page] || 1
-    @entries = allowed_posts.page(page).per(5)
+    @entries = Post.order('id desc').page(params[:page] || 1).per(5)
   end
 
   # get /posts/new
@@ -16,12 +15,7 @@ class PostsController < ApplicationController
 
   # post /posts
   def create
-    @entry = Entry::Post.new(post_parameters.merge(user: current_user))
-    if suspect_spam?(current_user, @entry.body, 2)
-      emulate_saving
-    else
-      create_post
-    end
+    @entry = Post.new(post_parameters.merge(user: current_user))
   end
 
   # get /posts/:id
@@ -36,7 +30,7 @@ class PostsController < ApplicationController
   def update
     if @entry.update(post_parameters)
       flash[:notice] = t('entry.post.updated')
-      redirect_to verbose_entry_posts_path(id: @entry.id, uri_title: @entry.url_title)
+      redirect_to @entry
     else
       render action: :edit
     end
@@ -46,13 +40,7 @@ class PostsController < ApplicationController
   def destroy
     @entry.destroy
     flash[:notice] = t('entry.post.deleted')
-    redirect_to entry_posts_path
-  end
-
-  # get /posts/tagged/:tag
-  def tagged
-    page     = params[:page] || 1
-    @entries = tagged_posts.page(page).per(5)
+    redirect_to posts_path
   end
 
   private

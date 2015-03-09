@@ -27,4 +27,18 @@ RSpec.describe Language, type: :model do
       end
     end
   end
+
+  describe "guess_from_locale" do
+    let!(:language) { create :russian_language }
+
+    it "returns nil for unknown code in locale" do
+      I18n.locale = :en
+      expect(Language.guess_from_locale).to be_nil
+    end
+
+    it "returns language for known code in locale" do
+      I18n.locale = :ru
+      expect(Language.guess_from_locale).to eq language
+    end
+  end
 end

@@ -9,6 +9,10 @@ class Language < ActiveRecord::Base
     end
   end
 
+  def self.guess_from_locale
+    self.find_by_code I18n.locale
+  end
+
   def i18n_name
     I18n.t("language.names.#{name}", default: :'language.names.no_translation')
   end

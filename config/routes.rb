@@ -38,13 +38,6 @@ Sovia::Application.routes.draw do
       end
     end
 
-    resources :posts, as: :entry_posts do
-      collection do
-        get 'tagged/:tag' => :tagged, as: :tagged
-        get ':id-:uri_title' => :show, as: :verbose
-      end
-    end
-
     resources :thoughts, as: :entry_thoughts do
       collection do
         get 'tagged/:tag' => :tagged, as: :tagged
@@ -60,7 +53,7 @@ Sovia::Application.routes.draw do
 
     resources :users, only: [:new, :create]
     resources :comments, only: [:index, :create]
-    resources :deeds, :goals, :languages
+    resources :deeds, :goals, :languages, :posts
 
     namespace :my do
       get '/' => 'index#index'
@@ -123,6 +116,7 @@ Sovia::Application.routes.draw do
   end
 
   # Obsolete routes
+  get 'posts/tagged/:tag', to: redirect('/posts')
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
   get 'user/profile' => 'index#gone'
