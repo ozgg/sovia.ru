@@ -3,6 +3,7 @@
 
 <header>
   <h1><%= t('.header') %></h1>
+
   <h2><%= t('page', page: params[:page] || 1) %></h2>
 </header>
 
@@ -11,18 +12,22 @@
     <ul class="comments">
       <% @comments.each do |comment| %>
           <li>
-            <div>
-              <figure>
-                <%= comment_avatar(comment.user) %>
-                <figcaption><%= user_link(comment.user) %> <%= t('.for') %> <%= link_to comment.entry.parsed_title, verbose_entry_path(comment.entry) %></figcaption>
-              </figure>
+            <% if comment.commentable.visible_to? current_user %>
+                <div>
+                  <figure>
+                    <%= comment_avatar(comment.user) %>
+                    <figcaption><%= user_link(comment.user) %> <%= t('.for') %> <%= link_to comment.commentable.parsed_title, verbose_entry_path(comment.commentable) %></figcaption>
+                  </figure>
 
-              <time datetime="<%= comment.datetime %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-            </div>
+                  <time datetime="<%= comment.datetime %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                </div>
 
-            <div>
-              <%= raw parse_body(comment.body, false, true) %>
-            </div>
+                <div>
+                  <%= raw parse_body(comment.body, false, true) %>
+                </div>
+            <% else %>
+                [<%= t(:hidden) %>]
+            <% end %>
           </li>
       <% end %>
     </ul>

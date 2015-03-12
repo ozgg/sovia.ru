@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :language
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :user, :language, :title, :body
   mount_uploader :image, ImageUploader
@@ -41,6 +41,11 @@ class Post < ActiveRecord::Base
   # @return [String]
   def first_passage
     body.split("\n").first
+  end
+
+  # Get title for view
+  def parsed_title
+    title
   end
 
   # Set parameters from entry

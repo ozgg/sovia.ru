@@ -54,7 +54,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  context "visible_to?", wip: true do
+  context "visible_to?" do
     let(:post) { create :post }
 
     it "returns true for anonymous user" do

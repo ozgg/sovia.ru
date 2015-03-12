@@ -1,4 +1,4 @@
-<% @comment = Comment.new(entry: entry) %>
+<% @comment = Comment.new(commentable: entry) %>
 <section>
   <% if entry.comments.any? %>
       <h3><%= t('.comments') %></h3>
