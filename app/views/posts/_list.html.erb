@@ -17,6 +17,7 @@
                 <div class="image"><%= image_tag entry.image.lead, alt: entry.title %></div>
             <% end %>
             <p><%= entry.preview %></p>
+            <p class="more"><%= link_to t(:read_more), entry %></p>
           </div>
           <footer>
             <div class="permalink"><%= link_to t(:link), entry %></div>

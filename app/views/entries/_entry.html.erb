@@ -54,7 +54,7 @@
     <% if local_assigns[:preview] %>
         <%= raw parse_body(entry.preview, entry.is_a?(Entry::Article), entry.owned_by?(current_user)) %>
         <% if entry.passages_count > 2 %>
-            <p class="more"><%= link_to t('read_more'), verbose_entry_path(entry) %></p>
+            <p class="more"><%= link_to t(:read_more), verbose_entry_path(entry) %></p>
         <% end %>
     <% else %>
         <%= raw parse_body(entry.body, entry.is_a?(Entry::Article), entry.owned_by?(current_user)) %>

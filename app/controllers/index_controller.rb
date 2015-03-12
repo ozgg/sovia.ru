@@ -2,6 +2,8 @@ class IndexController < ApplicationController
   # get /
   def index
     @entries = Entry.recent_entries
+    @posts   = Post.recent_posts
+
     @recent_tags = Tag::Dream.recently_updated
   end
 

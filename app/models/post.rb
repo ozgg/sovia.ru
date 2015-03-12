@@ -6,6 +6,10 @@ class Post < ActiveRecord::Base
   validates_presence_of :user, :language, :title, :body
   mount_uploader :image, ImageUploader
 
+  def self.recent_posts
+    self.order('id desc').first(3)
+  end
+
   # Is post editable by given user?
   #
   # @param [User] user or nil for anonymous user
