@@ -1,20 +1,20 @@
 class Comment < ActiveRecord::Base
-  belongs_to :entry, counter_cache: true, touch: true
+  belongs_to :commentable, polymorphic: true, counter_cache: true, touch: true
   belongs_to :user, counter_cache: true
   belongs_to :parent, class_name: 'Comment'
   has_many :comments
 
-  validates_presence_of :entry, :body
+  validates_presence_of :commentable, :body
 
   def notify_entry_owner?
-    owner = entry.user
+    owner = commentable.user
     if owner.nil? || owner == user
       false
     elsif parent.nil?
-      notify_owner?(entry.user)
+      notify_owner?(owner)
     else
       parent_owner = parent.user
-      !parent_owner.nil? && parent_owner != entry.user
+      !parent_owner.nil? && parent_owner != owner
     end
   end
 
