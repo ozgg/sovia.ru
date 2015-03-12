@@ -14,6 +14,14 @@ class Post < ActiveRecord::Base
     user.is_a?(User) && (self.user == user || user.has_role?(:posts_manager))
   end
 
+  # Post is visible to user?
+  #
+  # @param [User] user
+  # @return [Bool]
+  def visible_to?(user)
+    user.nil? || user.is_a?(User)
+  end
+
   # Get the name of post author
   #
   # @return [String]

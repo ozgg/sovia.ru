@@ -30,6 +30,11 @@ class Comment < ActiveRecord::Base
     created_at.strftime '%Y-%m-%dT%H:%M:%S%:z'
   end
 
+  # @param [Comment] comment
+  def belongs_to_same_post_as?(comment)
+    comment.commentable == self.commentable
+  end
+
   private
 
   def notify_owner?(owner)

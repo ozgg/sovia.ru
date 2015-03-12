@@ -21,15 +21,15 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :entry_id, :parent_id).merge(user: current_user)
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :parent_id).merge(user: current_user)
   end
 
   def check_rights
-    entry = @comment.entry
+    entry = @comment.commentable
     raise ForbiddenException unless entry.nil? || entry.visible_to?(current_user)
     unless @comment.parent.nil?
       parent = @comment.parent
-      raise ForbiddenException unless parent.entry_id == @comment.entry_id
+      raise ForbiddenException unless @comment.belongs_to_same_post_as?(parent)
     end
   end
 
@@ -49,6 +49,6 @@ class CommentsController < ApplicationController
 
   def redirect_with_confirmation
     flash[:notice] = t('comment.created')
-    redirect_to view_context.verbose_entry_path(@comment.entry)
+    redirect_to view_context.verbose_entry_path(@comment.commentable)
   end
 end

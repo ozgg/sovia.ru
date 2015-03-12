@@ -61,10 +61,12 @@ module ApplicationHelper
     entry = comment.entry
     parameters = {
         id:        entry.id,
-        uri_title: entry.url_title || 'bez-nazvaniya',
+        uri_title: entry.is_a?(Post) ? nil : (entry.url_title || 'bez-nazvaniya'),
         anchor:    "comment-#{comment.id}"
     }
-    if entry.is_a? Entry::Dream
+    if entry.is_a? Post
+      post_url id: entry.id, anchor: parameters[:anchor]
+    elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_url parameters
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_url parameters
@@ -76,9 +78,11 @@ module ApplicationHelper
   def verbose_entry_path(entry)
     parameters = {
         id:        entry.id,
-        uri_title: entry.url_title || 'bez-nazvaniya'
+        uri_title: entry.is_a?(Post) ? nil : (entry.url_title || 'bez-nazvaniya')
     }
-    if  entry.is_a? Entry::Dream
+    if entry.is_a? Post
+      post_path entry
+    elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_path(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_path(parameters)
@@ -90,9 +94,11 @@ module ApplicationHelper
   def verbose_entry_url(entry)
     parameters = {
         id:        entry.id,
-        uri_title: entry.url_title || 'bez-nazvaniya'
+        uri_title: entry.is_a?(Post) ? nil : (entry.url_title || 'bez-nazvaniya')
     }
-    if entry.is_a? Entry::Dream
+    if entry.is_a? Post
+      post_url entry
+    elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_url(parameters)
     elsif entry.is_a? Entry::Thought
       verbose_entry_thoughts_url(parameters)

@@ -31,7 +31,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  context "editable_by?", wip: true do
+  context "editable_by?" do
     let(:user) { create :user }
     let(:post) { create :post, user: user }
 
@@ -51,6 +51,19 @@ RSpec.describe Post, type: :model do
     it "returns false for another user" do
       another_user = create :user
       expect(post).not_to be_editable_by another_user
+    end
+  end
+
+  context "visible_to?", wip: true do
+    let(:post) { create :post }
+
+    it "returns true for anonymous user" do
+      expect(post).to be_visible_to nil
+    end
+
+    it "returns true for regular user" do
+      user = create :user
+      expect(post).to be_visible_to user
     end
   end
 end
