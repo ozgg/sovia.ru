@@ -1,6 +1,6 @@
 Здравствуйте, <%= @comment.parent.user.login %>.
 
-На ваш комментарий к записи «<%= @comment.entry.parsed_title %>» на сайте sovia.ru был оставлен комментарий.
+На ваш комментарий к записи «<%= @comment.commentable.parsed_title %>» на сайте sovia.ru был оставлен комментарий.
 Посмотреть его можно по этому адресу:
 <%= comment_url @comment %>
 
