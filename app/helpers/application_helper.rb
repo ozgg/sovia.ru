@@ -58,7 +58,7 @@ module ApplicationHelper
   end
 
   def comment_url(comment)
-    entry = comment.entry
+    entry = comment.commentable
     parameters = {
         id:        entry.id,
         uri_title: entry.is_a?(Post) ? nil : (entry.url_title || 'bez-nazvaniya'),

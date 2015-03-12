@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   # post /posts
   def create
     @entry = Post.new(post_parameters.merge(user: current_user))
+    @entry.language = Language.guess_from_locale
     if @entry.save
       flash[:notice] = t('entry.post.created')
       redirect_to @entry

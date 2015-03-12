@@ -12,5 +12,7 @@ class CreatePosts < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    execute "select setval('posts_id_seq', (select max(id) from entries));"
   end
 end

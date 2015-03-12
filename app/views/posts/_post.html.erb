@@ -8,6 +8,9 @@
     </div>
   </header>
   <div>
+    <% if post.image.url %>
+        <div class="post-image"><%= link_to image_tag(post.image.post, alt: post.title), post.image.url %></div>
+    <% end %>
     <%= simple_format post.body %>
   </div>
   <footer>

@@ -21,6 +21,7 @@ ru:
       goal: "цель"
       language: "язык"
       user_role: "роль пользователя"
+      post: "публикация"
     attributes:
       entry:
         title: "Название"
@@ -72,6 +73,12 @@ ru:
           dreambook_editor: "Редактор сонника"
           dreambook_manager: "Менеджер сонника"
           posts_manager: "Менеджер публикаций"
+      post:
+        title: "название"
+        lead: "аннотация"
+        body: "текст"
+        image: "иллюстрация"
+        language: "язык"
     properties:
       entry:
         privacy:
