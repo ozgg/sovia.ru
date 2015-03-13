@@ -10,7 +10,12 @@ namespace :sitemap do
     File.open sitemap, 'w' do |f|
       f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
       Entry.public_entries.each do |entry|
-        f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+        unless entry.is_a?(Entry::Article) || entry.is_a?(Entry::Post)
+          f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+        end
+      end
+      Post.all.each do |entry|
+        f.puts "<url><loc>#{post_path entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
       end
       f.puts "</urlset>\n"
     end
