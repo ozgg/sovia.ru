@@ -5,16 +5,24 @@
         <changefreq>daily</changefreq>
     </url>
     <% Entry.public_entries.each do |entry| %>
-    <url>
-        <loc><%= verbose_entry_url entry %></loc>
-        <lastmod><%= entry.updated_at.strftime(t('date.formats.w3c')) %></lastmod>
-    </url>
+        <% unless entry.is_a?(Entry::Post) || entry.is_a?(Entry::Article) %>
+        <url>
+            <loc><%= verbose_entry_url entry %></loc>
+            <lastmod><%= entry.updated_at.w3c %></lastmod>
+        </url>
+        <% end %>
+    <% end %>
+    <% Post.all.each do |entry| %>
+        <url>
+            <loc><%= post_url entry %></loc>
+            <lastmod><%= entry.updated_at.w3c %></lastmod>
+        </url>
     <% end %>
     <% Tag::Dream.all.each do |entry| %>
         <% unless entry.description.blank? %>
         <url>
             <loc><%= dreambook_word_url letter: entry.letter, word: entry.name %></loc>
-            <lastmod><%= entry.updated_at.strftime(t('date.formats.w3c')) %></lastmod>
+            <lastmod><%= entry.updated_at.w3c %></lastmod>
         </url>
         <% end %>
     <% end %>
