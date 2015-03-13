@@ -1,5 +1,5 @@
-<% content_for :title, t('.title', title: @entry.title) %>
-<% content_for :description, t('.description', title: @entry.title, user: @entry.author_name, date: @entry.created_at.strftime('%d.%m.%Y')) %>
+<% content_for :title, @entry.title %>
+<% content_for :description, @entry.preview %>
 
 <header>
   <h1><%= t('.post') %></h1>
