@@ -66,4 +66,20 @@ RSpec.describe Post, type: :model do
       expect(post).to be_visible_to user
     end
   end
+
+  context "locale" do
+    before(:each) { I18n.default_locale = :ru }
+
+    it "returns nil for default locale" do
+      language = create :russian_language
+      post = create :post, language: language
+      expect(post.locale).to be_nil
+    end
+
+    it "returns code for non-default locale" do
+      language = create :english_language
+      post = create :post, language: language
+      expect(post.locale).to eq(language.code)
+    end
+  end
 end

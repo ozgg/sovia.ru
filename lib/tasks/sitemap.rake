@@ -15,7 +15,7 @@ namespace :sitemap do
         end
       end
       Post.all.each do |entry|
-        f.puts "<url><loc>#{post_path entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+        f.puts "<url><loc>#{post_url(locale: entry.locale, id: entry.id)}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
       end
       f.puts "</urlset>\n"
     end
