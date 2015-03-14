@@ -35,4 +35,26 @@ namespace :sitemap do
     end
   end
 
+  desc 'Generate common old-style sitemap'
+  task common: :environment do
+    sitemap = "#{Rails.root}/public/sitemap"
+    File.open sitemap, 'w' do |f|
+      f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+      f.puts "<url><loc>#{root_url}</loc><changefreq>daily</changefreq></url>"
+      Entry.public_entries.each do |entry|
+        unless entry.is_a?(Entry::Article) || entry.is_a?(Entry::Post)
+          f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+        end
+      end
+      Post.all.each do |entry|
+        f.puts "<url><loc>#{post_url(locale: entry.locale, id: entry.id)}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+      end
+      Tag::Dream.all.each do |entry|
+        unless entry.description.blank?
+          f.puts "<url><loc>#{dreambook_word_url letter: entry.letter, word: entry.name}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
+        end
+      end
+      f.puts "</urlset>"
+    end
+  end
 end
