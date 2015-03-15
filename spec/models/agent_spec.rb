@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Agent, type: :model, wip: true do
+RSpec.describe Agent, type: :model do
   context "when validating" do
     it "is invalid without name" do
       agent = build :agent, name: ''
