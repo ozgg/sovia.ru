@@ -5,6 +5,22 @@ class Agent < ActiveRecord::Base
 
   has_many :agent_requests, dependent: :destroy
 
+  # Get instance of Agent for given string
+  #
+  # Trims agent name upto 255 characters
+  #
+  # @param [String] name
+  # @return [Agent]
+  def self.for_string(name)
+    name = name[0..254]
+    agent = self.find_by_name name
+    if agent.nil?
+      agent = self.create name: name
+    end
+
+    agent
+  end
+
   # Increments requests counter for this agent for today
   #
   # @return [AgentRequest]

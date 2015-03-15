@@ -26,7 +26,7 @@ RSpec.describe Agent, type: :model do
     end
   end
 
-  context "#add_request", wip: true do
+  context "#add_request" do
     let(:agent) { create :agent }
 
     it "creates new record with 1 request for new date" do
@@ -45,6 +45,32 @@ RSpec.describe Agent, type: :model do
       expect(agent_request).to eq(existing_request)
       requests_after = existing_request.requests_count
       expect(requests_after - requests_before).to eq(1)
+    end
+  end
+
+  context "#for_string" do
+    it "returns instance of Agent" do
+      expect(Agent.for_string('Agent/1.0')).to be_an(Agent)
+    end
+
+    it "returns Agent when name is in database" do
+      agent = create :agent
+      expect(Agent.for_string(agent.name)).to eq(agent)
+    end
+
+    it "creates new Agent for non-existing agent" do
+      count_before = Agent.count
+      name = 'Agent/1.0 (test)'
+      agent = Agent.for_string name
+      expect(Agent.count - count_before).to eq(1)
+      expect(agent.name).to eq(name)
+    end
+
+    it "trims Agent name to fit 255 symbols" do
+      name = 'A'
+      255.times { name += 'a' }
+      agent = Agent.for_string name
+      expect(agent.name.length).to eq(255)
     end
   end
 end
