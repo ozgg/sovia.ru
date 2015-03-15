@@ -23,6 +23,7 @@ en:
       user_role: "user role"
       post: "post"
       agent: "user agent"
+      agent_request: "request from user agent"
     attributes:
       entry:
         title: "title"
@@ -82,6 +83,8 @@ en:
         language: "language"
       agent:
         name: "name"
+        is_bot: "it is bot"
+      agent_request:
         day: "date"
         requests_count: "number of requests"
     properties:
@@ -841,3 +844,7 @@ en:
       description: "Administrative page with requests of user agent %{name}"
     agent:
       recent_requests: "Recent requests"
+    edit:
+      title: "Editing user agent"
+      description: "Administrative section with user agent editing form"
+      header: "Editing user agent"
