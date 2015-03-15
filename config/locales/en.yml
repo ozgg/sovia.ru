@@ -824,3 +824,5 @@ en:
   i: "I"
   link: "Link"
   hidden: "Hidden"
+  agent:
+    updated: "Agent updated"

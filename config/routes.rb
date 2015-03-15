@@ -47,6 +47,7 @@ Sovia::Application.routes.draw do
     resources :users, only: [:new, :create]
     resources :comments, only: [:index, :create]
     resources :deeds, :goals, :languages, :posts
+    resources :agents, only: [:index, :show, :edit, :update]
 
     namespace :my do
       get '/' => 'index#index'

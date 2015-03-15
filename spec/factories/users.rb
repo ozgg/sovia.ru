@@ -13,8 +13,14 @@ FactoryGirl.define do
     end
 
     factory :posts_manager do
-      after(:create) do |user, evaluator|
+      after(:create) do |user|
         user.roles = { :posts_manager => 1 }
+      end
+    end
+
+    factory :administrator do
+      after(:create) do |user|
+        user.roles = { :administrator => 1 }
       end
     end
   end

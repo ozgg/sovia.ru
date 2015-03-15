@@ -831,3 +831,5 @@ ru:
   i: "я"
   link: "Ссылка"
   hidden: "Скрыто"
+  agent:
+    updated: "Агент изменён"
