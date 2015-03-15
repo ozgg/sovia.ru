@@ -38,7 +38,6 @@ RSpec.describe Agent, type: :model do
     end
 
     it "increments requests_count for existing date" do
-      pending 'waiting for agent_request#today_for_agent'
       existing_request = create :agent_request, agent: agent
       requests_before  = existing_request.requests_count
       agent_request = agent.add_request

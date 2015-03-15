@@ -29,7 +29,7 @@ RSpec.describe AgentRequest, type: :model do
     end
   end
 
-  context "#today_for_agent", wip: true do
+  context "#today_for_agent" do
     it "returns nil when no requests for given agent today" do
       agent = create :agent
       agent_request = AgentRequest.today_for_agent agent
