@@ -2,59 +2,57 @@ require 'rails_helper'
 
 RSpec.describe AgentsController, type: :controller, wip: true do
   let(:agent) { create :agent }
+  let(:user) { create :administrator }
 
-  context "for user without administrator role" do
-    shared_examples_for 'blocker' do
-      it "raises UnauthorizedException" do
-        expect(action).to raise_exception(ApplicationController::UnauthorizedException)
-      end
-    end
+  before :each do
+    session[:user_id] = user.id
+    allow(controller).to receive(:allow_administrators_only)
+    expect(controller).to receive(:allow_administrators_only)
+  end
 
-    before(:each) { session[:user_id] = nil }
-
-    describe "GET #index" do
-      let(:action) { -> { get :index } }
-      it_should_behave_like 'blocker'
-    end
-
-    describe "GET #show" do
-      let(:action) { -> { get :show, id: agent } }
-      it_should_behave_like 'blocker'
-    end
-
-    describe "GET #edit" do
-      let(:action) { -> { get :edit, id: agent } }
-      it_should_behave_like 'blocker'
-    end
-
-    describe "PATCH #update" do
-      let(:action) { -> { patch :update, id: agent } }
-      it_should_behave_like 'blocker'
+  shared_examples 'successful response' do
+    it "returns HTTP success" do
+      expect(response).to have_http_status(:success)
     end
   end
 
-  context "for user with administrator role" do
-    before(:each) { session[:user_id] = create(:administrator).id }
+  shared_examples 'setting agent' do
+    it "assigns Agent to @agent" do
+      expect(assigns(:agent)).to eq(agent)
+    end
+  end
 
-    describe "GET #index" do
-      it "returns http success" do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
+  describe "GET #index" do
+    before(:each) { get :index }
+
+    it "assigns list of agents to @agents" do
+      expect(assigns(:agents)).not_to be_nil
     end
 
-    describe "GET #show" do
-      it "returns http success" do
-        get :show, id: agent
-        expect(response).to have_http_status(:success)
-      end
-    end
+    it_should_behave_like 'successful response'
+  end
 
-    describe "GET #edit" do
-      it "returns http success" do
-        get :edit, id: agent
-        expect(response).to have_http_status(:success)
-      end
+  describe "GET #show" do
+    before(:each) { get :show, id: agent }
+
+    it_should_behave_like 'setting agent'
+    it_should_behave_like 'successful response'
+  end
+
+  describe "GET #edit" do
+    before(:each) { get :edit, id: agent }
+
+    it_should_behave_like 'setting agent'
+    it_should_behave_like 'successful response'
+  end
+
+  describe "PATCH #update" do
+    before(:each) { patch :update, id: agent, agent: { is_bot: true } }
+
+    it_should_behave_like 'setting agent'
+
+    it "redirects to agent" do
+      expect(response).to redirect_to(agent)
     end
   end
 end
