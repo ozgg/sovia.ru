@@ -1,4 +1,6 @@
 class IndexController < ApplicationController
+  after_action :track_agent
+
   # get /
   def index
     @entries = Entry.recent_entries

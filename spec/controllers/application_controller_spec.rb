@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
   describe '#track_agent' do
-    it "calls Agent#from_string with user-agent from request" do
+    it "calls Agent#for_string with user-agent from request" do
       agent = create :agent
       allow(request).to receive(:user_agent).and_return(agent.name)
       allow(Agent).to receive(:for_string).with(agent.name).and_return(agent)
