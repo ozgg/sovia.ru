@@ -33,4 +33,11 @@ class Agent < ActiveRecord::Base
       agent_request
     end
   end
+
+  # Get 50 most recent requests for this agent
+  #
+  # @return [AgentRequest[]]
+  def recent_requests
+    agent_requests.order('day desc').first(50)
+  end
 end

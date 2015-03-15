@@ -22,6 +22,7 @@ ru:
       language: "язык"
       user_role: "роль пользователя"
       post: "публикация"
+      agent: "агент пользователя"
     attributes:
       entry:
         title: "Название"
@@ -79,6 +80,10 @@ ru:
         body: "текст"
         image: "иллюстрация"
         language: "язык"
+      agent:
+        name: "название"
+        day: "дата"
+        requests_count: "количество запросов"
     properties:
       entry:
         privacy:
@@ -838,3 +843,5 @@ ru:
       title: "Агенты пользователей, страница %{page}"
       description: "Административный раздел со списком агентов пользователя, страница %{page}"
       header: "Агенты пользователя"
+    agent:
+      recent_requests: "Последние запросы"

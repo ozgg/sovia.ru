@@ -1,2 +1,15 @@
-<h1>Agents#show</h1>
-<p>Find me in app/views/agents/show.html.erb</p>
+<% content_for :title, t('.title', name: @agent.name) %>
+<% content_for :description, t('.description', name: @agent.name) %>
+
+<article>
+  <header>
+    <h1><%= @agent.name %></h1>
+    <nav>
+      <ul>
+        <li><%= link_to t(:edit), edit_agent_path(@agent) %></li>
+      </ul>
+    </nav>
+  </header>
+
+  <%= render @agent %>
+</article>

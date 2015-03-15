@@ -22,6 +22,7 @@ en:
       language: "language"
       user_role: "user role"
       post: "post"
+      agent: "user agent"
     attributes:
       entry:
         title: "title"
@@ -79,6 +80,10 @@ en:
         body: "text"
         image: "image"
         language: "language"
+      agent:
+        name: "name"
+        day: "date"
+        requests_count: "number of requests"
     properties:
       entry:
         privacy:
@@ -831,3 +836,8 @@ en:
       title: "User agents, page %{page}"
       description: "Administrative section with list of user agents, page %{page}"
       header: "User agents"
+    show:
+      title: "User agent \"%{name}\""
+      description: "Administrative page with requests of user agent %{name}"
+    agent:
+      recent_requests: "Recent requests"

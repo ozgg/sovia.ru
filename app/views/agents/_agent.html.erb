@@ -1,0 +1,17 @@
+<table>
+  <caption><%= t('.recent_requests') %></caption>
+  <thead>
+  <tr>
+    <th><%= t('activerecord.attributes.agent.day') %></th>
+    <th><%= t('activerecord.attributes.agent.requests_count') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% agent.recent_requests.each do |agent_request| %>
+  <tr>
+    <th><%= agent_request.day %></th>
+    <td><%= agent_request.requests_count %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
