@@ -64,4 +64,10 @@ class ApplicationController < ActionController::Base
   def allow_administrators_only
     demand_role :administrator
   end
+
+  # Track request for current user agent
+  def track_agent
+    agent = Agent.for_string request.user_agent
+    agent.add_request if agent.is_a? Agent
+  end
 end
