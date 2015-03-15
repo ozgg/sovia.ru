@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AgentsController, type: :controller, wip: true do
+RSpec.describe AgentsController, type: :controller do
   let(:agent) { create :agent }
   let(:user) { create :administrator }
 

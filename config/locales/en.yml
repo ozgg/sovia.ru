@@ -826,3 +826,8 @@ en:
   hidden: "Hidden"
   agent:
     updated: "Agent updated"
+  agents:
+    index:
+      title: "User agents, page %{page}"
+      description: "Administrative section with list of user agents, page %{page}"
+      header: "User agents"
