@@ -25,4 +25,8 @@ RSpec.describe Agent, type: :model do
       expect(agent).to be_valid
     end
   end
+
+  context "#add_request", wip: true do
+    pending
+  end
 end
