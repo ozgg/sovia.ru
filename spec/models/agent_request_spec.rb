@@ -28,4 +28,19 @@ RSpec.describe AgentRequest, type: :model do
       expect(agent_request).to be_valid
     end
   end
+
+  context "#today_for_agent", wip: true do
+    it "returns nil when no requests for given agent today" do
+      agent = create :agent
+      agent_request = AgentRequest.today_for_agent agent
+      expect(agent_request).to be_nil
+    end
+
+    it "returns instance of AgentRequest for existing requests today" do
+      agent = create :agent
+      create :agent_request, agent: agent
+      agent_request = AgentRequest.today_for_agent agent
+      expect(agent_request).to be_an(AgentRequest)
+    end
+  end
 end

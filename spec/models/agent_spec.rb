@@ -27,6 +27,25 @@ RSpec.describe Agent, type: :model do
   end
 
   context "#add_request", wip: true do
-    pending
+    let(:agent) { create :agent }
+
+    it "creates new record with 1 request for new date" do
+      agent_request = agent.add_request
+      expect(agent_request).to be_an(AgentRequest)
+      expect(agent_request).to be_persisted
+      expect(agent_request.requests_count).to eq(1)
+      expect(agent_request.day).to eq(DateTime.now.to_date)
+    end
+
+    it "increments requests_count for existing date" do
+      pending 'waiting for agent_request#today_for_agent'
+      existing_request = create :agent_request, agent: agent
+      requests_before  = existing_request.requests_count
+      agent_request = agent.add_request
+      existing_request.reload
+      expect(agent_request).to eq(existing_request)
+      requests_after = existing_request.requests_count
+      expect(requests_after - requests_before).to eq(1)
+    end
   end
 end
