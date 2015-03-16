@@ -1,4 +1,7 @@
 class ErrorsController < ApplicationController
+  skip_before_action :set_locale
+  skip_after_action :track_agent
+
   layout 'errors'
 
   def not_found
