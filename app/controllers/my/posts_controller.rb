@@ -3,6 +3,6 @@ class My::PostsController < ApplicationController
 
   def index
     page     = params[:page] || 1
-    @entries = Entry::Post.where(user: current_user).order('id desc').page(page).per(5)
+    @entries = Post.where(user: current_user).order('id desc').page(page).per(5)
   end
 end
