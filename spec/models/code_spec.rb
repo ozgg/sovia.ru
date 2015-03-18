@@ -21,13 +21,13 @@ describe Code, type: :model do
     end
   end
 
-  describe '#track', wip: true do
+  describe '#track!' do
     it 'updates ip and agent' do
       ip    = '127.0.0.1'
       agent = create :agent
       code  = create :email_confirmation
-      expect(code).to receive(:update).with(ip: ip, agent: agent)
-      code.track ip, agent
+      expect(code).to receive(:update!).with(ip: ip, agent: agent)
+      code.track! ip, agent
     end
   end
 end

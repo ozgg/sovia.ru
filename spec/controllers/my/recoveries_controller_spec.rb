@@ -48,10 +48,11 @@ RSpec.describe My::RecoveriesController, type: :controller, wip: true do
   end
 
   describe 'post create' do
+    let(:ip) { '127.0.0.1' }
     let(:agent) { create :agent }
 
     before :each do
-      allow(request).to receive(:remote_ip).and_return('127.0.0.1')
+      allow(request).to receive(:remote_ip).and_return(ip)
       allow(controller).to receive(:agent).and_return(agent)
     end
 
@@ -63,12 +64,19 @@ RSpec.describe My::RecoveriesController, type: :controller, wip: true do
         expect(-> { post :create, parameters }).to change(Code::Recovery, :count).by(1)
       end
 
-      it 'sets user ip in created code' do
+      it 'tracks IP and UA for code' do
+        expect_any_instance_of(Code::Recovery).to receive(:track!).with(ip, agent)
         post :create, parameters
       end
-      it 'sets user agent in created code'
-      it 'sends message with code to user'
-      it 'redirects to recovery page'
+
+      it 'sends message with code to user' do
+        expect(-> { post :create, parameters }).to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      it 'redirects to recovery page' do
+        post :create, parameters
+        expect(response).to redirect_to(my_recovery_path)
+      end
     end
 
     context 'when email is not set' do

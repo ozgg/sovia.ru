@@ -41,11 +41,13 @@ class My::RecoveriesController < ApplicationController
     params.require(:user).permit(:password, :password_confirmation)
   end
 
+  # @param [User] user
   def send_code(user)
     code = user.password_recovery
     if code.nil?
       flash[:notice] = t('code.generation_error')
     else
+      code.track! request.remote_ip, agent
       CodeSender.password(code).deliver
       flash[:notice] = t('recovery_code_sent')
     end
