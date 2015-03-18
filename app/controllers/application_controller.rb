@@ -66,9 +66,16 @@ class ApplicationController < ActionController::Base
     demand_role :administrator
   end
 
+  # Get current user agent
+  #
+  # @return [Agent]
+  def agent
+    @agent ||= Agent.for_string request.user_agent
+  end
+
   # Track request for current user agent
   def track_agent
-    agent = Agent.for_string request.user_agent
-    agent.add_request if agent.is_a? Agent
+    user_agent = agent
+    user_agent.add_request if user_agent.is_a? Agent
   end
 end
