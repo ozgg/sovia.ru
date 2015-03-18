@@ -60,8 +60,9 @@ RSpec.describe My::RecoveriesController, type: :controller do
       let(:user) { create :unconfirmed_user }
       let(:parameters) { { email: user.email } }
 
-      it 'creates new code in database' do
-        expect(-> { post :create, parameters }).to change(Code::Recovery, :count).by(1)
+      it 'calls #password_recovery for user' do
+        expect_any_instance_of(User).to receive(:password_recovery)
+        post :create, parameters
       end
 
       it 'tracks IP and UA for code' do

@@ -12,6 +12,7 @@ class My::ConfirmationsController < ApplicationController
       flash[:notice] = t('code.generation_error')
       redirect_to my_confirmation_path
     else
+      code.track! request.remote_ip, agent
       CodeSender.email(code).deliver
       flash[:notice] = t('email_confirmation_sent')
       redirect_to my_confirmation_path
