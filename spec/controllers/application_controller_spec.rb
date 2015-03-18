@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ApplicationController, type: :controller, wip: true do
+RSpec.describe ApplicationController, type: :controller do
   let!(:agent) { create :agent }
 
   describe '#track_agent' do

@@ -6,7 +6,6 @@ RSpec.describe AgentsController, type: :controller do
 
   before :each do
     session[:user_id] = user.id
-    allow(controller).to receive(:allow_administrators_only)
     expect(controller).to receive(:allow_administrators_only)
   end
 

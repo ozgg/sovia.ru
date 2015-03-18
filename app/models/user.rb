@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
     use_gravatar? && !email.blank? && mail_confirmed?
   end
 
+  def filled_email?
+    !email.blank?
+  end
+
   def gravatar_image(size)
     image = Digest::MD5.hexdigest(email.downcase)
     "http://www.gravatar.com/avatar/#{image}?s=#{size}&d=identicon"
