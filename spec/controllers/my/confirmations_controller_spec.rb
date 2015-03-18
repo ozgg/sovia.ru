@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe My::ConfirmationsController, type: :controller, wip: true do
+RSpec.describe My::ConfirmationsController, type: :controller do
   let(:user) { create :unconfirmed_user }
 
   before :each do
@@ -82,6 +82,56 @@ RSpec.describe My::ConfirmationsController, type: :controller, wip: true do
 
     context 'validating and tracking' do
       before(:each) { post :create }
+
+      it_should_behave_like 'validating and tracking'
+    end
+  end
+
+  describe 'patch update', wip: true do
+    let(:code) { create :email_confirmation }
+    let(:parameters) { { code: code.body } }
+
+    before(:each) { session[:user_id] = code.user_id }
+
+    context 'when code is valid' do
+      it 'sets code as active' do
+        patch :update, parameters
+        code.reload
+        expect(code).to be_activated
+      end
+
+      it 'updates confirmation flag for user' do
+        expect_any_instance_of(User).to receive(:update).with(mail_confirmed: true)
+        patch :update, parameters
+      end
+
+      it 'redirects to profile page' do
+        patch :update, parameters
+        expect(response).to redirect_to(my_profile_path)
+      end
+    end
+
+    context 'when code is invalid' do
+      let(:code) { create :email_confirmation }
+      let(:parameters) { { code: 'invalid' } }
+
+      it 'leaves code intact' do
+        expect(-> { patch :update, parameters }).not_to change(code, :activated)
+      end
+
+      it 'leaves user intact' do
+        expect_any_instance_of(User).not_to receive(:update)
+        patch :update, parameters
+      end
+
+      it 'redirects to confirmation page' do
+        patch :update, parameters
+        expect(response).to redirect_to(my_confirmation_path)
+      end
+    end
+
+    context 'tracking and validating' do
+      before(:each) { patch :update }
 
       it_should_behave_like 'validating and tracking'
     end
