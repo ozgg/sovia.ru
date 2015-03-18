@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Code do
+describe Code, type: :model do
   let(:code) { build(:code) }
 
   it "is invalid without body" do
