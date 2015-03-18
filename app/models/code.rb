@@ -10,6 +10,14 @@ class Code < ActiveRecord::Base
     find_by(user: user, activated: false) || self.create!(user: user)
   end
 
+  # Track IP-address and user agent for the recent usage
+  #
+  # @param [String] ip
+  # @param [Agent] agent
+  def track(ip, agent)
+    update(ip: ip, agent: agent)
+  end
+
   protected
 
   def set_email_as_payload

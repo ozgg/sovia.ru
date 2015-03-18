@@ -48,9 +48,24 @@ RSpec.describe My::RecoveriesController, type: :controller, wip: true do
   end
 
   describe 'post create' do
+    let(:agent) { create :agent }
+
+    before :each do
+      allow(request).to receive(:remote_ip).and_return('127.0.0.1')
+      allow(controller).to receive(:agent).and_return(agent)
+    end
+
     context 'when email is set' do
-      it 'creates new code in database'
-      it 'sets user ip in created code'
+      let(:user) { create :unconfirmed_user }
+      let(:parameters) { { email: user.email } }
+
+      it 'creates new code in database' do
+        expect(-> { post :create, parameters }).to change(Code::Recovery, :count).by(1)
+      end
+
+      it 'sets user ip in created code' do
+        post :create, parameters
+      end
       it 'sets user agent in created code'
       it 'sends message with code to user'
       it 'redirects to recovery page'
