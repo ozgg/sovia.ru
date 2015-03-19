@@ -36,11 +36,41 @@ RSpec.describe My::ConfirmationsController, type: :controller do
   end
 
   describe '#redirect_confirmed_user' do
-    pending
+    before(:each) { allow(controller).to receive(:redirect_confirmed_user).and_call_original }
+
+    context 'when user is confirmed' do
+      it 'redirects to user profile path' do
+        expect(controller).to receive(:redirect_to).with(my_profile_path)
+        session[:user_id] = create(:confirmed_user).id
+        controller.send(:redirect_confirmed_user)
+      end
+    end
+
+    context 'when user is not confirmed' do
+      it 'returns nil' do
+        session[:user_id] = create(:unconfirmed_user).id
+        expect(controller.send(:redirect_confirmed_user)).to be_nil
+      end
+    end
   end
 
   describe '#redirect_without_email' do
-    pending
+    before(:each) { allow(controller).to receive(:redirect_without_email).and_call_original }
+
+    context 'when user has no email' do
+      it 'redirects to user profile editing path' do
+        expect(controller).to receive(:redirect_to).with(edit_my_profile_path)
+        session[:user_id] = create(:user).id
+        controller.send(:redirect_without_email)
+      end
+    end
+
+    context 'when user has email' do
+      it 'returns nil' do
+        session[:user_id] = create(:unconfirmed_user).id
+        expect(controller.send(:redirect_without_email)).to be_nil
+      end
+    end
   end
 
   describe 'get show' do
@@ -87,7 +117,7 @@ RSpec.describe My::ConfirmationsController, type: :controller do
     end
   end
 
-  describe 'patch update', wip: true do
+  describe 'patch update' do
     let(:code) { create :email_confirmation }
     let(:parameters) { { code: code.body } }
 
