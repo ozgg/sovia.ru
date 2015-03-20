@@ -9,9 +9,9 @@
   </header>
 
   <% if @agents.any? %>
-      <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
+      <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>" class="agents">
         <% @agents.each do |agent| %>
-            <li><%= link_to agent.name, agent_path(agent) %></li>
+            <li <%= raw 'class="bot"' if agent.is_bot? %>><%= link_to agent.name, agent_path(agent) %></li>
         <% end %>
       </ol>
 
