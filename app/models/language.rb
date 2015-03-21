@@ -9,6 +9,18 @@ class Language < ActiveRecord::Base
     end
   end
 
+  # Get languages for using as options for select
+  #
+  # @return [Array]
+  def self.languages_for_select
+    languages = [[I18n.t(:not_selected), '']]
+    self.all.each do |language|
+      languages << [language.i18n_name, language.id]
+    end
+
+    languages
+  end
+
   def self.guess_from_locale
     self.find_by_code I18n.locale
   end

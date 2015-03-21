@@ -49,6 +49,7 @@ ru:
             female: "Женский"
             male: "Мужской"
         roles: "Роли"
+        language: "основной язык"
       comment:
         body: "Комментарий"
       deed:

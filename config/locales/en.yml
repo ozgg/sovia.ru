@@ -49,6 +49,7 @@ en:
             female: "female"
             male: "male"
         roles: "roles"
+        language: "default language"
       comment:
         body: "comment"
       deed:

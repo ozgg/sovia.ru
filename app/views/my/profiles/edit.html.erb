@@ -49,6 +49,10 @@
           <%= label_tag :profile_gender, t('activerecord.attributes.user.gender') %>
           <%= select_tag 'profile[gender]', options_for_select(User.genders_for_select, selected: current_user.gender) %>
         </div>
+        <div>
+          <%= label_tag :profile_language_id, t('activerecord.attributes.user.language') %>
+          <%= select_tag 'profile[language_id]', options_for_select(Language.languages_for_select, selected: current_user.language_id) %>
+        </div>
       </fieldset>
       <fieldset>
         <legend><%= t('.sensitive_parameters') %></legend>
