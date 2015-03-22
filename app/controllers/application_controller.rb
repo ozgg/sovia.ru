@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     locale_for_user = Language.locale_for_user current_user
     locale_from_params = params[:locale] # || http_accept_language.compatible_language_from(I18n.available_locales)
-    I18n.locale = locale_for_user || locale_from_params || I18n.default_locale
+    I18n.locale = locale_from_params || locale_for_user || I18n.default_locale
   end
 
   def record_not_found
@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   #
   # @return [Agent]
   def agent
-    @agent ||= Agent.for_string request.user_agent
+    @agent ||= Agent.for_string(request.user_agent || 'n/a')
   end
 
   # Track request for current user agent
