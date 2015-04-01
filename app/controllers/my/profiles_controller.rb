@@ -24,6 +24,7 @@ class My::ProfilesController < ApplicationController
 
   def update_common_parameters
     if current_user.update(common_parameters)
+      current_user.language_ids = params[:user][:language_ids] || []
       flash[:notice] = t('profile.updated')
       redirect_to my_profile_path
     else

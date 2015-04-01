@@ -101,10 +101,10 @@ class User < ActiveRecord::Base
   end
 
   def language_ids=(ids)
-    ids.map! { |id| id.to_i }
+    ids.each { |index, id| ids[index] = id.to_i }
     Language.all.each do |language|
-      linked = ids.include? language.id
-      UserLanguage.set_link id, language.id, linked
+      linked = ids.has_value? language.id
+      UserLanguage.set_link self.id, language.id, linked
     end
   end
 

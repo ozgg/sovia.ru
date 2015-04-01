@@ -49,9 +49,18 @@
           <%= label_tag :profile_gender, t('activerecord.attributes.user.gender') %>
           <%= select_tag 'profile[gender]', options_for_select(User.genders_for_select, selected: current_user.gender) %>
         </div>
+      </fieldset>
+      <fieldset>
+        <legend><%= t('my.profiles.show.languages') %></legend>
         <div>
           <%= label_tag :profile_language_id, t('activerecord.attributes.user.language') %>
           <%= select_tag 'profile[language_id]', options_for_select(Language.languages_for_select, selected: current_user.language_id) %>
+        </div>
+        <div>
+          <% Language.all.each do |language| %>
+              <%= check_box_tag "user[language_ids][#{language.id}]", language.id, current_user.has_language?(language) %>
+              <%= label_tag "user_language_ids_#{language.id}", language.i18n_name %><br/>
+          <% end %>
         </div>
       </fieldset>
       <fieldset>

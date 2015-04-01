@@ -17,4 +17,8 @@ class UserLanguage < ActiveRecord::Base
       link.destroy unless link.nil?
     end
   end
+
+  def i18n_name
+    language.i18n_name
+  end
 end
