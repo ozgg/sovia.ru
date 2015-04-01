@@ -524,6 +524,7 @@ ru:
         title: "Мой профиль"
         header: "Мой профиль"
         description: "Страница просмотра вашего профиля на Совии."
+        languages: "Языки"
     recoveries:
       show:
         code: "Код из письма"

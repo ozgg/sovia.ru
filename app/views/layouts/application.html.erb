@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="<%= locale %>">
 <head>
+  <meta charset="utf-8" />
   <title><%= yield :title %> :: <%= t('.title') %></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
@@ -23,8 +24,9 @@
   <meta name="msapplication-TileColor" content="#2b5797" />
   <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
   <meta name="theme-color" content="#ffffff" />
-  <meta charset="utf-8" />
+  <% if content_for? :descrption %>
   <meta name="description" content="<%= yield :description %>" />
+  <% end %>
 </head>
 <body>
 <header>

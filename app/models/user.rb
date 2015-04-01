@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  ROLE_ANYONE    = 0
-  ROLE_EDITOR    = 1
-  ROLE_MODERATOR = 2
-  ROLE_DECENT    = 4
+  ROLE_ANYONE        = 0
+  ROLE_EDITOR        = 1
+  ROLE_MODERATOR     = 2
+  ROLE_DECENT        = 4
   ROLE_ADMINISTRATOR = 5
 
   GENDER_FEMALE = 0
@@ -98,6 +98,24 @@ class User < ActiveRecord::Base
       else
         I18n.t 'not_selected'
     end
+  end
+
+  def language_ids=(ids)
+    ids.map! { |id| id.to_i }
+    Language.all.each do |language|
+      linked = ids.include? language.id
+      UserLanguage.set_link id, language.id, linked
+    end
+  end
+
+  def has_language?(language)
+    !UserLanguage.by_pair(self, language).nil?
+  end
+
+  def language_names
+    names = [language ? language.i18n_name : I18n.t(:not_selected) ]
+    UserLanguage.where(user: self).each { |l| names << l.i18n_name }
+    names.uniq
   end
 
   protected

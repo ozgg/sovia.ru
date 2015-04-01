@@ -26,8 +26,8 @@
           <div class="flag"><%= t('activerecord.attributes.user.allow_mail') %></div>
       <% end %>
       <% if current_user.mail_confirmed? %>
-      <div class="flag"><%= t('user.email_confirmed') %></div>
-          <% else %>
+          <div class="flag"><%= t('user.email_confirmed') %></div>
+      <% else %>
           <%= form_tag my_confirmation_path, method: :post do %>
               <%= button_tag t('.send_code'), type: :submit %>
           <% end %>
@@ -38,6 +38,14 @@
       <ul>
         <li><%= t('.entries_count') %>: <%= current_user.entries_count %></li>
         <li><%= t('.comments_count') %>: <%= current_user.comments_count %></li>
+      </ul>
+    </dd>
+    <dt><%= t('.languages') %></dt>
+    <dd>
+      <ul>
+        <% current_user.language_names.each do |language_name| %>
+        <li><%= language_name %></li>
+        <% end %>
       </ul>
     </dd>
   </dl>

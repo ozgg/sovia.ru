@@ -521,6 +521,7 @@ en:
         title: "My profile"
         header: "My profile"
         description: "Page with your profile on Sovia."
+        languages: "Languages"
     recoveries:
       show:
         code: "The code from letter"
