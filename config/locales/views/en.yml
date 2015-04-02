@@ -1,1 +1,4 @@
 en:
+  layouts:
+    application:
+      title: "Sovia"
