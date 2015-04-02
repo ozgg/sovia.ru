@@ -1,0 +1,10 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              unreasonable: "не выглядит как e-mail"
+            login:
+              invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"

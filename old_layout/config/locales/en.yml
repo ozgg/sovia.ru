@@ -1,13 +1,5 @@
 en:
   activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            email:
-              unreasonable: "doesn't look like как e-mail"
-            login:
-              invalid: "must contain 1 to 30 english letters, digits or underscores"
     models:
       entry_dream: "dream"
       entry_article: "article"
