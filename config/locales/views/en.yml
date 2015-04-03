@@ -2,6 +2,7 @@ en:
   layouts:
     application:
       title: "Sovia"
+      notice: "Notice"
     main_navigation:
       aria_label: "Main menu"
       posts: "Posts"

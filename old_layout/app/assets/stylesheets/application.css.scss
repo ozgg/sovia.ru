@@ -30,87 +30,6 @@ progress {
 }
 
 body {
-  > header {
-
-    > figure {
-      margin: 0 300px 0 0;
-    }
-
-    > nav {
-      margin: 0 300px 0 0;
-
-      ul {
-        margin: 0;
-        padding: 0;
-
-        li {
-          list-style: none;
-          margin: 0;
-          display: inline-block;
-          width: 150px;
-          text-align: center;
-
-          &:first-child {
-            padding-left: 0;
-          }
-
-        }
-      }
-    }
-
-    > div:last-of-type {
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 300px;
-      height: 150px;
-
-      > form {
-        margin: 0;
-        padding: 16px;
-
-        h3 {
-          font-weight: normal;
-          font-variant: normal;
-        }
-
-        > div {
-          width: 230px;
-          margin: 0 auto;
-          white-space: nowrap;
-        }
-
-        label {
-          display: inline-block;
-          width: 70px;
-        }
-
-        button {
-          width: 70px;
-        }
-      }
-
-      > figure {
-        img {
-          margin: 0;
-          padding: 15px;
-          float: right;
-        }
-
-        figcaption {
-          padding: 15px 0 0 15px;
-        }
-      }
-
-      a:link, a:visited {
-        color: #bdd4da;
-      }
-
-      a:hover {
-        color: #ff9600;
-      }
-    }
-  }
 
   > section:first-of-type {
     background: #ffffff;
@@ -182,25 +101,8 @@ body {
     }
   }
 
-  > footer:last-of-type {
-    color: #dadada;
-    font-size: 0.8em;
-
-    a:link, a:visited {
-      color: #bdd4da;
-    }
-
-    > div {
-      float: left;
-      padding: 0 1em 0 0;
-    }
-  }
 }
 
-input, textarea, button {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 0.9em;
-}
 
 form {
   > div {
@@ -269,17 +171,6 @@ form {
 
 label:first-letter {
   text-transform: capitalize;
-}
-
-div.message, div#notice {
-  border: solid #478043 2px;
-  border-radius: 0.5em;
-  background: #e0ffd8;
-  color: #002000;
-  font-weight: bold;
-  text-align: center;
-  margin: 16px 316px 16px 32px;
-  padding: 0.5em;
 }
 
 div.social-buttons {

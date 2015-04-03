@@ -11,19 +11,25 @@
   <%= render 'layouts/head_links' %>
 </head>
 <body>
+
 <%= render 'layouts/header' %>
 
-<section role="main">
-  <% if flash[:notice] %>
-      <div id="notice" aria-label="<%= t('.notice') %>"><%= flash[:notice] %></div>
-  <% end %>
-  <%= yield %>
-</section>
+<div id="content">
+  <div id="main" role="main">
+    <% if flash[:notice] %>
+        <div class="notice" aria-label="<%= t('.notice') %>"><%= flash[:notice] %></div>
+    <% end %>
 
-<footer>
-  <div role="contentinfo">&copy; 2006&ndash;2015 sovia.ru</div>
-  <div role="contentinfo"><%= link_to t('.terms_of_service'), tos_path %></div>
-  <%= yield :metrics %>
-</footer>
+    <%= yield %>
+  </div>
+
+  <div id="sidebar" role="complementary">
+    Sidebar
+    <%= yield :sidebar %>
+  </div>
+</div>
+
+<%= render 'layouts/footer' %>
+
 </body>
 </html>

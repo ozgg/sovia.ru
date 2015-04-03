@@ -2,6 +2,7 @@ ru:
   layouts:
     application:
       title: "Совия"
+      notice: "Уведомление"
     main_navigation:
       aria_label: "Главное меню"
       posts: "Публикации"
@@ -18,3 +19,6 @@ ru:
       logout: "Выйти"
       deeds: "Журнал успеха"
       dashboard: "Кабинет"
+  about:
+    terms_of_service:
+      title: "Пользовательское соглашение"

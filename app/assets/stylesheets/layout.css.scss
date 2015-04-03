@@ -29,6 +29,11 @@ a:visited {
   color: #3e5c88;
 }
 
+input, textarea, button {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 0.9em;
+}
+
 body {
   margin: 0 auto;
   padding: 0;
@@ -147,4 +152,47 @@ body {
       }
     }
   }
+
+  > footer {
+    color: #dadada;
+    font-size: 0.8em;
+
+    a:link, a:visited {
+      color: #bdd4da;
+    }
+
+    > div {
+      float: left;
+      padding: 0 1em 0 0;
+    }
+  }
+}
+
+div#content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+div.notice {
+  border: solid #478043 2px;
+  border-radius: 0.5em;
+  background: #e0ffd8;
+  color: #002000;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 32px;
+  padding: 0.5em;
+}
+
+div#main {
+  margin-right: 300px;
+  padding: 15px;
+}
+
+div#sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
 }
