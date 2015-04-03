@@ -580,7 +580,6 @@ ru:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
     update_error: "Ошибка обновления профиля"
-  submit: "Отправить"
   email_not_found: "Указанный e-mail адрес не найден"
   recovery_code_sent: "Код сброса пароля отправлен"
   recovery_code_failure: "Не удалось создать код"
@@ -720,9 +719,6 @@ ru:
       title: "Редактирование успеха"
       header: "Редактирование успеха"
       description: "Страница редактирования записи в журнале успеха."
-    form:
-      today_i: "Сегодня я"
-      to_accomplish: ", чтобы"
   grains:
     index:
       title: "Зёрна восприятия"
@@ -770,7 +766,6 @@ ru:
       header: "Постановка и достижение целей"
   text: "текст"
   dummy_name: "Вася Пупкин"
-  be_better: "Быть лучше"
   language:
     created: "Язык добавлен"
     updated: "Язык изменён"

@@ -582,7 +582,6 @@ en:
     updated: "Profile updated"
     incorrect_password: "Old password is incorrect"
     update_error: "Error updating profile"
-  submit: "Submit"
   email_not_found: "Given e-mail was not found"
   recovery_code_sent: "Password recovery code has been sent"
   recovery_code_failure: "Could not create a new code"
@@ -768,7 +767,6 @@ en:
       header: "Issuing goals and succeeding in goals"
   text: "text"
   dummy_name: "John Doe"
-  be_better: "be better"
   language:
     created: "Language created"
     updated: "Language updated"

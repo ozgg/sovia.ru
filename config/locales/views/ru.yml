@@ -30,6 +30,11 @@ ru:
       recent_posts: "Последние публикации"
     dreambook_letters:
       dreambook_letters: "Первые буквы символов в соннике"
+  deeds:
+    form:
+      today_i: "Сегодня я"
+      to_accomplish: ", чтобы"
+      my_goals: "Мои цели"
   dreambook:
     search:
       search: "Поиск по соннику"
