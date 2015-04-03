@@ -16,22 +16,23 @@
             </div>
           </fieldset>
       <% end %>
-      <nav aria-label="<%= t('.authentication_options') %>">
+      <nav aria-label="<%= t('.authentication_options') %>" class="auth-options">
         <ul>
           <li><%= link_to t('.sign_up'), new_user_path %></li>
           <li><%= link_to t('.recover_password'), my_recovery_path %></li>
         </ul>
       </nav>
   <% else %>
+      <div class="user-info">
         <%= comment_avatar(current_user) %>
-        <%= current_user.login %>
-      <nav aria-label="<%= t('.aria_label_nav') %>">
-        <ul>
-          <li><%= link_to t('.private'), my_path, accesskey: '0' %></li>
-          <li><%= link_to t('.deeds'), my_deeds_path %></li>
-          <li><%= link_to t('.thoughts'), my_thoughts_path %></li>
-          <li><%= link_to t('.logout'), logout_path, method: :delete %></li>
-        </ul>
-      </nav>
+        <%= user_link current_user %>
+        <nav aria-label="<%= t('.user_menu') %>" class="user-options">
+          <ul>
+            <li><%= link_to t('.dashboard'), my_path, accesskey: '0' %></li>
+            <li><%= link_to t('.deeds'), my_deeds_path %></li>
+            <li><%= link_to t('.logout'), logout_path, method: :delete %></li>
+          </ul>
+        </nav>
+      </div>
   <% end %>
 </div>

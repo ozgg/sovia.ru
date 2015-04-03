@@ -14,3 +14,7 @@ ru:
       sign_up: "Регистрация"
       recover_password: "Восстановить пароль"
       authentication_options: "Дополнительно для аутентификации"
+      user_menu: "Меню пользователя"
+      logout: "Выйти"
+      deeds: "Журнал успеха"
+      dashboard: "Кабинет"

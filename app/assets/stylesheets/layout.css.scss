@@ -37,7 +37,6 @@ body {
   background: image_url('moon.png') no-repeat 0 0;
 
   > header {
-    outline: solid red 1px;
     position: relative;
     min-height: 150px;
     height: 150px;
@@ -117,7 +116,7 @@ body {
         }
       }
 
-      > nav {
+      > nav.auth-options {
         font-size: 0.9em;
         padding: 0 15px;
 
@@ -132,6 +131,18 @@ body {
           &:after {
             content: ']';
           }
+        }
+      }
+
+      div.user-info {
+        padding: 15px;
+
+        > img {
+          float: right;
+        }
+
+        nav {
+          padding: 15px;
         }
       }
     }

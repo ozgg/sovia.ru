@@ -14,3 +14,7 @@ en:
       sign_up: "Sign up"
       recover_password: "Recover password"
       authentication_options: "Authentication options"
+      user_menu: "User menu"
+      logout: "Log out"
+      deeds: "Journal of success"
+      dashboard: "Dashboard"
