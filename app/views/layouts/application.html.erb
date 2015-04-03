@@ -3,19 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <title><%= yield :meta_title %> :: <%= t('.title') %></title>
-  <%= render 'shared/meta_texts' %>
+  <%= render 'layouts/meta_texts' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <%= render 'shared/favicons' %>
-  <%= render 'shared/header_links' %>
+  <%= render 'layouts/favicons' %>
+  <%= render 'layouts/head_links' %>
 </head>
 <body>
-<header>
-  <figure role="banner"><%= link_to(image_tag('owl.png', alt: 'Sovia'), root_path) %></figure>
-  <%= render 'layouts/main_navigation' %>
-  <%= render 'layouts/auth_block' %>
-</header>
+<%= render 'layouts/header' %>
 
 <section role="main">
   <% if flash[:notice] %>

@@ -2,3 +2,10 @@ ru:
   layouts:
     application:
       title: "Совия"
+    main_navigation:
+      aria_label: "Главное меню"
+      posts: "Публикации"
+      dreams: "Сны"
+      new_dream: "Описать сон"
+      dreambook: "Сонник"
+      about: "О проекте"

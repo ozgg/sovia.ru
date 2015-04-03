@@ -1,0 +1,94 @@
+html {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  margin: 0;
+  padding: 0;
+  background: #122129 image_url('bg-icons.png') repeat 0 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  font-variant: small-caps;
+}
+
+ol, ul, form, figure, dl {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+}
+
+a:link {
+  color: #3d6d88;
+}
+
+a:visited {
+  color: #3e5c88;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  min-width: 900px;
+  max-width: 1200px;
+  background: image_url('moon.png') no-repeat 0 0;
+
+  > header {
+    outline: solid red 1px;
+    position: relative;
+    min-height: 150px;
+    height: 150px;
+
+    div.logo-and-nav {
+      position: relative;
+      margin-right: 300px;
+      height: 100%;
+
+      img {
+        padding: 40px 0 0 45px;
+      }
+
+      > nav {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+
+        & a:link, & a:visited {
+          color: #bdd4da;
+        }
+
+        & a:hover {
+          color: #ff9600;
+        }
+
+        li {
+          list-style: none;
+          display: inline-block;
+
+          > a {
+            display: inline-block;
+            padding: 0 15px;
+            font-size: 1.2em;
+
+            &:hover {
+              background: rgba(155, 127, 127, 0.3);
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    div.auth {
+      outline: solid green 1px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 300px;
+    }
+  }
+}

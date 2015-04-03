@@ -413,8 +413,6 @@ en:
       random: "Random dream"
       grains: "Grains of perception"
       comments: "All comments"
-    main_navigation:
-      aria_label: "Main menu"
   roles:
     insufficient_rights: "Insufficient rights"
   anonymous: "Anonymous"

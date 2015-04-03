@@ -2,3 +2,10 @@ en:
   layouts:
     application:
       title: "Sovia"
+    main_navigation:
+      aria_label: "Main menu"
+      posts: "Posts"
+      dreams: "Dreams"
+      new_dream: "New dream"
+      dreambook: "Dreambook"
+      about: "About"

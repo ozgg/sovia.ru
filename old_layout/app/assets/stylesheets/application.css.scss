@@ -3,18 +3,6 @@
  *= require_tree .
  */
 
-html {
-  background: #122129 image_url('bg-icons.png') repeat 0 0;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
-  text-indent: 0;
-  font-variant: small-caps;
-}
-
 h1 {
   font-size: 1.4em;
 }
@@ -27,25 +15,9 @@ h3:first-letter {
   text-transform: uppercase;
 }
 
-img {
-  border: none;
-}
-
-a:link {
-  color: #3d6d88;
-}
-
-a:visited {
-  color: #3e5c88;
-}
-
 ul, ol {
   margin: 0;
   padding: 0 0 0 2em;
-}
-
-figure {
-  margin: 0;
 }
 
 p {
@@ -58,27 +30,10 @@ progress {
 }
 
 body {
-  max-width: 1200px;
-  min-width: 700px;
-  background: image_url('moon.png') no-repeat 0 0;
-  margin: 0 auto;
-  padding: 0;
-
   > header {
-    position: relative;
-    min-height: 150px;
 
     > figure {
-      padding: 40px 0 28px 45px;
       margin: 0 300px 0 0;
-    }
-
-    & a:link, & a:visited {
-      color: #bdd4da;
-    }
-
-    & a:hover {
-      color: #ff9600;
     }
 
     > nav {
@@ -91,7 +46,6 @@ body {
         li {
           list-style: none;
           margin: 0;
-          font-size: 1.2em;
           display: inline-block;
           width: 150px;
           text-align: center;
@@ -100,15 +54,6 @@ body {
             padding-left: 0;
           }
 
-          > a {
-            display: inline-block;
-            width: 100%;
-
-            &:hover {
-              background: rgba(155, 127, 127, 0.3);
-              border-radius: 5px;
-            }
-          }
         }
       }
     }

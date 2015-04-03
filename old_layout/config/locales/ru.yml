@@ -416,8 +416,6 @@ ru:
       random: "Случайный сон"
       grains: "Зёрна восприятия"
       comments: "Все комментарии"
-    main_navigation:
-      aria_label: "Главное меню"
   roles:
     insufficient_rights: "Недостаточно прав"
   anonymous: "Анонимно"

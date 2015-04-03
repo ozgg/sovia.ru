@@ -1,27 +1,4 @@
 /*
  *= require_self
- *= require_tree .
+ *= require layout
  */
-
-html {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
-  text-indent: 0;
-  font-variant: small-caps;
-}
-
-img {
-  border: none;
-}
-
-a:link {
-  color: #3d6d88;
-}
-
-a:visited {
-  color: #3e5c88;
-}
