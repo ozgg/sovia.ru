@@ -109,19 +109,6 @@ en:
     index:
       no_posts: "No posts"
       main: "Welcome"
-      recent_posts: "Recent posts"
-      title: "The site about dreams"
-      description: "Main page of the project about dreams called Sovia. Dreams of users, articles, discussions, free online diary of dreams and constantly enriched dreambook."
-      quick_dreambook_access: "Quick access to dreambook"
-      described_dreams:
-        zero: "0 dreams"
-        one: "%{count} dream"
-        other: "%{count} dreams"
-      left_comments:
-        zero: "no comments"
-        one: "%{count} comment"
-        other: "%{count} comments"
-      our_users_added: "Our users added"
     gone:
       title: "This page is gone"
       description: "You are trying to see page that doesn't exist anymore."
@@ -131,8 +118,6 @@ en:
       tags_queue: "Tags queue"
     recent_tags:
       header: "Recent tags"
-    dreambook_letters:
-      dreambook_letters: "First letters of symbols in dreambook"
   articles:
     list:
       no_articles: "No articles"
@@ -443,8 +428,6 @@ en:
       header: "Dreambook for \"%{letter}\""
       description: "Free online-dreambook Sovia with symbols starting on \"%{letter}\", page %{page}."
     search:
-      search: "Search for dream symbol"
-      query: "Query"
       title: "Search %{word} in dreambook"
       header: "Search for dream symbol"
       result: "Search result"
@@ -713,8 +696,6 @@ en:
       title: "Features"
     changelog:
       title: "Changelog"
-    terms_of_service:
-      title: "Terms of service"
     privacy:
       title: "Privacy"
   deeds:
@@ -760,7 +741,6 @@ en:
       description: "Page for editing grain of perception"
       header: "Edit grain of perception"
   not_selected: "Not selected"
-  search: "Search"
   query_is_not_set: "Query is not set"
   view: "View"
   goal:

@@ -1,32 +1,3 @@
-nav.dreambook-letters {
-  margin: 0 284px 0 0;
-  padding: 0.3em;
-
-  ul {
-    margin: 0.3em 0;
-    padding: 0;
-
-    li {
-      list-style: none;
-      display: inline-block;
-      padding: 0;
-      border: solid 1px #eeeeee;
-      min-width: 1.2em;
-      text-align: center;
-
-      a:link, a:visited {
-        display: inline-block;
-        width: 100%;
-        color: #3d6d88;
-      }
-
-      a:hover {
-        color: #ff0000;
-        background: #eeffee;
-      }
-    }
-  }
-}
 
 ul.dreambook-symbols {
   margin: 0 284px 0 0;

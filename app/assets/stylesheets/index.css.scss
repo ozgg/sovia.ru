@@ -1,0 +1,16 @@
+article.front-page {
+  > section {
+    > section {
+      outline: solid red 1px;
+      width: 49%;
+
+      &:first-of-type {
+        float: left;
+      }
+
+      &:last-of-type {
+        float: right;
+      }
+    }
+  }
+}

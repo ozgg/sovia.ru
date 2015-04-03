@@ -19,3 +19,18 @@ en:
       logout: "Log out"
       deeds: "Journal of success"
       dashboard: "Dashboard"
+  about:
+    terms_of_service:
+      title: "Terms of service"
+  index:
+    index:
+      title: "The site about dreams"
+      description: "Main page of the project about dreams called Sovia. Dreams of users, articles, discussions, free online diary of dreams and constantly enriched dreambook."
+      quick_dreambook_access: "Quick access to dreambook"
+      recent_posts: "Recent posts"
+    dreambook_letters:
+      dreambook_letters: "First letters of symbols in dreambook"
+  dreambook:
+    search:
+      search: "Search for dream symbol"
+      query: "Query"

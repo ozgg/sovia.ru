@@ -22,3 +22,15 @@ ru:
   about:
     terms_of_service:
       title: "Пользовательское соглашение"
+  index:
+    index:
+      title: "Сайт о снах"
+      description: "Главная страница проекта о снах «Совия». Сны пользователей, статьи, обсуждения, бесплатный онлайн-дневник снов и пополняющийся сонник."
+      quick_dreambook_access: "Быстрый доступ к соннику"
+      recent_posts: "Последние публикации"
+    dreambook_letters:
+      dreambook_letters: "Первые буквы символов в соннике"
+  dreambook:
+    search:
+      search: "Поиск по соннику"
+      query: "Слово"

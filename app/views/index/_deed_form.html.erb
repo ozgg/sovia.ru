@@ -1,8 +1,8 @@
 <% last_deed = Deed.where(user: current_user).last %>
 <% if last_deed.nil? || (DateTime.now.to_i - last_deed.created_at.to_i > 14400) %>
-<article>
+<section>
   <h1>Добавить запись в журнал успеха?</h1>
   <p><%= link_to 'Что такое журнал успеха', deeds_path %></p>
   <%= render 'deeds/form' %>
-</article>
+</section>
 <% end %>
