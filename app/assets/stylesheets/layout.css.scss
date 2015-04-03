@@ -42,6 +42,14 @@ body {
     min-height: 150px;
     height: 150px;
 
+    & a:link, & a:visited {
+      color: #bdd4da;
+    }
+
+    & a:hover {
+      color: #ff9600;
+    }
+
     div.logo-and-nav {
       position: relative;
       margin-right: 300px;
@@ -57,13 +65,6 @@ body {
         left: 0;
         width: 100%;
 
-        & a:link, & a:visited {
-          color: #bdd4da;
-        }
-
-        & a:hover {
-          color: #ff9600;
-        }
 
         li {
           list-style: none;
@@ -84,11 +85,55 @@ body {
     }
 
     div.auth {
-      outline: solid green 1px;
       position: absolute;
       right: 0;
       top: 0;
       width: 300px;
+      height: 100%;
+      color: #F7F7F7;
+      background: rgba(127, 127, 127, 0.3);
+      border-radius: 16px;
+
+      form {
+        padding: 15px 15px 0 15px;
+
+        fieldset {
+          border: none;
+          padding: 0;
+
+          legend {
+            font-weight: bold;
+            font-size: 1.2em;
+          }
+
+          label {
+            display: inline-block;
+            min-width: 80px;
+
+            &:first-letter {
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+
+      > nav {
+        font-size: 0.9em;
+        padding: 0 15px;
+
+        li {
+          display: inline-block;
+          list-style: none;
+
+          &:before {
+            content: '[';
+          }
+
+          &:after {
+            content: ']';
+          }
+        }
+      }
     }
   }
 }

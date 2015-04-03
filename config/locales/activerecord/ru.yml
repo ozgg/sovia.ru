@@ -8,3 +8,8 @@ ru:
               unreasonable: "не выглядит как e-mail"
             login:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+    attributes:
+      user:
+        login: "логин"
+        password: "пароль"
+        password_confirmation: "подтверждение пароля"

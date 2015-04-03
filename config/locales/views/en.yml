@@ -9,3 +9,8 @@ en:
       new_dream: "New dream"
       dreambook: "Dreambook"
       about: "About"
+    auth_block:
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      recover_password: "Recover password"
+      authentication_options: "Authentication options"

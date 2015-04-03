@@ -1,23 +1,30 @@
 <div class="auth">
   <% if current_user.nil? %>
       <%= form_tag login_path do %>
-          <div>
-            <h3><%= t('.authorize') %></h3>
-            <%= label_tag :login, t('activerecord.attributes.user.login') %>
-            <%= text_field_tag :login, '', required: true %>
-            <br/>
-            <%= label_tag :password, t('activerecord.attributes.user.password') %>
-            <%= password_field_tag :password, '', required: true %>
-            <br/>
-            <%= button_tag t('sessions.new.enter'), type: 'submit' %>
-            <%= link_to t('users.new.register'), new_user_path %>
-          </div>
+          <fieldset>
+            <legend><%= t('.sign_in') %></legend>
+            <div>
+              <%= label_tag :login, t('activerecord.attributes.user.login') %>
+              <%= text_field_tag :login, '', required: true %>
+            </div>
+            <div>
+              <%= label_tag :password, t('activerecord.attributes.user.password') %>
+              <%= password_field_tag :password, '', required: true %>
+            </div>
+            <div>
+              <%= button_tag t('.sign_in'), type: 'submit' %>
+            </div>
+          </fieldset>
       <% end %>
+      <nav aria-label="<%= t('.authentication_options') %>">
+        <ul>
+          <li><%= link_to t('.sign_up'), new_user_path %></li>
+          <li><%= link_to t('.recover_password'), my_recovery_path %></li>
+        </ul>
+      </nav>
   <% else %>
-      <figure>
         <%= comment_avatar(current_user) %>
-        <figcaption><%= current_user.login %></figcaption>
-      </figure>
+        <%= current_user.login %>
       <nav aria-label="<%= t('.aria_label_nav') %>">
         <ul>
           <li><%= link_to t('.private'), my_path, accesskey: '0' %></li>

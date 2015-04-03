@@ -9,3 +9,8 @@ ru:
       new_dream: "Описать сон"
       dreambook: "Сонник"
       about: "О проекте"
+    auth_block:
+      sign_in: "Войти"
+      sign_up: "Регистрация"
+      recover_password: "Восстановить пароль"
+      authentication_options: "Дополнительно для аутентификации"

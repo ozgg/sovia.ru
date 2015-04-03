@@ -27,9 +27,6 @@ en:
         name: "name"
         description: "interpretation"
       user:
-        login: "login"
-        password: "password"
-        password_confirmation: "password confirmation"
         email: "e-mail"
         allow_mail: "allow email notifications"
         mail_confirmed: "e-mail address is confirmed"

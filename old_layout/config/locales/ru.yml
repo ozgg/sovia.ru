@@ -27,9 +27,6 @@ ru:
         name: "Название"
         description: "Интерпретация"
       user:
-        login: "Логин"
-        password: "Пароль"
-        password_confirmation: "Подтверждение пароля"
         email: "E-mail"
         allow_mail: "Получать уведомления по электронной почте"
         mail_confirmed: "Адрес электронной почты подтверждён"
