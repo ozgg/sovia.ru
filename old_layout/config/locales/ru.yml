@@ -395,9 +395,6 @@ ru:
       comments: "Все комментарии"
   roles:
     insufficient_rights: "Недостаточно прав"
-  anonymous: "Анонимно"
-  untitled: "Без названия"
-  read_more: "Читать дальше"
   views:
     pagination:
       first: "⇤"
@@ -407,7 +404,6 @@ ru:
       truncate: "..."
   are_you_sure: "Вы уверены?"
   at: "от"
-  nothing_found: "Ничего не найдено"
   please_log_in: "Пожалуйста, авторизуйтесь"
   dreambook:
     letters:

@@ -31,7 +31,7 @@ class Entry < ActiveRecord::Base
   end
 
   def self.recent_entries
-    Entry::Dream.public_entries.order('id desc').first(2)
+    Entry::Dream.public_entries.order('id desc').first(7)
   end
 
   def lucid?

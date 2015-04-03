@@ -397,9 +397,6 @@ en:
       comments: "All comments"
   roles:
     insufficient_rights: "Insufficient rights"
-  anonymous: "Anonymous"
-  untitled: "Untitled"
-  read_more: "Read more"
   views:
     pagination:
       first: "⇤"
@@ -409,7 +406,6 @@ en:
       truncate: "..."
   are_you_sure: "Are you sure?"
   at: "at"
-  nothing_found: "Nothing was found"
   please_log_in: "Please log in"
   dreambook:
     letters:

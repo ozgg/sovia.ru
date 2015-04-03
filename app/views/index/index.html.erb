@@ -24,49 +24,50 @@
 
     <section>
       <h1>Posts</h1>
+      <% if @posts.any? %>
+          <% @posts.each do |entry| %>
+              <div class="post-preview">
+                <div class="header">
+                  <div class="title"><%= link_to entry.title, entry %></div>
+                  <span class="author"><%= user_link entry.user %></span>
+                  <time datetime="<%= entry.created_at.w3c %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                </div>
+                <div class="body">
+                  <% if entry.image.url %>
+                      <div class="image"><%= image_tag entry.image.lead, alt: entry.title %></div>
+                  <% end %>
+                  <div class="text"><%= entry.preview %></div>
+                </div>
+              </div>
+          <% end %>
+      <% else %>
+          <%= render 'shared/nothing_found' %>
+      <% end %>
     </section>
 
     <section>
       <h1>Dreams</h1>
+      <% if @entries.any? %>
+          <% @entries.each do |entry| %>
+              <div class="post-preview">
+                <div class="header">
+                  <div class="image"><%= raw comment_avatar(entry.user) %></div>
+                  <div class="title"><%= link_to entry.parsed_title, verbose_entry_path(entry) %></div>
+                  <span class="author"><%= user_link entry.user %></span>
+                  <time datetime="<%= entry.datetime %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                </div>
+              </div>
+          <% end %>
+      <% else %>
+          <%= render 'shared/nothing_found' %>
+      <% end %>
     </section>
+
+    <div style="clear:both"></div>
   </section>
 
   <%= render 'shared/social' %>
 </article>
-
-<%= render 'entries/list' %>
-
-<% if @posts.any? %>
-    <% @posts.each do |entry| %>
-        <article class="entry post">
-          <header>
-            <figure><%= raw entry_avatar(entry.user) %></figure>
-            <h2><%= link_to entry.title, entry %></h2>
-
-            <div class="author">
-              <%= user_link entry.user %>
-              <time datetime="<%= entry.created_at.w3c %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-            </div>
-
-          </header>
-          <div>
-            <% if entry.image.url %>
-                <div class="image"><%= image_tag entry.image.lead, alt: entry.title %></div>
-            <% end %>
-            <p><%= entry.preview %></p>
-            <p class="more"><%= link_to t(:read_more), entry %></p>
-          </div>
-          <footer>
-            <div class="permalink"><%= link_to t(:link), entry %></div>
-            <div class="comments-count"><%= t('comment', count: entry.comments_count) %></div>
-          </footer>
-        </article>
-    <% end %>
-
-<% else %>
-    <%= render 'common/nothing_found' %>
-<% end %>
-
 
 <% content_for :sidebar do %>
   <%= render 'layouts/statistics' %>
