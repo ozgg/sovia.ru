@@ -30,6 +30,16 @@ ru:
       recent_posts: "Последние публикации"
     dreambook_letters:
       dreambook_letters: "Первые буквы символов в соннике"
+    statistics:
+      trends: "Тенденции в снах"
+    random_dream:
+      random_dream: "Случайный сон"
+    more_links:
+      more_links: "Ещё ссылки"
+      dreams_archive: "Архив снов"
+      random_dream: "Случайный сон"
+      statistics: "Статистика"
+      all_comments: "Все комментарии"
   deeds:
     form:
       today_i: "Сегодня я"

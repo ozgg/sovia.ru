@@ -115,8 +115,6 @@ ru:
       page_does_not_exist_anymore: "Эта страница больше не существует. Она была когда-то раньше, но оказалась неактуальной."
     management_links:
       tags_queue: "Очередь меток"
-    recent_tags:
-      header: "Обновления сонника"
   articles:
     list:
       no_articles: "Статей нет"

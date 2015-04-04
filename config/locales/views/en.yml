@@ -30,6 +30,16 @@ en:
       recent_posts: "Recent posts"
     dreambook_letters:
       dreambook_letters: "First letters of symbols in dreambook"
+    statistics:
+      trends: "Trends in dreams"
+    random_dream:
+      random_dream: "Random dream"
+    more_links:
+      more_links: "More links"
+      dreams_archive: "Archive of dreams"
+      random_dream: "Random dream"
+      statistics: "Statistics"
+      all_comments: "All comments"
   dreambook:
     search:
       search: "Search for dream symbol"

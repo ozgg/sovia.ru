@@ -31,7 +31,7 @@ class Entry < ActiveRecord::Base
   end
 
   def self.recent_entries
-    Entry::Dream.public_entries.order('id desc').first(7)
+    Entry::Dream.public_entries.order('id desc').first(3)
   end
 
   def lucid?
@@ -116,8 +116,8 @@ class Entry < ActiveRecord::Base
     body.gsub(/(\r?\n)+/, "\n").split("\n")[0..1].join("\n")
   end
 
-  def glimpse
-    body.gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..50].join(' ')
+  def glimpse(words = 50)
+    body.gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..words].join(' ') + '…'
   end
 
   def passages_count

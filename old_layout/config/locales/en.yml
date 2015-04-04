@@ -116,8 +116,6 @@ en:
       page_does_not_exist_anymore: "This page does not exist anymore. It was here some time ago, but turned out to be irrelevant."
     management_links:
       tags_queue: "Tags queue"
-    recent_tags:
-      header: "Recent tags"
   articles:
     list:
       no_articles: "No articles"

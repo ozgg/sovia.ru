@@ -5,8 +5,10 @@
 <article class="front-page">
   <section>
     <h1><%= t('.title') %></h1>
+
     <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
       а также искать интерпретацию того, что приснилось, в соннике.</p>
+
     <p>Каждый день происходит что-то новое,
       <%= current_user ? 'присоединяйтесь' : link_to('присоединяйтесь', new_user_path) %>.</p>
   </section>
@@ -56,6 +58,7 @@
                   <span class="author"><%= user_link entry.user %></span>
                   <time datetime="<%= entry.datetime %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
                 </div>
+                <div class="body"><%= raw parse_body(entry.glimpse 20) %></div>
               </div>
           <% end %>
       <% else %>
@@ -70,8 +73,7 @@
 </article>
 
 <% content_for :sidebar do %>
-  <%= render 'layouts/statistics' %>
-  <%= render 'recent_tags' %>
-  <%= render 'layouts/random_dream' %>
-  <%= render 'layouts/more' %>
+    <%= render 'statistics' %>
+    <%= render 'random_dream' %>
+    <%= render 'more_links' %>
 <% end %>

@@ -1,6 +1,6 @@
 <% tags = Tag::Dream.trends %>
-<div>
-  <h2><%= t('.statistics') %></h2>
+<section class="tag-trends">
+  <h1><%= t('.trends') %></h1>
   <% if tags.any? %>
       <nav>
         <ol>
@@ -10,6 +10,6 @@
         </ol>
       </nav>
   <% else %>
-      <div><%= t('nothing_found') %></div>
+      <%= render 'shared/nothing_found' %>
   <% end %>
-</div>
+</section>

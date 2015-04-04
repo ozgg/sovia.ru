@@ -1,0 +1,10 @@
+<% dream = Entry::Dream.random_dream %>
+<% unless dream.nil? %>
+    <section>
+      <h1><%= t('.random_dream') %></h1>
+
+      <h2><%= link_to dream.parsed_title, verbose_entry_path(dream) %></h2>
+
+      <div><%= dream.glimpse %></div>
+    </section>
+<% end %>
