@@ -173,25 +173,6 @@ label:first-letter {
   text-transform: capitalize;
 }
 
-
-nav.pagination {
-  margin: 1em 1em 0;
-
-  span {
-    display: inline-block;
-    padding: 0 0.3em;
-    border: solid #eeeeee 1px;
-
-    &.current {
-      background: #eeeeee;
-    }
-
-    &.gap {
-      border: none;
-    }
-  }
-}
-
 span.not-found {
   color: #ff8080;
 }

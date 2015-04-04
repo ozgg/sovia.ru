@@ -6,3 +6,17 @@ en:
   anonymous: "Anonymous"
   untitled: "Untitled"
   read_more: "Read more"
+  please_log_in: "Please log in"
+  link: "Link"
+  post:
+    created: "Post has been created"
+    updated: "Post has been updated"
+    deleted: "Post has been deleted"
+  comment:
+    zero: "0 comments"
+    one: "%{count} comment"
+    other: "%{count} comments"
+    created: "Comment has been added"
+    updated: "Comment has been updated"
+    deleted: "Comment has been deleted"
+  create: "Create"

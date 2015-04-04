@@ -119,20 +119,6 @@ article.entry {
     }
   }
 
-  footer {
-    border-top: solid #eeeeee 1px;
-    min-height: 1.4em;
-    clear: left;
-
-    > div:first-of-type {
-      float: left;
-    }
-
-    > div:last-of-type {
-      float: right;
-    }
-  }
-
   > div {
     padding: 0.5em 1em;
     word-wrap: break-word;

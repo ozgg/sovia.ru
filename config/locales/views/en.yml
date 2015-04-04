@@ -61,3 +61,16 @@ en:
   deeds:
     form:
       my_goals: "My goals"
+  posts:
+    index:
+      new_post: "New post"
+      title: "Community, page %{page}"
+      header: "Community"
+      description: "Posts of users of Sovia in community (forum about dreams) on Sovia, the site about dreams practice. Page %{page}."
+  views:
+    pagination:
+      first: "⇤"
+      last: "⇥"
+      previous: "←"
+      next: "→"
+      truncate: "..."

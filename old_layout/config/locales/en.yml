@@ -142,11 +142,6 @@ en:
       no_posts: "No posts"
     form:
       submit: "Save post"
-    index:
-      new_post: "New post"
-      title: "Community, page %{page}"
-      header: "Community"
-      description: "Posts of users of Sovia in community (forum about dreams) on Sovia, the site about dreams practice. Page %{page}."
     show:
       post: "View post"
       edit: "Edit post"
@@ -390,16 +385,8 @@ en:
       comments: "All comments"
   roles:
     insufficient_rights: "Insufficient rights"
-  views:
-    pagination:
-      first: "⇤"
-      last: "⇥"
-      previous: "←"
-      next: "→"
-      truncate: "..."
   are_you_sure: "Are you sure?"
   at: "at"
-  please_log_in: "Please log in"
   dreambook:
     letters:
       select_letter: "Select the sirst letter of dream symbol"
@@ -621,13 +608,6 @@ en:
     zero: "no errors"
     one: "%{count} error"
     other: "%{count} errors"
-  comment:
-    zero: "0 comments"
-    one: "%{count} comment"
-    other: "%{count} comments"
-    created: "Comment added"
-    updated: "Comment updated"
-    deleted: "Comment deleted"
   date:
     month_names: [~, january, february, march, april, may, june, july, august, september, october, november, december]
     formats:
@@ -776,7 +756,6 @@ en:
   list: "List"
   empty: "empty"
   i: "I"
-  link: "Link"
   hidden: "Hidden"
   agent:
     updated: "Agent updated"

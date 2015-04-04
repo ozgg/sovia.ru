@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   # get /posts
   def index
-    @posts = Post.order('id desc').page(current_page).per(5)
+    @posts = Post.order('id desc').page(current_page).per(10)
   end
 
   # get /posts/new

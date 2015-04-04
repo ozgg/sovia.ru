@@ -63,3 +63,16 @@ ru:
     search:
       search: "Поиск по соннику"
       query: "Слово"
+  posts:
+    index:
+      new_post: "Создать публикацию"
+      title: "Публикации, страница %{page}"
+      header: "Публикации"
+      description: "Публикации пользователей Совии в сообществе (форуме о снах) на Совии, сайте про сновиденную практику. Страница %{page}."
+  views:
+    pagination:
+      first: "⇤"
+      last: "⇥"
+      previous: "←"
+      next: "→"
+      truncate: "..."

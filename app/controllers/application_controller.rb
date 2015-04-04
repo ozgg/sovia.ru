@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
 
   def allow_authorized_only
     unless current_user
-      flash[:notice] = t('please_log_in')
+      flash[:notice] = t(:please_log_in)
       redirect_to login_path
     end
   end

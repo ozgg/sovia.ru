@@ -25,55 +25,6 @@ article.front-page {
         float: right;
 
       }
-
-      .post-preview {
-        border: dotted 1px #777777;
-        border-radius: 4px;
-        margin: 8px 0;
-
-        .header {
-          background: #f7f7f7;
-          padding: 8px 15px;
-          min-height: 50px;
-
-          .image {
-            float: left;
-            margin-right: 8px;
-
-            img {
-              max-width: 50px;
-            }
-          }
-
-          .title {
-            font-weight: bold;
-          }
-          
-          .author, time {
-            font-size: 0.9em;
-          }
-
-          time {
-            font-style: italic;
-            float: right;
-            color: #777777;
-          }
-        }
-
-        .body {
-          padding: 4px 15px;
-          min-height: 100px;
-
-          .image {
-            float: left;
-            margin-right: 8px;
-
-            img {
-              max-width: 100px;
-            }
-          }
-        }
-      }
     }
   }
 }
