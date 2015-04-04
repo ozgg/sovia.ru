@@ -1,9 +1,9 @@
-<%= form_for(@entry) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @entry } %>
+<%= form_for(@post) do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @post } %>
 
-    <% if @entry.image.url %>
+    <% if @post.image.url %>
         <figure>
-          <%= image_tag @entry.image.post.url %>
+          <%= image_tag @post.image.post.url %>
           <figcaption><%= t('activerecord.attributes.post.image') %></figcaption>
         </figure>
     <% end %>
@@ -12,15 +12,15 @@
       <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
     </div>
     <div>
-      <%= f.label :title %><br />
+      <div><%= f.label :title %></div>
       <%= f.text_field :title, required: true, size: 80 %>
     </div>
     <div>
-      <%= f.label :lead %><br />
+      <div><%= f.label :lead %></div>
       <%= f.text_area :lead, required: true, cols: 80, rows: 5 %>
     </div>
     <div>
-      <%= f.label :body %><br />
+      <div><%= f.label :body %></div>
       <%= f.text_area :body, required: true, cols: 80, rows: 25 %>
     </div>
 

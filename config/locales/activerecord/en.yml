@@ -13,3 +13,9 @@ en:
         login: "login"
         password: "password"
         password_confirmation: "password confirmation"
+      post:
+        title: "title"
+        lead: "lead"
+        body: "text"
+        image: "image"
+        language: "language"

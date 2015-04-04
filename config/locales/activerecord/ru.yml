@@ -13,3 +13,9 @@ ru:
         login: "логин"
         password: "пароль"
         password_confirmation: "подтверждение пароля"
+      post:
+        title: "название"
+        lead: "аннотация"
+        body: "текст"
+        image: "иллюстрация"
+        language: "язык"

@@ -65,12 +65,6 @@ en:
           dreambook_editor: "Dreambook editor"
           dreambook_manager: "Dreambook manager"
           posts_manager: "Posts manager"
-      post:
-        title: "title"
-        lead: "lead"
-        body: "text"
-        image: "image"
-        language: "language"
       agent:
         name: "name"
         is_bot: "it is bot"
@@ -138,8 +132,6 @@ en:
       description: "
       Articles about dreams and close topics tagged \"%{tag}\" on Sovia, page %{page}."
   posts:
-    list:
-      no_posts: "No posts"
     form:
       submit: "Save post"
     show:
@@ -155,10 +147,6 @@ en:
       title: "Edit post"
       header: "Edit post"
       description: "Page for editing post on Sovia."
-    new:
-      title: "New post"
-      header: "New post"
-      description: "Page for adding a new post in Sovia community."
     tagged:
       title: "Entries tagged \"%{tag}\", page %{page}"
       header: "Entries tagged \"%{tag}\""
@@ -604,10 +592,6 @@ en:
       next: "Next entry"
       described: "Tags that described in dreambook"
       adjacent: "Adjacent entries"
-  error:
-    zero: "no errors"
-    one: "%{count} error"
-    other: "%{count} errors"
   date:
     month_names: [~, january, february, march, april, may, june, july, august, september, october, november, december]
     formats:

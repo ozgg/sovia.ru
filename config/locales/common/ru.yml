@@ -22,4 +22,10 @@ ru:
     created: "Комментарий добавлен"
     updated: "Комментарий изменён"
     deleted: "Комментарий удалён"
+  error:
+    zero: "нет ошибок"
+    one: "%{count} ошибка"
+    few: "%{count} ошибки"
+    many: "%{count} ошибок"
+    other: "%{count} ошибок"
   create: "Создать"

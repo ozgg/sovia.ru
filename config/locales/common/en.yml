@@ -19,4 +19,8 @@ en:
     created: "Comment has been added"
     updated: "Comment has been updated"
     deleted: "Comment has been deleted"
+  error:
+    zero: "no errors"
+    one: "%{count} error"
+    other: "%{count} errors"
   create: "Create"
