@@ -227,3 +227,16 @@ div#sidebar {
     }
   }
 }
+
+div.social-buttons {
+  margin: 0;
+  position: relative;
+  padding: 0.5em;
+  clear: both;
+
+  div.addthis-container {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+  }
+}
