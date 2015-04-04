@@ -1,11 +1,13 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, 'Совия: пользовательское соглашение. О том, что можно и что нельзя делать на сайте.' %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, 'Совия: пользовательское соглашение. О том, что можно и что нельзя делать на сайте.' %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
 
-<header>
-  <h1>Пользовательское соглашение</h1>
-</header>
+<%= render 'shared/metrics' %>
 
 <article>
+  <h1>Пользовательское соглашение</h1>
   <p><%= link_to 'Соглашение о конфиденциальности', privacy_path %></p>
   <ol>
     <li>Что запрещено:
@@ -25,9 +27,3 @@
       продолжать его соблюдать или перестать пользоваться сайтом.</li>
   </ol>
 </article>
-
-<section>
-  <%= render 'layouts/more' %>
-</section>
-
-<%= render 'common/metrics' %>

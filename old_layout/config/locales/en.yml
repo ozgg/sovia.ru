@@ -109,11 +109,6 @@ en:
     index:
       no_posts: "No posts"
       main: "Welcome"
-    gone:
-      title: "This page is gone"
-      description: "You are trying to see page that doesn't exist anymore."
-      header: "This page is gone"
-      page_does_not_exist_anymore: "This page does not exist anymore. It was here some time ago, but turned out to be irrelevant."
     management_links:
       tags_queue: "Tags queue"
   articles:
@@ -682,15 +677,6 @@ en:
       header: "Thoughts tagged \"%{tag}\""
       description: "Thoughts of users of Sovia tagged \"%[tag}\", page %{page}."
   page: "Page %{page}"
-  about:
-    index:
-      title: "About"
-    features:
-      title: "Features"
-    changelog:
-      title: "Changelog"
-    privacy:
-      title: "Privacy"
   deeds:
     index:
       title: "Journal of success"

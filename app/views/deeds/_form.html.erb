@@ -2,10 +2,10 @@
     <%= render partial: 'common/errors_list', locals: { entity: @deed } unless @deed.nil?  %>
 
     <div>
+      <p><%= link_to t('.my_goals'), my_goals_path %></p>
       <%= form.label :name, t('.today_i') %>
       <%= form.text_field :name, size: 50, required: true %><%= form.label :goal, t('.to_accomplish') %>
       <%= form.select :goal_id, options_for_select(goals_for_select(current_user), selected: @deed ? @deed.goal : '') %>
-      <p><%= link_to t('.my_goals'), my_goals_path %></p>
       <%= form.button t(:submit), type: :submit %>
     </div>
 <% end %>

@@ -108,11 +108,6 @@ ru:
   index:
     index:
       no_posts: "Публикаций нет"
-    gone:
-      title: "Этой страницы больше нет"
-      description: "Вы пытаетесь посмотреть страницу, которой больше не существует."
-      header: "Этой страницы больше нет"
-      page_does_not_exist_anymore: "Эта страница больше не существует. Она была когда-то раньше, но оказалась неактуальной."
     management_links:
       tags_queue: "Очередь меток"
   articles:
@@ -684,15 +679,6 @@ ru:
       header: "Мысли с меткой «%{tag}»"
       description: "Мысли пользователей Совии с меткой «%[tag}», страница %{page}."
   page: "Страница %{page}"
-  about:
-    index:
-      title: "О проекте"
-    features:
-      title: "Возможности"
-    changelog:
-      title: "История изменений"
-    privacy:
-      title: "Соглашение о конфиденциальности"
   deeds:
     index:
       title: "Журнал успеха"

@@ -22,6 +22,12 @@ ru:
   about:
     terms_of_service:
       title: "Пользовательское соглашение"
+    index:
+      title: "О проекте"
+    features:
+      title: "Возможности"
+    privacy:
+      title: "Соглашение о конфиденциальности"
   index:
     index:
       title: "Сайт о снах"
@@ -32,6 +38,12 @@ ru:
       recent_in_dreams: "Недавнее в снах"
     dreambook_letters:
       dreambook_letters: "Первые буквы символов в соннике"
+    gone:
+      title: "Этой страницы больше нет"
+      description: "Вы пытаетесь посмотреть страницу, которой больше не существует."
+      header: "Этой страницы больше нет"
+      page_does_not_exist_anymore: "Эта страница больше не существует. Она была когда-то раньше, но оказалась неактуальной."
+  sidebar:
     statistics:
       trends: "Тенденции в снах"
     random_dream:

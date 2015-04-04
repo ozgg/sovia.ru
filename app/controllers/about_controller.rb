@@ -5,9 +5,6 @@ class AboutController < ApplicationController
   def features
   end
 
-  def changelog
-  end
-
   def terms_of_service
   end
 

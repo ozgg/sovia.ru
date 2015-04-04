@@ -94,7 +94,6 @@ Sovia::Application.routes.draw do
       controller :about do
         get '/' => :index, as: :about
         get '/features' => :features
-        get '/changelog' => :changelog
       end
     end
 
@@ -116,6 +115,7 @@ Sovia::Application.routes.draw do
   get 'posts/tagged/:tag', to: redirect('/posts')
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
+  get 'about/changelog' => 'index#gone'
   get 'user/profile' => 'index#gone'
   get 'user/profile/of/:login' => 'index#gone'
   get 'entities/(:id)' => 'index#gone'

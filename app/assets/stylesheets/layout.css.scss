@@ -206,6 +206,13 @@ div.notice {
 div#main {
   margin-right: 300px;
   padding: 15px;
+  min-height: 300px;
+
+  > article {
+    > ol, > ul {
+      margin-left: 30px;
+    }
+  }
 }
 
 div#sidebar {
@@ -218,7 +225,7 @@ div#sidebar {
     background: #f0f0f0;
     border-radius: 15px;
     padding: 15px;
-    margin: 15px;
+    margin: 15px 15px 15px 0;
 
     h1 {
       font-size: 1.3em;

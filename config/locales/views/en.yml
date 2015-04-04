@@ -22,6 +22,12 @@ en:
   about:
     terms_of_service:
       title: "Terms of service"
+    index:
+      title: "About"
+    features:
+      title: "Features"
+    privacy:
+      title: "Privacy"
   index:
     index:
       title: "The site about dreams"
@@ -32,6 +38,12 @@ en:
       recent_in_dreams: "Recent in dreams"
     dreambook_letters:
       dreambook_letters: "First letters of symbols in dreambook"
+    gone:
+      title: "This page is gone"
+      description: "You are trying to see page that doesn't exist anymore."
+      header: "This page is gone"
+      page_does_not_exist_anymore: "This page does not exist anymore. It was here some time ago, but turned out to be irrelevant."
+  sidebar:
     statistics:
       trends: "Trends in dreams"
     random_dream:
