@@ -5,21 +5,21 @@ class PostsController < ApplicationController
 
   # get /posts
   def index
-    @entries = Post.order('id desc').page(params[:page] || 1).per(5)
+    @posts = Post.order('id desc').page(current_page).per(5)
   end
 
   # get /posts/new
   def new
-    @entry = Post.new
+    @post = Post.new
   end
 
   # post /posts
   def create
-    @entry = Post.new(post_parameters.merge(user: current_user))
-    @entry.language = Language.guess_from_locale
-    if @entry.save
-      flash[:notice] = t('entry.post.created')
-      redirect_to @entry
+    @post = Post.new(post_parameters.merge(user: current_user))
+    @post.language = Language.guess_from_locale
+    if @post.save
+      flash[:notice] = t('post.created')
+      redirect_to @post
     else
       render action: :new
     end
@@ -35,9 +35,9 @@ class PostsController < ApplicationController
 
   # patch /posts/:id
   def update
-    if @entry.update(post_parameters)
-      flash[:notice] = t('entry.post.updated')
-      redirect_to @entry
+    if @post.update(post_parameters)
+      flash[:notice] = t('post.updated')
+      redirect_to @post
     else
       render action: :edit
     end
@@ -45,15 +45,15 @@ class PostsController < ApplicationController
 
   # delete /posts/:id
   def destroy
-    @entry.destroy
-    flash[:notice] = t('entry.post.deleted')
+    @post.destroy
+    flash[:notice] = t('post.deleted')
     redirect_to posts_path
   end
 
   private
 
   def set_post
-    @entry = Post.find(params[:id].to_i)
+    @post = Post.find(params[:id].to_i)
   end
 
   def post_parameters
@@ -65,6 +65,6 @@ class PostsController < ApplicationController
   end
 
   def restrict_editor_access
-    raise UnauthorizedException unless @entry.editable_by? current_user
+    raise UnauthorizedException unless @post.editable_by? current_user
   end
 end

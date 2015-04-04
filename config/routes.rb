@@ -31,18 +31,7 @@ Sovia::Application.routes.draw do
       end
     end
 
-    resources :thoughts, as: :entry_thoughts do
-      collection do
-        get 'tagged/:tag' => :tagged, as: :tagged
-        get ':id-:uri_title' => :show, as: :verbose
-      end
-    end
-
-    resources :grains, as: :entry_grains do
-      collection do
-        get ':id-:uri_title' => :show, as: :verbose
-      end
-    end
+    resources :grains, only: [:index]
 
     resources :users, only: [:new, :create]
     resources :comments, only: [:index, :create]
@@ -54,7 +43,7 @@ Sovia::Application.routes.draw do
 
       resource :profile, only: [:show, :edit, :update]
       resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :posts, :thoughts, :deeds, :grains, :goals, only: [:index]
+      resources :posts, :deeds, :goals, only: [:index]
       resources :tags, only: [:index, :show, :edit, :update]
 
       resources :dreams, only: [:index] do
@@ -116,53 +105,10 @@ Sovia::Application.routes.draw do
   get 'forum/posts/:id', to: redirect('/posts/%{id}')
   get 'forum/(:community)(/:id)', to: redirect('/posts')
   get 'about/changelog' => 'index#gone'
+  get 'thoughts/(:id)' => 'index#gone'
+  get 'my/thoughts' => 'index#gone'
   get 'user/profile' => 'index#gone'
   get 'user/profile/of/:login' => 'index#gone'
   get 'entities/(:id)' => 'index#gone'
   get 'fun/(:type)' => 'index#gone'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
 end
