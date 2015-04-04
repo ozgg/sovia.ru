@@ -38,6 +38,14 @@ input, textarea, button {
   font-size: 0.9em;
 }
 
+p {
+  margin: 0.5em 0;
+
+  &:first-of-type {
+    margin: 0;
+  }
+}
+
 body {
   margin: 0 auto;
   padding: 0;
@@ -177,7 +185,7 @@ div#content {
   background: #ffffff;
   border-radius: 15px;
 
-  section {
+  article > section, > section {
     > h1 {
       font-size: 1.4em;
     }

@@ -25,7 +25,7 @@
     <h1><%= t('.recent_posts') %></h1>
 
     <section>
-      <h1>Posts</h1>
+      <h1><%= t('.recent_in_posts') %></h1>
       <% if @posts.any? %>
           <% @posts.each do |entry| %>
               <div class="post-preview">
@@ -48,7 +48,7 @@
     </section>
 
     <section>
-      <h1>Dreams</h1>
+      <h1><%= t('.recent_in_dreams') %></h1>
       <% if @entries.any? %>
           <% @entries.each do |entry| %>
               <div class="post-preview">

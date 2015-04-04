@@ -1,7 +1,21 @@
 article.front-page {
   > section {
+    margin-bottom: 15px;
+    border-bottom: dashed #e0e0e0 1px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+
     > section {
       width: 49%;
+
+      > h1 {
+        font-size: 1.1em;
+        font-weight: normal;
+        text-align: center;
+      }
 
       &:first-of-type {
         float: left;

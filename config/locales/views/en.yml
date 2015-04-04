@@ -28,6 +28,8 @@ en:
       description: "Main page of the project about dreams called Sovia. Dreams of users, articles, discussions, free online diary of dreams and constantly enriched dreambook."
       quick_dreambook_access: "Quick access to dreambook"
       recent_posts: "Recent posts"
+      recent_in_posts: "Recent in posts"
+      recent_in_dreams: "Recent in dreams"
     dreambook_letters:
       dreambook_letters: "First letters of symbols in dreambook"
     statistics:
