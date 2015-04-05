@@ -39,8 +39,6 @@ en:
             male: "male"
         roles: "roles"
         language: "default language"
-      comment:
-        body: "comment"
       deed:
         name: "name"
         goal_id: "goal"
@@ -553,10 +551,6 @@ en:
       subject: "New reply to you post"
     comment_reply:
       subject: "New reply to your comment"
-    new:
-      title: "Add comment"
-      header: "Add comment"
-      description: "Add comment on entry on Sovia, the site about dreams."
     index:
       title: "All comments, page %{page}"
       header: "All comments"

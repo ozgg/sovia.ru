@@ -19,3 +19,5 @@ ru:
         body: "текст"
         image: "иллюстрация"
         language: "язык"
+      comment:
+        body: "текст комментария"

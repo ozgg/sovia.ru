@@ -19,3 +19,5 @@ en:
         body: "text"
         image: "image"
         language: "language"
+      comment:
+        body: "comment text"
