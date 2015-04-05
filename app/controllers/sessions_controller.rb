@@ -18,10 +18,10 @@ class SessionsController < ApplicationController
   # delete /logout
   def destroy
     if session[:user_id].nil?
-      flash[:notice] = t('session.not_logged_in')
+      flash[:notice] = t('sessions.destroy.not_logged_in')
     else
       session[:user_id] = nil
-      flash[:notice] = t('session.logged_out')
+      flash[:notice] = t('sessions.destroy.logged_out')
     end
     redirect_to root_path
   end
@@ -32,16 +32,16 @@ class SessionsController < ApplicationController
     user = User.find_by_login params[:login]
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:notice] = t('session.logged_in_successfully')
+      flash[:notice] = t('sessions.create.logged_in_successfully')
       redirect_to root_path
     else
       redirect_to login_path
-      flash[:notice] = t('session.invalid_credentials')
+      flash[:notice] = t('sessions.create.invalid_credentials')
     end
   end
 
   def redirect_authorized_user
-    flash[:notice] = t('session.already_logged_in')
+    flash[:notice] = t('sessions.new.already_logged_in')
     redirect_to root_path
   end
 end

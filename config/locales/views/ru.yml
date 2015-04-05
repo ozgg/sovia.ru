@@ -92,3 +92,19 @@ ru:
       previous: "←"
       next: "→"
       truncate: "..."
+  sessions:
+    new:
+      already_logged_in: "Вы уже вошли"
+      enter_credentials: "Введите логин и пароль"
+      login: "Логин"
+      password: "Пароль"
+      enter: "Войти"
+      recovery_form: "Форма восстановления пароля"
+      title: "Авторизация"
+      description: "Страница авторизации на Совии, сайте о снах."
+    create:
+      invalid_credentials: "Неправильный логин или пароль"
+      logged_in_successfully: "Вы успешно вошли"
+    destroy:
+      logged_out: "Вы успешно вышли"
+      not_logged_in: "Вы не выполнили вход"

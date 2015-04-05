@@ -86,17 +86,6 @@ ru:
     invalid_credentials: "Неправильный пароль"
     already_logged_in: "Вы уже вошли"
     logged_out: "Вы вышли"
-  sessions:
-    new:
-      enter_credentials: "Введите логин и пароль"
-      login: "Логин"
-      password: "Пароль"
-      enter: "Войти"
-      forgot_password: "Забыли пароль?"
-      recovery_form: "Форма восстановления пароля"
-      title: "Авторизация"
-      header: "Авторизация"
-      description: "Страница авторизации на Совии, сайте о снах."
   index:
     index:
       no_posts: "Публикаций нет"

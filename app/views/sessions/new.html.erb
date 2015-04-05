@@ -1,11 +1,11 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
-
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+<%= render 'shared/metrics' %>
 
 <article class="login">
+  <header>
+    <h1><%= t('.title') %></h1>
+  </header>
   <%= form_tag do %>
       <fieldset>
         <legend><%= t('.enter_credentials') %></legend>
@@ -22,8 +22,5 @@
         </div>
       </fieldset>
   <% end %>
-  <h2><%= t('.forgot_password') %></h2>
   <p><%= link_to t('.recovery_form'), my_recovery_path %></p>
 </article>
-
-<%= render 'common/metrics' %>

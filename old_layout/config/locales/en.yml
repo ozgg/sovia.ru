@@ -86,17 +86,6 @@ en:
     invalid_credentials: "Invalid credentials"
     already_logged_in: "You are already logged in"
     logged_out: "You have logged out"
-  sessions:
-    new:
-      enter_credentials: "Enter login and password"
-      login: "login"
-      password: "password"
-      enter: "enter"
-      forgot_password: "Forgot password?"
-      recovery_form: "Password recovery form"
-      title: "Authentication"
-      header: "Authentication"
-      description: "Authentication page on sovia, the site about dreams."
   index:
     index:
       no_posts: "No posts"
