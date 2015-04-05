@@ -147,13 +147,6 @@ en:
       title: "Dreams archive"
       header: "Dreams archive"
       description: "Page with archive of dreams on Sovia, the site about dreams."
-    tagged:
-      edit_tag: "Edit tag"
-      tag_description: "Tag description in dreambook"
-      title: "Dreams tagged \"%{tag}\", page %{page}"
-      header: "Dreams tagged \"%{tag}\""
-      description: "Dreams tagged \"%{tag}\" described by users of Sovia, the site about dreams. Page %{page}."
-      my_dreams: "Your dreams with this tag"
     new:
       title: "Describe a dream"
       header: "Describe a dream"

@@ -63,6 +63,13 @@ en:
       title: "Dreams, page %{page}"
       header: "Diary of dreams"
       description: "Dreams described by users of Sovia, page %{page}."
+    tagged:
+      edit_tag: "Edit tag"
+      tag_description: "Tag description in dreambook"
+      title: "Dreams tagged \"%{tag}\", page %{page}"
+      header: "Dreams tagged \"%{tag}\""
+      description: "Dreams tagged \"%{tag}\" described by users of Sovia, the site about dreams. Page %{page}."
+      my_dreams: "Your dreams with this tag"
   deeds:
     form:
       my_goals: "My goals"
