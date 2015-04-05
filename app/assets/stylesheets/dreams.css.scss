@@ -1,0 +1,100 @@
+.dream {
+  margin: 0 0 15px 0;
+
+  .header, header {
+    background: #F7F7F7;
+    min-height: 100px;
+    padding: 5px;
+
+    img {
+      float: left;
+      margin: 0 5px 5px 0;
+    }
+
+    .privacy {
+      float: left;
+      width: 16px;
+      margin: 0 5px 0 0;
+      background-repeat: no-repeat;
+
+      &.privacy-1 {
+        background-image: image_url('locks.gif');
+        background-position: center left;
+      }
+
+      &.privacy-255 {
+        background-image: image_url('locks.gif');
+        background-position: center right;
+      }
+    }
+
+    h3 {
+      margin-left: 105px;
+
+
+      &:first-letter {
+        text-transform: capitalize;
+      }
+
+      &.lucid:after {
+        content: '*';
+      }
+    }
+
+    .author {
+      margin-left: 126px;
+
+      time, .lucidity {
+        font-size: 0.8em;
+      }
+    }
+
+    nav.tags {
+      margin: 5px 0 0 105px;
+      border-top: solid #777777 1px;
+
+      h4 {
+        text-transform: capitalize;
+      }
+
+      ul {
+        li {
+          list-style: none;
+          display: inline-block;
+          border: outset 1px;
+          padding: 0 5px;
+          background: #fafafa;
+          font-size: 0.9em;
+
+          &:hover {
+            background: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .body {
+    padding: 15px;
+  }
+
+  .footer, .info {
+    font-size: 0.9em;
+    border-top: dotted #a0a0a0 1px;
+    padding: 0 5px;
+
+    .comment-count {
+      text-align: right;
+    }
+  }
+}
+
+p.more {
+  &:before {
+    content: '( ';
+  }
+
+  &:after {
+    content: ' )';
+  }
+}

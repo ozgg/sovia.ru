@@ -50,7 +50,7 @@ class DreamsController < ApplicationController
 
   # get /dreams/tagged/:tag
   def tagged
-    @entries = tagged_dreams.page(params[:page] || 1).per(5)
+    @dreams = tagged_dreams.page(current_page).per(5)
   end
 
   def random
@@ -61,7 +61,7 @@ class DreamsController < ApplicationController
     user = User.find_by_login(params[:login])
     raise record_not_found if user.nil?
 
-    @entries = allowed_dreams.where(user: user).page(params[:page] || 1).per(5)
+    @dreams = allowed_dreams.where(user: user).page(current_page).per(5)
   end
 
   def archive

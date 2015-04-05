@@ -1,18 +1,19 @@
 <% if @dreams.any? %>
     <% @dreams.each do |dream| %>
-        <div class="dream-preview">
+        <div class="dream">
           <div class="header">
-            <div class="avatar"><%= raw entry_avatar(dream.user) %></div>
-            <h3 class="title <%= dream.lucid? ? 'sucid' : '' %>">
-              <%= link_to dream.parsed_title, verbose_entry_path(dream) %>
-            </h3>
+            <%= raw entry_avatar(dream.user) %>
 
             <div class="privacy privacy-<%= dream.privacy %>">&nbsp;</div>
+
+            <h3 class="<%= dream.lucid? ? 'lucid' : '' %>">
+              <%= link_to dream.parsed_title, verbose_entry_path(dream) %>
+            </h3>
 
             <div class="author">
               <%= user_link dream.user %>,
               <time datetime="<%= dream.datetime %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-              <%= t('activerecord.attributes.entry.lucidity') + ': ' + dream.lucidity.to_s if dream.lucid? %>
+              <span class="lucidity"><%= t('activerecord.attributes.entry.lucidity') + ': ' + dream.lucidity.to_s if dream.lucid? && dream.owned_by?(current_user) %></span>
             </div>
 
             <% tags = dream.tags.order('canonical_name asc') %>

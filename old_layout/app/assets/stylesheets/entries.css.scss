@@ -47,22 +47,6 @@ article.entry {
       margin: 5px;
     }
 
-    div.privacy {
-      float: left;
-      width: 16px;
-      height: 1.4em;
-      background-repeat: no-repeat;
-
-      &.privacy-1 {
-        background-image: image_url('locks.gif');
-        background-position: center left;
-      }
-
-      &.privacy-255 {
-        background-image: image_url('locks.gif');
-        background-position: center right;
-      }
-    }
 
     div.author {
       line-height: 1.4em;
