@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   def bounce_authorized
     unless current_user.nil?
-      flash[:notice] = t('session.already_logged_in')
+      flash[:notice] = t('sessions.new.already_logged_in')
       redirect_to root_path
     end
   end

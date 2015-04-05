@@ -106,3 +106,16 @@ en:
       recovery_form: "Password recovery form"
       title: "Authentication"
       description: "Authentication page on sovia, the site about dreams."
+  users:
+    create:
+      successfully: "You have registered ang logged in"
+    new:
+      register: "Sign up"
+      login_notice: "Can contain 1 to 30 english letters, digits or underscores"
+      email_notice: "Used for password recovery and notifications"
+      i_am_bot: "I am bot and will not use this site"
+      password_notice: "Choose string password"
+      password_confirmation_notice: "Enter password one more time"
+      agreement: "By registering on this site, you agree to follow user agreement"
+      title: "Singing up"
+      description: "Page with sign-up form on Sovia, the site about dreams."

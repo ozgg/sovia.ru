@@ -13,6 +13,18 @@ ru:
         login: "логин"
         password: "пароль"
         password_confirmation: "подтверждение пароля"
+        email: "e-mail"
+        allow_mail: "получать уведомления по электронной почте"
+        mail_confirmed: "Адрес электронной почты подтверждён"
+        avatar: "картинка пользователя"
+        use_gravatar: "использовать картинку с gravatar.com"
+        gender: "пол"
+        enums:
+          genders:
+            female: "Женский"
+            male: "Мужской"
+        roles: "роли"
+        language: "основной язык"
       post:
         title: "название"
         lead: "аннотация"

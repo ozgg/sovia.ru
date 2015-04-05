@@ -26,19 +26,6 @@ en:
       tag:
         name: "name"
         description: "interpretation"
-      user:
-        email: "e-mail"
-        allow_mail: "allow email notifications"
-        mail_confirmed: "e-mail address is confirmed"
-        avatar: "user picture (avatar)"
-        use_gravatar: "use avatar from gravatar.com"
-        gender: "gender"
-        enums:
-          genders:
-            female: "female"
-            male: "male"
-        roles: "roles"
-        language: "default language"
       deed:
         name: "name"
         goal_id: "goal"
@@ -256,18 +243,6 @@ en:
         description: "Administrative page with editing form for user %{user}"
         header: "Editing user"
   users:
-    create:
-      successfully: "You have registered ang logged in"
-    new:
-      register: "Sign up"
-      login_notice: "Can contain 1 to 30 english letters, digits or underscores"
-      email_notice: "Used for password recovery and notifications"
-      i_am_bot: "I am bot and will not use this site"
-      password_notice: "Choose string password"
-      password_confirmation_notice: "Enter password one more time"
-      agreement: "By registering on this site, you agree to follow user agreement"
-      title: "Singing up"
-      description: "Page with sign-up form on Sovia, the site about dreams."
     recover_form:
       instructions: "Enter e-mail address to recover your password. Instructions and code for resetting password will be sent to this address."
       title: "Password recovery"

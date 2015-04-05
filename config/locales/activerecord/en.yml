@@ -13,6 +13,18 @@ en:
         login: "login"
         password: "password"
         password_confirmation: "password confirmation"
+        email: "e-mail"
+        allow_mail: "allow email notifications"
+        mail_confirmed: "e-mail address is confirmed"
+        avatar: "user picture (avatar)"
+        use_gravatar: "use avatar from gravatar.com"
+        gender: "gender"
+        enums:
+          genders:
+            female: "female"
+            male: "male"
+        roles: "roles"
+        language: "default language"
       post:
         title: "title"
         lead: "lead"
