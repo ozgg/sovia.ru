@@ -37,3 +37,7 @@ ru:
   are_you_sure: "Вы уверены?"
   comments_list: "Комментарии"
   reply: "Ответить"
+  dream:
+    updated: "Сон изменён"
+    deleted: "Сон удалён"
+    created: "Сон добавлен"

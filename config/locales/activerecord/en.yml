@@ -33,3 +33,9 @@ en:
         language: "language"
       comment:
         body: "comment text"
+      entry:
+        title: "title"
+        body:  "body"
+        privacy: "visibility"
+        tags_string: "tags"
+        lucidity: "lucidity"

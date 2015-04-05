@@ -17,12 +17,6 @@ en:
       agent: "user agent"
       agent_request: "request from user agent"
     attributes:
-      entry:
-        title: "title"
-        body:  "body"
-        privacy: "visibility"
-        tags_string: "tags"
-        lucidity: "lucidity"
       tag:
         name: "name"
         description: "interpretation"
@@ -123,11 +117,6 @@ en:
   dreams:
     list:
       no_dreams: "No dreams"
-    index:
-      new_dream: "Describe a dream"
-      title: "Dreams, page %{page}"
-      header: "Diary of dreams"
-      description: "Dreams described by users of Sovia, page %{page}."
     form:
       submit: "Save dream"
       title_description: "Select a title that briefly reflects dream's plot."

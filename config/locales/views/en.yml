@@ -58,6 +58,11 @@ en:
     search:
       search: "Search for dream symbol"
       query: "Query"
+  dreams:
+    index:
+      title: "Dreams, page %{page}"
+      header: "Diary of dreams"
+      description: "Dreams described by users of Sovia, page %{page}."
   deeds:
     form:
       my_goals: "My goals"

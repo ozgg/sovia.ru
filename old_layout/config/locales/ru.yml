@@ -17,12 +17,6 @@ ru:
       agent: "агент пользователя"
       agent_request: "запрос от агента пользователя"
     attributes:
-      entry:
-        title: "Название"
-        body:  "Текст"
-        privacy: "Видимость"
-        tags_string: "Метки"
-        lucidity: "Степень осознанности"
       tag:
         name: "Название"
         description: "Интерпретация"
@@ -121,11 +115,6 @@ ru:
   dreams:
     list:
       no_dreams: "Снов нет"
-    index:
-      new_dream: "Описать сон"
-      title: "Сны, страница %{page}"
-      header: "Дневник снов"
-      description: "Описанные пользователями Совии сны, страница %{page}."
     form:
       submit: "Сохранить сон"
       title_description: "Придумайте название, которое лаконично отражает сюжет сна."

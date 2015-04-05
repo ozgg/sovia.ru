@@ -4,7 +4,7 @@ class DreamsController < ApplicationController
 
   # get /dreams
   def index
-    @entries = allowed_dreams.page(params[:page] || 1).per(5)
+    @dreams = allowed_dreams.page(current_page).per(5)
   end
 
   # get /dreams/:id
@@ -33,7 +33,7 @@ class DreamsController < ApplicationController
   # patch /dreams/:id
   def update
     if @entry.update(dream_parameters)
-      flash[:notice] = t('entry.dream.updated')
+      flash[:notice] = t('dream.updated')
       redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'edit'
@@ -43,7 +43,7 @@ class DreamsController < ApplicationController
   # delete /dreams/:id
   def destroy
     if @entry.destroy
-      flash[:notice] = t('entry.dream.deleted')
+      flash[:notice] = t('dream.deleted')
     end
     redirect_to entry_dreams_path
   end
@@ -102,7 +102,7 @@ class DreamsController < ApplicationController
 
   def create_dream
     if @entry.save
-      flash[:notice] = t('entry.dream.created')
+      flash[:notice] = t('dream.created')
       redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
     else
       render action: 'new'
@@ -110,7 +110,7 @@ class DreamsController < ApplicationController
   end
 
   def emulate_saving
-    flash[:notice] = t('entry.dream.created')
+    flash[:notice] = t('dream.created')
     redirect_to entry_dreams_path
   end
 
@@ -126,8 +126,7 @@ class DreamsController < ApplicationController
   end
 
   def collect_archive
-    page      = params[:page] || 1
     first_day = "%04d-%02d-01 00:00:00" % [params[:year], params[:month]]
-    @dreams   = allowed_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(page).per(20)
+    @dreams   = allowed_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(current_page).per(20)
   end
 end

@@ -33,3 +33,9 @@ ru:
         language: "язык"
       comment:
         body: "текст комментария"
+      entry:
+        title: "название"
+        body:  "текст"
+        privacy: "видимость"
+        tags_string: "метки"
+        lucidity: "степень осознанности"

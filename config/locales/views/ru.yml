@@ -59,6 +59,11 @@ ru:
       today_i: "Сегодня я"
       to_accomplish: ", чтобы"
       my_goals: "Мои цели"
+  dreams:
+    index:
+      title: "Сны, страница %{page}"
+      header: "Дневник снов"
+      description: "Описанные пользователями Совии сны, страница %{page}."
   dreambook:
     search:
       search: "Поиск по соннику"
