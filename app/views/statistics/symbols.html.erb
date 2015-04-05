@@ -1,28 +1,28 @@
-<% content_for :title, t('.title', page: params[:page] || 1) %>
-<% content_for :description, t('.description', page: params[:page] || 1) %>
-
-<header>
-  <h1><%= t('.header') %></h1>
-  <h2><%= t('page', page: params[:page] || 1) %></h2>
-</header>
-
-<% if @tags.any? %>
-    <nav class="dream-symbols">
-      <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
-        <% @tags.each do |tag| %>
-            <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name), rel: 'tag' %> (<%= tag.entries_count %>)</li>
-        <% end %>
-      </ol>
-    </nav>
-
-    <%= paginate @tags %>
-<% else %>
-    <div class="message"><%= t('nothing_found') %></div>
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :meta_description, t('.description', page: current_page) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/random_dream' %>
+    <%= render 'sidebar/more_links' %>
 <% end %>
+<%= render 'shared/metrics' %>
 
-<section>
-  <%= render 'layouts/random_dream' %>
-  <%= render 'layouts/more' %>
+<section class="statistics">
+  <header>
+    <h1><%= t('.header') %></h1>
+    <h2><%= render 'shared/page' %></h2>
+  </header>
+
+  <% if @tags.any? %>
+      <nav class="dream-symbols">
+        <ol start="<%= ((params[:page] || 1).to_i - 1) * 20 + 1 %>">
+          <% @tags.each do |tag| %>
+              <li><%= link_to tag.name, tagged_entry_dreams_path(tag: tag.name), rel: 'tag' %> (<%= tag.entries_count %>)</li>
+          <% end %>
+        </ol>
+      </nav>
+
+      <%= paginate @tags %>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
 </section>
-
-<%= render 'common/metrics' %>

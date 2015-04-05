@@ -389,16 +389,6 @@ en:
       result: "Search result"
       description: "Search result for word %{word} in the dreambook of Sovia."
   page_gone: "This page is gone"
-  statistics:
-    index:
-      symbols: "Statistics for dream symbols"
-      title: "Statistics"
-      header: "Statistics"
-      description: "Page with list of available statistics for the site about dreams \"Sovia\"."
-    symbols:
-      header: "Statistics for dream symbols"
-      title: "Statistics for dream symbols, page %{page}"
-      description: "What dreams symbols appear the most in dreams? Statistics of the site about dreams \"Sovia\", page %{page}."
   my:
     index:
       dreams: "My dreams"

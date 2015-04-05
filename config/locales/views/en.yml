@@ -74,6 +74,15 @@ en:
     new:
       title: "Add comment"
       description: "Add comment on entry on Sovia, the site about dreams."
+  statistics:
+    index:
+      symbols: "Statistics for dream symbols"
+      title: "Statistics"
+      description: "Page with list of available statistics for the site about dreams \"Sovia\"."
+    symbols:
+      header: "Statistics for dream symbols"
+      title: "Statistics for dream symbols, page %{page}"
+      description: "What dreams symbols appear the most in dreams? Statistics of the site about dreams \"Sovia\", page %{page}."
   views:
     pagination:
       first: "⇤"
