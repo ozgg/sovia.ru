@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('ul.comments').find('ul.actions > li > div:first-child').on('click', function() {
-        var parent_comment = $(this).parent().parent().parent();
+    $('div.comments').find('div.actions > div:first-child').on('click', function() {
+        var parent_comment = $(this).parent().parent();
         var parent_id = parseInt(parent_comment.attr('id').replace('comment-', ''));
 
         $(this).parent().find('div:last-child').append($('#new_comment'));

@@ -7,4 +7,8 @@ module TimeHelpers
   def iso_day
     strftime('%Y-%m-%d')
   end
+
+  def microformat_minutes
+    strftime('%Y-%m-%dT%H:%M')
+  end
 end

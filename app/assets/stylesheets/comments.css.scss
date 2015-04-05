@@ -1,0 +1,58 @@
+div.comments {
+  > div {
+    margin: 0 0 15px 0;
+
+    .header {
+      background: #fef9ee;
+      padding: 5px;
+
+      > img {
+        float: left;
+        max-width: 25px;
+        max-height: 25px;
+        margin: 0 5px 0 0;
+      }
+
+      span {
+        a {
+          line-height: 25px;
+        }
+      }
+
+      time {
+        line-height: 25px;
+        font-size: 0.8em;
+        float: right;
+        color: #444444;
+      }
+    }
+
+    .body {
+      padding: 5px 15px;
+    }
+
+    .actions {
+      background: #fef9ee;
+      padding: 5px;
+
+      .reply {
+        cursor: pointer;
+        font-size: 0.9em;
+        color: #3d5c85;
+        display: inline-block;
+
+        &:hover {
+          color: #ff9600;
+        }
+
+        &:before {
+          content: '[ ';
+        }
+
+        &:after {
+          content: ' ]';
+        }
+      }
+    }
+  }
+}

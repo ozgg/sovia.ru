@@ -11,50 +11,47 @@
     <% end %>
   </header>
 
-  <section class="body">
+  <section class="body" itemprop="articleBody">
     <% if post.image.url %>
-        <figure><%= link_to image_tag(post.image.post, alt: post.title), post.image.url %></figure>
+        <figure><%= link_to image_tag(post.image.post, alt: post.title, itemprop: 'image'), post.image.url %></figure>
     <% end %>
     <%= simple_format post.body %>
   </section>
 
   <section class="info">
     <div>
-      <span class="author"><%= user_link post.user %></span>,
-      <time datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><%= user_link post.user %></span></span>,
+      <time itemprop="datePublished" content="<%= post.created_at.microformat_minutes %>" datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
   </section>
-  
+
   <%= render 'shared/social' %>
 
   <section class="comments">
     <% @comment = Comment.new(commentable: post) %>
     <% if post.comments.any? %>
         <h1><%= t(:comments) %></h1>
-        <ul class="comments">
+
+        <div class="comments">
           <% post.comments.order('id asc').each do |comment| %>
-              <li id="comment-<%= comment.id %>">
-                <div>
-                  <figure>
-                    <%= comment_avatar(comment.user) %>
-                    <figcaption><%= user_link(comment.user) %></figcaption>
-                  </figure>
+              <div id="comment-<%= comment.id %>">
+                <div class="header">
+                  <%= comment_avatar(comment.user) %>
+                  <span class="user"><%= user_link(comment.user) %></span>
                   <time datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
                 </div>
 
-                <div>
+                <div class="body">
                   <%= raw parse_body(comment.body, false, true) %>
                 </div>
 
-                <ul class="actions">
-                  <li>
-                    <div><%= t(:reply) %></div>
-                    <div></div>
-                  </li>
-                </ul>
-              </li>
+                <div class="actions">
+                  <div class="reply"><%= t(:reply) %></div>
+                  <div></div>
+                </div>
+              </div>
           <% end %>
-        </ul>
+        </div>
     <% end %>
 
     <div class="reply-container">
