@@ -68,6 +68,8 @@ en:
       description: "Posts and articles of users of Sovia in community (forum about dreams) on Sovia, the site about dream practice. Page %{page}."
     new:
       title: "New post"
+    edit:
+      title: "Editing post"
   views:
     pagination:
       first: "⇤"
@@ -75,3 +77,4 @@ en:
       previous: "←"
       next: "→"
       truncate: "..."
+  list: "List"

@@ -58,3 +58,41 @@ div.post-preview {
     }
   }
 }
+
+
+article.post {
+  header {
+    padding: 0 15px;
+    background: #f7f7f7;
+    border-radius: 15px 15px 0 0;
+  }
+
+  section {
+    padding: 0 15px;
+
+    &.body {
+      min-height: 300px;
+
+      figure {
+        float: left;
+        margin: 15px 15px 0 0;
+
+        img {
+          max-width: 250px;
+          max-height: 250px;
+        }
+      }
+    }
+
+    &.info {
+      background: #f7f7f7;
+      border-radius: 0 0 15px 15px;
+      text-align: right;
+
+      time {
+        font-size: 0.9em;
+        font-style: italic;
+      }
+    }
+  }
+}

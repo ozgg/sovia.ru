@@ -5,6 +5,11 @@
 <article>
   <header>
     <h1><%= t('.title') %></h1>
+    <nav>
+      <ul>
+        <li><%= link_to t(:list), posts_path %></li>
+      </ul>
+    </nav>
   </header>
 
   <%= render 'form' %>

@@ -1,23 +1,17 @@
-<% content_for :title, @entry.title %>
-<% content_for :description, @entry.preview %>
+<% content_for :meta_title, @post.title %>
+<% content_for :meta_description, @post.preview %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+    <meta property="og:article:published_time" content="<%= @post.created_at.iso_day %>" />
+    <meta property="og:article:modified_time" content="<%= @post.updated_at.iso_day %>" />
+    <meta property="og:article:author" content="<%= @post.user.login %>" />
+<% end %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @post.image.url) if @post.image.url %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/statistics' %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
 
-<header>
-  <h1><%= t('.post') %></h1>
-  <% if @entry.editable_by? current_user %>
-  <nav>
-    <ul>
-      <li><%= link_to t(:edit), edit_post_path(@entry) %></li>
-      <li><%= link_to t(:delete), @entry, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
-    </ul>
-  </nav>
-  <% end %>
-</header>
+<%= render 'shared/metrics' %>
 
-<%= render @entry %>
-
-<section>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/more' %>
-</section>
-
-<%= render 'common/metrics' %>
+<%= render @post %>

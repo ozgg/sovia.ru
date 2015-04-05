@@ -142,11 +142,6 @@ en:
       description: "Post \"%{title}\" on forum about dreams \"Sovia\", added by user %{user} on %{date}."
     post:
       tags: "Tags"
-    edit:
-      edit: "Edit post"
-      title: "Edit post"
-      header: "Edit post"
-      description: "Page for editing post on Sovia."
     tagged:
       title: "Entries tagged \"%{tag}\", page %{page}"
       header: "Entries tagged \"%{tag}\""
@@ -373,7 +368,6 @@ en:
       comments: "All comments"
   roles:
     insufficient_rights: "Insufficient rights"
-  are_you_sure: "Are you sure?"
   at: "at"
   dreambook:
     letters:
@@ -597,7 +591,6 @@ en:
     formats:
       short: "%B %Y"
       w3c: "%Y-%m-%dT%H:%M:%S%:z"
-  edit: "Edit"
   errors:
     messages:
       extension_white_list_error: "has invalid extension"

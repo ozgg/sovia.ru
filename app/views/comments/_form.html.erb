@@ -1,5 +1,5 @@
 <%= form_for(@comment) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @comment } %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @comment } %>
 
     <div>
       <%= f.hidden_field :commentable_id %>

@@ -1,60 +1,69 @@
-<article class="entry post">
+<article class="post" itemscope itemtype="http://schema.org/Article">
   <header>
-    <figure><%= raw entry_avatar(post.user) %></figure>
-    <h2><%= post.title %></h2>
-    <div class="author">
-      <%= user_link post.user %>,
-      <time datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-    </div>
+    <h1 itemprop="name"><%= post.title %></h1>
+    <% if @post.editable_by? current_user %>
+        <nav>
+          <ul>
+            <li><%= link_to t(:edit), edit_post_path(@post) %></li>
+            <li><%= link_to t(:delete), post, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+          </ul>
+        </nav>
+    <% end %>
   </header>
-  <div>
+
+  <section class="body">
     <% if post.image.url %>
-        <div class="post-image"><%= link_to image_tag(post.image.post, alt: post.title), post.image.url %></div>
+        <figure><%= link_to image_tag(post.image.post, alt: post.title), post.image.url %></figure>
     <% end %>
     <%= simple_format post.body %>
-  </div>
-  <footer>
-    <div class="permalink"><%= link_to t(:link), post %></div>
-    <div class="comments-count"><%= t('comment', count: post.comments_count) %></div>
-  </footer>
-</article>
+  </section>
 
-<% @comment = Comment.new(commentable: post) %>
-<section>
-  <% if post.comments.any? %>
-      <h3><%= t('entries.comments.comments') %></h3>
-      <ul class="comments">
-        <% post.comments.order('id asc').each do |comment| %>
-            <li id="comment-<%= comment.id %>">
-              <div>
-                <figure>
-                  <%= comment_avatar(comment.user) %>
-                  <figcaption><%= user_link(comment.user) %></figcaption>
-                </figure>
-                <time datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-              </div>
-
-              <div>
-                <%= raw parse_body(comment.body, false, true) %>
-              </div>
-
-              <ul class="actions">
-                <li>
-                  <div><%= t('entries.comments.reply') %></div>
-                  <div></div>
-                </li>
-              </ul>
-            </li>
-        <% end %>
-      </ul>
-  <% end %>
-
-  <div class="reply-container">
-    <h3><%= t('entries.comments.add_comment') %></h3>
+  <section class="info">
     <div>
-      <%= render 'comments/form' %>
+      <span class="author"><%= user_link post.user %></span>,
+      <time datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
-  </div>
-</section>
+  </section>
+  
+  <%= render 'shared/social' %>
 
-<%= render 'layouts/social' %>
+  <section class="comments">
+    <% @comment = Comment.new(commentable: post) %>
+    <% if post.comments.any? %>
+        <h1><%= t(:comments) %></h1>
+        <ul class="comments">
+          <% post.comments.order('id asc').each do |comment| %>
+              <li id="comment-<%= comment.id %>">
+                <div>
+                  <figure>
+                    <%= comment_avatar(comment.user) %>
+                    <figcaption><%= user_link(comment.user) %></figcaption>
+                  </figure>
+                  <time datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                </div>
+
+                <div>
+                  <%= raw parse_body(comment.body, false, true) %>
+                </div>
+
+                <ul class="actions">
+                  <li>
+                    <div><%= t(:reply) %></div>
+                    <div></div>
+                  </li>
+                </ul>
+              </li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <div class="reply-container">
+      <h3><%= t('comment.add') %></h3>
+
+      <div>
+        <%= render 'comments/form' %>
+      </div>
+    </div>
+  </section>
+
+</article>

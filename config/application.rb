@@ -27,5 +27,9 @@ module Sovia
     config.action_dispatch.rescue_responses.merge!('ApplicationController::UnauthorizedException' => :unauthorized)
 
     config.exceptions_app = self.routes
+
+    %w(app/service lib).each do |path|
+      config.autoload_paths << config.root.join(path).to_s
+    end
   end
 end
