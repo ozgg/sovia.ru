@@ -58,10 +58,10 @@ class DreamsController < ApplicationController
   end
 
   def dreams_of_user
-    user = User.find_by_login(params[:login])
-    raise record_not_found if user.nil?
+    @user = User.find_by_login(params[:login])
+    raise record_not_found if @user.nil?
 
-    @dreams = allowed_dreams.where(user: user).page(current_page).per(5)
+    @dreams = allowed_dreams.where(user: @user).page(current_page).per(5)
   end
 
   def archive

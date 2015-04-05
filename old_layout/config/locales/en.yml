@@ -117,44 +117,6 @@ en:
   dreams:
     list:
       no_dreams: "No dreams"
-    form:
-      submit: "Save dream"
-      title_description: "Select a title that briefly reflects dream's plot."
-      body_description: "Describe your dreams in details. Remember about passages in text."
-      body_markup_header: "You can use the following markup:"
-      short_dream_markup: "link to dream 123. Dream name will appear as link text."
-      long_dream_markup: "link to dream 123. Text in parentheses will appear as link text."
-      short_name_markup: "name in braces will be shortened to initials: JD. Author (and only author) can see full name hovering mouse over text. Maximum 30 letters."
-      long_name_markup: "name in braces will be replaced with text in parentheses (up to 30 letters in both cases). Author will be able to see initial text by hovering mouse over text."
-      tags_description: "You can enumerate tags using comma. Tag is a separate dream symbol. It is convenient to use them for search and own statistics."
-      lucidity_description: "Lucidity is a subjective measure from 0 (no lucidity at all) to 5 (maximal control). The main purpose is your own statistics."
-    show:
-      header: "Dream description"
-      edit: "Edit dream"
-      title: "Dream \"%{title}\""
-      description: "Dream \"%{title}\" described on Sovia by user %{user} on %{date}"
-    edit:
-      view: "View dream"
-      title: "Edit dream"
-      header: "Edit dream"
-      description: "Page for editing dream on Sovia."
-    random:
-      title: "Random dream"
-      header: "Random dream"
-      description: "Randomly selected dream."
-    archive:
-      year: "year %{year}"
-      title: "Dreams archive"
-      header: "Dreams archive"
-      description: "Page with archive of dreams on Sovia, the site about dreams."
-    new:
-      title: "Describe a dream"
-      header: "Describe a dream"
-      description: "You can describe your dreams and find their meaning on this page on Sovia, the site about dreams."
-    dreams_of_user:
-      title: "Dreams of user %{user}, page %{page}"
-      header: "Dreams of user %{user}"
-      description: "Dreams of user %{user} on Sovia, the site about dreams. Page %{page}."
   tags:
     list:
       no_tags: "No tags"
@@ -517,7 +479,6 @@ en:
       described: "Tags that described in dreambook"
       adjacent: "Adjacent entries"
   date:
-    month_names: [~, january, february, march, april, may, june, july, august, september, october, november, december]
     formats:
       short: "%B %Y"
       w3c: "%Y-%m-%dT%H:%M:%S%:z"

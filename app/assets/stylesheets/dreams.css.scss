@@ -76,6 +76,10 @@
 
   .body {
     padding: 15px;
+
+    .name {
+      border-bottom: dotted 1px;
+    }
   }
 
   .footer, .info {

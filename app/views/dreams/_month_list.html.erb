@@ -4,26 +4,26 @@
         <% if @dates[params[:year].to_i] %>
             <ul>
               <% @dates[params[:year].to_i].each do |month| %>
-                  <li><%= link_to t('date.month_names')[month], archive_entry_dreams_path(year: params[:year], month: month) %></li>
+                  <li><%= link_to t('date.nominative_months')[month], archive_entry_dreams_path(year: params[:year], month: month) %></li>
               <% end %>
             </ul>
         <% else %>
-            <div class="message"><%= t('nothing_found') %></div>
+            <%= render 'shared/nothing_found' %>
         <% end %>
     <% else %>
-        <h3><%= t('date.month_names')[params[:month].to_i] %> (<%= t('page', page: params[:page] || 1) %>)</h3>
+        <h3><%= t('date.nominative_months')[params[:month].to_i] %> (<%= render 'shared/page' %>)</h3>
         <% if @dreams.any? %>
             <ul>
               <% @dreams.each do |dream| %>
               <li>
                 <%= link_to dream.parsed_title, verbose_entry_path(dream) %>
-                (<time datetime="<%= dream.created_at %>"><%= dream.created_at.utc.strftime('%d.%m.%Y') %></time>)
+                (<time datetime="<%= dream.created_at.w3c %>"><%= dream.created_at.utc.strftime('%d.%m.%Y') %></time>)
               </li>
               <% end %>
             </ul>
             <%= paginate @dreams %>
         <% else %>
-            <div class="message"><%= t('nothing_found') %></div>
+            <%= render 'shared/nothing_found' %>
         <% end %>
     <% end %>
 <% end %>
