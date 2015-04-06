@@ -1,12 +1,10 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<%= render 'shared/metrics' %>
 
 <article>
   <header>
-    <h1><%= t('.header') %></h1>
+    <h1><%= t('.title') %></h1>
   </header>
 
   <%= render 'form' %>
 </article>
-
-<%= render 'common/metrics' %>

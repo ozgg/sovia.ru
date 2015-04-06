@@ -42,6 +42,36 @@ en:
       language:
         code: "code"
         name: "name"
+      goal:
+        name: "name"
+        status: "status"
+        description: "description"
+        statuses:
+          issued: "issued"
+          achieved: "achieved"
+          rejected: "rejected"
+      tag:
+        name: "name"
+        description: "interpretation"
+      deed:
+        name: "name"
+        goal_id: "goal"
+      user_role:
+        user: "user"
+        role: "role"
+        roles:
+          administrator: "Administrator"
+          moderator:  "Moderator"
+          dreams_manager: "Dreams manager"
+          dreambook_editor: "Dreambook editor"
+          dreambook_manager: "Dreambook manager"
+          posts_manager: "Posts manager"
+      agent:
+        name: "name"
+        is_bot: "it is bot"
+      agent_request:
+        day: "date"
+        requests_count: "number of requests"
     properties:
       dream:
         privacy:

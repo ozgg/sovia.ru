@@ -1,93 +1,7 @@
 ru:
-  activerecord:
-    models:
-      entry_dream: "сон"
-      entry_article: "статья"
-      entry_post: "публикация"
-      entry_thought: "мысль"
-      entry_grain: "зерно восприятия"
-      user: "пользователь"
-      tag: "метка"
-      comment: "комментарий"
-      deed: "хорошее дело"
-      goal: "цель"
-      language: "язык"
-      user_role: "роль пользователя"
-      post: "публикация"
-      agent: "агент пользователя"
-      agent_request: "запрос от агента пользователя"
-    attributes:
-      tag:
-        name: "Название"
-        description: "Интерпретация"
-      deed:
-        name: "Суть"
-        goal_id: "Цель"
-      goal:
-        name: "название"
-        status: "состояние"
-        description: "описание"
-        statuses:
-          issued: "поставлена"
-          achieved: "достигнута"
-          rejected: "отказ от цели"
-      user_role:
-        user: "пользователь"
-        role: "роль"
-        roles:
-          administrator: "Администратор"
-          moderator:  "Модератор"
-          dreams_manager: "Менеджер снов"
-          dreambook_editor: "Редактор сонника"
-          dreambook_manager: "Менеджер сонника"
-          posts_manager: "Менеджер публикаций"
-      agent:
-        name: "название"
-        is_bot: "это бот"
-      agent_request:
-        day: "дата"
-        requests_count: "количество запросов"
-  titles:
-    posts:
-      index: "Сообщество"
-    tags:
-      index: "Метки"
-  session:
-    not_logged_in: "Вы вышли"
-    logged_in_successfully: "Вы вошли"
-    invalid_credentials: "Неправильный пароль"
-    already_logged_in: "Вы уже вошли"
-    logged_out: "Вы вышли"
   index:
-    index:
-      no_posts: "Публикаций нет"
     management_links:
       tags_queue: "Очередь меток"
-  articles:
-    list:
-      no_articles: "Статей нет"
-    form:
-      submit: "Сохранить статью"
-    index:
-      new_article: "Создать статью"
-      title: "Статьи, страница %{page}"
-      header: "Статьи"
-      description: "Статьи по тематике снов и сопутствующим темам на Совии, сайте о снах. Страница %{page}."
-    show:
-      article: "Просмотр статьи"
-      title: "Статья «%{title}»"
-      description: "Статья «%{title}» на Совии, сайте о снах."
-    new:
-      header: "Новая статья"
-      title: "Новая статья"
-      description: "Страница добавления статьи"
-    edit:
-      title: "Редактирование статьи"
-      description: "Страница редактирования статьи"
-    tagged:
-      title: "Статьи с меткой «%{tag}», страница %{page}"
-      header: "Статьи с меткой «%{tag}»"
-      description: "Статьи по теме снов и близких к снам темах с меткой «%{tag}» на Совии, страница %{page}."
   posts:
     form:
       submit: "Сохранить запись"
@@ -172,27 +86,6 @@ ru:
         title: "Редактирование пользователя %{user}"
         description: "Административная страница с формой для редактирования пользователя %{user}"
         header: "Редактирование пользователя"
-  entry:
-    article:
-      created: "Статья добавлена"
-      updated: "Статья обновлена"
-      deleted: "Статья удалена"
-    post:
-      created: "Публикация добавлена"
-      updated: "Публикация обновлена"
-      deleted: "Публикация удалена"
-    dream:
-      created: "Сон добавлен"
-      updated: "Сон обновлён"
-      deleted: "Сон удалён"
-    thought:
-      created: "Мысль добавлена"
-      updated: "Мысль обновлена"
-      deleted: "Мысль удалена"
-    grain:
-      created: "Зерно восприятия добавлено"
-      updated: "Зерно восприятия изменено"
-      deleted: "Зерно восприятия удалено"
   tag:
     created: "Метка добавлена"
     updated: "Метка обновлена"
@@ -201,37 +94,9 @@ ru:
     created: "Запись добавлена"
     updated: "Запись обновлена"
     deleted: "Запись удалена"
-  layouts:
-    application:
-      articles: "Статьи"
-      dreams: "Сны"
-      new_dream: "Описать сон"
-      about: "О проекте"
-      terms_of_service: "Пользовательское соглашение"
-      dreambook: "Сонник"
-      sidebar: "Боковая панель"
-      notice: "Замечание"
-    auth_block:
-      authorize: "Авторизация"
-      logout: "Выйти"
-      private: "Личный кабинет"
-      deeds: "Журнал успеха"
-      thoughts: "Мои мысли"
-      aria_label_nav: "Пользовательское меню"
-    statistics:
-      statistics: "Тенденции в сюжетах снов"
-    more:
-      more: "Ещё разделы"
-      archive: "Архив снов"
-      statistics: "Статистика"
-      thoughts: "Мысли пользователей"
-      random: "Случайный сон"
-      grains: "Зёрна восприятия"
-      comments: "Все комментарии"
   roles:
     insufficient_rights: "Недостаточно прав"
   at: "от"
-  page_gone: "Страницы больше нет"
   my:
     index:
       dreams: "Мои сны"
@@ -360,13 +225,6 @@ ru:
         header: "Редактирование моего символа сна «%{tag}»"
         view: "В просмотр"
         description: "Редактирование вашей интерпретации символа сна «%{tag}»"
-    goals:
-      index:
-        title: "Ваши цели, страница %{page}"
-        description: "Список целей, которые вы себе поставили, страница %{page}."
-        header: "Ваши цели"
-        about: "О целях"
-        create: "Поставить цель"
   profile:
     updated: "Профиль обновлён"
     incorrect_password: "Старый пароль неправильный"
@@ -470,35 +328,6 @@ ru:
       title: "Редактирование зерна восприятия"
       description: "Страница редактирования зерна восприятия"
       header: "Редактирование зерна восприятия"
-  view: "Посмотреть"
-  goal:
-    created: "Цель добавлена"
-    updated: "Цель обновлена"
-    deleted: "Цель удалена"
-  goals:
-    new:
-      title: "Создать цель"
-      description: "Страница с формой создания новой цели."
-      header: "Добавить цель"
-    show:
-      title: "Ваша цель «%{goal}»"
-      description: "Страница с описанием вашей цели, которую вы описали как «%{goal}»."
-      steps_to_achieve: "Мои шаги для достижения цели"
-      nothing_done_to_achieve: "Пока ничего не сделано для достижения этой цели."
-    edit:
-      title: "Редактирование цели"
-      description: "Страница с формой редактирования вашей цели."
-      header: "Редактирование цели"
-      goals: "Все ваши цели"
-    index:
-      title: "Постановка и достижение целей"
-      description: "Как правильно ставить себе цели и как их достигать, чем себя мотивировать и как фиксировать прогресс."
-      header: "Постановка и достижение целей"
-  create: "Создать"
-  list: "К списку"
-  empty: "пусто"
-  i: "я"
-  hidden: "Скрыто"
   agent:
     updated: "Агент изменён"
   agents:

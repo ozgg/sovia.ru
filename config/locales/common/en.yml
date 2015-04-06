@@ -66,3 +66,7 @@ en:
     internal_server_error:
       title: "Server error (500)"
       description: "Something went wrong. Try to return in several minutes, most likely everything will work."
+  goal:
+    created: "Goal has been added"
+    updated: "Goal has been updated"
+    deleted: "Goal has been deleted"

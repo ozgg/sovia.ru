@@ -240,3 +240,15 @@ en:
     index:
       title: "Grains of perception"
       description: "What are grains of perception, why one should describe them and how to use them. You can find out on this page of Sovia, the site about dreams."
+  goals:
+    new:
+      title: "Create goal"
+    show:
+      title: "Your goal \"%{goal}\""
+      steps_to_achieve: "My steps to achive this goal."
+      nothing_done_to_achieve: "Nothing done yet to achieve this goal."
+    edit:
+      title: "Edit goals"
+    index:
+      title: "Issuing goals and succeeding in goals"
+      description: "How to issue own goals and how to succeed in them. How to motivate yourself and track your progress."

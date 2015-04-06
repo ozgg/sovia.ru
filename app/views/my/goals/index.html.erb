@@ -1,27 +1,29 @@
-<% content_for :title, t('.title', page: params[:page] || 1) %>
-<% content_for :description, t('.description', page: params[:page] || 1) %>
+<% content_for :meta_title, t('.title', page: current_page) %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <h2><%= t('page', page: params[:page] || 1) %></h2>
-  <nav>
-    <ul>
-      <li><%= link_to t('.about'), goals_path %></li>
-      <li><%= link_to t('.create'), new_goal_path %></li>
-    </ul>
-  </nav>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <h2><%= render 'shared/page' %></h2>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t('.about'), goals_path %></li>
+        <li><%= link_to t(:create), new_goal_path %></li>
+      </ul>
+    </nav>
+  </header>
 
-<% if @goals.any? %>
-    <ul class="goals">
-      <% @goals.each do |goal| %>
-      <li><%= link_to goal.name, goal %> (<%= t("activerecord.attributes.goal.statuses.#{goal.status}") %> <%= goal.updated_at.strftime('%d.%m.%Y') %>)</li>
-      <% end %>
-    </ul>
+  <% if @goals.any? %>
+      <ul class="goals">
+        <% @goals.each do |goal| %>
+            <li><%= link_to goal.name, goal %> (<%= t("activerecord.attributes.goal.statuses.#{goal.status}") %> <%= goal.updated_at.strftime('%d.%m.%Y') %>)</li>
+        <% end %>
+      </ul>
 
-    <%= paginate @goals %>
-<% else %>
-    <div class="message"><%= t('nothing_found') %></div>
-<% end %>
+      <%= paginate @goals %>
+  <% else %>
+      <div class="message"><%= t('nothing_found') %></div>
+  <% end %>
 
-<%= render 'common/metrics' %>
+</article>
+

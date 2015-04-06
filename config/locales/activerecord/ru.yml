@@ -42,6 +42,36 @@ ru:
       language:
         code: "код"
         name: "название"
+      deed:
+        name: "Суть"
+        goal_id: "Цель"
+      goal:
+        name: "название"
+        status: "состояние"
+        description: "описание"
+        statuses:
+          issued: "поставлена"
+          achieved: "достигнута"
+          rejected: "отказ от цели"
+      tag:
+        name: "Название"
+        description: "Интерпретация"
+      user_role:
+        user: "пользователь"
+        role: "роль"
+        roles:
+          administrator: "Администратор"
+          moderator:  "Модератор"
+          dreams_manager: "Менеджер снов"
+          dreambook_editor: "Редактор сонника"
+          dreambook_manager: "Менеджер сонника"
+          posts_manager: "Менеджер публикаций"
+      agent:
+        name: "название"
+        is_bot: "это бот"
+      agent_request:
+        day: "дата"
+        requests_count: "количество запросов"
     properties:
       dream:
         privacy:

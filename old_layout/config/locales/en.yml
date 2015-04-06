@@ -1,120 +1,5 @@
 en:
-  activerecord:
-    models:
-      entry_dream: "dream"
-      entry_article: "article"
-      entry_post: "post"
-      entry_thought: "thought"
-      entry_grain: "grain of perception"
-      user: "user"
-      tag: "tag"
-      comment: "comment"
-      deed: "deed"
-      goal: "goal"
-      language: "language"
-      user_role: "user role"
-      post: "post"
-      agent: "user agent"
-      agent_request: "request from user agent"
-    attributes:
-      tag:
-        name: "name"
-        description: "interpretation"
-      deed:
-        name: "name"
-        goal_id: "goal"
-      goal:
-        name: "name"
-        status: "status"
-        description: "description"
-        statuses:
-          issued: "issued"
-          achieved: "achieved"
-          rejected: "rejected"
-      user_role:
-        user: "user"
-        role: "role"
-        roles:
-          administrator: "Administrator"
-          moderator:  "Moderator"
-          dreams_manager: "Dreams manager"
-          dreambook_editor: "Dreambook editor"
-          dreambook_manager: "Dreambook manager"
-          posts_manager: "Posts manager"
-      agent:
-        name: "name"
-        is_bot: "it is bot"
-      agent_request:
-        day: "date"
-        requests_count: "number of requests"
-  titles:
-    posts:
-      index: "Community"
-    tags:
-      index: "Tags"
-  session:
-    not_logged_in: "You are not logged in"
-    logged_in_successfully: "Logged in successfully"
-    invalid_credentials: "Invalid credentials"
-    already_logged_in: "You are already logged in"
-    logged_out: "You have logged out"
-  index:
-    index:
-      no_posts: "No posts"
-      main: "Welcome"
-    management_links:
-      tags_queue: "Tags queue"
-  articles:
-    list:
-      no_articles: "No articles"
-    form:
-      submit: "Save article"
-    index:
-      new_article: "New article"
-      title: "Articles, page %{page}"
-      header: "Articles"
-      description: "Articles about dreams and similar topics on Sovia, the site about dreams. Page %{page}."
-    show:
-      article: "Viewing article"
-      title: "Article \"%{title}\""
-      description: "Article \"%{title}\" on Sovia, the site about dreams."
-    new:
-      header: "New article"
-      title: "New article"
-      description: "Page with adding article"
-    edit:
-      title: "Edit article"
-      description: "Page for editing article"
-    tagged:
-      title: "Articles tagged \"%{tag}\", page %{page}"
-      header: "Articles tagged \"%{tag}\""
-      description: "
-      Articles about dreams and close topics tagged \"%{tag}\" on Sovia, page %{page}."
-  posts:
-    form:
-      submit: "Save post"
-    show:
-      post: "View post"
-      edit: "Edit post"
-      delete: "Delete post"
-      title: "Post \"%{title}\" in community"
-      description: "Post \"%{title}\" on forum about dreams \"Sovia\", added by user %{user} on %{date}."
-    post:
-      tags: "Tags"
-    tagged:
-      title: "Entries tagged \"%{tag}\", page %{page}"
-      header: "Entries tagged \"%{tag}\""
-      description: "Discussing of dreams practice tagged \"%{tag}\" on Sovia, the site about dreams. Page %{page}."
-  dreams:
-    list:
-      no_dreams: "No dreams"
   tags:
-    list:
-      no_tags: "No tags"
-    form:
-      submit: "Save tag"
-    index:
-      new_tag: "New tag"
     show:
       tag: "View tag"
       delete: "Delete tag"
@@ -177,27 +62,6 @@ en:
         title: "Editing user %{user}"
         description: "Administrative page with editing form for user %{user}"
         header: "Editing user"
-  entry:
-    article:
-      created: "Article added"
-      updated: "Article updated"
-      deleted: "Article deleted"
-    post:
-      created: "Post added"
-      updated: "Post updated"
-      deleted: "Post deleted"
-    dream:
-      created: "Dream added"
-      updated: "Dream updated"
-      deleted: "Dream deleted"
-    thought:
-      created: "Thought added"
-      updated: "Thought updated"
-      deleted: "Thought deleted"
-    grain:
-      created: "Grain of perception added"
-      updated: "Grain of perception updated"
-      deleted: "Grain of perception deleted"
   tag:
     created: "Tag added"
     updated: "Tag updated"
@@ -206,37 +70,8 @@ en:
     created: "Deed added"
     updated: "Deed updated"
     deleted: "Deed deleted"
-  layouts:
-    application:
-      articles: "Articles"
-      dreams: "Dreams"
-      new_dream: "Describe a dream"
-      about: "About"
-      terms_of_service: "User agreement"
-      dreambook: "Dreambook"
-      sidebar: "Sidebar"
-      notice: "Notice"
-    auth_block:
-      authorize: "Authorization"
-      logout: "Logout"
-      private: "Personal office"
-      deeds: "Journal of success"
-      thoughts: "My thoughts"
-      aria_label_nav: "Menu for user"
-    statistics:
-      statistics: "Trends in dream tags"
-    more:
-      more: "More"
-      archive: "Archive of dreams"
-      statistics: "Statistics"
-      thoughts: "Thoughts of users"
-      random: "Random dream"
-      grains: "Grains of perception"
-      comments: "All comments"
   roles:
     insufficient_rights: "Insufficient rights"
-  at: "at"
-  page_gone: "This page is gone"
   my:
     index:
       dreams: "My dreams"
@@ -408,38 +243,6 @@ en:
       next: "Next entry"
       described: "Tags that described in dreambook"
       adjacent: "Adjacent entries"
-  date:
-    formats:
-      short: "%B %Y"
-      w3c: "%Y-%m-%dT%H:%M:%S%:z"
-  delete: "Delete"
-  reset: "Reset"
-  thoughts:
-    show:
-      thought: "View thoughts"
-      edit: "Edit"
-      delete: "Delete"
-      title: "Thought \"%{thought}\""
-      description: "Thought \"%{thought}\" in journal of practice of user %{user} on Sovia from %{date}."
-    management_links:
-      create: "New thought"
-    index:
-      header: "Thoughts of users"
-      title: "Thoughts of users, page %{page}"
-      description: "Thoughts of users of Sovia, page %{page}."
-    new:
-      header: "New thought"
-      title: "New thought"
-      description: "Page for adding entries into the journal of thoughts and practice"
-    edit:
-      header: "Edit thoughts"
-      title: "Edit thoughts"
-      description: "Page for editing entries in the journal of thoughts"
-    tagged:
-      title: "Thoughts tagged \"%{tag}\", page %{page}"
-      header: "Thoughts tagged \"%{tag}\""
-      description: "Thoughts of users of Sovia tagged \"%[tag}\", page %{page}."
-  page: "Page %{page}"
   deeds:
     index:
       title: "Journal of success"
@@ -463,50 +266,6 @@ en:
     form:
       today_i: "Today I"
       to_accomplish: ", to"
-  grains:
-    form:
-      submit: "Save grain"
-    new:
-      title: "Add grain of perception"
-      header: "Add grain of perception"
-      description: "Page for adding grains of perception"
-    show:
-      title: "Grain of perception \"%{title}\""
-      header: "View grain of perception"
-      description: "Page for viewing grain of perception \"%{title}\""
-    edit:
-      title: "Edit grain of perception"
-      description: "Page for editing grain of perception"
-      header: "Edit grain of perception"
-  view: "View"
-  goal:
-    created: "Goal added"
-    updated: "Goal updated"
-    deleted: "Goal deleted"
-  goals:
-    new:
-      title: "Create goal"
-      description: "Page with form for creating new goals."
-      header: "Add goal"
-    show:
-      title: "Your goal \"%{goal}\""
-      description: "Page with description of your goal, that you issued as \"%{goal}\"."
-      steps_to_achieve: "My steps to achive this goal."
-      nothing_done_to_achieve: "Nothing done yet to achieve this goal."
-    edit:
-      title: "Edit goals"
-      description: "Page with form for editing your goal."
-      header: "Edit goals"
-      goals: "All your goals"
-    index:
-      title: "Issuing goals and succeeding in goals"
-      description: "How to issue own goals and how to succeed in them. How to motivate yourself and track your progress."
-      header: "Issuing goals and succeeding in goals"
-  create: "Create"
-  list: "List"
-  empty: "empty"
-  i: "I"
-  hidden: "Hidden"
   agent:
     updated: "Agent updated"
   agents:

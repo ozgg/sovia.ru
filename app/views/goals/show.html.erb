@@ -1,5 +1,5 @@
-<% content_for :title, t('.title', goal: @goal.name) %>
-<% content_for :description, t('.description', goal: @goal.name) %>
+<% content_for :meta_title, t('.title', goal: @goal.name) %>
+<%= render 'shared/metrics' %>
 
 <article>
   <header>
@@ -11,7 +11,7 @@
           <%= t('support.array.two_words_connector') %><%= t("activerecord.attributes.goal.statuses.#{@goal.status}") %> <%= @goal.updated_at.strftime('%d.%m.%Y') %>
       <% end %>
     </h2>
-    <nav>
+    <nav class="options">
       <ul>
         <li><%= link_to t(:list), my_goals_path %></li>
         <li><%= link_to t(:edit), edit_goal_path(@goal) %></li>
@@ -46,5 +46,3 @@
       <p><%= t('.nothing_done_to_achieve') %></p>
   <% end %>
 </article>
-
-<%= render 'common/metrics' %>
