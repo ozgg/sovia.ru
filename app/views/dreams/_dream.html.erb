@@ -21,14 +21,15 @@
       <span class="lucidity"><%= t('activerecord.attributes.entry.lucidity') + ': ' + dream.lucidity.to_s if dream.lucid? && dream.owned_by?(current_user) %></span>
     </div>
 
-    <% tags = dream.tags.order('canonical_name asc') %>
+    <% tags, described_tags = dream.tags.order('canonical_name asc'), [] %>
     <% if tags.any? %>
         <nav class="tags">
           <h4><%= t('activerecord.attributes.entry.tags_string') %></h4>
           <ul>
             <% tags.each do |tag| %>
                 <li><%= tagged_entries_path(tag) %></li>
-            <% end %>
+                <% described_tags << tag unless tag.description.blank? %>
+          <% end %>
           </ul>
         </nav>
     <% end %>
@@ -39,6 +40,21 @@
   <div class="body" itemprop="articleBody">
     <%= raw parse_body(dream.body, false, dream.owned_by?(current_user)) %>
   </div>
+
+  <% if described_tags.any? %>
+      <% described_tags.sort! { |a, b| a.name <=> b.name } %>
+      <aside>
+        <input type="checkbox" id="described-tags-<%= dream.id %>" />
+        <div>
+          <label for="described-tags-<%= dream.id %>" title="<%= t('.described') %>">?</label>
+          <ul aria-label="<%= t('.described') %>">
+            <% described_tags.each do |tag| %>
+                <li><%= link_to tag.name, dreambook_word_path(letter: tag.letter, word: tag.uri_name) %></li>
+            <% end %>
+          </ul>
+        </div>
+      </aside>
+  <% end %>
 
   <section class="info">
     <%= render 'shared/social' if dream.shareable? %>

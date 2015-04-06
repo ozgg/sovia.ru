@@ -105,6 +105,8 @@ en:
       title: "Dreams of user %{user}, page %{page}"
       header: "Dreams of user %{user}"
       description: "Dreams of user %{user} on Sovia, the site about dreams. Page %{page}."
+    dream:
+      described: "Symbols described in dreambook"
   deeds:
     form:
       my_goals: "My goals"

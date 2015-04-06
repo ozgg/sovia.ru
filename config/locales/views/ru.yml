@@ -107,6 +107,8 @@ ru:
       title: "Сны пользователя %{user}, страница %{page}"
       header: "Сны пользователя %{user}"
       description: "Сны пользователя %{user} на Совии, сайте о снах. Страница %{page}."
+    dream:
+      described: "Описанные в соннике символы"
   dreambook:
     search:
       search: "Поиск по соннику"

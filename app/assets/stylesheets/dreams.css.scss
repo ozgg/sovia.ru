@@ -1,5 +1,6 @@
 .dream {
   margin: 0 0 15px 0;
+  position: relative;
 
   > .header, > header {
     background: #F7F7F7;
@@ -89,6 +90,72 @@
 
     .comment-count {
       text-align: right;
+    }
+  }
+
+  > aside {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+
+    > input[type=checkbox] {
+      display: none;
+
+      + div {
+        label {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          padding: 0 15px;
+          background: #f0f0ff;
+          font-weight: bold;
+          font-size: 1.4em;
+          line-height: 45px;
+          cursor: pointer;
+          border-radius: 15px;
+        }
+
+        ul {
+          margin: 60px 5px 0 0;
+          background: #ffffff;
+          display: none;
+          border-radius: 15px;
+          box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+
+          li {
+            list-style: none;
+            padding: 0 15px;
+            border-radius: 15px;
+
+            &:hover {
+              background: #ddddff;
+            }
+
+            > a {
+              display: inline-block;
+              width: 100%;
+
+              &:first-letter {
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+      }
+
+      &:checked {
+        + div {
+          label {
+            text-shadow: 0 0 15px #4040ff;
+            box-shadow: 0 0 3px 3px rgba(127, 127, 255, 0.5);
+          }
+
+          ul {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
