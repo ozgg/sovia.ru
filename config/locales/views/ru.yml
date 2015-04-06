@@ -86,6 +86,9 @@ ru:
       header: "Описание сна"
       title: "Сон «%{title}»"
       description: "Сон «%{title}», описанный на Совии пользователем %{user} %{date}"
+      adjacent: "Соседние сны"
+      previous: "Предыдущий сон"
+      next: "Следующий сон"
     edit:
       title: "Редактирование сна"
       header: "Редактирование сна"

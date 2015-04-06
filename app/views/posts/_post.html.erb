@@ -2,7 +2,7 @@
   <header>
     <h1 itemprop="name"><%= post.title %></h1>
     <% if @post.editable_by? current_user %>
-        <nav>
+        <nav class="options">
           <ul>
             <li><%= link_to t(:edit), edit_post_path(@post) %></li>
             <li><%= link_to t(:delete), post, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
@@ -28,42 +28,5 @@
 
   <%= render 'shared/social' %>
 
-  <section class="comments">
-    <% @comment = Comment.new(commentable: post) %>
-    <% if post.comments.any? %>
-        <h1><%= t(:comments_list) %></h1>
-
-        <div class="comments">
-          <% post.comments.order('id asc').each do |comment| %>
-              <div id="comment-<%= comment.id %>" itemscope itemtype="http://schema.org/Comment">
-                <meta itemprop="url" content="<%= comment_url comment %>" />
-                <div class="header">
-                  <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
-                    <%= comment_avatar(comment.user) %>
-                    <span itemprop="name"><%= user_link(comment.user) %></span>
-                  </span>
-                  <time itemprop="datePublished" content="<%= comment.created_at.microformat_minutes %>" datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-                </div>
-
-                <div class="body" itemprop="about">
-                  <%= raw parse_body(comment.body, false, true) %>
-                </div>
-
-                <div class="actions">
-                  <div class="reply"><%= t(:reply) %></div>
-                  <div></div>
-                </div>
-              </div>
-          <% end %>
-        </div>
-    <% end %>
-
-    <div class="reply-container">
-      <h3><%= t('comment.add') %></h3>
-
-      <div>
-        <%= render 'comments/form' %>
-      </div>
-    </div>
-  </section>
+  <%= render partial: 'comments/list', locals: { commentable: post, comments: post.comments } %>
 </article>

@@ -1,0 +1,19 @@
+<div id="comment-<%= comment.id %>" itemscope itemtype="http://schema.org/Comment">
+  <meta itemprop="url" content="<%= comment_url comment %>"/>
+  <div class="header">
+                  <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <%= comment_avatar(comment.user) %>
+                    <span itemprop="name"><%= user_link(comment.user) %></span>
+                  </span>
+    <time itemprop="datePublished" content="<%= comment.created_at.microformat_minutes %>" datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+  </div>
+
+  <div class="body" itemprop="about">
+    <%= raw parse_body(comment.body, false, true) %>
+  </div>
+
+  <div class="actions">
+    <div class="reply"><%= t(:reply) %></div>
+    <div></div>
+  </div>
+</div>

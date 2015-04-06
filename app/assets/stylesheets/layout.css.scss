@@ -224,21 +224,21 @@ div#main {
     > ol, > ul {
       margin-left: 30px;
     }
+  }
+}
 
-    > header > nav {
-      li {
-        list-style: none;
-        display: inline-block;
-        padding: 0 15px;
+nav.options {
+  li {
+    list-style: none;
+    display: inline-block;
+    padding: 0 15px;
 
-        &:before {
-          content: '[';
-        }
+    &:before {
+      content: '[';
+    }
 
-        &:after {
-          content: ']';
-        }
-      }
+    &:after {
+      content: ']';
     }
   }
 }
@@ -315,5 +315,35 @@ section.errors {
 
   ul {
     margin: 0 0 0 30px;
+  }
+}
+
+nav.adjacent-entries {
+  min-height: 1.4em;
+  margin: 16px 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &.previous {
+        float: left;
+
+        &:before {
+          content: "← ";
+        }
+      }
+
+      &.next {
+        float: right;
+
+        &:after {
+          content: " →";
+        }
+      }
+    }
   }
 }

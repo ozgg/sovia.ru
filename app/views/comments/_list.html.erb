@@ -1,0 +1,20 @@
+<section class="comments">
+  <% @comment = Comment.new(commentable: commentable) %>
+  <% if comments.any? %>
+      <h1><%= t(:comments_list) %></h1>
+
+      <div class="comments">
+        <% comments.order('id asc').each do |comment| %>
+        <%= render comment %>
+        <% end %>
+      </div>
+  <% end %>
+
+  <div class="reply-container">
+    <h3><%= t('comment.add') %></h3>
+
+    <div>
+      <%= render 'comments/form' %>
+    </div>
+  </div>
+</section>

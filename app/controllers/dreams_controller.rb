@@ -13,13 +13,13 @@ class DreamsController < ApplicationController
 
   # get /dreams/new
   def new
-    @entry = Entry::Dream.new
+    @dream = Entry::Dream.new
   end
 
   # post /dreams
   def create
-    @entry = Entry::Dream.new(dream_parameters.merge(user: current_user))
-    if suspect_spam?(current_user, @entry.body, 2)
+    @dream = Entry::Dream.new(dream_parameters.merge(user: current_user))
+    if suspect_spam?(current_user, @dream.body, 2)
       emulate_saving
     else
       create_dream
@@ -32,20 +32,20 @@ class DreamsController < ApplicationController
 
   # patch /dreams/:id
   def update
-    if @entry.update(dream_parameters)
+    if @dream.update(dream_parameters)
       flash[:notice] = t('dream.updated')
-      redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
+      redirect_to verbose_dream_dreams_path(id: @dream.id, uri_title: @dream.url_title)
     else
-      render action: 'edit'
+      render :edit
     end
   end
 
   # delete /dreams/:id
   def destroy
-    if @entry.destroy
+    if @dream.destroy
       flash[:notice] = t('dream.deleted')
     end
-    redirect_to entry_dreams_path
+    redirect_to dream_dreams_path
   end
 
   # get /dreams/tagged/:tag
@@ -54,7 +54,7 @@ class DreamsController < ApplicationController
   end
 
   def random
-    @entry = Entry::Dream.random_dream
+    @dream = Entry::Dream.random_dream
   end
 
   def dreams_of_user
@@ -72,19 +72,19 @@ class DreamsController < ApplicationController
   private
 
   def set_dream
-    @entry = Entry::Dream.find(params[:id])
-    raise UnauthorizedException unless @entry.visible_to? current_user
+    @dream = Entry::Dream.find(params[:id])
+    raise UnauthorizedException unless @dream.visible_to? current_user
   end
 
   def dream_parameters
-    parameters = params[:entry_dream].permit(:title, :body, :privacy, :tags_string, :lucidity)
+    parameters = params[:dream_dream].permit(:title, :body, :privacy, :tags_string, :lucidity)
     parameters[:lucidity] = 0 if parameters[:lucidity].to_i < 0
     parameters[:lucidity] = 5 if parameters[:lucidity].to_i > 5
     parameters
   end
 
   def restrict_editor_access
-    raise UnauthorizedException unless @entry.editable_by? current_user
+    raise UnauthorizedException unless @dream.editable_by? current_user
   end
 
   def allowed_dreams
@@ -97,21 +97,21 @@ class DreamsController < ApplicationController
     @tag = Tag::Dream.match_by_name(params[:tag])
     raise record_not_found if @tag.nil?
 
-    allowed_dreams.joins(:entry_tags).where(entry_tags: { tag: @tag })
+    allowed_dreams.joins(:dream_tags).where(dream_tags: { tag: @tag })
   end
 
   def create_dream
-    if @entry.save
+    if @dream.save
       flash[:notice] = t('dream.created')
-      redirect_to verbose_entry_dreams_path(id: @entry.id, uri_title: @entry.url_title)
+      redirect_to verbose_dream_dreams_path(id: @dream.id, uri_title: @dream.url_title)
     else
-      render action: 'new'
+      render :new
     end
   end
 
   def emulate_saving
     flash[:notice] = t('dream.created')
-    redirect_to entry_dreams_path
+    redirect_to dream_dreams_path
   end
 
   def collect_months
