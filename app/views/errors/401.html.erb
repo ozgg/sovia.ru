@@ -1,13 +1,14 @@
-<% content_for :title, t('errors.unauthorized.title') %>
-<% content_for :description, t('errors.unauthorized.description') %>
-
-<header>
-  <h1>Недостаточно прав (401)</h1>
-  <h2>Не хватает полномочий для просмотра страницы</h2>
-</header>
+<% content_for :meta_title, t('errors.unauthorized.title') %>
+<% content_for :meta_description, t('errors.unauthorized.description') %>
 
 <article>
+  <header>
+    <h1>Недостаточно прав (401)</h1>
+
+    <h2>Не хватает полномочий для просмотра страницы</h2>
+  </header>
+
   <p>У вашего пользователя не хватает прав, чтобы выполнить действие.</p>
 </article>
 
-<%= render 'common/metrics' %>
+<%= render 'shared/metrics' %>

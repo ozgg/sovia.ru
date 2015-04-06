@@ -51,3 +51,18 @@ en:
       russian: "Russian"
       english: "English"
       no_translation: "Name is not translated"
+  errors:
+    messages:
+      extension_white_list_error: "has invalid extension"
+    unauthorized:
+      title: "Authorization required"
+      description: "If you are on this page, that means that you've tried to see some information that requires authorization."
+    not_found:
+      title: "Page not found"
+      description: "Page that you've requested was not found, because it doesn't exist or was deleted."
+    unprocessible_entry:
+      title: "Unprocessible entry (422)"
+      description: "Something was not processed. Try to refresh page or retry what you did later."
+    internal_server_error:
+      title: "Server error (500)"
+      description: "Something went wrong. Try to return in several minutes, most likely everything will work."
