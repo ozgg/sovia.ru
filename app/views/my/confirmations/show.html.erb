@@ -1,34 +1,37 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<article class="confirmation">
+  <header>
+    <h1><%= t('.title') %></h1>
+  </header>
 
-<% if current_user && current_user.mail_confirmed? %>
-    <div class="information"><%= t('user.email_confirmed') %></div>
-<% else %>
-    <article class="confirmation">
-      <h2><%= t('.got_code') %></h2>
-      <%= form_tag my_confirmation_path, method: :patch do %>
-          <div>
-            <%= label_tag :code, t('.code') %>
-            <%= text_field_tag :code, params[:code], required: true %>
-          </div>
-          <div>
-            <%= button_tag t('.confirm'), type: :submit %>
-          </div>
-      <% end %>
-    </article>
+  <% if current_user && current_user.mail_confirmed? %>
+      <div class="information"><%= t('user.email_confirmed') %></div>
+  <% else %>
+      <section>
+        <h1><%= t('.got_code') %></h1>
+        <%= form_tag my_confirmation_path, method: :patch do %>
+            <div>
+              <%= label_tag :code, t('.code') %>
+              <%= text_field_tag :code, param_from_request(:code), required: true %>
+            </div>
+            <div>
+              <%= button_tag t('.confirm'), type: :submit %>
+            </div>
+        <% end %>
 
-    <article class="confirmation">
-      <h2><%= t('.no_code') %></h2>
-      <%= form_tag my_confirmation_path, method: :post do %>
-          <div>
-            <%= button_tag t('confirmation.send_code'), type: :submit %>
-          </div>
-      <% end %>
-    </article>
-<% end %>
+      </section>
 
-<%= render 'common/metrics' %>
+      <section>
+        <h1><%= t('.no_code') %></h1>
+        <%= form_tag my_confirmation_path, method: :post do %>
+            <div>
+              <%= button_tag t('confirmation.send_code'), type: :submit %>
+            </div>
+        <% end %>
+      </section>
+  <% end %>
+</article>
+

@@ -1,14 +1,15 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<section>
+  <header>
+    <h1><%= t('.title') %></h1>
+  </header>
 
-<nav>
-  <ul>
-    <li><%= link_to t('.tags'), my_symbols_path %></li>
-  </ul>
-</nav>
+  <nav style="margin-left:30px;">
+    <ul>
+      <li><%= link_to t('.tags'), my_symbols_path %></li>
+    </ul>
+  </nav>
+</section>
 
-<%= render 'common/metrics' %>

@@ -3,12 +3,12 @@ class My::DreamsController < ApplicationController
 
   # get /my/dreams
   def index
-    @entries = my_dreams.page(params[:page] || 1).per(5)
+    @dreams = my_dreams.page(current_page).per(5)
   end
 
   # get /my/dreams/tagged/:tag
   def tagged
-    @entries = tagged_dreams.page(params[:page] || 1).per(5)
+    @dreams = tagged_dreams.page(current_page).per(5)
   end
   
   protected

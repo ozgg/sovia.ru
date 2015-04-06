@@ -1,12 +1,15 @@
 class My::ProfilesController < ApplicationController
   before_action :allow_authorized_only
 
+  # get /my/profile
   def show
   end
 
+  # get /my/profile/edit
   def edit
   end
 
+  # patch /my/profile
   def update
     if params[:password].blank?
       update_common_parameters

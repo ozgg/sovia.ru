@@ -9,7 +9,6 @@ class My::StatisticsController < ApplicationController
   def tags
     where_clause = { :'tags.type' => 'Tag::Dream', user: current_user }
 
-    page   = params[:page] || 1
-    @tags  = UserTag.joins(:tag).where(where_clause).order('entries_count desc, tags.name asc').page(page).per(20)
+    @tags = UserTag.joins(:tag).where(where_clause).order('entries_count desc, tags.name asc').page(current_page).per(20)
   end
 end
