@@ -7,7 +7,7 @@
     </nav>
 <% end %>
 
-<article class="dream" itemscope itemtype="http://schema.org/Article">
+<article class="dream" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     <%= raw entry_avatar(dream.user) %>
 
@@ -35,7 +35,8 @@
     <% end %>
   </header>
 
-  <meta itemprop="commentCount" content="<%= dream.comments_count %>"/>
+  <meta itemprop="commentCount" content="<%= dream.comments_count %>" />
+  <meta itemprop="keywords" content="<%= dream.tags_string %>" />
 
   <div class="body" itemprop="articleBody">
     <%= raw parse_body(dream.body, false, dream.owned_by?(current_user)) %>

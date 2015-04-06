@@ -1,12 +1,5 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
-
-<%= render partial: 'entries/entry', object: @entry %>
-
-<section></section>
-
-<%= render 'common/metrics' %>
+<%= render partial: 'dream', object: @dream %>
