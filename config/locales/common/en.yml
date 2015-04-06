@@ -32,6 +32,8 @@ en:
   are_you_sure: "Are you sure?"
   comments_list: "Comments"
   reply: "Reply"
+  text: "text"
+  dummy_name: "John Doe"
   date:
     nominative_months: [~, january, february, march, april, may, june, july, august, september, october, november, december]
   dream:

@@ -196,14 +196,3 @@ article.entry {
     }
   }
 }
-
-
-input[type=range] + span {
-  &:before {
-    content: '('
-  }
-
-  &:after {
-    content: ')'
-  }
-}

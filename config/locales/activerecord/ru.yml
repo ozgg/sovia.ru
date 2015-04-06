@@ -39,3 +39,9 @@ ru:
         privacy: "видимость"
         tags_string: "метки"
         lucidity: "степень осознанности"
+    properties:
+      dream:
+        privacy:
+          none: "Для всех"
+          users: "Для сообщества"
+          owner: "Только для меня"

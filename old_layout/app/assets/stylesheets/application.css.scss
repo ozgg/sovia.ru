@@ -103,68 +103,6 @@ body {
 
 }
 
-
-form {
-  > div {
-    margin: 0 0 0.5em 0;
-
-    &:last-child {
-      margin: 0;
-    }
-
-    > div {
-      width: 500px;
-      position: relative;
-
-      input, textarea {
-        width: 480px;
-        max-width: 480px;
-      }
-
-      input + div, textarea + div {
-        position: absolute;
-        top: -5px;
-        left: 500px;
-        min-width: 300px;
-        width: 100%;
-        display: none;
-        background: #f6fff6;
-        border: solid #e0ffd8 1px;
-        border-radius: 3px;
-        padding: 0.3em;
-        color: #333333;
-        font-size: 0.9em;
-        box-shadow: -5px 5px 5px #777777;
-
-        p {
-          margin: 0;
-          text-indent: 0;
-        }
-
-        ul {
-          margin: 0;
-          padding: 0;
-
-          li {
-            margin: 0 0 0 0.5em;
-            list-style: none;
-
-            span:first-of-type {
-              background: #eeeeee;
-              padding: 0.1em 0.3em;
-            }
-          }
-        }
-      }
-
-      input:focus + div, textarea:focus + div {
-        display: block;
-      }
-    }
-  }
-
-}
-
 label:first-letter {
   text-transform: capitalize;
 }

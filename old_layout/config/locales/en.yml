@@ -50,12 +50,6 @@ en:
       agent_request:
         day: "date"
         requests_count: "number of requests"
-    properties:
-      entry:
-        privacy:
-          none: "for everybody"
-          users: "for community"
-          owner: "only for me"
   titles:
     posts:
       index: "Community"
@@ -593,8 +587,6 @@ en:
       title: "Issuing goals and succeeding in goals"
       description: "How to issue own goals and how to succeed in them. How to motivate yourself and track your progress."
       header: "Issuing goals and succeeding in goals"
-  text: "text"
-  dummy_name: "John Doe"
   language:
     created: "Language created"
     updated: "Language updated"

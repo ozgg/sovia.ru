@@ -1,10 +1,11 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<section class="new-dream">
+  <header>
+    <h1><%= t('.title') %></h1>
+  </header>
 
-<%= render 'form' %>
-
-<%= render 'common/metrics' %>
+  <%= render 'form' %>
+</section>

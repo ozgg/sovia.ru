@@ -16,9 +16,9 @@ class Entry < ActiveRecord::Base
 
   def self.privacy_modes
     {
-        PRIVACY_NONE  => I18n.t('activerecord.properties.entry.privacy.none'),
-        PRIVACY_USERS => I18n.t('activerecord.properties.entry.privacy.users'),
-        PRIVACY_OWNER => I18n.t('activerecord.properties.entry.privacy.owner')
+        PRIVACY_NONE  => I18n.t('activerecord.properties.dream.privacy.none'),
+        PRIVACY_USERS => I18n.t('activerecord.properties.dream.privacy.users'),
+        PRIVACY_OWNER => I18n.t('activerecord.properties.dream.privacy.owner')
     }
   end
 
