@@ -180,7 +180,7 @@ input[type=range] + span {
   }
 }
 
-section.new-dream > form {
+section.new-dream > form, section.edit-dream > form {
   > div {
     margin: 0 0 0.5em 0;
 

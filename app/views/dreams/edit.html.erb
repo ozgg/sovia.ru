@@ -1,15 +1,15 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('.view'), @entry %></li>
-    </ul>
-  </nav>
-</header>
+<section class="edit-dream">
+  <header>
+    <h1><%= t('.header') %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:view), @dream %></li>
+      </ul>
+    </nav>
+  </header>
 
-<%= render 'form' %>
-
-<%= render 'common/metrics' %>
+  <%= render 'form' %>
+</section>

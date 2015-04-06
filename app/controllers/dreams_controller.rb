@@ -34,7 +34,7 @@ class DreamsController < ApplicationController
   def update
     if @dream.update(dream_parameters)
       flash[:notice] = t('dream.updated')
-      redirect_to verbose_dream_dreams_path(id: @dream.id, uri_title: @dream.url_title)
+      redirect_to verbose_entry_dreams_path(id: @dream.id, uri_title: @dream.url_title)
     else
       render :edit
     end
@@ -45,7 +45,7 @@ class DreamsController < ApplicationController
     if @dream.destroy
       flash[:notice] = t('dream.deleted')
     end
-    redirect_to dream_dreams_path
+    redirect_to entry_dreams_path
   end
 
   # get /dreams/tagged/:tag
@@ -97,13 +97,13 @@ class DreamsController < ApplicationController
     @tag = Tag::Dream.match_by_name(params[:tag])
     raise record_not_found if @tag.nil?
 
-    allowed_dreams.joins(:dream_tags).where(dream_tags: { tag: @tag })
+    allowed_dreams.joins(:entry_tags).where(entry_tags: { tag: @tag })
   end
 
   def create_dream
     if @dream.save
       flash[:notice] = t('dream.created')
-      redirect_to verbose_dream_dreams_path(id: @dream.id, uri_title: @dream.url_title)
+      redirect_to verbose_entry_dreams_path(id: @dream.id, uri_title: @dream.url_title)
     else
       render :new
     end

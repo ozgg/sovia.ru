@@ -12,7 +12,7 @@
 
     <h2><%= render 'shared/page' %></h2>
     <% if current_user %>
-        <nav>
+        <nav class="options">
           <ul>
             <li><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag: @tag.name) %></li>
             <% if current_user.editor? %>
