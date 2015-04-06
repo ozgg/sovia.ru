@@ -1,33 +1,34 @@
-<% content_for :title, t('.title', letter: params[:letter], page: params[:page] || 1) %>
-<% content_for :description, t('.description', letter: params[:letter], page: params[:page] || 1) %>
-
-<header>
-  <h1><%= t('.header', letter: params[:letter]) %></h1>
-  <h2><%= t('page', page: params[:page] || 1) %></h2>
-</header>
-
-<%= render 'search' %>
-<%= render 'letters' %>
-
-<% if @tags.any? %>
-    <%= paginate @tags %>
-
-    <nav>
-      <ul class="dreambook-symbols">
-        <% @tags.each do |word| %>
-        <li><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name ) %></li>
-        <% end %>
-      </ul>
-    </nav>
-
-    <%= paginate @tags %>
-<% else %>
-    <div class="message"><%= t('nothing_found') %></div>
+<% content_for :meta_title, t('.title', letter: letter_from_request, page: current_page) %>
+<% content_for :meta_description, t('.description', letter: letter_from_request, page: current_page) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/statistics' %>
+    <%= render 'sidebar/more_links' %>
 <% end %>
+<%= render 'shared/metrics' %>
 
 <section>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/more' %>
-</section>
+  <header>
+    <h1><%= t('.header', letter: letter_from_request) %></h1>
 
-<%= render 'common/metrics' %>
+    <h2><%= t('page', page: params[:page] || 1) %></h2>
+  </header>
+
+  <%= render 'search' %>
+  <%= render 'letters' %>
+
+  <% if @tags.any? %>
+      <%= paginate @tags %>
+
+      <nav>
+        <ul class="dreambook-symbols">
+          <% @tags.each do |word| %>
+              <li><%= link_to word.name, dreambook_word_path(letter: word.letter, word: word.name) %></li>
+          <% end %>
+        </ul>
+      </nav>
+
+      <%= paginate @tags %>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</section>

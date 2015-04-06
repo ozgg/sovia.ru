@@ -236,27 +236,6 @@ en:
   roles:
     insufficient_rights: "Insufficient rights"
   at: "at"
-  dreambook:
-    letters:
-      select_letter: "Select the sirst letter of dream symbol"
-    word:
-      read_dreams: "Dreams with this tag"
-      title: "Dreambook: %{word}"
-      header: "Dreambook"
-      description: "What does it mean when you see %{word} in a dream: interpretation, dreams with the symbol \"%{word}\" in free online-dreambook Sovia."
-    index:
-      title: "Dreambook"
-      header: "Dreambook"
-      description: "Free online-dreambook on Sovia, the site about dreams. Содержание и выбор буквы, on которую начинается слово."
-    letter:
-      title: "Dream symbols statring with \"%{letter}\", page %{page}"
-      header: "Dreambook for \"%{letter}\""
-      description: "Free online-dreambook Sovia with symbols starting on \"%{letter}\", page %{page}."
-    search:
-      title: "Search %{word} in dreambook"
-      header: "Search for dream symbol"
-      result: "Search result"
-      description: "Search result for word %{word} in the dreambook of Sovia."
   page_gone: "This page is gone"
   my:
     index:
@@ -514,8 +493,6 @@ en:
       title: "Edit grain of perception"
       description: "Page for editing grain of perception"
       header: "Edit grain of perception"
-  not_selected: "Not selected"
-  query_is_not_set: "Query is not set"
   view: "View"
   goal:
     created: "Goal added"

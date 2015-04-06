@@ -1,12 +1,13 @@
 class DreambookController < ApplicationController
   before_action :collect_letters
+  helper_method :letter_from_request
 
   def index
   end
 
   def letter
-    page   = params[:page] || 1
-    letter = params[:letter]
+    page   = current_page
+    letter = letter_from_request
     @tags  = Tag::Dream.where(letter: letter).where.not(description: '').order('canonical_name asc').page(page).per(50)
   end
 
@@ -16,9 +17,9 @@ class DreambookController < ApplicationController
   end
 
   def search
-    word = Tag::canonize(params[:query] || '')
+    word = Tag::canonize query_from_request
     if word.blank?
-      flash[:notice] = t('query_is_not_set')
+      flash[:notice] = t(:query_is_not_set)
       redirect_to dreambook_path
     else
       @tags = Tag::Dream.where('canonical_name like ? and description is not null', "%#{word}%").order('canonical_name asc').limit(50)
@@ -27,10 +28,14 @@ class DreambookController < ApplicationController
 
   def obsolete
     if params[:word]
-      redirect_to dreambook_word_path(letter: params[:letter], word: params[:word]), status: :moved_permanently
+      redirect_to dreambook_word_path(letter: letter_from_request, word: params[:word]), status: :moved_permanently
     else
-      redirect_to dreambook_letter_path(letter: params[:letter]), status: :moved_permanently
+      redirect_to dreambook_letter_path(letter: letter_from_request), status: :moved_permanently
     end
+  end
+
+  def letter_from_request
+    @letter_from_request ||= params[:letter].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
   end
 
   private

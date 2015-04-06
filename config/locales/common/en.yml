@@ -35,6 +35,8 @@ en:
   text: "text"
   dummy_name: "John Doe"
   hidden: "Hidden"
+  not_selected: "Not selected"
+  query_is_not_set: "Query is not set"
   date:
     nominative_months: [~, january, february, march, april, may, june, july, august, september, october, november, december]
   dream:

@@ -1,19 +1,19 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/statistics' %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+  </header>
 
-<%= render 'greeting' %>
-<%= render 'search' %>
-<%= render 'letters' %>
+  <%= render 'greeting' %>
+  <%= render 'search' %>
+  <%= render 'letters' %>
 
-<%= render 'layouts/social' %>
-
-<section>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/more' %>
-</section>
-
-<%= render 'common/metrics' %>
+  <%= render 'shared/social' %>
+</article>

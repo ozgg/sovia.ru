@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_page
+  helper_method :current_user, :current_page, :query_from_request
 
   # Get current user from session
   #
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     @page ||= (params[:page] || 1).to_s.to_i
     @page = 1 unless @page > 0
     @page
+  end
+
+  def query_from_request
+    @query_from_request ||= params[:query].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
   end
 
   def default_url_options(options = {})

@@ -1,12 +1,19 @@
-<% content_for :title, t('.title', word: @tag.name) %>
-<% content_for :description, t('.description', word: @tag.name) %>
+<% content_for :meta_title, t('.title', word: @tag.name) %>
+<% content_for :meta_description, t('.description', word: @tag.name) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/statistics' %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
 
+<%= render 'shared/metrics' %>
+
+<article>
 <header>
   <h1><%= t('.header') %></h1>
   <% if current_user && current_user.editor? %>
-      <nav>
+      <nav class="options">
         <ul>
-          <li><%= link_to t('edit'), edit_admin_dream_tag_path(@tag) %></li>
+          <li><%= link_to t(:edit), edit_admin_dream_tag_path(@tag) %></li>
         </ul>
       </nav>
   <% end %>
@@ -14,10 +21,10 @@
 
 <%= render 'search' %>
 
-<article class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
-  <meta itemprop="articleSection" content="<%= t('layouts.application.dreambook') %>"/>
+<section class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <meta itemprop="articleSection" content="<%= t('layouts.main_navigation.dreambook') %>"/>
   <header>
-    <h2 itemprop="headline"><%= @tag.name %></h2>
+    <h1 itemprop="headline"><%= @tag.name %></h1>
   </header>
   <div itemprop="articleBody" role="definition">
     <%= raw parse_body(@tag.description.to_s, true, true) %>
@@ -26,15 +33,11 @@
     <%= render 'call' %>
     <nav><%= link_to t('.read_dreams'), tagged_entry_dreams_path(tag: @tag.name) %> (<%= @tag.entries_count %>)</nav>
   </footer>
-</article>
+</section>
 
-<%= render 'layouts/social' %>
+<%= render 'shared/social' %>
 
 <%= render 'letters' %>
 
-<section>
-  <%= render 'layouts/statistics' %>
-  <%= render 'layouts/more' %>
-</section>
+</article>
 
-<%= render 'common/metrics' %>
