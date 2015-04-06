@@ -207,3 +207,13 @@ en:
       title: "Comments of user %{user}, page %{page}"
       description: "Page %{page} with comments by user %{user}."
       header: "Comments of user %{user}"
+  languages:
+    index:
+      title: "Managing languages"
+    new:
+      title: "Adding language"
+    show:
+      header: "Language information"
+      title: "Language \"%{name}\""
+    edit:
+      title: "Editing language"

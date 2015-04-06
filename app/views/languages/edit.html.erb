@@ -1,14 +1,15 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('view'), @language %></li>
-      <li><%= link_to t('list'), languages_path %></li>
-    </ul>
-  </nav>
-</header>
+<section>
+  <header>
+    <h1><%= t('.title') %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:view), @language %></li>
+        <li><%= link_to t(:list), languages_path %></li>
+      </ul>
+    </nav>
+  </header>
 
-<%= render 'form' %>
+  <%= render 'form' %>
+</section>

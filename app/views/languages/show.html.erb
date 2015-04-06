@@ -1,17 +1,15 @@
-<% content_for :title, t('.title', name: @language.name) %>
-<% content_for :description, t('.description', name: @language.name) %>
-
-<header>
-  <h1><%= t('.header') %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('list'), languages_path %></li>
-      <li><%= link_to t('edit'), edit_language_path(@language) %></li>
-      <li><%= link_to t('delete'), @language, method: :delete, data: { confirm: t('are_you_sure') } %></li>
-    </ul>
-  </nav>
-</header>
+<% content_for :meta_title, t('.title', name: @language.name) %>
 
 <article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:list), languages_path %></li>
+        <li><%= link_to t(:edit), edit_language_path(@language) %></li>
+        <li><%= link_to t(:delete), @language, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+      </ul>
+    </nav>
+  </header>
   <p><%= @language.code %>: <%= @language.name %> (<%= @language.i18n_name %>).</p>
 </article>

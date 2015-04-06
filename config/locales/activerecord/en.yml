@@ -39,6 +39,9 @@ en:
         privacy: "visibility"
         tags_string: "tags"
         lucidity: "lucidity"
+      language:
+        code: "code"
+        name: "name"
     properties:
       dream:
         privacy:

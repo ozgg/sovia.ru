@@ -1,17 +1,18 @@
-<%= content_for :title, t('.title') %>
-<%= content_for :description, t('.description') %>
+<%= content_for :meta_title, t('.title') %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <%= render 'management_links' %>
-</header>
+<section>
+  <header>
+    <h1><%= t('.title') %></h1>
+    <%= render 'management_links' %>
+  </header>
 
-<% if @languages.any? %>
-    <ul>
-      <% @languages.each do |language| %>
-      <li><%= link_to "#{language.code}: #{language.name} (#{language.i18n_name})", language %></li>
-      <% end %>
-    </ul>
-<% else %>
-    <%= render 'common/nothing_found' %>
-<% end %>
+  <% if @languages.any? %>
+      <ul>
+        <% @languages.each do |language| %>
+            <li><%= link_to "#{language.code}: #{language.name} (#{language.i18n_name})", language %></li>
+        <% end %>
+      </ul>
+  <% else %>
+      <%= render 'common/nothing_found' %>
+  <% end %>
+</section>

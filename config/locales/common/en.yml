@@ -34,10 +34,18 @@ en:
   reply: "Reply"
   text: "text"
   dummy_name: "John Doe"
+  hidden: "Hidden"
   date:
     nominative_months: [~, january, february, march, april, may, june, july, august, september, october, november, december]
   dream:
     created: "Dream has been created"
     deleted: "Dream has been deleted"
     updated: "Dream has been updated"
-  hidden: "Hidden"
+  language:
+    created: "Language created"
+    updated: "Language updated"
+    deleted: "Language deleted"
+    names:
+      russian: "Russian"
+      english: "English"
+      no_translation: "Name is not translated"

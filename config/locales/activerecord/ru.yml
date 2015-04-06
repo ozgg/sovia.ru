@@ -39,6 +39,9 @@ ru:
         privacy: "видимость"
         tags_string: "метки"
         lucidity: "степень осознанности"
+      language:
+        code: "код"
+        name: "название"
     properties:
       dream:
         privacy:

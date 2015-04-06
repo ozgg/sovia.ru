@@ -39,10 +39,18 @@ ru:
   reply: "Ответить"
   text: "текст"
   dummy_name: "Вася Пупкин"
+  hidden: "Скрыто"
   date:
     nominative_months: [~, январь, февраль, март, апрель, май, июнь, июль, август, сентябрь, октябрь, ноябрь, декабрь]
   dream:
     updated: "Сон изменён"
     deleted: "Сон удалён"
     created: "Сон добавлен"
-  hidden: "Скрыто"
+  language:
+    created: "Язык добавлен"
+    updated: "Язык изменён"
+    deleted: "Язык удалён"
+    names:
+      russian: "Русский"
+      english: "Английский"
+      no_translation: "Название не переведено"

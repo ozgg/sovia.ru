@@ -1,15 +1,15 @@
 <%= form_for(@language) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @language } %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @language } %>
 
     <div>
-      <%= f.label :code %><br />
+      <div><%= f.label :code %></div>
       <%= f.text_field :code, required: true, size: 10 %>
     </div>
     <div>
-      <%= f.label :name %><br />
+      <div><%= f.label :name %></div>
       <%= f.text_field :name, required: true, size: 20 %>
     </div>
     <div>
-      <%= f.button t('submit'), type: 'submit' %>
+      <%= f.button t(:submit), type: :submit %>
     </div>
 <% end %>
