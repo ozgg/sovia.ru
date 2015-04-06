@@ -123,6 +123,15 @@ en:
     new:
       title: "Add comment"
       description: "Add comment on entry on Sovia, the site about dreams."
+    entry_reply:
+      subject: "New reply to your post"
+    comment_reply:
+      subject: "New reply to your comment"
+    index:
+      title: "All comments, page %{page}"
+      header: "All comments"
+      for: "for"
+      description: "All comments from the users of Sovia, the site about dreams. Page %{page}."
   statistics:
     index:
       symbols: "Statistics for dream symbols"

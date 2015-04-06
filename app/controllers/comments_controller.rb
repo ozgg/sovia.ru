@@ -1,11 +1,14 @@
 class CommentsController < ApplicationController
+  # get /comments
   def index
-    @comments = Comment.order('id desc').page(params[:page] || 1).per(5)
+    @comments = Comment.order('id desc').page(params[:page] || 1).per(10)
   end
 
+  # get /comments/new
   def new
   end
 
+  # post /comments
   def create
     @comment = Comment.new(comment_params)
     check_rights

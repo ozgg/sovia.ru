@@ -438,16 +438,6 @@ en:
       subject: "Resetting password for site sovia.ru"
     email:
       subject: "Confirming email-address for site sovia.ru"
-  comments:
-    entry_reply:
-      subject: "New reply to you post"
-    comment_reply:
-      subject: "New reply to your comment"
-    index:
-      title: "All comments, page %{page}"
-      header: "All comments"
-      for: "for"
-      description: "All comments from the users of Sovia, the site about dreams. Page %{page}."
   user:
     email_confirmed: "E-mail confirmed"
     code_invalid: "Invalid code"

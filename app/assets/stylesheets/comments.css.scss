@@ -1,57 +1,55 @@
-div.comments {
-  > div {
-    margin: 0 0 15px 0;
+div.comments > div, div.comment {
+  margin: 0 0 15px 0;
 
-    .header {
-      background: #fef9ee;
-      padding: 5px;
+  .header {
+    background: #fef9ee;
+    padding: 5px;
 
-      img {
-        float: left;
-        max-width: 25px;
-        max-height: 25px;
-        margin: 0 5px 0 0;
-      }
+    img {
+      float: left;
+      max-width: 25px;
+      max-height: 25px;
+      margin: 0 5px 0 0;
+    }
 
-      span {
-        a {
-          line-height: 25px;
-        }
-      }
-
-      time {
+    span {
+      a {
         line-height: 25px;
-        font-size: 0.8em;
-        float: right;
-        color: #444444;
       }
     }
 
-    .body {
-      padding: 5px 15px;
+    time {
+      line-height: 25px;
+      font-size: 0.8em;
+      float: right;
+      color: #444444;
     }
+  }
 
-    .actions {
-      background: #fef9ee;
-      padding: 5px;
+  .body {
+    padding: 5px 15px;
+  }
 
-      .reply {
-        cursor: pointer;
-        font-size: 0.9em;
-        color: #3d5c85;
-        display: inline-block;
+  .actions {
+    background: #fef9ee;
+    padding: 5px;
 
-        &:hover {
-          color: #ff9600;
-        }
+    .reply {
+      cursor: pointer;
+      font-size: 0.9em;
+      color: #3d5c85;
+      display: inline-block;
 
-        &:before {
-          content: '[ ';
-        }
+      &:hover {
+        color: #ff9600;
+      }
 
-        &:after {
-          content: ' ]';
-        }
+      &:before {
+        content: '[ ';
+      }
+
+      &:after {
+        content: ' ]';
       }
     }
   }

@@ -433,16 +433,6 @@ ru:
       subject: "Сброс пароля на сайте sovia.ru"
     email:
       subject: "Подтверждение email-адреса на сайте sovia.ru"
-  comments:
-    entry_reply:
-      subject: "Ответ на вашу запись"
-    comment_reply:
-      subject: "Ответ на ваш комментарий"
-    index:
-      title: "Все комментарии, страница %{page}"
-      header: "Все комментарии"
-      for: "к записи"
-      description: "Все комментарии от пользователей Совии, сайта о снах. Страница %{page}."
   user:
     email_confirmed: "Почта подтверждена"
     code_invalid: "Недействительный код"
