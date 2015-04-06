@@ -1,5 +1,5 @@
 <%= form_for(@deed || Deed.new) do |form| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @deed } unless @deed.nil?  %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @deed } unless @deed.nil?  %>
 
     <div>
       <p><%= link_to t('.my_goals'), my_goals_path %></p>

@@ -54,11 +54,6 @@ ru:
       random_dream: "Случайный сон"
       statistics: "Статистика"
       all_comments: "Все комментарии"
-  deeds:
-    form:
-      today_i: "Сегодня я"
-      to_accomplish: ", чтобы"
-      my_goals: "Мои цели"
   dreams:
     index:
       title: "Сны, страница %{page}"
@@ -255,9 +250,171 @@ ru:
     index:
       title: "Постановка и достижение целей"
       description: "Как правильно ставить себе цели и как их достигать, чем себя мотивировать и как фиксировать прогресс."
+  deeds:
+    index:
+      title: "Журнал успеха"
+      description: "Что такое журнал успеха, для чего он нужен и как им пользоваться."
+    new:
+      title: "Создание записи в журнале успеха"
+    show:
+      title: "Просмотр успеха «%{deed}»"
+      header: "Просмотр журнала успеха"
+      adjacent: "Соседние записи"
+      previous: "Предыдущая запись"
+      next: "Следующая запись"
+    edit:
+      title: "Редактирование успеха"
+    form:
+      today_i: "Сегодня я"
+      to_accomplish: ", чтобы"
+      my_goals: "Мои цели"
+  agents:
+    index:
+      title: "Агенты пользователей, страница %{page}"
+      header: "Агенты пользователя"
+    agent:
+      recent_requests: "Последние запросы"
+    edit:
+      title: "Редактирование агента пользователя"
+    show:
+      title: "Агент пользователя %{name}"
+  code_sender:
+    password:
+      subject: "Сброс пароля на сайте sovia.ru"
+    email:
+      subject: "Подтверждение email-адреса на сайте sovia.ru"
+  admin:
+    dream_tags:
+      show:
+        in_dreambook: "Посмотреть в соннике"
+        title: "Символ сна %{name}"
+      index:
+        title: "Символы снов, страница %{page}"
+        header: "Символы снов"
+        select_word: "Поиск по символу"
+      new:
+        title: "Новый символ сна"
+      edit:
+        title: "Редактирование символа сна"
+    queues:
+      tags:
+        title: "Очередь меток, страница %{page}"
+        header: "Очередь символов снов"
+    comments:
+      index:
+        title: "Управление комментариями, страница %{page}"
+        header: "Управление комментариями"
+      show:
+        title: "Комментарий %{id}"
+      edit:
+        title: "Редактирование комментария %{id}"
+    users:
+      index:
+        title: "Управление пользователями, страница %{page}"
+        header: "Управление пользователями"
+      new:
+        title: "Добавление пользователя"
+      show:
+        title: "Администрирование: пользователь %{user}"
+        header: "Профиль пользователя"
+      edit:
+        title: "Редактирование пользователя %{user}"
+        header: "Редактирование пользователя"
   my:
     goals:
       index:
         title: "Ваши цели, страница %{page}"
         header: "Ваши цели"
         about: "О целях"
+    index:
+      dreams: "Мои сны"
+      profile: "Мой профиль"
+      confirm_email: "Отправить код подтверждения почты"
+      index:
+        dreams: "Мои сны"
+        profile: "Мой профиль"
+        confirm_email: "Подтверждение почты"
+        my_deeds: "Мой журнал успеха"
+        posts: "Мои публикации в сообществе"
+        title: "Кабинет"
+        tags: "Мои символы снов"
+        my_goals: "Мои цели"
+    profiles:
+      edit:
+        update: "Обновить профиль"
+        email: "Электронная почта"
+        current_password: "Текущий пароль"
+        allow_mail: "Получать письма по электронной почте"
+        common_parameters: "Общие параметры"
+        sensitive_parameters: "Особые параметры"
+        new_password: "Новый пароль"
+        password_confirmation: "Подтверждение нового пароля"
+        sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль"
+        leave_blank_if_necessary: "Если не меняете пароль, новый пароль вводить не нужно"
+        update_avatar: "Новая картинка пользователя"
+        avatar_demands: "Допустимые форматы — JPG, PNG. Лучше всего — квадратная картинка примерно 400×400."
+        title: "Редактирование профиля"
+        use_gravatar: "Использовать картинку с gravatar.com"
+      show:
+        avatar: "Текущая картинка пользователя"
+        created_at: "Дата регистрации на сайте"
+        send_code: "Получить код подтверждения почты"
+        statistics: "Статистика"
+        entries_count: "Количество публикаций"
+        comments_count: "Количество комментариев"
+        title: "Мой профиль"
+        languages: "Языки"
+    recoveries:
+      show:
+        code: "Код из письма"
+        update_password: "Обновить пароль"
+        no_code: "Нет кода сброса?"
+        send_code: "Получить код"
+        got_code: "Код сброса уже есть?"
+        title: "Сброс пароля"
+        header: "Сброс пароля"
+    confirmations:
+      show:
+        got_code: "Код подтверждения есть"
+        no_code: "Кода подтверждения нет?"
+        code: "Код из письма"
+        confirm: "Подтвердить адрес"
+        title: "Подтверждение электронной почты"
+        description: "Страница подтверждения адреса электронной почты на Совии."
+    statistics:
+      index:
+        tags: "Мои символы снов"
+        title: "Моя статистика"
+      tags:
+        title: "Мои символы снов, страница %{page}"
+        header: "Мои символы снов"
+    deeds:
+      index:
+        empty: "Ничего не описано"
+        create: "Добавить запись об успехе"
+        about: "Что это такое"
+        title: "Мой журнал успеха, страница %{page}"
+        header: "Мой журнал успеха"
+    dreams:
+      index:
+        title: "Мои сны, страница %{page}"
+        header: "Мои сны"
+      tagged:
+        title: "Мои сны с меткой %{tag}, страница %{page}"
+        header: "Мои сны с меткой «%{tag}»"
+    posts:
+      index:
+        title: "Мои публикации в сообществе, страница %{page}"
+        header: "Мои публикации в сообществе"
+    tags:
+      index:
+        title: "Мои символы снов, страница %{page}"
+        header: "Мои символы снов"
+      show:
+        title: "Мой символ сна «%{tag}»"
+        all_symbols: "Все символы"
+        read_dreams: "Посмотреть сны с этим символом"
+        view_in_dreambook: "Посмотреть в соннике"
+        no_description: "Описание не добавлено"
+      edit:
+        title: "Редактирование моего символа сна «%{tag}»"

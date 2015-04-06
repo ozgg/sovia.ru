@@ -126,9 +126,6 @@ en:
       description: "Dreams of user %{user} on Sovia, the site about dreams. Page %{page}."
     dream:
       described: "Symbols described in dreambook"
-  deeds:
-    form:
-      my_goals: "My goals"
   posts:
     index:
       title: "Community, page %{page}"
@@ -252,3 +249,173 @@ en:
     index:
       title: "Issuing goals and succeeding in goals"
       description: "How to issue own goals and how to succeed in them. How to motivate yourself and track your progress."
+  deeds:
+    index:
+      title: "Journal of success"
+      description: "What is journal of success, how to use and take advantage of it."
+    new:
+      title: "Creating entries in the journal of success"
+    show:
+      title: "View deed \"%{deed}\""
+      header: "View journal of success"
+      adjacent: "Adjacent entries"
+      previous: "Previous entry"
+      next: "Next entry"
+    edit:
+      title: "Edit deed"
+    form:
+      today_i: "Today I"
+      to_accomplish: ", to"
+      my_goals: "My goals"
+  my:
+    index:
+      dreams: "My dreams"
+      profile: "My profile"
+      confirm_email: "Send e-mail confirmation code"
+      index:
+        dreams: "My dreams"
+        profile: "My profile"
+        confirm_email: "E-mail confirmation"
+        my_deeds: "My journal of success"
+        posts: "My posts in community"
+        title: "Dashboard"
+        tags: "My dream symbols"
+        my_goals: "My goals"
+    profiles:
+      edit:
+        update: "Update profile"
+        email: "E-mail"
+        current_password: "Current password"
+        allow_mail: "Receive e-mail from this site"
+        common_parameters: "Common parameters"
+        sensitive_parameters: "Sensitive parameters"
+        new_password: "New password"
+        password_confirmation: "Confirmation of new password"
+        sensitive_parameters_notice: "Current password required for changing these parameters"
+        leave_blank_if_necessary: "If you do not change password, leave blank"
+        view: "Into view mode"
+        update_avatar: "New user picture"
+        avatar_demands: "Allowed formats are JPG, PNG. The best image is square picture approximately 400×400."
+        title: "Edit profile"
+        use_gravatar: "Use image from gravatar.com"
+      show:
+        avatar: "Current avatar"
+        created_at: "Registration date"
+        send_code: "Receive confirmation code"
+        statistics: "Statistics"
+        entries_count: "Number of posts"
+        comments_count: "Number of comments"
+        title: "My profile"
+        languages: "Languages"
+    recoveries:
+      show:
+        code: "The code from letter"
+        update_password: "Update password"
+        no_code: "No recovery code?"
+        send_code: "Receive code"
+        got_code: "Have recoverry code?"
+        title: "Reset password"
+        description: "Page for password recovery on Sovia."
+    confirmations:
+      show:
+        got_code: "Have confirmation code"
+        no_code: "No confirmation code?"
+        code: "The code from letter"
+        confirm: "Confirm e-mail"
+        title: "Confirm e-mail"
+        description: "Page with confirmation of e-mail on Sovia."
+    statistics:
+      index:
+        tags: "My dream symbols"
+        title: "My statistics"
+      tags:
+        title: "My dream symbols, page %{page}"
+        header: "My dream symbols"
+    deeds:
+      index:
+        empty: "Nothing added"
+        create: "Add success"
+        about: "What is this"
+        title: "My journal of success, page %{page}"
+        header: "My journal of success"
+    dreams:
+      index:
+        title: "My dreams, page %{page}"
+        header: "My dreams"
+      tagged:
+        title: "My dreams tagged %{tag}, page %{page}"
+        header: "My dreams tagged \"%{tag}\""
+    posts:
+      index:
+        title: "My posts in community, page %{page}"
+        header: "My posts in community"
+    tags:
+      index:
+        title: "My dream symbols, page %{page}"
+        header: "My dream symbols"
+      show:
+        title: "My dream symbol \"%{tag}\""
+        all_symbols: "All symbols"
+        read_dreams: "View dreams with this tag"
+        view_in_dreambook: "View in dreambook"
+        no_description: "Description is not added"
+      edit:
+        title: "Edit my dream symbol \"%{tag}\""
+    goals:
+      index:
+        title: "Your goals, page %{page}"
+        header: "Your goals"
+        about: "About goals"
+        create: "Issue a new goal"
+  code_sender:
+    password:
+      subject: "Resetting password for site sovia.ru"
+    email:
+      subject: "Confirming email-address for site sovia.ru"
+  admin:
+    dream_tags:
+      show:
+        in_dreambook: "See in dreambook"
+        title: "Dream symbol %{name}"
+      index:
+        title: "Dream symbols, page %{page}"
+        header: "Dream symbols"
+        select_word: "Search for symbol"
+      new:
+        title: "New dream symbol"
+      edit:
+        title: "Edit dream symbol"
+    queues:
+      tags:
+        title: "Tags queue, page %{page}"
+        header: "Queue of dream symbols"
+    comments:
+      index:
+        title: "Managing comments, page %{page}"
+        header: "Manage comments"
+      show:
+        title: "Comment %{id}"
+      edit:
+        title: "Editing comment %{id}"
+    users:
+      index:
+        title: "Manage users, page %{page}"
+        header: "Users administration"
+      new:
+        title: "Adding user"
+      show:
+        title: "Managing: user %{user}"
+        header: "User profile"
+      edit:
+        title: "Editing user %{user}"
+        header: "Editing user"
+  agents:
+    index:
+      title: "User agents, page %{page}"
+      header: "User agents"
+    show:
+      title: "User agent \"%{name}\""
+    agent:
+      recent_requests: "Recent requests"
+    edit:
+      title: "Editing user agent"

@@ -1,33 +1,36 @@
-<% content_for :title, t('.title', deed: @deed.name) %>
-<% content_for :description, t('.description', deed: @deed.name) %>
+<% content_for :meta_title, t('.title', deed: @deed.name) %>
+<%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+  </header>
 
-<% adjacent = [@deed.previous_entry, @deed.next_entry] %>
-<% unless adjacent[0].nil? && adjacent[1].nil? %>
-    <nav class="adjacent-entries">
-      <ul aria-label="<%= t('.adjacent') %>">
-        <% unless adjacent[0].nil? %>
-            <li class="previous"><%= link_to t('.previous'), deed_path(adjacent[0]), rel: 'prev' %></li>
-        <% end %>
-        <% unless adjacent[1].nil? %>
-            <li class="next"><%= link_to t('.next'), deed_path(adjacent[1]), rel: 'next' %></li>
-        <% end %>
-      </ul>
-    </nav>
-<% end %>
+  <% adjacent = [@deed.previous_entry, @deed.next_entry] %>
+  <% unless adjacent[0].nil? && adjacent[1].nil? %>
+      <nav class="adjacent-entries">
+        <ul aria-label="<%= t('.adjacent') %>">
+          <% unless adjacent[0].nil? %>
+              <li class="previous"><%= link_to t('.previous'), deed_path(adjacent[0]), rel: 'prev' %></li>
+          <% end %>
+          <% unless adjacent[1].nil? %>
+              <li class="next"><%= link_to t('.next'), deed_path(adjacent[1]), rel: 'next' %></li>
+          <% end %>
+        </ul>
+      </nav>
+  <% end %>
 
-<p>
-  <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
-  <%= @deed.name %><%= @deed.goal_postfix %>
-</p>
-<nav>
-  <ul>
-    <li><%= link_to t('edit'), edit_deed_path(@deed) %></li>
-    <li><%= link_to t('delete'), deed_path(@deed), method: :delete, data: { confirm: t('are_you_sure') }  %></li>
-  </ul>
-</nav>
+  <p>
+    <time datetime="<%= @deed.created_at %>"><%= @deed.created_at.strftime('%d.%m.%Y') %></time>
+    <%= @deed.name %><%= @deed.goal_postfix %>
+  </p>
+  <nav class="options">
+    <ul>
+      <li><%= link_to t(:list), my_deeds_path %></li>
+      <li><%= link_to t(:edit), edit_deed_path(@deed) %></li>
+      <li><%= link_to t(:delete), deed_path(@deed), method: :delete, data: { confirm: t(:are_you_sure) }  %></li>
+    </ul>
+  </nav>
 
-<%= render 'common/metrics' %>
+</article>
+

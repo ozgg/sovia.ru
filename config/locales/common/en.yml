@@ -70,3 +70,33 @@ en:
     created: "Goal has been added"
     updated: "Goal has been updated"
     deleted: "Goal has been deleted"
+  profile:
+    updated: "Profile updated"
+    incorrect_password: "Old password is incorrect"
+    update_error: "Error updating profile"
+  deed:
+    created: "Deed added"
+    updated: "Deed updated"
+    deleted: "Deed deleted"
+  tag:
+    created: "Tag added"
+    updated: "Tag updated"
+    deleted: "Tag deleted"
+  email_not_found: "Given e-mail was not found"
+  recovery_code_sent: "Password recovery code has been sent"
+  recovery_code_failure: "Could not create a new code"
+  user:
+    email_confirmed: "E-mail confirmed"
+    code_invalid: "Invalid code"
+    recovery_failed: "Could not change password, check everything and try again"
+    password_changed: "Password changes"
+    created: "User created"
+    updated: "User updated"
+  email_confirmation_sent: "Confirmation code has been sent"
+  confirmation:
+    send_code: "Send confirmation code"
+    set_email: "Set e-mail address"
+  code:
+    generation_error: "Error while generating code"
+  agent:
+    updated: "Agent updated"
