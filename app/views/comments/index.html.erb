@@ -2,32 +2,12 @@
 <% content_for :meta_description, t('.description', page: current_page) %>
 <%= render 'shared/metrics' %>
 
-<header>
-  <h1><%= t('.header') %></h1>
+<section>
+  <header>
+    <h1><%= t('.header') %></h1>
 
-  <h2><%= render 'shared/page' %></h2>
-</header>
+    <h2><%= render 'shared/page' %></h2>
+  </header>
 
-<% if @comments.any? %>
-      <% @comments.each do |comment| %>
-          <div class="comment">
-            <% if comment.commentable.visible_to? current_user %>
-                <div class="header">
-                    <%= comment_avatar(comment.user) %>
-                    <%= user_link(comment.user) %> <%= t('.for') %> <%= link_to comment.commentable.parsed_title, verbose_entry_path(comment.commentable) %>
-
-                  <time datetime="<%= comment.datetime %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-                </div>
-
-                <div class="body">
-                  <%= raw parse_body(comment.body, false, true) %>
-                </div>
-            <% else %>
-                [<%= t(:hidden) %>]
-            <% end %>
-          </div>
-      <% end %>
-    <%= paginate @comments %>
-<% else %>
-    <%= render 'shared/nothing_found' %>
-<% end %>
+  <%= render 'simple_list' %>
+</section>

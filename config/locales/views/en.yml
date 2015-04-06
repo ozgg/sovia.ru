@@ -130,8 +130,9 @@ en:
     index:
       title: "All comments, page %{page}"
       header: "All comments"
-      for: "for"
       description: "All comments from the users of Sovia, the site about dreams. Page %{page}."
+    simple_list:
+      for: "for"
   statistics:
     index:
       symbols: "Statistics for dream symbols"
@@ -177,3 +178,32 @@ en:
       agreement: "By registering on this site, you agree to follow user agreement"
       title: "Singing up"
       description: "Page with sign-up form on Sovia, the site about dreams."
+    recover_form:
+      instructions: "Enter e-mail address to recover your password. Instructions and code for resetting password will be sent to this address."
+      title: "Password recovery"
+    recover:
+      email: "E-mail"
+      code: "Code from letter"
+      password: "New password"
+      password_confirmation: "Password confirmation"
+    profile:
+      user_info: "User information"
+      registration_date: "Registration date"
+      entries_count: "Number of entries"
+      comments_count: "Number of comments"
+      read_dreams: "Read dreams of this user"
+      description: "What dreams does user %{user} see and what do they write about dreams can be known on Sovia, the site about dreams, where they are registered and describe their dreams"
+      read_posts: "Posts of this user"
+      read_comments: "Comments of this user"
+    posts:
+      title: "Posts of user %{user}, page %{page}"
+      header: "Posts of user %{user}"
+      description: "Page %{page} with list of posts of user %{user}."
+    dreams:
+      title: "Dreams of user %{user}, page %{page}"
+      description: "Page %{page} with dreams of user %{user}."
+      header: "Dreams of user %{user}"
+    comments:
+      title: "Comments of user %{user}, page %{page}"
+      description: "Page %{page} with comments by user %{user}."
+      header: "Comments of user %{user}"

@@ -1,11 +1,11 @@
-<% content_for :title, t('.title', user: @user.login, page: params[:page] || 1) %>
-<% content_for :description, t('.description', user: @user.login, page: params[:page] || 1) %>
+<% content_for :meta_title, t('.title', user: @user.login, page: params[:page] || 1) %>
+<% content_for :meta_description, t('.description', user: @user.login, page: params[:page] || 1) %>
+<%= render 'shared/metrics' %>
 
-<h1><%= t('.header', user: @user.login) %></h1>
-<h2><%= t('page', page: params[:page] || 1) %></h2>
+<section>
+  <h1><%= t('.header', user: @user.login) %></h1>
 
-<%= render 'posts/list' %>
+  <h2><%= render 'shared/page' %></h2>
 
-<section></section>
-
-<%= render 'common/metrics' %>
+  <%= render partial: 'posts/list', locals: { posts: @posts, paginate: true } %>
+</section>

@@ -1,11 +1,12 @@
-<% content_for :title, @user.login %>
-<% content_for :description, t('.description', user: @user.login) %>
-
-<header>
-  <h1><%= @user.login %></h1>
-</header>
+<% content_for :meta_title, @user.login %>
+<% content_for :meta_description, t('.description', user: @user.login) %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @user.avatar.url) if @user.avatar.url %>
+<%= render 'shared/metrics' %>
 
 <article class="user-profile">
+  <header>
+    <h1><%= @user.login %></h1>
+  </header>
   <figure>
     <%= raw profile_avatar(@user) %>
     <figcaption><%= @user.login %></figcaption>
@@ -33,7 +34,3 @@
   <p><%= link_to t('.read_posts'), user_posts_path(login: @user.login) %></p>
   <p><%= link_to t('.read_comments'), user_comments_path(login: @user.login) %></p>
 </article>
-
-<section></section>
-
-<%= render 'common/metrics' %>
