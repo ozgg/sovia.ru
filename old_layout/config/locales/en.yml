@@ -500,10 +500,6 @@ en:
       today_i: "Today I"
       to_accomplish: ", to"
   grains:
-    index:
-      title: "Grains of perception"
-      header: "Grains of perception"
-      description: "What are grains of perception, why one should describe them and how to use them. You can find out on this page of Sovia, the site about dreams."
     form:
       submit: "Save grain"
     new:

@@ -217,3 +217,7 @@ en:
       title: "Language \"%{name}\""
     edit:
       title: "Editing language"
+  grains:
+    index:
+      title: "Grains of perception"
+      description: "What are grains of perception, why one should describe them and how to use them. You can find out on this page of Sovia, the site about dreams."
