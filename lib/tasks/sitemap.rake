@@ -9,10 +9,8 @@ namespace :sitemap do
     sitemap = "#{Rails.root}/public/sitemap.posts.xml"
     File.open sitemap, 'w' do |f|
       f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-      Entry.public_entries.each do |entry|
-        unless entry.is_a?(Entry::Article) || entry.is_a?(Entry::Post)
-          f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
-        end
+      Entry::Dream.public_entries.each do |entry|
+        f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
       end
       Post.all.each do |entry|
         f.puts "<url><loc>#{post_url(locale: entry.locale, id: entry.id)}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
@@ -41,10 +39,8 @@ namespace :sitemap do
     File.open sitemap, 'w' do |f|
       f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
       f.puts "<url><loc>#{root_url}</loc><changefreq>daily</changefreq></url>"
-      Entry.public_entries.each do |entry|
-        unless entry.is_a?(Entry::Article) || entry.is_a?(Entry::Post)
-          f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
-        end
+      Entry::Dream.public_entries.each do |entry|
+        f.puts "<url><loc>#{verbose_entry_url entry}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
       end
       Post.all.each do |entry|
         f.puts "<url><loc>#{post_url(locale: entry.locale, id: entry.id)}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"

@@ -4,13 +4,11 @@
         <loc><%= root_url %></loc>
         <changefreq>daily</changefreq>
     </url>
-    <% Entry.public_entries.each do |entry| %>
-        <% unless entry.is_a?(Entry::Post) || entry.is_a?(Entry::Article) %>
+    <% Entry::Dream.public_entries.each do |entry| %>
         <url>
             <loc><%= verbose_entry_url entry %></loc>
             <lastmod><%= entry.updated_at.w3c %></lastmod>
         </url>
-        <% end %>
     <% end %>
     <% Post.all.each do |entry| %>
         <url>
