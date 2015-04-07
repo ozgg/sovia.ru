@@ -53,8 +53,6 @@ module ApplicationHelper
     attributes[:class] = 'described' unless tag.description.blank?
     if tag.is_a? Tag::Dream
       link_to tag.name, tagged_entry_dreams_path(parameters), attributes
-    elsif tag.is_a? Tag::Thought
-      link_to tag.name, tagged_entry_thoughts_path(parameters), attributes
     else
       tag.name
     end
@@ -71,8 +69,6 @@ module ApplicationHelper
       post_url id: entry.id, anchor: parameters[:anchor]
     elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_url parameters
-    elsif entry.is_a? Entry::Thought
-      verbose_entry_thoughts_url parameters
     else
       "Entry #{entry.id}"
     end
@@ -87,10 +83,6 @@ module ApplicationHelper
       post_path entry
     elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_path(parameters)
-    elsif entry.is_a? Entry::Thought
-      verbose_entry_thoughts_path(parameters)
-    elsif entry.is_a? Entry::Grain
-      verbose_entry_grains_path(parameters)
     end
   end
 
@@ -103,10 +95,6 @@ module ApplicationHelper
       post_url entry
     elsif entry.is_a? Entry::Dream
       verbose_entry_dreams_url(parameters)
-    elsif entry.is_a? Entry::Thought
-      verbose_entry_thoughts_url(parameters)
-    elsif entry.is_a? Entry::Grain
-      verbose_entry_grains_url(parameters)
     end
   end
 
@@ -177,8 +165,6 @@ module ApplicationHelper
       end
       if entry.nil?
         "<span class=\"not-found\" title=\"#{escape(title)}\">#{match[:id]}</span>"
-      elsif entry.is_a? Entry::Grain
-        "<span class=\"not-found\">Grain #{match[:id]}</span>"
       else
         prefix + link_to(title, verbose_entry_path(entry), title: entry.parsed_title) + postfix
       end
