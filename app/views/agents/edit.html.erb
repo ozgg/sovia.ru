@@ -1,10 +1,9 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
 
 <article>
   <header>
-    <h1><%= t('.header') %></h1>
-    <nav>
+    <h1><%= t('.title') %></h1>
+    <nav class="options">
       <ul>
         <li><%= link_to t(:list), agents_path %></li>
         <li><%= link_to t(:view), @agent %></li>

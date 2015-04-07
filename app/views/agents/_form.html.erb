@@ -1,5 +1,5 @@
 <%= form_for(@agent) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @agent } %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @agent } %>
 
     <div><%= @agent.name %></div>
     <div>
@@ -7,6 +7,6 @@
       <%= f.label :is_bot %>
     </div>
     <div>
-      <%= f.button t('submit'), type: 'submit' %>
+      <%= f.button t(:submit), type: 'submit' %>
     </div>
 <% end %>

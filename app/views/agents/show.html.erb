@@ -1,5 +1,4 @@
-<% content_for :title, t('.title', name: @agent.name) %>
-<% content_for :description, t('.description', name: @agent.name) %>
+<% content_for :meta_title, t('.title', name: @agent.name) %>
 
 <article>
   <header>
@@ -7,7 +6,7 @@
     <% if @agent.is_bot? %>
     <h2><%= t('activerecord.attributes.agent.is_bot') %></h2>
     <% end %>
-    <nav>
+    <nav class="options">
       <ul>
         <li><%= link_to t(:list), agents_path %></li>
         <li><%= link_to t(:edit), edit_agent_path(@agent) %></li>
