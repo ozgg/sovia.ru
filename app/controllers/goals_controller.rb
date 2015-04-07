@@ -57,6 +57,6 @@ class GoalsController < ApplicationController
 
   def set_goal
     @goal = Goal.find(params[:id])
-    raise UnauthorizedException unless @goal.user == current_user
+    raise UnauthorizedException unless @goal.owned_by? current_user
   end
 end
