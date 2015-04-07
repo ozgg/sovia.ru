@@ -1,35 +1,38 @@
-<% content_for :title, t('.title', id: @comment.id) %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title', id: @comment.id) %>
 
-<header>
-  <h1><%= t('.header', id: @comment.id) %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('.comments'), admin_comments_path %></li>
-    </ul>
-  </nav>
-</header>
+<article>
+  <header>
+    <h1><%= t('.title', id: @comment.id) %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:list), admin_comments_path %></li>
+      </ul>
+    </nav>
+  </header>
 
-<ul class="comments">
-      <li id="comment-<%= @comment.id %>">
-        <div>
-          <figure>
-            <%= comment_avatar(@comment.user) %>
-            <figcaption><%= user_link(@comment.user) %></figcaption>
-          </figure>
-          <time datetime="<%= @comment.datetime %>"><%= @comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
-        </div>
+  <div class="comments">
+    <div>
+      <div class="header">
+                  <span class="user">
+                    <%= comment_avatar(@comment.user) %>
+                    <%= user_link(@comment.user) %>
+                    <%= link_to @comment.commentable.parsed_title, verbose_entry_path(@comment.commentable) %>
+                  </span>
+        <time datetime="<%= @comment.created_at.w3c %>"><%= @comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+      </div>
 
-        <div>
-          <%= raw parse_body(@comment.body, false, true) %>
-        </div>
+      <div class="body">
+        <%= raw parse_body(@comment.body, false, true) %>
+      </div>
 
-        <ul class="actions">
-          <li>
-            <div><%= link_to t('edit'), edit_admin_comment_path(@comment) %></div>
-            <div><%= link_to t('delete'), admin_comment_path(@comment), method: :delete, data: { confirm: t('are_you_sure') } %></div>
-            <div></div>
-          </li>
-        </ul>
-      </li>
-</ul>
+      <div class="actions">
+        <nav class="options">
+          <ul>
+            <li><%= link_to t(:edit), edit_admin_comment_path(@comment) %></li>
+            <li><%= link_to t(:delete), admin_comment_path(@comment), method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</article>

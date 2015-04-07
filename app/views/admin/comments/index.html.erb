@@ -1,35 +1,43 @@
-<% content_for :title, t('.title', page: params[:page] || 1) %>
-<% content_for :description, t('.description', page: params[:page] || 1) %>
+<% content_for :meta_title, t('.title', page: current_page) %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <h2><%= t('page', page: params[:page] || 1) %></h2>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <h2><%= render 'shared/page' %></h2>
+  </header>
 
-<% if @comments.any? %>
-    <ul class="admin-comments">
-      <% @comments.each do |comment| %>
-      <li>
-        <div>
-          <p>
-            <time datetime="<%= comment.datetime %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>,
-            <%= user_link(comment.user) %>,
-            <%= link_to comment.entry.parsed_title, verbose_entry_path(comment.entry) %>
-          </p>
-        </div>
-        <div>
-          <p><%= comment.body %></p>
-        </div>
-        <div>
-          <p><%= link_to t('view'), admin_comment_path(comment) %></p>
-          <p><%= link_to t('edit'), edit_admin_comment_path(comment) %></p>
-          <p><%= link_to t('delete'), admin_comment_path(comment), method: :delete, data: { confirm: t('are_you_sure') } %></p>
-        </div>
-      </li>
-      <% end %>
-    </ul>
+  <% if @comments.any? %>
+      <div class="comments">
+        <% @comments.each do |comment| %>
+            <div>
+              <div class="header">
+                  <span class="user">
+                    <%= comment_avatar(comment.user) %>
+                    <%= user_link(comment.user) %>
+                    <%= link_to comment.commentable.parsed_title, verbose_entry_path(comment.commentable) %>
+                  </span>
+                <time datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+              </div>
 
-    <%= paginate @comments %>
-<% else %>
-    <div class="message"><%= t('nothing_found') %></div>
-<% end %>
+              <div class="body">
+                <%= comment.body %>
+              </div>
+
+              <div class="actions">
+                <nav class="options">
+                  <ul>
+                    <li><%= link_to t(:view), admin_comment_path(comment) %></li>
+                    <li><%= link_to t(:edit), edit_admin_comment_path(comment) %></li>
+                    <li><%= link_to t(:delete), admin_comment_path(comment), method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+        <% end %>
+      </div>
+
+      <%= paginate @comments %>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</article>
