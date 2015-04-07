@@ -1,7 +1,7 @@
 <% url = @tag.new_record? ? admin_dream_tags_path : admin_dream_tag_path(@tag) %>
 
 <%= form_for(@tag, url: url) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @tag } %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @tag } %>
 
     <div>
       <%= f.label :name %><br />
@@ -12,6 +12,6 @@
       <%= f.text_area :description, required: true, cols: 80, rows: 25 %>
     </div>
     <div>
-      <%= f.button t('tags.form.submit'), type: 'submit' %>
+      <%= f.button t(:submit), type: :submit %>
     </div>
 <% end %>

@@ -1,15 +1,16 @@
-<% content_for :title, t('.title') %>
-<% content_for :description, t('.description') %>
+<% content_for :meta_title, t('.title') %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('titles.tags.index'), admin_dream_tags_path %></li>
-      <li><%= link_to t('index.management_links.tags_queue'), admin_queues_tags_path %></li>
-      <li><%= link_to t('.view'), admin_dream_tag_path(@tag) %></li>
-    </ul>
-  </nav>
-</header>
+<article>
+  <header>
+    <h1><%= t('.title') %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:list), admin_dream_tags_path %></li>
+        <li><%= link_to t('admin.queues.tags.header'), admin_queues_tags_path %></li>
+        <li><%= link_to t(:view), admin_dream_tag_path(@tag) %></li>
+      </ul>
+    </nav>
+  </header>
 
-<%= render 'form' %>
+  <%= render 'form' %>
+</article>

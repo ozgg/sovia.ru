@@ -1,24 +1,25 @@
-<% content_for :title, t('.title', name: @tag.name) %>
-<% content_for :description, t('.description', name: @tag.name) %>
+<% content_for :meta_title, t('.title', name: @tag.name) %>
 
-<header>
-  <h1><%= t('.header', name: @tag.name) %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t('.in_dreambook'), dreambook_word_path(letter: @tag.letter, word: @tag.uri_name) %></li>
-      <li><%= link_to t('tags.show.list'), admin_dream_tags_path %></li>
-      <li><%= link_to t('index.management_links.tags_queue'), admin_queues_tags_path %></li>
-      <li><%= link_to t('tags.show.edit'), edit_admin_dream_tag_path(@tag) %></li>
-      <li><%= link_to t('tags.show.delete'), admin_dream_tag_path(@tag), method: :delete, data: { confirm: t('are_you_sure') } %></li>
-    </ul>
-  </nav>
-</header>
-
-<article class="entry-tag">
+<article>
   <header>
-    <h2><%= @tag.name %></h2>
+    <h1><%= t('.title', name: @tag.name) %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t('.in_dreambook'), dreambook_word_path(letter: @tag.letter, word: @tag.uri_name) %></li>
+        <li><%= link_to t(:list), admin_dream_tags_path %></li>
+        <li><%= link_to t('admin.queues.tags.header'), admin_queues_tags_path %></li>
+        <li><%= link_to t(:edit), edit_admin_dream_tag_path(@tag) %></li>
+        <li><%= link_to t(:delete), admin_dream_tag_path(@tag), method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+      </ul>
+    </nav>
   </header>
-  <div>
-    <%= raw parse_body(@tag.description.to_s, true, true) %>
-  </div>
+
+  <section class="entry-tag">
+    <header>
+      <h1><%= @tag.name %></h1>
+    </header>
+    <div>
+      <%= raw parse_body(@tag.description.to_s, true, true) %>
+    </div>
+  </section>
 </article>

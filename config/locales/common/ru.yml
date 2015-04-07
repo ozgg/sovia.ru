@@ -105,3 +105,4 @@ ru:
     generation_error: "Ошибка создания кода"
   agent:
     updated: "Агент изменён"
+  reset: "Сброс"

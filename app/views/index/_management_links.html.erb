@@ -1,0 +1,8 @@
+<% if current_user && current_user.has_role?(:dreambook_manager) %>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t('admin.dream_tags.index.header'), admin_dream_tags_path %></li>
+        <li><%= link_to t('admin.queues.tags.header'), admin_queues_tags_path %></li>
+      </ul>
+    </nav>
+<% end %>

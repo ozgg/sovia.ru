@@ -100,3 +100,4 @@ en:
     generation_error: "Error while generating code"
   agent:
     updated: "Agent updated"
+  reset: "Reset"

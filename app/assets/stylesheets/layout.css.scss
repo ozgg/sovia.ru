@@ -54,6 +54,14 @@ label {
   }
 }
 
+progress {
+  min-width: 300px;
+}
+
+span.not-found {
+  color: #ff8080;
+}
+
 body {
   margin: 0 auto;
   padding: 0;

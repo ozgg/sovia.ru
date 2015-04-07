@@ -1,28 +1,29 @@
-<% content_for :title, t('.title', page: params[:page] || 1) %>
-<% content_for :description, t('.description', page: params[:page] || 1) %>
+<% content_for :meta_title, t('.title', page: current_page) %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <h2><%= t('page', page: params[:page] || 1) %></h2>
-  <nav>
-    <ul>
-      <li><%= link_to t('tags.show.list'), admin_dream_tags_path %></li>
-    </ul>
-  </nav>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <h2><%= render 'shared/page' %></h2>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:list), admin_dream_tags_path %></li>
+      </ul>
+    </nav>
+  </header>
 
-<p><progress value="<%= @progress[0] %>" max="<%= @progress[1] %>" title="<%= "#{@progress[0]}/#{@progress[1]}" %>"></progress>
-<%= (Time.now + @tags.total_pages.days).strftime('%d.%m.%Y') %></p>
+  <p><progress value="<%= @progress[0] %>" max="<%= @progress[1] %>" title="<%= "#{@progress[0]}/#{@progress[1]}" %>"></progress>
+    <%= (Time.now + @tags.total_pages.days).strftime('%d.%m.%Y') %></p>
 
-<% if @tags.any? %>
-    <ol start="<%= ((params[:page] || 1).to_i - 1) * 25 + 1 %>">
-      <% @tags.each do |tag| %>
-          <li>
-            <%= link_to tag.name, edit_admin_dream_tag_path(tag) %> (<%= tag.entries_count %>)
-      <% end %>
-    </ol>
+  <% if @tags.any? %>
+      <ol start="<%= ((params[:page] || 1).to_i - 1) * 25 + 1 %>">
+        <% @tags.each do |tag| %>
+            <li>
+              <%= link_to tag.name, edit_admin_dream_tag_path(tag) %> (<%= tag.entries_count %>)
+        <% end %>
+      </ol>
 
-    <%= paginate @tags %>
-<% else %>
-    <div class="message"><%= t('nothing_found') %></div>
-<% end %>
+      <%= paginate @tags %>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</article>
