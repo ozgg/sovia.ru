@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
 
   # get /admin/users
   def index
-    @users = User.order('login asc').page(params[:page] || 1).per(20)
+    @users = User.order('login asc').page(current_page).per(20)
   end
 
   # get /admin/users/new

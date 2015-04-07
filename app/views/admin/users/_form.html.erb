@@ -1,7 +1,7 @@
 <% url = @user.new_record? ? admin_users_path : admin_user_path(@user) %>
 
 <%= form_for(@user, url: url) do |f| %>
-    <%= render partial: 'common/errors_list', locals: { entity: @user } %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @user } %>
 
     <% unless @user.new_record? %>
         <figure>
@@ -49,7 +49,7 @@
     </div>
     <div>
       <p><%= t('activerecord.attributes.user.roles') %></p>
-      <ul>
+      <ul style="margin-left:30px;">
         <% UserRole.roles_for_select.each do |role| %>
         <li>
           <%= hidden_field_tag "user[roles][#{role[1]}]", 0, id: nil %>

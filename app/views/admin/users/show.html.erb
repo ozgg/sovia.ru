@@ -1,71 +1,72 @@
-<% content_for :title, t('.title', user: @user.login) %>
-<% content_for :description, t('.description', user: @user.login) %>
+<% content_for :meta_title, t('.title', user: @user.login) %>
 
-<header>
-  <h1><%= t('.header') %></h1>
-  <nav>
-    <ul>
-      <li><%= link_to t(:edit), edit_admin_user_path(@user) %></li>
-      <li><%= link_to t(:list), admin_users_path %></li>
-    </ul>
-  </nav>
-</header>
+<article>
+  <header>
+    <h1><%= t('.header') %></h1>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:edit), edit_admin_user_path(@user) %></li>
+        <li><%= link_to t(:list), admin_users_path %></li>
+      </ul>
+    </nav>
+  </header>
 
-<article class="user-profile">
-  <figure>
-    <%= raw profile_avatar(@user) %>
-    <figcaption><%= @user.login %></figcaption>
-  </figure>
+  <section class="user-profile">
+    <figure>
+      <%= raw profile_avatar(@user) %>
+      <figcaption><%= @user.login %></figcaption>
+    </figure>
 
-  <table>
-    <caption><%= t('users.profile.user_info') %> <%= user_link @user %></caption>
-    <tbody>
-    <tr>
-      <th><%= t('users.profile.registration_date') %></th>
-      <td><time datetime="<%= @user.created_at.w3c %>"><%= @user.created_at.strftime('%d.%m.%Y') %></time></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.email') %></th>
-      <td><%= @user.email || t(:empty) %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.gender') %></th>
-      <td><%= @user.gender_string %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.allow_mail') %></th>
-      <td><%= @user.allow_mail? %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.mail_confirmed') %></th>
-      <td><%= @user.mail_confirmed? %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.use_gravatar') %></th>
-      <td><%= @user.use_gravatar? %></td>
-    </tr>
-    <tr>
-      <th><%= t('users.profile.entries_count') %></th>
-      <td><%= @user.entries_count %></td>
-    </tr>
-    <tr>
-      <th><%= t('users.profile.comments_count') %></th>
-      <td><%= @user.comments_count %></td>
-    </tr>
-    <tr>
-      <th><%= t('activerecord.attributes.user.roles') %></th>
-      <td>
-        <% if @user.user_roles.any? %>
-        <ul>
-          <% @user.user_roles.each do |role| %>
-          <li><%= role.name %></li>
+    <table>
+      <caption><%= t('users.profile.user_info') %> <%= user_link @user %></caption>
+      <tbody>
+      <tr>
+        <th><%= t('users.profile.registration_date') %></th>
+        <td><time datetime="<%= @user.created_at.w3c %>"><%= @user.created_at.strftime('%d.%m.%Y') %></time></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <td><%= @user.email || t(:empty) %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.gender') %></th>
+        <td><%= @user.gender_string %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.allow_mail') %></th>
+        <td><%= @user.allow_mail? %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.mail_confirmed') %></th>
+        <td><%= @user.mail_confirmed? %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.use_gravatar') %></th>
+        <td><%= @user.use_gravatar? %></td>
+      </tr>
+      <tr>
+        <th><%= t('users.profile.entries_count') %></th>
+        <td><%= @user.entries_count %></td>
+      </tr>
+      <tr>
+        <th><%= t('users.profile.comments_count') %></th>
+        <td><%= @user.comments_count %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.roles') %></th>
+        <td>
+          <% if @user.user_roles.any? %>
+              <ul>
+                <% @user.user_roles.each do |role| %>
+                    <li><%= role.name %></li>
+                <% end %>
+              </ul>
+          <% else %>
+              <%= t(:empty) %>
           <% end %>
-        </ul>
-        <% else %>
-        <%= t(:empty) %>
-        <% end %>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
 </article>
