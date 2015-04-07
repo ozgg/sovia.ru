@@ -1,5 +1,11 @@
 <% content_for :meta_title, t('.title', word: @tag.name) %>
 <% content_for :meta_description, t('.description', word: @tag.name) %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+    <meta property="og:article:published_time" content="<%= @tag.created_at.iso_day %>" />
+    <meta property="og:article:modified_time" content="<%= @tag.updated_at.iso_day %>" />
+    <meta property="og:article:section" content="<%= t('layouts.main_navigation.dreambook') %>" />
+<% end %>
 <% content_for :sidebar do %>
     <%= render 'sidebar/statistics' %>
     <%= render 'sidebar/more_links' %>
