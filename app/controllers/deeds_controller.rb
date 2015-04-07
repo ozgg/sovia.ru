@@ -19,7 +19,7 @@ class DeedsController < ApplicationController
       flash[:notice] = t('deed.created')
       redirect_to my_deeds_path
     else
-      render action: :new
+      render :new
     end
   end
 
@@ -58,7 +58,7 @@ class DeedsController < ApplicationController
 
   def set_deed
     @deed = Deed.find(params[:id])
-    raise UnauthorizedException unless @deed.user == current_user
+    raise UnauthorizedException unless @deed.owned_by? current_user
   end
 
   def check_deed

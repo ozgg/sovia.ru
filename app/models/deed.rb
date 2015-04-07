@@ -17,4 +17,8 @@ class Deed < ActiveRecord::Base
   def next_entry
     Deed.where(user_id: user_id).where("id > #{id}").order('id asc').first
   end
+
+  def owned_by?(person)
+    person.is_a?(User) && (self.user == person)
+  end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Deed do
+describe Deed, type: :model do
   let(:deed) { build(:deed) }
 
   it "is invalid without user" do
