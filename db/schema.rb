@@ -138,7 +138,6 @@ ActiveRecord::Schema.define(version: 20150407144004) do
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "user_id"
     t.integer  "language_id",               null: false
     t.integer  "owner_id",                  null: false
     t.string   "owner_type",                null: false
@@ -152,7 +151,6 @@ ActiveRecord::Schema.define(version: 20150407144004) do
   end
 
   add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "type",                       null: false

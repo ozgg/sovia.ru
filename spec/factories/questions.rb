@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :question do
-    user
+    association :owner, factory: :unconfirmed_user
     association :language, factory: :russian_language
-    text "What is that?"
+    body "What is that?"
   end
 end

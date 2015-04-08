@@ -1,7 +1,6 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
-      t.references :user, index: true
       t.references :language, index: true, null: false
       t.integer :owner_id, null: false
       t.string :owner_type, null: false
