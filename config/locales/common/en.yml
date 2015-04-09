@@ -101,3 +101,7 @@ en:
   agent:
     updated: "Agent updated"
   reset: "Reset"
+  question:
+    created: "Quesion has been created"
+    updated: "Question has been updated"
+    deleted: "Question has been deleted"

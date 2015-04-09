@@ -4,6 +4,8 @@ class CreateQuestions < ActiveRecord::Migration
       t.references :language, index: true, null: false
       t.integer :owner_id, null: false
       t.string :owner_type, null: false
+      t.references :agent, index: true
+      t.inet :ip
       t.integer :upvotes, null: false, default: 0
       t.integer :downvotes, null: false, default: 0
       t.integer :rating, null: false, default: 0
@@ -12,5 +14,7 @@ class CreateQuestions < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :questions, [:owner_type, :owner_id]
   end
 end

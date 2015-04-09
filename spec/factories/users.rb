@@ -18,6 +18,12 @@ FactoryGirl.define do
       end
     end
 
+    factory :moderator do
+      after(:create) do |user|
+        user.roles = { :moderator => 1 }
+      end
+    end
+
     factory :administrator do
       after(:create) do |user|
         user.roles = { :administrator => 1 }

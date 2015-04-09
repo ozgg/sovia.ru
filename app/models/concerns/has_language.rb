@@ -9,8 +9,8 @@ module HasLanguage
 
   module ClassMethods
     # Find content in languages suitable for visitor
-    def suitable_for_visitor(visitor)
-      language_ids = [I18n.locale]
+    def suitable_for(visitor)
+      language_ids = Language.guess_from_locale
       language_ids << visitor.language_ids if visitor.respond_to?(:language_ids)
       self.where(language_id: [language_ids])
     end

@@ -106,3 +106,7 @@ ru:
   agent:
     updated: "Агент изменён"
   reset: "Сброс"
+  question:
+    created: "Вопрос добавлен"
+    updated: "Вопрос изменён"
+    deleted: "Вопрос удалён"

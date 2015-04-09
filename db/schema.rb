@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 20150407144004) do
     t.integer  "language_id",               null: false
     t.integer  "owner_id",                  null: false
     t.string   "owner_type",                null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
     t.integer  "upvotes",       default: 0, null: false
     t.integer  "downvotes",     default: 0, null: false
     t.integer  "rating",        default: 0, null: false
@@ -150,7 +152,9 @@ ActiveRecord::Schema.define(version: 20150407144004) do
     t.datetime "updated_at"
   end
 
+  add_index "questions", ["agent_id"], name: "index_questions_on_agent_id", using: :btree
   add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
+  add_index "questions", ["owner_type", "owner_id"], name: "index_questions_on_owner_type_and_owner_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "type",                       null: false

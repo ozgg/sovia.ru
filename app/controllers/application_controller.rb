@@ -93,4 +93,16 @@ class ApplicationController < ActionController::Base
     user_agent = agent
     user_agent.add_request if user_agent.is_a? Agent
   end
+
+  def owner_for_entity
+    { owner: current_user }
+  end
+
+  def language_for_entity
+    { language: Language.guess_from_locale }
+  end
+
+  def tracking_for_entity
+    { agent: agent, ip: request.remote_ip }
+  end
 end
