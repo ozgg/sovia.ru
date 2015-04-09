@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
-  belongs_to :owner, polymorphic: true
-  belongs_to :language
+  include HasOwner
+  include HasLanguage
 
-  validates_presence_of :owner, :language, :body
+  validates_presence_of :owner, :body
 end

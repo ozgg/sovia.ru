@@ -1,8 +1,9 @@
 class UserLanguage < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :language
+  include HasLanguage
 
-  validates_presence_of :user, :language
+  belongs_to :user
+
+  validates_presence_of :user
   validates_uniqueness_of :language, scope: :user
 
   def self.by_pair(user, language)

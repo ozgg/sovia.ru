@@ -101,6 +101,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def language_ids
+    ids = []
+    ids << language.id unless language.nil?
+    UserLanguage.where(user: self).each { |l| ids << l.id }
+    ids
+  end
+
   def language_ids=(ids)
     ids.each { |index, id| ids[index] = id.to_i }
     Language.all.each do |language|

@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
+  include HasLanguage
+
   belongs_to :user, counter_cache: true
-  belongs_to :language
   has_many :comments, as: :commentable, dependent: :destroy
 
-  validates_presence_of :user, :language, :title, :body
+  validates_presence_of :user, :title, :body
   mount_uploader :image, ImageUploader
 
   def self.recent_posts
@@ -31,16 +32,6 @@ class Post < ActiveRecord::Base
   # @return [String]
   def author_name
     user.login
-  end
-
-  # Get locale code for post
-  #
-  # Returns language code of locale or nil for default locale
-  #
-  # @return [String]
-  def locale
-    language_code = language.code
-    (I18n.default_locale.to_s == language_code.to_s) ? nil : language_code
   end
 
   # Get text preview for list of posts
