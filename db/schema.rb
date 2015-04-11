@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407144004) do
+ActiveRecord::Schema.define(version: 20150409235210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,24 @@ ActiveRecord::Schema.define(version: 20150407144004) do
   end
 
   add_index "agents", ["name"], name: "index_agents_on_name", using: :btree
+
+  create_table "answers", force: true do |t|
+    t.integer  "question_id",             null: false
+    t.integer  "owner_id",                null: false
+    t.string   "owner_type",              null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "upvotes",     default: 0, null: false
+    t.integer  "downwotes",   default: 0, null: false
+    t.integer  "rating",      default: 0, null: false
+    t.text     "body",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["agent_id"], name: "index_answers_on_agent_id", using: :btree
+  add_index "answers", ["owner_type", "owner_id"], name: "index_answers_on_owner_type_and_owner_id", using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "codes", force: true do |t|
     t.integer  "user_id"
