@@ -1,9 +1,6 @@
 class User < ActiveRecord::Base
-  ROLE_ANYONE        = 0
   ROLE_EDITOR        = 1
   ROLE_MODERATOR     = 2
-  ROLE_DECENT        = 4
-  ROLE_ADMINISTRATOR = 5
 
   GENDER_FEMALE = 0
   GENDER_MALE   = 1

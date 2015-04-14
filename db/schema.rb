@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414175419) do
+ActiveRecord::Schema.define(version: 20150414221631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,18 @@ ActiveRecord::Schema.define(version: 20150414175419) do
   add_index "entry_tags", ["entry_id", "tag_id"], name: "index_entry_tags_on_entry_id_and_tag_id", unique: true, using: :btree
   add_index "entry_tags", ["entry_id"], name: "index_entry_tags_on_entry_id", using: :btree
   add_index "entry_tags", ["tag_id"], name: "index_entry_tags_on_tag_id", using: :btree
+
+  create_table "fillers", force: true do |t|
+    t.integer  "queue",       null: false
+    t.integer  "gender"
+    t.integer  "language_id", null: false
+    t.string   "title"
+    t.string   "body",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fillers", ["language_id"], name: "index_fillers_on_language_id", using: :btree
 
   create_table "goals", force: true do |t|
     t.integer  "user_id"
