@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409235210) do
+ActiveRecord::Schema.define(version: 20150414175419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,8 +236,12 @@ ActiveRecord::Schema.define(version: 20150409235210) do
     t.integer  "posts_count",     default: 0,     null: false
     t.integer  "dreams_count",    default: 0,     null: false
     t.integer  "language_id"
+    t.inet     "ip"
+    t.integer  "agent_id"
+    t.boolean  "bot",             default: false, null: false
   end
 
+  add_index "users", ["agent_id"], name: "index_users_on_agent_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["language_id"], name: "index_users_on_language_id", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # get /users/new
   def new
-    @user  = User.new
+    @user = User.new
   end
 
   # post /users
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   def user_parameters
     parameters = params.require(:user).permit(:login, :email, :password, :password_confirmation, :allow_mail)
     parameters[:email] = nil if parameters[:email].blank?
-    parameters
+    parameters.merge(language_for_entity).merge(tracking_for_entity)
   end
 
   def create_user
