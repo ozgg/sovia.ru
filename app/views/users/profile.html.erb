@@ -34,3 +34,5 @@
   <p><%= link_to t('.read_posts'), user_posts_path(login: @user.login) %></p>
   <p><%= link_to t('.read_comments'), user_comments_path(login: @user.login) %></p>
 </article>
+
+<%= render 'shared/track_data', item: @user %>

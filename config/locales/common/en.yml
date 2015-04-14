@@ -37,6 +37,7 @@ en:
   comments_list: "Comments"
   reply: "Reply"
   text: "text"
+  empty: "Empty"
   dummy_name: "John Doe"
   hidden: "Hidden"
   not_selected: "Not selected"

@@ -25,6 +25,7 @@ en:
             male: "male"
         roles: "roles"
         language: "default language"
+        bot: "it is bot"
       post:
         title: "title"
         lead: "lead"

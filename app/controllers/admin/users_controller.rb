@@ -57,7 +57,7 @@ class Admin::UsersController < ApplicationController
   def user_parameters
     allowed = [
         :login, :email, :password, :password_confirmation, :allow_mail, :mail_confirmed,
-        :avatar, :use_gravatar, :gender, :roles
+        :avatar, :use_gravatar, :gender, :roles, :bot
     ]
     parameters = params.require(:user).permit(allowed)
     parameters[:email] = nil if parameters[:email].blank?

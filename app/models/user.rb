@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :user_roles, dependent: :destroy
   has_many :questions, as: :owner, dependent: :destroy
   belongs_to :language
+  belongs_to :agent
 
   has_secure_password
 

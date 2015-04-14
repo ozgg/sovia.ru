@@ -53,6 +53,10 @@
         <td><%= @user.comments_count %></td>
       </tr>
       <tr>
+        <th><%= t('activerecord.attributes.user.bot') %></th>
+        <td><%= @user.bot? %></td>
+      </tr>
+      <tr>
         <th><%= t('activerecord.attributes.user.roles') %></th>
         <td>
           <% if @user.user_roles.any? %>
@@ -68,5 +72,6 @@
       </tr>
       </tbody>
     </table>
+    <%= render 'shared/track_data', item: @user %>
   </section>
 </article>

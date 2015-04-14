@@ -16,7 +16,10 @@
 
       <ul>
         <% @users.each do |user| %>
-            <li><%= link_to user.login, admin_user_path(user) %> (<%= user.entries_count %> / <%= user.comments_count %>)</li>
+            <li>
+              <%= link_to user.login, admin_user_path(user) %> (<%= user.entries_count %> / <%= user.comments_count %>)
+              <%= t('activerecord.attributes.user.bot') if user.bot? %>
+            </li>
         <% end %>
       </ul>
 
