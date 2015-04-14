@@ -13,12 +13,7 @@
   <% if local_assigns[:locals][:show_links] %>
      <div class="footer"><%= link_to t(:answer, count: question.answers_count), question %></div>
   <% end %>
-  <% if current_user && current_user.moderator? %>
-  <div class="track">
-    <div><%= question.ip %></div>
-    <div><%= question.agent.name %></div>
-  </div>
-  <% end %>
+  <%= render partial: 'shared/track_data', locals: { item: question } %>
 
   <%= render partial: 'answers', locals: { question: question } if local_assigns[:locals][:show_answers] %>
 </article>

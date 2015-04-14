@@ -1,4 +1,4 @@
-.question {
+.question, .answer {
   margin: 0 0 15px 0;
 
   .header {
@@ -34,4 +34,8 @@
     background: #FaFaFa;
     padding: 3px 15px;
   }
+}
+
+.question > .header {
+  background: #f7f7f7;
 }

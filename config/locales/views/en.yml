@@ -10,6 +10,7 @@ en:
       new_dream: "New dream"
       dreambook: "Dreambook"
       about: "About"
+      questions: "Questions"
     auth_block:
       sign_in: "Sign in"
       sign_up: "Sign up"

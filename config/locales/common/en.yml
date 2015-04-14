@@ -86,6 +86,7 @@ en:
     created: "Tag added"
     updated: "Tag updated"
     deleted: "Tag deleted"
+  page: "Page %{page}"
   email_not_found: "Given e-mail was not found"
   recovery_code_sent: "Password recovery code has been sent"
   recovery_code_failure: "Could not create a new code"

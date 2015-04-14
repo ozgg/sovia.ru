@@ -1,0 +1,6 @@
+<% if current_user && current_user.moderator? %>
+    <div class="track">
+      <div><%= item.ip %></div>
+      <div><%= item.agent.name %></div>
+    </div>
+<% end %>

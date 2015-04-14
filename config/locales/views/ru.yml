@@ -10,6 +10,7 @@ ru:
       new_dream: "Описать сон"
       dreambook: "Сонник"
       about: "О проекте"
+      questions: "Вопросы"
     auth_block:
       sign_in: "Войти"
       sign_up: "Регистрация"
