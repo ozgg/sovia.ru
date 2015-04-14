@@ -103,6 +103,6 @@ class ApplicationController < ActionController::Base
   end
 
   def tracking_for_entity
-    { agent: agent, ip: request.remote_ip }
+    { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
   end
 end
