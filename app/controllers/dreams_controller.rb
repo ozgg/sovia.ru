@@ -19,7 +19,7 @@ class DreamsController < ApplicationController
   # post /dreams
   def create
     @dream = Entry::Dream.new(dream_parameters.merge(user: current_user))
-    if suspect_spam?(current_user, @dream.body, 2)
+    if suspect_spam?(current_user, @dream.body, 1)
       emulate_saving
     else
       create_dream

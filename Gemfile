@@ -34,8 +34,8 @@ gem 'http_accept_language'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'carrierwave'
-
 gem 'bcrypt'
+gem 'vkontakte_api', '~> 1.4'
 
 gem 'puma'
 

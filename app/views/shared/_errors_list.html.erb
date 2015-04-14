@@ -1,6 +1,6 @@
 <% if entity.errors.any? %>
     <section class="errors">
-      <h1><%= t('error', count: entity.errors.count) %>:</h1>
+      <h1><%= t(:error, count: entity.errors.count) %>:</h1>
 
       <ul>
         <% entity.errors.full_messages.each do |msg| %>

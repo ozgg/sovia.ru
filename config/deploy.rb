@@ -53,6 +53,7 @@ task :deploy => :environment do
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
+    invoke :'deploy:cleanup'
 
     to :launch do
       queue! "bundle exec pumactl -S #{deploy_to}/shared/tmp/puma.state restart"
