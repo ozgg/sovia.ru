@@ -74,6 +74,7 @@ en:
         day: "date"
         requests_count: "number of requests"
       question:
+        owner_id: "author"
         body: "question text"
       answer:
         body: "answer text"

@@ -95,7 +95,11 @@ class ApplicationController < ActionController::Base
   end
 
   def owner_for_entity
-    { owner: current_user }
+    if current_user && current_user.has_role?(:administrator)
+      { owner_id: params[:owner_id], owner_type: params[:owner_type] }
+    else
+      { owner: current_user }
+    end
   end
 
   def language_for_entity

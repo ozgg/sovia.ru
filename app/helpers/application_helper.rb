@@ -203,4 +203,8 @@ module ApplicationHelper
   def escape(string)
     string.gsub('<', '&lt;').gsub('>', '&gt;').gsub('"', '&quot;')
   end
+
+  def visitor_is_administrator?
+    current_user && current_user.has_role?(:administrator)
+  end
 end
