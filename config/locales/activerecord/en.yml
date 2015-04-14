@@ -72,6 +72,8 @@ en:
       agent_request:
         day: "date"
         requests_count: "number of requests"
+      question:
+        body: "question text"
     properties:
       dream:
         privacy:

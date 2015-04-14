@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
   #
   # @return [Integer]
   def current_page
-    @page ||= (params[:page] || 1).to_s.to_i
-    @page = 1 unless @page > 0
-    @page
+    @current_page ||= (params[:page] || 1).to_s.to_i
+    @current_page = 1 unless @current_page > 0
+    @current_page
   end
 
   def query_from_request

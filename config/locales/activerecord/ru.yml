@@ -72,6 +72,8 @@ ru:
       agent_request:
         day: "дата"
         requests_count: "количество запросов"
+      question:
+        body: "текст вопроса"
     properties:
       dream:
         privacy:

@@ -419,3 +419,16 @@ en:
       recent_requests: "Recent requests"
     edit:
       title: "Editing user agent"
+  questions:
+    index:
+      title: "Questions about dreams, page %{page}"
+      description: "Page %{page} with users' questions about their dreams."
+      header: "Questions about dreams"
+    new:
+      title: "Ask question"
+      description: "Here you can ask your question about dreams and get answers"
+    show:
+      title: "Question #%{id}"
+      description: "Question about dreams from user %{owner}"
+    edit:
+      title: "Editing question"

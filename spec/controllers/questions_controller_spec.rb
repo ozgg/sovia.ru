@@ -54,7 +54,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     it_should_behave_like 'tracking'
-    it_should_behave_like 'validating authorization'
   end
 
   describe 'post create' do

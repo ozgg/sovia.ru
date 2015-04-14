@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     genders
   end
 
+  def screen_name
+    login
+  end
+
   def moderator?
     has_role? :moderator
   end

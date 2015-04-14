@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :allow_authorized_only, only: [:new, :create]
+  before_action :allow_authorized_only, only: [:create]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # get /questions
@@ -21,10 +21,6 @@ class QuestionsController < ApplicationController
     else
       render :new
     end
-  end
-
-  # get /questions/:id
-  def show
   end
 
   # get /questions/:id/edit

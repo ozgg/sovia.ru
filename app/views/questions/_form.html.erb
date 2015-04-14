@@ -1,0 +1,12 @@
+<%= form_for @question do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @question } %>
+
+    <div>
+      <div><%= f.label :body %></div>
+      <%= f.text_area :body, cols: 80, rows: 10, required: true %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

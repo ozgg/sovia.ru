@@ -1,0 +1,17 @@
+<% content_for :meta_title, t('.title', id: @question.id) %>
+<% content_for :meta_description, t('.description', owner: @question.owner.screen_name) %>
+
+<article>
+  <h1><%= t('.title', id: @question.id) %></h1>
+  <nav class="options">
+    <ul>
+      <li><%= link_to t(:create), new_question_path %></li>
+      <li><%= link_to t(:list), questions_path %></li>
+      <% if current_user && current_user.moderator? %>
+      <li><%= link_to t(:edit), edit_question_path(@question) %></li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <%= render @question %>
+</article>

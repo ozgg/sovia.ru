@@ -1,0 +1,14 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
+
+<article>
+  <h1><%= t('.title') %></h1>
+  <% if current_user %>
+      <%= render 'form' %>
+  <% else %>
+      <h2>Вам нужно войти или зарегистрироваться</h2>
+
+      <p>Чтобы задавать вопросы о снах, вам нужно авторизоваться. Если у вас уже есть аккаунт, просто
+      войдите, если нет, — зарегистрируйтесь.</p>
+  <% end %>
+</article>
