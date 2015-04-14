@@ -13,7 +13,7 @@
   </nav>
 
   <% if @questions.any? %>
-      <%= render @questions %>
+      <%= render @questions, locals: { show_links: true } %>
 
       <%= paginate @questions %>
   <% else %>

@@ -432,3 +432,10 @@ en:
       description: "Question about dreams from user %{owner}"
     edit:
       title: "Editing question"
+    form:
+      max_length: "Maximum length is 500 characters. If you cannot fit your quesion in it, consider telling your dream instead."
+    answers:
+      add_answer: "Add answer"
+  answers:
+    new:
+      title: "Answering question"

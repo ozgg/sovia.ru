@@ -1,4 +1,4 @@
-div.question {
+.question {
   margin: 0 0 15px 0;
 
   .header {
@@ -28,5 +28,10 @@ div.question {
 
   .body {
     padding: 5px 15px;
+  }
+
+  .footer {
+    background: #FaFaFa;
+    padding: 3px 15px;
   }
 }

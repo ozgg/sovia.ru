@@ -17,6 +17,11 @@ RSpec.describe Question, type: :model do
       expect(question).not_to be_valid
     end
 
+    it 'fails with too long body' do
+      question = build :question, body: 'A' * 501
+      expect(question).not_to be_valid
+    end
+
     it 'passes with valid parameters' do
       expect(build :question).to be_valid
     end

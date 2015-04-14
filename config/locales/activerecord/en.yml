@@ -74,6 +74,8 @@ en:
         requests_count: "number of requests"
       question:
         body: "question text"
+      answer:
+        body: "answer text"
     properties:
       dream:
         privacy:

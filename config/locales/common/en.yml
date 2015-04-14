@@ -24,6 +24,10 @@ en:
     zero: "no errors"
     one: "%{count} error"
     other: "%{count} errors"
+  answer:
+    zero: "no answers"
+    one: "%{count} answer"
+    other: "%{count} answers"
   create: "Create"
   list: "List"
   view: "View"

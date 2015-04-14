@@ -74,6 +74,8 @@ ru:
         requests_count: "количество запросов"
       question:
         body: "текст вопроса"
+      answer:
+        body: "текст ответа"
     properties:
       dream:
         privacy:
