@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', id: @question.id) %>
 <% content_for :meta_description, t('.description', owner: @question.owner.screen_name) %>
+<%= render 'shared/metrics' %>
 
 <article>
   <h1><%= t('.title', id: @question.id) %></h1>
