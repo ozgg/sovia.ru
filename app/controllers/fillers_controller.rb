@@ -1,9 +1,9 @@
 class FillersController < ApplicationController
   before_action :allow_administrators_only
-  before_action :set_filler, only: [:show, :edit, :update, :delete]
+  before_action :set_filler, only: [:show, :edit, :update, :destroy]
 
   def index
-    @fillers = Filler.order('id desc').page(current_page).per(20)
+    @fillers = Filler.order('id asc').page(current_page).per(10)
   end
 
   def new
