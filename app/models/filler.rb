@@ -11,6 +11,6 @@ class Filler < ActiveRecord::Base
   end
 
   def self.genders_for_form
-    [I18n.t(:empty), ''] + genders.keys.to_a.map { |e| [I18n.t("activerecord.attributes.filler.genders.#{e}"), e] }
+    [[I18n.t(:empty), '']] + genders.keys.to_a.map { |e| [I18n.t("activerecord.attributes.filler.genders.#{e}"), e] }
   end
 end
