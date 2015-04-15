@@ -440,3 +440,14 @@ en:
   answers:
     new:
       title: "Answering question"
+  fillers:
+    new:
+      title: "Add filler"
+    edit:
+      title: "Edit filler"
+    show:
+      title: "Filler #%{id}"
+      header: "Filler"
+    index:
+      title: "Fillers, page %{page}"
+      header: "Fillers"

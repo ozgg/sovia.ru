@@ -1,0 +1,32 @@
+<% content_for :meta_title, t('.title', id: @filler.id) %>
+
+<nav class="options">
+  <ul>
+    <li><%= link_to t(:list), fillers_path %></li>
+    <li><%= link_to t(:edit), edit_filler_path(@filler) %></li>
+  </ul>
+</nav>
+
+<section>
+  <h1><%= t('.header') %></h1>
+
+  <table>
+    <tbody>
+    <tr>
+      <th>id</th><td><%= @filler.id %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.filler.queue') %></th><td><%= @filler.queue %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.filler.gender') %></th><td><%= @filler.gender %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.filler.title') %></th><td><%= @filler.title %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.filler.body') %></th><td><%= @filler.body %>/td>
+    </tr>
+    </tbody>
+  </table>
+</section>

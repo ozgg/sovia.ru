@@ -1,0 +1,25 @@
+<%= form_for @filler do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @filler } %>
+
+    <div>
+      <%= f.label :queue %>
+      <%= f.select :queue, Filler.queues_for_form %>
+    </div>
+
+    <div>
+      <%= f.label :gender %>
+      <%= f.select :gender, Filler.genders_for_form %>
+    </div>
+
+    <div>
+      <%= f.label :title %>
+      <%= f.text_area :title %>
+    </div>
+
+    <div>
+      <div><%= f.label :body %></div>
+      <div><%= f.text_area :body, cols: 80, rows: 10 %></div>
+    </div>
+
+    <div><%= f.button t(:submit), type: :submit %></div>
+<% end %>

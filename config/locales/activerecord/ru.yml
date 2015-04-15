@@ -78,6 +78,17 @@ ru:
         body: "текст вопроса"
       answer:
         body: "текст ответа"
+      filler:
+        language: "язык"
+        queue: "очередь"
+        gender: "пол"
+        title: "название"
+        body: "текст"
+        queues:
+          question: "вопрос"
+        genders:
+          male: "мужской"
+          female: "женский"
     properties:
       dream:
         privacy:

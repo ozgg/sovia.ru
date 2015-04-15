@@ -78,6 +78,17 @@ en:
         body: "question text"
       answer:
         body: "answer text"
+      filler:
+        language: "language"
+        queue: "queue"
+        gender: "gender"
+        title: "title"
+        body: "text"
+        queues:
+          question: "question"
+        genders:
+          male: "male"
+          female: "female"
     properties:
       dream:
         privacy:
