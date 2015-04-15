@@ -7,6 +7,9 @@
     <loc>http://sovia.ru/sitemap.posts.xml</loc>
   </sitemap>
   <sitemap>
+    <loc>http://sovia.ru/sitemap.questions.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>http://sovia.ru/sitemap.dreambook.xml</loc>
   </sitemap>
 </sitemapindex>

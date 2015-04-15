@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
   def language_ids
     ids = []
     ids << language.id unless language.nil?
-    UserLanguage.where(user: self).each { |l| ids << l.id }
+    UserLanguage.where(user: self).each { |l| ids << l.language.id }
     ids
   end
 
