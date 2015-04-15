@@ -33,6 +33,20 @@ class User < ActiveRecord::Base
     genders
   end
 
+  def self.random_bot(gender = nil)
+    clause = { bot: true }
+    if gender
+      clause[:gender] = (gender.to_sym === :male) ? GENDER_MALE : GENDER_FEMALE
+    end
+    offset = rand(self.where(clause).count)
+    bot    = self.where(clause).offset(offset).first
+    if bot.nil?
+      offset = rand(self.where(bot: true).count)
+      bot    = self.where(bot: true).offset(offset).first
+    end
+    bot
+  end
+
   def screen_name
     login
   end
