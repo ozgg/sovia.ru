@@ -30,7 +30,7 @@
                   <span class="author"><%= user_link entry.user %></span>
                   <time datetime="<%= entry.datetime %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
                 </div>
-                <div class="body"><%= raw parse_body(entry.glimpse 20) %></div>
+                <div class="body"><%= glimpse(parse_body(entry.body), 20) %></div>
               </div>
           <% end %>
       <% else %>

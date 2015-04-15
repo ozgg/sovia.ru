@@ -207,4 +207,8 @@ module ApplicationHelper
   def visitor_is_administrator?
     current_user && current_user.has_role?(:administrator)
   end
+
+  def glimpse(text, words = 50)
+    strip_tags(text).gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..words].join(' ') + '…'
+  end
 end

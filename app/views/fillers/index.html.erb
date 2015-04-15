@@ -16,7 +16,7 @@
         <% @fillers.each do |filler| %>
         <li>
           <div><%= link_to "#{filler.queue}:#{filler.gender}:#{filler.title}", filler %></div>
-          <div><%= filler.body %></div>
+          <div><%= glimpse(filler.body) %></div>
         </li>
         <% end %>
       </ul>

@@ -5,6 +5,6 @@
 
       <h2><%= link_to dream.parsed_title, verbose_entry_path(dream) %></h2>
 
-      <div><%= dream.glimpse %></div>
+      <div><%= glimpse(parse_body(dream.body)) %></div>
     </section>
 <% end %>
