@@ -67,8 +67,8 @@ class PostsController < ApplicationController
   end
 
   def creation_parameters
-    show_in_list = current_user.has_role?(:posts_manager)
-    post_parameters.merge(language_for_entity).merge(user: current_user).merge(show_in_list: show_in_list)
+    showing = { show_in_list: current_user.has_role?(:posts_manager) }
+    post_parameters.merge(language_for_entity).merge(user: current_user).merge(showing).merge(tracking_for_entity)
   end
 
   def restrict_anonymous_access

@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   include HasLanguage
 
+  belongs_to :agent
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
 

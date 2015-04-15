@@ -15,6 +15,7 @@
           <div class="footer">
             <div class="comment-count"><%= link_to t(:comment, count: post.comments_count), post %></div>
           </div>
+          <%= render 'shared/track_data', item: post %>
         </div>
     <% end %>
 
