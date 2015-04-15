@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :restrict_anonymous_access, only: [:new, :create, :edit, :update, :destroy]
   before_action :restrict_editor_access, only: [:edit, :update, :destroy]
 
@@ -52,6 +52,12 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:notice] = t('post.deleted')
     redirect_to posts_path
+  end
+
+  def toggle
+    demand_role :posts_manager
+    @post.toggle_visibility!
+    render json: { result: @post.show_in_list? }
   end
 
   private

@@ -57,6 +57,12 @@ class Post < ActiveRecord::Base
     title
   end
 
+  def toggle_visibility!
+    self.lead = self.first_passage if self.lead.blank?
+    self.show_in_list = !self.show_in_list?
+    save
+  end
+
   # Set parameters from entry
   #
   # This method is used for exporting articles and posts into new Post model.

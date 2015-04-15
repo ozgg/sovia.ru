@@ -2,6 +2,7 @@
     <% posts.each do |post| %>
         <div class="post-preview">
           <div class="header">
+            <%= render partial: 'posts/controls', locals: { post: post } %>
             <div class="title"><%= link_to post.title, post %></div>
             <span class="author"><%= user_link post.user %></span>
             <time datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>

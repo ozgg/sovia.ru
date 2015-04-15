@@ -8,6 +8,7 @@
 <% end %>
 <article class="post" itemscope itemtype="http://schema.org/Article">
   <header>
+    <%= render partial: 'controls', locals: { post: @post } %>
     <h1 itemprop="name"><%= post.title %></h1>
   </header>
 

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_page, :query_from_request
+  helper_method :current_user, :current_page, :query_from_request, :visitor_has_role?
 
   # Get current user from session
   #
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     @current_page ||= (params[:page] || 1).to_s.to_i
     @current_page = 1 unless @current_page > 0
     @current_page
+  end
+
+  def visitor_has_role?(role)
+    current_user && current_user.has_role?(role)
   end
 
   def query_from_request
