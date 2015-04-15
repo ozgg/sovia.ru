@@ -7,8 +7,9 @@ class Post < ActiveRecord::Base
   validates_presence_of :user, :title, :body
   mount_uploader :image, ImageUploader
 
-  def self.recent_posts
-    self.order('id desc').first(3)
+  def self.recent_posts(show_hidden = false)
+    clause = show_hidden ? {} : { show_in_list: true }
+    self.where(clause).order('id desc').first(3)
   end
 
   # Is post editable by given user?

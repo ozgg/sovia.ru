@@ -3,7 +3,10 @@ class UserRole < ActiveRecord::Base
   validates_presence_of :user, :role
   validates_uniqueness_of :role, scope: :user
 
-  enum role: [:administrator, :moderator, :dreams_manager, :dreambook_editor, :dreambook_manager, :posts_manager]
+  enum role: [
+                 :administrator, :moderator, :dreams_manager, :dreambook_editor, :dreambook_manager, :posts_manager,
+                 :content_editor
+             ]
 
   def self.roles_for_select
     self.roles.keys.to_a.map { |e| [I18n.t("activerecord.attributes.user_role.roles.#{e}"), e] }

@@ -5,7 +5,12 @@ class PostsController < ApplicationController
 
   # get /posts
   def index
-    @posts = Post.order('id desc').page(current_page).per(10)
+    if current_user && current_user.has_role?(:posts_manager)
+      clause = {}
+    else
+      clause = { show_in_list: true }
+    end
+    @posts = Post.where(clause).order('id desc').page(current_page).per(10)
   end
 
   # get /posts/new
@@ -15,13 +20,12 @@ class PostsController < ApplicationController
 
   # post /posts
   def create
-    @post = Post.new(post_parameters.merge(user: current_user))
-    @post.language = Language.guess_from_locale
+    @post = Post.new creation_parameters
     if @post.save
       flash[:notice] = t('post.created')
       redirect_to @post
     else
-      render action: :new
+      render :new
     end
   end
 
@@ -39,7 +43,7 @@ class PostsController < ApplicationController
       flash[:notice] = t('post.updated')
       redirect_to @post
     else
-      render action: :edit
+      render :edit
     end
   end
 
@@ -57,7 +61,14 @@ class PostsController < ApplicationController
   end
 
   def post_parameters
-    params.require(:post).permit(:language_id, :title, :lead, :body, :image)
+    allowed = [:title, :lead, :body, :image]
+    allowed << :show_in_list if current_user.has_role? :posts_manager
+    params.require(:post).permit(allowed)
+  end
+
+  def creation_parameters
+    show_in_list = current_user.has_role?(:posts_manager)
+    post_parameters.merge(language_for_entity).merge(user: current_user).merge(show_in_list: show_in_list)
   end
 
   def restrict_anonymous_access

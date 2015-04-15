@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414221631) do
+ActiveRecord::Schema.define(version: 20150415155036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,18 +152,24 @@ ActiveRecord::Schema.define(version: 20150414221631) do
   add_index "languages", ["code"], name: "index_languages_on_code", unique: true, using: :btree
 
   create_table "posts", force: true do |t|
-    t.integer  "user_id",                    null: false
-    t.integer  "language_id",                null: false
-    t.integer  "rating",         default: 0, null: false
-    t.integer  "comments_count", default: 0, null: false
+    t.integer  "user_id",                       null: false
+    t.integer  "language_id",                   null: false
+    t.integer  "rating",         default: 0,    null: false
+    t.integer  "comments_count", default: 0,    null: false
     t.string   "image"
-    t.string   "title",                      null: false
+    t.string   "title",                         null: false
     t.text     "lead"
-    t.text     "body",                       null: false
+    t.text     "body",                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "upvotes",        default: 0,    null: false
+    t.integer  "downvotes",      default: 0,    null: false
+    t.inet     "ip"
+    t.integer  "agent_id"
+    t.boolean  "show_in_list",   default: true, null: false
   end
 
+  add_index "posts", ["agent_id"], name: "index_posts_on_agent_id", using: :btree
   add_index "posts", ["language_id"], name: "index_posts_on_language_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 

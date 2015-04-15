@@ -32,6 +32,7 @@ ru:
         body: "текст"
         image: "иллюстрация"
         language: "язык"
+        show_in_list: "показывать в списке"
       comment:
         body: "текст комментария"
       entry:
@@ -67,6 +68,7 @@ ru:
           dreambook_editor: "Редактор сонника"
           dreambook_manager: "Менеджер сонника"
           posts_manager: "Менеджер публикаций"
+          content_editor: "Редактор контента"
       agent:
         name: "название"
         is_bot: "это бот"

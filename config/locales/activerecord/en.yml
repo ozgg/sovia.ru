@@ -32,6 +32,7 @@ en:
         body: "text"
         image: "image"
         language: "language"
+        show_in_list: "show in list"
       comment:
         body: "comment text"
       entry:
@@ -67,6 +68,7 @@ en:
           dreambook_editor: "Dreambook editor"
           dreambook_manager: "Dreambook manager"
           posts_manager: "Posts manager"
+          content_editor: "Content editor"
       agent:
         name: "name"
         is_bot: "it is bot"

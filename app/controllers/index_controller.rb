@@ -2,7 +2,7 @@ class IndexController < ApplicationController
   # get /
   def index
     @entries = Entry.recent_entries
-    @posts   = Post.recent_posts
+    @posts   = Post.recent_posts(current_user && current_user.has_role?(:posts_manager))
 
     @recent_tags = Tag::Dream.recently_updated
   end
