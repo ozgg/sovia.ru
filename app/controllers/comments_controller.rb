@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   # get /comments
   def index
-    @comments = Comment.order('id desc').page(params[:page] || 1).per(10)
+    @comments = Comment.order('id desc').page(current_page).per(10)
   end
 
   # get /comments/new
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 
   # post /comments
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.new creation_parameters
     check_rights
     if suspect_spam?(@comment.user, @comment.body)
       redirect_with_confirmation
@@ -23,6 +23,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable_id, :commentable_type, :parent_id).merge(user: current_user)
+  end
+
+  def creation_parameters
+    comment_params.merge(tracking_for_entity)
   end
 
   def check_rights
@@ -40,11 +44,11 @@ class CommentsController < ApplicationController
         Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
         Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
       rescue Net::SMTPAuthenticationError => e
-        logger.warn e.message + " (using #{ENV['MAIL_PASSWORD']})"
+        logger.warn e.message
       end
       redirect_with_confirmation
     else
-      render action: :new
+      render :new
     end
   end
 

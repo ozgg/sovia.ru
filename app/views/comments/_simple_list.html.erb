@@ -16,6 +16,7 @@
               [<%= t(:hidden) %>]
           <% end %>
         </div>
+        <%= render 'shared/track_data', item: comment %>
     <% end %>
     <%= paginate @comments %>
 <% else %>
