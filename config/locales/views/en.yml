@@ -455,3 +455,4 @@ en:
     index:
       title: "Fillers, page %{page}"
       header: "Fillers"
+  auth_failed: "Authentication has failed. Try again."

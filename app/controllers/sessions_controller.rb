@@ -26,6 +26,13 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def login_vk
+    srand
+    session[:state] ||= Digest::MD5.hexdigest(rand.to_s)
+
+    redirect_to VkontakteApi.authorization_url(scope: [:email, :offline], state: session[:state])
+  end
+
   private
 
   def authenticate_user

@@ -76,6 +76,7 @@ Sovia::Application.routes.draw do
       get 'login' => :new
       post 'login' => :create
       delete 'logout' => :destroy
+      get 'login/vk' => :login_vk
     end
 
     scope '/statistics' do
@@ -83,6 +84,10 @@ Sovia::Application.routes.draw do
         get '/' => :index, as: :statistics
         get '/symbols' => :symbols, as: :statistics_symbols
       end
+    end
+
+    scope '/auth', controller: :auth do
+      get 'vk'
     end
 
     scope '/about' do
