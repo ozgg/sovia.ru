@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416185622) do
+ActiveRecord::Schema.define(version: 20150416204947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: true do |t|
+    t.integer  "network",                           null: false
+    t.integer  "user_id"
+    t.integer  "language_id"
+    t.string   "local_id",                          null: false
+    t.string   "name"
+    t.string   "screen_name",                       null: false
+    t.string   "email"
+    t.string   "avatar"
+    t.string   "avatar_url_small"
+    t.string   "avatar_url_medium"
+    t.string   "avatar_url_big"
+    t.integer  "gender"
+    t.boolean  "verified",          default: false, null: false
+    t.boolean  "allow_mail",        default: true,  null: false
+    t.boolean  "allow_login",       default: true,  null: false
+    t.datetime "token_expiry"
+    t.string   "access_token"
+    t.string   "refresh_token"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accounts", ["language_id"], name: "index_accounts_on_language_id", using: :btree
+  add_index "accounts", ["network", "local_id"], name: "index_accounts_on_network_and_local_id", using: :btree
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "agent_requests", force: true do |t|
     t.integer  "agent_id",                   null: false
