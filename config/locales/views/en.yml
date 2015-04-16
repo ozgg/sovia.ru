@@ -20,6 +20,10 @@ en:
       logout: "Log out"
       deeds: "Journal of success"
       dashboard: "Dashboard"
+    mail_confirmation:
+      confirm_email: "Email confirmation"
+      confirmation_description: "To receive letters from this site, you need to confirm you email address."
+      receive_code: "Receive code"
   about:
     terms_of_service:
       title: "Terms of service"

@@ -20,6 +20,10 @@ ru:
       logout: "Выйти"
       deeds: "Журнал успеха"
       dashboard: "Кабинет"
+    mail_confirmation:
+      confirm_email: "Подтверждение почты"
+      confirmation_description: "Чтобы получать письма, вам нужно подтвердить свой адрес электронной почты."
+      receive_code: "Получить код подтверждения"
   about:
     terms_of_service:
       title: "Пользовательское соглашение"

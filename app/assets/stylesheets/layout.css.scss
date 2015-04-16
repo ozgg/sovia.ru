@@ -263,6 +263,14 @@ div#sidebar {
     padding: 15px;
     margin: 15px 15px 15px 0;
 
+    &.attention {
+      background: #fff0f0;
+
+      form {
+        text-align: center;
+      }
+    }
+
     h1 {
       font-size: 1.3em;
     }
