@@ -29,5 +29,11 @@ FactoryGirl.define do
         user.roles = { :administrator => 1 }
       end
     end
+
+    factory :content_editor do
+      after(:create) do |user|
+        user.roles = { :content_editor => 1 }
+      end
+    end
   end
 end

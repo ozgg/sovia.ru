@@ -85,6 +85,10 @@ class ApplicationController < ActionController::Base
     demand_role :administrator
   end
 
+  def allow_editors_only
+    demand_role :content_editor
+  end
+
   # Get current user agent
   #
   # @return [Agent]
@@ -99,7 +103,7 @@ class ApplicationController < ActionController::Base
   end
 
   def owner_for_entity
-    if current_user && current_user.has_role?(:administrator) && params[:owner_id]
+    if current_user && current_user.has_role?(:content_editor) && params[:owner_id]
       { owner_id: params[:owner_id], owner_type: params[:owner_type] }
     else
       { owner: current_user }

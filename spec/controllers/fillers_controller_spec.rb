@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe FillersController, type: :controller do
-  let(:user) { create :administrator }
+  let(:user) { create :content_editor }
   let!(:filler) { create :filler }
 
   before :each do
     session[:user_id] = user.id
-    allow(controller).to receive(:allow_administrators_only)
+    allow(controller).to receive(:allow_editors_only)
   end
 
   shared_examples 'setter' do
@@ -17,7 +17,7 @@ RSpec.describe FillersController, type: :controller do
 
   shared_examples 'checker' do
     it 'allows administrators only' do
-      expect(controller).to have_received(:allow_administrators_only)
+      expect(controller).to have_received(:allow_editors_only)
     end
   end
 

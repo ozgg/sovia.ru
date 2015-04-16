@@ -1,7 +1,7 @@
 <%= form_for @question do |f| %>
     <%= render partial: 'shared/errors_list', locals: { entity: @question } %>
 
-    <% if visitor_is_administrator? && !@question.id %>
+    <% if visitor_has_role?(:content_editor) && !@question.id %>
         <div>
           <%= hidden_field_tag :owner_type, current_user.class.to_s %>
           <%= label_tag :owner_id, t('activerecord.attributes.question.owner_id') %>

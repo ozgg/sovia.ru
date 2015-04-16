@@ -1,5 +1,5 @@
 class FillersController < ApplicationController
-  before_action :allow_administrators_only
+  before_action :allow_editors_only
   before_action :set_filler, only: [:show, :edit, :update, :destroy]
 
   def index
