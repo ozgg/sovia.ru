@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
   belongs_to :user
 
   has_many :questions, as: :owner, dependent: :destroy
-  has_many :comments, as: :owner
+  has_many :comments, as: :owner, dependent: :destroy
 
   enum network: [:vk]
   enum gender: [:female, :male]

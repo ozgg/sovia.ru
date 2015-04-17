@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416204947) do
+ActiveRecord::Schema.define(version: 20150417143430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,19 @@ ActiveRecord::Schema.define(version: 20150416204947) do
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "rating",            default: 0,     null: false
+    t.integer  "upvotes",           default: 0,     null: false
+    t.integer  "downvotes",         default: 0,     null: false
+    t.integer  "questions_count",   default: 0,     null: false
+    t.integer  "answers_count",     default: 0,     null: false
+    t.integer  "dreams_count",      default: 0,     null: false
+    t.integer  "posts_count",       default: 0,     null: false
+    t.integer  "comments_count",    default: 0,     null: false
   end
 
+  add_index "accounts", ["agent_id"], name: "index_accounts_on_agent_id", using: :btree
   add_index "accounts", ["language_id"], name: "index_accounts_on_language_id", using: :btree
   add_index "accounts", ["network", "local_id"], name: "index_accounts_on_network_and_local_id", using: :btree
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree

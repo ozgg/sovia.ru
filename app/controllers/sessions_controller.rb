@@ -17,18 +17,16 @@ class SessionsController < ApplicationController
 
   # delete /logout
   def destroy
-    if session[:user_id].nil?
-      flash[:notice] = t('sessions.destroy.not_logged_in')
-    else
-      session[:user_id] = nil
-      flash[:notice] = t('sessions.destroy.logged_out')
-    end
+    session[:account_id] = nil
+    session[:user_id] = nil
+
     redirect_to root_path
   end
 
   def login_vk
     srand
     session[:state] ||= Digest::MD5.hexdigest(rand.to_s)
+    session[:lng] = Language.guess_from_locale.id
 
     redirect_to VkontakteApi.authorization_url(scope: [:email, :offline], state: session[:state])
   end
