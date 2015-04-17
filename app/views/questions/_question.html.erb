@@ -13,6 +13,9 @@
   <% if local_assigns[:locals][:show_links] %>
      <div class="footer"><%= link_to t(:answer, count: question.answers_count), question %></div>
   <% end %>
+  <% if local_assigns[:locals][:share] %>
+  <%= render 'shared/social' %>
+  <% end %>
   <%= render partial: 'shared/track_data', locals: { item: question } %>
 
   <%= render partial: 'answers', locals: { question: question } if local_assigns[:locals][:show_answers] %>

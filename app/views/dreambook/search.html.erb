@@ -1,5 +1,8 @@
 <% content_for :meta_title, t('.title', word: query_from_request) %>
 <% content_for :meta_description, t('.description', word: query_from_request) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/donate' %>
+<% end %>
 <%= render 'shared/metrics' %>
 
 <section>

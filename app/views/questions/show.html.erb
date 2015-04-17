@@ -1,5 +1,8 @@
 <% content_for :meta_title, t('.title', id: @question.id) %>
 <% content_for :meta_description, t('.description', owner: @question.owner.screen_name) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/donate' %>
+<% end %>
 <%= render 'shared/metrics' %>
 
 <article>
@@ -14,5 +17,5 @@
     </ul>
   </nav>
 
-  <%= render @question, locals: { show_answers: true } %>
+  <%= render @question, locals: { show_answers: true, share: true } %>
 </article>

@@ -59,6 +59,9 @@ en:
       random_dream: "Random dream"
       statistics: "Statistics"
       all_comments: "All comments"
+    donate:
+      donate: "Donate"
+      every_donation_helps: "Even 50 rub (~$1) would help."
   dreambook:
     letters:
       select_letter: "Select the sirst letter of dream symbol"

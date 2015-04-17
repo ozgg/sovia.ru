@@ -1,7 +1,7 @@
 <% content_for :meta_title, t('.title', letter: letter_from_request, page: current_page) %>
 <% content_for :meta_description, t('.description', letter: letter_from_request, page: current_page) %>
 <% content_for :sidebar do %>
-    <%= render 'sidebar/statistics' %>
+    <%= render 'sidebar/donate' %>
     <%= render 'sidebar/more_links' %>
 <% end %>
 <%= render 'shared/metrics' %>

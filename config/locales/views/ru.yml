@@ -59,6 +59,9 @@ ru:
       random_dream: "Случайный сон"
       statistics: "Статистика"
       all_comments: "Все комментарии"
+    donate:
+      donate: "Поддержать проект"
+      every_donation_helps: "Даже пятьдесят рублей могут спасти гиганта мысли."
   dreams:
     index:
       title: "Сны, страница %{page}"
