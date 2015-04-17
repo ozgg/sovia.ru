@@ -458,3 +458,13 @@ ru:
     index:
       title: "Наполнители, страница %{page}"
       header: "Наполнители"
+  accounts:
+    index:
+      title: "Внешние аккаунты, страница %{page}"
+      header: "Внешние аккаунты"
+    show:
+      title: "Аккаунт №%{id}"
+    new:
+      title: "Новый аккаунт"
+    edit:
+      title: "Редактирование аккаунта"

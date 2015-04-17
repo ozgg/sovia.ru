@@ -91,6 +91,19 @@ ru:
         genders:
           male: "мужской"
           female: "женский"
+      account:
+        language_id: "язык"
+        network: "сеть"
+        gender: "пол"
+        local_id: "местный id"
+        name: "имя"
+        screen_name: "ник"
+        avatar_url_small: "маленькая картинка"
+        avatar_url_medium: "средняя картинка"
+        avatar_url_big: "большая картинка"
+        genders:
+          male: "Мужской"
+          female: "Женский"
     properties:
       dream:
         privacy:

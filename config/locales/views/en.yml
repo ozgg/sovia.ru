@@ -459,3 +459,11 @@ en:
       title: "Fillers, page %{page}"
       header: "Fillers"
   auth_failed: "Authentication has failed. Try again."
+  accounts:
+    index:
+      title: "Accounts, page %{page}"
+      header: "Accounts"
+    show:
+      title: "Account #%{id}"
+    new:
+      title: "New account"

@@ -1,0 +1,50 @@
+<%= form_for @account do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @account } %>
+
+    <div>
+      <%= f.label :language_id %>
+      <%= f.select :language_id, options_for_select(Language.languages_for_select, selected: @account.language_id) %>
+    </div>
+
+    <div>
+      <%= f.label :network %>
+      <%= f.select :network, Account.networks_for_form %>
+    </div>
+
+    <div>
+      <%= f.label :gender %>
+      <%= f.select :gender, Account.genders_for_form %>
+    </div>
+
+    <div>
+      <%= f.label :local_id %>
+      <%= f.text_field :local_id, required: true %>
+    </div>
+
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :screen_name %>
+      <%= f.text_field :screen_name %>
+    </div>
+
+    <div>
+      <%= f.label :avatar_url_small %>
+      <%= f.url_field :avatar_url_small %>
+    </div>
+
+    <div>
+      <%= f.label :avatar_url_medium %>
+      <%= f.url_field :avatar_url_medium %>
+    </div>
+
+    <div>
+      <%= f.label :avatar_url_big %>
+      <%= f.url_field :avatar_url_big %>
+    </div>
+
+    <div><%= f.button t(:submit), type: :submit %></div>
+<% end %>
