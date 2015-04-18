@@ -40,7 +40,6 @@ class My::ProfilesController < ApplicationController
     new_parameters[:allow_mail] = false if new_parameters[:allow_mail].nil?
     new_parameters[:use_gravatar] = false if new_parameters[:use_gravatar].nil?
     new_parameters[:gender] = nil if new_parameters[:gender].blank?
-    new_parameters[:language_id] = nil unless Language.find_by id: new_parameters[:language_id]
 
     new_parameters
   end

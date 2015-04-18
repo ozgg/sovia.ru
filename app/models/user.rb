@@ -145,6 +145,22 @@ class User < ActiveRecord::Base
     names.uniq
   end
 
+  def set_from_vk_hash(parameters)
+    self.name = "#{parameters.first_name} #{parameters.last_name}"
+    case parameters.sex.to_i
+      when 1
+        self.gender = GENDER_FEMALE
+      when 2
+        self.gender = GENDER_MALE
+      else
+        self.gender = nil
+    end
+    self.avatar_url_big = parameters.photo_400
+    self.avatar_url_medium = parameters.photo_200
+    self.avatar_url_small = parameters.photo_50
+    self.screen_name = parameters.screen_name
+  end
+
   protected
 
   def normalize_login

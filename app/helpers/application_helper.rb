@@ -6,8 +6,10 @@ module ApplicationHelper
   def user_link(user)
     if user.nil?
       t('anonymous')
-    else
+    elsif user.sovia?
       link_to user.login, user_profile_path(login: user.login)
+    else
+      "#{user.network}: #{user.name}"
     end
   end
 
