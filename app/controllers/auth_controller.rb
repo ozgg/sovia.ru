@@ -13,7 +13,7 @@ class AuthController < ApplicationController
   protected
 
   def set_vk_account
-    account = User.find_by(network: 'vk', login: @vk.user_id.to_s) || create_vk_account
+    account = User.find_by(network: User.networks[:vk], login: @vk.user_id.to_s) || create_vk_account
     account.update(access_token: @vk.token) unless account.access_token == @vk.token
     session[:user_id] = account.id
   end

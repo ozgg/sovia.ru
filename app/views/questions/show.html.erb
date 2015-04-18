@@ -11,7 +11,7 @@
     <ul>
       <li><%= link_to t(:create), new_question_path %></li>
       <li><%= link_to t(:list), questions_path %></li>
-      <% if current_user && current_user.moderator? %>
+      <% if visitor_has_role? :moderator %>
       <li><%= link_to t(:edit), edit_question_path(@question) %></li>
       <% end %>
     </ul>

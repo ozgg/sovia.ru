@@ -3,9 +3,8 @@
 
     <% if visitor_has_role?(:content_editor) && !@question.id %>
         <div>
-          <%= hidden_field_tag :owner_type, current_user.class.to_s %>
-          <%= label_tag :owner_id, t('activerecord.attributes.question.owner_id') %>
-          <%= select_tag :owner_id, options_for_select(owners_for_select(current_user)) %>
+          <%= label_tag :user_id, t('activerecord.attributes.question.user_id') %>
+          <%= select_tag :user_id, options_for_select(owners_for_select(current_user)) %>
         </div>
     <% end %>
     <div>

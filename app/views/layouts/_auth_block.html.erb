@@ -11,8 +11,9 @@
               <%= label_tag :password, t('activerecord.attributes.user.password') %>
               <%= password_field_tag :password, '', required: true %>
             </div>
-            <div>
-              <%= button_tag t('.sign_in'), type: 'submit' %>
+            <div class="auth-buttons">
+              <div><%= button_tag t('.sign_in'), type: 'submit' %></div>
+              <div><%= link_to image_tag('vk.png'), login_vk_path, title: t('.vk') %></div>
             </div>
           </fieldset>
       <% end %>

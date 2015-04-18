@@ -7,5 +7,7 @@
         <% @answer = question.answers.new %>
         <%= render 'answers/form' %>
       </section>
+  <% else %>
+  <p class="notice">Отвечать могут только зарегистрированные пользователи.</p>
   <% end %>
 </section>

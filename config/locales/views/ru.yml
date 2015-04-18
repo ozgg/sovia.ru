@@ -20,6 +20,7 @@ ru:
       logout: "Выйти"
       deeds: "Журнал успеха"
       dashboard: "Кабинет"
+      vk: "Зайти через ВКонтакте"
     mail_confirmation:
       confirm_email: "Подтверждение почты"
       confirmation_description: "Чтобы получать письма, вам нужно подтвердить свой адрес электронной почты."

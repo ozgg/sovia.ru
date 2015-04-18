@@ -1,8 +1,8 @@
 <div class="answer" itemprop="suggestedAnswer" itemscope itemtype="http://schema.org/Answer">
   <div class="header">
     <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <%= comment_avatar(answer.owner) %>
-      <span itemprop="name"><%= user_link(answer.owner) %></span>
+      <%= comment_avatar(answer.user) %>
+      <span itemprop="name"><%= user_link(answer.user) %></span>
     </span>
     <time itemprop="dateCreated" content="<%= answer.created_at.microformat_minutes %>" datetime="<%= answer.created_at.w3c %>"><%= answer.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
   </div>

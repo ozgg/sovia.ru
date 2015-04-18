@@ -76,7 +76,7 @@ ru:
         day: "дата"
         requests_count: "количество запросов"
       question:
-        owner_id: "автор"
+        user_id: "автор"
         body: "текст вопроса"
       answer:
         body: "текст ответа"
