@@ -30,7 +30,7 @@ class Filler < ActiveRecord::Base
   protected
 
   def create_question
-    owner = User.random_bot(gender)
-    Question.create!(language: self.language, owner: owner, body: self.body[0..499]) if owner
+    user = User.random_bot(gender)
+    Question.create!(language: self.language, user: user, body: self.body[0..499]) if user
   end
 end
