@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   def index
     if current_user && current_user.has_role?(:posts_manager)
       clause = {}
+    elsif current_user
+      clause = "show_in_list = true or user_id = ?", current_user.id
     else
       clause = { show_in_list: true }
     end

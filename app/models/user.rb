@@ -161,6 +161,14 @@ class User < ActiveRecord::Base
     self.screen_name = parameters.screen_name
   end
 
+  def avatar_url
+    url = avatar_url_big
+    url = avatar_url_medium if url.blank?
+    url = avatar_url_small if url.blank?
+    url = avatar.url if url.blank?
+    url
+  end
+
   protected
 
   def normalize_login

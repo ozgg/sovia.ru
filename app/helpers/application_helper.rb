@@ -18,8 +18,10 @@ module ApplicationHelper
       image_tag 'fallback/avatar/default.png'
     elsif user.should_use_gravatar?
       image_tag user.gravatar_image(400)
-    else
+    elsif user.sovia?
       image_tag user.avatar.url
+    else
+      image_tag user.avatar_url
     end
   end
 
@@ -30,7 +32,10 @@ module ApplicationHelper
     elsif user.should_use_gravatar?
       image_tag user.gravatar_image(200), attributes
     else
-      image_tag user.avatar.entry.url, attributes
+      avatar_url = user.avatar_url_medium
+      avatar_url = user.avatar_url_small if avatar_url.blank?
+      avatar_url = user.avatar.entry.url if avatar_url.blank?
+      image_tag avatar_url, attributes
     end
   end
 
@@ -41,7 +46,9 @@ module ApplicationHelper
     elsif user.should_use_gravatar?
       image_tag user.gravatar_image(100), attributes
     else
-      image_tag user.avatar.comment.url, attributes
+      avatar_url = user.avatar_url_small
+      avatar_url = user.avatar.comment.url if avatar_url.blank?
+      image_tag avatar_url, attributes
     end
   end
 

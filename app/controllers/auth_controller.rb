@@ -29,8 +29,9 @@ class AuthController < ApplicationController
   end
 
   def vk_parameters
+    language = Language.find_by(id: session[:lng]) || Language.first
     parameters = { network: 'vk', login: @vk.user_id.to_s, access_token: @vk.token }
-    parameters.merge(language_id: session[:lng]).merge(tracking_for_entity)
+    parameters.merge(language: language).merge(tracking_for_entity)
     parameters.merge password: session[:state], password_confirmation: session[:state]
   end
 end

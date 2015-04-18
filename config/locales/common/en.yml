@@ -8,6 +8,7 @@ en:
   read_more: "Read more"
   please_log_in: "Please log in"
   link: "Link"
+  i: 'i'
   post:
     created: "Post has been created"
     updated: "Post has been updated"
