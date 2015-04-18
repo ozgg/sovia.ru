@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
   context 'validation' do
+    it 'fails without user' do
+      expect(build :answer, user: nil).not_to be_valid
+    end
+    
     it 'fails without body' do
       answer = build :answer, body: ' '
       expect(answer).not_to be_valid

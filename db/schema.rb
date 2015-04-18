@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417202742) do
+ActiveRecord::Schema.define(version: 20150418152610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,13 @@ ActiveRecord::Schema.define(version: 20150417202742) do
     t.text     "body",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "answers", ["agent_id"], name: "index_answers_on_agent_id", using: :btree
   add_index "answers", ["owner_type", "owner_id"], name: "index_answers_on_owner_type_and_owner_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["user_id"], name: "index_answers_on_user_id", using: :btree
 
   create_table "codes", force: true do |t|
     t.integer  "user_id"
@@ -196,11 +198,13 @@ ActiveRecord::Schema.define(version: 20150417202742) do
     t.text     "body",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "questions", ["agent_id"], name: "index_questions_on_agent_id", using: :btree
   add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
   add_index "questions", ["owner_type", "owner_id"], name: "index_questions_on_owner_type_and_owner_id", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "type",                       null: false

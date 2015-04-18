@@ -103,10 +103,10 @@ class ApplicationController < ActionController::Base
   end
 
   def owner_for_entity
-    if current_user && current_user.has_role?(:content_editor) && params[:owner_id]
-      { owner_id: params[:owner_id], owner_type: params[:owner_type] }
+    if visitor_has_role?(:content_editor) && params[:user_id]
+      { user_id: params[:user_id] }
     else
-      { owner: current_user }
+      { user: current_user, owner: current_user }
     end
   end
 

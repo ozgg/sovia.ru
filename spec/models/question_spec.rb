@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   context 'validating' do
-    it 'fails without owner' do
-      question = build :question, owner: nil
+    it 'fails without user' do
+      question = build :question, user: nil
       expect(question).not_to be_valid
     end
 
