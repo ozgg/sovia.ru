@@ -18,7 +18,7 @@ class My::ProfilesController < ApplicationController
         update_sensitive_parameters
       else
         flash[:notice] = t('profile.incorrect_password')
-        render action: :edit
+        render :edit
       end
     end
   end
@@ -31,7 +31,7 @@ class My::ProfilesController < ApplicationController
       flash[:notice] = t('profile.updated')
       redirect_to my_profile_path
     else
-      render action: :edit
+      render :edit
     end
   end
 

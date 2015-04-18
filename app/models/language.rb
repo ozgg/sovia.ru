@@ -13,10 +13,8 @@ class Language < ActiveRecord::Base
   #
   # @return [Array]
   def self.languages_for_select
-    languages = [[I18n.t(:not_selected), '']]
-    self.all.each do |language|
-      languages << [language.i18n_name, language.id]
-    end
+    languages = []
+    self.all.each { |language| languages << [language.i18n_name, language.id] }
 
     languages
   end

@@ -1,29 +1,36 @@
 class User < ActiveRecord::Base
-  ROLE_EDITOR        = 1
-  ROLE_MODERATOR     = 2
+  ROLE_EDITOR    = 1
+  ROLE_MODERATOR = 2
 
   GENDER_FEMALE = 0
   GENDER_MALE   = 1
 
-  has_many :entries, dependent: :restrict_with_exception
+  has_many :entries, dependent: :destroy
   has_many :codes, dependent: :destroy
-  has_many :comments, dependent: :nullify
+  has_many :comments, dependent: :destroy
   has_many :user_tags, dependent: :destroy
+  has_many :goals, dependent: :destroy
   has_many :deeds, dependent: :destroy
   has_many :user_roles, dependent: :destroy
   has_many :questions, as: :owner, dependent: :destroy
+  has_many :answers, as: :owner, dependent: :destroy
+  has_many :posts, dependent: :destroy
+
   belongs_to :language
   belongs_to :agent
 
   has_secure_password
 
-  validates_uniqueness_of :login
-  validates_uniqueness_of :email, allow_nil: true
-  validates_format_of :login, with: /\A[a-z0-9_]{1,30}\z/
+  validates_uniqueness_of :login, scope: [:network]
+  validates_presence_of :login
+
+  validate :login_should_be_valid
   validate :email_should_be_reasonable
   before_validation :normalize_login, :normalize_email
 
   mount_uploader :avatar, AvatarUploader
+
+  enum network: [:sovia, :vk]
 
   def self.genders_for_select
     prefix  = 'activerecord.attributes.user.enums.genders.'
@@ -47,10 +54,6 @@ class User < ActiveRecord::Base
     bot
   end
 
-  def screen_name
-    login
-  end
-
   def moderator?
     has_role? :moderator
   end
@@ -71,7 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def can_receive_letters?
-    mail_confirmed? && allow_mail? && !email.blank?
+    mail_confirmed? && allow_mail? && filled_email?
   end
 
   def email_confirmation
@@ -79,11 +82,11 @@ class User < ActiveRecord::Base
   end
 
   def password_recovery
-    Code::Recovery.code_for_user(self) unless email.blank?
+    Code::Recovery.code_for_user(self) if sovia? && filled_email?
   end
 
   def should_use_gravatar?
-    use_gravatar? && !email.blank? && mail_confirmed?
+    use_gravatar? && filled_email? && mail_confirmed?
   end
 
   def filled_email?
@@ -137,7 +140,7 @@ class User < ActiveRecord::Base
   end
 
   def language_names
-    names = [language ? language.i18n_name : I18n.t(:not_selected) ]
+    names = [language ? language.i18n_name : I18n.t(:not_selected)]
     UserLanguage.where(user: self).each { |l| names << l.i18n_name }
     names.uniq
   end
@@ -145,7 +148,7 @@ class User < ActiveRecord::Base
   protected
 
   def normalize_login
-    login.downcase!
+    login.downcase! if sovia?
   end
 
   def normalize_email
@@ -155,6 +158,13 @@ class User < ActiveRecord::Base
   def email_should_be_reasonable
     unless email.nil? || email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
       errors.add(:email, I18n.t('activerecord.errors.models.user.attributes.email.unreasonable'))
+    end
+  end
+
+  def login_should_be_valid
+    if sovia?
+      pattern = /\A[a-z0-9_]{1,30}\z/
+      errors.add(:login, I18n.t('activerecord.errors.models.user.attributes.login.invalid')) unless login =~ pattern
     end
   end
 end

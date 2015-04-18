@@ -11,49 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417143430) do
+ActiveRecord::Schema.define(version: 20150417202742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accounts", force: true do |t|
-    t.integer  "network",                           null: false
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.string   "local_id",                          null: false
-    t.string   "name"
-    t.string   "screen_name",                       null: false
-    t.string   "email"
-    t.string   "avatar"
-    t.string   "avatar_url_small"
-    t.string   "avatar_url_medium"
-    t.string   "avatar_url_big"
-    t.integer  "gender"
-    t.boolean  "verified",          default: false, null: false
-    t.boolean  "allow_mail",        default: true,  null: false
-    t.boolean  "allow_login",       default: true,  null: false
-    t.datetime "token_expiry"
-    t.string   "access_token"
-    t.string   "refresh_token"
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "agent_id"
-    t.inet     "ip"
-    t.integer  "rating",            default: 0,     null: false
-    t.integer  "upvotes",           default: 0,     null: false
-    t.integer  "downvotes",         default: 0,     null: false
-    t.integer  "questions_count",   default: 0,     null: false
-    t.integer  "answers_count",     default: 0,     null: false
-    t.integer  "dreams_count",      default: 0,     null: false
-    t.integer  "posts_count",       default: 0,     null: false
-    t.integer  "comments_count",    default: 0,     null: false
-  end
-
-  add_index "accounts", ["agent_id"], name: "index_accounts_on_agent_id", using: :btree
-  add_index "accounts", ["language_id"], name: "index_accounts_on_language_id", using: :btree
-  add_index "accounts", ["network", "local_id"], name: "index_accounts_on_network_and_local_id", using: :btree
-  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "agent_requests", force: true do |t|
     t.integer  "agent_id",                   null: false
@@ -287,30 +248,44 @@ ActiveRecord::Schema.define(version: 20150417143430) do
   add_index "user_tags", ["user_id"], name: "index_user_tags_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "login",                           null: false
+    t.string   "login",                             null: false
     t.string   "email"
-    t.string   "password_digest",                 null: false
+    t.string   "password_digest",                   null: false
     t.string   "avatar"
-    t.boolean  "mail_confirmed",  default: false, null: false
-    t.boolean  "allow_mail",      default: false, null: false
-    t.integer  "entries_count",   default: 0,     null: false
-    t.integer  "comments_count",  default: 0,     null: false
-    t.integer  "roles_mask",      default: 0,     null: false
+    t.boolean  "mail_confirmed",    default: false, null: false
+    t.boolean  "allow_mail",        default: false, null: false
+    t.integer  "entries_count",     default: 0,     null: false
+    t.integer  "comments_count",    default: 0,     null: false
+    t.integer  "roles_mask",        default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "use_gravatar",    default: false
+    t.boolean  "use_gravatar",      default: false
     t.integer  "gender"
-    t.integer  "posts_count",     default: 0,     null: false
-    t.integer  "dreams_count",    default: 0,     null: false
+    t.integer  "posts_count",       default: 0,     null: false
+    t.integer  "dreams_count",      default: 0,     null: false
     t.integer  "language_id"
     t.inet     "ip"
     t.integer  "agent_id"
-    t.boolean  "bot",             default: false, null: false
+    t.boolean  "bot",               default: false, null: false
+    t.integer  "questions_count",   default: 0,     null: false
+    t.integer  "answers_count",     default: 0,     null: false
+    t.integer  "rating",            default: 0,     null: false
+    t.integer  "upvotes",           default: 0,     null: false
+    t.integer  "downvotes",         default: 0,     null: false
+    t.integer  "network",           default: 0,     null: false
+    t.string   "name"
+    t.string   "screen_name"
+    t.datetime "token_expiry"
+    t.string   "access_token"
+    t.string   "refresh_token"
+    t.string   "avatar_url_small"
+    t.string   "avatar_url_medium"
+    t.string   "avatar_url_big"
   end
 
   add_index "users", ["agent_id"], name: "index_users_on_agent_id", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["language_id"], name: "index_users_on_language_id", using: :btree
-  add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
+  add_index "users", ["network", "login"], name: "index_users_on_network_and_login", unique: true, using: :btree
 
 end

@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       after_registration
     else
-      render action: 'new'
+      render :new
     end
   end
 
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   end
 
   def find_user_by_login(login)
-    @user = User.find_by(login: login)
+    @user = User.find_by login: login, network: 'sovia'
     raise record_not_found if @user.nil?
   end
 end
