@@ -1,5 +1,4 @@
 class Answer < ActiveRecord::Base
-  include HasOwner
   include HasUser
 
   belongs_to :question, counter_cache: true

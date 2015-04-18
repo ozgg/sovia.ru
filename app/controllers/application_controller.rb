@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
     if visitor_has_role?(:content_editor) && params[:user_id]
       { user_id: params[:user_id] }
     else
-      { user: current_user, owner: current_user }
+      { user: current_user }
     end
   end
 

@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-  include HasOwner
   include HasUser
   include HasLanguage
 

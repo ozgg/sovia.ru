@@ -1,5 +1,5 @@
 <% content_for :meta_title, t('.title', id: @question.id) %>
-<% content_for :meta_description, t('.description', owner: @question.owner.screen_name) %>
+<% content_for :meta_description, t('.description', owner: @question.user.screen_name) %>
 <% content_for :sidebar do %>
     <%= render 'sidebar/donate' %>
 <% end %>
