@@ -1,4 +1,4 @@
-<% if current_user.is_a?(User) && current_user.allow_mail? && !current_user.mail_confirmed? %>
+<% if current_user.is_a?(User) && current_user.filled_email? && current_user.allow_mail? && !current_user.mail_confirmed? %>
     <section class="attention">
       <h1><%= t('.confirm_email') %></h1>
       <p><%= t('.confirmation_description') %></p>
