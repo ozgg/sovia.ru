@@ -12,9 +12,14 @@
   <% else %>
       <h2>Вам нужно войти или зарегистрироваться</h2>
 
-      <p>Чтобы задавать вопросы о снах, вам нужно авторизоваться. Если у вас уже есть аккаунт, просто
-      войдите, если нет, — зарегистрируйтесь.</p>
+      <p>Чтобы задавать вопросы о снах, вам нужно авторизоваться.</p>
+      <p>Мы можете использовать свой аккаунт в некоторых существующих соцсетях, это просто и удобно.</p>
 
-      <p><%= link_to 'Войти через ВКонтакте', login_vk_path %></p>
+      <div class="auth-buttons">
+        <span><%= link_to image_tag('vk.png'), login_vk_path, title: t('layouts.auth_block.vk') %></span>
+        <span><%= link_to image_tag('twitter.png'), auth_external_path(provider: :twitter), title: t('layouts.auth_block.twitter') %></span>
+        <span><%= link_to image_tag('fb.png'), auth_external_path(provider: :facebook), title: t('layouts.auth_block.facebook') %></span>
+        <span><%= link_to image_tag('mailru.png'), auth_external_path(provider: :mail_ru), title: t('layouts.auth_block.mail_ru') %></span>
+      </div>
   <% end %>
 </article>
