@@ -9,7 +9,7 @@ module ApplicationHelper
     elsif user.sovia?
       link_to user.login, user_profile_path(login: user.login)
     else
-      "#{user.network}: #{user.name}"
+      "#{user.network}: #{user.name_for_link}"
     end
   end
 
@@ -47,6 +47,7 @@ module ApplicationHelper
       image_tag user.gravatar_image(100), attributes
     else
       avatar_url = user.avatar_url_small
+      avatar_url = user.avatar_url_medium if avatar_url.blank?
       avatar_url = user.avatar.comment.url if avatar_url.blank?
       image_tag avatar_url, attributes
     end

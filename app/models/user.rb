@@ -54,6 +54,14 @@ class User < ActiveRecord::Base
     bot
   end
 
+  def name_for_link
+    if sovia?
+      login
+    else
+      screen_name.blank? ? name : screen_name
+    end
+  end
+
   def moderator?
     has_role? :moderator
   end
