@@ -88,6 +88,8 @@ Sovia::Application.routes.draw do
 
     scope '/auth', controller: :auth do
       get 'vk'
+      get ':provider' => :external, as: :auth_external
+      get ':provider/callback' => :callback, as: :auth_callback
     end
 
     scope '/about' do

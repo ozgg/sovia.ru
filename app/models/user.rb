@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   has_many :goals, dependent: :destroy
   has_many :deeds, dependent: :destroy
   has_many :user_roles, dependent: :destroy
-  has_many :questions, as: :owner, dependent: :destroy
-  has_many :answers, as: :owner, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
   has_many :posts, dependent: :destroy
 
   belongs_to :language
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  enum network: [:sovia, :vk]
+  enum network: [:sovia, :vk, :twitter]
 
   def self.genders_for_select
     prefix  = 'activerecord.attributes.user.enums.genders.'

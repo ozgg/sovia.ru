@@ -10,7 +10,38 @@ class AuthController < ApplicationController
     redirect_to root_path
   end
 
+  def external
+    render plain: params[:provider]
+  end
+
+  def callback
+    message = "set_#{params[:provider]}_account"
+    send message if respond_to? message, true
+
+    redirect_to root_path
+  end
+
   protected
+
+  def set_twitter_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:twitter], login: data[:uid]) || create_twitter_account(data)
+    account.update(access_token: data[:credentials][:token], refresh_token: data[:credentials][:secret])
+    session[:user_id] = account.id
+  end
+
+  def create_twitter_account(data)
+    parameters = { network: 'twitter', login: data[:uid] }
+    parameters.merge! tracking_for_entity
+    parameters.merge! password: 'none', password_confirmation: 'none'
+    parameters.merge! language: (Language.find_by(id: session[:lng]) || Language.first)
+    account = User.new parameters
+    account.name = data[:info][:name]
+    account.screen_name = data[:info][:nickname]
+    account.avatar_url_medium = data[:info][:image]
+    account.save!
+    account
+  end
 
   def set_vk_account
     account = User.find_by(network: User.networks[:vk], login: @vk.user_id.to_s) || create_vk_account
@@ -24,14 +55,13 @@ class AuthController < ApplicationController
     info    = client.users.get(uid: @vk.user_id, fields: %i(sex screen_name photo_50 photo_200 photo_400 contacts)).first
     account.set_from_vk_hash(info)
     account.save!
-    session[:user_id] = account.id
     account
   end
 
   def vk_parameters
     language = Language.find_by(id: session[:lng]) || Language.first
     parameters = { network: 'vk', login: @vk.user_id.to_s, access_token: @vk.token }
-    parameters.merge(language: language).merge(tracking_for_entity)
+    parameters.merge!(language: language).merge(tracking_for_entity)
     parameters.merge password: session[:state], password_confirmation: session[:state]
   end
 end
