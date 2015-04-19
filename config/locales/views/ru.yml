@@ -23,6 +23,7 @@ ru:
       vk: "Зайти через ВКонтакте"
       twitter: "Зайти через Twitter"
       facebook: "Зайти через Facebook"
+      mail_ru: "Зайти через mail.ru"
     mail_confirmation:
       confirm_email: "Подтверждение почты"
       confirmation_description: "Чтобы получать письма, вам нужно подтвердить свой адрес электронной почты."

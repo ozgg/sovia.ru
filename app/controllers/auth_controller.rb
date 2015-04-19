@@ -59,6 +59,22 @@ class AuthController < ApplicationController
     account
   end
 
+  def set_mail_ru_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:mail_ru], login: data[:uid]) || create_facebook_account(data)
+    account.update(access_token: data[:credentials][:token], token_expiry: DateTime.strptime(data[:credentials][:expires_at].to_s, '%s'), refresh_token: data[:credentials][:refresh_token])
+    session[:user_id] = account.id
+  end
+
+  def create_mail_ru_account(data)
+    parameters = { network: 'mail_ru', login: data[:uid] }.merge(tracking_for_entity)
+    parameters.merge! language: (Language.find_by(id: session[:lng]) || Language.first)
+    account = User.new parameters
+    account.set_from_auth_hash data
+    account.save!
+    account
+  end
+
   def set_vk_account
     account = User.find_by(network: User.networks[:vk], login: @vk.user_id.to_s) || create_vk_account
     account.update(access_token: @vk.token) unless account.access_token == @vk.token

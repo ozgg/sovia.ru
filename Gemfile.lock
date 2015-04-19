@@ -98,6 +98,8 @@ GEM
       rack (~> 1.0)
     omniauth-facebook (2.0.1)
       omniauth-oauth2 (~> 1.2)
+    omniauth-mail_ru (1.0.1)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -202,6 +204,7 @@ DEPENDENCIES
   mina
   mini_magick
   omniauth-facebook
+  omniauth-mail_ru
   omniauth-twitter
   pg
   puma

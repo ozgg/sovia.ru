@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  enum network: [:sovia, :vk, :twitter, :fb]
+  enum network: [:sovia, :vk, :twitter, :fb, :mail_ru]
 
   def self.genders_for_select
     prefix  = 'activerecord.attributes.user.enums.genders.'
