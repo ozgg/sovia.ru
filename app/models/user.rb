@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  enum network: [:sovia, :vk, :twitter]
+  enum network: [:sovia, :vk, :twitter, :fb]
 
   def self.genders_for_select
     prefix  = 'activerecord.attributes.user.enums.genders.'
@@ -151,6 +151,15 @@ class User < ActiveRecord::Base
     names = [language ? language.i18n_name : I18n.t(:not_selected)]
     UserLanguage.where(user: self).each { |l| names << l.i18n_name }
     names.uniq
+  end
+
+  def set_from_auth_hash(data)
+    self.password = self.password_confirmation = 'n/a'
+    self.name = data[:info][:name]
+    self.screen_name = data[:info][:nickname]
+    self.avatar_url_medium = data[:info][:image]
+    self.email = data[:info][:email]
+    self.mail_confirmed = !data[:info][:verified].blank?
   end
 
   def set_from_vk_hash(parameters)

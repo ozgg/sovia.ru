@@ -37,6 +37,7 @@ gem 'carrierwave'
 gem 'bcrypt'
 gem 'vkontakte_api', '~> 1.4'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 gem 'puma'
 

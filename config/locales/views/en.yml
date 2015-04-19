@@ -22,6 +22,7 @@ en:
       dashboard: "Dashboard"
       vk: "Enter with VK account"
       twitter: "Enter with Twitter account"
+      facebook: "Enter with facebook account"
     mail_confirmation:
       confirm_email: "Email confirmation"
       confirmation_description: "To receive letters from this site, you need to confirm you email address."

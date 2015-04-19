@@ -22,6 +22,7 @@ ru:
       dashboard: "Кабинет"
       vk: "Зайти через ВКонтакте"
       twitter: "Зайти через Twitter"
+      facebook: "Зайти через Facebook"
     mail_confirmation:
       confirm_email: "Подтверждение почты"
       confirmation_description: "Чтобы получать письма, вам нужно подтвердить свой адрес электронной почты."
