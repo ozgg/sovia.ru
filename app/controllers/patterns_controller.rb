@@ -1,7 +1,7 @@
 class PatternsController < ApplicationController
-  before_action :restrict_editing_access, only: [:new, :create]
-  before_action :restrict_management_access, only: [:edit, :update, :destroy]
-  before_action :set_pattern, onlt: [:show, :edit, :update, :destroy]
+  before_action :restrict_editing_access, only: [:new, :create, :edit, :update]
+  before_action :restrict_management_access, only: [:destroy]
+  before_action :set_pattern, only: [:show, :edit, :update, :destroy]
 
   # get /patterns
   def index
