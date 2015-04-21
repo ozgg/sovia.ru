@@ -104,6 +104,13 @@ ru:
         genders:
           male: "Мужской"
           female: "Женский"
+      pattern:
+        language_id: "язык"
+        dream_count: "количество снов"
+        image: "иллюстрация"
+        name: "название"
+        code: "внутренний код"
+        body: "описание"
     properties:
       dream:
         privacy:

@@ -5,7 +5,7 @@ en:
         user:
           attributes:
             email:
-              unreasonable: "doesn't look like как e-mail"
+              unreasonable: "doesn't look like e-mail"
             login:
               invalid: "must contain 1 to 30 english letters, digits or underscores"
     attributes:
@@ -91,6 +91,13 @@ en:
         genders:
           male: "male"
           female: "female"
+      pattern:
+        language_id: "язык"
+        dream_count: "количество снов"
+        image: "иллюстрация"
+        name: "название"
+        code: "внутренний код"
+        body: "описание"
     properties:
       dream:
         privacy:

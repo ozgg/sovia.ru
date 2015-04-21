@@ -38,6 +38,8 @@ Sovia::Application.routes.draw do
     resources :deeds, :goals, :languages, :questions, :fillers
     resources :agents, only: [:index, :show, :edit, :update]
 
+    resources :patterns
+
     resources :posts do
       member do
         post 'toggle'
