@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :pattern do
-    language nil
-dream_count 1
-name "MyString"
-image "MyString"
-body "MyString"
-  end
+    association :language, factory: :russian_language
+    sequence(:name) { |n| "pattern #{n}" }
 
+    factory :described_pattern do
+      body 'This pattern has description'
+    end
+  end
 end
