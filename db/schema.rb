@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418173723) do
+ActiveRecord::Schema.define(version: 20150421005912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,21 @@ ActiveRecord::Schema.define(version: 20150418173723) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "patterns", force: true do |t|
+    t.integer  "language_id",             null: false
+    t.integer  "dream_count", default: 0, null: false
+    t.string   "image"
+    t.string   "name",                    null: false
+    t.string   "code",                    null: false
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "patterns", ["code", "language_id"], name: "index_patterns_on_code_and_language_id", using: :btree
+  add_index "patterns", ["dream_count", "language_id"], name: "index_patterns_on_dream_count_and_language_id", using: :btree
+  add_index "patterns", ["language_id"], name: "index_patterns_on_language_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.integer  "user_id",                       null: false
