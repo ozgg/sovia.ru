@@ -6,9 +6,20 @@ class Pattern < ActiveRecord::Base
   validates_presence_of :name, :code
   validates_uniqueness_of :code, scope: [:language_id]
 
+  def self.to_code(name)
+    stripped = name.mb_chars.downcase.to_s.strip.gsub(/[^a-zа-я0-9ё]/, '')
+    stripped.blank? ? nil : stripped
+  end
+
+  def self.match_by_name(language, name)
+    find_by language: language, code: self.to_code(name)
+  end
+
+  def self.match_or_create_by_name(language, name)
+    self.match_by_name(language, name) || create(language: language, name: name)
+  end
+
   def prepare_code!
-    lowered   = self.name.mb_chars.downcase.to_s.strip
-    stripped  = lowered.gsub(/[^a-zа-я0-9ё]/, '')
-    self.code = stripped.blank? ? nil : stripped
+    self.code = Pattern.to_code self.name
   end
 end

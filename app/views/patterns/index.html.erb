@@ -21,6 +21,8 @@
             <li><%= link_to pattern.name, pattern %></li>
         <% end %>
       </ul>
+
+      <%= paginate @patterns %>
   <% else %>
       <%= render 'shared/nothing_found' %>
   <% end %>
