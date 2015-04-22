@@ -14,6 +14,10 @@ module HasLanguage
       language_ids += visitor.language_ids if visitor.respond_to?(:language_ids)
       self.where(language_id: language_ids)
     end
+
+    def current_locale
+      self.where(language: Language.guess_from_locale)
+    end
   end
 
   # Get locale code for object

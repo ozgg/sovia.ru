@@ -5,7 +5,7 @@ class PatternsController < ApplicationController
 
   # get /patterns
   def index
-    @patterns = Pattern.suitable_for(current_user).order('code asc').page(current_page).per(25)
+    @patterns = Pattern.current_locale.order('code asc').page(current_page).per(25)
   end
 
   # get /patterns/new

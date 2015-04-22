@@ -471,3 +471,8 @@ en:
       title: "Account #%{id}"
     new:
       title: "New account"
+  patterns:
+    index:
+      title: "Dream patterns, page %{page}"
+      description: "Page %{page} of list of dream patterns"
+      header: "Dream patterns"

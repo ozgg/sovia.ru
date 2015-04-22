@@ -472,3 +472,8 @@ ru:
       title: "Новый аккаунт"
     edit:
       title: "Редактирование аккаунта"
+  patterns:
+    index:
+      title: "Образы снов, страница %{page}"
+      description: "Страница %{page} с образами снов"
+      header: "Образы снов"
