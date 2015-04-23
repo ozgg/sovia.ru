@@ -1,0 +1,20 @@
+<%= form_for @pattern do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @pattern } %>
+
+    <div>
+      <%= f.label :image %>
+      <%= f.file_field :image, accept: 'image/jpg, image/jpeg, image/png' %>
+    </div>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <div><%= f.label :body %></div>
+      <%= f.text_area :body, cols: 80, rows: 10 %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

@@ -18,7 +18,7 @@
   <% if @patterns.any? %>
       <ul>
         <% @patterns.each do |pattern| %>
-            <li><%= link_to pattern.name, pattern %></li>
+            <li><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</li>
         <% end %>
       </ul>
 

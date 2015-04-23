@@ -6,6 +6,8 @@ class Pattern < ActiveRecord::Base
   validates_presence_of :name, :code
   validates_uniqueness_of :code, scope: [:language_id]
 
+  mount_uploader :image, ImageUploader
+
   def self.to_code(name)
     stripped = name.mb_chars.downcase.to_s.strip.gsub(/[^a-zа-я0-9ё]/, '')
     stripped.blank? ? nil : stripped

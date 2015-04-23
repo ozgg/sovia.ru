@@ -476,3 +476,7 @@ en:
       title: "Dream patterns, page %{page}"
       description: "Page %{page} of list of dream patterns"
       header: "Dream patterns"
+    new:
+      title: "New dream pattern"
+    edit:
+      title: "Edit dream pattern"
