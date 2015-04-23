@@ -480,3 +480,8 @@ en:
       title: "New dream pattern"
     edit:
       title: "Edit dream pattern"
+    show:
+      title: "Dream pattern \"%{name}\""
+      description: "Description of dream pattern \"%{name}\" on Sovia, the site about dreams"
+    pattern:
+      with_this_pattern: "with this pattern"

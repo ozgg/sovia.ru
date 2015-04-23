@@ -49,6 +49,9 @@ en:
     created: "Dream has been created"
     deleted: "Dream has been deleted"
     updated: "Dream has been updated"
+    zero: "no dreams"
+    one: "%{count} dream"
+    other: "%{count} dreams"
   language:
     created: "Language created"
     updated: "Language updated"

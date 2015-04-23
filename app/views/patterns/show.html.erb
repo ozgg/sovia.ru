@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title', name: @pattern.name) %>
+<% content_for :meta_description, t('.description', name: @pattern.name) %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @pattern.image.url) if @pattern.image.url %>
+<%= render 'shared/metrics' %>
+
+<nav class="options">
+  <ul>
+    <li><%= link_to t(:list), patterns_path %></li>
+    <% if visitor_has_role? :dreambook_editor %>
+        <li><%= link_to t(:create), new_pattern_path %></li>
+        <li><%= link_to t(:edit), edit_pattern_path(@pattern) %></li>
+    <% end %>
+  </ul>
+</nav>
+
+<%= render @pattern %>

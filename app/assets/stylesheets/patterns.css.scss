@@ -1,0 +1,16 @@
+.pattern {
+
+  .body {
+    min-height: 280px;
+  }
+
+  figure {
+    float: left;
+    margin: 15px;
+
+    img {
+      max-width: 250px;
+      max-height: 250px;
+    }
+  }
+}

@@ -56,6 +56,11 @@ ru:
     updated: "Сон изменён"
     deleted: "Сон удалён"
     created: "Сон добавлен"
+    zero: "ни одного сна"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
   language:
     created: "Язык добавлен"
     updated: "Язык изменён"

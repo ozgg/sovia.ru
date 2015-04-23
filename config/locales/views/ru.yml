@@ -481,3 +481,8 @@ ru:
       title: "Новый образ сна"
     edit:
       title: "Редактирование образа сна"
+    show:
+      title: "Образ сна «%{name}»"
+      description: "Описание образа сна «%{name}» на Совии, сайте о снах"
+    pattern:
+      with_this_pattern: "с этим образом"
