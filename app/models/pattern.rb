@@ -8,6 +8,10 @@ class Pattern < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :described, -> { where('body is not null') }
+  scope :undescribed, -> { where('body is null') }
+  scope :letter, -> (name) { where('code ilike ?', "#{self.to_code(name)}%") }
+
   def self.to_code(name)
     stripped = name.mb_chars.downcase.to_s.strip.gsub(/[^a-zа-я0-9ё]/, '')
     stripped.blank? ? nil : stripped

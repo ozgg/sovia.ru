@@ -1,0 +1,18 @@
+<%= form_tag patterns_path, method: :get do %>
+    <fieldset>
+      <legend><%= t(:filters) %></legend>
+
+      <div>
+        <%= check_box_tag 'filters[hide]', 1, @filter[:hide] %>
+        <%= label_tag 'filters_hide', t('.hide_described') %>
+      </div>
+      <div>
+        <%= label_tag 'filters_name', t('activerecord.attributes.pattern.name') %>
+        <%= text_field_tag 'filters[name]', @filter[:name] %>
+      </div>
+      <div>
+        <%= button_tag t('.filter'), type: :submit, name: nil %>
+      </div>
+
+    </fieldset>
+<% end %>

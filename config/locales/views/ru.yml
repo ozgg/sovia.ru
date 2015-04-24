@@ -486,3 +486,6 @@ ru:
       description: "Описание образа сна «%{name}» на Совии, сайте о снах"
     pattern:
       with_this_pattern: "с этим образом"
+    filters:
+      hide_described: "Скрыть описанные"
+      filter: "Фильтровать"

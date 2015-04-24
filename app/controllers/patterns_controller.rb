@@ -5,7 +5,11 @@ class PatternsController < ApplicationController
 
   # get /patterns
   def index
-    @patterns = Pattern.current_locale.order('code asc').page(current_page).per(25)
+    set_filters
+    selection = Pattern.current_locale
+    selection = selection.undescribed if @filter[:hide]
+    selection = selection.letter(@filter[:name]) unless @filter[:name].blank?
+    @patterns = selection.order('code asc').page(current_page).per(25)
   end
 
   # get /patterns/new
@@ -50,6 +54,14 @@ class PatternsController < ApplicationController
 
   def set_pattern
     @pattern = Pattern.find params[:id]
+  end
+
+  def set_filters
+    @filter = {}
+    if params[:filters]
+      @filter[:name] = params[:filters][:name].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
+      @filter[:hide] = params[:filters][:hide].to_i == 1
+    end
   end
 
   def pattern_parameters

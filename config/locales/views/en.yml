@@ -485,3 +485,6 @@ en:
       description: "Description of dream pattern \"%{name}\" on Sovia, the site about dreams"
     pattern:
       with_this_pattern: "with this pattern"
+    filters:
+      hide_described: "hide described"
+      filter: "Filter"

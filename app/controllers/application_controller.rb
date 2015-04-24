@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :current_page, :query_from_request, :visitor_has_role?
+  helper_method :current_user, :current_page, :query_from_request, :visitor_has_role?, :param_from_request
 
   # Get current user from session
   #
@@ -25,9 +25,7 @@ class ApplicationController < ActionController::Base
   #
   # @return [Integer]
   def current_page
-    @current_page ||= (params[:page] || 1).to_s.to_i
-    @current_page = 1 unless @current_page > 0
-    @current_page
+    @current_page ||= (params[:page] || 1).to_s.to_i.abs
   end
 
   def visitor_has_role?(role)
@@ -44,6 +42,10 @@ class ApplicationController < ActionController::Base
     else
       { locale: I18n.locale }.merge options
     end
+  end
+
+  def param_from_request(parameter)
+    params[parameter].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
   end
 
   protected
