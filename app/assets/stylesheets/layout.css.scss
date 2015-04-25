@@ -390,3 +390,11 @@ div.track {
   padding: 5px;
   color: #777777;
 }
+
+fieldset.filters {
+  > div {
+    display: inline-block;
+    border: dotted #fafafa 1px;
+    padding: 5px;
+  }
+}

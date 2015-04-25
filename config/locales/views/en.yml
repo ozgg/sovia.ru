@@ -488,3 +488,5 @@ en:
     filters:
       hide_described: "hide described"
       filter: "Filter"
+      order_by_id: "Order by id"
+      order_by_dream_count: "Order by dream count"

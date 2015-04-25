@@ -6,10 +6,14 @@ class PatternsController < ApplicationController
   # get /patterns
   def index
     set_filters
+    sorting = []
+    sorting << 'dream_count desc' if @filter[:order_dreams]
+    sorting << 'id desc' if @filter[:order_id]
+    sorting << 'code asc'
     selection = Pattern.current_locale
     selection = selection.undescribed if @filter[:hide]
     selection = selection.letter(@filter[:name]) unless @filter[:name].blank?
-    @patterns = selection.order('code asc').page(current_page).per(25)
+    @patterns = selection.order(sorting.join(', ')).page(current_page).per(25)
   end
 
   # get /patterns/new
@@ -61,6 +65,8 @@ class PatternsController < ApplicationController
     if params[:filters]
       @filter[:name] = params[:filters][:name].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
       @filter[:hide] = params[:filters][:hide].to_i == 1
+      @filter[:order_id] = params[:filters][:oi].to_i == 1
+      @filter[:order_dreams] = params[:filters][:od].to_i == 1
     end
   end
 

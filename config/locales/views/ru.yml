@@ -489,3 +489,5 @@ ru:
     filters:
       hide_described: "Скрыть описанные"
       filter: "Фильтровать"
+      order_by_id: "Сортировать по id"
+      order_by_dream_count: "Сортировать по количеству снов"
