@@ -92,12 +92,25 @@ en:
           male: "male"
           female: "female"
       pattern:
-        language_id: "язык"
-        dream_count: "количество снов"
-        image: "иллюстрация"
-        name: "название"
-        code: "внутренний код"
-        body: "описание"
+        language_id: "language"
+        dream_count: "dream count"
+        image: "image"
+        name: "name"
+        code: "internal code"
+        body: "description"
+      place:
+        user_id: "user"
+        language_id: "language"
+        agent_id: "user agent"
+        ip: "IP-address"
+        privacy: "privacy"
+        dreams_count: "dream count"
+        latitude: "latitude"
+        longitude: "longitude"
+        head_direction: "head direction"
+        image: "image"
+        name: "name"
+        description: "description"
     properties:
       dream:
         privacy:

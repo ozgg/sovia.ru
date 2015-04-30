@@ -111,6 +111,19 @@ ru:
         name: "название"
         code: "внутренний код"
         body: "описание"
+      place:
+        user_id: "пользователь"
+        language_id: "язык"
+        agent_id: "агент пользователя"
+        ip: "IP-адрес"
+        privacy: "закрытость"
+        dreams_count: "количество снов"
+        latitude: "широта"
+        longitude: "долгота"
+        head_direction: "направление головы"
+        image: "картинка"
+        name: "название"
+        description: "описание"
     properties:
       dream:
         privacy:

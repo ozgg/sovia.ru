@@ -4,6 +4,10 @@ class Agent < ActiveRecord::Base
   validates_length_of :name, maximum: 255
 
   has_many :agent_requests, dependent: :destroy
+  has_many :users, dependent: :nullify
+  has_many :posts, dependent: :nullify
+  has_many :dreams, dependent: :nullify
+  has_many :places, dependent: :nullify
 
   # Get instance of Agent for given string
   #

@@ -4,7 +4,7 @@ module HasLanguage
   included do
     belongs_to :language
 
-    validates_presence_of :language
+    validates_presence_of :language_id
   end
 
   module ClassMethods
@@ -12,7 +12,7 @@ module HasLanguage
     def suitable_for(visitor)
       language_ids = [Language.guess_from_locale]
       language_ids += visitor.language_ids if visitor.respond_to?(:language_ids)
-      self.where(language_id: language_ids)
+      self.where(language_id: language_ids.uniq)
     end
 
     def current_locale

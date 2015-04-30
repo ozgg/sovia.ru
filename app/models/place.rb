@@ -1,5 +1,14 @@
 class Place < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :language
+  include HasUser
+  include HasLanguage
+  include HasPrivacy
+  include HasCoordinates
+  include HeadDirection
+
   belongs_to :agent
+
+  mount_uploader :image, ImageUploader
+
+  validates_presence_of :user_id, :name
+  validates_length_of :name, maximum: 255
 end
