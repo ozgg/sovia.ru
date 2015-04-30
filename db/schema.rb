@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421005912) do
+ActiveRecord::Schema.define(version: 20150430003924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,28 @@ ActiveRecord::Schema.define(version: 20150421005912) do
 
   add_index "deeds", ["goal_id"], name: "index_deeds_on_goal_id", using: :btree
   add_index "deeds", ["user_id"], name: "index_deeds_on_user_id", using: :btree
+
+  create_table "dreams", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "language_id",                          null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "privacy",              default: 0,     null: false
+    t.integer  "lucidity",             default: 0,     null: false
+    t.integer  "factors",              default: 0,     null: false
+    t.boolean  "needs_interpretation", default: false, null: false
+    t.integer  "time_of_day"
+    t.integer  "comments_count",       default: 0,     null: false
+    t.string   "image"
+    t.string   "title"
+    t.text     "body",                                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dreams", ["agent_id"], name: "index_dreams_on_agent_id", using: :btree
+  add_index "dreams", ["language_id"], name: "index_dreams_on_language_id", using: :btree
+  add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree
 
   create_table "entries", force: true do |t|
     t.integer  "user_id"
