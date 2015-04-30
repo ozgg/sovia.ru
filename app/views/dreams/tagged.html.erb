@@ -15,7 +15,7 @@
         <nav class="options">
           <ul>
             <li><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag: @tag.name) %></li>
-            <% if current_user.editor? %>
+            <% if visitor_has_role? :posts_manager %>
                 <li><%= link_to t('.edit_tag'), admin_dream_tag_path(@tag) %></li>
             <% end %>
           </ul>

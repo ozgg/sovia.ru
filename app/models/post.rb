@@ -1,8 +1,8 @@
 class Post < ActiveRecord::Base
   include HasLanguage
+  include HasUser
 
   belongs_to :agent
-  belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :user, :title, :body
@@ -61,19 +61,5 @@ class Post < ActiveRecord::Base
     self.lead = self.first_passage if self.lead.blank?
     self.show_in_list = !self.show_in_list?
     save
-  end
-
-  # Set parameters from entry
-  #
-  # This method is used for exporting articles and posts into new Post model.
-  #
-  # @param [Entry] entry
-  def set_from_entry(entry)
-    self.id             = entry.id
-    self.created_at     = entry.created_at
-    self.user_id        = entry.user_id
-    self.title          = entry.title
-    self.body           = entry.body
-    self.comments_count = entry.comments_count
   end
 end

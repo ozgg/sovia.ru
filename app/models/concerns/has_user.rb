@@ -5,7 +5,7 @@ module HasUser
     belongs_to :user, counter_cache: true
   end
 
-  def owned_by?(person)
-    self.user == person
+  def owned_by?(user)
+    user.is_a?(User) && (self.user == user)
   end
 end

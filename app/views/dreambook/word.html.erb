@@ -16,7 +16,7 @@
 <article>
 <header>
   <h1><%= t('.header') %></h1>
-  <% if current_user && current_user.editor? %>
+  <% if visitor_has_role? :posts_manager %>
       <nav class="options">
         <ul>
           <li><%= link_to t(:edit), edit_admin_dream_tag_path(@tag) %></li>

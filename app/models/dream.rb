@@ -1,4 +1,6 @@
 class Dream < ActiveRecord::Base
-  belongs_to :user
+  include HasLanguage
+  include HasUser
+
   belongs_to :agent
 end

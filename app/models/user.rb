@@ -62,14 +62,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def moderator?
-    has_role? :moderator
-  end
-
-  def editor?
-    has_role? :posts_manager
-  end
-
   def decent?
     entries_count >= 5
   end
