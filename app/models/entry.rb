@@ -1,7 +1,5 @@
 class Entry < ActiveRecord::Base
-  PRIVACY_NONE  = 0
-  PRIVACY_USERS = 1
-  PRIVACY_OWNER = 255
+  include HasPrivacy
 
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy

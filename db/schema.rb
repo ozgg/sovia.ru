@@ -100,15 +100,20 @@ ActiveRecord::Schema.define(version: 20150430003924) do
 
   create_table "dreams", force: true do |t|
     t.integer  "user_id"
+    t.integer  "place_id"
     t.integer  "language_id",                          null: false
     t.integer  "agent_id"
     t.inet     "ip"
     t.integer  "privacy",              default: 0,     null: false
     t.integer  "lucidity",             default: 0,     null: false
-    t.integer  "factors",              default: 0,     null: false
+    t.integer  "mood",                 default: 0,     null: false
+    t.integer  "head_direction"
+    t.integer  "body_position"
     t.boolean  "needs_interpretation", default: false, null: false
+    t.boolean  "interpretation_given", default: false, null: false
     t.integer  "time_of_day"
     t.integer  "comments_count",       default: 0,     null: false
+    t.boolean  "show_image",           default: true,  null: false
     t.string   "image"
     t.string   "title"
     t.text     "body",                                 null: false
@@ -117,7 +122,10 @@ ActiveRecord::Schema.define(version: 20150430003924) do
   end
 
   add_index "dreams", ["agent_id"], name: "index_dreams_on_agent_id", using: :btree
+  add_index "dreams", ["language_id", "privacy"], name: "index_dreams_on_language_id_and_privacy", using: :btree
+  add_index "dreams", ["language_id"], name: "dreams_created_month_idx", using: :btree
   add_index "dreams", ["language_id"], name: "index_dreams_on_language_id", using: :btree
+  add_index "dreams", ["place_id"], name: "index_dreams_on_place_id", using: :btree
   add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree
 
   create_table "entries", force: true do |t|
@@ -196,6 +204,27 @@ ActiveRecord::Schema.define(version: 20150430003924) do
   add_index "patterns", ["code", "language_id"], name: "index_patterns_on_code_and_language_id", using: :btree
   add_index "patterns", ["dream_count", "language_id"], name: "index_patterns_on_dream_count_and_language_id", using: :btree
   add_index "patterns", ["language_id"], name: "index_patterns_on_language_id", using: :btree
+
+  create_table "places", force: true do |t|
+    t.integer  "user_id",                    null: false
+    t.integer  "language_id",                null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "privacy",        default: 0, null: false
+    t.integer  "dreams_count",   default: 0, null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "head_direction"
+    t.string   "image"
+    t.string   "name",                       null: false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "places", ["agent_id"], name: "index_places_on_agent_id", using: :btree
+  add_index "places", ["language_id"], name: "index_places_on_language_id", using: :btree
+  add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.integer  "user_id",                       null: false
