@@ -2,7 +2,7 @@ class CreateDreams < ActiveRecord::Migration
   def change
     create_table :dreams do |t|
       t.references :user, index: true
-      t.references :place, index: true
+      t.references :places, index: true
       t.references :language, index: true, null: false
       t.references :agent, index: true
       t.inet :ip

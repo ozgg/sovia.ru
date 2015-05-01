@@ -4,4 +4,5 @@ class Dream < ActiveRecord::Base
   include HasPrivacy
 
   belongs_to :agent
+  belongs_to :place
 end

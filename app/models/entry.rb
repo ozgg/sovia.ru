@@ -54,17 +54,6 @@ class Entry < ActiveRecord::Base
     self.user == user
   end
 
-  def visible_to?(looker)
-    case privacy
-      when PRIVACY_NONE
-        true
-      when PRIVACY_USERS
-        !looker.nil?
-      else
-        user == looker
-    end
-  end
-
   def editable_by?(editor)
     !editor.nil? && ((editor == user) || editor.has_role?(:dreams_manager))
   end

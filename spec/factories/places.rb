@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :place do
+  factory :places do
     association :user, factory: :unconfirmed_user
     association :language, factory: :russian_language
     name 'Моя кровать'

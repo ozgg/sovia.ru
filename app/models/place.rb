@@ -6,6 +6,7 @@ class Place < ActiveRecord::Base
   include HeadDirection
 
   belongs_to :agent
+  has_many :dreams, dependent: :nullify
 
   mount_uploader :image, ImageUploader
 
