@@ -60,6 +60,10 @@ class ApplicationController < ActionController::Base
     ActiveRecord::RecordNotFound
   end
 
+  def restrict_anonymous_access
+    redirect_to login_path unless current_user.is_a? User
+  end
+
   def allow_authorized_only
     unless current_user
       flash[:notice] = t(:please_log_in)

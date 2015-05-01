@@ -39,6 +39,7 @@ Sovia::Application.routes.draw do
     resources :agents, only: [:index, :show, :edit, :update]
 
     resources :patterns
+    resources :places
 
     resources :posts do
       member do

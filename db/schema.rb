@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430003924) do
+ActiveRecord::Schema.define(version: 20150501001610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -345,6 +345,7 @@ ActiveRecord::Schema.define(version: 20150430003924) do
     t.string   "avatar_url_small"
     t.string   "avatar_url_medium"
     t.string   "avatar_url_big"
+    t.integer  "places_count",      default: 0,     null: false
   end
 
   add_index "users", ["agent_id"], name: "index_users_on_agent_id", using: :btree

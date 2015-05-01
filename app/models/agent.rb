@@ -7,6 +7,7 @@ class Agent < ActiveRecord::Base
   has_many :users, dependent: :nullify
   has_many :posts, dependent: :nullify
   has_many :dreams, dependent: :nullify
+  has_many :comments, dependent: :nullify
   has_many :places, dependent: :nullify
 
   # Get instance of Agent for given string

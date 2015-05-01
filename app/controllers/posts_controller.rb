@@ -79,10 +79,6 @@ class PostsController < ApplicationController
     post_parameters.merge(language_for_entity).merge(user: current_user).merge(showing).merge(tracking_for_entity)
   end
 
-  def restrict_anonymous_access
-    raise UnauthorizedException if current_user.nil?
-  end
-
   def restrict_editor_access
     raise UnauthorizedException unless @post.editable_by? current_user
   end
