@@ -50,7 +50,7 @@ class PlacesController < ApplicationController
 
   def place_parameters
     permitted = [:privacy, :latitude, :longitude, :head_direction, :image, :name, :description]
-    params.require(:places).permit permitted
+    params.require(:place).permit permitted
   end
 
   def creation_parameters
