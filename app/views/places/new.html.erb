@@ -1,6 +1,12 @@
 <% content_for :meta_title, t('.title') %>
 <%= render 'shared/metrics' %>
 
+<nav class="options">
+  <ul>
+    <li><%= link_to t(:list), places_path %></li>
+  </ul>
+</nav>
+
 <section>
   <h1><%= t('.title') %></h1>
 

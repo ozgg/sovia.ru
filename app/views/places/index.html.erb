@@ -3,14 +3,25 @@
 <%= render 'shared/metrics' %>
 
 <% if current_user %>
-<nav class="options">
-  <ul>
-    <li><%= link_to t(:create), new_place_path %></li>
-  </ul>
-</nav>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:create), new_place_path %></li>
+      </ul>
+    </nav>
 <% end %>
 
 <article>
   <h1><%= t('.title') %></h1>
 
+  <% if current_user %>
+      <% if @entities.any? %>
+          <ul>
+            <% @entities.each do |place| %>
+                <li><%= render partial: 'preview', locals: { place: place } %></li>
+            <% end %>
+          </ul>
+      <% else %>
+          <%= render 'shared/nothing_found' %>
+      <% end %>
+  <% end %>
 </article>

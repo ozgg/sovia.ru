@@ -4,6 +4,12 @@ class PlacesController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
   before_action :restrict_visibility, only: [:show]
 
+  def index
+    if current_user
+      @entities = current_user.places.order('name asc').all
+    end
+  end
+
   # get /places/new
   def new
     @entity = Place.new

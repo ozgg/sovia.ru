@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :places, dependent: :destroy
 
   belongs_to :language
   belongs_to :agent
