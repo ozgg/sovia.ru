@@ -1,0 +1,9 @@
+<article class="place">
+  <figure>
+    <% if place.image.url %>
+        <%= image_tag place.image.post.url, alt: place.name %>
+    <% end %>
+    <figcaption class="<%= place.head_direction %>"><%= place.name %></figcaption>
+  </figure>
+  <div class="description"><%= simple_format place.description %></div>
+</article>

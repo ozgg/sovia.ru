@@ -130,3 +130,12 @@ ru:
           none: "Для всех"
           users: "Для сообщества"
           owner: "Только для меня"
+    head_directions:
+      north: "север"
+      north_west: "северо-запад"
+      west: "запад"
+      south_west: "юго-запад"
+      south: "юг"
+      south_east: "юго-восток"
+      east: "восток"
+      north_east: "северо-восток"

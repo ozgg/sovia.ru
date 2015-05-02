@@ -490,3 +490,11 @@ en:
       filter: "Filter"
       order_by_id: "Order by id"
       order_by_dream_count: "Order by dream count"
+  places:
+    index:
+      title: "Places of sleep"
+      description: "Infomation about creating and managing your places of sleep"
+    new:
+      title: "Create place of sleep"
+    show:
+      title: "Sleep place \"%{name}\""

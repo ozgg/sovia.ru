@@ -491,3 +491,11 @@ ru:
       filter: "Фильтровать"
       order_by_id: "Сортировать по id"
       order_by_dream_count: "Сортировать по количеству снов"
+  places:
+    index:
+      title: "Места сна"
+      description: "Страница с описанием управления своими местами сна"
+    new:
+      title: "Создать место сна"
+    show:
+      title: "Место для сна «%{name}»"

@@ -1,0 +1,30 @@
+<%= form_for(@entity) do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: @entity } %>
+
+    <% if @entity.image.url %>
+        <figure>
+          <%= image_tag @entity.image.post.url %>
+          <figcaption><%= t('activerecord.attributes.place.image') %></figcaption>
+        </figure>
+    <% end %>
+    <div>
+      <%= f.label :image %>
+      <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
+    </div>
+    <div>
+      <div><%= f.label :name %></div>
+      <%= f.text_field :name, required: true, size: 80, maxlength: 255 %>
+    </div>
+    <div>
+      <div><%= f.label :description %></div>
+      <%= f.text_area :description, required: true, cols: 80, rows: 25 %>
+    </div>
+    <div>
+      <div><%= f.label :head_direction %></div>
+      <%= f.select :head_direction, head_directions_for_form %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: 'submit' %>
+    </div>
+<% end %>
