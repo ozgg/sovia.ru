@@ -498,3 +498,5 @@ en:
       title: "Create place of sleep"
     show:
       title: "Sleep place \"%{name}\""
+    edit:
+      title: "Edit sleep place"
