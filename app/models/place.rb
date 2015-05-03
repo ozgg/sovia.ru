@@ -8,7 +8,7 @@ class Place < ActiveRecord::Base
   belongs_to :agent
   has_many :dreams, dependent: :nullify
 
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, PersonalUploader
 
   validates_presence_of :user_id, :name
   validates_length_of :name, maximum: 255
