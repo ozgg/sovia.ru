@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501001610) do
+ActiveRecord::Schema.define(version: 20150503233303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,26 @@ ActiveRecord::Schema.define(version: 20150501001610) do
   end
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
+
+  create_table "grains", force: true do |t|
+    t.integer  "user_id",                 null: false
+    t.integer  "pattern_id"
+    t.integer  "dream_count", default: 0, null: false
+    t.integer  "category"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "image"
+    t.string   "code",                    null: false
+    t.string   "name",                    null: false
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grains", ["pattern_id"], name: "index_grains_on_pattern_id", using: :btree
+  add_index "grains", ["user_id", "code"], name: "index_grains_on_user_id_and_code", unique: true, using: :btree
+  add_index "grains", ["user_id", "dream_count"], name: "index_grains_on_user_id_and_dream_count", using: :btree
+  add_index "grains", ["user_id"], name: "index_grains_on_user_id", using: :btree
 
   create_table "languages", force: true do |t|
     t.string "code", null: false
@@ -346,6 +366,7 @@ ActiveRecord::Schema.define(version: 20150501001610) do
     t.string   "avatar_url_medium"
     t.string   "avatar_url_big"
     t.integer  "places_count",      default: 0,     null: false
+    t.integer  "grains_count",      default: 0,     null: false
   end
 
   add_index "users", ["agent_id"], name: "index_users_on_agent_id", using: :btree
