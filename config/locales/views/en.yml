@@ -500,3 +500,7 @@ en:
       title: "Sleep place \"%{name}\""
     edit:
       title: "Edit sleep place"
+  violators:
+    index:
+      title: "Violators, page %{page}"
+      header: "Violators"

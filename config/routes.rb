@@ -40,6 +40,7 @@ Sovia::Application.routes.draw do
 
     resources :patterns
     resources :places
+    resources :violators, only: [:index]
 
     resources :posts do
       member do

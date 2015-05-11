@@ -111,7 +111,8 @@ class DreamsController < ApplicationController
 
   def emulate_saving
     flash[:notice] = t('dream.created')
-    redirect_to dream_dreams_path
+    Violator.create tracking_for_entity
+    redirect_to entry_dreams_path
   end
 
   def collect_months

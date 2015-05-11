@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503233303) do
+ActiveRecord::Schema.define(version: 20150511214553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -373,5 +373,15 @@ ActiveRecord::Schema.define(version: 20150503233303) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["language_id"], name: "index_users_on_language_id", using: :btree
   add_index "users", ["network", "login"], name: "index_users_on_network_and_login", unique: true, using: :btree
+
+  create_table "violators", force: true do |t|
+    t.integer  "agent_id",   null: false
+    t.inet     "ip",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "violators", ["agent_id"], name: "index_violators_on_agent_id", using: :btree
+  add_index "violators", ["ip"], name: "index_violators_on_ip", using: :btree
 
 end
