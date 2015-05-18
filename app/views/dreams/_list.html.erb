@@ -30,7 +30,7 @@
           </div>
 
           <div class="body">
-            <%= raw parse_body(dream.preview, dream.is_a?(Entry::Article), dream.owned_by?(current_user)) %>
+            <%= raw parse_body(dream.preview, false, dream.owned_by?(current_user)) %>
             <% if dream.passages_count > 2 %>
                 <p class="more"><%= link_to t(:read_more), verbose_entry_path(dream) %></p>
             <% end %>
