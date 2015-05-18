@@ -293,6 +293,7 @@ en:
         title: "Dashboard"
         tags: "My dream symbols"
         my_goals: "My goals"
+        places: "Places of sleep"
     profiles:
       edit:
         update: "Update profile"

@@ -351,6 +351,7 @@ ru:
         title: "Кабинет"
         tags: "Мои символы снов"
         my_goals: "Мои цели"
+        places: "Места для сна"
     profiles:
       edit:
         update: "Обновить профиль"
