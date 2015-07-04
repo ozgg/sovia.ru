@@ -12,7 +12,7 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 set :domain, '89.108.70.205'
 set :deploy_to, '/var/www/sovia.ru'
 set :repository, 'git@github.com:ozgg/Sovia.git'
-set :branch, 'master'
+set :branch, 'version-3-1-0'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
