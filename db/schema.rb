@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511214553) do
+ActiveRecord::Schema.define(version: 20150704194232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,8 +189,10 @@ ActiveRecord::Schema.define(version: 20150511214553) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "language_id"
   end
 
+  add_index "grains", ["language_id"], name: "index_grains_on_language_id", using: :btree
   add_index "grains", ["pattern_id"], name: "index_grains_on_pattern_id", using: :btree
   add_index "grains", ["user_id", "code"], name: "index_grains_on_user_id_and_code", unique: true, using: :btree
   add_index "grains", ["user_id", "dream_count"], name: "index_grains_on_user_id_and_dream_count", using: :btree
