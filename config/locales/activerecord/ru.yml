@@ -124,6 +124,16 @@ ru:
         image: "картинка"
         name: "название"
         description: "описание"
+      grain:
+        pattern_name: "образ сна"
+        dream_count: "количество снов"
+        category: "категория"
+        latitude: "широта"
+        longitude: "долгота"
+        image: "картинка"
+        code: "код"
+        name: "название"
+        body: "описание"
     properties:
       dream:
         privacy:

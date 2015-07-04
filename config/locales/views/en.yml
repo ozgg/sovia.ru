@@ -249,6 +249,10 @@ en:
     index:
       title: "Grains of perception"
       description: "What are grains of perception, why one should describe them and how to use them. You can find out on this page of Sovia, the site about dreams."
+    create:
+      created: "Grain of perception has been added"
+    new:
+      title: "Create grain of perception"
   goals:
     new:
       title: "Create goal"

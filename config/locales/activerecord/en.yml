@@ -111,6 +111,16 @@ en:
         image: "image"
         name: "name"
         description: "description"
+      grain:
+        pattern_name: "dream pattern"
+        dream_count: "dream count"
+        category: "category"
+        latitude: "latitude"
+        longitude: "longitude"
+        image: "image"
+        code: "code"
+        name: "name"
+        body: "description"
     properties:
       dream:
         privacy:

@@ -1,0 +1,22 @@
+<%= form_for entity do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+    <div>
+      <div><%= f.label :name %></div>
+      <% f.text_field :name %>
+    </div>
+
+    t.integer  "pattern_id"
+    t.integer  "dream_count", default: 0, null: false
+    t.integer  "category"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "image"
+    t.string   "code",                    null: false
+    t.string   "name",                    null: false
+    t.text     "body"
+
+    <div class="button">
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

@@ -31,7 +31,7 @@ Sovia::Application.routes.draw do
       end
     end
 
-    resources :grains, only: [:index]
+    resources :grains
 
     resources :users, only: [:new, :create]
     resources :comments, :answers, only: [:index, :create]
@@ -53,7 +53,7 @@ Sovia::Application.routes.draw do
 
       resource :profile, only: [:show, :edit, :update]
       resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :posts, :deeds, :goals, only: [:index]
+      resources :posts, :deeds, :goals, :grains, only: [:index]
       resources :tags, only: [:index, :show, :edit, :update]
 
       resources :dreams, only: [:index] do

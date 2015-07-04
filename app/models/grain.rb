@@ -1,6 +1,7 @@
 class Grain < ActiveRecord::Base
   include HasUser
   include HasCoordinates
+  include HasLanguage
 
   belongs_to :pattern
   before_validation :prepare_code!
@@ -26,5 +27,9 @@ class Grain < ActiveRecord::Base
 
   def prepare_code!
     self.code = Grain.to_code self.name
+  end
+
+  def pattern_name
+    self.pattern.nil? ? '' : self.pattern.name
   end
 end
