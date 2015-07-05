@@ -1,5 +1,0 @@
-<% %w(first prev next last canonical).each do |rel| %>
-    <% if content_for? "link_to_#{rel}".to_sym %>
-        <link rel="<%= rel %>" href="<%= yield "link_to_#{rel}".to_sym %>"/>
-    <% end %>
-<% end %>

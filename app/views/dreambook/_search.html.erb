@@ -1,7 +1,0 @@
-<form action="<%= dreambook_search_path %>" method="get" id="dreambook-search">
-  <div>
-    <%= label_tag :query, t('.search') %>
-    <%= search_field_tag :query, query_from_request, placeholder: t('.query'), required: true %>
-    <%= button_tag t(:search), type: :submit, name: nil %>
-  </div>
-</form>

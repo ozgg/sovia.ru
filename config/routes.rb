@@ -1,131 +1,56 @@
-Sovia::Application.routes.draw do
-  get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
+Rails.application.routes.draw do
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
 
-  root 'index#index'
+  # You can have the root of your site routed with "root"
+  # root 'welcome#index'
 
-  scope '(:locale)', locale: /ru|en/ do
-    %w( 422 500 ).each do |code|
-      get code, :to => "errors#show", :code => code
-    end
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
 
-    get '/401' => 'errors#unauthorized'
-    get '/404' => 'errors#not_found'
+  # Example of named route that can be invoked with purchase_url(id: product.id)
+  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-    resources :dreams, as: :entry_dreams do
-      collection do
-        get 'random' => :random
-        get 'tagged/:tag' => :tagged, as: :tagged
-        get 'of/:login' => :dreams_of_user, as: :user
-        get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
-        get ':id-:uri_title' => :show, as: :verbose
-      end
-    end
+  # Example resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
-    scope '/dreambook' do
-      controller :dreambook do
-        get '/' => :index, as: :dreambook
-        get '/search' => :search, as: :dreambook_search
-        get '/read/:letter/(:word)' => :obsolete, constraints: { letter: /.{,6}/ }
-        get '/:letter/:word' => :word, as: :dreambook_word, constraints: { letter: /.{,6}/ }
-        get '/:letter' => :letter, as: :dreambook_letter, constraints: { letter: /.{,6}/ }
-      end
-    end
+  # Example resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
 
-    resources :grains
+  # Example resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
 
-    resources :users, only: [:new, :create]
-    resources :comments, :answers, only: [:index, :create]
-    resources :deeds, :goals, :languages, :questions, :fillers
-    resources :agents, only: [:index, :show, :edit, :update]
+  # Example resource route with more complex sub-resources:
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', on: :collection
+  #     end
+  #   end
 
-    resources :patterns
-    resources :places
-    resources :violators, only: [:index]
+  # Example resource route with concerns:
+  #   concern :toggleable do
+  #     post 'toggle'
+  #   end
+  #   resources :posts, concerns: :toggleable
+  #   resources :photos, concerns: :toggleable
 
-    resources :posts do
-      member do
-        post 'toggle'
-      end
-    end
-
-    namespace :my do
-      get '/' => 'index#index'
-
-      resource :profile, only: [:show, :edit, :update]
-      resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :posts, :deeds, :goals, :grains, only: [:index]
-      resources :tags, only: [:index, :show, :edit, :update]
-
-      resources :dreams, only: [:index] do
-        collection do
-          get 'tagged/:tag' => :tagged, as: :tagged
-        end
-      end
-
-      scope '/statistics' do
-        controller :statistics do
-          get '/' => :index
-          get '/symbols' => :tags
-        end
-      end
-    end
-
-    namespace :admin do
-      resources :dream_tags, :users
-      resources :comments, only: [:index, :show, :edit, :update, :destroy]
-      get "queues/tags"
-    end
-
-    controller :sessions do
-      get 'login' => :new
-      post 'login' => :create
-      delete 'logout' => :destroy
-      get 'login/vk' => :login_vk
-    end
-
-    scope '/statistics' do
-      controller :statistics do
-        get '/' => :index, as: :statistics
-        get '/symbols' => :symbols, as: :statistics_symbols
-      end
-    end
-
-    scope '/auth', controller: :auth do
-      get 'vk'
-      get ':provider' => :external, as: :auth_external
-      get ':provider/callback' => :callback, as: :auth_callback
-    end
-
-    scope '/about' do
-      controller :about do
-        get '/' => :index, as: :about
-        get '/features' => :features
-      end
-    end
-
-    get 'u/:login' => 'users#profile', as: :user_profile
-    get 'u/:login/posts' => 'users#posts', as: :user_posts
-    get 'u/:login/dreams' => 'users#dreams', as: :user_dreams
-    get 'u/:login/comments' => 'users#comments', as: :user_comments
-
-    get 'tos' => 'about#terms_of_service'
-    get 'privacy' => 'about#privacy'
-
-    get 'sitemap' => 'index#sitemap'
-  end
-
-  # Obsolete routes
-  get 'articles', to: redirect('/posts')
-  get 'articles/:id', to: redirect('/posts/%{id}')
-  get 'articles/tagged/:tag', to: redirect('/posts')
-  get 'posts/tagged/:tag', to: redirect('/posts')
-  get 'forum/posts/:id', to: redirect('/posts/%{id}')
-  get 'forum/(:community)(/:id)', to: redirect('/posts')
-  get 'about/changelog' => 'index#gone'
-  get 'thoughts/(:id)' => 'index#gone'
-  get 'my/thoughts' => 'index#gone'
-  get 'user/profile' => 'index#gone'
-  get 'user/profile/of/:login' => 'index#gone'
-  get 'entities/(:id)' => 'index#gone'
-  get 'fun/(:type)' => 'index#gone'
+  # Example resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
 end

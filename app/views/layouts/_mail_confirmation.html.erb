@@ -1,9 +1,0 @@
-<% if current_user.is_a?(User) && current_user.filled_email? && current_user.allow_mail? && !current_user.mail_confirmed? %>
-    <section class="attention">
-      <h1><%= t('.confirm_email') %></h1>
-      <p><%= t('.confirmation_description') %></p>
-      <%= form_tag my_confirmation_path, method: :post do %>
-          <%= button_tag t('.receive_code'), type: :submit %>
-      <% end %>
-    </section>
-<% end %>

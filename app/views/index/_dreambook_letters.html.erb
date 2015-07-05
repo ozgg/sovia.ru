@@ -1,7 +1,0 @@
-<nav class="dreambook-letters">
-  <ul aria-label="<%= t('.dreambook_letters') %>">
-    <% %w(А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Э Ю Я).each do |letter| %>
-        <li><%= link_to letter, dreambook_letter_path(letter: letter) %></li>
-    <% end %>
-  </ul>
-</nav>
