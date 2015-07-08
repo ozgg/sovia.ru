@@ -12,3 +12,13 @@ en:
       language:
         code: "code"
         slug: "slug"
+      browser:
+        name: "name"
+        bot: "it is bot"
+        mobile: "mobile device"
+        agents_count: "UA count"
+      agent:
+        browser_id: "browser"
+        bot: "it is bot"
+        mobile: "mobile device"
+        name: "name"

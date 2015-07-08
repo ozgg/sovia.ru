@@ -3,6 +3,7 @@ class CreateBrowsers < ActiveRecord::Migration
     create_table :browsers do |t|
       t.string :name, null: false
       t.boolean :bot, null: false, default: false
+      t.boolean :mobile, null: false, default: false
       t.integer :agents_count, null: false, default: true
     end
 

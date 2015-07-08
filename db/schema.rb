@@ -11,14 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708223139) do
+ActiveRecord::Schema.define(version: 20150708224200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "agents", force: :cascade do |t|
+    t.integer  "browser_id"
+    t.boolean  "bot",        default: false, null: false
+    t.boolean  "mobile",     default: false, null: false
+    t.string   "name",                       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "agents", ["browser_id"], name: "index_agents_on_browser_id", using: :btree
+  add_index "agents", ["name"], name: "index_agents_on_name", using: :btree
+
   create_table "browsers", force: :cascade do |t|
     t.string  "name",                         null: false
     t.boolean "bot",          default: false, null: false
+    t.boolean "mobile",       default: false, null: false
     t.integer "agents_count", default: 1,     null: false
   end
 
@@ -29,4 +42,5 @@ ActiveRecord::Schema.define(version: 20150708223139) do
     t.string "slug", null: false
   end
 
+  add_foreign_key "agents", "browsers"
 end

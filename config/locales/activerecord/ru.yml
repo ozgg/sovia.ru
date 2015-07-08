@@ -12,3 +12,13 @@ ru:
       language:
         code: "код"
         slug: "идентификатор"
+      browser:
+        name: "название"
+        bot: "это бот"
+        mobile: "мобильное устройство"
+        agents_count: "количество АП"
+      agent:
+        browser_id: "браузер"
+        bot: "это бот"
+        mobile: "мобильное устройство"
+        name: "название"
