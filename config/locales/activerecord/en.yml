@@ -1,1 +1,14 @@
 en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              unreasonable: "does not look like e-mail"
+            login:
+              invalid: "can contain 1 to 30 English letters, digits or underscores"
+    attributes:
+      language:
+        code: "code"
+        slug: "slug"

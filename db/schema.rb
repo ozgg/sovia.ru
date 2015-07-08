@@ -17,18 +17,8 @@ ActiveRecord::Schema.define(version: 20150705101917) do
   enable_extension "plpgsql"
 
   create_table "languages", force: :cascade do |t|
-    t.string   "code",                        null: false
-    t.string   "slug",                        null: false
-    t.integer  "users_count",     default: 0, null: false
-    t.integer  "patterns_count",  default: 0, null: false
-    t.integer  "grains_count",    default: 0, null: false
-    t.integer  "tags_count",      default: 0, null: false
-    t.integer  "posts_count",     default: 0, null: false
-    t.integer  "dreams_count",    default: 0, null: false
-    t.integer  "questions_count", default: 0, null: false
-    t.integer  "comments_count",  default: 0, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string "code", null: false
+    t.string "slug", null: false
   end
 
 end

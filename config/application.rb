@@ -30,7 +30,12 @@ module Sovia4
     config.i18n.available_locales = [:ru, :en]
     config.i18n.default_locale = :ru
 
-    config.action_dispatch.rescue_responses.merge!('ApplicationController::UnauthorizedException' => :unauthorized)
+    config.action_dispatch.rescue_responses.merge!(
+        {
+            :'ApplicationController::UnauthorizedException' => :unauthorized,
+            :'ApplicationController::ForbiddenException' => :forbidden,
+        }
+    )
 
     %w(app/service lib).each do |path|
       config.autoload_paths << config.root.join(path).to_s

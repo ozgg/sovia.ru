@@ -1,1 +1,6 @@
 ru:
+  languages:
+    russian:
+      name: "русский"
+    english:
+      name: "английский"

@@ -1,15 +1,21 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the LanguagesHelper. For example:
-#
-# describe LanguagesHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe LanguagesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Getting language name' do
+    context 'when name is known' do
+      let(:language) { create :russian_language }
+
+      it 'returns localized language name' do
+        expect(helper.language_name(language)).to eq('русский')
+      end
+    end
+
+    context 'when name is unknown' do
+      let(:language) { create :language }
+
+      it 'returns language slug' do
+        expect(helper.language_name(language)).to eq(language.slug)
+      end
+    end
+  end
 end
