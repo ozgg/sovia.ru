@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705101917) do
+ActiveRecord::Schema.define(version: 20150708223139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "browsers", force: :cascade do |t|
+    t.string  "name",                         null: false
+    t.boolean "bot",          default: false, null: false
+    t.integer "agents_count", default: 1,     null: false
+  end
+
+  add_index "browsers", ["name"], name: "index_browsers_on_name", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string "code", null: false
