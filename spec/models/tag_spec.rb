@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Tag, type: :model do
   context 'validating' do
+    it 'fails without language' do
+      tag = build :tag, language: nil
+      expect(tag).not_to be_valid
+    end
+
     it 'fails without name' do
       tag = build :tag, name: ' '
       expect(tag).not_to be_valid
