@@ -26,3 +26,8 @@ en:
         name: "name"
         secret: "secret"
         active: "active"
+      tag:
+        language_id: "language"
+        name: "name"
+        slug: "slug"
+        post_count: "post count"

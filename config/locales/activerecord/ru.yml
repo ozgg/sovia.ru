@@ -26,3 +26,8 @@ ru:
         name: "название"
         secret: "секрет"
         active: "активный"
+      tag:
+        language_id: "язык"
+        name: "название"
+        slug: "код"
+        post_count: "количество публикаций"

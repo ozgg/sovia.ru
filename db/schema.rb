@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709100143) do
+ActiveRecord::Schema.define(version: 20150709102041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,5 +52,18 @@ ActiveRecord::Schema.define(version: 20150709100143) do
     t.string "slug", null: false
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.integer  "language_id",             null: false
+    t.string   "name",                    null: false
+    t.string   "slug",                    null: false
+    t.integer  "post_count",  default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "tags", ["language_id"], name: "index_tags_on_language_id", using: :btree
+  add_index "tags", ["slug", "language_id"], name: "index_tags_on_slug_and_language_id", using: :btree
+
   add_foreign_key "agents", "browsers"
+  add_foreign_key "tags", "languages"
 end
