@@ -22,3 +22,7 @@ en:
         bot: "it is bot"
         mobile: "mobile device"
         name: "name"
+      client:
+        name: "name"
+        secret: "secret"
+        active: "active"
