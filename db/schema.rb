@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709225935) do
+ActiveRecord::Schema.define(version: 20150710134312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 20150709225935) do
   add_index "tags", ["language_id"], name: "index_tags_on_language_id", using: :btree
   add_index "tags", ["slug", "language_id"], name: "index_tags_on_slug_and_language_id", using: :btree
 
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "role",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_roles", ["user_id", "role"], name: "index_user_roles_on_user_id_and_role", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.integer  "language_id",                     null: false
     t.inet     "ip"
@@ -99,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150709225935) do
 
   add_foreign_key "agents", "browsers"
   add_foreign_key "tags", "languages"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "agents"
   add_foreign_key "users", "languages"
 end

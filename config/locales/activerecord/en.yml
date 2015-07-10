@@ -56,3 +56,6 @@ en:
         allow_login: "allow logging in"
         email_confirmed: "email is confirmed"
         allow_mail: "allow mail from server"
+      user_role:
+        user_id: "user"
+        role: "role"
