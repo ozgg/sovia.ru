@@ -9,10 +9,15 @@ class User < ActiveRecord::Base
 
   before_validation :normalize_email, :normalize_screen_name
 
+  validates_presence_of :uid
+  validates_uniqueness_of :uid, scope: [:network]
+  validate :uid_should_be_valid
+  validate :email_should_be_reasonable
+
   protected
 
   def normalize_screen_name
-    self.uid = screen_name.downcase if native?
+    self.uid = screen_name.downcase if native? && !screen_name.blank?
   end
 
   def normalize_email

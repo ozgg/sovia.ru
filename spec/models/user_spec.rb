@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model, wip: true do
+RSpec.describe User, type: :model do
   context 'before validating' do
     it 'normalizes email' do
       user = User.new email: 'USERNAME@example.com'
@@ -22,9 +22,33 @@ RSpec.describe User, type: :model, wip: true do
   end
 
   context 'validating' do
-    it 'fails without uid'
-    it 'fails with unreasonable email'
-    it 'fails with malformed native uid'
-    it 'fails with non-unique native uid'
+    it 'fails without uid' do
+      user = build :user, network: :vk, uid: ' '
+      expect(user).not_to be_valid
+    end
+
+    it 'fails with unreasonable email' do
+      user = build :user, email: 'invalid'
+      expect(user).not_to be_valid
+    end
+
+    it 'fails with malformed native uid' do
+      user = build :user, uid: 'invalid uid', screen_name: nil
+      expect(user).not_to be_valid
+    end
+
+    it 'fails with non-unique uid for network' do
+      user = create :user
+      expect(build :user, screen_name: user.screen_name.upcase).not_to be_valid
+    end
+
+    it 'passes with non-unique uid for defferent networks' do
+      user = create :user
+      expect(build :user, uid: user.uid, network: :vk).to be_valid
+    end
+
+    it 'passes with valid attributes' do
+      expect(build :user).to be_valid
+    end
   end
 end

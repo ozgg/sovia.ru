@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    association :language, factory: :russian_language
+    language
     network 0
     sequence(:screen_name) { |n| "User_#{n}" }
     password 'secret'
