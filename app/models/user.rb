@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  has_many :user_roles, dependent: :destroy
+  has_many :posts, dependent: :destroy
+
   enum gender: [:female, :male]
   enum network: [:native, :vk, :twitter, :fb, :mail_ru]
 

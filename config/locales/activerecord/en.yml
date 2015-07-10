@@ -59,3 +59,17 @@ en:
       user_role:
         user_id: "user"
         role: "role"
+      post:
+        language_id: "language"
+        user_id: "author"
+        agent_id: "UA"
+        ip: "IP"
+        rating: "rating"
+        upvote_count: "upvote count"
+        downvote_count: "downvote count"
+        show_in_list: "show in list"
+        title: "title"
+        image: "image"
+        lead: "lead"
+        body: "body"
+        tags_cache: "tags"

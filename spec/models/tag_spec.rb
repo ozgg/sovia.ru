@@ -19,7 +19,7 @@ RSpec.describe Tag, type: :model do
     end
 
     it 'generates slug before validation' do
-      tag = build :tag, name: ' Ёжики? В тумане?! '
+      tag = build :tag, name: ' Ёжики? В... ту-мане?! '
       tag.valid?
       expect(tag.slug).to eq('ёжикивтумане')
     end

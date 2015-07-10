@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710134312) do
+ActiveRecord::Schema.define(version: 20150710200250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,29 @@ ActiveRecord::Schema.define(version: 20150710134312) do
     t.string "code", null: false
     t.string "slug", null: false
   end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "language_id",                    null: false
+    t.integer  "user_id",                        null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "rating",         default: 0,     null: false
+    t.integer  "upvote_count",   default: 0,     null: false
+    t.integer  "downvote_count", default: 0,     null: false
+    t.boolean  "show_in_list",   default: false, null: false
+    t.string   "title",                          null: false
+    t.string   "image"
+    t.string   "lead",                           null: false
+    t.text     "body",                           null: false
+    t.string   "tags_cache",     default: [],    null: false, array: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "posts", ["agent_id"], name: "index_posts_on_agent_id", using: :btree
+  add_index "posts", ["language_id"], name: "index_posts_on_language_id", using: :btree
+  add_index "posts", ["show_in_list", "language_id"], name: "index_posts_on_show_in_list_and_language_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.integer  "language_id",             null: false
@@ -108,6 +131,9 @@ ActiveRecord::Schema.define(version: 20150710134312) do
   add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
 
   add_foreign_key "agents", "browsers"
+  add_foreign_key "posts", "agents"
+  add_foreign_key "posts", "languages"
+  add_foreign_key "posts", "users"
   add_foreign_key "tags", "languages"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "agents"

@@ -59,3 +59,17 @@ ru:
       user_role:
         user_id: "пользователь"
         role: "роль"
+      post:
+        language_id: "язык"
+        user_id: "автор"
+        agent_id: "АП"
+        ip: "IP"
+        rating: "рейтинг"
+        upvote_count: "количество голосов «за»"
+        downvote_count: "количество голосов «против»"
+        show_in_list: "показывать в списке"
+        title: "название"
+        image: "картинка"
+        lead: "аннотация"
+        body: "текст"
+        tags_cache: "метки"
