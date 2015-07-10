@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  describe 'class definition' do
-    it 'includes has_language' do
-      expect(Post.included_modules).to include(HasLanguage)
-    end
+  it_behaves_like 'has_language'
+  it_behaves_like 'required_user'
 
+  describe 'class definition' do
     it 'includes has_trace' do
       expect(Post.included_modules).to include(HasTrace)
     end
@@ -16,11 +15,6 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'validateion' do
-    it 'fails without user' do
-      post = build :post, user: nil
-      expect(post).not_to be_valid
-    end
-
     it 'fails without title' do
       post = build :post, title: ' '
       expect(post).not_to be_valid

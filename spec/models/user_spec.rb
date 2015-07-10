@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it_behaves_like 'has_language'
+
   context 'before validating' do
     it 'normalizes email' do
       user = User.new email: 'USERNAME@example.com'
