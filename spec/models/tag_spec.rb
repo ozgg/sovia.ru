@@ -2,28 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Tag, type: :model do
   it_behaves_like 'has_language'
+  it_behaves_like 'has_name_with_slug'
 
   context 'validating' do
-    it 'fails without name' do
-      tag = build :tag, name: ' '
-      expect(tag).not_to be_valid
-    end
-
-    it 'normalizes name before validation' do
-      tag = build :tag, name: ' Слово  и  дело  '
-      tag.valid?
-      expect(tag.name).to eq('Слово и дело')
-    end
-
-    it 'generates slug before validation' do
-      tag = build :tag, name: ' Ёжики? В... ту-мане?! '
-      tag.valid?
-      expect(tag.slug).to eq('ёжикивтумане')
-    end
-
-    it 'fails with non-unique slug for language' do
-      tag = create :tag, name: 'Дубль'
-      expect(build :tag, language: tag.language, name: 'Дубль!').not_to be_valid
+    it 'passes with valid attributes' do
+      expect(build :tag).to be_valid
     end
   end
 end
