@@ -6,7 +6,7 @@ en:
           attributes:
             email:
               unreasonable: "does not look like e-mail"
-            login:
+            uid:
               invalid: "can contain 1 to 30 English letters, digits or underscores"
     attributes:
       language:

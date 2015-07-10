@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709102041) do
+ActiveRecord::Schema.define(version: 20150709225935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,41 @@ ActiveRecord::Schema.define(version: 20150709102041) do
   add_index "tags", ["language_id"], name: "index_tags_on_language_id", using: :btree
   add_index "tags", ["slug", "language_id"], name: "index_tags_on_slug_and_language_id", using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.integer  "language_id",                     null: false
+    t.inet     "ip"
+    t.integer  "agent_id"
+    t.integer  "network",                         null: false
+    t.integer  "user_id"
+    t.string   "uid",                             null: false
+    t.string   "password_digest"
+    t.string   "email"
+    t.string   "screen_name"
+    t.string   "name"
+    t.string   "image"
+    t.integer  "rating",          default: 0,     null: false
+    t.integer  "upvote_count",    default: 0,     null: false
+    t.integer  "downvote_count",  default: 0,     null: false
+    t.integer  "posts_count",     default: 0,     null: false
+    t.integer  "dreams_count",    default: 0,     null: false
+    t.integer  "questions_count", default: 0,     null: false
+    t.integer  "comments_count",  default: 0,     null: false
+    t.integer  "gender"
+    t.boolean  "bot",             default: false, null: false
+    t.boolean  "allow_login",     default: true,  null: false
+    t.boolean  "email_confirmed", default: false, null: false
+    t.boolean  "allow_mail",      default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "users", ["agent_id"], name: "index_users_on_agent_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["language_id"], name: "index_users_on_language_id", using: :btree
+  add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
+
   add_foreign_key "agents", "browsers"
   add_foreign_key "tags", "languages"
+  add_foreign_key "users", "agents"
+  add_foreign_key "users", "languages"
 end

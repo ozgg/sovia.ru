@@ -6,7 +6,7 @@ ru:
           attributes:
             email:
               unreasonable: "не выглядит как e-mail"
-            login:
+            uid:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
     attributes:
       language:
