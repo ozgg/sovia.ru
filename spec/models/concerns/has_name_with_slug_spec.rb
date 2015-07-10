@@ -9,13 +9,19 @@ shared_examples_for 'has_name_with_slug' do
       expect(entity).not_to be_valid
     end
 
-    it 'normalizes name before validation' do
+    it 'squishes name' do
       entity = build model, name: ' Слово  и  дело  '
       entity.valid?
       expect(entity.name).to eq('Слово и дело')
     end
 
-    it 'generates slug before validation' do
+    it 'limits name length to 50 letters' do
+      entity = build model, name: 'Ы' * 51
+      entity.valid?
+      expect(entity.name.length).to eq(50)
+    end
+
+    it 'generates slug' do
       entity = build model, name: ' Ёжики? В... ту-мане?! '
       entity.valid?
       expect(entity.slug).to eq('ёжикивтумане')

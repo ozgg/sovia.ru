@@ -13,7 +13,7 @@ module HasNameWithSlug
   protected
 
   def normalize_name
-    self.name.squish!
+    self.name = self.name.squish[0..49]
   end
 
   def generate_slug
