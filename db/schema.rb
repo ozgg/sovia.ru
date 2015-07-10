@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710200250) do
+ActiveRecord::Schema.define(version: 20150710225624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150710200250) do
   end
 
   add_index "clients", ["name"], name: "index_clients_on_name", using: :btree
+
+  create_table "goals", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "status",      null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string "code", null: false
@@ -131,6 +142,7 @@ ActiveRecord::Schema.define(version: 20150710200250) do
   add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
 
   add_foreign_key "agents", "browsers"
+  add_foreign_key "goals", "users"
   add_foreign_key "posts", "agents"
   add_foreign_key "posts", "languages"
   add_foreign_key "posts", "users"

@@ -73,3 +73,8 @@ en:
         lead: "lead"
         body: "body"
         tags_cache: "tags"
+      goal:
+        user_id: "user"
+        status: "status"
+        name: "name"
+        description: "description"

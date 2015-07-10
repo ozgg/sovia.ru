@@ -73,3 +73,8 @@ ru:
         lead: "аннотация"
         body: "текст"
         tags_cache: "метки"
+      goal:
+        user_id: "пользователь"
+        status: "состояние"
+        name: "название"
+        description: "описание"
