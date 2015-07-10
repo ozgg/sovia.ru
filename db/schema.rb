@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710225624) do
+ActiveRecord::Schema.define(version: 20150710230935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20150710225624) do
   end
 
   add_index "clients", ["name"], name: "index_clients_on_name", using: :btree
+
+  create_table "deeds", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "goal_id"
+    t.string   "essence",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "deeds", ["goal_id"], name: "index_deeds_on_goal_id", using: :btree
+  add_index "deeds", ["user_id"], name: "index_deeds_on_user_id", using: :btree
 
   create_table "goals", force: :cascade do |t|
     t.integer  "user_id",     null: false
@@ -142,6 +153,8 @@ ActiveRecord::Schema.define(version: 20150710225624) do
   add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
 
   add_foreign_key "agents", "browsers"
+  add_foreign_key "deeds", "goals"
+  add_foreign_key "deeds", "users"
   add_foreign_key "goals", "users"
   add_foreign_key "posts", "agents"
   add_foreign_key "posts", "languages"

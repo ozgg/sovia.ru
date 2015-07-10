@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Goal, type: :model, wip: true do
+RSpec.describe Goal, type: :model do
   it_behaves_like 'required_user'
 
   context 'class definition' do
