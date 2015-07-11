@@ -1,6 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe PostTag, type: :model, wip: true do
+RSpec.describe PostTag, type: :model do
+  let(:post) { create :post }
+  let(:tag) { create :tag }
+
   describe 'validation' do
     it 'fails without post' do
       pair = build :post_tag, post: nil
@@ -23,10 +26,15 @@ RSpec.describe PostTag, type: :model, wip: true do
   end
 
   describe 'after create' do
-    it 'increments post count in tag'
+    it 'increments post count in tag' do
+      expect { create :post_tag, post: post, tag: tag }.to change(tag, :post_count).by(1)
+    end
   end
 
   describe 'after destroy' do
-    it 'decrements post count in tag'
+    it 'decrements post count in tag' do
+      pair = create :post_tag, post: post, tag: tag
+      expect { pair.destroy }.to change(tag, :post_count).by(-1)
+    end
   end
 end
