@@ -78,3 +78,6 @@ ru:
         status: "состояние"
         name: "название"
         description: "описание"
+      post_tag:
+        post_id: "публикация"
+        tag_id: "метка"

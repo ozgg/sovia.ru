@@ -78,3 +78,6 @@ en:
         status: "status"
         name: "name"
         description: "description"
+      post_tag:
+        post_id: "post"
+        tag_id: "tag"

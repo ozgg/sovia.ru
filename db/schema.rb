@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710230935) do
+ActiveRecord::Schema.define(version: 20150711232524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 20150710230935) do
     t.string "code", null: false
     t.string "slug", null: false
   end
+
+  create_table "post_tags", force: :cascade do |t|
+    t.integer  "post_id",    null: false
+    t.integer  "tag_id",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "post_tags", ["post_id"], name: "index_post_tags_on_post_id", using: :btree
+  add_index "post_tags", ["tag_id"], name: "index_post_tags_on_tag_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "language_id",                    null: false
@@ -156,6 +166,8 @@ ActiveRecord::Schema.define(version: 20150710230935) do
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
   add_foreign_key "goals", "users"
+  add_foreign_key "post_tags", "posts"
+  add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "agents"
   add_foreign_key "posts", "languages"
   add_foreign_key "posts", "users"

@@ -3,5 +3,4 @@ FactoryGirl.define do
     user
     essence 'did something nice'
   end
-
 end
