@@ -2,6 +2,8 @@ class DreamPattern < ActiveRecord::Base
   belongs_to :dream
   belongs_to :pattern
 
+  enum status: [:by_owner, :suggested, :rejected, :forced]
+
   validates_presence_of :dream_id, :pattern_id
   validates_uniqueness_of :pattern_id, scope: :dream_id
 
