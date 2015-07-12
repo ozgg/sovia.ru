@@ -1,0 +1,20 @@
+class DreamPattern < ActiveRecord::Base
+  belongs_to :dream
+  belongs_to :pattern
+
+  validates_presence_of :dream_id, :pattern_id
+  validates_uniqueness_of :pattern_id, scope: :dream_id
+
+  after_create :increment_dream_count
+  after_destroy :decrement_dream_count
+
+  protected
+
+  def increment_dream_count
+    self.pattern.increment! :dream_count
+  end
+
+  def decrement_dream_count
+    self.pattern.decrement! :dream_count
+  end
+end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712205025) do
+ActiveRecord::Schema.define(version: 20150712225445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,16 @@ ActiveRecord::Schema.define(version: 20150712205025) do
 
   add_index "deeds", ["goal_id"], name: "index_deeds_on_goal_id", using: :btree
   add_index "deeds", ["user_id"], name: "index_deeds_on_user_id", using: :btree
+
+  create_table "dream_patterns", force: :cascade do |t|
+    t.integer "dream_id",   null: false
+    t.integer "pattern_id", null: false
+    t.integer "status",     null: false
+  end
+
+  add_index "dream_patterns", ["dream_id", "pattern_id"], name: "index_dream_patterns_on_dream_id_and_pattern_id", using: :btree
+  add_index "dream_patterns", ["dream_id"], name: "index_dream_patterns_on_dream_id", using: :btree
+  add_index "dream_patterns", ["pattern_id"], name: "index_dream_patterns_on_pattern_id", using: :btree
 
   create_table "dreams", force: :cascade do |t|
     t.integer  "language_id",                          null: false
@@ -311,6 +321,8 @@ ActiveRecord::Schema.define(version: 20150712205025) do
   add_foreign_key "comments", "users"
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
+  add_foreign_key "dream_patterns", "dreams"
+  add_foreign_key "dream_patterns", "patterns"
   add_foreign_key "dreams", "agents"
   add_foreign_key "dreams", "languages"
   add_foreign_key "dreams", "places"
