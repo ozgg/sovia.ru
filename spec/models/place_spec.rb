@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Place, type: :model do
   it_behaves_like 'required_user'
   it_behaves_like 'has_location'
+  it_behaves_like 'has_azimuth'
 
   describe 'class definition' do
     it 'includes has_owner' do
@@ -11,18 +12,12 @@ RSpec.describe Place, type: :model do
   end
 
   describe 'validation' do
+    it 'passes with valid attributes' do
+      expect(build :place).to be_valid
+    end
+
     it 'fails without name' do
       place = build :place, name: ' '
-      expect(place).not_to be_valid
-    end
-
-    it 'fails for azimuth greater than 359' do
-      place = build :place, azimuth: 360
-      expect(place).not_to be_valid
-    end
-
-    it 'fails for azimuth less than 0' do
-      place = build :place, azimuth: -1
       expect(place).not_to be_valid
     end
   end

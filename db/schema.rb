@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712202816) do
+ActiveRecord::Schema.define(version: 20150712205025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,39 @@ ActiveRecord::Schema.define(version: 20150712202816) do
 
   add_index "deeds", ["goal_id"], name: "index_deeds_on_goal_id", using: :btree
   add_index "deeds", ["user_id"], name: "index_deeds_on_user_id", using: :btree
+
+  create_table "dreams", force: :cascade do |t|
+    t.integer  "language_id",                          null: false
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "privacy",                              null: false
+    t.integer  "lucidity",             default: 0,     null: false
+    t.integer  "mood",                 default: 0,     null: false
+    t.integer  "azimuth"
+    t.integer  "body_position"
+    t.boolean  "needs_interpretation", default: false, null: false
+    t.boolean  "interpretation_given", default: false, null: false
+    t.integer  "time_of_day"
+    t.integer  "comments_count",       default: 0,     null: false
+    t.boolean  "show_image",           default: true,  null: false
+    t.integer  "rating",               default: 0,     null: false
+    t.integer  "upvote_count",         default: 0,     null: false
+    t.integer  "downvote_count",       default: 0,     null: false
+    t.string   "image"
+    t.string   "title"
+    t.text     "body",                                 null: false
+    t.string   "patterns_cache",       default: [],    null: false, array: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "dreams", ["agent_id"], name: "index_dreams_on_agent_id", using: :btree
+  add_index "dreams", ["language_id", "privacy"], name: "index_dreams_on_language_id_and_privacy", using: :btree
+  add_index "dreams", ["language_id"], name: "index_dreams_on_language_id", using: :btree
+  add_index "dreams", ["place_id"], name: "index_dreams_on_place_id", using: :btree
+  add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree
 
   create_table "goals", force: :cascade do |t|
     t.integer  "user_id",     null: false
@@ -278,6 +311,10 @@ ActiveRecord::Schema.define(version: 20150712202816) do
   add_foreign_key "comments", "users"
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
+  add_foreign_key "dreams", "agents"
+  add_foreign_key "dreams", "languages"
+  add_foreign_key "dreams", "places"
+  add_foreign_key "dreams", "users"
   add_foreign_key "goals", "users"
   add_foreign_key "grains", "languages"
   add_foreign_key "grains", "patterns"
