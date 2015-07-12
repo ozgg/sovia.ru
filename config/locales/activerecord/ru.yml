@@ -81,3 +81,12 @@ ru:
       post_tag:
         post_id: "публикация"
         tag_id: "метка"
+      place:
+        user_id: "пользователь"
+        dreams_count: "количество снов"
+        latitude: "широта"
+        longitude: "долгота"
+        name: "название"
+        image: "картинка"
+        description: "описание"
+        azimuth: "направление головы"

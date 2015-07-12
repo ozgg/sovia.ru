@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711232524) do
+ActiveRecord::Schema.define(version: 20150712115621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,21 @@ ActiveRecord::Schema.define(version: 20150711232524) do
     t.string "code", null: false
     t.string "slug", null: false
   end
+
+  create_table "places", force: :cascade do |t|
+    t.integer  "user_id",                  null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "azimuth"
+    t.integer  "dreams_count", default: 0, null: false
+    t.string   "name",                     null: false
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
   create_table "post_tags", force: :cascade do |t|
     t.integer  "post_id",    null: false
@@ -166,6 +181,7 @@ ActiveRecord::Schema.define(version: 20150711232524) do
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
   add_foreign_key "goals", "users"
+  add_foreign_key "places", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "agents"

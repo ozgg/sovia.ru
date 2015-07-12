@@ -81,3 +81,12 @@ en:
       post_tag:
         post_id: "post"
         tag_id: "tag"
+      place:
+        user_id: "user"
+        dreams_count: "dream count"
+        latitude: "latitude"
+        longitude: "longitude"
+        name: "name"
+        image: "image"
+        description: "description"
+        azimuth: "direction of head"
