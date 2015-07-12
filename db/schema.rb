@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712155338) do
+ActiveRecord::Schema.define(version: 20150712172003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,29 @@ ActiveRecord::Schema.define(version: 20150712155338) do
   end
 
   add_index "clients", ["name"], name: "index_clients_on_name", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "language_id",                      null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "parent_id"
+    t.integer  "commentable_id",                   null: false
+    t.string   "commentable_type",                 null: false
+    t.boolean  "best",             default: false, null: false
+    t.boolean  "visible",          default: true,  null: false
+    t.integer  "rating",           default: 0,     null: false
+    t.integer  "upvote_count",     default: 0,     null: false
+    t.integer  "downvote_count",   default: 0,     null: false
+    t.text     "body",                             null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "comments", ["agent_id"], name: "index_comments_on_agent_id", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["language_id"], name: "index_comments_on_language_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "deeds", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -242,6 +265,9 @@ ActiveRecord::Schema.define(version: 20150712155338) do
   add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
 
   add_foreign_key "agents", "browsers"
+  add_foreign_key "comments", "agents"
+  add_foreign_key "comments", "languages"
+  add_foreign_key "comments", "users"
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
   add_foreign_key "goals", "users"
