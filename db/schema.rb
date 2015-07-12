@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712115621) do
+ActiveRecord::Schema.define(version: 20150712135254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150712115621) do
     t.integer  "rating",         default: 0,     null: false
     t.integer  "upvote_count",   default: 0,     null: false
     t.integer  "downvote_count", default: 0,     null: false
+    t.integer  "comments_count", default: 0,     null: false
     t.boolean  "show_in_list",   default: false, null: false
     t.string   "title",                          null: false
     t.string   "image"
@@ -121,6 +122,25 @@ ActiveRecord::Schema.define(version: 20150712115621) do
   add_index "posts", ["language_id"], name: "index_posts_on_language_id", using: :btree
   add_index "posts", ["show_in_list", "language_id"], name: "index_posts_on_show_in_list_and_language_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "questions", force: :cascade do |t|
+    t.integer  "language_id",                    null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "rating",         default: 0,     null: false
+    t.integer  "upvote_count",   default: 0,     null: false
+    t.integer  "downvote_count", default: 0,     null: false
+    t.integer  "comments_count", default: 0,     null: false
+    t.boolean  "answered",       default: false, null: false
+    t.text     "body",                           null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "questions", ["agent_id"], name: "index_questions_on_agent_id", using: :btree
+  add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.integer  "language_id",             null: false
@@ -187,6 +207,9 @@ ActiveRecord::Schema.define(version: 20150712115621) do
   add_foreign_key "posts", "agents"
   add_foreign_key "posts", "languages"
   add_foreign_key "posts", "users"
+  add_foreign_key "questions", "agents"
+  add_foreign_key "questions", "languages"
+  add_foreign_key "questions", "users"
   add_foreign_key "tags", "languages"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "agents"
