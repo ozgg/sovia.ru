@@ -26,10 +26,5 @@ shared_examples_for 'has_name_with_slug' do
       entity.valid?
       expect(entity.slug).to eq('ёжикивтумане')
     end
-
-    it 'fails with non-unique slug for language' do
-      entity = create model, name: 'Дубль'
-      expect(build :tag, language: entity.language, name: 'Дубль!').not_to be_valid
-    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712135254) do
+ActiveRecord::Schema.define(version: 20150712155338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,10 +69,54 @@ ActiveRecord::Schema.define(version: 20150712135254) do
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
+  create_table "grains", force: :cascade do |t|
+    t.integer  "language_id",             null: false
+    t.integer  "user_id",                 null: false
+    t.integer  "pattern_id"
+    t.integer  "dream_count", default: 0, null: false
+    t.integer  "category"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "image"
+    t.string   "name",                    null: false
+    t.string   "slug",                    null: false
+    t.text     "description"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "grains", ["language_id"], name: "index_grains_on_language_id", using: :btree
+  add_index "grains", ["pattern_id"], name: "index_grains_on_pattern_id", using: :btree
+  add_index "grains", ["slug", "user_id"], name: "index_grains_on_slug_and_user_id", using: :btree
+  add_index "grains", ["user_id"], name: "index_grains_on_user_id", using: :btree
+
   create_table "languages", force: :cascade do |t|
     t.string "code", null: false
     t.string "slug", null: false
   end
+
+  create_table "patterns", force: :cascade do |t|
+    t.integer  "language_id",                null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "dream_count",    default: 0, null: false
+    t.integer  "comments_count", default: 0, null: false
+    t.integer  "rating",         default: 0, null: false
+    t.integer  "upvote_count",   default: 0, null: false
+    t.integer  "downvote_count", default: 0, null: false
+    t.string   "name",                       null: false
+    t.string   "slug",                       null: false
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "patterns", ["agent_id"], name: "index_patterns_on_agent_id", using: :btree
+  add_index "patterns", ["language_id"], name: "index_patterns_on_language_id", using: :btree
+  add_index "patterns", ["slug", "language_id"], name: "index_patterns_on_slug_and_language_id", using: :btree
+  add_index "patterns", ["user_id"], name: "index_patterns_on_user_id", using: :btree
 
   create_table "places", force: :cascade do |t|
     t.integer  "user_id",                  null: false
@@ -201,6 +245,12 @@ ActiveRecord::Schema.define(version: 20150712135254) do
   add_foreign_key "deeds", "goals"
   add_foreign_key "deeds", "users"
   add_foreign_key "goals", "users"
+  add_foreign_key "grains", "languages"
+  add_foreign_key "grains", "patterns"
+  add_foreign_key "grains", "users"
+  add_foreign_key "patterns", "agents"
+  add_foreign_key "patterns", "languages"
+  add_foreign_key "patterns", "users"
   add_foreign_key "places", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"

@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :deeds, dependent: :destroy
   has_many :places, dependent: :destroy
   has_many :questions, dependent: :destroy
+  has_many :patterns, dependent: :nullify
+  has_many :grains, dependent: :destroy
 
   enum gender: [:female, :male]
   enum network: [:native, :vk, :twitter, :fb, :mail_ru]
