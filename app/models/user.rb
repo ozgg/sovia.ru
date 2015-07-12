@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :user_roles, dependent: :destroy
+  has_many :user_languages, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :deeds, dependent: :destroy

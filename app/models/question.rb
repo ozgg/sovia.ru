@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   include HasTrace
   include HasOwner
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :body, length: { minimum: 10, maximum: 500 }

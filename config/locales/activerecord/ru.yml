@@ -142,3 +142,6 @@ ru:
         upvote_count: "количество голосов «за»"
         downvote_count: "количество голосов «против»"
         body: "текст комментария"
+      user_language:
+        user_id: "пользователь"
+        language_id: "язык"

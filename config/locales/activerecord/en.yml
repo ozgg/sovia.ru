@@ -142,3 +142,6 @@ en:
         upvote_count: "upvote count"
         downvote_count: "downvote count"
         body: "comment text"
+      user_language:
+        user_id: "user"
+        language_id: "language"
