@@ -168,3 +168,10 @@ ru:
         title: "название"
         body: "сюжет"
         patterns_cache: "кеш образов"
+      dream_pattern:
+        dream_id: "сон"
+        pattern_id: "образ"
+        status: "состояние"
+      dream_grain:
+        dream_id: "сон"
+        grain_id: "личный образ"

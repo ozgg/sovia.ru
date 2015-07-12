@@ -6,6 +6,8 @@ class Pattern < ActiveRecord::Base
 
   belongs_to :user
   has_many :grains, dependent: :nullify
+  has_many :dream_patterns, dependent: :destroy
+  has_many :dreams, through: :dream_patterns
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates_uniqueness_of :slug, scope: :language_id

@@ -168,3 +168,10 @@ en:
         title: "title"
         body: "plot"
         patterns_cache: "patterns cache"
+      dream_pattern:
+        dream_id: "dream"
+        pattern_id: "pattern"
+        status: "status"
+      dream_grain:
+        dream_id: "dream"
+        grain_id: "personal pattern"
