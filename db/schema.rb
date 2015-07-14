@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714135802) do
+ActiveRecord::Schema.define(version: 20150714214639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -292,6 +292,28 @@ ActiveRecord::Schema.define(version: 20150714135802) do
   add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
   add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
+  create_table "side_notes", force: :cascade do |t|
+    t.integer  "language_id",                    null: false
+    t.integer  "user_id",                        null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.boolean  "active",         default: false, null: false
+    t.integer  "rating",         default: 0,     null: false
+    t.integer  "upvote_count",   default: 0,     null: false
+    t.integer  "downvote_count", default: 0,     null: false
+    t.integer  "comments_count", default: 0,     null: false
+    t.string   "image"
+    t.string   "link",                           null: false
+    t.string   "title",                          null: false
+    t.text     "body"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "side_notes", ["agent_id"], name: "index_side_notes_on_agent_id", using: :btree
+  add_index "side_notes", ["language_id"], name: "index_side_notes_on_language_id", using: :btree
+  add_index "side_notes", ["user_id"], name: "index_side_notes_on_user_id", using: :btree
+
   create_table "tags", force: :cascade do |t|
     t.integer  "language_id",             null: false
     t.string   "name",                    null: false
@@ -405,6 +427,9 @@ ActiveRecord::Schema.define(version: 20150714135802) do
   add_foreign_key "questions", "agents"
   add_foreign_key "questions", "languages"
   add_foreign_key "questions", "users"
+  add_foreign_key "side_notes", "agents"
+  add_foreign_key "side_notes", "languages"
+  add_foreign_key "side_notes", "users"
   add_foreign_key "tags", "languages"
   add_foreign_key "tokens", "agents"
   add_foreign_key "tokens", "clients"
