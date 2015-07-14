@@ -178,3 +178,7 @@ ru:
       dream_factor:
         dream_id: "сон"
         factor: "фактор"
+      pattern_link:
+        pattern_id: "образ"
+        target_id: "образ-цель"
+        category: "категория"

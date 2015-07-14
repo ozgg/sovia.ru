@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714112321) do
+ActiveRecord::Schema.define(version: 20150714125646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,15 @@ ActiveRecord::Schema.define(version: 20150714112321) do
     t.string "code", null: false
     t.string "slug", null: false
   end
+
+  create_table "pattern_links", force: :cascade do |t|
+    t.integer "pattern_id", null: false
+    t.integer "target_id",  null: false
+    t.integer "category",   null: false
+  end
+
+  add_index "pattern_links", ["pattern_id", "target_id", "category"], name: "index_pattern_links_on_pattern_id_and_target_id_and_category", using: :btree
+  add_index "pattern_links", ["pattern_id"], name: "index_pattern_links_on_pattern_id", using: :btree
 
   create_table "patterns", force: :cascade do |t|
     t.integer  "language_id",                null: false
@@ -350,6 +359,7 @@ ActiveRecord::Schema.define(version: 20150714112321) do
   add_foreign_key "grains", "languages"
   add_foreign_key "grains", "patterns"
   add_foreign_key "grains", "users"
+  add_foreign_key "pattern_links", "patterns"
   add_foreign_key "patterns", "agents"
   add_foreign_key "patterns", "languages"
   add_foreign_key "patterns", "users"

@@ -178,3 +178,7 @@ en:
       dream_factor:
         dream_id: "dream"
         factor: "factor"
+      pattern_link:
+        pattern_id: "pattern"
+        target_id: "target"
+        category: "category"
