@@ -1,10 +1,10 @@
 class Dream < ActiveRecord::Base
   include HasLanguage
   include HasOwner
+  include HasTrace
 
   belongs_to :user
   belongs_to :place
-  belongs_to :agent
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :dream_patterns, dependent: :destroy

@@ -2,17 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   it_behaves_like 'has_language'
+  it_behaves_like 'has_owner'
   it_behaves_like 'required_user'
-
-  describe 'class definition' do
-    it 'includes has_trace' do
-      expect(Post.included_modules).to include(HasTrace)
-    end
-
-    it 'includes has_owner' do
-      expect(Post.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_trace'
 
   describe 'validateion' do
     it 'fails without title' do

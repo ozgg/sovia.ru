@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Goal, type: :model do
   it_behaves_like 'required_user'
-
-  context 'class definition' do
-    it 'includes has_owner' do
-      expect(Goal.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_owner'
 
   context 'validation' do
     it 'fails without name' do

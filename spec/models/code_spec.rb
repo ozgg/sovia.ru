@@ -2,16 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Code, type: :model do
   it_behaves_like 'required_user'
-
-  describe 'class definition' do
-    it 'includes has_owner' do
-      expect(Code.included_modules).to include(HasOwner)
-    end
-
-    it 'includes has_trace' do
-      expect(Code.included_modules).to include(HasTrace)
-    end
-  end
+  it_behaves_like 'has_owner'
+  it_behaves_like 'has_trace'
 
   describe 'new instance' do
     it 'generates code body' do

@@ -4,12 +4,7 @@ RSpec.describe Pattern, type: :model do
   it_behaves_like 'has_language'
   it_behaves_like 'has_name_with_slug'
   it_behaves_like 'has_unique_slug'
-
-  describe 'class definition' do
-    it 'includes has_owner' do
-      expect(Pattern.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_owner'
 
   describe 'validation' do
     it 'passes with valid attributes' do

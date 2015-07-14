@@ -4,12 +4,7 @@ RSpec.describe Grain, type: :model do
   it_behaves_like 'has_language'
   it_behaves_like 'required_user'
   it_behaves_like 'has_name_with_slug'
-
-  describe 'class definition' do
-    it 'includes has_owner' do
-      expect(Grain.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_owner'
 
   describe 'validation' do
     it 'fails with non-unique slug for user and language' do

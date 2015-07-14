@@ -3,12 +3,8 @@ require 'rails_helper'
 RSpec.describe Dream, type: :model do
   it_behaves_like 'has_language'
   it_behaves_like 'has_azimuth'
-
-  describe 'class definition' do
-    it 'includes has_owner' do
-      expect(Dream.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_owner'
+  it_behaves_like 'has_trace'
 
   describe 'validation' do
     it 'passes with valid attributes' do

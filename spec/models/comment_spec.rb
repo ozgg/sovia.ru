@@ -2,12 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   it_behaves_like 'has_language'
-
-  describe 'class definition' do
-    it 'includes has_owner' do
-      expect(Comment.included_modules).to include(HasOwner)
-    end
-  end
+  it_behaves_like 'has_owner'
+  it_behaves_like 'has_trace'
 
   describe 'validation' do
     it 'fails without commentable object' do
