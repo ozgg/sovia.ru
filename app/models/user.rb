@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :grains, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :dreams, dependent: :destroy
+  has_many :tokens, dependent: :destroy
+  has_many :side_notes, dependent: :destroy
 
   enum gender: [:female, :male]
   enum network: [:native, :vk, :twitter, :fb, :mail_ru]
