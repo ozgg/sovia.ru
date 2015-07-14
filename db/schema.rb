@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714132213) do
+ActiveRecord::Schema.define(version: 20150714135802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,6 +304,22 @@ ActiveRecord::Schema.define(version: 20150714132213) do
   add_index "tags", ["language_id"], name: "index_tags_on_language_id", using: :btree
   add_index "tags", ["slug", "language_id"], name: "index_tags_on_slug_and_language_id", using: :btree
 
+  create_table "tokens", force: :cascade do |t|
+    t.integer  "user_id",                   null: false
+    t.integer  "client_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.boolean  "active",     default: true, null: false
+    t.string   "token",                     null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "tokens", ["agent_id"], name: "index_tokens_on_agent_id", using: :btree
+  add_index "tokens", ["client_id"], name: "index_tokens_on_client_id", using: :btree
+  add_index "tokens", ["token"], name: "index_tokens_on_token", unique: true, using: :btree
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
+
   create_table "user_languages", force: :cascade do |t|
     t.integer "user_id",     null: false
     t.integer "language_id", null: false
@@ -390,6 +406,9 @@ ActiveRecord::Schema.define(version: 20150714132213) do
   add_foreign_key "questions", "languages"
   add_foreign_key "questions", "users"
   add_foreign_key "tags", "languages"
+  add_foreign_key "tokens", "agents"
+  add_foreign_key "tokens", "clients"
+  add_foreign_key "tokens", "users"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
   add_foreign_key "user_roles", "users"

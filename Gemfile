@@ -27,6 +27,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'puma'
 gem 'mina', group: :development
 
+# Backport from Rails 5
+gem 'has_secure_token'
+
 gem 'kaminari'
 gem 'mini_magick'
 gem 'carrierwave'
