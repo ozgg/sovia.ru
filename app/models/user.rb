@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   validate :uid_should_be_valid
   validate :email_should_be_reasonable
 
+  mount_uploader :image, AvatarUploader
+
   protected
 
   def normalize_screen_name

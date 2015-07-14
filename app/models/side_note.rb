@@ -7,4 +7,6 @@ class SideNote < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :user_id, :title, :link
+
+  mount_uploader :image, SideNoteUploader
 end

@@ -9,4 +9,6 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :user_id, :title, :lead, :body
+
+  mount_uploader :image, ImageUploader
 end

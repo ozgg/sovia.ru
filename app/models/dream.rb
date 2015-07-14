@@ -20,4 +20,6 @@ class Dream < ActiveRecord::Base
   validates :mood, numericality: { greater_than_or_equal_to: -2, less_than_or_equal_to: 2 }
   validates :lucidity, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
   validates_presence_of :body
+
+  mount_uploader :image, ImageUploader
 end

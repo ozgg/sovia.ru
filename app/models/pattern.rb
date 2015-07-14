@@ -12,4 +12,6 @@ class Pattern < ActiveRecord::Base
   has_many :pattern_links, dependent: :destroy
 
   validates_uniqueness_of :slug, scope: :language_id
+
+  mount_uploader :image, ImageUploader
 end

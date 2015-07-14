@@ -6,4 +6,6 @@ class Place < ActiveRecord::Base
 
   validates_presence_of :user_id, :name
   validates :azimuth, numericality: { greater_than_or_equal_to: 0, less_than: 360 }, allow_nil: true
+
+  mount_uploader :image, ImageUploader
 end

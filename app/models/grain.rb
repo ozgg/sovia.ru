@@ -10,4 +10,6 @@ class Grain < ActiveRecord::Base
 
   validates_presence_of :user_id
   validates_uniqueness_of :slug, scope: [:user_id, :language_id]
+
+  mount_uploader :image, ImageUploader
 end
