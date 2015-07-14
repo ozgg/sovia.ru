@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
+
+  root 'index#index'
+
+  scope '(:locale)', locale: /ru|en/ do
+
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
