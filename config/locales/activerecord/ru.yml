@@ -175,3 +175,6 @@ ru:
       dream_grain:
         dream_id: "сон"
         grain_id: "личный образ"
+      dream_factor:
+        dream_id: "сон"
+        factor: "фактор"

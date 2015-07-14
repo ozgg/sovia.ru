@@ -11,6 +11,7 @@ class Dream < ActiveRecord::Base
   has_many :patterns, through: :dream_patterns
   has_many :dream_grains, dependent: :destroy
   has_many :grains, through: :dream_grains
+  has_many :dream_factors, dependent: :destroy
 
   enum privacy: [:generally_accessible, :visible_to_community, :visible_to_followees, :personal]
   enum body_position: [:left, :back, :right, :stomach]

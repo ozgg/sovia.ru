@@ -175,3 +175,6 @@ en:
       dream_grain:
         dream_id: "dream"
         grain_id: "personal pattern"
+      dream_factor:
+        dream_id: "dream"
+        factor: "factor"
