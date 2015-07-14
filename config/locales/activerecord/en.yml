@@ -190,3 +190,10 @@ en:
         activated: "activated"
         body: "code"
         payload: "payload"
+      token:
+        user_id: "user"
+        client_id: "client"
+        agent_id: "UA"
+        ip: "IP address"
+        active: "active"
+        token: "token"

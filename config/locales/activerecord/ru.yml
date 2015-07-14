@@ -190,3 +190,10 @@ ru:
         activated: "активирован"
         body: "код"
         payload: "полезная нагрузка"
+      token:
+        user_id: "пользователь"
+        client_id: "клиент"
+        agent_id: "АП"
+        ip: "IP-адрес"
+        active: "активный"
+        token: "жетон"
