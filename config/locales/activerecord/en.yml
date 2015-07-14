@@ -182,3 +182,11 @@ en:
         pattern_id: "pattern"
         target_id: "target"
         category: "category"
+      code:
+        user_id: "user"
+        agent_id: "UA"
+        ip: "IP address"
+        category: "category"
+        activated: "activated"
+        body: "code"
+        payload: "payload"

@@ -182,3 +182,11 @@ ru:
         pattern_id: "образ"
         target_id: "образ-цель"
         category: "категория"
+      code:
+        user_id: "пользователь"
+        agent_id: "АП"
+        ip: "IP-адрес"
+        category: "категория"
+        activated: "активирован"
+        body: "код"
+        payload: "полезная нагрузка"

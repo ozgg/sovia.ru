@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714125646) do
+ActiveRecord::Schema.define(version: 20150714132213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,21 @@ ActiveRecord::Schema.define(version: 20150714125646) do
   end
 
   add_index "clients", ["name"], name: "index_clients_on_name", using: :btree
+
+  create_table "codes", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.integer  "category",                   null: false
+    t.boolean  "activated",  default: false, null: false
+    t.string   "body",                       null: false
+    t.string   "payload"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "codes", ["agent_id"], name: "index_codes_on_agent_id", using: :btree
+  add_index "codes", ["user_id"], name: "index_codes_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "language_id",                      null: false
@@ -341,6 +356,8 @@ ActiveRecord::Schema.define(version: 20150714125646) do
   add_index "users", ["uid", "network"], name: "index_users_on_uid_and_network", using: :btree
 
   add_foreign_key "agents", "browsers"
+  add_foreign_key "codes", "agents"
+  add_foreign_key "codes", "users"
   add_foreign_key "comments", "agents"
   add_foreign_key "comments", "languages"
   add_foreign_key "comments", "users"
