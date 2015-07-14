@@ -9,6 +9,7 @@ class Pattern < ActiveRecord::Base
   has_many :dream_patterns, dependent: :destroy
   has_many :dreams, through: :dream_patterns
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :pattern_links, dependent: :destroy
 
   validates_uniqueness_of :slug, scope: :language_id
 end
