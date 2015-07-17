@@ -25,9 +25,7 @@ class AuthenticationsController < ApplicationController
   protected
 
   def redirect_authenticated_user
-    unless current_user.nil?
-      redirect_to root_path
-    end
+    redirect_to root_path, notice: t(:already_logged_in) unless current_user.nil?
   end
 
   # @param [User] user

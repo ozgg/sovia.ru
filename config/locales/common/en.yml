@@ -4,3 +4,5 @@ en:
       name: "Russian"
     english:
       name: "English"
+  already_logged_in: "You are already logged in"
+  please_log_in: "Please log in"

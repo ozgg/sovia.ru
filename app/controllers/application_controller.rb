@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
   def record_not_found
     ActiveRecord::RecordNotFound
   end
+
+  def restrict_anonymous_access
+    redirect_to root_path, notice: t(:please_log_in) unless current_user.is_a? User
+  end
 end

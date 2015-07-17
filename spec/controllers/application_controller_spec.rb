@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController, type: :controller do
-  describe '#current_user' do
-    let(:user) { create :user }
+  let(:user) { create :user }
 
+  describe '#current_user' do
     before(:each) do
       allow(Token).to receive(:user_by_token).and_return(user)
     end
@@ -35,6 +35,30 @@ RSpec.describe ApplicationController, type: :controller do
       it 'does not call Token#user_by_token' do
         controller.current_user
         expect(Token).not_to have_received(:user_by_token)
+      end
+    end
+  end
+
+  describe '#restrict_anonymous_access' do
+    context 'when user is logged in' do
+      before :each do
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it 'does not call redirect_to' do
+        expect(controller).not_to receive(:redirect_to)
+        controller.send(:restrict_anonymous_access)
+      end
+    end
+
+    context 'when user is not logged in' do
+      before :each do
+        allow(controller).to receive(:current_user).and_return(nil)
+      end
+
+      it 'redirects to root path' do
+        expect(controller).to receive(:redirect_to).with(root_path, notice: I18n.t(:please_log_in))
+        controller.send(:restrict_anonymous_access)
       end
     end
   end
