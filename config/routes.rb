@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root 'index#index'
 
   scope '(:locale)', locale: /ru|en/ do
-
+    controller :authentications do
+      get 'login' => :new
+      post 'login' => :create
+      delete 'logout' => :destroy
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

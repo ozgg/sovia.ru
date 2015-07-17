@@ -21,4 +21,8 @@ class Token < ActiveRecord::Base
     instance = self.find_by user_id: user_id, token: token, active: true
     instance.is_a?(self) ? instance.user : nil
   end
+
+  def cookie_pair
+    "#{user_id}:#{token}"
+  end
 end
