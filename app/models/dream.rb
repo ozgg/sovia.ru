@@ -18,7 +18,8 @@ class Dream < ActiveRecord::Base
 
   validates :azimuth, numericality: { greater_than_or_equal_to: 0, less_than: 360 }, allow_nil: true
   validates :mood, numericality: { greater_than_or_equal_to: -2, less_than_or_equal_to: 2 }
-  validates :lucidity, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+  validates :lucidity, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+  validates :time_of_day, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }, allow_nil: true
   validates_presence_of :body
 
   mount_uploader :image, ImageUploader

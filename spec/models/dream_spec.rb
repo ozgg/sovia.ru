@@ -31,5 +31,13 @@ RSpec.describe Dream, type: :model do
     it 'fails with lucidity greater than 5' do
       expect(build :dream, lucidity: 6).not_to be_valid
     end
+
+    it 'fails with time of day less than 0' do
+      expect(build :dream, time_of_day: -1).not_to be_valid
+    end
+
+    it 'fails with time of day greater than 23' do
+      expect(build :dream, time_of_day: 24).not_to be_valid
+    end
   end
 end
