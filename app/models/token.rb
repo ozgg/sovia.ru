@@ -9,4 +9,8 @@ class Token < ActiveRecord::Base
 
   validates_presence_of :user_id
   validates_uniqueness_of :token
+
+  def self.user_by_token(token)
+
+  end
 end
