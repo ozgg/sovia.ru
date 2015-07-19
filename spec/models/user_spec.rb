@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   it_behaves_like 'has_language'
   it_behaves_like 'has_trace'
 
-  context 'before validating' do
+  describe 'before validating' do
     it 'normalizes email' do
       user = User.new email: 'USERNAME@example.com'
       user.valid?
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context 'validating' do
+  describe 'validating' do
     it 'fails without uid' do
       user = build :user, network: :vk, uid: ' '
       expect(user).not_to be_valid

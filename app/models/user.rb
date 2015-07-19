@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, AvatarUploader
 
+  def has_role?(role)
+    UserRole.user_has_role? self, role
+  end
+
   protected
 
   def normalize_screen_name
