@@ -54,4 +54,12 @@ RSpec.describe User, type: :model do
       expect(build :user).to be_valid
     end
   end
+
+  describe '#has_role?' do
+    it 'calls UserRole#user_has_role? for user and role' do
+      user = create :user
+      expect(UserRole).to receive(:user_has_role?).with(user, :role)
+      user.has_role? :role
+    end
+  end
 end
