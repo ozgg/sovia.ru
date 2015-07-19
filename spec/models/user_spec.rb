@@ -63,7 +63,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#add_role', wip: true do
+  describe '#add_role' do
     let(:user) { create :user }
 
     it 'inserts row into user_roles for absent pair' do
@@ -77,6 +77,26 @@ RSpec.describe User, type: :model do
 
     it 'leaves table intact for non-existing role' do
       expect { user.add_role :non_existent }.not_to change(UserRole, :count)
+    end
+  end
+
+  describe '#remove_role' do
+    let(:user) { create :user }
+
+    before :each do
+      create :user_role, user: user, role: :administrator
+    end
+
+    it 'removes row from user_role for existing pair' do
+      expect { user.remove_role :administrator }.to change(UserRole, :count).by(-1)
+    end
+
+    it 'leaves table intact for absent pair' do
+      expect { user.remove_role :moderator }.not_to change(UserRole, :count)
+    end
+
+    it 'leaves table intact for invalid role' do
+      expect { user.remove_role :non_existent }.not_to change(UserRole, :count)
     end
   end
 end

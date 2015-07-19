@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def remove_role(role)
+    UserRole.destroy_all(user: self, role: UserRole.roles[role]) if UserRole.role_exists? role
+  end
+
   protected
 
   def normalize_screen_name
