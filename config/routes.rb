@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root 'index#index'
 
   scope '(:locale)', locale: /ru|en/ do
+    resource :profile, except: [:destroy]
+
     controller :authentications do
       get 'login' => :new
       post 'login' => :create
