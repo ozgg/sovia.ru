@@ -1,1 +1,4 @@
 ru:
+  profiles:
+    create:
+      success: "Вы зарегистрировались и вошли"

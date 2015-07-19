@@ -32,6 +32,15 @@ class ApplicationController < ActionController::Base
   end
 
   def restrict_anonymous_access
-    redirect_to root_path, notice: t(:please_log_in) unless current_user.is_a? User
+    redirect_to login_path, notice: t(:please_log_in) unless current_user.is_a? User
+  end
+
+  def tracking_for_entity
+    agent = Agent.for_string(request.user_agent || 'n/a')
+    { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
+  end
+
+  def language_for_entity
+    { language: Language.find_by(code: locale) }
   end
 end

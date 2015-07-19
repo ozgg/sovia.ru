@@ -16,4 +16,8 @@ RSpec.describe Agent, type: :model do
       expect(Agent.new name: 'Crawler/1.0').to be_valid
     end
   end
+
+  describe '#for_string' do
+    pending
+  end
 end

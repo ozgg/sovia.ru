@@ -83,6 +83,10 @@ RSpec.describe AuthenticationsController, type: :controller do
         expect(response).to redirect_to(root_path)
       end
     end
+
+    context 'when user is not allowed to log in' do
+      pending
+    end
   end
 
   describe 'delete destroy' do

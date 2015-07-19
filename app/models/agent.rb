@@ -13,4 +13,15 @@ class Agent < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+
+  # Get instance of Agent for given string
+  #
+  # Trims agent name upto 255 characters
+  #
+  # @param [String] name
+  # @return [Agent]
+  def self.for_string(name)
+    criterion = { name: name[0..254] }
+    self.find_by(criterion) || self.create(criterion)
+  end
 end

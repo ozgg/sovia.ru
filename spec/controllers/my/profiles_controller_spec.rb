@@ -1,25 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, type: :controller, wip: true do
+RSpec.describe My::ProfilesController, type: :controller, wip: true do
   let(:password) { 'secret' }
-  let(:user) { create :confirmed_user, password: password, password_confirmation: password }
+  let(:language) { create :russian_language }
+  let(:user) { create :confirmed_user, language: language, password: password, password_confirmation: password }
+
+  before(:each) { I18n.locale = language.code }
 
   describe 'new' do
-    before(:each) { get :new }
-
     context 'when user is logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(user) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(user)
+        get :new
+      end
 
       it 'redirects to profile path' do
-        expect(response).to redirect_to(profile_path)
+        expect(response).to redirect_to(my_profile_path)
       end
     end
 
     context 'when user is not logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(nil) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(nil)
+        get :new
+      end
 
       it 'renders view "new"' do
         expect(response).to render_template(:new)
+      end
+
+      it 'assigns new user to @user' do
+        expect(assigns[:user]).to be_a_new(User)
       end
     end
   end
@@ -37,7 +48,7 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
 
       it 'redirects to profile path' do
         action.call
-        expect(response).to redirect_to(profile_path)
+        expect(response).to redirect_to(my_profile_path)
       end
     end
 
@@ -55,12 +66,17 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
 
         it 'sets cookie with new token' do
           action.call
-          expect(response.cookie['token']).to eq(Token.last.cookie_pair)
+          expect(response.cookies['token']).to eq(Token.last.cookie_pair)
         end
 
         it 'redirects to profile path' do
           action.call
-          expect(response).to redirect_to(profile_path)
+          expect(response).to redirect_to(my_profile_path)
+        end
+
+        it 'assigns User instance to @user' do
+          action.call
+          expect(assigns[:user]).to be_a(User)
         end
       end
 
@@ -71,6 +87,11 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
           expect(action).not_to change(User, :count)
         end
 
+        it 'assigns User instance to @user' do
+          action.call
+          expect(assigns[:user]).to be_a(User)
+        end
+
         it 'renders view "new"' do
           action.call
           expect(response).to render_template(:new)
@@ -78,7 +99,7 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
       end
 
       context 'when user is bot' do
-        let(:action) { -> { post :create, agree: 1, user: user_parameters } }
+        let(:action) { -> { post :create, agree: '1', user: user_parameters } }
 
         it 'does not add user to database' do
           expect(action).not_to change(User, :count)
@@ -93,18 +114,22 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
   end
 
   describe 'show' do
-    before(:each) { get :show }
-
     context 'when user is logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(user) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(user)
+        get :show
+      end
 
       it 'renders view "show"' do
-        expect(response).to render(:show)
+        expect(response).to render_template(:show)
       end
     end
 
     context 'when user is not logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(nil) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(nil)
+        get :show
+      end
 
       it 'redirects to login path' do
         expect(response).to redirect_to(login_path)
@@ -113,10 +138,11 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
   end
 
   describe 'edit' do
-    before(:each) { get :edit }
-
     context 'when user is logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(user) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(user)
+        get :edit
+      end
 
       it 'renders view "edit"' do
         expect(response).to render_template(:edit)
@@ -124,7 +150,10 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
     end
 
     context 'when user is not logged in' do
-      before(:each) { allow(controller).to receive(:current_user).and_return(nil) }
+      before(:each) do
+        allow(controller).to receive(:current_user).and_return(nil)
+        get :edit
+      end
 
       it 'redirects to login path' do
         expect(response).to redirect_to(login_path)
@@ -145,7 +174,7 @@ RSpec.describe ProfilesController, type: :controller, wip: true do
 
       it 'redirects to profile path' do
         action.call
-        expect(response).to redirect_to(profile_path)
+        expect(response).to redirect_to(my_profile_path)
       end
 
       context 'when user changes password' do
