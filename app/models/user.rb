@@ -34,6 +34,12 @@ class User < ActiveRecord::Base
     UserRole.user_has_role? self, role
   end
 
+  def add_role(role)
+    if UserRole.role_exists? role
+      UserRole.create user: self, role: role unless has_role? role
+    end
+  end
+
   protected
 
   def normalize_screen_name
