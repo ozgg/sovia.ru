@@ -44,6 +44,13 @@ class User < ActiveRecord::Base
     UserRole.destroy_all(user: self, role: UserRole.roles[role]) if UserRole.role_exists? role
   end
 
+  # @param [Hash] roles
+  def roles=(roles)
+    roles.each do |role, flag|
+      flag.to_i > 0 ? add_role(role) : remove_role(role)
+    end
+  end
+
   protected
 
   def normalize_screen_name
