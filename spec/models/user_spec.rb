@@ -101,10 +101,30 @@ RSpec.describe User, type: :model do
   end
 
   describe '#add_language' do
-    pending
+    let(:user) { create :user }
+
+    before(:each) { create :user_language, user: user, language: user.language }
+
+    it 'adds new row to user languages for absent link' do
+      expect { user.add_language create(:language) }.to change(UserLanguage, :count).by(1)
+    end
+
+    it 'does not add row to user languages for existing link' do
+      expect { user.add_language user.language }.not_to change(UserLanguage, :count)
+    end
   end
 
   describe '#remove_language' do
-    pending
+    let(:user) { create :user }
+
+    before(:each) { create :user_language, user: user, language: user.language }
+
+    it 'removes row from user languages for existing link' do
+      expect { user.remove_language user.language }.to change(UserLanguage, :count).by(-1)
+    end
+
+    it 'does not change user languages for absent link' do
+      expect { user.remove_language create(:language) }.not_to change(UserLanguage, :count)
+    end
   end
 end
