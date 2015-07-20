@@ -56,8 +56,8 @@ RSpec.describe ApplicationController, type: :controller do
         allow(controller).to receive(:current_user).and_return(nil)
       end
 
-      it 'redirects to root path' do
-        expect(controller).to receive(:redirect_to).with(root_path, notice: I18n.t(:please_log_in))
+      it 'redirects to login path' do
+        expect(controller).to receive(:redirect_to).with(login_path, notice: I18n.t(:please_log_in))
         controller.send(:restrict_anonymous_access)
       end
     end

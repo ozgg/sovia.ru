@@ -51,6 +51,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  def speaks_language?(language)
+    UserLanguage.user_speaks_language? self, language
+  end
+
+  def add_language(language)
+    UserLanguage.create user: self, language: language
+  end
+
+  def remove_language(language)
+    UserLanguage.destroy_all(user: self, language: language)
+  end
+
+  # @param [Hash] language_ids
+  def language_ids=(language_ids)
+    language_ids.each do |language_id, flag|
+      language = Language.find language_id
+      flag.to_i > 0 ? add_language(language) : remove_language(language)
+    end
+  end
+
   protected
 
   def normalize_screen_name

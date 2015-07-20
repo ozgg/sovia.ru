@@ -2,3 +2,5 @@ ru:
   profiles:
     create:
       success: "Вы зарегистрировались и вошли"
+    update:
+      success: "Профиль успешно изменён"

@@ -99,4 +99,12 @@ RSpec.describe User, type: :model do
       expect { user.remove_role :non_existent }.not_to change(UserRole, :count)
     end
   end
+
+  describe '#add_language' do
+    pending
+  end
+
+  describe '#remove_language' do
+    pending
+  end
 end

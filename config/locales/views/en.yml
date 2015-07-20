@@ -2,3 +2,5 @@ en:
   profiles:
     create:
       success: "You have registered and logged in"
+    update:
+      success: "Profile has been updated successfully"

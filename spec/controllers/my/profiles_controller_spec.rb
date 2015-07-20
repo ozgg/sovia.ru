@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe My::ProfilesController, type: :controller, wip: true do
+RSpec.describe My::ProfilesController, type: :controller do
   let(:password) { 'secret' }
   let(:language) { create :russian_language }
   let(:user) { create :confirmed_user, language: language, password: password, password_confirmation: password }
