@@ -18,6 +18,12 @@ RSpec.describe Agent, type: :model do
   end
 
   describe '#for_string' do
-    pending
+    it 'returns instance of Agent' do
+      expect(Agent.for_string 'Test/1.0').to be_an(Agent)
+    end
+
+    it 'inserts new agent to database for non-existent agent' do
+      expect { Agent.for_string 'Test/1.1' }.to change(Agent, :count).by(1)
+    end
   end
 end
