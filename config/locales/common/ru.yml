@@ -6,3 +6,4 @@ ru:
       name: "английский"
   already_logged_in: "Вы уже вошли"
   please_log_in: "Пожалуйста, выполните вход"
+  could_not_log_in: "Не удалось выполнить вход"

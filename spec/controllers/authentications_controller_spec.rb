@@ -85,7 +85,27 @@ RSpec.describe AuthenticationsController, type: :controller do
     end
 
     context 'when user is not allowed to log in' do
-      pending
+      let(:user) { create :user, password: '1', password_confirmation: '1', network: 0, allow_login: false }
+      let(:action) { -> { post :create, login: user.uid, password: '1' } }
+
+      before(:each) do
+        request.cookies['token'] = nil
+        allow(controller).to receive(:current_user).and_return(nil)
+      end
+
+      it 'renders template "new"' do
+        action.call
+        expect(response).to render_template(:new)
+      end
+
+      it 'does not create token' do
+        expect(action).not_to change(Token, :count)
+      end
+
+      it 'does not set token cookie' do
+        action.call
+        expect(response.cookies['token']).to be_nil
+      end
     end
   end
 

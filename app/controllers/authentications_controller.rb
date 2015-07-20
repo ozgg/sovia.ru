@@ -8,10 +8,11 @@ class AuthenticationsController < ApplicationController
   # post /login
   def create
     user = User.find_by network: 'native', uid: params[:login].to_s
-    if user.is_a?(User) && user.authenticate(params[:password].to_s)
+    if user.is_a?(User) && user.authenticate(params[:password].to_s) && user.allow_login?
       create_token_for_user user
       redirect_to root_path
     else
+      flash.now[:notice] = t(:could_not_log_in)
       render :new
     end
   end
