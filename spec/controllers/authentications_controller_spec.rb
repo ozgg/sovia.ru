@@ -62,7 +62,7 @@ RSpec.describe AuthenticationsController, type: :controller do
     end
 
     context 'when credentials are valid' do
-      let(:action) { -> { post :create, login: user.uid, password: '1234' } }
+      let(:action) { -> { post :create, login: user.screen_name, password: '1234' } }
 
       before(:each) do
         allow(controller).to receive(:current_user).and_return(nil)

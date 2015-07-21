@@ -35,4 +35,12 @@ RSpec.describe Code, type: :model do
       code.track! ip, agent
     end
   end
+
+  describe '#recovery_for_user' do
+    pending
+  end
+
+  describe '#confirmation_for_user' do
+    pending
+  end
 end

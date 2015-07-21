@@ -7,7 +7,7 @@ class AuthenticationsController < ApplicationController
 
   # post /login
   def create
-    user = User.find_by network: 'native', uid: params[:login].to_s
+    user = User.find_by network: 'native', uid: params[:login].to_s.downcase
     if user.is_a?(User) && user.authenticate(params[:password].to_s) && user.allow_login?
       create_token_for_user user
       redirect_to root_path

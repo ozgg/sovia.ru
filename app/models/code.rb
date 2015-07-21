@@ -11,6 +11,12 @@ class Code < ActiveRecord::Base
 
   after_initialize :generate_body
 
+  # @param [User] user
+  def self.recovery_for_user(user)
+    parameters = { user: user, category: categories[:recovery], activated: false }
+    self.find_by(parameters) || self.create(parameters)
+  end
+
   # Track IP-address and user agent for the recent usage
   #
   # @param [String] ip

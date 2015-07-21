@@ -35,8 +35,11 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, notice: t(:please_log_in) unless current_user.is_a? User
   end
 
+  def agent
+    @agent ||= Agent.for_string(request.user_agent || 'n/a')
+  end
+
   def tracking_for_entity
-    agent = Agent.for_string(request.user_agent || 'n/a')
     { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
   end
 

@@ -4,3 +4,8 @@ en:
       success: "You have registered and logged in"
     update:
       success: "Profile has been updated successfully"
+  my:
+    recoveries:
+      create:
+        impossible: "Password recovery for this user is not available"
+        completed: "Recovery code has been sent to your email address"
