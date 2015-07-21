@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe My::RecoveriesController, type: :controller, wip: true do
+RSpec.describe My::RecoveriesController, type: :controller do
   let(:user) { create :unconfirmed_user }
 
   before :each do
@@ -68,36 +68,102 @@ RSpec.describe My::RecoveriesController, type: :controller, wip: true do
     end
   end
 
-  describe 'patch update' do
+  describe 'patch update', wip: true do
+    let(:new_password) { { user: { password: 'new', password_confirmation: 'new' } } }
+    let(:code) { create :code, user: user, category: Code.categories[:recovery] }
+
     context 'when code is invalid' do
-      it 'does not change user'
-      it 'redirects to my_recovery_path'
+      let(:action) { -> { patch :update, { login: user.screen_name, code: 'nope' }.merge(new_password) } }
+
+      it 'does not change user' do
+        expect(action).not_to change(user, :password_digest)
+      end
+
+      it 'redirects to my_recovery_path' do
+        action.call
+        expect(response).to redirect_to(my_recovery_path)
+      end
     end
 
     context 'when login is invalid' do
-      it 'does not change code'
-      it 'redirects to my_recovery_path'
+      let(:code) { create :code, category: Code.categories[:recovery] }
+      let(:action) { -> { patch :update, { login: user.screen_name, code: code.body }.merge(new_password) } }
+
+      it 'does not change code' do
+        expect(action).not_to change(code)
+      end
+
+      it 'redirects to my_recovery_path' do
+        action.call
+        expect(response).to redirect_to(my_recovery_path)
+      end
     end
 
     context 'when code is expired' do
-      it 'does not change user'
-      it 'does not change code'
-      it 'redirects to my_recovery_path'
+      let(:code) { create :code, user: user, category: Code.categories[:recovery], activated: true }
+      let(:action) { -> { patch :update, { login: user.sreen_name, code: code.body }.merge(new_password) } }
+
+      it 'does not change user' do
+        expect(action).not_to change(user)
+      end
+
+      it 'does not change code' do
+        expect(action).not_to change(code)
+      end
+
+      it 'redirects to my_recovery_path' do
+        action.call
+        expect(response).to redirect_to(my_recovery_path)
+      end
     end
 
     context 'when form is invalid' do
-      it 'does not change user'
-      it 'does not change code'
-      it 'redirects to my_recovery_path'
+      let(:action) { -> { patch :update, login: user.uid, code: code.body, user: { password: '1' } } }
+
+      it 'does not change user' do
+        expect(action).not_to change(user)
+      end
+
+      it 'does not change code' do
+        expect(action).not_to change(code)
+      end
+
+      it 'redirects to my_recovery_path' do
+        action.call
+        expect(response).to redirect_to(my_recovery_path)
+      end
     end
 
     context 'when everything is valid' do
-      it 'updates password for user'
-      it 'sets email_confirmed to true'
-      it 'deactivates code'
-      it 'creates new token'
-      it 'sets token cookie'
-      it 'redirects to root_path'
+      let(:action) { -> { patch :update, { login: user.sreen_name, code: code.body }.merge(new_password) } }
+
+      it 'updates password for user' do
+        expect(action).to change(user, :password_digest)
+      end
+
+      it 'sets email_confirmed to true' do
+        action.call
+        user.reload
+        expect(user).to be_email_confirmed
+      end
+
+      it 'deactivates code' do
+        expect(action).to change(code, :activated)
+      end
+
+      it 'creates new token' do
+        expect(action).to change(Token, :count).by(1)
+      end
+
+      it 'sets token cookie' do
+        action.call
+        expect(response.cookies['token']).to eq(Token.last.cookie_pair)
+      end
+
+      it 'redirects to root_path' do
+        action.call
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
