@@ -37,7 +37,7 @@ RSpec.describe Code, type: :model do
   end
 
   describe '#recovery_for_user' do
-    let(:user) { create :user }
+    let(:user) { create :unconfirmed_user }
     let(:action) { -> { Code.recovery_for_user user } }
 
     context 'when non-activated recovery exists' do
@@ -64,6 +64,10 @@ RSpec.describe Code, type: :model do
 
     it 'returns non-activated code' do
       expect(action.call).not_to be_activated
+    end
+
+    it 'sets email of user as payload' do
+      expect(action.call.payload).to eq(user.email)
     end
   end
 
