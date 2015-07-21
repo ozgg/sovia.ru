@@ -37,10 +37,64 @@ RSpec.describe Code, type: :model do
   end
 
   describe '#recovery_for_user' do
-    pending
+    let(:user) { create :user }
+    let(:action) { -> { Code.recovery_for_user user } }
+
+    context 'when non-activated recovery exists' do
+      let!(:code) { create :recovery_code, user: user }
+
+      it 'returns existing code' do
+        expect(action.call).to eq(code)
+      end
+
+      it 'does not insert new code' do
+        expect(action).not_to change(Code, :count)
+      end
+    end
+
+    context 'when recovery does not exist' do
+      it 'creates new code' do
+        expect(action).to change(Code, :count)
+      end
+
+      it 'returns new code' do
+        expect(action.call).to be_a(Code)
+      end
+    end
+
+    it 'returns non-activated code' do
+      expect(action.call).not_to be_activated
+    end
   end
 
   describe '#confirmation_for_user' do
-    pending
+    let(:user) { create :user }
+    let(:action) { -> { Code.confirmation_for_user user } }
+
+    context 'when non-activated confirmation exists' do
+      let!(:code) { create :confirmation_code, user: user }
+
+      it 'returns existing code' do
+        expect(action.call).to eq(code)
+      end
+
+      it 'does not insert new code' do
+        expect(action).not_to change(Code, :count)
+      end
+    end
+
+    context 'when confirmation does not exist' do
+      it 'creates new code' do
+        expect(action).to change(Code, :count)
+      end
+
+      it 'returns new code' do
+        expect(action.call).to be_a(Code)
+      end
+    end
+
+    it 'returns non-activated code' do
+      expect(action.call).not_to be_activated
+    end
   end
 end

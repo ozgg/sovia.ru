@@ -32,7 +32,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
     end
 
     context 'when user has email' do
-      let(:code) { create :code, user: user, category: Code.categories[:recovery] }
+      let(:code) { create :recovery_code, user: user }
       let(:action) { -> { post :create, login: user.screen_name } }
 
       before :each do
@@ -70,7 +70,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
 
   describe 'patch update' do
     let(:new_password) { { user: { password: 'new' } } }
-    let(:code) { create :code, user: user, category: Code.categories[:recovery], payload: user.email }
+    let(:code) { create :recovery_code, user: user, payload: user.email }
 
     context 'when code is invalid' do
       before :each do
@@ -88,7 +88,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
     end
 
     context 'when login is invalid' do
-      let(:code) { create :code, category: Code.categories[:recovery] }
+      let(:code) { create :recovery_code }
 
       before :each do
         patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
@@ -105,7 +105,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
     end
 
     context 'when code is expired' do
-      let(:code) { create :code, user: user, category: Code.categories[:recovery], activated: true }
+      let(:code) { create :recovery_code, user: user, activated: true }
 
       before :each do
         patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
@@ -141,7 +141,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
       end
     end
 
-    context 'when everything is valid', wip: true do
+    context 'when everything is valid' do
       let(:action) { -> { patch :update, { login: user.screen_name, code: code.body }.merge(new_password) } }
 
       it 'updates password for user' do
