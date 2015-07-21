@@ -9,3 +9,6 @@ en:
       create:
         impossible: "Password recovery for this user is not available"
         completed: "Recovery code has been sent to your email address"
+      update:
+        invalid_code: "You have entered invalid code"
+        success: "Password has been successfully reset. You have logged in."

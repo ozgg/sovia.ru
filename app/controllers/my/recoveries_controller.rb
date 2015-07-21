@@ -1,6 +1,8 @@
 class My::RecoveriesController < ApplicationController
+  include Authentication
+
   before_action :redirect_authenticated_user
-  before_action :find_user, only: [:create]
+  before_action :find_user, only: [:create, :update]
 
   def show
   end
@@ -15,17 +17,22 @@ class My::RecoveriesController < ApplicationController
   end
 
   def update
-
+    find_code
+    if @code.nil?
+      redirect_to my_recovery_path, notice: t('my.recoveries.update.invalid_code')
+    else
+      reset_password
+    end
   end
 
   protected
 
-  def redirect_authenticated_user
-    redirect_to root_path, notice: t(:already_logged_in) unless current_user.nil?
-  end
-
   def find_user
     @user = User.find_by uid: params[:login].to_s.downcase, network: User.networks[:native]
+  end
+
+  def find_code
+    @code = Code.find_by user: @user, activated: false, category: Code.categories[:recovery]
   end
 
   def send_code
@@ -36,5 +43,22 @@ class My::RecoveriesController < ApplicationController
       code.track! request.remote_ip, agent
       CodeSender.password(code).deliver_now
     end
+  end
+
+  def reset_password
+    if @user.update new_user_parameters
+      create_token_for_user @user
+      @code.update! activated: true
+      redirect_to root_path, notice: t('my.recoveries.update.success')
+    else
+      render :show
+    end
+  end
+
+  def new_user_parameters
+    parameters = params.require(:user).permit(:password)
+    parameters[:password] = nil if parameters[:password].blank?
+    parameters.merge!(email_confirmed: true) if @code.payload == @user.email
+    parameters
   end
 end

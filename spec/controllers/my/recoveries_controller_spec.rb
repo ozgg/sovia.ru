@@ -68,87 +68,98 @@ RSpec.describe My::RecoveriesController, type: :controller do
     end
   end
 
-  describe 'patch update', wip: true do
-    let(:new_password) { { user: { password: 'new', password_confirmation: 'new' } } }
-    let(:code) { create :code, user: user, category: Code.categories[:recovery] }
+  describe 'patch update' do
+    let(:new_password) { { user: { password: 'new' } } }
+    let(:code) { create :code, user: user, category: Code.categories[:recovery], payload: user.email }
 
     context 'when code is invalid' do
-      let(:action) { -> { patch :update, { login: user.screen_name, code: 'nope' }.merge(new_password) } }
+      before :each do
+        patch :update, { login: user.screen_name, code: 'nope' }.merge(new_password)
+      end
 
       it 'does not change user' do
-        expect(action).not_to change(user, :password_digest)
+        user.reload
+        expect(user.authenticate 'new').to be_falsey
       end
 
       it 'redirects to my_recovery_path' do
-        action.call
         expect(response).to redirect_to(my_recovery_path)
       end
     end
 
     context 'when login is invalid' do
       let(:code) { create :code, category: Code.categories[:recovery] }
-      let(:action) { -> { patch :update, { login: user.screen_name, code: code.body }.merge(new_password) } }
+
+      before :each do
+        patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
+      end
 
       it 'does not change code' do
-        expect(action).not_to change(code)
+        code.reload
+        expect(code).not_to be_activated
       end
 
       it 'redirects to my_recovery_path' do
-        action.call
         expect(response).to redirect_to(my_recovery_path)
       end
     end
 
     context 'when code is expired' do
       let(:code) { create :code, user: user, category: Code.categories[:recovery], activated: true }
-      let(:action) { -> { patch :update, { login: user.sreen_name, code: code.body }.merge(new_password) } }
 
-      it 'does not change user' do
-        expect(action).not_to change(user)
+      before :each do
+        patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
       end
 
-      it 'does not change code' do
-        expect(action).not_to change(code)
+      it 'does not change user' do
+        user.reload
+        expect(user.authenticate 'new').to be_falsey
       end
 
       it 'redirects to my_recovery_path' do
-        action.call
         expect(response).to redirect_to(my_recovery_path)
       end
     end
 
     context 'when form is invalid' do
-      let(:action) { -> { patch :update, login: user.uid, code: code.body, user: { password: '1' } } }
+      before :each do
+        patch :update, login: user.uid, code: code.body, user: { password: ' ' }
+      end
 
       it 'does not change user' do
-        expect(action).not_to change(user)
+        user.reload
+        expect(user.authenticate(' ')).to be_falsey
       end
 
       it 'does not change code' do
-        expect(action).not_to change(code)
+        code.reload
+        expect(code).not_to be_activated
       end
 
-      it 'redirects to my_recovery_path' do
-        action.call
-        expect(response).to redirect_to(my_recovery_path)
+      it 'renders view "show"' do
+        expect(response).to render_template(:show)
       end
     end
 
-    context 'when everything is valid' do
-      let(:action) { -> { patch :update, { login: user.sreen_name, code: code.body }.merge(new_password) } }
+    context 'when everything is valid', wip: true do
+      let(:action) { -> { patch :update, { login: user.screen_name, code: code.body }.merge(new_password) } }
 
       it 'updates password for user' do
-        expect(action).to change(user, :password_digest)
+        action.call
+        user.reload
+        expect(user.authenticate 'new').to be_truthy
       end
 
-      it 'sets email_confirmed to true' do
+      it 'sets email_confirmed to true for the same email' do
         action.call
         user.reload
         expect(user).to be_email_confirmed
       end
 
-      it 'deactivates code' do
-        expect(action).to change(code, :activated)
+      it 'sets activated flag in code to true' do
+        action.call
+        code.reload
+        expect(code).to be_activated
       end
 
       it 'creates new token' do
