@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20150714214639) do
 
   add_index "dreams", ["agent_id"], name: "index_dreams_on_agent_id", using: :btree
   add_index "dreams", ["language_id", "privacy"], name: "index_dreams_on_language_id_and_privacy", using: :btree
+  add_index "dreams", ["language_id"], name: "dreams_created_month_idx", using: :btree
   add_index "dreams", ["language_id"], name: "index_dreams_on_language_id", using: :btree
   add_index "dreams", ["place_id"], name: "index_dreams_on_place_id", using: :btree
   add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree

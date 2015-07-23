@@ -28,5 +28,6 @@ class CreateDreams < ActiveRecord::Migration
     end
 
     add_index :dreams, [:language_id, :privacy]
+    execute "create index dreams_created_month_idx on dreams using btree (language_id, date_trunc('month', created_at));"
   end
 end
