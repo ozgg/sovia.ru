@@ -12,3 +12,9 @@ en:
       update:
         invalid_code: "You have entered invalid code"
         success: "Password has been successfully reset. You have logged in."
+    confirmations:
+      create:
+        set_email: "Please fill in you email address"
+        success: "Confirmation code has been sent"
+      update:
+        invalid_code: "Invalid code"

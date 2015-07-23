@@ -100,5 +100,9 @@ RSpec.describe Code, type: :model do
     it 'returns non-activated code' do
       expect(action.call).not_to be_activated
     end
+
+    it 'sets email of user as payload' do
+      expect(action.call.payload).to eq(user.email)
+    end
   end
 end

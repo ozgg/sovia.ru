@@ -20,7 +20,7 @@ class Code < ActiveRecord::Base
   # @param [User] user
   def self.confirmation_for_user(user)
     parameters = { user: user, category: categories[:confirmation], activated: false }
-    self.find_by(parameters) || self.create(parameters)
+    self.find_by(parameters) || self.create(parameters.merge(payload: user.email))
   end
 
   # Track IP-address and user agent for the recent usage

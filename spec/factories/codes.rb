@@ -8,6 +8,7 @@ FactoryGirl.define do
     end
 
     factory :confirmation_code do
+      association :user, factory: :unconfirmed_user
       category Code.categories[:confirmation]
     end
   end
