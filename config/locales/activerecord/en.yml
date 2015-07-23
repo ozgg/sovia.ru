@@ -8,6 +8,9 @@ en:
               unreasonable: "does not look like e-mail"
             uid:
               invalid: "can contain 1 to 30 English letters, digits or underscores"
+        dream:
+          attribute:
+            foreign: "принадлежит другому пользователю"
     attributes:
       language:
         code: "code"

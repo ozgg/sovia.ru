@@ -21,6 +21,15 @@ class Dream < ActiveRecord::Base
   validates :lucidity, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
   validates :time_of_day, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }, allow_nil: true
   validates_presence_of :body
+  validate :place_has_same_owner
 
   mount_uploader :image, ImageUploader
+
+  protected
+
+  def place_has_same_owner
+    if place.is_a?(Place) && !place.owned_by?(self.user)
+      errors.add :place_id, I18n.t('activerecord.errors.models.dream.attribute.foreign')
+    end
+  end
 end

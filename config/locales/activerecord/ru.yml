@@ -8,6 +8,9 @@ ru:
               unreasonable: "не выглядит как e-mail"
             uid:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+        dream:
+          attribute:
+            foreign: "принадлежит другому пользователю"
     attributes:
       language:
         code: "код"

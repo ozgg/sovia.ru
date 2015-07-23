@@ -39,5 +39,11 @@ RSpec.describe Dream, type: :model do
     it 'fails with time of day greater than 23' do
       expect(build :dream, time_of_day: 24).not_to be_valid
     end
+
+    it 'fails with foreign place' do
+      user  = create :user
+      place = create :place
+      expect(build :dream, user: user, place: place).not_to be_valid
+    end
   end
 end
