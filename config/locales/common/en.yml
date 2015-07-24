@@ -8,3 +8,4 @@ en:
   please_log_in: "Please log in"
   could_not_log_in: "Could not log in"
   email_already_confirmed: "Email is already confirmed"
+  insufficient_role: "Your role is insufficient to access this page"

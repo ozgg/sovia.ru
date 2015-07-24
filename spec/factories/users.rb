@@ -13,5 +13,11 @@ FactoryGirl.define do
         email_confirmed true
       end
     end
+
+    factory :administrator do
+      after :create do |user|
+        user.add_role :administrator
+      end
+    end
   end
 end

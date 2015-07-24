@@ -32,7 +32,15 @@ class ApplicationController < ActionController::Base
   end
 
   def restrict_anonymous_access
-    redirect_to login_path, notice: t(:please_log_in) unless current_user.is_a? User
+    redirect_to login_path, alert: t(:please_log_in) unless current_user.is_a? User
+  end
+
+  def require_role(role)
+    if current_user.is_a? User
+      redirect_to root_path, alert: t(:insufficient_role) unless current_user.has_role? role
+    else
+      redirect_to login_path, alert: t(:please_log_in)
+    end
   end
 
   def agent
