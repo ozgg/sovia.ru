@@ -18,3 +18,8 @@ ru:
         success: "Код подтверждения выслан"
       update:
         invalid_code: "Недействительный код"
+  browsers:
+    update:
+      success: "Браузер успешно изменён"
+    delete:
+      success: "Браузер успешно удалён"

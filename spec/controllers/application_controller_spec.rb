@@ -57,7 +57,7 @@ RSpec.describe ApplicationController, type: :controller do
       end
 
       it 'redirects to login path' do
-        expect(controller).to receive(:redirect_to).with(login_path, notice: I18n.t(:please_log_in))
+        expect(controller).to receive(:redirect_to).with(login_path, alert: I18n.t(:please_log_in))
         controller.send(:restrict_anonymous_access)
       end
     end

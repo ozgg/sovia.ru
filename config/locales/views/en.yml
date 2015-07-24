@@ -18,3 +18,8 @@ en:
         success: "Confirmation code has been sent"
       update:
         invalid_code: "Invalid code"
+  browsers:
+    update:
+      success: "Browser has been updated successfully"
+    delete:
+      success: "Browser has been deleted successfully"

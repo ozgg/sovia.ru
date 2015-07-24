@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BrowsersController, type: :controller, wip: true do
+RSpec.describe BrowsersController, type: :controller do
   let(:user) { create :administrator }
   let!(:browser) { create :browser }
 
@@ -17,7 +17,7 @@ RSpec.describe BrowsersController, type: :controller, wip: true do
 
   shared_examples 'entity_assigner' do
     it 'assigns browser to @entity' do
-      expect(assigns[:browser]).to eq(browser)
+      expect(assigns[:entity]).to eq(browser)
     end
   end
 
@@ -89,7 +89,6 @@ RSpec.describe BrowsersController, type: :controller, wip: true do
 
   describe 'patch update' do
     before(:each) do
-      allow(browser).to receive(:update)
       patch :update, id: browser, browser: { name: 'new name' }
     end
 
@@ -97,7 +96,12 @@ RSpec.describe BrowsersController, type: :controller, wip: true do
     it_behaves_like 'entity_assigner'
 
     it 'updates browser' do
-      expect(browser).to have_received(:update).with(name: 'new name')
+      browser.reload
+      expect(browser.name).to eq('new name')
+    end
+
+    it 'redirects to browser page' do
+      expect(response).to redirect_to(browser)
     end
   end
 
@@ -108,6 +112,10 @@ RSpec.describe BrowsersController, type: :controller, wip: true do
       before(:each) { action.call }
 
       it_behaves_like 'administrative_page'
+
+      it 'redirects to browsers page' do
+        expect(response).to redirect_to(browsers_path)
+      end
     end
 
     it 'removes browser from database' do
