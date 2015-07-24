@@ -23,3 +23,8 @@ en:
       success: "Browser has been updated successfully"
     delete:
       success: "Browser has been deleted successfully"
+  agents:
+    update:
+      success: "Agent has been updated successfully"
+    delete:
+      success: "Agent has been deleted successfully"

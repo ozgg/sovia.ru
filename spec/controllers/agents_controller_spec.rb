@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe BrowsersController, type: :controller do
+RSpec.describe AgentsController, type: :controller do
   let(:user) { create :administrator }
-  let!(:browser) { create :browser }
+  let!(:agent) { create :agent }
 
   before :each do
     allow(controller).to receive(:require_role)
@@ -10,8 +10,8 @@ RSpec.describe BrowsersController, type: :controller do
   end
 
   shared_examples 'entity_assigner' do
-    it 'assigns browser to @entity' do
-      expect(assigns[:entity]).to eq(browser)
+    it 'assigns agent to @entity' do
+      expect(assigns[:entity]).to eq(agent)
     end
   end
 
@@ -20,8 +20,8 @@ RSpec.describe BrowsersController, type: :controller do
 
     it_behaves_like 'administrative_page'
 
-    it 'assigns list of browsers to @collection' do
-      expect(assigns[:collection]).to include(browser)
+    it 'assigns list of agents to @collection' do
+      expect(assigns[:collection]).to include(agent)
     end
   end
 
@@ -30,8 +30,8 @@ RSpec.describe BrowsersController, type: :controller do
 
     it_behaves_like 'administrative_page'
 
-    it 'assigns new instance Browser to @entity' do
-      expect(assigns[:entity]).to be_a_new(Browser)
+    it 'assigns new instance agent to @entity' do
+      expect(assigns[:entity]).to be_a_new(Agent)
     end
 
     it 'renders view "new"' do
@@ -40,27 +40,27 @@ RSpec.describe BrowsersController, type: :controller do
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, browser: attributes_for(:browser) } }
+    let(:action) { -> { post :create, agent: attributes_for(:agent) } }
 
     context 'authorization and redirects' do
       before(:each) { action.call }
 
       it_behaves_like 'administrative_page'
 
-      it 'redirects to created browser' do
-        expect(response).to redirect_to(Browser.last)
+      it 'redirects to created agent' do
+        expect(response).to redirect_to(Agent.last)
       end
     end
 
     context 'database change' do
-      it 'inserts row into browsers table' do
-        expect(action).to change(Browser, :count).by(1)
+      it 'inserts row into agents table' do
+        expect(action).to change(Agent, :count).by(1)
       end
     end
   end
 
   describe 'get show' do
-    before(:each) { get :show, id: browser }
+    before(:each) { get :show, id: agent }
 
     it_behaves_like 'administrative_page'
     it_behaves_like 'entity_assigner'
@@ -71,7 +71,7 @@ RSpec.describe BrowsersController, type: :controller do
   end
 
   describe 'get edit' do
-    before(:each) { get :edit, id: browser }
+    before(:each) { get :edit, id: agent }
 
     it_behaves_like 'administrative_page'
     it_behaves_like 'entity_assigner'
@@ -83,37 +83,37 @@ RSpec.describe BrowsersController, type: :controller do
 
   describe 'patch update' do
     before(:each) do
-      patch :update, id: browser, browser: { name: 'new name' }
+      patch :update, id: agent, agent: { name: 'new name' }
     end
 
     it_behaves_like 'administrative_page'
     it_behaves_like 'entity_assigner'
 
-    it 'updates browser' do
-      browser.reload
-      expect(browser.name).to eq('new name')
+    it 'updates agent' do
+      agent.reload
+      expect(agent.name).to eq('new name')
     end
 
-    it 'redirects to browser page' do
-      expect(response).to redirect_to(browser)
+    it 'redirects to agent page' do
+      expect(response).to redirect_to(agent)
     end
   end
 
   describe 'delete destroy' do
-    let(:action) { -> { delete :destroy, id: browser } }
+    let(:action) { -> { delete :destroy, id: agent } }
 
     context 'authorization' do
       before(:each) { action.call }
 
       it_behaves_like 'administrative_page'
 
-      it 'redirects to browsers page' do
-        expect(response).to redirect_to(browsers_path)
+      it 'redirects to agents page' do
+        expect(response).to redirect_to(agents_path)
       end
     end
 
-    it 'removes browser from database' do
-      expect(action).to change(Browser, :count).by(-1)
+    it 'removes agent from database' do
+      expect(action).to change(Agent, :count).by(-1)
     end
   end
 end

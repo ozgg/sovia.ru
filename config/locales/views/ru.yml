@@ -23,3 +23,8 @@ ru:
       success: "Браузер успешно изменён"
     delete:
       success: "Браузер успешно удалён"
+  agents:
+    update:
+      success: "Агент успешно изменён"
+    delete:
+      success: "Агент успешно удалён"
