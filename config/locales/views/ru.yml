@@ -33,3 +33,8 @@ ru:
       success: "Клиент успешно изменён"
     delete:
       success: "Клиент успешно удалён"
+  tags:
+    update:
+      success: "Метка успешно изменена"
+    delete:
+      success: "Метка успешно удалена"

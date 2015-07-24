@@ -33,3 +33,8 @@ en:
       success: "Client has been updated seccessfully"
     delete:
       success: "Client has been deleted successfully"
+  tags:
+    update:
+      success: "Tag has been updated successfully"
+    delete:
+      success: "Tag has been deleted successfully"

@@ -1,17 +1,17 @@
-class BrowsersController < ApplicationController
+class TagsController < ApplicationController
   before_action :restrict_access
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Browser.order('name asc').page(current_page).per(25)
+    @collection = Tag.order('name asc').page(current_page).per(25)
   end
 
   def new
-    @entity = Browser.new
+    @entity = Tag.new
   end
 
   def create
-    @entity = Browser.new entity_parameters
+    @entity = Tag.new creation_parameters
     if @entity.save
       redirect_to @entity
     else
@@ -27,7 +27,7 @@ class BrowsersController < ApplicationController
 
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('browsers.update.success')
+      redirect_to @entity, notice: t('tags.update.success')
     else
       render :edit
     end
@@ -35,9 +35,9 @@ class BrowsersController < ApplicationController
 
   def destroy
     if @entity.destroy
-      flash[:notice] = t('browsers.delete.success')
+      flash[:notice] = t('tags.delete.success')
     end
-    redirect_to browsers_path
+    redirect_to tags_path
   end
 
   protected
@@ -47,10 +47,14 @@ class BrowsersController < ApplicationController
   end
 
   def set_entity
-    @entity = Browser.find params[:id]
+    @entity = Tag.find params[:id]
   end
 
   def entity_parameters
-    params.require(:browser).permit(:name, :mobile, :bot)
+    params.require(:tag).permit(:name)
+  end
+
+  def creation_parameters
+    entity_parameters.merge(language_for_entity)
   end
 end
