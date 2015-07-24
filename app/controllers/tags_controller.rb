@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Tag.order('slug asc').page(current_page).per(25)
+    @collection = Tag.in_languages(visitor_languages).order('slug asc').page(current_page).per(25)
   end
 
   def new

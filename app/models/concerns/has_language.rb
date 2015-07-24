@@ -5,6 +5,8 @@ module HasLanguage
     belongs_to :language
 
     validates_presence_of :language_id
+
+    scope :in_languages, ->(language_ids) { where(language_id: language_ids) }
   end
 
   module ClassMethods
