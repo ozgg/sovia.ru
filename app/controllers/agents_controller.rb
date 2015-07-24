@@ -53,6 +53,6 @@ class AgentsController < ApplicationController
   end
 
   def entity_parameters
-    params.require(:agent).permit(:name, :mobile, :bot)
+    params.require(:agent).permit(:browser_id, :name, :mobile, :bot)
   end
 end
