@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'index#index'
 
   scope '(:locale)', locale: /ru|en/ do
-    resources :browsers, :agents
+    resources :browsers, :agents, :clients
 
     namespace :my do
       resource :profile, except: [:destroy]

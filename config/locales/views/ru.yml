@@ -28,3 +28,8 @@ ru:
       success: "Агент успешно изменён"
     delete:
       success: "Агент успешно удалён"
+  clients:
+    update:
+      success: "Клиент успешно изменён"
+    delete:
+      success: "Клиент успешно удалён"

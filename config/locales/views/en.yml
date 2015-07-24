@@ -28,3 +28,8 @@ en:
       success: "Agent has been updated successfully"
     delete:
       success: "Agent has been deleted successfully"
+  clients:
+    update:
+      success: "Client has been updated seccessfully"
+    delete:
+      success: "Client has been deleted successfully"
