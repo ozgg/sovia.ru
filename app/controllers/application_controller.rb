@@ -32,6 +32,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def visitor_languages
+    languages = [Language.find_by(code: I18n.locale).id]
+    if current_user.is_a? User
+      languages += current_user.user_languages.pluck(:language_id) + [current_user.language_id]
+    end
+    languages.uniq
+  end
+
   # Wrapper for 'Record not found' exception
   #
   # @return [ActiveRecord::RecordNotFound]

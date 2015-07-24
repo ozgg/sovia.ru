@@ -62,4 +62,61 @@ RSpec.describe ApplicationController, type: :controller do
       end
     end
   end
+
+  describe '#visitor_languages' do
+    let!(:russian_language) { create :russian_language }
+    let!(:english_language) { create :english_language }
+
+    before :each do
+      I18n.locale = russian_language.code.to_sym
+    end
+
+    context 'when user is not logged in' do
+      before :each do
+        allow(controller).to receive(:current_user).and_return(nil)
+      end
+
+      it 'returns array with id of language for selected locale' do
+        expect(controller.send(:visitor_languages)).to eq([russian_language.id])
+      end
+    end
+
+    context 'when user has only locale as language' do
+      let(:user) { create :user, language: russian_language }
+
+      before :each do
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it 'returns language of user as language' do
+        expect(controller.send(:visitor_languages)).to eq([russian_language.id])
+      end
+    end
+
+    context 'when user has another language as default' do
+      let(:user) { create :user, language: english_language }
+
+      before :each do
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it 'returns both language ids' do
+        expect(controller.send(:visitor_languages)).to eq([russian_language.id, english_language.id])
+      end
+    end
+
+    context 'when user has several preferred languages' do
+      let(:user) { create :user, language: russian_language }
+
+      before :each do
+        user.add_language(russian_language)
+        user.add_language(english_language)
+        allow(controller).to receive(:current_user).and_return(user)
+      end
+
+      it 'returns all language ids' do
+        expect(controller.send(:visitor_languages)).to eq([russian_language.id, english_language.id])
+      end
+    end
+  end
 end
