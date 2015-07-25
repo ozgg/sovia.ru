@@ -4,11 +4,19 @@ Rails.application.routes.draw do
   root 'index#index'
 
   scope '(:locale)', locale: /ru|en/ do
-    resources :browsers, :agents, :clients, :tags
+    resources :browsers, :agents, :clients, :tags, :users
 
     namespace :my do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
+    end
+
+    scope 'u/(:uid)', controller: :users do
+      get '/' => :profile
+      get 'posts', as: :user_posts
+      get 'dreams', as: :user_dreams
+      get 'questions', as: :user_questions
+      get 'comments', as: :user_comments
     end
 
     controller :authentications do
