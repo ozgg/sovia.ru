@@ -30,15 +30,13 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, AvatarUploader
 
-  scope :find_by_long_uid, ->(long_uid) { where self.long_uid_to_criteria(long_uid) }
-
-  def self.long_uid_to_criteria(long_uid)
+  def self.with_long_uid(long_uid)
     parts = long_uid.split('-')
     if parts.length > 1
-      network_code = parts.shift
-      networks.has_key?(network_code) ? { network: networks[network_code], uid: parts.join('-') } : { uid: nil }
+      code = parts.shift
+      find_by(network: networks[code], uid: parts.join('-')) if networks.has_key?(code)
     else
-      { uid: long_uid }
+      find_by uid: long_uid
     end
   end
 

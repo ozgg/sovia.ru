@@ -8,7 +8,7 @@ RSpec.describe UsersController, type: :controller do
   before :each do
     allow(controller).to receive(:require_role)
     allow(controller).to receive(:current_user).and_return(current_user)
-    allow(User).to receive(:find_by_long_uid).and_return([user])
+    allow(User).to receive(:with_long_uid).and_return(user)
   end
 
   shared_examples 'entity_assigner' do
@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :controller do
 
   shared_examples 'user_assigner' do
     it 'finds user by long uid' do
-      expect(User).to have_received(:find_by_long_uid).with(user.long_uid)
+      expect(User).to have_received(:with_long_uid).with(user.long_uid)
     end
 
     it 'assigns user to @user' do
