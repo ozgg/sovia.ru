@@ -38,3 +38,10 @@ en:
       success: "Tag has been updated successfully"
     delete:
       success: "Tag has been deleted successfully"
+  users:
+    create:
+      success: "User has been created successfully"
+    update:
+      success: "User has been updated successfully"
+    destroy:
+      success: "User has been deleted successfully"
