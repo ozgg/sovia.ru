@@ -30,6 +30,23 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, AvatarUploader
 
+  scope :find_by_long_uid, ->(long_uid) { where self.long_uid_to_criteria(long_uid) }
+
+  def self.long_uid_to_criteria(long_uid)
+    parts = long_uid.split('-')
+    if parts.length > 1
+      network_code = parts.shift
+      networks.has_key?(network_code) ? { network: network_code, uid: parts.join('-') } : { uid: nil }
+    else
+      { uid: long_uid }
+    end
+  end
+
+  def long_uid
+    prefix = native? ? '' : network + '-'
+    prefix + uid
+  end
+
   def has_role?(role)
     UserRole.user_has_role? self, role
   end
@@ -69,6 +86,10 @@ class User < ActiveRecord::Base
       language = Language.find language_id
       flag.to_i > 0 ? add_language(language) : remove_language(language)
     end
+  end
+
+  def follows?(user)
+    User.is_a?(User) && (user.id == self.user_id)
   end
 
   protected

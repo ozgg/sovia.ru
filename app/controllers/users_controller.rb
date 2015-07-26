@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :restrict_access, except: [:profile, :dreams, :posts, :questions]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:profile, :posts, :dreams, :questions, :comments]
 
   def index
     @collection = User.order('network asc, uid asc').page(current_page).per(25)
@@ -48,15 +49,19 @@ class UsersController < ApplicationController
   end
 
   def dreams
+    @dreams = Dream.owned_by(@user).visible_to_user(current_user, @user).order('id desc').page(current_page).per(5)
   end
 
   def posts
+    @posts = @user.posts.order('id desc').page(current_page).per(5)
   end
 
   def questions
+    @questions = @user.questions.order('id desc').page(current_page).per(5)
   end
 
   def comments
+    @comments = @user.comments.order('id desc').page(current_page).per(20)
   end
 
   protected
@@ -67,6 +72,11 @@ class UsersController < ApplicationController
 
   def set_entity
     @entity = User.find params[:id]
+  end
+
+  def set_user
+    @user = User.find_by_long_uid params[:uid]
+    raise record_not_found unless @user.is_a? User
   end
 
   def entity_parameters

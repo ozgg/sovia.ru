@@ -25,6 +25,14 @@ class Dream < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def self.visible_to_user(user, owner = nil)
+    privacy = [self.privacies[:generally_accessible]]
+    privacy << self.privacies[:visible_to_community] if user.is_a? User
+    privacy << self.privacies[:visible_to_followees] if owner.is_a?(User) && owner.follows?(user)
+    privacy << self.privacies[:personal] if owner.is_a?(User) && (owner == user)
+    self.where privacy: privacy
+  end
+
   protected
 
   def place_has_same_owner

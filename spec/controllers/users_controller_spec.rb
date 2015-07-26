@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller, wip: true do
+RSpec.describe UsersController, type: :controller do
   let(:current_user) { create :administrator }
   let!(:language) { create :russian_language }
   let!(:user) { create :user }
@@ -8,11 +8,22 @@ RSpec.describe UsersController, type: :controller, wip: true do
   before :each do
     allow(controller).to receive(:require_role)
     allow(controller).to receive(:current_user).and_return(current_user)
+    allow(User).to receive(:find_by_long_uid).and_return(user)
   end
 
   shared_examples 'entity_assigner' do
     it 'assigns user to @entity' do
       expect(assigns[:entity]).to eq(user)
+    end
+  end
+
+  shared_examples 'user_assigner' do
+    it 'finds user by long uid' do
+      expect(User).to have_received(:find_by_long_uid).with(user.long_uid)
+    end
+
+    it 'assigns user to @user' do
+      expect(assigns[:user]).to eq(user)
     end
   end
 
@@ -119,22 +130,82 @@ RSpec.describe UsersController, type: :controller, wip: true do
   end
 
   describe 'get profile' do
-    pending
+    before(:each) { get :profile, uid: user.long_uid }
+
+    it_behaves_like 'user_assigner'
+
+    it 'renders view "profile"' do
+      expect(response).to render_template(:profile)
+    end
   end
 
   describe 'get dreams' do
-    pending
+    let!(:dream) { create :dream, user: user }
+    let!(:personal_dream) { create :personal_dream, user: user }
+
+    before(:each) { get :dreams, uid: user.long_uid }
+
+    it_behaves_like 'user_assigner'
+
+    it 'assigns public dreams to @dreams' do
+      expect(assigns[:dreams]).to include(dream)
+    end
+
+    it 'does not include private dreams to @dreams' do
+      expect(assigns[:dreams]).not_to include(personal_dream)
+    end
+
+    it 'renders view "dreams"' do
+      expect(response).to render_template(:dreams)
+    end
   end
 
   describe 'get posts' do
-    pending
+    let!(:user_post) { create :post, user: user }
+
+    before(:each) { get :posts, uid: user.long_uid }
+
+    it_behaves_like 'user_assigner'
+
+    it 'assigns posts to @posts' do
+      expect(assigns[:posts]).to include(user_post)
+    end
+
+    it 'renders view "posts"' do
+      expect(response).to render_template(:posts)
+    end
   end
 
   describe 'get questions' do
-    pending
+    let!(:question) { create :question, user: user }
+
+    before(:each) { get :questions, uid: user.long_uid }
+
+    it_behaves_like 'user_assigner'
+
+    it 'assigns questions to @questions' do
+      expect(assigns[:questions]).to include(question)
+    end
+
+    it 'renders view "questions"' do
+      expect(response).to render_template(:questions)
+    end
   end
 
   describe 'get comments' do
-    pending
+    let!(:comment) { create :comment, user: user }
+
+    before(:each) { get :comments, uid: user.long_uid }
+
+    it_behaves_like 'administrative_page'
+    it_behaves_like 'user_assigner'
+
+    it 'assigns comments to @comments' do
+      expect(assigns[:comments]).to include(comment)
+    end
+
+    it 'renders view "comments"' do
+      expect(response).to render_template(:comments)
+    end
   end
 end

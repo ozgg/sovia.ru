@@ -127,4 +127,8 @@ RSpec.describe User, type: :model do
       expect { user.remove_language create(:language) }.not_to change(UserLanguage, :count)
     end
   end
+
+  describe '#find_by_long_uid' do
+    pending
+  end
 end
