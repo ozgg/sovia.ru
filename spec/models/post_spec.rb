@@ -26,4 +26,12 @@ RSpec.describe Post, type: :model do
       expect(build :post).to be_valid
     end
   end
+
+  describe '#tags_string=' do
+    pending
+  end
+
+  describe '#cache_tags!' do
+    pending
+  end
 end

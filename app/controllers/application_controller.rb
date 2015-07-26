@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_page, :current_user
+  helper_method :current_page, :current_user, :current_user_has_role?
 
   # Get current page from request
   #
@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= Token.user_by_token cookies['token']
+  end
+
+  def current_user_has_role?(role)
+    current_user.is_a?(User) && current_user.has_role?(role)
   end
 
   protected
@@ -69,5 +73,9 @@ class ApplicationController < ActionController::Base
 
   def language_for_entity
     { language: Language.find_by(code: locale) }
+  end
+
+  def owner_for_entity
+    { user: current_user }
   end
 end

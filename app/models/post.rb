@@ -11,4 +11,16 @@ class Post < ActiveRecord::Base
   validates_presence_of :user_id, :title, :lead, :body
 
   mount_uploader :image, ImageUploader
+
+  def tags_string=(tags_string)
+
+  end
+
+  def cache_tags!
+
+  end
+
+  def editable_by?(user)
+    owned_by?(user) || UserRole.user_has_role?(user, :administrator)
+  end
 end

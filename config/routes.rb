@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /ru|en/ do
     resources :browsers, :agents, :clients, :tags, :users
+    resources :posts
 
     namespace :my do
       resource :profile, except: [:destroy]
