@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by_long_uid params[:uid]
+    @user = User.find_by_long_uid(params[:uid]).first
     raise record_not_found unless @user.is_a? User
   end
 

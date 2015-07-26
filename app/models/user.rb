@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     parts = long_uid.split('-')
     if parts.length > 1
       network_code = parts.shift
-      networks.has_key?(network_code) ? { network: network_code, uid: parts.join('-') } : { uid: nil }
+      networks.has_key?(network_code) ? { network: networks[network_code], uid: parts.join('-') } : { uid: nil }
     else
       { uid: long_uid }
     end

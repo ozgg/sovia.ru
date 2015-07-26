@@ -8,7 +8,7 @@ RSpec.describe UsersController, type: :controller do
   before :each do
     allow(controller).to receive(:require_role)
     allow(controller).to receive(:current_user).and_return(current_user)
-    allow(User).to receive(:find_by_long_uid).and_return(user)
+    allow(User).to receive(:find_by_long_uid).and_return([user])
   end
 
   shared_examples 'entity_assigner' do

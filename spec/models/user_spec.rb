@@ -129,6 +129,19 @@ RSpec.describe User, type: :model do
   end
 
   describe '#find_by_long_uid' do
-    pending
+    it 'returns native user' do
+      user = create :user
+      expect(User.find_by_long_uid(user.long_uid).first).to eq(user)
+    end
+
+    it 'returns vk user' do
+      user = create :user, network: User.networks[:vk], uid: '42'
+      expect(User.find_by_long_uid(user.long_uid).first).to eq(user)
+    end
+
+    it 'returns nil for unknown network' do
+      user = create :user
+      expect(User.find_by_long_uid("invalid-#{user.uid}").first).to be_nil
+    end
   end
 end
