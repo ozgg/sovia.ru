@@ -52,3 +52,8 @@ ru:
       success: "Публикация успешно изменена"
     destroy:
       success: "Публикация успешно удалена"
+  goals:
+    update:
+      success: "Цель успешно изменена"
+    delete:
+      success: "Цель успешно удалена"

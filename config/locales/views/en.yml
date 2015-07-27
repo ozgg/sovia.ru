@@ -52,3 +52,8 @@ en:
       success: "Post has been updated successfully"
     destroy:
       success: "Post has been deleted successfully"
+  goals:
+    update:
+      success: "Goal has been updated successfully"
+    delete:
+      success: "Goal has been deleted successfully"
