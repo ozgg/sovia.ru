@@ -4,15 +4,25 @@ class PostsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-
+    if current_user_has_role? :administrator
+      @collection = Post.in_languages(visitor_languages).order('id desc').page(current_page).per(5)
+    else
+      @collection = Post.in_languages(visitor_languages).visible.order('id desc').page(current_page).per(5)
+    end
   end
 
   def new
-
+    @entity = Post.new
   end
 
   def create
-
+    @entity = Post.new creation_parameters
+    if @entity.save
+      set_tags
+      redirect_to @entity, notice: t('posts.create.success')
+    else
+      render :new
+    end
   end
 
   def show
@@ -24,11 +34,19 @@ class PostsController < ApplicationController
   end
 
   def update
-
+    if @entity.update entity_parameters
+      set_tags
+      redirect_to @entity, notice: t('posts.update.success')
+    else
+      render :edit
+    end
   end
 
   def destroy
-
+    if @entity.destroy
+      flash[:notice] = t('posts.destroy.success')
+    end
+    redirect_to posts_path
   end
 
   def tagged
@@ -38,7 +56,7 @@ class PostsController < ApplicationController
   protected
 
   def restrict_editing
-    raise UnauthorizedException unless @post.editable_by? current_user
+    raise UnauthorizedException unless @entity.editable_by? current_user
   end
 
   def set_entity
@@ -47,7 +65,7 @@ class PostsController < ApplicationController
 
   def entity_parameters
     parameters = params.require(:post).permit(:show_in_list, :title, :image, :lead, :body)
-    parameters.reject!(:show_in_list) unless current_user_has_role? :administrator
+    parameters.reject!(:show_in_list) if parameters.include?(:show_in_list) && !current_user_has_role?(:administrator)
     parameters
   end
 
@@ -56,6 +74,7 @@ class PostsController < ApplicationController
   end
 
   def set_tags
-    @entity.tags_string = params.require(:post).permit(:tags_string)
+    @entity.tags_string = params.require(:post).permit(:tags_string).to_s
+    @entity.cache_tags!
   end
 end

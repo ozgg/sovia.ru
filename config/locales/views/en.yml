@@ -45,3 +45,10 @@ en:
       success: "User has been updated successfully"
     destroy:
       success: "User has been deleted successfully"
+  posts:
+    create:
+      success: "Post has been created successfully"
+    update:
+      success: "Post has been updated successfully"
+    destroy:
+      success: "Post has been deleted successfully"

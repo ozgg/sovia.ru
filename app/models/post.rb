@@ -12,6 +12,8 @@ class Post < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :visible, -> { where show_in_list: true }
+
   def tags_string=(tags_string)
     list_of_tags = []
     tags_string.split(',').each do |tag_name|

@@ -1,19 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller, wip: true do
+RSpec.describe PostsController, type: :controller do
   let(:language) { create :russian_language }
   let(:administrator) { create :administrator, language: language }
-  let(:owner) { create :user, language: language }
   let(:user) { create :user, language: language }
-  let!(:entity) { create :visible_post, language: language }
+  let!(:entity) { create :visible_post, user: user, language: language }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:restrict_anonymous_access)
+    allow(controller).to receive(:restrict_editing)
+    I18n.locale = language.code
   end
 
   shared_examples 'restricted_editing' do
-    it 'restricts editing'
+    it 'restricts editing' do
+      expect(controller).to have_received(:restrict_editing)
+    end
   end
 
   shared_examples 'entity_assigner' do
@@ -22,87 +25,201 @@ RSpec.describe PostsController, type: :controller, wip: true do
     end
   end
 
+  shared_examples 'setting_post_tags' do
+    it 'sets post tags' do
+      expect_any_instance_of(Post).to receive(:tags_string=)
+      action.call
+    end
+
+    it 'caches post tags' do
+      expect_any_instance_of(Post).to receive(:cache_tags!)
+      action.call
+    end
+  end
+
+  shared_examples 'not_setting_post_tags' do
+    it 'does not set new tags' do
+      expect_any_instance_of(Post).not_to receive(:tags_string=)
+      action.call
+    end
+
+    it 'does not cache tags' do
+      expect_any_instance_of(Post).not_to receive(:cache_tags!)
+      action.call
+    end
+  end
+
   describe 'get index' do
     let!(:hidden_post) { create :post, language: language }
 
     context 'when user sees hidden posts' do
-      it 'adds hidden post to @collection'
+      before :each do
+        allow(controller).to receive(:current_user).and_return(administrator)
+        get :index
+      end
+
+      it 'adds hidden post to @collection' do
+        expect(assigns[:collection]).to include(hidden_post)
+      end
     end
 
     context 'when user does not see hidden posts' do
-      it 'does not add hidden post to @collection'
+      before(:each) { get :index }
+
+      it 'does not add hidden post to @collection' do
+        expect(assigns[:collection]).not_to include(hidden_post)
+      end
     end
 
     context 'in any case' do
-      it 'assigns visible post to @collection'
-      it 'renders view "index"'
+      before(:each) { get :index }
+
+      it 'assigns visible post to @collection' do
+        expect(assigns[:collection]).to include(entity)
+      end
+
+      it 'renders view "index"' do
+        expect(response).to render_template(:index)
+      end
     end
   end
 
   describe 'get new' do
+    before(:each) { get :new }
+
     it_behaves_like 'page_for_users'
 
-    it 'assigns new Post to @entity'
-    it 'renders view "new"'
+    it 'assigns new Post to @entity' do
+      expect(assigns[:entity]).to be_a_new(Post)
+    end
+
+    it 'renders view "new"' do
+      expect(response).to render_template(:new)
+    end
   end
 
   describe 'post create' do
     context 'when data is valid' do
-      it 'creates new Post in database'
-      it 'redirects to created post page'
+      let(:action) { -> { post :create, post: attributes_for(:post) } }
+
+      it_behaves_like 'setting_post_tags'
+
+      it 'creates new Post in database' do
+        expect(action).to change(Post, :count).by(1)
+      end
+
+      it 'redirects to created post page' do
+        action.call
+        expect(response).to redirect_to(Post.last)
+      end
     end
 
     context 'when data is invalid' do
-      it 'leaves posts table intact'
-      it 'renders view :new'
+      let(:action) { -> { post :create, post: { lead: ' ' } } }
+
+      it_behaves_like 'not_setting_post_tags'
+
+      it 'leaves posts table intact' do
+        expect(action).not_to change(Post, :count)
+      end
+
+      it 'renders view :new' do
+        action.call
+        expect(response).to render_template(:new)
+      end
     end
 
     context 'restricting access' do
+      before(:each) { post :create, post: attributes_for(:post) }
+
       it_behaves_like 'page_for_users'
     end
   end
 
   describe 'get show' do
+    before(:each) { get :show, id: entity }
+
     it_behaves_like 'entity_assigner'
 
-    it 'renders view "show"'
+    it 'renders view "show"' do
+      expect(response).to render_template(:show)
+    end
   end
 
   describe 'get edit' do
-    it_behaves_lile 'entity_assigner'
+    before(:each) { get :edit, id: entity }
+
+    it_behaves_like 'entity_assigner'
     it_behaves_like 'restricted_editing'
-    it 'renders view "edit"'
+
+    it 'renders view "edit"' do
+      expect(response).to render_template(:edit)
+    end
   end
 
   describe 'patch update' do
     context 'when data is valid' do
-      it 'updates post'
-      it 'redirects to post page'
+      let(:action) { -> { patch :update, id: entity, post: { lead: 'new lead'} } }
+
+      it_behaves_like 'setting_post_tags'
+
+      it 'updates post' do
+        action.call
+        entity.reload
+        expect(entity.lead).to eq('new lead')
+      end
+
+      it 'redirects to post page' do
+        action.call
+        expect(response).to redirect_to(entity)
+      end
     end
 
     context 'when data is invalid' do
-      it 'does not update post'
-      it 'renders view "edit"'
+      let(:action) { -> { patch :update, id: entity, post: { lead: ' '} } }
+
+      it_behaves_like 'not_setting_post_tags'
+
+      it 'does not update post' do
+        action.call
+        entity.reload
+        expect(entity.lead).not_to be_blank
+      end
+
+      it 'renders view "edit"' do
+        action.call
+        expect(response).to render_template(:edit)
+      end
     end
 
     context 'restricting access' do
+      before(:each) { patch :update, id: entity, post: { lead: 'new lead'} }
+
       it_behaves_like 'restricted_editing'
     end
   end
 
   describe 'delete destroy' do
     context 'changing database' do
-      it 'removes post from database'
+      let(:action) { -> { delete :destroy, id: entity } }
+
+      it 'removes post from database' do
+        expect(action).to change(Post, :count).by(-1)
+      end
     end
 
     context 'redirect and restriction' do
+      before(:each) { delete :destroy, id: entity }
+
       it_behaves_like 'restricted_editing'
 
-      it 'redirects to posts page'
+      it 'redirects to posts page' do
+        expect(response).to redirect_to(posts_path)
+      end
     end
   end
 
-  describe 'get tagged' do
+  describe 'get tagged', wip: true do
     it 'includes posts with tag to @collection'
     it 'does not include posts without tag to @collection'
     it 'renders view "tagged"'
