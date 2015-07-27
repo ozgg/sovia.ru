@@ -57,3 +57,8 @@ ru:
       success: "Цель успешно изменена"
     delete:
       success: "Цель успешно удалена"
+  deeds:
+    update:
+      success: "Дело успешно обновлено"
+    delete:
+      success: "Дело успешно удалено"

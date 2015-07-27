@@ -10,7 +10,10 @@ en:
               invalid: "can contain 1 to 30 English letters, digits or underscores"
         dream:
           attribute:
-            foreign: "принадлежит другому пользователю"
+            foreign: "belongs to another user"
+        deed:
+          attribute:
+            foreign: "belonds to another user"
     attributes:
       language:
         code: "code"

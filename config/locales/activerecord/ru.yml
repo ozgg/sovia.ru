@@ -11,6 +11,9 @@ ru:
         dream:
           attribute:
             foreign: "принадлежит другому пользователю"
+        deed:
+          attribute:
+            foreign: "принадлежит другому пользователю"
     attributes:
       language:
         code: "код"

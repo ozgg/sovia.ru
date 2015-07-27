@@ -13,5 +13,10 @@ RSpec.describe Deed, type: :model do
     it 'passes with valid attributes' do
       expect(build :deed).to be_valid
     end
+
+    it 'fails with foreign goal' do
+      goal = create :goal
+      expect(build :deed, goal: goal).not_to be_valid
+    end
   end
 end

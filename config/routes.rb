@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /ru|en/ do
     resources :browsers, :agents, :clients, :tags, :users
-    resources :goals
+    resources :goals, :deeds
     resources :posts do
       collection do
         get 'tagged/:tag_name', action: :tagged, as: :tagged
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     namespace :my do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :goals, only: [:index]
+      resources :goals, :deeds, only: [:index]
     end
 
     scope 'u/(:uid)', controller: :users do
@@ -33,9 +33,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -47,10 +44,6 @@ Rails.application.routes.draw do
   #     member do
   #       get 'short'
   #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
   #     end
   #   end
 

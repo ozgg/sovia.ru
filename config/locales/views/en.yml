@@ -57,3 +57,8 @@ en:
       success: "Goal has been updated successfully"
     delete:
       success: "Goal has been deleted successfully"
+  deeds:
+    update:
+      success: "Deed has been updated successfully"
+    delete:
+      success: "Deed has been deleted successfully"

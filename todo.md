@@ -2,8 +2,6 @@
  
 Controllers:
 
- * goals 
- * deeds
  * places
  * questions
  * patterns
@@ -18,11 +16,11 @@ My controllers:
 
  * index
  * posts
- * goals
- * deeds
  * places
  * questions
  * grains
  * comments
  * dreams
  * side_notes
+
+Views:
