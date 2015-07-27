@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   root 'index#index'
 
   scope '(:locale)', locale: /ru|en/ do
-    resources :browsers, :agents, :clients, :tags, :users
+    # Administrative resources
+    resources :browsers, :agents, :clients, :tags, :users, :patterns
+
+    # Common resources
     resources :goals, :deeds, :places, :questions
+
+    # Tagged entries
     resources :posts do
       collection do
         get 'tagged/:tag_name', action: :tagged, as: :tagged
@@ -24,6 +29,7 @@ Rails.application.routes.draw do
       get 'dreams', as: :user_dreams
       get 'questions', as: :user_questions
       get 'comments', as: :user_comments
+      get 'patterns', as: :user_patterns
     end
 
     controller :authentications do

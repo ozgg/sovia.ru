@@ -2,7 +2,7 @@
  
 Controllers:
 
- * patterns
+ * patterns (+ patterns of user)
  * grains
  * comments
  * dreams (+archive)
@@ -25,3 +25,9 @@ Views:
  * layouts
  * index
  
+Later:
+
+ * Mentions of user
+ * Notifications
+ * Favorites
+ * Followings

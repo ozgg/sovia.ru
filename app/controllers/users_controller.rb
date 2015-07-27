@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :restrict_access, except: [:profile, :dreams, :posts, :questions]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:profile, :posts, :dreams, :questions, :comments]
+  before_action :set_user, only: [:profile, :posts, :dreams, :questions, :comments, :patterns]
 
   def index
     @collection = User.order('network asc, uid asc').page(current_page).per(25)
@@ -62,6 +62,10 @@ class UsersController < ApplicationController
 
   def comments
     @comments = @user.comments.order('id desc').page(current_page).per(20)
+  end
+
+  def patterns
+    @patterns = @user.patterns.order('slug asc').page(current_page).per(25)
   end
 
   protected

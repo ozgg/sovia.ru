@@ -208,4 +208,21 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template(:comments)
     end
   end
+
+  describe 'get patterns' do
+    let!(:pattern) { create :pattern, user: user }
+
+    before(:each) { get :patterns, uid: user.long_uid }
+
+    it_behaves_like 'administrative_page'
+    it_behaves_like 'user_assigner'
+
+    it 'assigns pattern to @patterns' do
+      expect(assigns[:patterns]).to include(pattern)
+    end
+
+    it 'renders view "patterns"' do
+      expect(response).to render_template(:patterns)
+    end
+  end
 end
