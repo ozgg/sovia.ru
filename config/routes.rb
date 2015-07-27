@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /ru|en/ do
     resources :browsers, :agents, :clients, :tags, :users
-    resources :posts
+    resources :posts do
+      collection do
+        get 'tagged/:tag_name', action: :tagged, as: :tagged
+      end
+    end
 
     namespace :my do
       resource :profile, except: [:destroy]

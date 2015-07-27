@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :restrict_anonymous_access, except: [:index, :show]
+  before_action :restrict_anonymous_access, except: [:index, :show, :tagged]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
@@ -28,6 +28,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+
+  end
+
+  def tagged
 
   end
 
