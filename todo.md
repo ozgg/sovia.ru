@@ -2,7 +2,6 @@
  
 Controllers:
 
- * places
  * questions
  * patterns
  * grains
@@ -16,7 +15,6 @@ My controllers:
 
  * index
  * posts
- * places
  * questions
  * grains
  * comments
@@ -24,3 +22,7 @@ My controllers:
  * side_notes
 
 Views:
+
+ * layouts
+ * index
+ 

@@ -62,3 +62,8 @@ en:
       success: "Deed has been updated successfully"
     delete:
       success: "Deed has been deleted successfully"
+  places:
+    update:
+      success: "Place has been updated successfully"
+    delete:
+      success: "Place has been deleted successfully"

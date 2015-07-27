@@ -62,3 +62,8 @@ ru:
       success: "Дело успешно обновлено"
     delete:
       success: "Дело успешно удалено"
+  places:
+    update:
+      success: "Место успешно изменено"
+    delete:
+      success: "Место успешно удалено"

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe DeedsController, type: :controller do
+RSpec.describe PlacesController, type: :controller do
   let(:user) { create :user }
-  let!(:deed) { create :deed, user: user }
+  let!(:place) { create :place, user: user }
 
   before :each do
     allow(controller).to receive(:restrict_anonymous_access)
@@ -10,8 +10,8 @@ RSpec.describe DeedsController, type: :controller do
   end
 
   shared_examples 'entity_assigner' do
-    it 'assigns deed to @entity' do
-      expect(assigns[:entity]).to eq(deed)
+    it 'assigns place to @entity' do
+      expect(assigns[:entity]).to eq(place)
     end
   end
 
@@ -28,8 +28,8 @@ RSpec.describe DeedsController, type: :controller do
 
     it_behaves_like 'page_for_users'
 
-    it 'assigns new instance Deed to @entity' do
-      expect(assigns[:entity]).to be_a_new(Deed)
+    it 'assigns new instance Place to @entity' do
+      expect(assigns[:entity]).to be_a_new(Place)
     end
 
     it 'renders view "new"' do
@@ -38,27 +38,27 @@ RSpec.describe DeedsController, type: :controller do
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, deed: attributes_for(:deed).merge(status: :issued) } }
+    let(:action) { -> { post :create, place: attributes_for(:place).merge(status: :issued) } }
 
     context 'authorization and redirects' do
       before(:each) { action.call }
 
       it_behaves_like 'page_for_users'
 
-      it 'redirects to created deed' do
-        expect(response).to redirect_to(Deed.last)
+      it 'redirects to created place' do
+        expect(response).to redirect_to(Place.last)
       end
     end
 
     context 'database change' do
-      it 'inserts row into deeds table' do
-        expect(action).to change(Deed, :count).by(1)
+      it 'inserts row into places table' do
+        expect(action).to change(Place, :count).by(1)
       end
     end
   end
 
   describe 'get show' do
-    before(:each) { get :show, id: deed }
+    before(:each) { get :show, id: place }
 
     it_behaves_like 'page_for_users'
     it_behaves_like 'entity_assigner'
@@ -69,7 +69,7 @@ RSpec.describe DeedsController, type: :controller do
   end
 
   describe 'get edit' do
-    before(:each) { get :edit, id: deed }
+    before(:each) { get :edit, id: place }
 
     it_behaves_like 'page_for_users'
     it_behaves_like 'entity_assigner'
@@ -81,37 +81,37 @@ RSpec.describe DeedsController, type: :controller do
 
   describe 'patch update' do
     before(:each) do
-      patch :update, id: deed, deed: { essence: 'new value' }
+      patch :update, id: place, place: { name: 'new value' }
     end
 
     it_behaves_like 'page_for_users'
     it_behaves_like 'entity_assigner'
 
-    it 'updates deed' do
-      deed.reload
-      expect(deed.essence).to eq('new value')
+    it 'updates place' do
+      place.reload
+      expect(place.name).to eq('new value')
     end
 
-    it 'redirects to deed page' do
-      expect(response).to redirect_to(deed)
+    it 'redirects to place page' do
+      expect(response).to redirect_to(place)
     end
   end
 
   describe 'delete destroy' do
-    let(:action) { -> { delete :destroy, id: deed } }
+    let(:action) { -> { delete :destroy, id: place } }
 
     context 'authorization' do
       before(:each) { action.call }
 
       it_behaves_like 'page_for_users'
 
-      it 'redirects to deeds page' do
-        expect(response).to redirect_to(my_deeds_path)
+      it 'redirects to places page' do
+        expect(response).to redirect_to(my_places_path)
       end
     end
 
-    it 'removes deed from database' do
-      expect(action).to change(Deed, :count).by(-1)
+    it 'removes place from database' do
+      expect(action).to change(Place, :count).by(-1)
     end
   end
 end
