@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let(:language) { create :russian_language }
+  let!(:language) { create :russian_language }
   let(:administrator) { create :administrator, language: language }
   let(:user) { create :user, language: language }
   let!(:entity) { create :visible_post, user: user, language: language }
@@ -219,9 +219,31 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe 'get tagged', wip: true do
-    it 'includes posts with tag to @collection'
-    it 'does not include posts without tag to @collection'
-    it 'renders view "tagged"'
+  describe 'get tagged' do
+    let(:tag) { create :tag, language: entity.language }
+
+    before :each do
+      entity.tags_string = 'test'
+    end
+
+    it 'includes posts with tag to @collection' do
+      get :tagged, tag_name: 'TEST'
+      expect(assigns[:collection]).to include(entity)
+    end
+
+    it 'does not include posts without tag to @collection' do
+      get :tagged, tag_name: tag.name
+      expect(assigns[:collection]).not_to include(entity)
+    end
+
+    it 'assigns existing tag to @tag' do
+      get :tagged, tag_name: tag.name
+      expect(assigns[:tag]).to eq(tag)
+    end
+
+    it 'renders view "tagged"' do
+      get :tagged, tag_name: 'test'
+      expect(response).to render_template(:tagged)
+    end
   end
 end

@@ -26,11 +26,9 @@ class PostsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def update
@@ -50,7 +48,9 @@ class PostsController < ApplicationController
   end
 
   def tagged
-
+    @tag = Tag.match_by_name params[:tag_name], Language.find_by(code: locale)
+    raise record_not_found unless @tag.is_a? Tag
+    @collection = Post.visible.joins(:post_tags).where(post_tags: { tag: @tag }).page(current_page).per(5)
   end
 
   protected
