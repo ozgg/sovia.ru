@@ -31,13 +31,22 @@ RSpec.describe Post, type: :model do
     let!(:post) { create :post }
     let!(:existing_tag) { create :tag, language: post.language }
 
-    it 'adds new tags to post'
-    it 'ignores empty tags'
-    it 'ignores repeating tags'
-    it 'removes absent tags'
+    it 'adds new non-empty and non-repeating tags to post' do
+      expect { post.tags_string = 'a,,A,c,c,b,' }.to change(PostTag, :count).by(3)
+    end
+
+    it 'removes absent tags' do
+      create :post_tag, post: post, tag: existing_tag
+      expect { post.tags_string = ''}.to change(PostTag, :count).by(-1)
+    end
   end
 
   describe '#cache_tags!' do
-    it 'sets sorted tags to tags_cache'
+    it 'sets sorted tags to tags_cache' do
+      post = create :post
+      post.tags_string = 'b, a'
+      post.cache_tags!
+      expect(post.tags_cache).to eq(%w(a b))
+    end
   end
 end

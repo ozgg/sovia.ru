@@ -13,11 +13,15 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def tags_string=(tags_string)
-
+    list_of_tags = []
+    tags_string.split(',').each do |tag_name|
+      list_of_tags << Tag.match_or_create_by_name(tag_name.squish, self.language) unless tag_name.blank?
+    end
+    self.tags = list_of_tags.uniq
   end
 
   def cache_tags!
-
+    update tags_cache: tags.order('slug asc').map { |tag| tag.name }
   end
 
   def editable_by?(user)
