@@ -8,6 +8,14 @@ module HasNameWithSlug
   end
 
   module ClassMethods
+    def match_by_name(name, language)
+      find_by slug: Canonizer.canonize(name), language: language
+    end
+
+    def match_or_create_by_name(name, language)
+      entity = find_by slug: Canonizer.canonize(name), language: language
+      entity || create(name: name, language: language)
+    end
   end
 
   protected

@@ -28,10 +28,16 @@ RSpec.describe Post, type: :model do
   end
 
   describe '#tags_string=' do
-    pending
+    let!(:post) { create :post }
+    let!(:existing_tag) { create :tag, language: post.language }
+
+    it 'adds new tags to post'
+    it 'ignores empty tags'
+    it 'ignores repeating tags'
+    it 'removes absent tags'
   end
 
   describe '#cache_tags!' do
-    pending
+    it 'sets sorted tags to tags_cache'
   end
 end

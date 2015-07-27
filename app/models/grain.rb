@@ -14,4 +14,13 @@ class Grain < ActiveRecord::Base
   validates_uniqueness_of :slug, scope: [:user_id, :language_id]
 
   mount_uploader :image, ImageUploader
+
+  def self.match_by_name(name, language, user)
+    find_by user: user, language: language, slug: Canonizer.canonize(name)
+  end
+
+  def self.match_or_create_by_name(name, language, user)
+    grain = self.match_by_name name, language, user
+    grain || self.create(user: user, language: language, name: name)
+  end
 end
