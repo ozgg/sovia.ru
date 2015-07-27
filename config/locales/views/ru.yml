@@ -67,3 +67,8 @@ ru:
       success: "Место успешно изменено"
     delete:
       success: "Место успешно удалено"
+  questions:
+    update:
+      success: "Вопрос успешно изменён"
+    destroy:
+      success: "Вопрос успешно удалён"

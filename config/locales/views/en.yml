@@ -67,3 +67,8 @@ en:
       success: "Place has been updated successfully"
     delete:
       success: "Place has been deleted successfully"
+  questions:
+    update:
+      success: "Question has been updated successfully"
+    destroy:
+      success: "Question has been deleted successfully"

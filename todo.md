@@ -2,11 +2,11 @@
  
 Controllers:
 
- * questions
  * patterns
  * grains
  * comments
- * dreams
+ * dreams (+archive)
+ * dreambook
  * codes
  * tokens
  * side_notes
@@ -14,11 +14,10 @@ Controllers:
 My controllers:
 
  * index
- * posts
- * questions
+ * posts (+tagged)
  * grains
  * comments
- * dreams
+ * dreams (+tagged)
  * side_notes
 
 Views:
