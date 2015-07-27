@@ -72,3 +72,8 @@ ru:
       success: "Вопрос успешно изменён"
     destroy:
       success: "Вопрос успешно удалён"
+  patterns:
+    update:
+      success: "Образ успешно обновлён"
+    delete:
+      success: "Образ успешно удалён"
