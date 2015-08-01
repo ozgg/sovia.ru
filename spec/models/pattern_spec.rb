@@ -13,7 +13,7 @@ RSpec.describe Pattern, type: :model do
     end
   end
 
-  describe 'links=' do
+  describe 'links=', wip: true do
     let!(:pattern) { create :pattern }
 
     it 'sets links for new patterns' do
@@ -42,7 +42,7 @@ RSpec.describe Pattern, type: :model do
     end
   end
 
-  describe 'links', wip: true do
+  describe 'links' do
     pending
   end
 end

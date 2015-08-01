@@ -31,14 +31,12 @@ class Pattern < ActiveRecord::Base
   protected
 
   def links_in_category(category, links_string)
-    links = links_string.split(',').map { |name| link_by_target_name category, name }
-    links.compact.uniq
+    links = links_string.split(',').select { |name| !name.blank? }.map { |name| link_by_target_name category, name }
+    links.uniq
   end
 
   def link_by_target_name(category, target_name)
-    unless target_name.blank?
-      target = Pattern.match_or_create_by_name(target_name.squish, self.language)
-      PatternLink.by_triplet category, self, target
-    end
+    target = Pattern.match_or_create_by_name(target_name.squish, self.language)
+    PatternLink.by_triplet category, self, target
   end
 end
