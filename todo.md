@@ -2,8 +2,6 @@
  
 Controllers:
 
- * patterns (+ patterns of user)
- * grains
  * comments
  * dreams (+archive)
  * dreambook
@@ -15,7 +13,6 @@ My controllers:
 
  * index
  * posts (+tagged)
- * grains
  * comments
  * dreams (+tagged)
  * side_notes

@@ -77,3 +77,8 @@ en:
       success: "Pattern has been updated successfully"
     delete:
       success: "Pattern has been deleted succesfully"
+  grains:
+    update:
+      success: "Grain has been updated successfully"
+    delete:
+      success: "Grain has been deleted successfully"
