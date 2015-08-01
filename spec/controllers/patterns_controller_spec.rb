@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PatternsController, type: :controller, wip: true do
+RSpec.describe PatternsController, type: :controller do
   let!(:language) { create :russian_language }
   let(:user) { create :administrator, language: language }
   let!(:pattern) { create :pattern, language: language }
