@@ -13,7 +13,7 @@ RSpec.describe Pattern, type: :model do
     end
   end
 
-  describe 'links=', wip: true do
+  describe 'links=' do
     let!(:pattern) { create :pattern }
 
     it 'sets links for new patterns' do
@@ -43,6 +43,16 @@ RSpec.describe Pattern, type: :model do
   end
 
   describe 'links' do
-    pending
+    let!(:pattern) { create :pattern }
+
+    it 'returns list of target patterns for each category' do
+      target = create :pattern, language: pattern.language
+      link   = create :pattern_link, pattern: pattern, target: target
+      expect(pattern.links[link.category]).to eq([target])
+    end
+
+    it 'returns empty array for category without targets' do
+      expect(pattern.links[PatternLink.categories.keys.first]).to eq([])
+    end
   end
 end
