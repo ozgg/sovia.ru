@@ -13,18 +13,25 @@ RSpec.describe Pattern, type: :model do
     end
   end
 
-  describe 'links=', wip: true do
+  describe 'links=' do
     let!(:pattern) { create :pattern }
 
     it 'sets links for new patterns' do
-      links  = { PatternLink.categories.keys.first => 'foo, bar' }
+      links  = { PatternLink.categories.keys.first => 'foo, bar,,,foo,bar ,,,' }
       action = -> { pattern.links = links }
       expect(action).to change(PatternLink, :count).by(2)
     end
 
-    it 'removes links for absent patterns' do
+    it 'removes links for empty list' do
       create :pattern_link, pattern: pattern
       action = -> { pattern.links = {} }
+      expect(action).to change(PatternLink, :count).by(-1)
+    end
+
+    it 'removes links for absent targets' do
+      create :pattern_link, pattern: pattern, target: create(:pattern, name: 'foo', language: pattern.language)
+      create :pattern_link, pattern: pattern, target: create(:pattern, name: 'bar', language: pattern.language)
+      action = -> { pattern.links = { PatternLink.categories.keys.first => 'foo' } }
       expect(action).to change(PatternLink, :count).by(-1)
     end
 
@@ -35,7 +42,7 @@ RSpec.describe Pattern, type: :model do
     end
   end
 
-  describe 'links' do
+  describe 'links', wip: true do
     pending
   end
 end

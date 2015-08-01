@@ -19,7 +19,7 @@ class Pattern < ActiveRecord::Base
   def links=(links)
     new_links = []
     PatternLink.categories.keys.each do |category|
-      new_links += links_in_category category, links[category] if links.has_key? category
+      new_links += links_in_category(category, links[category]) if links.has_key? category
     end
     self.pattern_links = new_links
   end
@@ -30,16 +30,15 @@ class Pattern < ActiveRecord::Base
 
   protected
 
-  def existing_links(category)
-    PatternLink.where(pattern: self).in_category(category).all.to_a
-  end
-
   def links_in_category(category, links_string)
-    links_string.split(',').map { |name| link_by_target_name(category, name) unless name.blank? }
+    links = links_string.split(',').map { |name| link_by_target_name category, name }
+    links.compact.uniq
   end
 
   def link_by_target_name(category, target_name)
-    target = Pattern.match_or_create_by_name(target_name.squish, self.language)
-    PatternLink.by_triplet category, self, target
+    unless target_name.blank?
+      target = Pattern.match_or_create_by_name(target_name.squish, self.language)
+      PatternLink.by_triplet category, self, target
+    end
   end
 end
