@@ -88,7 +88,7 @@ RSpec.describe PatternsController, type: :controller do
 
   describe 'patch update' do
     before(:each) do
-      patch :update, id: pattern, pattern: { name: 'new name' }
+      patch :update, id: pattern, pattern: { name: 'new name', links: [see_also: 'foo'] }
     end
 
     it_behaves_like 'administrative_page'
