@@ -82,3 +82,10 @@ ru:
       success: "Зерно восприятия успешно обновлено"
     delete:
       success: "Зерно восприятия успешно удалено"
+  comments:
+    create:
+      success: "Комментарий добавлен"
+    update:
+      success: "Комментарий изменён"
+    destroy:
+      success: "Комментарий удалён"

@@ -16,6 +16,9 @@ RSpec.describe Comment, type: :model do
       expect(comment).not_to be_valid
     end
 
+    it 'fails with invalid parent'
+    it 'fails with invisible commentable object'
+
     it 'passes with valid attributes' do
       expect(build :comment).to be_valid
     end

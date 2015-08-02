@@ -82,3 +82,10 @@ en:
       success: "Grain has been updated successfully"
     delete:
       success: "Grain has been deleted successfully"
+  comments:
+    create:
+      success: "Comment has been added"
+    update:
+      success: "Comment has been updated"
+    destroy:
+      success: "Comment has been deleted"

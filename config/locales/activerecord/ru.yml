@@ -14,6 +14,12 @@ ru:
         deed:
           attribute:
             foreign: "принадлежит другому пользователю"
+        comment:
+          attributes:
+            parent_id:
+              invalid: "задан неправильно"
+            commentable:
+              invisible: "вне вашей видимости"
     attributes:
       language:
         code: "код"
@@ -140,6 +146,7 @@ ru:
         agent_id: "АП"
         ip: "IP-адрес"
         parent_id: "родительский комментарий"
+        commentable: "комментируемый объект"
         commentable_id: "id объекта"
         commentable_type: "тип объекта"
         best: "лучший комментарий"

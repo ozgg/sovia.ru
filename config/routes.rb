@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :browsers, :agents, :clients, :tags, :users, :patterns
 
     # Common resources
-    resources :goals, :deeds, :places, :questions, :grains
+    resources :goals, :deeds, :places, :questions, :grains, :comments
 
     # Tagged entries
     resources :posts do
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     namespace :my do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :goals, :deeds, :places, :questions, :grains, only: [:index]
+      resources :goals, :deeds, :places, :questions, :grains, :comments, only: [:index]
     end
 
     # Scope of certain user

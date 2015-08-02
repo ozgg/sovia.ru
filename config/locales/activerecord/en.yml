@@ -14,6 +14,12 @@ en:
         deed:
           attribute:
             foreign: "belonds to another user"
+        comment:
+          attributes:
+            parent_id:
+              invalid: "is invalid"
+            commentable:
+              invisible: "is not visible to you"
     attributes:
       language:
         code: "code"
@@ -140,6 +146,7 @@ en:
         agent_id: "UA"
         ip: "IP address"
         parent_id: "parent comment"
+        commentable: "commented object"
         commentable_id: "commentable id"
         commentable_type: "commentable type"
         best: "best"
