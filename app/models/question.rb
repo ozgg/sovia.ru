@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   include HasLanguage
   include HasTrace
   include HasOwner
+  include CommentableByCommunity
 
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy

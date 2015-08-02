@@ -9,6 +9,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :commentable, :body
   validate :parent_matches
   validate :commentable_is_visible
+  validate :commentable_is_commentable
 
   protected
 
@@ -23,6 +24,14 @@ class Comment < ActiveRecord::Base
     if self.commentable.respond_to? :visible_to?
       unless self.commentable.visible_to? self.user
         errors.add(:commentable, I18n.t('activerecord.errors.models.comment.attributes.commentable.invisible'))
+      end
+    end
+  end
+
+  def commentable_is_commentable
+    if self.commentable.respond_to? :commentable_by?
+      unless self.commentable.commentable_by? self.user
+        errors.add(:commentable, I18n.t('activerecord.errors.models.comment.attributes.commentable.not_commentable'))
       end
     end
   end

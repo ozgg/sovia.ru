@@ -5,6 +5,7 @@ RSpec.describe Post, type: :model do
   it_behaves_like 'has_owner'
   it_behaves_like 'required_user'
   it_behaves_like 'has_trace'
+  it_behaves_like 'commentable_by_community'
 
   describe 'validateion' do
     it 'fails without title' do

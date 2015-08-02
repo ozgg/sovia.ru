@@ -1,11 +1,9 @@
 class CommentsController < ApplicationController
-  before_action :restrict_access, only: [:index]
-  before_action :restrict_anonymous_access, except: [:index, :show, :tagged]
+  before_action :restrict_access, except: [:index, :create]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
-  before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    @collection = Comment.in_languages(visitor_languages).order('id desc').page(current_page).per(5)
+    @collection = Comment.in_languages(visitor_languages).order('id desc').page(current_page).per(25)
   end
 
   def new
@@ -46,10 +44,6 @@ class CommentsController < ApplicationController
 
   def restrict_access
     require_role :administrator
-  end
-
-  def restrict_editing
-    raise UnauthorizedException unless @entity.editable_by? current_user
   end
 
   def set_entity

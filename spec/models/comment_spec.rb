@@ -26,6 +26,11 @@ RSpec.describe Comment, type: :model do
       expect(build :comment, commentable: dream).not_to be_valid
     end
 
+    it 'fails with non-commentable object', wip: true do
+      question = create :question
+      expect(build :comment, commentable: question).not_to be_valid
+    end
+
     it 'passes with valid attributes' do
       expect(build :comment).to be_valid
     end

@@ -22,6 +22,7 @@ en:
               invalid: "is invalid"
             commentable:
               invisible: "is not visible to you"
+              not_commentable: "is not available to comment by you"
     attributes:
       language:
         code: "code"

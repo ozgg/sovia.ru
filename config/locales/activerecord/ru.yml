@@ -22,6 +22,7 @@ ru:
               invalid: "задан неправильно"
             commentable:
               invisible: "вне вашей видимости"
+              not_commentable: "недоступен вам для комментирования"
     attributes:
       language:
         code: "код"
