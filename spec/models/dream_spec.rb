@@ -51,7 +51,7 @@ RSpec.describe Dream, type: :model do
     end
   end
 
-  describe '#visible_to?', wip: true do
+  describe '#visible_to?' do
     shared_examples 'visible_to_anonymous' do
       it 'returns true for anonymous user' do
         expect(dream).to be_visible_to(nil)

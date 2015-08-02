@@ -35,18 +35,20 @@ class Dream < ActiveRecord::Base
   end
 
   def visible_to?(user)
-    case privacy.to_sym
-      when :generally_accessible
-        true
-      when :visible_to_community
-        user.is_a? User
-      when :visible_to_followees
-        self.user.is_a?(User) && self.user.follows?(user)
-      when :personal
-        user == self.user
-      else
-        user == self.user
-    end
+    method = "#{self.privacy}_to?".to_sym
+    respond_to?(method) ? send(method, user) : owned_by?(user)
+  end
+
+  def generally_accessible_to?(user)
+    user.nil? || user.is_a?(User)
+  end
+
+  def visible_to_community_to?(user)
+    user.is_a? User
+  end
+
+  def visible_to_followees_to?(user)
+    owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
   end
 
   protected
