@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :restrict_access, except: [:index, :create]
+  before_action :restrict_access, except: [:create]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def update
     if @entity.update entity_parameters
-      redirect_to @entity.commentable, notice: t('comments.update.success')
+      redirect_to @entity, notice: t('comments.update.success')
     else
       render :edit
     end

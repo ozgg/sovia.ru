@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :browsers, :agents, :clients, :tags, :users, :patterns
 
     # Common resources
-    resources :goals, :deeds, :places, :questions, :grains, :comments
+    resources :goals, :deeds, :places, :questions, :grains, :comments, :dreams
 
     # Tagged entries
     resources :posts do
