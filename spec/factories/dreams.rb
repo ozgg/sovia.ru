@@ -6,6 +6,7 @@ FactoryGirl.define do
     body 'Какой-то сон для проверки'
 
     factory :personal_dream do
+      association :user, factory: :unconfirmed_user
       privacy Dream.privacies[:personal]
     end
   end

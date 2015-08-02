@@ -45,5 +45,11 @@ RSpec.describe Dream, type: :model do
       place = create :place
       expect(build :dream, user: user, place: place).not_to be_valid
     end
+
+    it 'fails with invalid privacy'
+  end
+
+  describe '#visible_to?' do
+    pending
   end
 end

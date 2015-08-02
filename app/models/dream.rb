@@ -33,11 +33,32 @@ class Dream < ActiveRecord::Base
     self.where privacy: privacy
   end
 
+  def visible_to?(user)
+    case privacy.to_sym
+      when :generally_accessible
+        true
+      when :visible_to_community
+        user.is_a? User
+      when :visible_to_followees
+        self.user.is_a?(User) && self.user.follows?(user)
+      when :personal
+        user == self.user
+      else
+        user == self.user
+    end
+  end
+
   protected
 
   def place_has_same_owner
     if place.is_a?(Place) && !place.owned_by?(self.user)
       errors.add :place_id, I18n.t('activerecord.errors.models.dream.attribute.foreign')
+    end
+  end
+
+  def visibility_consistence
+    if self.owner.nil? && !self.generally_accessible?
+      errors.add :privacy, I18n.t('activerecord.errors.models.dream.privacy.invalid')
     end
   end
 end

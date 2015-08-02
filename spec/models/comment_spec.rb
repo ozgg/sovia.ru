@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Comment, type: :model do
+RSpec.describe Comment, type: :model, wip: true do
   it_behaves_like 'has_language'
   it_behaves_like 'has_owner'
   it_behaves_like 'has_trace'
@@ -16,8 +16,16 @@ RSpec.describe Comment, type: :model do
       expect(comment).not_to be_valid
     end
 
-    it 'fails with invalid parent'
-    it 'fails with invisible commentable object'
+    it 'fails with invalid parent' do
+      parent = create :comment
+      expect(build :comment, parent_id: parent.id).not_to be_valid
+    end
+
+    it 'fails with invisible commentable object' do
+      dream  = create :personal_dream
+      parent = create :comment, user: dream.user, commentable: dream
+      expect(build :comment, parent_id: parent.id, commentable: dream).not_to be_valid
+    end
 
     it 'passes with valid attributes' do
       expect(build :comment).to be_valid

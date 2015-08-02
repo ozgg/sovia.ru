@@ -11,6 +11,8 @@ ru:
         dream:
           attribute:
             foreign: "принадлежит другому пользователю"
+          privacy:
+            invalid: "имеет недопустимое значение"
         deed:
           attribute:
             foreign: "принадлежит другому пользователю"

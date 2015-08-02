@@ -11,6 +11,8 @@ en:
         dream:
           attribute:
             foreign: "belongs to another user"
+          privacy:
+            invalid: "is invalid"
         deed:
           attribute:
             foreign: "belonds to another user"

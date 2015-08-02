@@ -13,11 +13,9 @@ class Comment < ActiveRecord::Base
   protected
 
   def parent_matches
-    unless self.parent_id.blank?
-      parent = find_by! parent_id: self.parent_id
-      unless parent.commentable != self.commentable
-        errors.add(:parent_id, I18n.t('activerecord.errors.models.comment.attributes.parent_id.invalid'))
-      end
+    parent = self.parent_id.blank? ? nil : Comment.find_by(id: self.parent_id)
+    if parent.is_a?(Comment) && parent.commentable != self.commentable
+      errors.add(:parent_id, I18n.t('activerecord.errors.models.comment.attributes.parent_id.invalid'))
     end
   end
 
