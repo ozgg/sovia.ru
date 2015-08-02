@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   end
 
   def follows?(user)
-    User.is_a?(User) && (user.id == self.user_id)
+    user.is_a?(User) && (user.id == self.id)
   end
 
   protected

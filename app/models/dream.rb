@@ -22,6 +22,7 @@ class Dream < ActiveRecord::Base
   validates :time_of_day, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 23 }, allow_nil: true
   validates_presence_of :body
   validate :place_has_same_owner
+  validate :privacy_consistence
 
   mount_uploader :image, ImageUploader
 
@@ -56,8 +57,8 @@ class Dream < ActiveRecord::Base
     end
   end
 
-  def visibility_consistence
-    if self.owner.nil? && !self.generally_accessible?
+  def privacy_consistence
+    if self.user.nil? && !self.generally_accessible?
       errors.add :privacy, I18n.t('activerecord.errors.models.dream.privacy.invalid')
     end
   end
