@@ -34,6 +34,18 @@ class Dream < ActiveRecord::Base
     self.where privacy: privacy
   end
 
+  def self.parameters_for_all
+    [:title, :body, :needs_interpretation]
+  end
+
+  def self.parameters_for_users
+    [:place_id, :privacy, :lucidity, :mood, :azimuth, :body_position, :time_of_day, :show_image, :image]
+  end
+
+  def self.parameters_for_administrators
+    [:interpretation_given]
+  end
+
   def visible_to?(user)
     method = "#{self.privacy}_to?".to_sym
     respond_to?(method) ? send(method, user) : owned_by?(user)
