@@ -2,8 +2,7 @@
  
 Controllers:
 
- * comments
- * dreams (+archive)
+ * dreams (+archive +tagged)
  * dreambook
  * codes
  * tokens
@@ -13,7 +12,6 @@ My controllers:
 
  * index
  * posts (+tagged)
- * comments
  * dreams (+tagged)
  * side_notes
 

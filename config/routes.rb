@@ -8,10 +8,10 @@ Rails.application.routes.draw do
     resources :browsers, :agents, :clients, :tags, :users, :patterns
 
     # Common resources
-    resources :goals, :deeds, :places, :questions, :grains, :comments, :dreams
+    resources :goals, :deeds, :places, :questions, :grains, :comments
 
     # Tagged entries
-    resources :posts do
+    resources :posts, :dreams do
       collection do
         get 'tagged/:tag_name', action: :tagged, as: :tagged
       end
@@ -22,6 +22,11 @@ Rails.application.routes.draw do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
       resources :goals, :deeds, :places, :questions, :grains, :comments, only: [:index]
+      resources :posts, :dreams, only: [:index] do
+        collection do
+          get 'tagged/:tag_name', action: :tagged, as: :tagged
+        end
+      end
     end
 
     # Scope of certain user
