@@ -89,3 +89,8 @@ en:
       success: "Comment has been updated"
     destroy:
       success: "Comment has been deleted"
+  dreams:
+    update:
+      success: "Dream has been updated successfully"
+    destroy:
+      success: "Dream has been deleted successfully"

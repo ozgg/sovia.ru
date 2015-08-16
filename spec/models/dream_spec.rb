@@ -136,4 +136,12 @@ RSpec.describe Dream, type: :model do
       it_behaves_like 'visible_to_owner'
     end
   end
+
+  describe '#grains_string=' do
+    pending
+  end
+
+  describe '#cache_patterns!' do
+    pending
+  end
 end

@@ -63,6 +63,14 @@ class Dream < ActiveRecord::Base
     owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
   end
 
+  def grains_string=(input)
+
+  end
+
+  def cache_patterns!
+
+  end
+
   protected
 
   def place_has_same_owner

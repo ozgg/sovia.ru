@@ -89,3 +89,8 @@ ru:
       success: "Комментарий изменён"
     destroy:
       success: "Комментарий удалён"
+  dreams:
+    update:
+      success: "Сон успешно изменён"
+    destroy:
+      success: "Сон успешно удалён"
