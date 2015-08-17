@@ -12,6 +12,12 @@ module HasNameWithSlug
       find_by slug: Canonizer.canonize(name), language: language
     end
 
+    def match_by_name!(name, language)
+      result = match_by_name name, language
+      raise ActiveRecord::RecordNotFound if result.nil?
+      result
+    end
+
     def match_or_create_by_name(name, language)
       entity = find_by slug: Canonizer.canonize(name), language: language
       entity || create(name: name, language: language)

@@ -12,7 +12,6 @@ Controllers:
 My controllers:
 
  * index
- * dreams (+tagged)
  * side_notes
 
 Views:
@@ -20,10 +19,17 @@ Views:
  * layouts
  * index
  
+Refactoring:
+
+  * Method for selecting dreams by grain
+  * Method for selecting dreams by pattern
+  * Method for selecting posts by tag
+
 Later:
 
  * Mentions of user
  * Notifications
  * Favorites
  * Followings
- * my dreams archive
+ * My dreams archive
+ * Change grain to pattern link for new values

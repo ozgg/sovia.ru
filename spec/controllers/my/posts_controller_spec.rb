@@ -31,8 +31,8 @@ RSpec.describe My::PostsController, type: :controller do
   end
 
   describe 'get tagged' do
-    let(:tag) { create :tag, language: entity.language }
-    let!(:other_entity) { create :post, user: user, language: entity.language }
+    let(:tag) { create :tag, language: language }
+    let!(:other_entity) { create :post, user: user, language: language }
 
     before :each do
       entity.tags_string = 'test'

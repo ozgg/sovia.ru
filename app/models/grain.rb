@@ -38,6 +38,18 @@ class Grain < ActiveRecord::Base
     find_by user: user, language: language, slug: Canonizer.canonize(name)
   end
 
+  # Find grain by name or raise exception if it is not found
+  #
+  # @param [String] name
+  # @param [Language] language
+  # @param [User] user
+  # @return [Grain]
+  def self.match_by_name!(name, language, user)
+    result = match_by_name name, language, user
+    raise ActiveRecord::RecordNotFound if result.nil?
+    result
+  end
+
   # Find or create grain (with referenced) pattern by grain name
   #
   # Grain name may or may not include referenced pattern name ("foo", "(foo)", "foo(bar)")
