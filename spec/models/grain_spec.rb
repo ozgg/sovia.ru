@@ -48,4 +48,33 @@ RSpec.describe Grain, type: :model do
       end
     end
   end
+
+  describe '#extract_names', wip: true do
+    context 'when long name has no parenthesis' do
+      it 'returns original name twice' do
+        long_name = 'simple case'
+        expect(Grain.extract_names long_name).to eq([long_name, long_name])
+      end
+    end
+
+    context 'when long name has pattern in parenthesis' do
+      it 'returns grain name and pattern name' do
+        grain_name = 'kitty'
+        pattern_name = 'pussy'
+        expect(Grain.extract_names " #{grain_name} ( #{pattern_name} )").to eq([grain_name, pattern_name])
+      end
+    end
+
+    context 'when long name has empty parenthesis' do
+      it 'returns grain name and nil' do
+        expect(Grain.extract_names 'kitty ( )').to eq(['kitty', nil])
+      end
+    end
+
+    context 'when long name has only grain in parenthesis' do
+      it 'returns grain name and nil' do
+        expect(Grain.extract_names '( kitty )').to eq(['kitty', nil])
+      end
+    end
+  end
 end

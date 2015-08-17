@@ -137,7 +137,7 @@ RSpec.describe Dream, type: :model do
     end
   end
 
-  describe '#grains_string=', wip: true do
+  describe '#grains_string=' do
     let!(:dream) { create :owned_dream }
     let!(:existing_pattern) { create :pattern, language: dream.language }
     let!(:existing_grain) { create :grain, pattern: existing_pattern, language: dream.language }
@@ -164,7 +164,6 @@ RSpec.describe Dream, type: :model do
 
     context 'when grain has custom pattern link' do
       it 'links grain with pattern in parenthesis' do
-        pending
         pattern = create :pattern, language: dream.language
         dream.grains_string = "#{existing_grain.name} (#{pattern.name})"
         existing_grain.reload
@@ -174,6 +173,13 @@ RSpec.describe Dream, type: :model do
       it 'removes link for empty parenthesis' do
         pending
         dream.grains_string = "#{existing_grain} ()"
+        existing_grain.reload
+        expect(dream.patterns).to be_blank
+      end
+
+      it 'removes link for grain in parenthesis' do
+        pending
+        dream.grains_string = "(#{existing_grain})"
         existing_grain.reload
         expect(dream.patterns).to be_blank
       end
