@@ -184,7 +184,31 @@ RSpec.describe Dream, type: :model do
     end
   end
 
-  describe '#cache_patterns!', wip: true do
-    pending
+  describe '#cache_patterns!' do
+    let!(:dream) { create :owned_dream }
+
+    it 'adds patterns by user to patterns_cache' do
+      link = create :dream_pattern, dream: dream
+      dream.cache_patterns!
+      expect(dream.patterns_cache).to include(link.pattern.name)
+    end
+
+    it 'adds suggested patterns to patterns_cache' do
+      link = create :suggested_dream_pattern, dream: dream
+      dream.cache_patterns!
+      expect(dream.patterns_cache).to include(link.pattern.name)
+    end
+
+    it 'adds forced patterns to patterns_cache' do
+      link = create :forced_dream_pattern, dream: dream
+      dream.cache_patterns!
+      expect(dream.patterns_cache).to include(link.pattern.name)
+    end
+
+    it 'does not add rejected patterns to patterns_cache' do
+      link = create :rejected_dream_pattern, dream: dream
+      dream.cache_patterns!
+      expect(dream.patterns_cache).not_to include(link.pattern.name)
+    end
   end
 end

@@ -117,7 +117,7 @@ class Dream < ActiveRecord::Base
 
   # Get visible patterns
   def visible_patterns
-    patterns
+    Pattern.where(id: DreamPattern.visible.where(dream: self).pluck(:pattern_id))
   end
 
   # Update dream patterns based on given grains and external (suggested, rejected of forced) patterns

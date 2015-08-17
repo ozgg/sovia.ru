@@ -236,7 +236,7 @@ RSpec.describe DreamsController, type: :controller do
     end
   end
 
-  describe 'get tagged' do
+  describe 'get tagged', wip: true do
     pending
   end
 end

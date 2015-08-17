@@ -7,6 +7,7 @@ Controllers:
  * codes
  * tokens
  * side_notes
+ * catch spammers
 
 My controllers:
 

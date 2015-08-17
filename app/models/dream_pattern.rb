@@ -10,6 +10,18 @@ class DreamPattern < ActiveRecord::Base
   after_create :increment_dream_count
   after_destroy :decrement_dream_count
 
+  scope :visible, -> { where status: DreamPattern.visible_statuses }
+
+  # Visible statuses for scopes
+  #
+  # @return [Array]
+  def self.visible_statuses
+    [statuses[:by_owner], statuses[:suggested], statuses[:forced]]
+  end
+
+  # Is link set externally?
+  #
+  # @return [Boolean]
   def external?
     [:suggested, :rejected, :forced].include? self.status.to_sym
   end

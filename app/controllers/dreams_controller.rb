@@ -79,7 +79,8 @@ class DreamsController < ApplicationController
   end
 
   def set_collection_with_pattern
-    selection = Dream.visible_to_user(current_user).joins(:dream_patterns).where(dream_patterns: { pattern: @pattern })
+    patterns_clause = { pattern: @pattern, status: DreamPattern.visible_statuses }
+    selection       = Dream.visible_to_user(current_user).joins(:dream_patterns).where(dream_patterns: patterns_clause)
 
     @collection = selection.page(current_page).per(10)
   end
