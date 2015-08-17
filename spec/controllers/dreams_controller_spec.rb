@@ -262,5 +262,10 @@ RSpec.describe DreamsController, type: :controller do
       get :tagged, tag_name: 'test'
       expect(response).to render_template(:tagged)
     end
+
+    it 'selects only dreams visible to user' do
+      expect(Dream).to receive(:visible_to_user).and_call_original
+      get :tagged, tag_name: 'test'
+    end
   end
 end
