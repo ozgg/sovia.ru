@@ -236,7 +236,31 @@ RSpec.describe DreamsController, type: :controller do
     end
   end
 
-  describe 'get tagged', wip: true do
-    pending
+  describe 'get tagged' do
+    let(:pattern) { create :pattern, language: language }
+
+    before :each do
+      dream_for_community.grains_string = 'test'
+    end
+
+    it 'includes dreams with pattern to @collection' do
+      get :tagged, tag_name: 'TEST'
+      expect(assigns[:collection]).to include(dream_for_community)
+    end
+
+    it 'does not include dreams without pattern to @collection' do
+      get :tagged, tag_name: pattern.name
+      expect(assigns[:collection]).not_to include(dream_for_community)
+    end
+
+    it 'assigns existing pattern to @pattern' do
+      get :tagged, tag_name: pattern.name
+      expect(assigns[:pattern]).to eq(pattern)
+    end
+
+    it 'renders view "tagged"' do
+      get :tagged, tag_name: 'test'
+      expect(response).to render_template(:tagged)
+    end
   end
 end
