@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DreamsController, type: :controller, wip: true do
+RSpec.describe DreamsController, type: :controller do
   let(:language) { create :russian_language }
   let(:owner) { create :user, language: language }
   let(:user) { create :user, language: language }

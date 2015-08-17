@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :dream_pattern do
     dream
     pattern
-    status 0
+    status DreamPattern.statuses[:by_owner]
   end
 end

@@ -10,6 +10,10 @@ class DreamPattern < ActiveRecord::Base
   after_create :increment_dream_count
   after_destroy :decrement_dream_count
 
+  def external?
+    [:suggested, :rejected, :forced].include? self.status.to_sym
+  end
+
   protected
 
   def increment_dream_count

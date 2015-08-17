@@ -3,7 +3,7 @@ class DreamsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    selection = Dream.in_languages(visitor_languages).visible_to_user(current_user)
+    selection   = Dream.in_languages(visitor_languages).visible_to_user(current_user)
     @collection = selection.order('id desc').page(current_page).per(10)
   end
 
@@ -44,7 +44,9 @@ class DreamsController < ApplicationController
   end
 
   def tagged
-
+    @pattern = Pattern.match_by_name params[:tag_name], Language.find_by(code: locale)
+    raise record_not_found unless @pattern.is_a? Pattern
+    set_collection_with_pattern
   end
 
   protected
@@ -74,5 +76,11 @@ class DreamsController < ApplicationController
       @entity.grains_string = params.require(:dream).permit(:grains_string).to_s
       @entity.cache_patterns!
     end
+  end
+
+  def set_collection_with_pattern
+    selection = Dream.visible_to_user(current_user).joins(:dream_patterns).where(dream_patterns: { pattern: @pattern })
+
+    @collection = selection.page(current_page).per(10)
   end
 end

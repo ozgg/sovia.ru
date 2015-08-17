@@ -137,8 +137,47 @@ RSpec.describe Dream, type: :model do
     end
   end
 
-  describe '#grains_string=' do
-    pending
+  describe '#grains_string=', wip: true do
+    let!(:dream) { create :owned_dream }
+    let!(:existing_pattern) { create :pattern, language: dream.language }
+    let!(:existing_grain) { create :grain, pattern: existing_pattern, language: dream.language }
+
+    context 'in common case' do
+      it 'adds new non-empty and non-repeating grains to dream' do
+        expect { dream.grains_string = 'a,,A,c,c,b,' }.to change(DreamGrain, :count).by(3)
+      end
+
+      it 'adds new non-empty and non-repeating patterns to dream' do
+        expect { dream.grains_string = 'a,,A,c,c,b,' }.to change(DreamPattern, :count).by(3)
+      end
+
+      it 'removes absent patterns' do
+        create :dream_pattern, dream: dream, pattern: existing_pattern
+        expect { dream.grains_string = ''}.to change(DreamPattern, :count).by(-1)
+      end
+
+      it 'removes absent grains' do
+        create :dream_grain, dream: dream, grain: existing_grain
+        expect { dream.grains_string = ''}.to change(DreamGrain, :count).by(-1)
+      end
+    end
+
+    context 'when grain has custom pattern link' do
+      it 'links grain with pattern in parenthesis' do
+        pending
+        pattern = create :pattern, language: dream.language
+        dream.grains_string = "#{existing_grain.name} (#{pattern.name})"
+        existing_grain.reload
+        expect(dream.patterns).to eq([pattern])
+      end
+
+      it 'removes link for empty parenthesis' do
+        pending
+        dream.grains_string = "#{existing_grain} ()"
+        existing_grain.reload
+        expect(dream.patterns).to be_blank
+      end
+    end
   end
 
   describe '#cache_patterns!' do

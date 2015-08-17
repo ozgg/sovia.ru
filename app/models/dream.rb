@@ -63,12 +63,13 @@ class Dream < ActiveRecord::Base
     owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
   end
 
-  def grains_string=(input)
-
+  def grains_string=(grains_string)
+    self.grains = Grain.string_to_array grains_string, self.language, self.user
+    update_patterns
   end
 
   def cache_patterns!
-
+    update patterns_cache: patterns.order('slug asc').map { |pattern| pattern.name }
   end
 
   protected
@@ -83,5 +84,23 @@ class Dream < ActiveRecord::Base
     if self.user.nil? && !self.generally_accessible?
       errors.add :privacy, I18n.t('activerecord.errors.models.dream.privacy.invalid')
     end
+  end
+
+  def update_patterns
+    links = []
+    old_patterns = self.dream_patterns.map { |link| [link.pattern_id, link] }.to_h
+    self.grains.pluck(:pattern_id).each do |pattern_id|
+      if old_patterns.has_key? pattern_id
+        link = old_patterns[pattern_id]
+        link.update status: DreamPattern.statuses[:by_owner]
+      else
+        link = DreamPattern.create dream: self, pattern_id: pattern_id, status: DreamPattern.statuses[:by_owner]
+      end
+      links << link
+    end
+    old_patterns.values.each do |link|
+      links << link if link.external?
+    end
+    self.dream_patterns = links
   end
 end
