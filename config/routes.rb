@@ -17,6 +17,10 @@ Rails.application.routes.draw do
       end
     end
 
+    scope 'dreams', controller: :dreams do
+      get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
+    end
+
     # Namespace for current user
     namespace :my do
       resource :profile, except: [:destroy]

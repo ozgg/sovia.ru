@@ -172,7 +172,7 @@ RSpec.describe DreamsController, type: :controller do
     before(:each) { allow(controller).to receive(:current_user).and_return(owner) }
 
     context 'when data is valid' do
-      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: 'new text'} } }
+      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: 'new text' } } }
 
       it_behaves_like 'setting_dream_patterns'
 
@@ -189,7 +189,7 @@ RSpec.describe DreamsController, type: :controller do
     end
 
     context 'when data is invalid' do
-      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: ' '} } }
+      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: ' ' } } }
 
       it_behaves_like 'not_setting_dream_patterns'
 
@@ -206,7 +206,7 @@ RSpec.describe DreamsController, type: :controller do
     end
 
     context 'when editor is not owner' do
-      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: 'new text'} } }
+      let(:action) { -> { patch :update, id: dream_for_community, dream: { body: 'new text' } } }
 
       before(:each) { allow(controller).to receive(:current_user).and_return(create :administrator) }
 
@@ -266,6 +266,53 @@ RSpec.describe DreamsController, type: :controller do
     it 'selects only dreams visible to user' do
       expect(Dream).to receive(:visible_to_user).and_call_original
       get :tagged, tag_name: 'test'
+    end
+  end
+
+  describe 'get archive' do
+    let(:year) { dream_for_community.created_at.year }
+    let(:month) { dream_for_community.created_at.month }
+
+    shared_examples 'dates_assigner' do
+      it 'assigns @dates' do
+        expect(assigns[:dates]).to have_key(year)
+      end
+    end
+
+    shared_examples 'no_collection' do
+      it 'does not populate @collection' do
+        expect(assigns[:collection]).to be_nil
+      end
+    end
+
+    context 'when nothing is passed in parameters' do
+      before(:each) { get :archive }
+
+      it_behaves_like 'dates_assigner'
+      it_behaves_like 'no_collection'
+    end
+
+    context 'when year is passed' do
+      before(:each) { get :archive, year: year }
+
+      it_behaves_like 'dates_assigner'
+      it_behaves_like 'no_collection'
+    end
+
+    context 'when month is passed' do
+      let!(:dream_in_past) { create :dream_for_community, created_at: 2.months.ago }
+
+      before(:each) { get :archive, year: year, month: month }
+
+      it_behaves_like 'dates_assigner'
+
+      it 'adds dreams for selected month to @collection' do
+        expect(assigns[:collection]).to include(dream_for_community)
+      end
+
+      it 'does not add dreams in past to @collection' do
+        expect(assigns[:collection]).not_to include(dream_in_past)
+      end
     end
   end
 end

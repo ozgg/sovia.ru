@@ -3,8 +3,7 @@ class DreamsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    selection   = Dream.in_languages(visitor_languages).visible_to_user(current_user)
-    @collection = selection.order('id desc').page(current_page).per(10)
+    @collection = visible_dreams.order('id desc').page(current_page).per(10)
   end
 
   def new
@@ -49,6 +48,12 @@ class DreamsController < ApplicationController
     set_collection_with_pattern
   end
 
+  def archive
+    @dates = {}
+    collect_months
+    collect_archive unless params[:month].nil?
+  end
+
   protected
 
   def restrict_editing
@@ -78,10 +83,26 @@ class DreamsController < ApplicationController
     end
   end
 
+  def visible_dreams
+    Dream.in_languages(visitor_languages).visible_to_user(current_user)
+  end
+
   def set_collection_with_pattern
     patterns_clause = { pattern: @pattern, status: DreamPattern.visible_statuses }
     selection       = Dream.visible_to_user(current_user).joins(:dream_patterns).where(dream_patterns: patterns_clause)
 
     @collection = selection.page(current_page).per(10)
+  end
+
+  def collect_months
+    Dream.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
+      @dates[date.year] = [] unless @dates.has_key? date.year
+      @dates[date.year] << date.month
+    end
+  end
+
+  def collect_archive
+    first_day   = '%04d-%02d-01 00:00:00' % [params[:year], params[:month]]
+    @collection = visible_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(current_page).per(20)
   end
 end

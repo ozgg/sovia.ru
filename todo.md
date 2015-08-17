@@ -2,7 +2,6 @@
  
 Controllers:
 
- * dreams (+archive)
  * dreambook
  * codes
  * tokens
@@ -33,3 +32,4 @@ Later:
  * Followings
  * My dreams archive
  * Change grain to pattern link for new values
+ * Posts archive
