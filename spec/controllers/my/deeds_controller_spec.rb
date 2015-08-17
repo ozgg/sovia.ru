@@ -13,6 +13,8 @@ RSpec.describe My::DeedsController, type: :controller do
   describe 'get index' do
     before(:each) { get :index }
 
+    it_behaves_like 'page_for_users'
+
     it 'includes deeds of user into @collection' do
       expect(assigns[:collection]).to include(deed)
     end

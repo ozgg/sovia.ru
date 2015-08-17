@@ -13,6 +13,8 @@ RSpec.describe My::QuestionsController, type: :controller do
   describe 'get index' do
     before(:each) { get :index }
 
+    it_behaves_like 'page_for_users'
+
     it 'includes questions of user into @collection' do
       expect(assigns[:collection]).to include(question)
     end

@@ -2,7 +2,7 @@
  
 Controllers:
 
- * dreams (+archive +tagged)
+ * dreams (+archive)
  * dreambook
  * codes
  * tokens
@@ -12,7 +12,6 @@ Controllers:
 My controllers:
 
  * index
- * posts (+tagged)
  * dreams (+tagged)
  * side_notes
 
@@ -27,3 +26,4 @@ Later:
  * Notifications
  * Favorites
  * Followings
+ * my dreams archive

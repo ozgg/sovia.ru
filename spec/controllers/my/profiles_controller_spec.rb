@@ -7,7 +7,7 @@ RSpec.describe My::ProfilesController, type: :controller do
 
   before(:each) { I18n.locale = language.code }
 
-  describe 'new' do
+  describe 'get new' do
     context 'when user is logged in' do
       before(:each) do
         allow(controller).to receive(:current_user).and_return(user)
@@ -35,7 +35,7 @@ RSpec.describe My::ProfilesController, type: :controller do
     end
   end
 
-  describe 'create' do
+  describe 'post create' do
     let(:user_parameters) { { screen_name: 'new_user', password: '1', password_confirmation: '1' } }
     let(:action) { -> { post :create, user: user_parameters } }
 
@@ -113,7 +113,7 @@ RSpec.describe My::ProfilesController, type: :controller do
     end
   end
 
-  describe 'show' do
+  describe 'get show' do
     context 'when user is logged in' do
       before(:each) do
         allow(controller).to receive(:current_user).and_return(user)
@@ -137,7 +137,7 @@ RSpec.describe My::ProfilesController, type: :controller do
     end
   end
 
-  describe 'edit' do
+  describe 'get edit' do
     context 'when user is logged in' do
       before(:each) do
         allow(controller).to receive(:current_user).and_return(user)
@@ -161,7 +161,7 @@ RSpec.describe My::ProfilesController, type: :controller do
     end
   end
 
-  describe 'update' do
+  describe 'patch update' do
     let(:action) { -> { patch :update, user: { name: 'Random Guy' } } }
 
     context 'when user is logged in' do
