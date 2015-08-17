@@ -26,6 +26,10 @@ class Dream < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  # Select dreams that are visible to given user
+  #
+  # @param [User|nil] user who selects dreams
+  # @param [User|nil] owner used for "profile" and "my dreams" context
   def self.visible_to_user(user, owner = nil)
     privacy = [self.privacies[:generally_accessible]]
     privacy << self.privacies[:visible_to_community] if user.is_a? User
@@ -34,73 +38,118 @@ class Dream < ActiveRecord::Base
     self.where privacy: privacy
   end
 
+  # Parameters for controller that are available for every user
   def self.parameters_for_all
     [:title, :body, :needs_interpretation]
   end
 
+  # Parameters for controller that are available only for logged in users
   def self.parameters_for_users
     [:place_id, :privacy, :lucidity, :mood, :azimuth, :body_position, :time_of_day, :show_image, :image]
   end
 
+  # Parameters for controller that are available only for administrators
   def self.parameters_for_administrators
     [:interpretation_given]
   end
 
+  # Is dream visible to user?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
   def visible_to?(user)
     method = "#{self.privacy}_to?".to_sym
     respond_to?(method) ? send(method, user) : owned_by?(user)
   end
 
+  # Is dream visible to user as generally accessible dream?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
   def generally_accessible_to?(user)
     user.nil? || user.is_a?(User)
   end
 
+  # Is dream visible to user as dream for community?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
   def visible_to_community_to?(user)
     user.is_a? User
   end
 
+  # Is dream visible to user as dream for followees?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
   def visible_to_followees_to?(user)
     owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
   end
 
+  # Add grains and patterns listed in comma-separated grains string
+  #
+  # @param [String] grains_string
   def grains_string=(grains_string)
     self.grains = Grain.string_to_array grains_string, self.language, self.user
     update_patterns
   end
 
+  # Cache visible patterns in patterns_cache
   def cache_patterns!
-    update patterns_cache: patterns.order('slug asc').map { |pattern| pattern.name }
+    update patterns_cache: visible_patterns.order('slug asc').map { |pattern| pattern.name }
   end
 
   protected
 
+  # Place should have the same owner as dream
   def place_has_same_owner
     if place.is_a?(Place) && !place.owned_by?(self.user)
       errors.add :place_id, I18n.t('activerecord.errors.models.dream.attribute.foreign')
     end
   end
 
+  # Anonymous users can add only generally accessible dreams
   def privacy_consistence
     if self.user.nil? && !self.generally_accessible?
       errors.add :privacy, I18n.t('activerecord.errors.models.dream.privacy.invalid')
     end
   end
 
+  # Get visible patterns
+  def visible_patterns
+    patterns
+  end
+
+  # Update dream patterns based on given grains and external (suggested, rejected of forced) patterns
   def update_patterns
-    links = []
-    old_patterns = self.dream_patterns.map { |link| [link.pattern_id, link] }.to_h
-    self.grains.pluck(:pattern_id).each do |pattern_id|
-      if old_patterns.has_key? pattern_id
-        link = old_patterns[pattern_id]
-        link.update status: DreamPattern.statuses[:by_owner]
-      else
-        link = DreamPattern.create dream: self, pattern_id: pattern_id, status: DreamPattern.statuses[:by_owner]
-      end
-      links << link
-    end
-    old_patterns.values.each do |link|
-      links << link if link.external?
-    end
-    self.dream_patterns = links
+    old_links = self.dream_patterns.map { |link| [link.pattern_id, link] }.to_h
+    new_links = gather_links old_links, self.grains.pluck(:pattern_id)
+
+    self.dream_patterns = (new_links + old_links.values.select { |link| link.external? }).uniq
+  end
+
+  # Gather new pattern links set by owner
+  #
+  # @param [Hash] old_links
+  # @param [Array] pattern_ids
+  # @return [Array<DreamPattern>]
+  def gather_links(old_links, pattern_ids)
+    links = pattern_ids.map { |pattern_id| link_by_owner(old_links, pattern_id) }
+    links.select { |link| !link.pattern_id.blank? }
+  end
+
+  # Get dream pattern that was set by owner with grain
+  #
+  # Forced patterns stay forced so owner cannot remove them later (add and then remove grain linked to forced pattern)
+  #
+  # @param [Hash] old_links
+  # @param [Integer] pattern_id
+  # @return DreamPattern
+  def link_by_owner(old_links, pattern_id)
+    link = old_links[pattern_id] || DreamPattern.new(dream: self, pattern_id: pattern_id)
+
+    link.status = DreamPattern.statuses[:by_owner] unless link.forced?
+    link.save
+    link
   end
 end

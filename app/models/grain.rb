@@ -69,9 +69,19 @@ class Grain < ActiveRecord::Base
 
   protected
 
+  # Create grain/pattern pair and return created grain
+  #
+  # Creates grain with references pattern or without pattern, if pattern name is nil
+  #
+  # @param [User] user
+  # @param [Language] language
+  # @param [String] grain_name
+  # @param [String|nil] pattern_name
+  # @return [Grain]
   def self.create_pair(user, language, grain_name, pattern_name)
-    grain = self.create(user: user, language: language, name: grain_name)
-    grain.update pattern: Pattern.match_or_create_by_name(pattern_name, language)
+    grain   = self.create(user: user, language: language, name: grain_name)
+    pattern = pattern_name.nil? ? nil : Pattern.match_or_create_by_name(pattern_name, language)
+    grain.update pattern: pattern
     grain
   end
 

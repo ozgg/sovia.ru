@@ -171,14 +171,12 @@ RSpec.describe Dream, type: :model do
       end
 
       it 'removes link for empty parenthesis' do
-        pending
         dream.grains_string = "#{existing_grain} ()"
         existing_grain.reload
         expect(dream.patterns).to be_blank
       end
 
       it 'removes link for grain in parenthesis' do
-        pending
         dream.grains_string = "(#{existing_grain})"
         existing_grain.reload
         expect(dream.patterns).to be_blank
@@ -186,7 +184,7 @@ RSpec.describe Dream, type: :model do
     end
   end
 
-  describe '#cache_patterns!' do
+  describe '#cache_patterns!', wip: true do
     pending
   end
 end

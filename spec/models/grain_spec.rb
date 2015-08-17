@@ -49,7 +49,7 @@ RSpec.describe Grain, type: :model do
     end
   end
 
-  describe '#extract_names', wip: true do
+  describe '#extract_names' do
     context 'when long name has no parenthesis' do
       it 'returns original name twice' do
         long_name = 'simple case'
