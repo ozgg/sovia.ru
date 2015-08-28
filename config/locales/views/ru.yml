@@ -94,3 +94,8 @@ ru:
       success: "Сон успешно изменён"
     destroy:
       success: "Сон успешно удалён"
+  codes:
+    update:
+      success: "Код успешно обновлён"
+    delete:
+      success: "Код успешно удалён"

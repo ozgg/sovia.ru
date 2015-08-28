@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   scope '(:locale)', locale: /ru|en/ do
     # Administrative resources
-    resources :browsers, :agents, :clients, :tags, :users, :patterns
+    resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes
 
     # Common resources
     resources :goals, :deeds, :places, :questions, :grains, :comments

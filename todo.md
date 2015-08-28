@@ -2,7 +2,6 @@
  
 Controllers:
 
- * codes
  * tokens
  * side_notes
  * catch spammers
