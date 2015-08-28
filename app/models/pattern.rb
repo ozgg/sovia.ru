@@ -15,6 +15,29 @@ class Pattern < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :starting_with, ->(letter) { where 'slug like ?', "#{letter}%" }
+
+  def self.letters(locale)
+    method = "letters_#{locale}"
+    respond_to?(method) ? send(method) : []
+  end
+
+  def self.letters_ru
+    %w(А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ы Э Ю Я)
+  end
+
+  def self.letters_en
+    %w(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
+  end
+
+  def self.search(language, query)
+    if query.blank?
+      []
+    else
+      self.where(language: language).where('slug like ?', "%#{query}%").order('slug asc').limit(20)
+    end
+  end
+
   # @param [Hash] links
   def links=(links)
     new_links = []

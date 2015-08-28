@@ -13,12 +13,19 @@ Rails.application.routes.draw do
     # Tagged entries
     resources :posts, :dreams do
       collection do
-        get 'tagged/:tag_name', action: :tagged, as: :tagged
+        get 'tagged/:tag_name' => :tagged, as: :tagged
       end
     end
 
     scope 'dreams', controller: :dreams do
       get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
+    end
+
+    scope 'dreambook', controller: :dreambook do
+      get '/' => :index, as: :dreambook
+      get 'search' => :search, as: :dreambook_search
+      get ':letter' => :letter, as: :dreambook_letter
+      get ':letter/:word' => :word, as: :dreambook_word
     end
 
     # Namespace for current user

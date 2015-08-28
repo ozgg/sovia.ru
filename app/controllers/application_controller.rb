@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_page, :current_user, :current_user_has_role?
+  helper_method :current_page, :current_user, :current_user_has_role?, :param_from_request
 
   # Get current page from request
   #
@@ -26,7 +26,15 @@ class ApplicationController < ActionController::Base
     current_user.is_a?(User) && current_user.has_role?(role)
   end
 
+  def param_from_request(parameter)
+    params[parameter].to_s.encode('UTF-8', 'UTF-8', invalid: :replace, replace: '')
+  end
+
   protected
+
+  def language_in_locale
+    Language.find_by code: I18n.locale
+  end
 
   def default_url_options(options = {})
     if I18n.locale == I18n.default_locale

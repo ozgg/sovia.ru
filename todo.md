@@ -2,7 +2,6 @@
  
 Controllers:
 
- * dreambook
  * codes
  * tokens
  * side_notes
