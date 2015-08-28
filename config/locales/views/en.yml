@@ -99,3 +99,8 @@ en:
       success: "Code has been updated successfully"
     delete:
       success: "Code has been deleted successfully"
+  tokens:
+    update:
+      success: "Token has been updated successfully"
+    delete:
+      success: "Token has been deleted successfully"

@@ -99,3 +99,8 @@ ru:
       success: "Код успешно обновлён"
     delete:
       success: "Код успешно удалён"
+  tokens:
+    update:
+      success: "Жетон успешно обновлён"
+    delete:
+      success: "Жетон успешно удалён"
