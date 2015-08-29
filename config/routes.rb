@@ -38,6 +38,7 @@ Rails.application.routes.draw do
           get 'tagged/:tag_name', action: :tagged, as: :tagged
         end
       end
+      get '/' => 'index#index'
     end
 
     # Scope of certain user

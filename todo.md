@@ -4,10 +4,6 @@ Controllers:
 
  * catch spammers
 
-My controllers:
-
- * index
-
 Views:
 
  * layouts

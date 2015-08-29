@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     user.is_a?(User) && (user.id == self.id)
   end
 
+  def decent?
+    dreams_count > 20 && comments_count > 20
+  end
+
   protected
 
   def normalize_screen_name

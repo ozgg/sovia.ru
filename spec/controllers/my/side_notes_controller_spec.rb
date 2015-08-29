@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe My::SideNotesController, type: :controller, wip: true do
+RSpec.describe My::SideNotesController, type: :controller do
   let(:language) { create :russian_language }
   let(:user) { create :user, language: language }
   let!(:entity) { create :side_note, user: user, language: language }

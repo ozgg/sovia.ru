@@ -94,6 +94,8 @@ en:
       success: "Dream has been updated successfully"
     destroy:
       success: "Dream has been deleted successfully"
+    create:
+      success: "Dream has been created successfully"
   codes:
     update:
       success: "Code has been updated successfully"

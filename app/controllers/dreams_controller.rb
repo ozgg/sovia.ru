@@ -12,11 +12,10 @@ class DreamsController < ApplicationController
 
   def create
     @entity = Dream.new creation_parameters
-    if @entity.save
-      set_grains
-      redirect_to @entity
+    if Trap.suspect_spam?(current_user, @entity.body, 1)
+      emulate_saving
     else
-      render :new
+      create_dream
     end
   end
 
@@ -104,5 +103,19 @@ class DreamsController < ApplicationController
   def collect_archive
     first_day   = '%04d-%02d-01 00:00:00' % [params[:year], params[:month]]
     @collection = visible_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(current_page).per(20)
+  end
+
+  def create_dream
+    if @entity.save
+      set_grains
+      redirect_to @entity, notice: t('dreams.create.success')
+    else
+      render :new
+    end
+  end
+
+  def emulate_saving
+    flash[:notice] = t('dreams.create.success')
+    redirect_to dreams_path
   end
 end

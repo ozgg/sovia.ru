@@ -12,6 +12,7 @@ RSpec.describe DreamsController, type: :controller do
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:restrict_editing)
+    allow(Trap).to receive(:suspect_spam?).and_return(false)
     allow_any_instance_of(Dream).to receive(:visible_to?).and_return(true)
     I18n.locale = language.code
   end
@@ -74,6 +75,19 @@ RSpec.describe DreamsController, type: :controller do
     end
   end
 
+  shared_examples 'leaving_dreams_intact' do
+    it 'leaves dreams table intact' do
+      expect(action).not_to change(Dream, :count)
+    end
+  end
+
+  shared_examples 'checking_spam' do
+    it 'calls Trap#suspect_spam?' do
+      action.call
+      expect(Trap).to have_received(:suspect_spam?)
+    end
+  end
+
   describe 'get index' do
     context 'when user is not logged in' do
       before :each do
@@ -115,11 +129,12 @@ RSpec.describe DreamsController, type: :controller do
     end
   end
 
-  describe 'post create' do
+  describe 'post create', wip: true do
     context 'when data is valid' do
       let(:action) { -> { post :create, dream: attributes_for(:dream).merge(privacy: 'generally_accessible') } }
 
       it_behaves_like 'setting_dream_patterns'
+      it_behaves_like 'checking_spam'
 
       it 'creates new Dream in database' do
         expect(action).to change(Dream, :count).by(1)
@@ -135,15 +150,31 @@ RSpec.describe DreamsController, type: :controller do
       let(:action) { -> { post :create, dream: { body: ' ' } } }
 
       it_behaves_like 'not_setting_dream_patterns'
-
-      it 'leaves dreams table intact' do
-        expect(action).not_to change(Dream, :count)
-      end
+      it_behaves_like 'leaving_dreams_intact'
+      it_behaves_like 'checking_spam'
 
       it 'renders view :new' do
         action.call
         expect(response).to render_template(:new)
       end
+    end
+
+    context 'when spam is suspected' do
+      let(:action) { -> { post :create, dream: { body: 'https://example.com' } } }
+
+      before :each do
+        allow(Trap).to receive(:suspect_spam?).and_return(true)
+      end
+
+      it_behaves_like 'checking_spam'
+      it_behaves_like 'leaving_dreams_intact'
+
+      it 'redirects to dreams path' do
+        action.call
+        expect(response).to redirect_to(dreams_path)
+      end
+      
+      it 'adds violation to database'
     end
   end
 
