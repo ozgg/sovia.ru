@@ -104,3 +104,8 @@ en:
       success: "Token has been updated successfully"
     delete:
       success: "Token has been deleted successfully"
+  side_notes:
+    update:
+      success: "Side note has been updated successfully"
+    delete:
+      success: "Side note has been deleted successfully"

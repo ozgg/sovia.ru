@@ -116,5 +116,4 @@ RSpec.describe TokensController, type: :controller do
       expect(action).to change(Token, :count).by(-1)
     end
   end
-
 end

@@ -2,7 +2,6 @@
  
 Controllers:
 
- * side_notes
  * catch spammers
 
 My controllers:
@@ -23,6 +22,7 @@ Refactoring:
 
 Later:
 
+ * Social log in
  * Mentions of user
  * Notifications
  * Favorites

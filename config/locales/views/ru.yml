@@ -104,3 +104,8 @@ ru:
       success: "Жетон успешно обновлён"
     delete:
       success: "Жетон успешно удалён"
+  side_notes:
+    update:
+      success: "Заметка успешно изменена"
+    delete:
+      success: "Заметка успешно удалена"

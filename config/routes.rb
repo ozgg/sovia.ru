@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
 
     # Common resources
-    resources :goals, :deeds, :places, :questions, :grains, :comments
+    resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
 
     # Tagged entries
     resources :posts, :dreams do
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     namespace :my do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :goals, :deeds, :places, :questions, :grains, :comments, only: [:index]
+      resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes, only: [:index]
       resources :posts, :dreams, only: [:index] do
         collection do
           get 'tagged/:tag_name', action: :tagged, as: :tagged
