@@ -7,7 +7,6 @@ Controllers:
 My controllers:
 
  * index
- * side_notes
 
 Views:
 
