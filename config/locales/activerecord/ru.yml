@@ -226,3 +226,9 @@ ru:
         image: "картинка"
         link: "ссылка"
         body: "текст"
+      violation:
+        user_id: "пользователь"
+        agent_id: "АП"
+        ip: "IP-адрес"
+        category: "категория"
+        body: "текст"

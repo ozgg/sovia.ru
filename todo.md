@@ -2,7 +2,7 @@
  
 Controllers:
 
- * catch spammers
+ * Comments: notify participants
 
 Views:
 

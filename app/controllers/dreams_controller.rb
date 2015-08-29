@@ -115,7 +115,9 @@ class DreamsController < ApplicationController
   end
 
   def emulate_saving
-    flash[:notice] = t('dreams.create.success')
-    redirect_to dreams_path
+    parameters = { user: @entity.user, category: Violation.categories[:dreams_spam], body: @entity.body }
+    Violation.create(parameters.merge tracking_for_entity)
+
+    redirect_to dreams_path, notice: t('dreams.create.success')
   end
 end

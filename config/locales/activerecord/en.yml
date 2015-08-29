@@ -226,3 +226,9 @@ en:
         image: "image"
         link: "link"
         body: "body"
+      violation:
+        user_id: "user"
+        agent_id: "UA"
+        ip: "IP address"
+        category: "category"
+        body: "body"

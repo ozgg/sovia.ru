@@ -9,12 +9,19 @@ RSpec.describe CommentsController, type: :controller do
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:require_role)
+    allow(Trap).to receive(:suspect_spam?).and_return(false)
     I18n.locale = language.code
   end
 
   shared_examples 'entity_assigner' do
-    it 'assigns post to @entity' do
+    it 'assigns comment to @entity' do
       expect(assigns[:entity]).to eq(entity)
+    end
+  end
+
+  shared_examples 'intact_comments' do
+    it 'leaves comments table intact' do
+      expect(action).not_to change(Comment, :count)
     end
   end
 
@@ -45,7 +52,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'post create' do
-    context 'when data is valid' do
+    context 'when data is valid', wip: true do
       let!(:dream) { create :dream }
       let(:data) { { commentable_id: dream.id, commentable_type: dream.class, body: '1'} }
 
@@ -59,18 +66,37 @@ RSpec.describe CommentsController, type: :controller do
         action.call
         expect(response).to redirect_to(Comment.last.commentable)
       end
+
+      it 'sends notification to participants'
     end
 
     context 'when data is invalid' do
       let(:action) { -> { post :create, comment: { body: ' ' } } }
 
-      it 'leaves comments table intact' do
-        expect(action).not_to change(Comment, :count)
-      end
+      it_behaves_like 'intact_comments'
 
       it 'renders view :new' do
         action.call
         expect(response).to render_template(:new)
+      end
+    end
+
+    context 'when spam is suspected' do
+      let(:action) { -> { post :create, comment: { body: 'http://example.com' } } }
+
+      before :each do
+        allow(Trap).to receive(:suspect_spam?).and_return(true)
+      end
+
+      it_behaves_like 'intact_comments'
+
+      it 'redirects to commentable page' do
+        action.call
+        expect(response).to be_redirect
+      end
+
+      it 'adds violation to database' do
+        expect(action).to change(Violation, :count).by(1)
       end
     end
   end

@@ -2,7 +2,7 @@ class Trap
   def self.suspect_spam?(user, text, tolerance = 1)
     if user.nil? || !user.decent?
       tolerance += tolerance_delta(user) if user.is_a?(User)
-      text.scan(/https?:\/\//).length >= tolerance
+      text.scan(/https?:\/\/[a-z0-9]+/i).length >= tolerance
     else
       false
     end

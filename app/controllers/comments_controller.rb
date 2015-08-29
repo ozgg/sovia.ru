@@ -12,10 +12,10 @@ class CommentsController < ApplicationController
 
   def create
     @entity = Comment.new creation_parameters
-    if @entity.save
-      redirect_to @entity.commentable, notice: t('comments.create.success')
+    if Trap.suspect_spam?(@entity.user, @entity.body, 2)
+      add_violation
     else
-      render :new
+      save_comment
     end
   end
 
@@ -60,5 +60,35 @@ class CommentsController < ApplicationController
 
   def creation_parameters
     entity_parameters.merge(owner_for_entity).merge(language_for_entity).merge(tracking_for_entity)
+  end
+
+  def add_violation
+    parameters = { user: @entity.user, category: Violation.categories[:comments_spam], body: @entity.body }
+    Violation.create(parameters.merge tracking_for_entity)
+
+    redirect_with_confirmation
+  end
+
+  def save_comment
+    if @entity.save
+      notify_participants
+      redirect_with_confirmation
+    else
+      render :new
+    end
+  end
+
+  def redirect_with_confirmation
+    flash[:notice] = t('comments.create.success')
+    redirect_to(@entity.commentable || root_path)
+  end
+
+  def notify_participants
+    # begin
+    #   Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
+    #   Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
+    # rescue Net::SMTPAuthenticationError => e
+    #   logger.warn e.message
+    # end
   end
 end

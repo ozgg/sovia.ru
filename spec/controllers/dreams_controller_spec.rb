@@ -129,7 +129,7 @@ RSpec.describe DreamsController, type: :controller do
     end
   end
 
-  describe 'post create', wip: true do
+  describe 'post create' do
     context 'when data is valid' do
       let(:action) { -> { post :create, dream: attributes_for(:dream).merge(privacy: 'generally_accessible') } }
 
@@ -174,7 +174,9 @@ RSpec.describe DreamsController, type: :controller do
         expect(response).to redirect_to(dreams_path)
       end
 
-      it 'adds violation to database'
+      it 'adds violation to database' do
+        expect(action).to change(Violation, :count).by(1)
+      end
     end
   end
 
