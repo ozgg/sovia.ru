@@ -173,7 +173,7 @@ RSpec.describe DreamsController, type: :controller do
         action.call
         expect(response).to redirect_to(dreams_path)
       end
-      
+
       it 'adds violation to database'
     end
   end
