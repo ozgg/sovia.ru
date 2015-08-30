@@ -1,5 +1,9 @@
 require "rails_helper"
 
+RSpec.configure do |c|
+  c.include CommentsHelper
+end
+
 RSpec.describe Comments, type: :mailer do
   let!(:language) { create :russian_language }
   let!(:dream) { create :owned_dream, user: create(:confirmed_user), language: language }
@@ -25,7 +29,9 @@ RSpec.describe Comments, type: :mailer do
       expect(mail.to).to eq([dream.user.email])
     end
 
-    it 'includes link to comment in letter body'
+    it 'includes link to comment in letter body' do
+      expect(mail.body.encoded).to match(url_to_comment(comment))
+    end
   end
 
   describe 'comment_reply' do
@@ -43,6 +49,8 @@ RSpec.describe Comments, type: :mailer do
       expect(mail.to).to eq([parent_comment.user.email])
     end
 
-    it 'includes link to comment in letter body'
+    it 'includes link to comment in letter body' do
+      expect(mail.body.encoded).to match(url_to_comment(comment))
+    end
   end
 end
