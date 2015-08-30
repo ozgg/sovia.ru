@@ -45,7 +45,7 @@ RSpec.describe Comments, type: :mailer do
       expect(mail.from).to eq(['support@sovia.ru'])
     end
 
-    it 'sends to dream owner' do
+    it 'sends to parent comment owner' do
       expect(mail.to).to eq([parent_comment.user.email])
     end
 

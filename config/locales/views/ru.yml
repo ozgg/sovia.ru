@@ -82,6 +82,11 @@ ru:
       success: "Зерно восприятия успешно обновлено"
     delete:
       success: "Зерно восприятия успешно удалено"
+  code_sender:
+    email:
+      subject: "Подтверждение адреса электронной почты"
+    password:
+      subject: "Сброс пароля"
   comments:
     create:
       success: "Комментарий добавлен"

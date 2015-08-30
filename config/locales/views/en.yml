@@ -82,6 +82,11 @@ en:
       success: "Grain has been updated successfully"
     delete:
       success: "Grain has been deleted successfully"
+  code_sender:
+    email:
+      subject: "Email confirmation"
+    password:
+      subject: "Password recovery"
   comments:
     create:
       success: "Comment has been added"
