@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def can_receive_letters?
-    true
+    allow_mail? && email_confirmed? && !email.blank?
   end
 
   protected

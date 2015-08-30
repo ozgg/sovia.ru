@@ -145,7 +145,20 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'can_receive_letters?', wip: true do
-    pending
+  describe 'can_receive_letters?' do
+    it 'returns false for users without email' do
+      user = create :user, email: nil
+      expect(user.can_receive_letters?).not_to be
+    end
+
+    it 'returns false for users without "allow mail" flag' do
+      user = create :confirmed_user, allow_mail: false
+      expect(user.can_receive_letters?).not_to be
+    end
+
+    it 'returns true for users with confirmed email and "allow mail" flag' do
+      user = create :confirmed_user, allow_mail: true
+      expect(user.can_receive_letters?).to be
+    end
   end
 end
