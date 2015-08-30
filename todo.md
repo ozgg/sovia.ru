@@ -2,7 +2,6 @@
  
 Controllers:
 
- * Comments: notify participants
  * Violations
  * My dreams archive
  * Posts archive

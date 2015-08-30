@@ -89,6 +89,10 @@ ru:
       success: "Комментарий изменён"
     destroy:
       success: "Комментарий удалён"
+    entry_reply:
+      subject: "Новый ответ на вашу запись"
+    comment_reply:
+      subject: "Новый ответ на ваш комментарий"
   dreams:
     update:
       success: "Сон успешно изменён"

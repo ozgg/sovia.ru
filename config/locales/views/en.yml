@@ -89,6 +89,10 @@ en:
       success: "Comment has been updated"
     destroy:
       success: "Comment has been deleted"
+    entry_reply:
+      subject: "New reply to your post"
+    comment_reply:
+      subject: "New reply to your comment"
   dreams:
     update:
       success: "Dream has been updated successfully"
