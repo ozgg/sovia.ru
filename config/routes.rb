@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  # Collections that have tags and archive (e.g. posts and dreams)
+  concern :tagged_archive do
+    collection do
+      get 'tagged/:tag_name' => :tagged, as: :tagged
+      get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
+    end
+  end
+
   get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
 
   root 'index#index'
@@ -11,14 +19,10 @@ Rails.application.routes.draw do
     # Common resources
     resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
 
-    # Tagged entries with archive
-    resources :posts, :dreams do
-      collection do
-        get 'tagged/:tag_name' => :tagged, as: :tagged
-        get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
-      end
-    end
+    # Tagged resources with archive
+    resources :posts, :dreams, concerns: :tagged_archive
 
+    # Dreambook
     scope 'dreambook', controller: :dreambook do
       get '/' => :index, as: :dreambook
       get 'search' => :search, as: :dreambook_search
@@ -31,12 +35,8 @@ Rails.application.routes.draw do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
       resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes, only: [:index]
+      resources :posts, :dreams, only: [:index], concerns: :tagged_archive
 
-      resources :posts, :dreams, only: [:index] do
-        collection do
-          get 'tagged/:tag_name', action: :tagged, as: :tagged
-        end
-      end
       get '/' => 'index#index'
     end
 
@@ -50,15 +50,13 @@ Rails.application.routes.draw do
       get 'patterns', as: :user_patterns
     end
 
+    # Authentication
     controller :authentications do
       get 'login' => :new
       post 'login' => :create
       delete 'logout' => :destroy
     end
   end
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
@@ -84,11 +82,4 @@ Rails.application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
 end
