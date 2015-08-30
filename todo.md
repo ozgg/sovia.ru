@@ -1,5 +1,3 @@
- * Specs for Canonizer?
-
 Views:
 
  * agents          
