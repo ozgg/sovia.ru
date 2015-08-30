@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     language
-    network 0
+    network User.networks[:native]
     sequence(:screen_name) { |n| "User_#{n}" }
     password 'secret'
     password_confirmation 'secret'
@@ -11,6 +11,7 @@ FactoryGirl.define do
 
       factory :confirmed_user do
         email_confirmed true
+        allow_mail true
       end
     end
 

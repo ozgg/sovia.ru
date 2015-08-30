@@ -144,4 +144,8 @@ RSpec.describe User, type: :model do
       expect(User.with_long_uid "invalid-#{user.uid}").to be_nil
     end
   end
+
+  describe 'can_receive_letters?', wip: true do
+    pending
+  end
 end

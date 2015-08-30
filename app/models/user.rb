@@ -94,6 +94,10 @@ class User < ActiveRecord::Base
     dreams_count > 20 && comments_count > 20
   end
 
+  def can_receive_letters?
+    true
+  end
+
   protected
 
   def normalize_screen_name

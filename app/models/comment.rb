@@ -13,11 +13,19 @@ class Comment < ActiveRecord::Base
   validate :commentable_is_commentable
 
   def notify_entry_owner?
-
+    if parent.is_a?(Comment) && commentable.owned_by?(parent.user)
+      false
+    else
+      notify_user? self.commentable.user
+    end
   end
 
   def notify_parent_owner?
-
+    if parent.is_a? Comment
+      owned_by?(parent.user) ? false : notify_user?(parent.user)
+    else
+      false
+    end
   end
 
   protected
@@ -42,6 +50,14 @@ class Comment < ActiveRecord::Base
       unless self.commentable.commentable_by? self.user
         errors.add(:commentable, I18n.t('activerecord.errors.models.comment.attributes.commentable.not_commentable'))
       end
+    end
+  end
+
+  def notify_user?(user)
+    if user.is_a?(User) && !owned_by?(user)
+      user.can_receive_letters?
+    else
+      false
     end
   end
 end

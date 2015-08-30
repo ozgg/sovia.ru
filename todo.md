@@ -3,6 +3,9 @@
 Controllers:
 
  * Comments: notify participants
+ * Violations
+ * My dreams archive
+ * Posts archive
 
 Views:
 
@@ -22,6 +25,4 @@ Later:
  * Notifications
  * Favorites
  * Followings
- * My dreams archive
  * Change grain to pattern link for new values
- * Posts archive
