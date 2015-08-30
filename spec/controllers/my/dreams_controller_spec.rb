@@ -91,7 +91,7 @@ RSpec.describe My::DreamsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:entity_in_past) { create :dream, created_at: 2.months.ago, language: language }
+      let!(:entity_in_past) { create :dream, user: user, created_at: 2.months.ago, language: language }
 
       before(:each) { get :archive, year: year, month: month }
 
@@ -103,6 +103,10 @@ RSpec.describe My::DreamsController, type: :controller do
 
       it 'does not add entities in past to @collection' do
         expect(assigns[:collection]).not_to include(entity_in_past)
+      end
+
+      it 'does not include foreign entities into @collection' do
+        expect(assigns[:collection]).not_to include(foreign_entity)
       end
     end
   end

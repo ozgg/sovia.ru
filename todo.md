@@ -1,8 +1,4 @@
  * Specs for Canonizer?
- 
-Controllers:
-
- * My posts archive
 
 Views:
 
