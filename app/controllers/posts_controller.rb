@@ -53,6 +53,12 @@ class PostsController < ApplicationController
     @collection = Post.visible.joins(:post_tags).where(post_tags: { tag: @tag }).page(current_page).per(5)
   end
 
+  def archive
+    @dates = {}
+    collect_months
+    collect_archive unless params[:month].nil?
+  end
+
   protected
 
   def restrict_editing
@@ -76,5 +82,17 @@ class PostsController < ApplicationController
   def set_tags
     @entity.tags_string = params.require(:post).permit(:tags_string).to_s
     @entity.cache_tags!
+  end
+
+  def collect_months
+    Post.in_languages(visitor_languages).visible.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
+      @dates[date.year] = [] unless @dates.has_key? date.year
+      @dates[date.year] << date.month
+    end
+  end
+
+  def collect_archive
+    first_day   = '%04d-%02d-01 00:00:00' % [params[:year], params[:month]]
+    @collection = Post.in_languages(visitor_languages).visible.where("date_trunc('month', created_at) = '#{first_day}'").order('id asc').page(current_page).per(20)
   end
 end

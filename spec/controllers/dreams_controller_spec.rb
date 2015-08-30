@@ -333,7 +333,7 @@ RSpec.describe DreamsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:dream_in_past) { create :dream_for_community, created_at: 2.months.ago }
+      let!(:dream_in_past) { create :dream_for_community, created_at: 2.months.ago, language: language }
 
       before(:each) { get :archive, year: year, month: month }
 

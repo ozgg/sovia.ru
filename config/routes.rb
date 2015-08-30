@@ -11,15 +11,12 @@ Rails.application.routes.draw do
     # Common resources
     resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
 
-    # Tagged entries
+    # Tagged entries with archive
     resources :posts, :dreams do
       collection do
         get 'tagged/:tag_name' => :tagged, as: :tagged
+        get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
       end
-    end
-
-    scope 'dreams', controller: :dreams do
-      get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
     end
 
     scope 'dreambook', controller: :dreambook do

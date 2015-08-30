@@ -94,7 +94,7 @@ class DreamsController < ApplicationController
   end
 
   def collect_months
-    Dream.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
+    Dream.in_languages(visitor_languages).uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end

@@ -3,7 +3,6 @@
 Controllers:
 
  * My dreams archive
- * Posts archive
  * My posts archive
 
 Views:

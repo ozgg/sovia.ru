@@ -246,4 +246,56 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to render_template(:tagged)
     end
   end
+
+  describe 'get archive' do
+    let(:year) { entity.created_at.year }
+    let(:month) { entity.created_at.month }
+    let!(:hidden_entity) { create :post, language: language }
+
+    shared_examples 'dates_assigner' do
+      it 'assigns @dates' do
+        expect(assigns[:dates]).to have_key(year)
+      end
+    end
+
+    shared_examples 'no_collection' do
+      it 'does not populate @collection' do
+        expect(assigns[:collection]).to be_nil
+      end
+    end
+
+    context 'when nothing is passed in parameters' do
+      before(:each) { get :archive }
+
+      it_behaves_like 'dates_assigner'
+      it_behaves_like 'no_collection'
+    end
+
+    context 'when year is passed' do
+      before(:each) { get :archive, year: year }
+
+      it_behaves_like 'dates_assigner'
+      it_behaves_like 'no_collection'
+    end
+
+    context 'when month is passed' do
+      let!(:entity_in_past) { create :visible_post, created_at: 2.months.ago, language: language }
+
+      before(:each) { get :archive, year: year, month: month }
+
+      it_behaves_like 'dates_assigner'
+
+      it 'adds entities for selected month to @collection' do
+        expect(assigns[:collection]).to include(entity)
+      end
+
+      it 'does not add entities in past to @collection' do
+        expect(assigns[:collection]).not_to include(entity_in_past)
+      end
+
+      it 'does not add hidden entities to @collection' do
+        expect(assigns[:collection]).not_to include(hidden_entity)
+      end
+    end
+  end
 end
