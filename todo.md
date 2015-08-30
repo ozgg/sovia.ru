@@ -2,8 +2,42 @@
 
 Views:
 
- * layouts
- * index
+ * agents          
+ * clients         
+ * comments        
+ * dreams          
+ * index           
+ * posts           
+ * tags            
+ * violations
+ * authentications 
+ * code_sender     
+ * deeds           
+ * goals           
+ * layouts         
+ * patterns        
+ * questions       
+ * tokens
+ * browsers        
+ * codes           
+ * dreambook       
+ * grains          
+ * metrics         
+ * places          
+ * side_notes      
+ * users
+ * my/comments      
+ * my/deeds         
+ * my/goals         
+ * my/index         
+ * my/posts         
+ * my/questions     
+ * my/side_notes
+ * my/confirmations dreams        
+ * my/grains        
+ * my/places        
+ * my/profiles      
+ * my/recoveries
  
 Refactoring:
 
