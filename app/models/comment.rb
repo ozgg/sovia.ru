@@ -4,12 +4,21 @@ class Comment < ActiveRecord::Base
   include HasTrace
 
   belongs_to :user, counter_cache: true
+  belongs_to :parent, class_name: Comment.to_s
   belongs_to :commentable, polymorphic: true, counter_cache: true
 
   validates_presence_of :commentable, :body
   validate :parent_matches
   validate :commentable_is_visible
   validate :commentable_is_commentable
+
+  def notify_entry_owner?
+
+  end
+
+  def notify_parent_owner?
+
+  end
 
   protected
 

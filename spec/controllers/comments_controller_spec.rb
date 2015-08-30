@@ -52,7 +52,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe 'post create' do
-    context 'when data is valid', wip: true do
+    context 'when data is valid' do
       let!(:dream) { create :dream }
       let(:data) { { commentable_id: dream.id, commentable_type: dream.class, body: '1'} }
 
@@ -66,8 +66,6 @@ RSpec.describe CommentsController, type: :controller do
         action.call
         expect(response).to redirect_to(Comment.last.commentable)
       end
-
-      it 'sends notification to participants'
     end
 
     context 'when data is invalid' do
@@ -178,6 +176,48 @@ RSpec.describe CommentsController, type: :controller do
       it 'redirects to comments page' do
         expect(response).to redirect_to(comments_path)
       end
+    end
+  end
+
+  describe 'notifying participants' do
+    let(:post_owner) { create :confirmed_user, allow_mail: true }
+    let(:comment_owner) { create :confirmed_user, allow_mail: true }
+    let!(:entry) { create :post, user: post_owner}
+    let!(:comment) { create :comment, commentable: entry, user: comment_owner }
+    let(:data) { { commentable_id: entry.id, commentable_type: entry.class, comment_id: comment.id, body: '1' }}
+    let(:action) { -> { post :create, comment: data }}
+
+    before :each do
+      allow_any_instance_of(Comment).to receive(:notify_entry_owner?).and_return(true)
+      allow_any_instance_of(Comment).to receive(:notify_parent_owner?).and_return(true)
+      allow(Comments).to receive(:entry_reply).and_return(Mail)
+      allow(Comments).to receive(:comment_reply).and_return(Mail)
+      allow(Mail).to receive(:deliver)
+    end
+
+    it 'checks if entry owner should receive notification' do
+      expect_any_instance_of(Comment).to receive(:notify_entry_owner?)
+      action.call
+    end
+
+    it 'checks if parent comment owner should receive notification' do
+      expect_any_instance_of(Comment).to receive(:notify_parent_owner?)
+      action.call
+    end
+
+    it 'sends notification to entry owner' do
+      expect(Comments).to receive(:entry_reply)
+      action.call
+    end
+
+    it 'sends notification to parent owner' do
+      expect(Comments).to receive(:comment_reply)
+      action.call
+    end
+
+    it 'sends mails' do
+      expect(Mail).to receive(:deliver).twice
+      action.call
     end
   end
 end

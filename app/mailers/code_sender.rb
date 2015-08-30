@@ -1,4 +1,4 @@
-class CodeSender < ActionMailer::Base
+class CodeSender < ApplicationMailer
   def email(code)
     @code = code
 

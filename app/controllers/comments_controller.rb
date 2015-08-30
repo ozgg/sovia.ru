@@ -84,11 +84,11 @@ class CommentsController < ApplicationController
   end
 
   def notify_participants
-    # begin
-    #   Comments.entry_reply(@comment).deliver if @comment.notify_entry_owner?
-    #   Comments.comment_reply(@comment).deliver if @comment.notify_parent_owner?
-    # rescue Net::SMTPAuthenticationError => e
-    #   logger.warn e.message
-    # end
+    begin
+      Comments.entry_reply(@entity).deliver if @entity.notify_entry_owner?
+      Comments.comment_reply(@entity).deliver if @entity.notify_parent_owner?
+    rescue Net::SMTPAuthenticationError => error
+      logger.warn error.message
+    end
   end
 end

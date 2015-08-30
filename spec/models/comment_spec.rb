@@ -35,4 +35,12 @@ RSpec.describe Comment, type: :model do
       expect(build :comment).to be_valid
     end
   end
+
+  describe 'notify_entry_owner?' do
+    pending
+  end
+
+  describe 'notify_parent_owner?' do
+    pending
+  end
 end
