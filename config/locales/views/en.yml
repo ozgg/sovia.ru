@@ -120,3 +120,6 @@ en:
       success: "Side note has been updated successfully"
     delete:
       success: "Side note has been deleted successfully"
+  violations:
+    delete:
+      success: "Violation has been deleted successfully"

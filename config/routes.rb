@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /ru|en/ do
     # Administrative resources
     resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
+    resources :violations, only: [:index, :show, :destroy]
 
     # Common resources
     resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
       resource :profile, except: [:destroy]
       resource :confirmation, :recovery, only: [:show, :create, :update]
       resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes, only: [:index]
+
       resources :posts, :dreams, only: [:index] do
         collection do
           get 'tagged/:tag_name', action: :tagged, as: :tagged

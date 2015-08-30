@@ -120,3 +120,6 @@ ru:
       success: "Заметка успешно изменена"
     delete:
       success: "Заметка успешно удалена"
+  violations:
+    delete:
+      success: "Нарушение успешно удалено"
