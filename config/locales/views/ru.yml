@@ -123,3 +123,6 @@ ru:
   violations:
     delete:
       success: "Нарушение успешно удалено"
+  layouts:
+    application:
+      title: "Совия"

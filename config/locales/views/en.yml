@@ -123,3 +123,6 @@ en:
   violations:
     delete:
       success: "Violation has been deleted successfully"
+  layouts:
+    application:
+      title: "Sovia"
