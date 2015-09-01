@@ -46,6 +46,7 @@ Refactoring:
 Later:
 
  * Social log in
+ * Sitemap
  * Mentions of user
  * Notifications
  * Favorites
