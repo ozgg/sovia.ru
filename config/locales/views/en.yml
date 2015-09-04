@@ -126,3 +126,6 @@ en:
   layouts:
     application:
       title: "Sovia"
+    flash_messages:
+      notice: "Notice"
+      warning: "Warning"

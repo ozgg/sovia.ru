@@ -126,3 +126,6 @@ ru:
   layouts:
     application:
       title: "Совия"
+    flash_messages:
+      notice: "Уведомление"
+      warning: "Предупреждение"

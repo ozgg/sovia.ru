@@ -1,0 +1,7 @@
+<div class="authentication">
+  <% if current_user.is_a? User %>
+      <%= render partial: 'authentications/plate', locals: { user: current_user } %>
+  <% else %>
+      <%= render 'authentications/form' %>
+  <% end %>
+</div>

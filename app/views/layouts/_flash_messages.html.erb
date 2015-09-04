@@ -1,0 +1,6 @@
+<% if flash[:notice] %>
+    <div class="notice" title="<%= t('.notice') %>"><%= flash[:notice] %></div>
+<% end %>
+<% if flash[:warning] %>
+    <div class="warning" title="<%= t('.warning') %>"><%= flash[:warning] %></div>
+<% end %>
