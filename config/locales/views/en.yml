@@ -129,3 +129,10 @@ en:
     flash_messages:
       notice: "Notice"
       warning: "Warning"
+    main_navigation:
+      posts: "Posts"
+      dreams: "Dreams"
+      add_dream: "Add a dream"
+      dreambook: "Dreambook"
+      questions: "Questions"
+      about: "About us"

@@ -129,3 +129,10 @@ ru:
     flash_messages:
       notice: "Уведомление"
       warning: "Предупреждение"
+    main_navigation:
+      posts: "Публикации"
+      dreams: "Сны"
+      add_dream: "Добавить сон"
+      dreambook: "Сонник"
+      questions: "Вопросы"
+      about: "О проекте"

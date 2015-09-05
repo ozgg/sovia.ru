@@ -24,6 +24,7 @@ Views:
  * places          
  * side_notes      
  * users
+ * about
  * my/comments      
  * my/deeds         
  * my/goals         

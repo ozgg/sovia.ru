@@ -56,6 +56,14 @@ Rails.application.routes.draw do
       post 'login' => :create
       delete 'logout' => :destroy
     end
+
+    # About project, terms of service and privacy
+    controller :about do
+      get 'about' => :index
+      get 'about/features' => :features
+      get 'tos' => :terms_of_service
+      get 'privacy'
+    end
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
