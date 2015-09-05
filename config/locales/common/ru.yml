@@ -9,3 +9,9 @@ ru:
   could_not_log_in: "Не удалось выполнить вход"
   email_already_confirmed: "Электронная почта уже подтверждена"
   insufficient_role: "Ваша роль не подходит для доступа к странице"
+  error:
+    zero: "нет ошибок"
+    one: "%{count} ошибка"
+    few: "%{count} ошибки"
+    many: "%{count} ошибок"
+    other: "%{count} ошибок"

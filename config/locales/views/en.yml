@@ -18,6 +18,15 @@ en:
         success: "Confirmation code has been sent"
       update:
         invalid_code: "Invalid code"
+    profiles:
+      new:
+        title: "Join"
+      advantages:
+        advantages: "Advantages of registered users"
+      form:
+        i_am_bot: "I am bot and not going to use the site"
+        registration_form: "Registration form"
+        you_accept_terms_of_service: "If you join the site, you agree to follow the terms of service."
   browsers:
     update:
       success: "Browser has been updated successfully"
@@ -138,3 +147,7 @@ en:
       about: "About us"
     footer:
       terms_of_service: "Terms of service"
+  authentications:
+    form:
+      join: "Join"
+      reset_password: "Reset password"

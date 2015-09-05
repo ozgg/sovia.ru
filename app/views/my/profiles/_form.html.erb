@@ -1,0 +1,40 @@
+<section class="form">
+  <h1><%= t('.registration_form') %></h1>
+
+  <%= render partial: 'shared/errors_list', locals: { entity: @user } %>
+
+  <%= form_tag my_profile_path do %>
+      <div>
+        <%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %>
+        <%= text_field_tag 'user[screen_name]', @user.screen_name, required: true, size: 30, maxlength: 30 %>
+      </div>
+
+      <div>
+        <%= label_tag :user_password, t('activerecord.attributes.user.password') %>
+        <%= password_field_tag 'user[password]', '', required: true, size: 30 %>
+      </div>
+
+      <div>
+        <%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+        <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 30 %>
+      </div>
+
+      <div>
+        <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
+        <%= email_field_tag 'user[email]', @user.email, size: 50 %>
+      </div>
+
+      <div>
+        <%= check_box_tag :agree %>
+        <%= label_tag :agree, t('.i_am_bot') %>
+      </div>
+
+      <div>
+        <p><%= t('.you_accept_terms_of_service') %></p>
+      </div>
+
+      <div>
+        <%= button_tag t('my.profiles.new.title'), type: :submit, name: 'button' %>
+      </div>
+  <% end %>
+</section>

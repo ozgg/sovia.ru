@@ -18,6 +18,15 @@ ru:
         success: "Код подтверждения выслан"
       update:
         invalid_code: "Недействительный код"
+    profiles:
+      new:
+        title: "Присоединиться"
+      advantages:
+        advantages: "Преимущества зарегистрированных пользователей"
+      form:
+        i_am_bot: "Я — бот и не собираюсь пользоваться сайтом"
+        registration_form: "Форма регистрации"
+        you_accept_terms_of_service: "Регистрируясь на сайте, вы принимаете пользовательское соглашение."
   browsers:
     update:
       success: "Браузер успешно изменён"
@@ -138,3 +147,7 @@ ru:
       about: "О проекте"
     footer:
       terms_of_service: "Пользовательское соглашение"
+  authentications:
+    form:
+      join: "Присоединиться"
+      reset_password: "Сброс пароля"
