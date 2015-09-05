@@ -136,3 +136,5 @@ ru:
       dreambook: "Сонник"
       questions: "Вопросы"
       about: "О проекте"
+    footer:
+      terms_of_service: "Пользовательское соглашение"
