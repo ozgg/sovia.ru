@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Dream, type: :model do
-  it_behaves_like 'has_language'
   it_behaves_like 'has_azimuth'
   it_behaves_like 'has_owner'
   it_behaves_like 'has_trace'
@@ -139,8 +138,8 @@ RSpec.describe Dream, type: :model do
 
   describe '#grains_string=' do
     let!(:dream) { create :owned_dream }
-    let!(:existing_pattern) { create :pattern, language: dream.language }
-    let!(:existing_grain) { create :grain, pattern: existing_pattern, language: dream.language }
+    let!(:existing_pattern) { create :pattern }
+    let!(:existing_grain) { create :grain, pattern: existing_pattern }
 
     context 'in common case' do
       it 'adds new non-empty and non-repeating grains to dream' do
@@ -164,7 +163,7 @@ RSpec.describe Dream, type: :model do
 
     context 'when grain has custom pattern link' do
       it 'links grain with pattern in parenthesis' do
-        pattern = create :pattern, language: dream.language
+        pattern = create :pattern
         dream.grains_string = "#{existing_grain.name} (#{pattern.name})"
         existing_grain.reload
         expect(dream.patterns).to eq([pattern])

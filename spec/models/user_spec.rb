@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it_behaves_like 'has_language'
   it_behaves_like 'has_trace'
 
   describe 'before validating' do
@@ -97,34 +96,6 @@ RSpec.describe User, type: :model do
 
     it 'leaves table intact for invalid role' do
       expect { user.remove_role :non_existent }.not_to change(UserRole, :count)
-    end
-  end
-
-  describe '#add_language' do
-    let(:user) { create :user }
-
-    before(:each) { create :user_language, user: user, language: user.language }
-
-    it 'adds new row to user languages for absent link' do
-      expect { user.add_language create(:language) }.to change(UserLanguage, :count).by(1)
-    end
-
-    it 'does not add row to user languages for existing link' do
-      expect { user.add_language user.language }.not_to change(UserLanguage, :count)
-    end
-  end
-
-  describe '#remove_language' do
-    let(:user) { create :user }
-
-    before(:each) { create :user_language, user: user, language: user.language }
-
-    it 'removes row from user languages for existing link' do
-      expect { user.remove_language user.language }.to change(UserLanguage, :count).by(-1)
-    end
-
-    it 'does not change user languages for absent link' do
-      expect { user.remove_language create(:language) }.not_to change(UserLanguage, :count)
     end
   end
 

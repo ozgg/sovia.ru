@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SideNote, type: :model do
-  it_behaves_like 'has_language'
   it_behaves_like 'has_owner'
   it_behaves_like 'has_trace'
   it_behaves_like 'required_user'

@@ -1,12 +1,6 @@
 require "rails_helper"
 
 RSpec.describe CodeSender, type: :mailer do
-  let!(:language) { create :russian_language }
-
-  before :each do
-    I18n.locale = language.code
-  end
-
   describe 'email' do
     let!(:code) { create :confirmation_code }
     let(:mail) { CodeSender.email(code) }

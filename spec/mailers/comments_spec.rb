@@ -5,14 +5,9 @@ RSpec.configure do |c|
 end
 
 RSpec.describe Comments, type: :mailer do
-  let!(:language) { create :russian_language }
-  let!(:dream) { create :owned_dream, user: create(:confirmed_user), language: language }
+  let!(:dream) { create :owned_dream, user: create(:confirmed_user) }
   let!(:parent_comment) { create :comment, commentable: dream, user: create(:confirmed_user) }
   let(:comment) { create :comment, parent: parent_comment, commentable: dream }
-
-  before :each do
-    I18n.locale = language.code
-  end
 
   describe 'entry_reply' do
     let(:mail) { Comments.entry_reply(comment) }

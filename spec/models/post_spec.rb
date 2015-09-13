@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  it_behaves_like 'has_language'
   it_behaves_like 'has_owner'
   it_behaves_like 'required_user'
   it_behaves_like 'has_trace'
@@ -30,7 +29,7 @@ RSpec.describe Post, type: :model do
 
   describe '#tags_string=' do
     let!(:post) { create :post }
-    let!(:existing_tag) { create :tag, language: post.language }
+    let!(:existing_tag) { create :tag }
 
     it 'adds new non-empty and non-repeating tags to post' do
       expect { post.tags_string = 'a,,A,c,c,b,' }.to change(PostTag, :count).by(3)
@@ -38,7 +37,7 @@ RSpec.describe Post, type: :model do
 
     it 'removes absent tags' do
       create :post_tag, post: post, tag: existing_tag
-      expect { post.tags_string = ''}.to change(PostTag, :count).by(-1)
+      expect { post.tags_string = '' }.to change(PostTag, :count).by(-1)
     end
   end
 
