@@ -1,12 +1,11 @@
 class CreateDreams < ActiveRecord::Migration
   def change
     create_table :dreams do |t|
-      t.references :language, index: true, foreign_key: true, null: false
       t.references :user, index: true, foreign_key: true
       t.references :place, index: true, foreign_key: true
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.integer :privacy, null: false
+      t.integer :privacy, null: false, index: true
       t.integer :lucidity, null: false, default: 0
       t.integer :mood, null: false, default: 0
       t.integer :azimuth
@@ -27,7 +26,6 @@ class CreateDreams < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :dreams, [:language_id, :privacy]
-    execute "create index dreams_created_month_idx on dreams using btree (language_id, date_trunc('month', created_at));"
+    execute "create index dreams_created_month_idx on dreams using btree (date_trunc('month', created_at));"
   end
 end

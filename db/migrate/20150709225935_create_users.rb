@@ -1,11 +1,11 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.references :language, index: true, foreign_key: true, null: false
-      t.inet :ip
       t.references :agent, index: true, foreign_key: true
+      t.inet :ip
       t.integer :network, null: false
       t.integer :user_id
+      t.integer :invitee_id
       t.string :uid, null: false
       t.string :password_digest
       t.string :email, index: true

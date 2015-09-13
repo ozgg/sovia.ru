@@ -4,11 +4,9 @@ class CreateAgents < ActiveRecord::Migration
       t.references :browser, index: true, foreign_key: true
       t.boolean :bot, null: false, default: false
       t.boolean :mobile, null: false, default: false
-      t.string :name, null: false
+      t.string :name, null: false, index: true
 
       t.timestamps null: false
     end
-
-    add_index :agents, :name
   end
 end

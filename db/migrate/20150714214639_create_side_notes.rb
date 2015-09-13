@@ -1,7 +1,6 @@
 class CreateSideNotes < ActiveRecord::Migration
   def change
     create_table :side_notes do |t|
-      t.references :language, index: true, foreign_key: true, null: false
       t.references :user, index: true, foreign_key: true, null: false
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
