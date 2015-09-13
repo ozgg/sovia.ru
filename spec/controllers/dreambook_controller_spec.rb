@@ -22,7 +22,7 @@ RSpec.describe DreambookController, type: :controller do
 
   describe 'get search' do
     it 'assigns found patterns to @patterns' do
-      get :search, query: 'ph'
+      get :search, query: 'ер'
       expect(assigns[:patterns]).to include(pattern_a)
     end
 
@@ -32,7 +32,7 @@ RSpec.describe DreambookController, type: :controller do
     end
 
     it 'does not assign mismatching pattern to @patterns' do
-      get :search, query: 'ph'
+      get :search, query: 'ер'
       expect(assigns[:patterns]).not_to include(pattern_b)
     end
   end

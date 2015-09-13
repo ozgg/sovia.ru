@@ -7,65 +7,61 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/:locale' => 'index#index', constraints: { locale: /ru|en/ }
-
   root 'index#index'
 
-  scope '(:locale)', locale: /ru|en/ do
-    # Administrative resources
-    resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
-    resources :violations, only: [:index, :show, :destroy]
+  # Administrative resources
+  resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
+  resources :violations, only: [:index, :show, :destroy]
 
-    # Common resources
-    resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
+  # Common resources
+  resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes
 
-    # Tagged resources with archive
-    resources :posts, :dreams, concerns: :tagged_archive
+  # Tagged resources with archive
+  resources :posts, :dreams, concerns: :tagged_archive
 
-    # Dreambook
-    scope 'dreambook', controller: :dreambook do
-      get '/' => :index, as: :dreambook
-      get 'search' => :search, as: :dreambook_search
-      get ':letter' => :letter, as: :dreambook_letter
-      get ':letter/:word' => :word, as: :dreambook_word
-    end
+  # Dreambook
+  scope 'dreambook', controller: :dreambook do
+    get '/' => :index, as: :dreambook
+    get 'search' => :search, as: :dreambook_search
+    get ':letter' => :letter, as: :dreambook_letter
+    get ':letter/:word' => :word, as: :dreambook_word
+  end
 
-    # Namespace for current user
-    namespace :my do
-      resource :profile, except: [:destroy]
-      resource :confirmation, :recovery, only: [:show, :create, :update]
-      resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes, only: [:index]
-      resources :posts, :dreams, only: [:index], concerns: :tagged_archive
+  # Namespace for current user
+  namespace :my do
+    resource :profile, except: [:destroy]
+    resource :confirmation, :recovery, only: [:show, :create, :update]
+    resources :goals, :deeds, :places, :questions, :grains, :comments, :side_notes, only: [:index]
+    resources :posts, :dreams, only: [:index], concerns: :tagged_archive
 
-      get '/' => 'index#index'
-    end
+    get '/' => 'index#index'
+  end
 
-    # Scope of certain user
-    scope 'u/(:uid)', controller: :users do
-      get '/' => :profile
-      get 'posts', as: :user_posts
-      get 'dreams', as: :user_dreams
-      get 'questions', as: :user_questions
-      get 'comments', as: :user_comments
-      get 'patterns', as: :user_patterns
-    end
+  # Scope of certain user
+  scope 'u/(:uid)', controller: :users do
+    get '/' => :profile
+    get 'posts', as: :user_posts
+    get 'dreams', as: :user_dreams
+    get 'questions', as: :user_questions
+    get 'comments', as: :user_comments
+    get 'patterns', as: :user_patterns
+  end
 
-    # Authentication
-    controller :authentications do
-      get 'login' => :new
-      post 'login' => :create
-      delete 'logout' => :destroy
-      get 'auth/vk' => :login_vk, as: :login_vk
-      get 'auth/:provider' => :auth_external, as: :auth_external
-    end
+  # Authentication
+  controller :authentications do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+    get 'auth/vk' => :login_vk, as: :login_vk
+    get 'auth/:provider' => :auth_external, as: :auth_external
+  end
 
-    # About project, terms of service and privacy
-    controller :about do
-      get 'about' => :index
-      get 'about/features' => :features
-      get 'tos' => :terms_of_service
-      get 'privacy'
-    end
+  # About project, terms of service and privacy
+  controller :about do
+    get 'about' => :index
+    get 'about/features' => :features
+    get 'tos' => :terms_of_service
+    get 'privacy'
   end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

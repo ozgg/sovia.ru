@@ -25,6 +25,6 @@ class DreambookController < ApplicationController
   end
 
   def set_letters
-    @letters = Pattern.letters I18n.locale
+    @letters = Pattern.letters
   end
 end
