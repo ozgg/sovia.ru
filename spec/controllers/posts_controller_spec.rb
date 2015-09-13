@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let!(:language) { create :russian_language }
-  let(:administrator) { create :administrator, language: language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :visible_post, user: user, language: language }
+  let(:administrator) { create :administrator }
+  let(:user) { create :user }
+  let!(:entity) { create :visible_post, user: user }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:restrict_editing)
-    I18n.locale = language.code
   end
 
   shared_examples 'restricted_editing' do
@@ -50,7 +48,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'get index' do
-    let!(:hidden_post) { create :post, language: language }
+    let!(:hidden_post) { create :post }
 
     context 'when user sees hidden posts' do
       before :each do
@@ -220,7 +218,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'get tagged' do
-    let(:tag) { create :tag, language: entity.language }
+    let(:tag) { create :tag }
 
     before :each do
       entity.tags_string = 'test'
@@ -250,7 +248,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'get archive' do
     let(:year) { entity.created_at.year }
     let(:month) { entity.created_at.month }
-    let!(:hidden_entity) { create :post, language: language }
+    let!(:hidden_entity) { create :post }
 
     shared_examples 'dates_assigner' do
       it 'assigns @dates' do
@@ -279,7 +277,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:entity_in_past) { create :visible_post, created_at: 2.months.ago, language: language }
+      let!(:entity_in_past) { create :visible_post, created_at: 2.months.ago }
 
       before(:each) { get :archive, year: year, month: month }
 

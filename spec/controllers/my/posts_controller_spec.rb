@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe My::PostsController, type: :controller do
-  let(:language) { create :russian_language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :post, user: user, language: language }
-  let!(:foreign_entity) { create :post, language: language }
+  let(:user) { create :user }
+  let!(:entity) { create :post, user: user }
+  let!(:foreign_entity) { create :post }
 
   before :each do
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:current_user).and_return(user)
-    I18n.locale = language.code
   end
 
   describe 'get index' do
@@ -31,8 +29,8 @@ RSpec.describe My::PostsController, type: :controller do
   end
 
   describe 'get tagged' do
-    let(:tag) { create :tag, language: language }
-    let!(:other_entity) { create :post, user: user, language: language }
+    let(:tag) { create :tag }
+    let!(:other_entity) { create :post, user: user }
 
     before :each do
       entity.tags_string = 'test'
@@ -91,7 +89,7 @@ RSpec.describe My::PostsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:entity_in_past) { create :post, user: user, created_at: 2.months.ago, language: language }
+      let!(:entity_in_past) { create :post, user: user, created_at: 2.months.ago }
 
       before(:each) { get :archive, year: year, month: month }
 

@@ -1,20 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe DreamsController, type: :controller do
-  let(:language) { create :russian_language }
-  let(:owner) { create :user, language: language }
-  let(:user) { create :user, language: language }
-  let!(:generally_accessible_dream) { create :dream, language: language }
-  let!(:dream_for_community) { create :dream_for_community, user: owner, language: language }
-  let!(:dream_for_followees) { create :dream_for_followees, user: owner, language: language }
-  let!(:personal_dream) { create :personal_dream, user: owner, language: language }
+  let(:owner) { create :user }
+  let(:user) { create :user }
+  let!(:generally_accessible_dream) { create :dream }
+  let!(:dream_for_community) { create :dream_for_community, user: owner }
+  let!(:dream_for_followees) { create :dream_for_followees, user: owner }
+  let!(:personal_dream) { create :personal_dream, user: owner }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:restrict_editing)
     allow(Trap).to receive(:suspect_spam?).and_return(false)
     allow_any_instance_of(Dream).to receive(:visible_to?).and_return(true)
-    I18n.locale = language.code
   end
 
   shared_examples 'restricted_editing' do
@@ -270,7 +268,7 @@ RSpec.describe DreamsController, type: :controller do
   end
 
   describe 'get tagged' do
-    let(:pattern) { create :pattern, language: language }
+    let(:pattern) { create :pattern }
 
     before :each do
       dream_for_community.grains_string = 'test'
@@ -333,7 +331,7 @@ RSpec.describe DreamsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:dream_in_past) { create :dream_for_community, created_at: 2.months.ago, language: language }
+      let!(:dream_in_past) { create :dream_for_community, created_at: 2.months.ago }
 
       before(:each) { get :archive, year: year, month: month }
 

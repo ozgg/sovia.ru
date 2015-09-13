@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
-  let!(:language) { create :russian_language }
-  let(:administrator) { create :administrator, language: language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :comment, user: user, language: language }
+  let(:administrator) { create :administrator }
+  let(:user) { create :user }
+  let!(:entity) { create :comment, user: user }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:require_role)
     allow(Trap).to receive(:suspect_spam?).and_return(false)
-    I18n.locale = language.code
   end
 
   shared_examples 'entity_assigner' do

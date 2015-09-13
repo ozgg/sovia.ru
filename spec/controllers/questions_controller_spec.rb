@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let!(:language) { create :russian_language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :question, user: user, language: language }
+  let(:user) { create :user }
+  let!(:entity) { create :question, user: user }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:restrict_editing)
-    I18n.locale = language.code
   end
 
   shared_examples 'restricted_editing' do

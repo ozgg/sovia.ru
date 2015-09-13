@@ -17,7 +17,6 @@ RSpec.describe TagsController, type: :controller do
 
   describe 'get index' do
     before(:each) do
-      allow(controller).to receive(:visitor_languages).and_return([tag.language_id])
       get :index
     end
 

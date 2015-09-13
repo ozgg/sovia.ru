@@ -1,13 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DreambookController, type: :controller do
-  let!(:language) { create :russian_language }
-  let!(:pattern_a) { create :pattern, name: 'alpha', language: language }
-  let!(:pattern_b) { create :pattern, name: 'beta', language: language }
-
-  before :each do
-    I18n.locale = language.code
-  end
+  let!(:pattern_a) { create :pattern, name: 'первый' }
+  let!(:pattern_b) { create :pattern, name: 'второй' }
 
   shared_examples 'setting_letters' do
     it 'assigns letters to @letters' do

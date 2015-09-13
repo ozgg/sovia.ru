@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe My::SideNotesController, type: :controller do
-  let(:language) { create :russian_language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :side_note, user: user, language: language }
-  let!(:foreign_entity) { create :side_note, language: language }
+  let(:user) { create :user }
+  let!(:entity) { create :side_note, user: user }
+  let!(:foreign_entity) { create :side_note }
 
   before :each do
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:current_user).and_return(user)
-    I18n.locale = language.code
   end
 
   describe 'get index' do

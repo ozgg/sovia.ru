@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe My::DreamsController, type: :controller do
-  let(:language) { create :russian_language }
-  let(:user) { create :user, language: language }
-  let!(:entity) { create :personal_dream, user: user, language: language }
-  let!(:foreign_entity) { create :dream_for_community, language: language }
+  let(:user) { create :user }
+  let!(:entity) { create :personal_dream, user: user }
+  let!(:foreign_entity) { create :dream_for_community }
 
   before :each do
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:current_user).and_return(user)
-    I18n.locale = language.code
   end
 
   describe 'get index' do
@@ -31,8 +29,8 @@ RSpec.describe My::DreamsController, type: :controller do
   end
 
   describe 'get tagged' do
-    let(:grain) { create :grain, language: language, user: user }
-    let!(:other_entity) { create :dream_for_community, user: user, language: language }
+    let(:grain) { create :grain, user: user }
+    let!(:other_entity) { create :dream_for_community, user: user }
 
     before :each do
       entity.grains_string = 'test(pattern)'
@@ -91,7 +89,7 @@ RSpec.describe My::DreamsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:entity_in_past) { create :dream, user: user, created_at: 2.months.ago, language: language }
+      let!(:entity_in_past) { create :dream, user: user, created_at: 2.months.ago }
 
       before(:each) { get :archive, year: year, month: month }
 

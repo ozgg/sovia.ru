@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe GrainsController, type: :controller do
-  let(:language) { create :russian_language }
-  let(:user) { create :user, language: language }
-  let!(:grain) { create :grain, user: user, language: language }
+  let(:user) { create :user }
+  let!(:grain) { create :grain, user: user }
 
   before :each do
     allow(controller).to receive(:restrict_anonymous_access)
     allow(controller).to receive(:current_user).and_return(user)
-    I18n.locale = language.code
   end
 
   shared_examples 'entity_assigner' do

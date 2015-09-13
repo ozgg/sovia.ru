@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe My::ProfilesController, type: :controller do
   let(:password) { 'secret' }
-  let(:language) { create :russian_language }
-  let(:user) { create :confirmed_user, language: language, password: password, password_confirmation: password }
-
-  before(:each) { I18n.locale = language.code }
+  let(:user) { create :confirmed_user, password: password, password_confirmation: password }
 
   describe 'get new' do
     context 'when user is logged in' do

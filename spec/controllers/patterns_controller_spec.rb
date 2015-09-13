@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PatternsController, type: :controller do
-  let!(:language) { create :russian_language }
-  let(:user) { create :administrator, language: language }
-  let!(:pattern) { create :pattern, language: language }
+  let(:user) { create :administrator }
+  let!(:pattern) { create :pattern }
 
   before :each do
     allow(controller).to receive(:require_role)
     allow(controller).to receive(:current_user).and_return(user)
-    I18n.locale = language.code
   end
 
   shared_examples 'entity_assigner' do
@@ -19,7 +17,6 @@ RSpec.describe PatternsController, type: :controller do
 
   describe 'get index' do
     before(:each) do
-      allow(controller).to receive(:visitor_languages).and_return([pattern.language_id])
       get :index
     end
 

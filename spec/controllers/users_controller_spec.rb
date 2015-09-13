@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   let(:current_user) { create :administrator }
-  let!(:language) { create :russian_language }
   let!(:user) { create :user }
 
   before :each do
@@ -52,7 +51,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, user: attributes_for(:user).merge(network: 'native', language_id: language.id) } }
+    let(:action) { -> { post :create, user: attributes_for(:user).merge(network: 'native') } }
 
     context 'authorization and redirects' do
       before(:each) { action.call }
