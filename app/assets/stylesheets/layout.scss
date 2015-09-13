@@ -11,6 +11,19 @@ h1, h2, h3, h4, h6, h6 {
   font-variant: small-caps;
 }
 
+form {
+  margin: 0;
+  padding: 0;
+
+  label {
+    display: inline-block;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
+
 body {
   max-width: 75rem;
   min-width: 40rem;
@@ -42,8 +55,9 @@ body {
 #main {
   margin-right: 20rem;
   background: #ffffff;
-  min-width: 20rem;
+  min-width: 18rem;
   min-height: 20rem;
+  padding: 1rem;
 }
 
 #sidebar {

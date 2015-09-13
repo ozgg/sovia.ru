@@ -1,3 +1,5 @@
+ * Remove English locale and other languages
+
 Views:
 
  * agents          

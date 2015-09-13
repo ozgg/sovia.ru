@@ -7,8 +7,6 @@
   background: rgba(255, 255, 255, 0.3);
 
   > form {
-    margin: 0;
-    padding: 0;
     height: 8rem;
 
     fieldset {
@@ -16,13 +14,8 @@
     }
 
     label {
-      display: inline-block;
       width: 4rem;
       line-height: 1.2rem;
-
-      &:first-letter {
-        text-transform: uppercase;
-      }
     }
 
     input {
@@ -86,7 +79,6 @@
             color: #ccffff;
           }
         }
-
       }
     }
   }

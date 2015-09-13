@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
       expect(build :user, screen_name: user.screen_name.upcase).not_to be_valid
     end
 
-    it 'passes with non-unique uid for defferent networks' do
+    it 'passes with non-unique uid for different networks' do
       user = create :user
       expect(build :user, uid: user.uid, network: :vk).to be_valid
     end

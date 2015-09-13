@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user_role do
     user
-    role 0
+    role UserRole.roles[:administrator]
   end
 end
