@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :deed do
     user
-    essence 'did something nice'
+    essence 'сделал что-то хорошее'
   end
 end

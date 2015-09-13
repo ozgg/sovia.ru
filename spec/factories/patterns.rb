@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :pattern do
-    language
-    sequence (:name) { |n| "Pattern #{n}" }
+    sequence (:name) { |n| "Образ #{n}" }
   end
 end

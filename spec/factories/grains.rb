@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :grain do
-    language
     user
-    sequence(:name) { |n| "Grain #{n}" }
+    sequence(:name) { |n| "Образ #{n}" }
   end
 end

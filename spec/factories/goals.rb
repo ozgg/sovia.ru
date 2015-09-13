@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :goal do
     user
-    name 'Be better'
-    status 0
+    name 'Быть лучше'
+    status Goal.statuses[:issued]
   end
 end

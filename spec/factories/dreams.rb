@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :dream do
-    language
     privacy Dream.privacies[:generally_accessible]
     body 'Какой-то сон для проверки'
 
