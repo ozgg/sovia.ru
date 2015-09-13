@@ -5,9 +5,9 @@ class SideNotesController < ApplicationController
   
   def index
     if current_user_has_role? :administrator
-      @collection = SideNote.in_languages(visitor_languages).order('id desc').page(current_page).per(25)
+      @collection = SideNote.order('id desc').page(current_page).per(25)
     else
-      @collection = SideNote.in_languages(visitor_languages).visible.order('id desc').page(current_page).per(25)
+      @collection = SideNote.visible.order('id desc').page(current_page).per(25)
     end
   end
 
@@ -66,6 +66,6 @@ class SideNotesController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(language_for_entity).merge(tracking_for_entity).merge(owner_for_entity)
+    entity_parameters.merge(tracking_for_entity).merge(owner_for_entity)
   end
 end

@@ -3,7 +3,7 @@ class PatternsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Pattern.in_languages(visitor_languages).order('slug asc').page(current_page).per(25)
+    @collection = Pattern.order('slug asc').page(current_page).per(25)
   end
 
   def new
@@ -57,7 +57,7 @@ class PatternsController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(language_for_entity).merge(owner_for_entity).merge(tracking_for_entity)
+    entity_parameters.merge(owner_for_entity).merge(tracking_for_entity)
   end
 
   def set_links

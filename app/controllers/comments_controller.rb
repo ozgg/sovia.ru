@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Comment.in_languages(visitor_languages).order('id desc').page(current_page).per(25)
+    @collection = Comment.order('id desc').page(current_page).per(25)
   end
 
   def new
@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(owner_for_entity).merge(language_for_entity).merge(tracking_for_entity)
+    entity_parameters.merge(owner_for_entity).merge(tracking_for_entity)
   end
 
   def add_violation

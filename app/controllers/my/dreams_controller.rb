@@ -6,7 +6,7 @@ class My::DreamsController < ApplicationController
   end
 
   def tagged
-    @grain = Grain.match_by_name! params[:tag_name], Language.find_by(code: locale), current_user
+    @grain = Grain.match_by_name! params[:tag_name], current_user
     set_collection_with_grains
   end
 

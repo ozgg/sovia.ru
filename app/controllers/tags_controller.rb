@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Tag.in_languages(visitor_languages).order('slug asc').page(current_page).per(25)
+    @collection = Tag.order('slug asc').page(current_page).per(25)
   end
 
   def new
@@ -11,7 +11,7 @@ class TagsController < ApplicationController
   end
 
   def create
-    @entity = Tag.new creation_parameters
+    @entity = Tag.new entity_parameters
     if @entity.save
       redirect_to @entity
     else
@@ -52,9 +52,5 @@ class TagsController < ApplicationController
 
   def entity_parameters
     params.require(:tag).permit(:name)
-  end
-
-  def creation_parameters
-    entity_parameters.merge(language_for_entity)
   end
 end

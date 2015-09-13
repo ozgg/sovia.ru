@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    @collection = Question.in_languages(visitor_languages).order('id desc').page(current_page).per(10)
+    @collection = Question.order('id desc').page(current_page).per(10)
   end
 
   def new
@@ -56,7 +56,7 @@ class QuestionsController < ApplicationController
   end
 
   def creation_parameters
-    parameters = entity_parameters.merge(owner_for_entity).merge(language_for_entity).merge(tracking_for_entity)
+    parameters = entity_parameters.merge(owner_for_entity).merge(tracking_for_entity)
     parameters.reject! :answered if parameters.include? :answered
     parameters
   end

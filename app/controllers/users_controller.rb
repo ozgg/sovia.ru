@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     @entity = User.new creation_parameters
     if @entity.save
       set_roles
-      set_languages
       redirect_to @entity, notice: t('users.create.success')
     else
       render :new
@@ -31,7 +30,6 @@ class UsersController < ApplicationController
   def update
     if @entity.update entity_parameters
       set_roles
-      set_languages
       redirect_to @entity, notice: t('users.update.success')
     else
       render :edit
@@ -86,7 +84,7 @@ class UsersController < ApplicationController
   def entity_parameters
     permitted = [
         :email, :screen_name, :name, :image, :rating, :gender, :bot, :allow_login, :password, :password_confirmation,
-        :email_confirmed, :allow_mail, :language_id
+        :email_confirmed, :allow_mail
     ]
     parameters = params.require(:user).permit(permitted)
     parameters[:email] = nil if parameters[:email].blank?
@@ -100,9 +98,5 @@ class UsersController < ApplicationController
 
   def set_roles
     @entity.roles = params.require(:user).permit(:roles)
-  end
-
-  def set_languages
-    @entity.language_ids = params.require(:user).permit(:language_ids)
   end
 end

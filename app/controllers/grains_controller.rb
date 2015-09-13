@@ -49,12 +49,12 @@ class GrainsController < ApplicationController
     grain = params.require :grain
     parameters = grain.permit(:category, :latitude, :longitude, :image, :name, :description)
     unless grain[:pattern_name].blank?
-      parameters[:pattern] = Pattern.match_or_create_by_name grain[:pattern_name], Language.find_by_code(locale)
+      parameters[:pattern] = Pattern.match_or_create_by_name grain[:pattern_name]
     end
     parameters
   end
 
   def creation_parameters
-    entity_parameters.merge(owner_for_entity).merge(language_for_entity)
+    entity_parameters.merge(owner_for_entity)
   end
 end

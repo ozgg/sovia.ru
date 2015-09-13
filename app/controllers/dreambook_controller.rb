@@ -6,17 +6,16 @@ class DreambookController < ApplicationController
 
   def search
     @query    = Canonizer.canonize param_from_request(:query)
-    @patterns = Pattern.search language_in_locale, @query
+    @patterns = Pattern.search @query
   end
 
   def letter
-    language_id = language_in_locale.id
     letter      = letter_from_request
-    @patterns   = Pattern.in_languages(language_id).starting_with(letter).order('slug asc').page(current_page).per(50)
+    @patterns   = Pattern.starting_with(letter).order('slug asc').page(current_page).per(50)
   end
 
   def word
-    @pattern = Pattern.match_by_name! params[:word], language_in_locale
+    @pattern = Pattern.match_by_name! params[:word]
   end
 
   protected

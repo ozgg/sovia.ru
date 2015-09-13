@@ -42,7 +42,7 @@ class DreamsController < ApplicationController
   end
 
   def tagged
-    @pattern = Pattern.match_by_name params[:tag_name], Language.find_by(code: locale)
+    @pattern = Pattern.match_by_name params[:tag_name]
     raise record_not_found unless @pattern.is_a? Pattern
     set_collection_with_pattern
   end
@@ -72,7 +72,7 @@ class DreamsController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(owner_for_entity).merge(language_for_entity).merge(tracking_for_entity)
+    entity_parameters.merge(owner_for_entity).merge(tracking_for_entity)
   end
 
   def set_grains
@@ -83,7 +83,7 @@ class DreamsController < ApplicationController
   end
 
   def visible_dreams
-    Dream.in_languages(visitor_languages).visible_to_user(current_user)
+    Dream.visible_to_user(current_user)
   end
 
   def set_collection_with_pattern
@@ -94,7 +94,7 @@ class DreamsController < ApplicationController
   end
 
   def collect_months
-    Dream.in_languages(visitor_languages).uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
+    Dream.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end

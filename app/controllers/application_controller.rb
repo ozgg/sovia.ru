@@ -32,26 +32,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def language_in_locale
-    Language.find_by code: I18n.locale
-  end
-
-  def default_url_options(options = {})
-    if I18n.locale == I18n.default_locale
-      { locale: nil }.merge options
-    else
-      { locale: I18n.locale }.merge options
-    end
-  end
-
-  def visitor_languages
-    languages = [Language.find_by(code: I18n.locale).id]
-    if current_user.is_a? User
-      languages += current_user.user_languages.pluck(:language_id) + [current_user.language_id]
-    end
-    languages.uniq
-  end
-
   # Wrapper for 'Record not found' exception
   #
   # @return [ActiveRecord::RecordNotFound]
@@ -77,10 +57,6 @@ class ApplicationController < ActionController::Base
 
   def tracking_for_entity
     { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
-  end
-
-  def language_for_entity
-    { language: Language.find_by(code: locale) }
   end
 
   def owner_for_entity

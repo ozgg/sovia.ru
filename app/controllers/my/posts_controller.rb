@@ -6,7 +6,7 @@ class My::PostsController < ApplicationController
   end
 
   def tagged
-    @tag = Tag.match_by_name params[:tag_name], Language.find_by(code: locale)
+    @tag = Tag.match_by_name params[:tag_name]
     raise record_not_found unless @tag.is_a? Tag
     selection   = Post.where(user:current_user).joins(:post_tags).where(post_tags: { tag: @tag })
     @collection = selection.page(current_page).per(10)

@@ -22,7 +22,6 @@ class My::ProfilesController < ApplicationController
 
   def update
     if current_user.update user_parameters
-      set_languages
       redirect_to my_profile_path, notice: t('profiles.update.success')
     else
       render :edit
@@ -53,12 +52,12 @@ class My::ProfilesController < ApplicationController
 
   def creation_parameters
     parameters = params.require(:user).permit(:screen_name, :email, :password, :password_confirmation)
-    parameters.merge(tracking_for_entity).merge(language_for_entity).merge(network: User.networks[:native])
+    parameters.merge(tracking_for_entity).merge(network: User.networks[:native])
   end
 
   def user_parameters
     sensitive  = sensitive_parameters
-    editable   = [:name, :image, :gender, :language_id] + sensitive
+    editable   = [:name, :image, :gender] + sensitive
     parameters = params.require(:user).permit(editable)
     filter_parameters parameters, sensitive
   end
@@ -75,9 +74,5 @@ class My::ProfilesController < ApplicationController
     sensitive.each { |parameter| parameters.except! parameter if parameter.blank? }
     parameters[:email_confirmed] = false if parameters[:email] && parameters[:email] != current_user.email
     parameters
-  end
-
-  def set_languages
-    current_user.language_ids = params.require(:user).permit(:language_ids)
   end
 end
