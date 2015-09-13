@@ -151,6 +151,12 @@ ru:
     form:
       join: "Присоединиться"
       reset_password: "Сброс пароля"
+      sign_in: "Войти"
+      login: "Логин"
+      vk: "Зайти через VK"
+      twitter: "Войти через Twitter"
+      facebook: "Войти через Facebook"
+      mail_ru: "Войти через mail.ru"
   index:
     index:
       title: "Сайт о снах"

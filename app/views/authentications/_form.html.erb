@@ -1,3 +1,24 @@
+<%= form_tag login_path do %>
+    <fieldset>
+      <legend><%= t('.sign_in') %></legend>
+      <div>
+        <%= label_tag :login, t('.login') %>
+        <%= text_field_tag :login, '', required: true %>
+      </div>
+      <div>
+        <%= label_tag :password, t('activerecord.attributes.user.password') %>
+        <%= password_field_tag :password, '', required: true %>
+      </div>
+      <div class="auth-buttons">
+        <div><%= button_tag t('.sign_in'), type: 'submit' %></div>
+        <div><%= link_to image_tag('login/vk.png'), login_vk_path, title: t('.vk') %></div>
+        <div><%= link_to image_tag('login/twitter.png'), auth_external_path(provider: :twitter), title: t('.twitter') %></div>
+        <div><%= link_to image_tag('login/fb.png'), auth_external_path(provider: :facebook), title: t('.facebook') %></div>
+        <div><%= link_to image_tag('login/mailru.png'), auth_external_path(provider: :mail_ru), title: t('.mail_ru') %></div>
+      </div>
+    </fieldset>
+<% end %>
+
 <nav>
   <ul>
     <li><%= link_to t('.join'), new_my_profile_path %></li>

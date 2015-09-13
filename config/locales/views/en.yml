@@ -151,6 +151,12 @@ en:
     form:
       join: "Join"
       reset_password: "Reset password"
+      sign_in: "Sign in"
+      login: "Login"
+      vk: "Sign in with VK"
+      twitter: "Sign in with Twitter"
+      facebook: "Sign in with Facebook"
+      mail_ru: "Sign in with mail.ru"
   index:
     index:
       title: "The site about dreams"

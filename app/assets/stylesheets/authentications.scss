@@ -1,0 +1,93 @@
+.authentication {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20rem;
+  height: 10rem;
+  background: rgba(255, 255, 255, 0.3);
+
+  > form {
+    margin: 0;
+    padding: 0;
+    height: 8rem;
+
+    fieldset {
+      padding: 0.5rem;
+    }
+
+    label {
+      display: inline-block;
+      width: 4rem;
+      line-height: 1.2rem;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    input {
+      font-size: 1rem;
+      width: 9.6rem;
+      line-height: 1.2rem;
+    }
+
+    div.auth-buttons {
+      height: 2rem;
+
+      div {
+        float: left;
+        width: 2rem;
+        height: 2rem;
+        margin: 0 0.2rem;
+
+        &:first-of-type {
+          width: 4rem;
+          margin: 0 0.4rem 0 0;
+
+          button {
+            width: 100%;
+            height: 2rem;
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  > nav {
+    ul {
+      margin: 0;
+      padding: 0;
+      height: 1rem;
+
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: inline-block;
+        width: 9.8rem;
+        text-align: center;
+
+        a {
+          line-height: 2rem;
+
+          &:link, &:visited {
+            color: #66ccff;
+          }
+
+          &:hover {
+            color: #ccffff;
+          }
+        }
+
+      }
+    }
+  }
+}
