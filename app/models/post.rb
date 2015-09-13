@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  include HasLanguage
   include HasTrace
   include HasOwner
   include CommentableByCommunity
@@ -18,7 +17,7 @@ class Post < ActiveRecord::Base
   def tags_string=(tags_string)
     list_of_tags = []
     tags_string.split(',').each do |tag_name|
-      list_of_tags << Tag.match_or_create_by_name(tag_name.squish, self.language) unless tag_name.blank?
+      list_of_tags << Tag.match_or_create_by_name(tag_name.squish) unless tag_name.blank?
     end
     self.tags = list_of_tags.uniq
   end

@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-  include HasLanguage
   include HasTrace
   include HasOwner
   include CommentableByCommunity

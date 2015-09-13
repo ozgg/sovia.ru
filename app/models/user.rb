@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
-  include HasLanguage
   include HasTrace
 
   has_secure_password
 
   has_many :user_roles, dependent: :destroy
-  has_many :user_languages, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :deeds, dependent: :destroy
@@ -63,26 +61,6 @@ class User < ActiveRecord::Base
   def roles=(roles)
     roles.each do |role, flag|
       flag.to_i > 0 ? add_role(role) : remove_role(role)
-    end
-  end
-
-  def speaks_language?(language)
-    UserLanguage.user_speaks_language? self, language
-  end
-
-  def add_language(language)
-    UserLanguage.create user: self, language: language
-  end
-
-  def remove_language(language)
-    UserLanguage.destroy_all(user: self, language: language)
-  end
-
-  # @param [Hash] language_ids
-  def language_ids=(language_ids)
-    language_ids.each do |language_id, flag|
-      language = Language.find language_id
-      flag.to_i > 0 ? add_language(language) : remove_language(language)
     end
   end
 

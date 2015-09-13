@@ -1,5 +1,4 @@
 class SideNote < ActiveRecord::Base
-  include HasLanguage
   include HasOwner
   include HasTrace
 

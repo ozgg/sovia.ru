@@ -1,5 +1,4 @@
 class Dream < ActiveRecord::Base
-  include HasLanguage
   include HasOwner
   include HasTrace
 
@@ -90,7 +89,7 @@ class Dream < ActiveRecord::Base
   #
   # @param [String] grains_string
   def grains_string=(grains_string)
-    self.grains = Grain.string_to_array grains_string, self.language, self.user
+    self.grains = Grain.string_to_array grains_string, self.user
     update_patterns
   end
 

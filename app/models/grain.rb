@@ -1,5 +1,4 @@
 class Grain < ActiveRecord::Base
-  include HasLanguage
   include HasOwner
   include HasNameWithSlug
 
@@ -11,19 +10,18 @@ class Grain < ActiveRecord::Base
   enum category: [:person, :place, :item, :event, :action, :creature]
 
   validates_presence_of :user_id
-  validates_uniqueness_of :slug, scope: [:user_id, :language_id]
+  validates_uniqueness_of :slug, scope: [:user_id]
 
   mount_uploader :image, ImageUploader
 
   # Convert string of comma-separated grain names to array of grains
   #
   # @param [String] names
-  # @param [Language] language
   # @param [User] user
   # @return [Array<Grain>]
-  def self.string_to_array(names, language, user)
+  def self.string_to_array(names, user)
     list = names.split(',').select { |name| !name.blank? }.map do |name|
-      self.match_or_create_by_name(name.squish, language, user)
+      self.match_or_create_by_name(name.squish, user)
     end
     list.uniq
   end
@@ -31,21 +29,19 @@ class Grain < ActiveRecord::Base
   # Find grain by name
   #
   # @param [String] name
-  # @param [Language] language
   # @param [User] user
   # @return [Grain|nil]
-  def self.match_by_name(name, language, user)
-    find_by user: user, language: language, slug: Canonizer.canonize(name)
+  def self.match_by_name(name, user)
+    find_by user: user, slug: Canonizer.canonize(name)
   end
 
   # Find grain by name or raise exception if it is not found
   #
   # @param [String] name
-  # @param [Language] language
   # @param [User] user
   # @return [Grain]
-  def self.match_by_name!(name, language, user)
-    result = match_by_name name, language, user
+  def self.match_by_name!(name, user)
+    result = match_by_name name, user
     raise ActiveRecord::RecordNotFound if result.nil?
     result
   end
@@ -55,13 +51,12 @@ class Grain < ActiveRecord::Base
   # Grain name may or may not include referenced pattern name ("foo", "(foo)", "foo(bar)")
   #
   # @param [String] long_name
-  # @param [Language] language
   # @param [User] user
   # @return [Grain]
-  def self.match_or_create_by_name(long_name, language, user)
+  def self.match_or_create_by_name(long_name, user)
     grain_name, pattern_name = self.extract_names long_name
-    grain = self.match_by_name grain_name, language, user
-    grain || self.create_pair(user, language, grain_name, pattern_name)
+    grain = self.match_by_name grain_name, user
+    grain || self.create_pair(user, grain_name, pattern_name)
   end
 
   # Extract grain and pattern names from long name
@@ -86,13 +81,12 @@ class Grain < ActiveRecord::Base
   # Creates grain with references pattern or without pattern, if pattern name is nil
   #
   # @param [User] user
-  # @param [Language] language
   # @param [String] grain_name
   # @param [String|nil] pattern_name
   # @return [Grain]
-  def self.create_pair(user, language, grain_name, pattern_name)
-    grain   = self.create(user: user, language: language, name: grain_name)
-    pattern = pattern_name.nil? ? nil : Pattern.match_or_create_by_name(pattern_name, language)
+  def self.create_pair(user, grain_name, pattern_name)
+    grain   = self.create(user: user, name: grain_name)
+    pattern = pattern_name.nil? ? nil : Pattern.match_or_create_by_name(pattern_name)
     grain.update pattern: pattern
     grain
   end

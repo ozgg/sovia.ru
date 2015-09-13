@@ -8,19 +8,19 @@ module HasNameWithSlug
   end
 
   module ClassMethods
-    def match_by_name(name, language)
-      find_by slug: Canonizer.canonize(name), language: language
+    def match_by_name(name)
+      find_by slug: Canonizer.canonize(name)
     end
 
-    def match_by_name!(name, language)
-      result = match_by_name name, language
+    def match_by_name!(name)
+      result = match_by_name name
       raise ActiveRecord::RecordNotFound if result.nil?
       result
     end
 
-    def match_or_create_by_name(name, language)
-      entity = find_by slug: Canonizer.canonize(name), language: language
-      entity || create(name: name, language: language)
+    def match_or_create_by_name(name)
+      entity = find_by slug: Canonizer.canonize(name)
+      entity || create(name: name)
     end
   end
 

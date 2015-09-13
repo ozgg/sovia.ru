@@ -1,5 +1,4 @@
 class Pattern < ActiveRecord::Base
-  include HasLanguage
   include HasTrace
   include HasOwner
   include HasNameWithSlug
@@ -11,30 +10,21 @@ class Pattern < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :pattern_links, dependent: :destroy
 
-  validates_uniqueness_of :slug, scope: :language_id
+  validates_uniqueness_of :slug
 
   mount_uploader :image, ImageUploader
 
   scope :starting_with, ->(letter) { where 'slug like ?', "#{letter}%" }
 
-  def self.letters(locale)
-    method = "letters_#{locale}"
-    respond_to?(method) ? send(method) : []
-  end
-
-  def self.letters_ru
+  def self.letters
     %w(А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ы Э Ю Я)
   end
 
-  def self.letters_en
-    %w(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z)
-  end
-
-  def self.search(language, query)
+  def self.search(query)
     if query.blank?
       []
     else
-      self.where(language: language).where('slug like ?', "%#{query}%").order('slug asc').limit(20)
+      self.where('slug like ?', "%#{query}%").order('slug asc').limit(20)
     end
   end
 
@@ -63,7 +53,7 @@ class Pattern < ActiveRecord::Base
   end
 
   def link_by_target_name(category, target_name)
-    target = Pattern.match_or_create_by_name(target_name.squish, self.language)
+    target = Pattern.match_or_create_by_name(target_name.squish)
     PatternLink.by_triplet category, self, target
   end
 end
