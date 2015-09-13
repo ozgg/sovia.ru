@@ -14,7 +14,12 @@
 
 <div id="content">
   <%= render 'layouts/flash_messages' %>
-  <%= yield %>
+  <div id="main" role="main">
+    <%= yield %>
+  </div>
+  <div id="sidebar" role="complementary">
+    Sidebar
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>

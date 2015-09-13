@@ -151,3 +151,6 @@ en:
     form:
       join: "Join"
       reset_password: "Reset password"
+  index:
+    index:
+      title: "The site about dreams"

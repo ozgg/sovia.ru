@@ -151,3 +151,6 @@ ru:
     form:
       join: "Присоединиться"
       reset_password: "Сброс пароля"
+  index:
+    index:
+      title: "Сайт о снах"
