@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.inet :ip
       t.integer :network, null: false
       t.integer :user_id
-      t.integer :invitee_id
+      t.integer :inviter_id
       t.string :uid, null: false
       t.string :password_digest
       t.string :email, index: true

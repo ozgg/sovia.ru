@@ -24,9 +24,6 @@ ru:
               invisible: "вне вашей видимости"
               not_commentable: "недоступен вам для комментирования"
     attributes:
-      language:
-        code: "код"
-        slug: "идентификатор"
       browser:
         name: "название"
         bot: "это бот"
@@ -42,12 +39,10 @@ ru:
         secret: "секрет"
         active: "активный"
       tag:
-        language_id: "язык"
         name: "название"
         slug: "код"
         post_count: "количество публикаций"
       user:
-        language_id: "язык"
         ip: "IP-адрес"
         agent: "АП при регистрации"
         network: "сеть"
@@ -75,7 +70,6 @@ ru:
         user_id: "пользователь"
         role: "роль"
       post:
-        language_id: "язык"
         user_id: "автор"
         agent_id: "АП"
         ip: "IP-адрес"
@@ -107,7 +101,6 @@ ru:
         description: "описание"
         azimuth: "направление головы"
       question:
-        language_id: "язык"
         user_id: "автор"
         agent_id: "АП"
         ip: "IP-адрес"
@@ -118,7 +111,6 @@ ru:
         answered: "ответ получен"
         body: "текст вопроса"
       grain:
-        language_id: "язык"
         user_id: "пользователь"
         pattern_id: "образ сна"
         dream_count: "количество снов"
@@ -130,7 +122,6 @@ ru:
         slug: "идентификатор"
         description: "описание"
       pattern:
-        language_id: "язык"
         user_id: "пользователь"
         agent_id: "АП"
         ip: "IP-адрес"
@@ -144,7 +135,6 @@ ru:
         image: "картинка"
         description: "описание"
       comment:
-        language_id: "язык"
         user_id: "пользователь"
         agent_id: "АП"
         ip: "IP-адрес"
@@ -158,11 +148,7 @@ ru:
         upvote_count: "количество голосов «за»"
         downvote_count: "количество голосов «против»"
         body: "текст комментария"
-      user_language:
-        user_id: "пользователь"
-        language_id: "язык"
       dream:
-        language_id: "язык"
         user_id: "пользователь"
         place_id: "место"
         agent_id: "АП"
@@ -214,7 +200,6 @@ ru:
         active: "активный"
         token: "жетон"
       side_note:
-        language_id: "язык"
         user_id: "пользователь"
         agent_id: "АП"
         ip: "IP-адрес"

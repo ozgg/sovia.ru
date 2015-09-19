@@ -1,57 +1,7 @@
 <% if Rails.env.production? %>
     <% content_for :metrics do %>
-        <!-- Yandex.Metrika counter -->
-        <script type="text/javascript">
-            (function (d, w, c) {
-                (w[c] = w[c] || []).push(function() {
-                    try {
-                        w.yaCounter24204925 = new Ya.Metrika({
-                            id:24204925,
-                            clickmap:true,
-                            trackLinks:true,
-                            accurateTrackBounce:true
-                        });
-                    } catch(e) { }
-                });
-
-                var n = d.getElementsByTagName("script")[0],
-                        s = d.createElement("script"),
-                        f = function () { n.parentNode.insertBefore(s, n); };
-                s.type = "text/javascript";
-                s.async = true;
-                s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-                if (w.opera == "[object Opera]") {
-                    d.addEventListener("DOMContentLoaded", f, false);
-                } else { f(); }
-            })(document, window, "yandex_metrika_callbacks");
-        </script>
-        <noscript><div><img src="https://mc.yandex.ru/watch/24204925" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        <!-- /Yandex.Metrika counter -->
-
-        <!-- Openstat -->
-        <span id="openstat857572"></span>
-        <script type="text/javascript">
-            var openstat = { counter: 857572, next: openstat };
-            (function(d, t, p) {
-                var j = d.createElement(t); j.async = true; j.type = "text/javascript";
-                j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
-                var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
-            })(document, "script", document.location.protocol);
-        </script>
-        <!-- /Openstat -->
-
-        <!-- Google Analytics -->
-        <script type="text/javascript">
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-6037428-1', 'auto');
-            ga('send', 'pageview');
-
-        </script>
-        <!-- /Google Analytics -->
+        <%= render 'metrics/yandex' %>
+        <%= render 'metrics/openstat' %>
+        <%= render 'metrics/google' %>
     <% end %>
 <% end %>
