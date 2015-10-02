@@ -1,0 +1,28 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <div>
+      <div><%= f.label :title %></div>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <div><%= f.label :body %></div>
+      <%= f.text_area :body, cols: 50, rows: 20, required: true %>
+    </div>
+    <div>
+      <%= f.check_box :needs_interpretation %>
+      <%= f.label :needs_interpretation %>
+    </div>
+
+    <% if current_user.is_a? User %>
+        [:place_id, :privacy, :lucidity, :mood, :azimuth, :body_position, :time_of_day, :show_image, :image]
+    <% end %>
+
+    <% if current_user_has_role? :administrator %>
+        [:interpretation_given]
+    <% end %>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

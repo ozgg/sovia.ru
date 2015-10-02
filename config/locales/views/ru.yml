@@ -116,6 +116,8 @@ ru:
       success: "Сон успешно удалён"
     create:
       success: "Сон успешно добавлен"
+    new:
+      title: "Добавить сон"
   codes:
     update:
       success: "Код успешно обновлён"
@@ -162,3 +164,4 @@ ru:
   index:
     index:
       title: "Сайт о снах"
+  submit: "Отправить"

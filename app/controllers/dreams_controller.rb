@@ -12,7 +12,7 @@ class DreamsController < ApplicationController
 
   def create
     @entity = Dream.new creation_parameters
-    if Trap.suspect_spam?(current_user, @entity.body, 1)
+    if Trap.suspect_spam?(current_user, @entity.body.to_s, 1)
       emulate_saving
     else
       create_dream
@@ -106,6 +106,7 @@ class DreamsController < ApplicationController
   end
 
   def create_dream
+    @entity.privacy = Dream.privacies[:generally_accessible] if current_user.nil?
     if @entity.save
       set_grains
       redirect_to @entity, notice: t('dreams.create.success')
