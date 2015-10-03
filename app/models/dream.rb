@@ -37,6 +37,13 @@ class Dream < ActiveRecord::Base
     self.where privacy: privacy
   end
 
+  def self.get_if_visible(id, current_user)
+    found_dream = self.find_by id: id
+    if found_dream.is_a?(Dream) && found_dream.visible_to?(current_user)
+      found_dream
+    end
+  end
+
   # Parameters for controller that are available for every user
   def self.parameters_for_all
     [:title, :body, :needs_interpretation]
@@ -50,6 +57,11 @@ class Dream < ActiveRecord::Base
   # Parameters for controller that are available only for administrators
   def self.parameters_for_administrators
     [:interpretation_given]
+  end
+
+  def title_for_view
+    result = self.title.to_s.squish
+    result.blank? ? I18n.t(:untitled) : result
   end
 
   # Is dream visible to user?

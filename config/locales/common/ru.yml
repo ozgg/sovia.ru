@@ -10,3 +10,5 @@ ru:
     few: "%{count} ошибки"
     many: "%{count} ошибок"
     other: "%{count} ошибок"
+  submit: "Отправить"
+  untitled: "Без названия"
