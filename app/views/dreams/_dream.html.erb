@@ -3,4 +3,6 @@
   <div>
     <%= raw parsed_dream_body(dream, current_user) %>
   </div>
+
+  <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>
 </article>

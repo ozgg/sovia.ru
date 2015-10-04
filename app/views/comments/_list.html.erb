@@ -1,0 +1,19 @@
+<section class="comments">
+  <% if comments.any? %>
+      <h1><%= t(:comments_list) %></h1>
+
+      <div class="comments">
+        <% comments.order('id asc').each do |comment| %>
+        <%= render comment %>
+        <% end %>
+      </div>
+  <% end %>
+
+  <div class="reply-container">
+    <h3><%= t('comment.add') %></h3>
+
+    <div>
+      <%= render partial: 'comments/form', locals: { entity: Comment.new(commentable: commentable) } %>
+    </div>
+  </div>
+</section>

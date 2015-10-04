@@ -1,0 +1,14 @@
+<%= form_for entity do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+    <div>
+      <%= f.hidden_field :commentable_id %>
+      <%= f.hidden_field :commentable_type %>
+      <%= f.hidden_field :parent_id %>
+    </div>
+    <div><%= f.label :body %></div>
+    <div><%= f.text_area :body, required: true, cols: 80, rows: 7 %></div>
+    <div>
+      <%= f.button t(:submit), type: 'submit' %>
+    </div>
+<% end %>
