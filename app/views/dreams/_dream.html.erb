@@ -1,7 +1,7 @@
 <article class="dream">
   <h1><%= dream.title_for_view %></h1>
   <div>
-    <%= raw parsed_dream_body(dream, current_user) %>
+    <%= raw prepare_dream_text(dream, current_user) %>
   </div>
 
   <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>
