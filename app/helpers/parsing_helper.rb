@@ -1,7 +1,7 @@
 module ParsingHelper
 
   def parse_dream_links(string, current_user)
-    pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,30})\))?/
+    pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
     string.gsub pattern do |chunk|
       match = pattern.match chunk
       dream = Dream.get_if_visible(match[:id], current_user)
@@ -10,6 +10,20 @@ module ParsingHelper
         "«#{link_to link_text, dream, title: dream.title_for_view}»"
       else
         '<span class="not-found">dream ' + match[:id] + '</span>'
+      end
+    end
+  end
+
+  def parse_post_links(string)
+    pattern = /\[post (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
+    string.gsub pattern do |chunk|
+      match = pattern.match chunk
+      post = Post.find_by id: match[:id]
+      if post.is_a? Post
+        link_text = match[:text].blank? ? post.title : match[:text]
+        "«#{link_to link_text, post, title: post.title}»"
+      else
+        '<span class="not-found">post ' + match[:id] + '</span>'
       end
     end
   end

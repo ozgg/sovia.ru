@@ -20,39 +20,6 @@ RSpec.describe DreamsHelper, type: :helper do
       expect(helper.parsed_dream_body(dream, nil)).to eq(expected)
     end
 
-    describe 'dream links' do
-      let!(:dream) { create :dream, title: 'Очередной сон' }
-      let!(:personal_dream) { create :personal_dream }
-
-      context 'when text given' do
-        it 'replaces fragment with link to existing dream with text' do
-          new_dream = create :dream, body: "pre [dream #{dream.id}](text) post"
-          expected = "<p>pre «#{link_to 'text', dream, title: dream.title_for_view}» post</p>"
-          expect(helper.parsed_dream_body(new_dream, nil)).to eq(expected)
-        end
-
-        it 'replaces fragment with span and text' do
-          new_dream = create :dream, body: "pre [dream #{personal_dream.id}](text) post"
-          expected = "<p>pre <span class=\"not-found\">dream #{personal_dream.id}</span> post</p>"
-          expect(helper.parsed_dream_body(new_dream, nil)).to eq(expected)
-        end
-      end
-
-      context 'when text is not given' do
-        it 'replaces fragment with dream number in span for non-existing dream' do
-          new_dream = create :dream, body: "pre [dream #{personal_dream.id}] post"
-          expected  = "<p>pre <span class=\"not-found\">dream #{personal_dream.id}</span> post</p>"
-          expect(helper.parsed_dream_body(new_dream, nil)).to eq(expected)
-        end
-        
-        it 'replaces fragment with link to dream and its title for existing dream' do
-          new_dream = create :dream, body: "pre [dream #{dream.id}] post"
-          expected  = "<p>pre «#{link_to dream.title_for_view, dream, title: dream.title_for_view}» post</p>"
-          expect(helper.parsed_dream_body(new_dream, nil)).to eq(expected)
-        end
-      end
-    end
-
     describe 'names' do
       context 'when user is owner' do
         it 'replaces fragment with acronym and name as title if no text is given' do
