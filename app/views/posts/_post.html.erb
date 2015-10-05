@@ -24,6 +24,9 @@
       <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><%= user_link post.user %></span></span>,
       <time itemprop="datePublished" content="<%= post.created_at.microformat_minutes %>" datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
     </div>
+    <div>
+      <%= post.tags_cache.join(', ') %>
+    </div>
     <meta itemprop="commentCount" content="<%= post.comments_count %>"/>
   </section>
   <%= render 'shared/track_data', item: post %>

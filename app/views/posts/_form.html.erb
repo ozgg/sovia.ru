@@ -24,8 +24,8 @@
       <%= f.text_area :body, cols: 50, rows: 20, required: true %>
     </div>
     <div>
-      <div><%= label_tag :post_tags_list, t('.tags_list') %></div>
-      <%= text_area_tag 'post[tags_string]', entity.tags_cache.join(', '), cols: 50, rows: 2 %>
+      <div><%= label_tag :tags_string, t('.tags_list') %></div>
+      <%= text_area_tag 'tags_string', entity.tags_cache.join(', '), cols: 50, rows: 2 %>
     </div>
 
     <% if current_user_has_role? :administrator %>

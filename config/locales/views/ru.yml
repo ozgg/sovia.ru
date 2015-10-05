@@ -71,6 +71,8 @@ ru:
       header: "Публикации"
     form:
       tags_list: "Метки"
+    edit:
+      title: "Редактирование публикации"
   goals:
     update:
       success: "Цель успешно изменена"

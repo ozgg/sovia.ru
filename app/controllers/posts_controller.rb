@@ -80,7 +80,7 @@ class PostsController < ApplicationController
   end
 
   def set_tags
-    @entity.tags_string = params.require(:post).permit(:tags_string).to_s
+    @entity.tags_string = params[:tags_string].to_s
     @entity.cache_tags!
   end
 
