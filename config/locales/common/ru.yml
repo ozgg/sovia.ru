@@ -4,6 +4,13 @@ ru:
   could_not_log_in: "Не удалось выполнить вход"
   email_already_confirmed: "Электронная почта уже подтверждена"
   insufficient_role: "Ваша роль не подходит для доступа к странице"
+  comment:
+    zero: "0 комментариев"
+    one: "%{count} комментарий"
+    few: "%{count} комментария"
+    many: "%{count} комментариев"
+    other: "%{count} комментариев"
+    add: "Добавить комментарий"
   error:
     zero: "нет ошибок"
     one: "%{count} ошибка"
@@ -15,9 +22,6 @@ ru:
   comments_list: "Комментарии"
   create: "Создать"
   nothing_found: "Ничего не нашлось"
-  posts:
-    new:
-      title: "Создать публикацию"
   edit: "Редактировать"
   delete: "Удалить"
   are_you_sure: "Вы уверены?"

@@ -57,6 +57,8 @@ ru:
     destroy:
       success: "Пользователь успешно удалён"
   posts:
+    new:
+      title: "Создать публикацию"
     create:
       success: "Публикация успешно создана"
     update:
@@ -65,6 +67,8 @@ ru:
       success: "Публикация успешно удалена"
     index:
       title: "Публикации, страница %{page}"
+      description: "Страница %{page} с публикациями на Совии, сайте о снах"
+      header: "Публикации"
     form:
       tags_list: "Метки"
   goals:

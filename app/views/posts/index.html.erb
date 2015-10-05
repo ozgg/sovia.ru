@@ -1,19 +1,13 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :meta_description, t('.description', page: current_page) %>
 
-<% if current_user.is_a? User %>
-    <nav>
-      <ul>
-        <li><%= link_to t(:create), new_post_path %></li>
-      </ul>
-    </nav>
-<% end %>
+<%= render 'shared/metrics' %>
 
-<div class="posts">
-  <% if @collection.any? %>
-  posts
-  <% else %>
-  <%= render 'shared/nothing_found' %>
-  <% end %>
+<%= render 'management_links' %>
+<article class="posts">
+  <h1><%= t('.header') %></h1>
 
   <%= paginate @collection %>
-</div>
+  <%= render partial: 'list', locals: { posts: @collection } %>
+  <%= paginate @collection %>
+</article>
