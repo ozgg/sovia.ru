@@ -60,16 +60,30 @@ RSpec.describe ParsingHelper, type: :helper, wip: true do
   end
 
   describe '#parse_pattern_links' do
+    let(:pattern) { create :pattern }
+
     context 'when pattern is not available' do
-      it 'replaces fragment with span'
+      it 'replaces fragment with span' do
+        sample = 'до [[Штука]] после'
+        expected = 'до <span class="not-found">Штука</span> после'
+        expect(helper.parse_pattern_links sample).to eq(expected)
+      end
     end
 
     context 'when text is given' do
-      it 'replaces fragment with link and text'
+      it 'replaces fragment with link and text' do
+        sample = "до [[#{pattern.name}]](text) после"
+        expected = 'до ' + link_to('text', dreambook_word_path(letter: pattern.letter, word: pattern.name)) + ' после'
+        expect(helper.parse_pattern_links sample).to eq(expected)
+      end
     end
 
     context 'when text is not given' do
-      it 'replaces fragment with link and pattern body'
+      it 'replaces fragment with link and pattern body' do
+        sample = "a [[#{pattern.name}]] b"
+        expected = "a #{link_to pattern.name, dreambook_word_path(letter: pattern.letter, word: pattern.name)} b"
+        expect(helper.parse_pattern_links sample).to eq(expected)
+      end
     end
   end
 
@@ -104,11 +118,35 @@ RSpec.describe ParsingHelper, type: :helper, wip: true do
   end
 
   describe '#prepare_dream_text' do
-    it 'ignores empty lines'
-    it 'encloses each line in passage'
-    it 'escapes < and >'
-    it 'parses links to dreams'
-    it 'parses names'
+    let(:dream) { create :dream }
+
+    it 'ignores empty lines' do
+      dream = create :dream, body: "\na\r\n\nb\r\n"
+      expected = '<p>a</p><p>b</p>'
+      expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
+    end
+
+    it 'encloses each line in passage' do
+      dream = create :dream, body: "a\nb"
+      expected = '<p>a</p><p>b</p>'
+      expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
+    end
+
+    it 'escapes < and >' do
+      dream = create :dream, body: '<a>'
+      expected = '<p>&lt;a&gt;</p>'
+      expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
+    end
+
+    it 'parses links to dreams' do
+      expect(helper).to receive(:parse_dream_links).and_call_original
+      helper.prepare_dream_text dream, nil
+    end
+
+    it 'parses names' do
+      expect(helper).to receive(:parse_names).and_call_original
+      helper.prepare_dream_text dream, nil
+    end
   end
 
   describe '#prepare_comment_text' do

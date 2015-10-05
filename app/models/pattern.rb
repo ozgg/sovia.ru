@@ -41,6 +41,10 @@ class Pattern < ActiveRecord::Base
     Hash[PatternLink.categories.keys.map { |category| [category, links_in_category(category)] }]
   end
 
+  def letter
+    name.first
+  end
+
   protected
 
   def set_links_in_category(category, links_string)
