@@ -63,6 +63,10 @@ ru:
       success: "Публикация успешно изменена"
     destroy:
       success: "Публикация успешно удалена"
+    index:
+      title: "Публикации, страница %{page}"
+    form:
+      tags_list: "Метки"
   goals:
     update:
       success: "Цель успешно изменена"

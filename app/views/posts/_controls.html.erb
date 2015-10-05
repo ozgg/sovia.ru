@@ -1,0 +1,5 @@
+<% if current_user_has_role? :administrator %>
+    <div class="controls">
+      <div class="visibility <%= post.show_in_list? ? '' : 'hidden' %>" data-uri="<%= url_for toggle_post_path(post) %>">&nbsp;</div>
+    </div>
+<% end %>

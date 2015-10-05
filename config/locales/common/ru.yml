@@ -13,3 +13,12 @@ ru:
   submit: "Отправить"
   untitled: "Без названия"
   comments_list: "Комментарии"
+  create: "Создать"
+  nothing_found: "Ничего не нашлось"
+  posts:
+    new:
+      title: "Создать публикацию"
+  edit: "Редактировать"
+  delete: "Удалить"
+  are_you_sure: "Вы уверены?"
+  anonymous: "Анонимно"

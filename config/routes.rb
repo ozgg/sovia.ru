@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   # Scope of certain user
   scope 'u/(:uid)', controller: :users do
-    get '/' => :profile
+    get '/' => :profile, as: :user_profile
     get 'posts', as: :user_posts
     get 'dreams', as: :user_dreams
     get 'questions', as: :user_questions

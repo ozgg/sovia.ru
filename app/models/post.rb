@@ -29,4 +29,18 @@ class Post < ActiveRecord::Base
   def editable_by?(user)
     owned_by?(user) || UserRole.user_has_role?(user, :administrator)
   end
+
+  # Get text preview for list of posts
+  #
+  # @return [String]
+  def preview
+    lead || first_passage
+  end
+
+  # Get the first passage from body
+  #
+  # @return [String]
+  def first_passage
+    body.squish.split("\n").first
+  end
 end

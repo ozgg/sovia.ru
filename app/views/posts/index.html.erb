@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+
+<% if current_user.is_a? User %>
+    <nav>
+      <ul>
+        <li><%= link_to t(:create), new_post_path %></li>
+      </ul>
+    </nav>
+<% end %>
+
+<div class="posts">
+  <% if @collection.any? %>
+  posts
+  <% else %>
+  <%= render 'shared/nothing_found' %>
+  <% end %>
+
+  <%= paginate @collection %>
+</div>
