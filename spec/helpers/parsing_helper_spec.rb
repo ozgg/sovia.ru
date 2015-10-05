@@ -191,11 +191,39 @@ RSpec.describe ParsingHelper, type: :helper, wip: true do
   end
 
   describe '#prepare_question_text' do
-    it 'ignores empty lines'
-    it 'encloses each line in passage'
-    it 'escapes < and >'
-    it 'parses links to dreams'
-    it 'parses links to patterns'
-    it 'parses links to posts'
+    let(:question) { create :question }
+
+    it 'ignores empty lines' do
+      question = create :question, body: "Вопрос\na\r\n\nb\r\n"
+      expected = '<p>Вопрос</p><p>a</p><p>b</p>'
+      expect(helper.prepare_question_text(question, nil)).to eq(expected)
+    end
+
+    it 'encloses each line in passage' do
+      question = create :question, body: "Строка a\nСтрока b"
+      expected = '<p>Строка a</p><p>Строка b</p>'
+      expect(helper.prepare_question_text(question, nil)).to eq(expected)
+    end
+
+    it 'escapes < and >' do
+      question = create :question, body: 'А тут будет тэг <a>'
+      expected = '<p>А тут будет тэг &lt;a&gt;</p>'
+      expect(helper.prepare_question_text(question, nil)).to eq(expected)
+    end
+
+    it 'parses links to dreams' do
+      expect(helper).to receive(:parse_dream_links).and_call_original
+      helper.prepare_question_text question, nil
+    end
+
+    it 'parses links to patterns' do
+      expect(helper).to receive(:parse_pattern_links).and_call_original
+      helper.prepare_question_text question, nil
+    end
+
+    it 'parses links to posts' do
+      expect(helper).to receive(:parse_post_links).and_call_original
+      helper.prepare_question_text question, nil
+    end
   end
 end

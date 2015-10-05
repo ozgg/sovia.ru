@@ -23,6 +23,30 @@ module ParsingHelper
     buffer
   end
 
+  # Prepare question text for views
+  #
+  # @param [Question] question
+  # @param [User] current_user
+  # @return [String]
+  def prepare_question_text(question, current_user)
+    buffer = ''
+    question.body.split("\n").each { |string| buffer += parse_question_string string.squish, current_user }
+    buffer
+  end
+
+  # Prepare post text for views
+  #
+  # @param [Post] post
+  # @return [String]
+  def prepare_post_text(post)
+    simple_format post.body
+  end
+
+  # Parse fragments like [dream 123](link text)
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @return [String]
   def parse_dream_links(string, current_user)
     pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
     string.gsub pattern do |chunk|
@@ -37,6 +61,10 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments like [post 123](link text)
+  #
+  # @param [String] string
+  # @return [String]
   def parse_post_links(string)
     pattern = /\[post (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
     string.gsub pattern do |chunk|
@@ -51,6 +79,10 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments like [[Pattern]](link text)
+  #
+  # @param [String] string
+  # @return [String]
   def parse_pattern_links(string)
     regex = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
     string.gsub regex do |chunk|
@@ -65,6 +97,11 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments like {Real Name}(text)
+  #
+  # @param [String] string
+  # @param [Boolean] show_names
+  # @return [String]
   def parse_names(string, show_names)
     pattern = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
     string.gsub pattern do |chunk|
@@ -81,6 +118,12 @@ module ParsingHelper
 
   protected
 
+  # Parse string as string from dream
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @param [Boolean] show_names
+  # @return [String]
   def parse_dream_string(string, current_user, show_names)
     if string.blank?
       ''
@@ -89,12 +132,22 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments available in dreams
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @param [Boolean] show_names
   def fragments_for_dream(string, current_user, show_names)
     quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
     string_with_name = parse_names quoted_string, show_names
     parse_dream_links string_with_name, current_user
   end
 
+  # Parse string as string from comment
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @return [String]
   def parse_comment_string(string, current_user)
     if string.blank?
       ''
@@ -103,7 +156,37 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments available for comments
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @return [String]
   def fragments_for_comment(string, current_user)
+    quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    processed_string = parse_dream_links quoted_string, current_user
+    processed_string = parse_pattern_links processed_string
+    parse_post_links processed_string
+  end
+
+  # Parse string as string from question
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @return [String]
+  def parse_question_string(string, current_user)
+    if string.blank?
+      ''
+    else
+      "<p>#{fragments_for_question(string, current_user)}</p>"
+    end
+  end
+
+  # Parse fragments available for questions
+  #
+  # @param [String] string
+  # @param [User] current_user
+  # @return [String]
+  def fragments_for_question(string, current_user)
     quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
     processed_string = parse_dream_links quoted_string, current_user
     processed_string = parse_pattern_links processed_string
