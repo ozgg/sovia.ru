@@ -12,6 +12,17 @@ module ParsingHelper
     buffer
   end
 
+  # Prepare comment text for views
+  #
+  # @param [Comment] comment
+  # @param [User] current_user
+  # @return [String]
+  def prepare_comment_text(comment, current_user)
+    buffer = ''
+    comment.body.split("\n").each { |string| buffer += parse_comment_string string.squish, current_user }
+    buffer
+  end
+
   def parse_dream_links(string, current_user)
     pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
     string.gsub pattern do |chunk|
@@ -82,5 +93,20 @@ module ParsingHelper
     quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
     string_with_name = parse_names quoted_string, show_names
     parse_dream_links string_with_name, current_user
+  end
+
+  def parse_comment_string(string, current_user)
+    if string.blank?
+      ''
+    else
+      "<p>#{fragments_for_comment(string, current_user)}</p>"
+    end
+  end
+
+  def fragments_for_comment(string, current_user)
+    quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    processed_string = parse_dream_links quoted_string, current_user
+    processed_string = parse_pattern_links processed_string
+    parse_post_links processed_string
   end
 end

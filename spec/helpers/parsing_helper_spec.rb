@@ -150,12 +150,40 @@ RSpec.describe ParsingHelper, type: :helper, wip: true do
   end
 
   describe '#prepare_comment_text' do
-    it 'ignores empty lines'
-    it 'encloses each line in passage'
-    it 'escapes < and >'
-    it 'parses links to patterns'
-    it 'parses links to dreams'
-    it 'parses links to posts'
+    let(:comment) { create :comment }
+
+    it 'ignores empty lines' do
+      comment = create :comment, body: "\na\r\n\nb\r\n"
+      expected = '<p>a</p><p>b</p>'
+      expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
+    end
+
+    it 'encloses each line in passage' do
+      comment = create :comment, body: "a\nb"
+      expected = '<p>a</p><p>b</p>'
+      expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
+    end
+
+    it 'escapes < and >' do
+      comment = create :comment, body: '<a>'
+      expected = '<p>&lt;a&gt;</p>'
+      expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
+    end
+
+    it 'parses links to patterns' do
+      expect(helper).to receive(:parse_pattern_links).and_call_original
+      helper.prepare_comment_text comment, nil
+    end
+
+    it 'parses links to dreams' do
+      expect(helper).to receive(:parse_dream_links).and_call_original
+      helper.prepare_comment_text comment, nil
+    end
+
+    it 'parses links to posts' do
+      expect(helper).to receive(:parse_post_links).and_call_original
+      helper.prepare_comment_text comment, nil
+    end
   end
 
   describe '#prepare_post_text' do
