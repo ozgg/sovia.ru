@@ -3,9 +3,10 @@ namespace :export do
   task patterns: :environment do
     File.open("#{Rails.root}/tmp/patterns.yml", 'w') do |file|
       Tag::Dream.order('id asc').each do |pattern|
+        description = replace_old_pattern_links(pattern.description.to_s).gsub('"', '\"').gsub(/\r?\n/, '\n')
         file.puts "#{pattern.id}:"
         file.puts "  name: \"#{pattern.name}\""
-        file.puts "  description: \"#{replace_old_pattern_links(pattern.description.to_s).squish}\""
+        file.puts "  description: \"#{description.strip}\""
       end
     end
   end
@@ -44,10 +45,10 @@ namespace :export do
   #
   # @param [String] string
   def replace_old_pattern_links(string)
-    pattern = /[<\[]symbol\s+name="(?<name>[^"]+)"\s*\/?[>\]]/
+    pattern = /[<\[]symbol\s+name="(?<name>[^"]+)"\s*(?:text="(?<text>[^"]+)"\s*)?\/?[>\]]/
     string.gsub('<p>', '').gsub('</p>', "\n").gsub pattern do |chunk|
       match = pattern.match chunk
-      "[[#{match[:name]}]]"
+      "[[#{match[:name]}]]" + (match[:text] ? "(#{match[:text]})" : '')
     end
   end
 end
