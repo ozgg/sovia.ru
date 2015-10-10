@@ -2,9 +2,9 @@
 <% content_for :meta_description, t('.description', word: @pattern.name) %>
 <% content_for :meta_type, 'article' %>
 <% content_for :meta_type_extension do %>
-    <meta property="og:article:published_time" content="<%= @pattern.created_at.iso_day %>" />
-    <meta property="og:article:modified_time" content="<%= @pattern.updated_at.iso_day %>" />
-    <meta property="og:article:section" content="<%= t('layouts.main_navigation.dreambook') %>" />
+    <meta property="og:article:published_time" content="<%= @pattern.created_at.iso_day %>"/>
+    <meta property="og:article:modified_time" content="<%= @pattern.updated_at.iso_day %>"/>
+    <meta property="og:article:section" content="<%= t('layouts.main_navigation.dreambook') %>"/>
 <% end %>
 
 <%= render 'shared/metrics' %>
@@ -18,7 +18,7 @@
 <% end %>
 
 <article>
-    <h1><%= t('.header') %></h1>
+  <h1><%= t('.header') %></h1>
 
   <%= render 'search' %>
 
@@ -28,12 +28,17 @@
       <h1 itemprop="headline"><%= @pattern.name %></h1>
     </header>
     <div itemprop="articleBody" role="definition">
-      <%= raw prepare_pattern_text @pattern %>
+      <% if @pattern.description.blank? %>
+          <p>Этот образ ещё не описан.</p>
+      <% else %>
+          <%= raw prepare_pattern_text @pattern %>
+      <% end %>
     </div>
     <footer>
       <p>Вы также можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут
         определить его значение точнее.</p>
-      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: @pattern.name) %> (<%= @pattern.dream_count %>)</nav>
+      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: @pattern.name) %> (<%= @pattern.dream_count %>)
+      </nav>
     </footer>
   </section>
 

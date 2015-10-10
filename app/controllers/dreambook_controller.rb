@@ -10,8 +10,7 @@ class DreambookController < ApplicationController
   end
 
   def letter
-    letter      = letter_from_request
-    @patterns   = Pattern.starting_with(letter).order('slug asc').page(current_page).per(50)
+    @patterns = Pattern.dreambook_page letter_from_request, current_page
   end
 
   def word

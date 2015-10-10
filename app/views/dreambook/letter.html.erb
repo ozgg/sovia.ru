@@ -1,0 +1,27 @@
+<% content_for :meta_title, t('.title', letter: @letter_from_request, page: current_page) %>
+<% content_for :meta_description, t('.description', letter: @letter_from_request, page: current_page) %>
+
+<%= render 'shared/metrics' %>
+
+<section>
+<h1><%= t('.header', letter: @letter_from_request) %></h1>
+
+  <%= render 'search' %>
+  <%= render 'letters' %>
+
+  <% if @patterns.any? %>
+      <%= paginate @patterns %>
+
+      <nav>
+        <ul class="dreambook-symbols">
+          <% @patterns.each do |pattern| %>
+              <li><%= link_to pattern.name, dreambook_word_path(letter: pattern.letter, word: pattern.name) %></li>
+          <% end %>
+        </ul>
+      </nav>
+
+      <%= paginate @patterns %>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</section>

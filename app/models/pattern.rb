@@ -14,7 +14,10 @@ class Pattern < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :starting_with, ->(letter) { where 'slug like ?', "#{letter}%" }
+  scope :starting_with, ->(letter) { where 'slug ilike ?', "#{letter}%" }
+  scope :good_for_dreambook, -> { where 'description is not null or dream_count > 0' }
+
+  PER_PAGE = 50
 
   def self.letters
     %w(А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ы Э Ю Я)
@@ -24,8 +27,12 @@ class Pattern < ActiveRecord::Base
     if query.blank?
       []
     else
-      self.where('slug like ?', "%#{query}%").order('slug asc').limit(20)
+      self.where('slug like ?', "%#{query}%").order('slug asc').limit(PER_PAGE)
     end
+  end
+
+  def self.dreambook_page(letter, current_page)
+    self.starting_with(letter).good_for_dreambook.order('slug asc').page(current_page).per(PER_PAGE)
   end
 
   # @param [Hash] links

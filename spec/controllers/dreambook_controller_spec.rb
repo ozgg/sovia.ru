@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DreambookController, type: :controller do
-  let!(:pattern_a) { create :pattern, name: 'первый' }
-  let!(:pattern_b) { create :pattern, name: 'второй' }
+  let!(:pattern_a) { create :described_pattern, name: 'первый' }
+  let!(:pattern_b) { create :described_pattern, name: 'второй' }
 
   shared_examples 'setting_letters' do
     it 'assigns letters to @letters' do
