@@ -31,8 +31,9 @@
       <%= raw prepare_pattern_text @pattern %>
     </div>
     <footer>
-      <%= render 'call' %>
-      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag: @pattern.name) %> (<%= @pattern.dream_count %>)</nav>
+      <p>Вы также можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут
+        определить его значение точнее.</p>
+      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: @pattern.name) %> (<%= @pattern.dream_count %>)</nav>
     </footer>
   </section>
 

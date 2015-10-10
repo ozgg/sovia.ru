@@ -1,0 +1,83 @@
+nav.dreambook-letters {
+  margin: 0;
+  padding: 0.3em;
+
+  ul {
+    margin: 0.3em 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      padding: 0;
+      border: solid 1px #eeeeee;
+      min-width: 1.2em;
+      text-align: center;
+
+      a:link, a:visited {
+        display: inline-block;
+        width: 100%;
+        color: #3d6d88;
+      }
+
+      a:hover {
+        color: #ff0000;
+        background: #eeffee;
+      }
+    }
+  }
+}
+
+ul.dreambook-symbols {
+  margin: 0 0 0 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    padding: 0 1em;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
+
+    &:nth-of-type(2n) {
+      background: #f0f0ff;
+    }
+
+    &:nth-of-type(2n+1) {
+      background: #f7f7ff;
+    }
+  }
+}
+
+.dreambook-word {
+  h1 {
+    background: #feefd0;
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-weight: normal;
+    font-variant: small-caps;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  div {
+    margin: 0;
+    padding: 0;
+
+    p {
+      margin: 0.5em 0;
+      text-indent: 1.5em;
+    }
+  }
+
+  footer {
+    border-top: solid #aaaaaa 1px;
+
+    nav {
+      margin: 0 0 0 1.5em;
+    }
+  }
+}

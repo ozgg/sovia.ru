@@ -99,7 +99,7 @@ module ParsingHelper
       match = regex.match chunk
       pattern = Pattern.match_by_name match[:body]
       if pattern.is_a? Pattern
-        link_text = match[:text].blank? ? pattern.name : match[:text]
+        link_text = match[:text].blank? ? match[:body] : match[:text]
         link_to link_text, dreambook_word_path(letter: pattern.letter, word: pattern.name)
       else
         '<span class="not-found">' + match[:body] + '</span>'
