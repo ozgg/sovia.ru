@@ -1,0 +1,43 @@
+<% content_for :meta_title, t('.title', word: @pattern.name) %>
+<% content_for :meta_description, t('.description', word: @pattern.name) %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+    <meta property="og:article:published_time" content="<%= @pattern.created_at.iso_day %>" />
+    <meta property="og:article:modified_time" content="<%= @pattern.updated_at.iso_day %>" />
+    <meta property="og:article:section" content="<%= t('layouts.main_navigation.dreambook') %>" />
+<% end %>
+
+<%= render 'shared/metrics' %>
+
+<% if current_user_has_role? :administrator %>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t(:edit), edit_pattern_path(@pattern) %></li>
+      </ul>
+    </nav>
+<% end %>
+
+<article>
+    <h1><%= t('.header') %></h1>
+
+  <%= render 'search' %>
+
+  <section class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
+    <meta itemprop="articleSection" content="<%= t('layouts.main_navigation.dreambook') %>"/>
+    <header>
+      <h1 itemprop="headline"><%= @pattern.name %></h1>
+    </header>
+    <div itemprop="articleBody" role="definition">
+      <%= raw prepare_pattern_text @pattern %>
+    </div>
+    <footer>
+      <%= render 'call' %>
+      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag: @pattern.name) %> (<%= @pattern.dream_count %>)</nav>
+    </footer>
+  </section>
+
+  <%= render 'shared/social' %>
+
+  <%= render 'letters' %>
+
+</article>

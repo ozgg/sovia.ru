@@ -42,6 +42,16 @@ module ParsingHelper
     simple_format post.body
   end
 
+  # Prepare pattern description for views
+  #
+  # @param [Pattern] pattern
+  # @return [String]
+  def prepare_pattern_text(pattern)
+    buffer = ''
+    pattern.description.to_s.split("\n").each { |string| buffer += parse_pattern_string string.squish }
+    buffer
+  end
+
   # Parse fragments like [dream 123](link text)
   #
   # @param [String] string
@@ -191,5 +201,25 @@ module ParsingHelper
     processed_string = parse_dream_links quoted_string, current_user
     processed_string = parse_pattern_links processed_string
     parse_post_links processed_string
+  end
+
+  # Parse string as string from pattern description
+  #
+  # @param [String] string
+  # @return [String]
+  def parse_pattern_string(string)
+    if string.blank?
+      ''
+    else
+      "<p>#{fragments_for_pattern(string)}</p>"
+    end
+  end
+
+  # Parse fragments available for patterns
+  #
+  # @param [String] string
+  def fragments_for_pattern(string)
+    quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    parse_pattern_links quoted_string
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ParsingHelper, type: :helper, wip: true do
+RSpec.describe ParsingHelper, type: :helper do
   describe '#parse_dream_links' do
     let(:dream) { create :dream, title: 'Сон о проверке' }
 
@@ -188,6 +188,33 @@ RSpec.describe ParsingHelper, type: :helper, wip: true do
 
   describe '#prepare_post_text' do
     pending
+  end
+
+  describe '#prepare_pattern_text' do
+    let(:pattern) { create :pattern, description: 'Какое-то толкование' }
+
+    it 'ignores empty lines' do
+      pattern = create :pattern, description: "Толкование\na\r\n\nb\r\n"
+      expected = '<p>Толкование</p><p>a</p><p>b</p>'
+      expect(helper.prepare_pattern_text(pattern)).to eq(expected)
+    end
+
+    it 'encloses each line in passage' do
+      pattern = create :pattern, description: "Строка a\nСтрока b"
+      expected = '<p>Строка a</p><p>Строка b</p>'
+      expect(helper.prepare_pattern_text(pattern)).to eq(expected)
+    end
+
+    it 'escapes < and >' do
+      pattern = create :pattern, description: 'А тут будет тэг <a>'
+      expected = '<p>А тут будет тэг &lt;a&gt;</p>'
+      expect(helper.prepare_pattern_text(pattern)).to eq(expected)
+    end
+
+    it 'parses links to patterns' do
+      expect(helper).to receive(:parse_pattern_links).and_call_original
+      helper.prepare_pattern_text pattern
+    end
   end
 
   describe '#prepare_question_text' do
