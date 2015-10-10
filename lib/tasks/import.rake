@@ -8,10 +8,28 @@ namespace :import do
           print id
           pattern = Pattern.match_or_create_by_name data['name']
           pattern.update! description: data['description'] unless data['description'].blank?
-          print " -> #{pattern.id}        \r"
+          print "\t#{pattern.id}        \r"
         end
       end
-      puts 'Done.'
+      puts "Done. Now we have #{Pattern.count} patterns."
+    else
+      puts "Cannot find file #{file_path}"
+    end
+  end
+
+  desc 'Import pattern names'
+  task pattern_names: :environment do
+    file_path = "#{Rails.root}/tmp/patterns.txt"
+    if File.exists? file_path
+      File.open(file_path).read.each_line do |name|
+        unless name.blank?
+          pattern = Pattern.match_or_create_by_name name
+          print "#{pattern.id}\t#{pattern.name}    \r"
+        end
+      end
+      puts "Done. Now we have #{Pattern.count} patterns."
+    else
+      puts "Cannot find file #{file_path}"
     end
   end
 
