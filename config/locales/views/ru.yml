@@ -179,6 +179,16 @@ ru:
   index:
     index:
       title: "Сайт о снах"
+      recent_in_posts: "Недавнее в публикациях"
+      recent_in_dreams: "Недавнее в снах"
   reply: "Ответить"
   comment:
     add: "Добавить комментарий"
+  dreambook:
+    search:
+      search: "Поиск по соннику"
+      query: "Слово"
+      title: "Поиск %{word} по соннику"
+      header: "Поиск по соннику"
+      result: "Результат поиска"
+      description: "Результат поиска слова %{word} в соннике Совии."

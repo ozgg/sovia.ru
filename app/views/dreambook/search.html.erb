@@ -1,0 +1,22 @@
+<% content_for :meta_title, t('.title', word: param_from_request(:query)) %>
+<% content_for :meta_description, t('.description', word: param_from_request(:query)) %>
+<%= render 'shared/metrics' %>
+
+<div>
+  <h1><%= t('.header') %></h1>
+
+  <%= render 'search' %>
+
+  <h2><%= t('.result') %></h2>
+  <% if @patterns.any? %>
+      <nav>
+        <ul class="dreambook-symbols">
+          <% @patterns.each do |pattern| %>
+              <li><%= link_to pattern.name, dreambook_word_path(letter: pattern.letter, word: pattern.name) %></li>
+          <% end %>
+        </ul>
+      </nav>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+</div>

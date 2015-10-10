@@ -20,8 +20,8 @@
 
     <section>
       <h1><%= t('.recent_in_dreams') %></h1>
-      <% if @entries.any? %>
-          <% @entries.each do |entry| %>
+      <% if @dreams.any? %>
+          <% @dreams.each do |entry| %>
               <div class="post-preview">
                 <div class="header">
                   <div class="image"><%= raw comment_avatar(entry.user) %></div>
@@ -39,13 +39,6 @@
 
     <div style="clear:both"></div>
   </section>
-  <!--
-  <div class="ssl">
-    <a href="https://www.positivessl.com">
-      <img src="https://www.positivessl.com/images-new/PositiveSSL_tl_trans2.png" alt="SSL Certificate" />
-    </a>
-  </div>
-  -->
 
   <%= render 'shared/social' %>
 </article>
