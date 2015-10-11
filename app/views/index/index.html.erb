@@ -24,7 +24,7 @@
           <% @dreams.each do |dream| %>
               <div class="post-preview">
                 <div class="header">
-                  <div class="image">raw comment_avatar(entry.user)</div>
+                  <div class="image"><%= raw comment_avatar(dream.user) %></div>
                   <div class="title"><%= link_to dream.title_for_view, dream %></div>
                   <span class="author"><%= user_link dream.user %></span>
                   <time datetime="<%= dream.created_at.w3c %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>

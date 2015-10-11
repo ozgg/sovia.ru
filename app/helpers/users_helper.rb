@@ -6,4 +6,8 @@ module UsersHelper
       I18n.t(:anonymous)
     end
   end
+
+  def comment_avatar(user)
+    'comment avatar'
+  end
 end
