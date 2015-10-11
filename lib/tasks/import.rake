@@ -273,6 +273,18 @@ namespace :import do
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
           print id
+          question = Question.find_by id: data['question_id']
+          if question.is_a? Question
+            comment = Comment.new
+            comment.commentable = question
+            comment.user_id = data['user_id']
+            comment.created_at = data['created_at']
+            comment.ip = data['ip'] unless data['ip'].blank?
+            comment.body = data['body']
+            comment.save!
+          else
+            puts ": cannot find question #{data['question_id']}"
+          end
           print "    \r"
         end
       end
