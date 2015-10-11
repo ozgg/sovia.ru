@@ -165,8 +165,26 @@ namespace :import do
     if File.exists? file_path
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
+          post = Post.find_by id: id
+          if post.is_a? Post
+            puts "Post #{id} already exists"
+          else
+            print id
+            post = Post.new
+            post.id = id
+            post.user_id = data['user_id']
+            post.ip = data['ip'] unless data['ip'].blank?
+            post.show_in_list = data['show_in_list'] if data['show_in_list']
+            post.created_at = data['created_at']
+            post.title = data['title']
+            post.lead = data['lead'] || data['title']
+            if File.exists? data['image'].to_s
+              post.image = File.open data['image']
+            end
+            post.body = data['body']
+            post.save!
+            print "    \r"
+          end
         end
       end
       puts "Done. Now we have #{Post.count} posts."
