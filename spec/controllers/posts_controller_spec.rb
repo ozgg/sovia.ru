@@ -217,6 +217,10 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  describe 'post toggle', wip: true do
+    pending
+  end
+
   describe 'get tagged' do
     let(:tag) { create :tag }
 

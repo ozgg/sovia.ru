@@ -13,6 +13,15 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   scope :visible, -> { where show_in_list: true }
+  scope :recent, -> { order('id desc') }
+
+  def self.recent_posts(show_hidden)
+    if show_hidden
+      self.recent.first(3)
+    else
+      self.visible.recent.first(3)
+    end
+  end
 
   def tags_string=(tags_string)
     list_of_tags = []

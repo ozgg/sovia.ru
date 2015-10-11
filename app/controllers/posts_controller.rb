@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :restrict_anonymous_access, except: [:index, :show, :tagged]
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
-  before_action :restrict_editing, only: [:edit, :update, :destroy]
+  before_action :set_entity, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :restrict_editing, only: [:edit, :update, :destroy, :toggle]
 
   def index
     if current_user_has_role? :administrator
@@ -45,6 +45,10 @@ class PostsController < ApplicationController
       flash[:notice] = t('posts.destroy.success')
     end
     redirect_to posts_path
+  end
+
+  def toggle
+
   end
 
   def tagged

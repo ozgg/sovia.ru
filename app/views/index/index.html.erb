@@ -30,6 +30,7 @@
                   <time datetime="<%= dream.created_at.w3c %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
                 </div>
                 <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
+                <%= render 'shared/track_data', item: dream %>
               </div>
           <% end %>
       <% else %>

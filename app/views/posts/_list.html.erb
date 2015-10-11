@@ -9,9 +9,9 @@
           </div>
           <div class="body">
             <% if post.image.url %>
-                <div class="image"><%= image_tag post.image.lead, alt: post.title %></div>
+                <div class="image"><%= image_tag post.image.url, alt: post.title %></div>
             <% end %>
-            <div class="text"><%= post.preview %></div>
+            <div class="text"><%= post.lead %></div>
           </div>
           <div class="footer">
             <div class="comment-count"><%= link_to t(:comment, count: post.comments_count), post %></div>

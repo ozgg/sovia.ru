@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # Tagged resources with archive
   resources :posts, :dreams, concerns: :tagged_archive
 
+  # Toggle visibility
+  post 'posts/:id/toggle' => 'posts#toggle', as: :toggle_post
+
   # Dreambook
   scope 'dreambook', controller: :dreambook do
     get '/' => :index, as: :dreambook

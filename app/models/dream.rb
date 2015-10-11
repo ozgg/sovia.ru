@@ -27,6 +27,10 @@ class Dream < ActiveRecord::Base
 
   scope :recent, -> { order('id desc') }
 
+  def self.recent_dreams(current_user)
+    self.visible_to_user(current_user).recent.first(3)
+  end
+
   # Select dreams that are visible to given user
   #
   # @param [User|nil] user who selects dreams
