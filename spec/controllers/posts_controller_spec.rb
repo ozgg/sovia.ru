@@ -157,7 +157,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'patch update' do
     context 'when data is valid' do
-      let(:action) { -> { patch :update, id: entity, post: { lead: 'new lead'} } }
+      let(:action) { -> { patch :update, id: entity, post: { lead: 'new lead' } } }
 
       it_behaves_like 'setting_post_tags'
 
@@ -174,7 +174,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'when data is invalid' do
-      let(:action) { -> { patch :update, id: entity, post: { lead: ' '} } }
+      let(:action) { -> { patch :update, id: entity, post: { lead: ' ' } } }
 
       it_behaves_like 'not_setting_post_tags'
 
@@ -191,7 +191,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'restricting access' do
-      before(:each) { patch :update, id: entity, post: { lead: 'new lead'} }
+      before(:each) { patch :update, id: entity, post: { lead: 'new lead' } }
 
       it_behaves_like 'restricted_editing'
     end
@@ -217,8 +217,45 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe 'post toggle', wip: true do
-    pending
+  describe 'post toggle' do
+    before(:each) do
+      allow(controller).to receive(:current_user).and_return(administrator)
+    end
+
+    context 'when post is visible' do
+      let!(:entity) { create :visible_post }
+
+      before(:each) { post :toggle, id: entity.id }
+
+      it_behaves_like 'restricted_editing'
+      it_behaves_like 'entity_assigner'
+
+      it 'changes post visibility to false' do
+        entity.reload
+        expect(entity).not_to be_show_in_list
+      end
+
+      it 'renders json with current post visibility' do
+        expect(response.body).to eq(JSON.dump({ result: false }))
+      end
+    end
+
+    context 'when post is invisible' do
+      let!(:entity) { create :post }
+      before(:each) { post :toggle, id: entity.id }
+
+      it_behaves_like 'restricted_editing'
+      it_behaves_like 'entity_assigner'
+
+      it 'changes post visibility to true' do
+        entity.reload
+        expect(entity).to be_show_in_list
+      end
+
+      it 'renders json with current post visibility' do
+        expect(response.body).to eq(JSON.dump({ result: true }))
+      end
+    end
   end
 
   describe 'get tagged' do

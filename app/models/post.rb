@@ -52,4 +52,8 @@ class Post < ActiveRecord::Base
   def first_passage
     body.squish.split("\n").first
   end
+
+  def toggle_visibility!
+    update show_in_list: !show_in_list
+  end
 end

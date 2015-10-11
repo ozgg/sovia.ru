@@ -48,7 +48,8 @@ class PostsController < ApplicationController
   end
 
   def toggle
-
+    @entity.toggle_visibility!
+    render json: { result: @entity.show_in_list? }
   end
 
   def tagged
