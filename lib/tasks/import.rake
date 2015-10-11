@@ -109,8 +109,20 @@ namespace :import do
     if File.exists? file_path
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
+          deed = Deed.find_by id: id
+          if deed.is_a? Deed
+            puts "Deed #{id} exists"
+          else
+            print id
+            deed = Deed.new
+            deed.id = id
+            deed.user_id = data['user_id']
+            deed.goal_id = data['goal_id'] unless data['goal_id'].blank?
+            deed.created_at = data['created_at']
+            deed.essence = data['name']
+            deed.save!
+            print "    \r"
+          end
         end
       end
       puts "Done. Now we have #{Deed.count} deeds."
