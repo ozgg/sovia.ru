@@ -237,8 +237,27 @@ namespace :import do
     if File.exists? file_path
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
+          comment = Comment.find_by id: id
+          if comment.is_a? Comment
+            print "Comment #{id} already exists\r"
+          else
+            print id
+            comment = Comment.new
+            comment.id = id
+            comment.user_id = data['user_id'] unless data['user_id'].blank?
+            comment.ip = data['ip'] unless data['ip'].blank?
+            comment.parent_id = data['parent_id'] unless data['parent_id'].blank?
+            comment.created_at = data['created_at']
+            comment.body = data['body']
+            comment.commentable_id = data['commentable_id']
+            comment.commentable_type = (data['commentable_type'] == 'Entry') ? 'Dream' : data['commentable_type']
+            begin
+              comment.save!
+            rescue ActiveRecord::RecordInvalid
+              puts "! #{$!}"
+            end
+            print " \r"
+          end
         end
       end
       puts "Done. Now we have #{Comment.count} comments."
