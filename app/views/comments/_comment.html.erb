@@ -2,9 +2,9 @@
   <meta itemprop="url" content="<%= comment_url comment %>"/>
   <div class="header">
     <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <span itemprop="name"><%= comment.user %></span>
+      <span itemprop="name"><%= user_link comment.user %></span>
     </span>
-    <time itemprop="datePublished" content="<%= comment.created_at.microformat_minutes %>" datetime="<%= comment.created_at.w3c %>"><%= comment.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+    <%= render partial: 'shared/publication_time', locals: { time: comment.created_at } %>
   </div>
 
   <div class="body" itemprop="about">

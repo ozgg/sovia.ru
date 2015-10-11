@@ -27,7 +27,7 @@
                   <div class="image"><%= raw comment_avatar(dream.user) %></div>
                   <div class="title"><%= link_to dream.title_for_view, dream %></div>
                   <span class="author"><%= user_link dream.user %></span>
-                  <time datetime="<%= dream.created_at.w3c %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                  <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
                 </div>
                 <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
                 <%= render 'shared/track_data', item: dream %>

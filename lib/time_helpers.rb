@@ -11,4 +11,8 @@ module TimeHelpers
   def microformat_minutes
     strftime('%Y-%m-%dT%H:%M')
   end
+  
+  def pubdate
+    strftime('%d.%m.%Y, %H:%M')
+  end
 end
