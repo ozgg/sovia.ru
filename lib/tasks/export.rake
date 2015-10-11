@@ -71,26 +71,42 @@ namespace :export do
         file.puts "#{post.id}:"
         file.puts "  user_id: #{post.user_id}"
         file.puts "  image: \"#{Rails.root}/public#{post.image.url}\"" unless post.image.blank?
-        file.puts "  title: \"#{normalize_post_body(post.title)}\""
-        file.puts "  lead: \"#{normalize_post_body(post.lead)}\"" unless post.lead.blank?
+        file.puts "  title: \"#{normalize_string(post.title)}\""
+        file.puts "  lead: \"#{normalize_string(post.lead)}\"" unless post.lead.blank?
         file.puts '  show_in_list: true' if post.show_in_list?
         file.puts "  ip: \"#{post.ip}\"" unless post.ip.blank?
         file.puts "  created_at: \"#{post.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
-        file.puts "  body: \"#{normalize_post_body(post.body)}\""
+        file.puts "  body: \"#{normalize_string(post.body)}\""
       end
     end
   end
 
-  desc "TODO: Export dreams to YAML"
+  desc 'Export dreams to YAML'
   task dreams: :environment do
+    File.open("#{Rails.root}/tmp/dreams.yml", 'w') do |file|
+      Entry::Dream.order('id asc').each do |dream|
+        file.puts "#{dream.id}:"
+        file.puts "  user_id: #{dream.user_id}" unless dream.user_id.blank?
+        file.puts "  privacy: #{dream.privacy}" if dream.privacy > 0
+        file.puts "  title: \"#{normalize_string(dream.title)}\"" unless dream.title.blank?
+        file.puts "  lucidity: #{dream.lucidity}" if dream.lucidity > 0
+        file.puts "  created_at: \"#{dream.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  tags_string: \"#{dream.tags_string}\""
+        file.puts "  body: \"#{parse_dream_body(dream.body)}\""
+      end
+    end
   end
 
-  desc "TODO: Export questions to YAML"
+  desc 'Export questions to YAML'
   task questions: :environment do
   end
 
-  desc "TODO: Export comments and answers to YAML"
+  desc 'Export comments to YAML'
   task comments: :environment do
+  end
+
+  desc 'Export answers to YAML'
+  task answers: :environment do
   end
 
   # Replace old dreambook pattern links with new format
@@ -106,7 +122,21 @@ namespace :export do
     end
   end
 
-  def normalize_post_body(string)
+  def normalize_string(string)
     string.gsub(/\r?\n/, '\n').gsub('"', '\"')
+  end
+
+  def parse_dream_body(string)
+    string_with_dreams = old_dream_links string
+    string_with_dreams.gsub(/\r?\n/, '\n').gsub('"', '\"')
+  end
+
+  def old_dream_links(string)
+    '<dream id="2000" title="трижды переплыла через реку" />'
+    pattern = /[<\[]dream\s+id="(?<id>\d+)"\s*(?:title="(?<text>[^"]+)"\s*)?\s*\/?[>\]]/
+    string.gsub pattern do |chunk|
+      match = pattern.match chunk
+      "[dream #{match[:id]}]" + (match[:text] ? "(#{match[:text]})" : '')
+    end
   end
 end
