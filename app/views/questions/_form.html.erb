@@ -1,10 +1,10 @@
-<%= form_for @question do |f| %>
-    <%= render partial: 'shared/errors_list', locals: { entity: @question } %>
+<%= form_for entity do |f| %>
+    <%= render partial: 'shared/errors_list', locals: { entity: entity } %>
 
-    <% if visitor_has_role?(:content_editor) && !@question.id %>
+    <% if current_user_has_role?(:administrator) && !entity.id %>
         <div>
           <%= label_tag :user_id, t('activerecord.attributes.question.user_id') %>
-          <%= select_tag :user_id, options_for_select(owners_for_select(current_user)) %>
+          select_tag :user_id, options_for_select(owners_for_select(current_user))
         </div>
     <% end %>
     <div>
@@ -13,6 +13,13 @@
     </div>
     <p class="notice"><%= t('.max_length') %></p>
 
+    <% if entity.id %>
+        <div>
+          <%= f.check_box :answered %>
+          <%= f.label :answered %>
+        </div>
+    <% end %>
+    
     <div>
       <%= f.button t(:submit), type: :submit %>
     </div>
