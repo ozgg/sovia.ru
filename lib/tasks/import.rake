@@ -131,30 +131,26 @@ namespace :import do
     end
   end
 
-  desc 'Import dreams from YAML'
-  task dreams: :environment do
-    file_path = "#{Rails.root}/tmp/dreams.yml"
-    if File.exists? file_path
-      File.open file_path, 'r' do |file|
-        YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
-        end
-      end
-      puts "Done. Now we have #{Dream.count} dreams."
-    else
-      puts "Cannot find file #{file_path}"
-    end
-  end
-
   desc 'Import questions from YAML'
   task questions: :environment do
     file_path = "#{Rails.root}/tmp/questions.yml"
     if File.exists? file_path
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
+          question = Question.find_by id: id
+          if question.is_a? Question
+            puts "Question #{id} already exists"
+          else
+            print id
+            question = Question.new
+            question.id = id
+            question.user_id = data['user_id']
+            question.body = data['body']
+            question.created_at = data['created_at']
+            question.ip = data['ip']
+            question.save!
+            print "    \r"
+          end
         end
       end
       puts "Done. Now we have #{Question.count} questions."
@@ -174,6 +170,22 @@ namespace :import do
         end
       end
       puts "Done. Now we have #{Post.count} posts."
+    else
+      puts "Cannot find file #{file_path}"
+    end
+  end
+
+  desc 'Import dreams from YAML'
+  task dreams: :environment do
+    file_path = "#{Rails.root}/tmp/dreams.yml"
+    if File.exists? file_path
+      File.open file_path, 'r' do |file|
+        YAML.load(file).each do |id, data|
+          print id
+          print "    \r"
+        end
+      end
+      puts "Done. Now we have #{Dream.count} dreams."
     else
       puts "Cannot find file #{file_path}"
     end
