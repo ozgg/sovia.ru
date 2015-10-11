@@ -1,15 +1,31 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the UsersHelper. For example:
-#
-# describe UsersHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe UsersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#user_link' do
+    context 'when user is anonymous' do
+      it 'renders text "Анонимно"' do
+        expect(helper.user_link(nil)).to eq(I18n.t(:anonymous))
+      end
+    end
+
+    context 'when user is native' do
+      it 'renders link to profile with class "native"' do
+        user = create :user
+        expected = link_to user.screen_name, user_profile_path(uid: user.uid), class: 'native user'
+        expect(helper.user_link(user)).to eq(expected)
+      end
+    end
+
+    context 'when user is external' do
+      it 'renders link to profile with network name as class' do
+        user = create :user, network: :vk, uid: 'id1'
+        expected = link_to user.screen_name, user_profile_path(uid: user.long_uid), class: 'vk user'
+        expect(helper.user_link(user)).to eq(expected)
+      end
+    end
+  end
+
+  describe 'comment_avatar' do
+    pending
+  end
 end

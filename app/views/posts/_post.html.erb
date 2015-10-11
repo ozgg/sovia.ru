@@ -14,7 +14,7 @@
 
   <section class="body" itemprop="articleBody">
     <% if post.image.url %>
-        <figure><%= link_to image_tag(post.image.post, alt: post.title, itemprop: 'image'), post.image.url %></figure>
+        <figure><%= link_to image_tag(post.image.url, alt: post.title, itemprop: 'image'), post.image.url %></figure>
     <% end %>
     <%= prepare_post_text post %>
   </section>
