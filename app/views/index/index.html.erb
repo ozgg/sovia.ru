@@ -21,15 +21,15 @@
     <section>
       <h1><%= t('.recent_in_dreams') %></h1>
       <% if @dreams.any? %>
-          <% @dreams.each do |entry| %>
+          <% @dreams.each do |dream| %>
               <div class="post-preview">
                 <div class="header">
-                  <div class="image"><%= raw comment_avatar(entry.user) %></div>
-                  <div class="title"><%= link_to entry.parsed_title, verbose_entry_path(entry) %></div>
-                  <span class="author"><%= user_link entry.user %></span>
-                  <time datetime="<%= entry.datetime %>"><%= entry.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+                  <div class="image">raw comment_avatar(entry.user)</div>
+                  <div class="title"><%= link_to dream.title_for_view, dream %></div>
+                  <span class="author"><%= user_link dream.user %></span>
+                  <time datetime="<%= dream.created_at.w3c %>"><%= dream.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
                 </div>
-                <div class="body"><%= glimpse(parse_body(entry.body), 20) %></div>
+                <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
               </div>
           <% end %>
       <% else %>

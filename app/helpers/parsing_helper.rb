@@ -1,5 +1,9 @@
 module ParsingHelper
 
+  def glimpse(text, words = 50)
+    strip_tags(text).gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..words].join(' ') + '…'
+  end
+
   # Prepare dream text for views
   #
   # @param [Dream] dream

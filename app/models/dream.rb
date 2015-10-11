@@ -25,6 +25,8 @@ class Dream < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :recent, -> { order('id desc') }
+
   # Select dreams that are visible to given user
   #
   # @param [User|nil] user who selects dreams
