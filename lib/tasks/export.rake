@@ -99,6 +99,15 @@ namespace :export do
 
   desc 'Export questions to YAML'
   task questions: :environment do
+    File.open("#{Rails.root}/tmp/questions.yml", 'w') do |file|
+      Question.order('id asc').each do |question|
+        file.puts "#{question.id}:"
+        file.puts "  user_id: #{question.user_id}"
+        file.puts "  created_at: \"#{question.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  body: \"#{normalize_string(question.body)}\""
+        file.puts "  ip: \"#{question.ip}\"" unless question.ip.blank?
+      end
+    end
   end
 
   desc 'Export comments to YAML'
