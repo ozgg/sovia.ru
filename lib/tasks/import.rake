@@ -199,11 +199,33 @@ namespace :import do
     if File.exists? file_path
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          print id
-          print "    \r"
+          dream = Dream.find_by id: id
+          if dream.is_a? Dream
+            puts "Dream #{id} already exists"
+          else
+            print id
+            dream = Dream.new
+            dream.id = id
+            dream.user_id = data['user_id'] unless data['user_id'].blank?
+            dream.created_at = data['created_at']
+            dream.lucidity = data['lucidity'] unless data['lucidity'].blank?
+            dream.title = data['title'] unless data['title'].blank?
+            dream.body = data['body']
+            if data['privacy']
+              dream.privacy = data['privacy'] == 1 ? :visible_to_community : :personal
+            else
+              dream.privacy = :generally_accessible
+            end
+            dream.save!
+            if data['user_id'] && data['tags_string']
+              dream.grains_string = data['tags_string']
+              dream.cache_patterns!
+            end
+            print "    \r"
+          end
         end
+        puts "Done. Now we have #{Dream.count} dreams."
       end
-      puts "Done. Now we have #{Dream.count} dreams."
     else
       puts "Cannot find file #{file_path}"
     end
