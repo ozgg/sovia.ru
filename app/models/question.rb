@@ -8,6 +8,12 @@ class Question < ActiveRecord::Base
 
   validates :body, length: { minimum: 10, maximum: 500 }
 
+  PER_PAGE = 10
+
+  def self.recent_list(current_page)
+    self.order('id desc').page(current_page).per(PER_PAGE)
+  end
+
   def editable_by?(user)
     owned_by?(user) || UserRole.user_has_role?(user, :administrator)
   end

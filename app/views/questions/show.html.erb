@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title', id: @entity.id) %>
+<% content_for :meta_description, t('.description', owner: @entity.user.screen_name) %>
+
+<%= render 'shared/metrics' %>
+
+<article>
+  <h1><%= t('.title', id: @entity.id) %></h1>
+  <nav class="options">
+    <ul>
+      <li><%= link_to t(:create), new_question_path %></li>
+      <li><%= link_to t(:list), questions_path %></li>
+      <% if current_user_has_role? :administrator %>
+          <li><%= link_to t(:edit), edit_question_path(@entity) %></li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <%= render @entity, locals: { show_answers: true, share: true } %>
+</article>

@@ -11,9 +11,11 @@
     <%= raw prepare_comment_text(comment, current_user) %>
   </div>
 
-  <div class="actions">
-    <div class="reply"><%= t(:reply) %></div>
-    <div></div>
-  </div>
+  <% unless comment.commentable.is_a? Question %>
+      <div class="actions">
+        <div class="reply"><%= t(:reply) %></div>
+        <div></div>
+      </div>
+  <% end %>
   <%= render partial: 'shared/track_data', locals: { item: comment } %>
 </div>

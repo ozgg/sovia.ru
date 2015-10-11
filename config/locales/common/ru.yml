@@ -11,6 +11,12 @@ ru:
     many: "%{count} комментариев"
     other: "%{count} комментариев"
     add: "Добавить комментарий"
+  answer:
+    zero: "нет ответов"
+    one: "%{count} ответ"
+    few: "%{count} ответа"
+    many: "%{count} ответов"
+    other: "%{count} ответов"
   error:
     zero: "нет ошибок"
     one: "%{count} ошибка"

@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    @collection = Question.order('id desc').page(current_page).per(10)
+    @collection = Question.recent_list current_page
   end
 
   def new
