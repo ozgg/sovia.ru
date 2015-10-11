@@ -64,12 +64,25 @@ namespace :export do
     end
   end
 
-  desc "TODO: Export dreams to YAML"
-  task dreams: :environment do
+  desc 'Export posts to YAML'
+  task posts: :environment do
+    File.open("#{Rails.root}/tmp/posts.yml", 'w') do |file|
+      Post.order('id asc').each do |post|
+        file.puts "#{post.id}:"
+        file.puts "  user_id: #{post.user_id}"
+        file.puts "  image: \"#{Rails.root}/public#{post.image.url}\"" unless post.image.blank?
+        file.puts "  title: \"#{normalize_post_body(post.title)}\""
+        file.puts "  lead: \"#{normalize_post_body(post.lead)}\"" unless post.lead.blank?
+        file.puts '  show_in_list: true' if post.show_in_list?
+        file.puts "  ip: \"#{post.ip}\"" unless post.ip.blank?
+        file.puts "  created_at: \"#{post.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  body: \"#{normalize_post_body(post.body)}\""
+      end
+    end
   end
 
-  desc "TODO: Export posts to YAML"
-  task posts: :environment do
+  desc "TODO: Export dreams to YAML"
+  task dreams: :environment do
   end
 
   desc "TODO: Export questions to YAML"
@@ -91,5 +104,9 @@ namespace :export do
       match = pattern.match chunk
       "[[#{match[:name]}]]" + (match[:text] ? "(#{match[:text]})" : '')
     end
+  end
+
+  def normalize_post_body(string)
+    string.gsub(/\r?\n/, '\n').gsub('"', '\"')
   end
 end
