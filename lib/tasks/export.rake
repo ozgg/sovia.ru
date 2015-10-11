@@ -112,6 +112,19 @@ namespace :export do
 
   desc 'Export comments to YAML'
   task comments: :environment do
+    File.open("#{Rails.root}/tmp/comments.yml", 'w') do |file|
+      Comment.order('id asc').each do |comment|
+        file.puts "#{comment.id}:"
+        file.puts "  parent_id: #{comment.parent_id}" unless comment.parent_id.blank?
+        file.puts "  user_id: #{comment.user_id}" unless comment.user_id.blank?
+        file.puts '  is_visible: false' unless comment.is_visible?
+        file.puts "  ip: \"#{comment.ip}\"" unless comment.ip.blank?
+        file.puts "  created_at: \"#{comment.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  commentable_id: #{comment.commentable_id}"
+        file.puts "  commentable_type: \"#{comment.commentable_type}\""
+        file.puts "  body: \"#{parse_comment_body(comment.body)}\""
+      end
+    end
   end
 
   desc 'Export answers to YAML'
@@ -136,6 +149,12 @@ namespace :export do
   end
 
   def parse_dream_body(string)
+    string_with_dreams = old_dream_links string
+    string_with_patterns = replace_old_pattern_links string_with_dreams
+    string_with_patterns.gsub(/\r?\n/, '\n').gsub('"', '\"')
+  end
+
+  def parse_comment_body(string)
     string_with_dreams = old_dream_links string
     string_with_dreams.gsub(/\r?\n/, '\n').gsub('"', '\"')
   end
