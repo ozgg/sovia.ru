@@ -129,6 +129,16 @@ namespace :export do
 
   desc 'Export answers to YAML'
   task answers: :environment do
+    File.open("#{Rails.root}/tmp/answers.yml", 'w') do |file|
+      Answer.order('id asc').each do |answer|
+        file.puts "#{answer.id}:"
+        file.puts "  question_id: #{answer.question_id}"
+        file.puts "  ip: \"#{answer.ip}\"" unless answer.ip.blank?
+        file.puts "  user_id: #{answer.user_id}"
+        file.puts "  created_at: \"#{answer.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  body: \"#{parse_comment_body(answer.body)}\""
+      end
+    end
   end
 
   # Replace old dreambook pattern links with new format
