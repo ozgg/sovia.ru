@@ -155,7 +155,7 @@ namespace :export do
   end
 
   def normalize_string(string)
-    string.gsub(/\r?\n/, '\n').gsub('"', '\"')
+    string.gsub('\\', '\\\\').gsub(/\r?\n/, '\n').gsub('"', '\"')
   end
 
   def parse_dream_body(string)
