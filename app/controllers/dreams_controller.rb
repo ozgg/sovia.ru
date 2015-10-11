@@ -77,7 +77,7 @@ class DreamsController < ApplicationController
 
   def set_grains
     if @entity.owned_by? current_user
-      @entity.grains_string = params.require(:dream).permit(:grains_string).to_s
+      @entity.grains_string = params[:grains_string].to_s
       @entity.cache_patterns!
     end
   end
