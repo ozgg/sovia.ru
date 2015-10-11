@@ -36,6 +36,34 @@ namespace :export do
     end
   end
 
+  desc 'Export goals to YAML'
+  task goals: :environment do
+    File.open("#{Rails.root}/tmp/goals.yml", 'w') do |file|
+      Goal.order('id asc').each do |goal|
+        file.puts "#{goal.id}:"
+        file.puts "  user_id: #{goal.user_id}"
+        file.puts "  status: \"#{goal.status}\""
+        file.puts "  name: \"#{goal.name}\""
+        file.puts "  description: \"#{goal.description}\""
+        file.puts "  created_at: \"#{goal.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+        file.puts "  updated_at: \"#{goal.updated_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+      end
+    end
+  end
+
+  desc 'Export deeds to YAML'
+  task deeds: :environment do
+    File.open("#{Rails.root}/tmp/deeds.yml", 'w') do |file|
+      Deed.order('id asc').each do |deed|
+        file.puts "#{deed.id}:"
+        file.puts "  user_id: #{deed.user_id}"
+        file.puts "  goal_id: #{deed.goal_id}" unless deed.goal_id.blank?
+        file.puts "  name: \"#{deed.name}\""
+        file.puts "  created_at: \"#{deed.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
+      end
+    end
+  end
+
   desc "TODO: Export dreams to YAML"
   task dreams: :environment do
   end
@@ -50,14 +78,6 @@ namespace :export do
 
   desc "TODO: Export comments and answers to YAML"
   task comments: :environment do
-  end
-
-  desc "TODO: Export goals to YAML"
-  task goals: :environment do
-  end
-
-  desc "TODO: Export deeds to YAML"
-  task deeds: :environment do
   end
 
   # Replace old dreambook pattern links with new format
