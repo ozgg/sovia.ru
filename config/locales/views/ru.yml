@@ -192,6 +192,8 @@ ru:
       twitter: "Войти через Twitter"
       facebook: "Войти через Facebook"
       mail_ru: "Войти через mail.ru"
+    plate:
+      logout: "Выйти"
   index:
     index:
       title: "Сайт о снах"

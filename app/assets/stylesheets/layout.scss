@@ -1,7 +1,7 @@
 html {
   margin: 0;
   padding: 0;
-  background: #241701 image_url('main-bg.png') no-repeat 10px -50px / 370px 250px;
+  background: #271f1d image_url('moon.png') no-repeat 0 0;
   font-size: 16px;
 }
 
@@ -30,17 +30,22 @@ body {
   margin: 0 auto;
 
   > header {
-    position: relative;
-    height: 10rem;
+    height: 5rem;
 
-    .logo {
-      height: 120px;
-      max-width: 880px;
+    .logo-and-auth {
+      outline: solid white 1px;
+      height: 3rem;
 
-      img {
-        margin: 25px 0 0 16px;
-        max-width: 125px;
-        max-height: 25px;
+      .logo {
+        padding: 1rem 0 0 0;
+        width: calc(100% - 20rem);
+        float: left;
+
+        img {
+          float: left;
+          max-width: 10rem;
+          max-height: 2rem;
+        }
       }
     }
   }
@@ -90,6 +95,9 @@ body {
 }
 
 nav.main {
+  height: 2rem;
+  max-width: calc(100% - 20rem);
+
   ul {
     margin: 0;
     padding: 0;
@@ -97,11 +105,20 @@ nav.main {
     li {
       list-style: none;
       display: inline-block;
-      padding: 0 1rem;
+      padding: 0;
+      height: 2rem;
 
       a:link, a:visited {
+        display: inline-block;
+        height: 100%;
+        padding: 0 1rem;
+        line-height: 2rem;
         font-size: 1.2rem;
         color: #F7F7F7;
+      }
+
+      a:hover {
+        background: rgba(127, 127, 127, 0.5);
       }
     }
   }

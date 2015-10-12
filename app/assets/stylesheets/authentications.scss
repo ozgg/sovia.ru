@@ -1,9 +1,7 @@
 .authentication {
-  position: absolute;
-  right: 0;
-  top: 0;
+  float: right;
   width: 20rem;
-  height: 10rem;
+  height: 3rem;
   background: rgba(255, 255, 255, 0.3);
 
   > form {
