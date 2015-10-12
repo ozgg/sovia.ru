@@ -1,4 +1,4 @@
-<div id="comment-<%= comment.id %>" itemscope itemtype="http://schema.org/Comment">
+<div id="comment-<%= comment.id %>" itemscope itemtype="http://schema.org/Comment" class="comment <%= comment.best? ? 'best' : '' %>">
   <meta itemprop="url" content="<%= comment_url comment %>"/>
   <div class="header">
     <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -11,11 +11,15 @@
     <%= raw prepare_comment_text(comment, current_user) %>
   </div>
 
-  <% unless comment.commentable.is_a? Question %>
-      <div class="actions">
+  <div class="actions">
+    <% if current_user_has_role? :administrator %>
+        <div><%= link_to t(:edit), edit_comment_path(comment) %></div>
+    <% end %>
+    <% unless comment.commentable.is_a? Question %>
         <div class="reply"><%= t(:reply) %></div>
-        <div></div>
-      </div>
-  <% end %>
+        <div class="container"></div>
+    <% end %>
+  </div>
+
   <%= render partial: 'shared/track_data', locals: { item: comment } %>
 </div>

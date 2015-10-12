@@ -12,7 +12,7 @@
   <div class="reply-container">
     <h3><%= t('comment.add') %></h3>
 
-    <div>
+    <div class="container">
       <%= render partial: 'comments/form', locals: { entity: Comment.new(commentable: commentable) } %>
     </div>
   </div>

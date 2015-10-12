@@ -51,7 +51,7 @@ namespace :import do
             user.email = data['email'] unless data['email'].blank?
             user.password_digest = data['password_digest']
             user.ip = data['ip'] unless data['ip'].blank?
-            user.screen_name = data['screen_name'] unless data['screen_name'].blank?
+            user.screen_name = data['screen_name'] || data['uid']
             user.name = data['name'] unless data['name'].blank?
             user.bot = true if data['bot']
             user.email_confirmed = true if data['mail_confirmed']
