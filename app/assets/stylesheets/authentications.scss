@@ -3,13 +3,70 @@
   width: 20rem;
   height: 3rem;
   background: rgba(255, 255, 255, 0.3);
+  position: relative;
+
+  #auth-form-checker {
+    display: none;
+
+    + form {
+      display: none;
+    }
+
+    &:checked + form {
+      display: block;
+    }
+  }
+
+  ul.options {
+    margin: 0 auto;
+    padding: 0;
+    height: 1.5rem;
+    white-space: nowrap;
+
+    li {
+      list-style: none;
+      float: left;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 50%;
+      line-height: 1.5rem;
+      color: #66ccff;
+    }
+  }
+
+  .external-login {
+    height: 1.5rem;
+
+    > div {
+      float: left;
+      margin: 0 0.5rem;
+
+      img {
+        max-width: 1.5rem;
+        max-height: 1.5rem;
+      }
+    }
+  }
+
+  a {
+
+    &:link, &:visited {
+      color: #66ccff;
+    }
+
+    &:hover {
+      color: #ccffff;
+    }
+  }
 
   > form {
-    height: 8rem;
-
-    fieldset {
-      padding: 0.5rem;
-    }
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    width: 20rem;
+    background: #ffffff;
 
     label {
       width: 4rem;
@@ -66,17 +123,6 @@
         width: 9.8rem;
         text-align: center;
 
-        a {
-          line-height: 2rem;
-
-          &:link, &:visited {
-            color: #66ccff;
-          }
-
-          &:hover {
-            color: #ccffff;
-          }
-        }
       }
     }
   }
