@@ -1,7 +1,7 @@
 html {
   margin: 0;
   padding: 0;
-  background: #1f263b;
+  background: #241701 image_url('main-bg.png') no-repeat 10px -50px / 370px 250px;
   font-size: 16px;
 }
 
@@ -32,6 +32,17 @@ body {
   > header {
     position: relative;
     height: 10rem;
+
+    .logo {
+      height: 120px;
+      max-width: 880px;
+
+      img {
+        margin: 25px 0 0 16px;
+        max-width: 125px;
+        max-height: 25px;
+      }
+    }
   }
 
   > footer {
