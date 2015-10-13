@@ -13,30 +13,28 @@
   </section>
 
   <section>
-    <section>
-      <h1><%= t('.recent_in_posts') %></h1>
-      <%= render partial: 'posts/list', locals: { posts: @posts } %>
-    </section>
+    <h1><%= t('.recent_in_posts') %></h1>
+    <%= render partial: 'posts/list', locals: { posts: @posts } %>
+  </section>
 
-    <section>
-      <h1><%= t('.recent_in_dreams') %></h1>
-      <% if @dreams.any? %>
-          <% @dreams.each do |dream| %>
-              <div class="post-preview">
-                <div class="header">
-                  <div class="image"><%= raw comment_avatar(dream.user) %></div>
-                  <div class="title"><%= link_to dream.title_for_view, dream %></div>
-                  <span class="author"><%= user_link dream.user %></span>
-                  <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
-                </div>
-                <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
-                <%= render 'shared/track_data', item: dream %>
+  <section>
+    <h1><%= t('.recent_in_dreams') %></h1>
+    <% if @dreams.any? %>
+        <% @dreams.each do |dream| %>
+            <div class="post-preview">
+              <div class="header">
+                <div class="image"><%= raw comment_avatar(dream.user) %></div>
+                <div class="title"><%= link_to dream.title_for_view, dream %></div>
+                <span class="author"><%= user_link dream.user %></span>
+                <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
               </div>
-          <% end %>
-      <% else %>
-          <%= render 'shared/nothing_found' %>
-      <% end %>
-    </section>
+              <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
+              <%= render 'shared/track_data', item: dream %>
+            </div>
+        <% end %>
+    <% else %>
+        <%= render 'shared/nothing_found' %>
+    <% end %>
   </section>
 
   <%= render 'shared/social' %>
