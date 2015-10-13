@@ -1,56 +1,12 @@
 .authentication {
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 20rem;
-  height: 3rem;
+  height: 5rem;
   background: rgba(255, 255, 255, 0.3);
-  position: relative;
-
-  #auth-form-checker {
-    display: none;
-
-    + form {
-      display: none;
-    }
-
-    &:checked + form {
-      display: block;
-    }
-  }
-
-  ul.options {
-    margin: 0 auto;
-    padding: 0;
-    height: 1.5rem;
-    white-space: nowrap;
-
-    li {
-      list-style: none;
-      float: left;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      width: 50%;
-      line-height: 1.5rem;
-      color: #66ccff;
-    }
-  }
-
-  .external-login {
-    height: 1.5rem;
-
-    > div {
-      float: left;
-      margin: 0 0.5rem;
-
-      img {
-        max-width: 1.5rem;
-        max-height: 1.5rem;
-      }
-    }
-  }
 
   a {
-
     &:link, &:visited {
       color: #66ccff;
     }
@@ -61,68 +17,78 @@
   }
 
   > form {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    width: 20rem;
-    background: #ffffff;
+    padding: 0.5rem;
 
     label {
-      width: 4rem;
-      line-height: 1.2rem;
+      display: none;
     }
 
     input {
       font-size: 1rem;
-      width: 9.6rem;
+      width: 8rem;
       line-height: 1.2rem;
+      height: 1.6rem;
     }
 
-    div.auth-buttons {
-      height: 2rem;
+    .fields {
+      float: left;
+      width: 8.5rem;
+      height: 4rem;
 
-      div {
-        float: left;
-        width: 2rem;
+      > div {
         height: 2rem;
-        margin: 0 0.2rem;
+      }
+    }
 
-        &:first-of-type {
-          width: 4rem;
-          margin: 0 0.4rem 0 0;
+    .actions {
+      > div {
+        height: 2rem;
+        margin: 0 0 0 8.5rem;
+
+        > div {
+          float: left;
+          height: 2rem;
 
           button {
-            width: 100%;
             height: 2rem;
-            margin: 0;
+            line-height: 1.5rem;
+            font-size: 0.9rem;
+            width: 3.3rem;
             padding: 0;
-            font-size: 1rem;
           }
-        }
 
-        img {
-          width: 100%;
-          height: 100%;
+          &.external {
+            float: right;
+            width: calc(100% - 3.3rem);
+
+            div {
+              float: left;
+              padding: 0.2rem 0.1rem;
+            }
+          }
+
+          img {
+            max-width: 1.6rem;
+            max-height: 1.6rem;
+          }
         }
       }
     }
-  }
 
-  > nav {
-    ul {
-      margin: 0;
-      padding: 0;
-      height: 1rem;
+    nav {
+      height: 2rem;
 
-      li {
+      ul {
         margin: 0;
         padding: 0;
-        list-style: none;
-        display: inline-block;
-        width: 9.8rem;
-        text-align: center;
 
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          text-align: center;
+          line-height: 2rem;
+        }
       }
     }
   }

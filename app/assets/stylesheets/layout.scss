@@ -31,20 +31,17 @@ body {
 
   > header {
     height: 5rem;
+    position: relative;
 
-    .logo-and-auth {
+    .logo {
+      width: calc(100% - 20rem);
       height: 3rem;
 
-      .logo {
+      img {
         padding: 1rem 0 0 0;
-        width: calc(100% - 20rem);
         float: left;
-
-        img {
-          float: left;
-          max-width: 10rem;
-          max-height: 2rem;
-        }
+        max-width: 10rem;
+        max-height: 2rem;
       }
     }
   }

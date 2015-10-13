@@ -186,7 +186,7 @@ ru:
     form:
       join: "Присоединиться"
       reset_password: "Сброс пароля"
-      sign_in: "Войти"
+      sign_in: "Вход"
       login: "Логин"
       vk: "Зайти через VK"
       twitter: "Войти через Twitter"
