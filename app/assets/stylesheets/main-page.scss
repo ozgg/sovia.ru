@@ -1,0 +1,14 @@
+article.front-page {
+  padding: 0.5rem;
+
+  .recent-posts {
+    width: calc(50% - 0.5rem);
+    float: left;
+
+  }
+
+  .recent-dreams {
+    width: calc(50% - 0.5rem);
+    float: right;
+  }
+}

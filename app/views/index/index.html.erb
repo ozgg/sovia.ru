@@ -1,40 +1,27 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :meta_description, t('.description') %>
+<% content_for :sidebar do %>
+    <div>Sidebar!</div>
+<% end %>
+
 <%= render 'shared/metrics' %>
 
 <article class="front-page">
-  <section>
-    <h1><%= t('.title') %></h1>
+  <h1><%= t('.title') %></h1>
 
-    <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
-      а также искать интерпретацию того, что приснилось, в соннике.</p>
+  <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
+    а также искать интерпретацию того, что приснилось, в соннике.</p>
 
-    <%= render 'dreambook/search' %>
-  </section>
+  <%= render 'dreambook/search' %>
 
-  <section>
+  <section class="recent-posts">
     <h1><%= t('.recent_in_posts') %></h1>
     <%= render partial: 'posts/list', locals: { posts: @posts } %>
   </section>
 
-  <section>
+  <section class="recent-dreams">
     <h1><%= t('.recent_in_dreams') %></h1>
-    <% if @dreams.any? %>
-        <% @dreams.each do |dream| %>
-            <div class="post-preview">
-              <div class="header">
-                <div class="image"><%= raw comment_avatar(dream.user) %></div>
-                <div class="title"><%= link_to dream.title_for_view, dream %></div>
-                <span class="author"><%= user_link dream.user %></span>
-                <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
-              </div>
-              <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
-              <%= render 'shared/track_data', item: dream %>
-            </div>
-        <% end %>
-    <% else %>
-        <%= render 'shared/nothing_found' %>
-    <% end %>
+    <%= render partial: 'dreams/previews', locals: { dreams: @dreams } %>
   </section>
 
   <%= render 'shared/social' %>

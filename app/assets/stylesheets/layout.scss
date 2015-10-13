@@ -11,6 +11,10 @@ h1, h2, h3, h4, h6, h6 {
   font-variant: small-caps;
 }
 
+p:first-of-type {
+  margin-top: 0;
+}
+
 form {
   margin: 0;
   padding: 0;
@@ -38,7 +42,7 @@ body {
       height: 3rem;
 
       img {
-        padding: 1rem 0 0 0;
+        padding: 1rem 2rem 0;
         float: left;
         max-width: 10rem;
         max-height: 2rem;
@@ -62,20 +66,29 @@ body {
 
 #content {
   position: relative;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.5rem;
 }
 
 #main {
-  margin-right: 20rem;
   background: #ffffff;
-  min-width: 18rem;
+  min-width: 20rem;
+  max-width: calc(100% - 20rem);
   min-height: 20rem;
-  padding: 1rem;
 }
 
 #sidebar {
   position: absolute;
   top: 0;
   right: 0;
+  width: 20rem;
+
+  > div {
+    background: #ffffff;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
 }
 
 .not-found {
@@ -106,10 +119,14 @@ nav.main {
       }
 
       a:hover {
-        background: rgba(127, 127, 127, 0.5);
+        background: rgba(255, 255, 255, 0.3);
       }
     }
   }
+}
+
+div.social-buttons {
+  clear: both;
 }
 
 nav.options {

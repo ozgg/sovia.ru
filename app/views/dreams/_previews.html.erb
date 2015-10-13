@@ -1,0 +1,16 @@
+<% if dreams.any? %>
+    <% dreams.each do |dream| %>
+        <div class="post-preview">
+          <div class="header">
+            <div class="image"><%= raw comment_avatar(dream.user) %></div>
+            <div class="title"><%= link_to dream.title_for_view, dream %></div>
+            <span class="author"><%= user_link dream.user %></span>
+            <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
+          </div>
+          <div class="body"><%= glimpse(prepare_dream_text(dream, current_user), 20) %></div>
+          <%= render 'shared/track_data', item: dream %>
+        </div>
+    <% end %>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
