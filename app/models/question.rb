@@ -8,10 +8,12 @@ class Question < ActiveRecord::Base
 
   validates :body, length: { minimum: 10, maximum: 500 }
 
+  scope :recent, -> { order 'id desc' }
+
   PER_PAGE = 10
 
   def self.recent_list(current_page)
-    self.order('id desc').page(current_page).per(PER_PAGE)
+    self.recent.page(current_page).per(PER_PAGE)
   end
 
   def editable_by?(user)

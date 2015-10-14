@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   scope :visible, -> { where show_in_list: true }
-  scope :recent, -> { order('id desc') }
+  scope :recent, -> (show_hidden) { show_hidden ? order('id desc') : visible.order('id desc') }
 
   def self.recent_posts(show_hidden)
     if show_hidden

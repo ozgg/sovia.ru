@@ -1,14 +1,47 @@
 article.front-page {
   padding: 0.5rem;
 
-  .recent-posts {
-    width: calc(50% - 0.5rem);
+  div.glimpse {
+    min-width: 12rem;
+    width: 50%;
+    height: 10rem;
+    margin: 0 0 0.5rem 0;
+    overflow: scroll;
     float: left;
 
-  }
+    > div {
+      margin: 0 0.5rem;
+      padding: 0 0.5rem;
+    }
 
-  .recent-dreams {
-    width: calc(50% - 0.5rem);
-    float: right;
+    .header {
+      height: 3rem;
+      overflow: scroll;
+      background: #f7f7f7;
+    }
+
+    .body {
+      height: 6rem;
+      overflow: scroll;
+
+      .image {
+        float: left;
+        margin: 0 0.5rem 0 0;
+
+        img {
+          max-width: 5.5rem;
+          max-height: 5.5rem;
+        }
+      }
+    }
+
+    .footer {
+      height: 1rem;
+      overflow: scroll;
+      font-size: 0.8rem;
+      line-height: 1rem;
+      text-align: right;
+      background: #f7f7f7;
+    }
   }
 }

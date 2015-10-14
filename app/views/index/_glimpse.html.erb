@@ -1,0 +1,11 @@
+<div class="glimpse">
+  <% if entity.class.respond_to?(:table_name) %>
+      <% if lookup_context.template_exists? 'glimpse', entity.class.table_name, true %>
+          <%= render partial: "#{entity.class.table_name}/glimpse", locals: { entity: entity } %>
+      <% else %>
+          <div class="error"><%= "#{entity.class} #{entity.id}" %></div>
+      <% end %>
+  <% else %>
+      <div class="error"><%= entity.class %></div>
+  <% end %>
+</div>
