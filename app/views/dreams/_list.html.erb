@@ -1,43 +1,6 @@
 <% if dreams.any? %>
     <% dreams.each do |dream| %>
-        <div class="dream-preview">
-          <div class="header">
-            <%= raw dream_avatar(dream.user) %>
-
-            <div class="privacy privacy-<%= dream.privacy %>">&nbsp;</div>
-
-            <h3 class="<%= dream.lucid? ? 'lucid' : '' %>">
-              <%= link_to dream.title_for_view, dream %>
-            </h3>
-
-            <div class="author">
-              <%= user_link dream.user %>,
-              <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
-              <span class="lucidity"><%= t('activerecord.attributes.dream.lucidity') + ': ' + dream.lucidity.to_s if dream.lucid? && dream.owned_by?(current_user) %></span>
-            </div>
-
-            <% if dream.patterns_cache.any? %>
-            <nav class="tags">
-              <ul>
-                <% dream.patterns_cache.each do |tag_name| %>
-                <li><%= link_to tag_name, tagged_dreams_path(tag_name: tag_name), rel: 'tag' %></li>
-                <% end %>
-              </ul>
-            </nav>
-            <% end %>
-          </div>
-
-          <div class="body">
-            <%= raw preview(prepare_dream_text(dream, current_user)) %>
-            <% if dream.count_passages > 2 %>
-            <div class="more"><%= link_to t(:read_more), dream %></div>
-            <% end %>
-          </div>
-
-          <div class="footer">
-            <div class="comment-count"><%= t('comment', count: dream.comments_count) %></div>
-          </div>
-        </div>
+        <%= render partial: 'dreams/preview', locals: { dream: dream } %>
     <% end %>
 <% else %>
     <%= render 'shared/nothing_found' %>

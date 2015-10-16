@@ -1,3 +1,70 @@
 article.dreams {
   padding: 0.5rem;
 }
+
+div.dream-preview {
+  border: dotted #f0f0f0 1px;
+  margin: 0.5rem 0;
+
+  .header {
+    background: #f7f7f0;
+    padding: 0.5rem;
+    min-height: 5rem;
+
+    .avatar {
+      float: left;
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      line-height: 1.5rem;
+    }
+
+    .author {
+      font-size: 0.9rem;
+
+      time {
+        font-style: italic;
+      }
+    }
+
+    nav.tags {
+      margin: 0.5rem 0 0 0;
+
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          list-style: none;
+          border: outset 1px;
+          padding: 0 0.3rem;
+          font-size: 0.8rem;
+          height: 1rem;
+
+          a {
+            line-height: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .body {
+    padding: 0.5rem;
+  }
+
+  .footer {
+    background: #F7F7F7;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.5rem;
+
+    .comment-count {
+      text-align: right;
+    }
+  }
+}
