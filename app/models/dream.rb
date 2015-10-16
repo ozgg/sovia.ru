@@ -27,8 +27,10 @@ class Dream < ActiveRecord::Base
 
   scope :recent, -> { order('id desc') }
 
-  def self.recent_dreams(current_user)
-    self.visible_to_user(current_user).recent.first(3)
+  PER_PAGE = 10
+
+  def self.page_for_user(current_page, current_user)
+    self.visible_to_user(current_user).recent.page(current_page).per(PER_PAGE)
   end
 
   # Select dreams that are visible to given user
@@ -114,6 +116,14 @@ class Dream < ActiveRecord::Base
   # Cache visible patterns in patterns_cache
   def cache_patterns!
     update patterns_cache: visible_patterns.order('slug asc').map { |pattern| pattern.name }
+  end
+
+  def lucid?
+    lucidity > 0
+  end
+
+  def count_passages
+    body.strip.gsub(/(\r?\n)+/, "\n").count("\n") + 1
   end
 
   protected

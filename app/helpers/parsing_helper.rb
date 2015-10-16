@@ -4,6 +4,10 @@ module ParsingHelper
     strip_tags(text).gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..words].join(' ') + '…'
   end
 
+  def preview(text, passages = 2)
+    text.split('</p><p>')[0...passages].join('</p><p>')
+  end
+
   # Prepare dream text for views
   #
   # @param [Dream] dream

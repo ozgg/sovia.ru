@@ -3,7 +3,7 @@ class DreamsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   def index
-    @collection = visible_dreams.order('id desc').page(current_page).per(10)
+    @collection = Dream.page_for_user current_page, current_user
   end
 
   def new

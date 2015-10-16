@@ -11,4 +11,8 @@ module UsersHelper
   def comment_avatar(user)
     'comment avatar'
   end
+
+  def dream_avatar(user)
+    'dream avatar'
+  end
 end
