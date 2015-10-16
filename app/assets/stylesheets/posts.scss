@@ -1,27 +1,23 @@
+article.posts {
+  padding: 0.5rem;
+}
+
 div.post-preview {
-  border: dotted 1px #777777;
-  border-radius: 4px;
-  margin: 8px 0;
+  margin: 0.5rem 0;
+  border: dotted #f7f7f0 1px;
 
   .header {
-    background: #f7f7f7;
-    padding: 8px 15px;
-    min-height: 50px;
-
-    .image {
-      float: left;
-      margin-right: 8px;
-
-      img {
-        max-width: 50px;
-      }
-    }
+    background: #f7f7f0;
+    padding: 0 1rem;
+    height: 3rem;
 
     .title {
+      line-height: 1.5rem;
       font-weight: bold;
     }
 
     .author, time {
+      line-height: 1.5rem;
       font-size: 0.9em;
     }
 
@@ -33,15 +29,18 @@ div.post-preview {
   }
 
   .body {
-    padding: 4px 15px;
-    min-height: 100px;
+    padding: 0 1rem;
+    height: 6rem;
 
     .image {
       float: left;
-      margin-right: 8px;
+      margin-right: 0.5rem;
+      width: 6rem;
+      height: 6rem;
 
       img {
-        max-width: 100px;
+        max-width: 6rem;
+        max-height: 6rem;
       }
     }
   }
@@ -60,10 +59,11 @@ div.post-preview {
 }
 
 article.post {
-  header {
+  padding: 0.5rem;
+
+  > h1 {
     padding: 0 15px;
     background: #f7f7f7;
-    border-radius: 15px 15px 0 0;
   }
 
   section {

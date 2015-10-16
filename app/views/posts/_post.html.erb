@@ -6,11 +6,10 @@
       </ul>
     </nav>
 <% end %>
+
 <article class="post" itemscope itemtype="http://schema.org/Article">
-  <header>
-    <%= render partial: 'controls', locals: { post: post } %>
-    <h1 itemprop="name"><%= post.title %></h1>
-  </header>
+  <h1 itemprop="name"><%= post.title %></h1>
+  <%= render partial: 'controls', locals: { post: post } %>
 
   <section class="body" itemprop="articleBody">
     <% if post.image.url %>
