@@ -18,21 +18,30 @@ article.front-page {
       height: 3rem;
       overflow: scroll;
       background: #f7f7f7;
+
+      .title {
+        line-height: 1.5rem;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .author {
+        line-height: 1.5rem;
+      }
+
+      time {
+        float: right;
+        font-size: 0.8rem;
+        font-style: italic;
+        line-height: 1.5rem;
+      }
     }
 
     .body {
+      border: solid #f7f7f7 1px;
       height: 6rem;
       overflow: scroll;
-
-      .image {
-        float: left;
-        margin: 0 0.5rem 0 0;
-
-        img {
-          max-width: 5.5rem;
-          max-height: 5.5rem;
-        }
-      }
     }
 
     .footer {
