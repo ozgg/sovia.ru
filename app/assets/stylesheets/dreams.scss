@@ -2,6 +2,79 @@ article.dreams {
   padding: 0.5rem;
 }
 
+article.dream {
+  padding: 0.5rem;
+  border: dotted #f0f0f0 1px;
+
+  > h1 {
+    background: #f7f7f0;
+    padding: 0.5rem;
+
+    &.lucid:after {
+      content: '*';
+    }
+
+    &.visible_to_community {
+      background: #f7f7f0 image_url('lock-yellow.png') no-repeat 100% 50% / 2rem 2rem;
+    }
+
+    &.personal {
+      background: #f7f7f0 image_url('lock-red.png') no-repeat 100% 50% / 2rem 2rem;
+    }
+  }
+
+  nav.tags {
+    margin: 0.5rem;
+    border: dotted 1px #f0f0f0;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        list-style: none;
+        border: outset 1px;
+        padding: 0 0.3rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .body {
+    padding: 0.5rem;
+  }
+
+  .footer {
+    background: #f7f7f7;
+    padding: 0 0.5rem;
+    height: 2rem;
+
+    .avatar {
+      float: left;
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+
+      img {
+        max-width: 2rem;
+        max-height: 2rem;
+      }
+    }
+
+    .author {
+      line-height: 2rem;
+    }
+
+    time {
+      float: right;
+      font-size: 0.9rem;
+      font-style: italic;
+      line-height: 2rem;
+    }
+  }
+}
+
 div.dream-preview {
   border: dotted #f0f0f0 1px;
   margin: 0.5rem 0;
@@ -21,6 +94,21 @@ div.dream-preview {
       font-weight: bold;
       font-size: 1.1rem;
       line-height: 1.5rem;
+
+    }
+
+    .visible_to_community {
+      background: image_url('lock-yellow.png') no-repeat 100% 50% / 1.5rem 1.5rem;
+    }
+
+    .personal {
+      background: image_url('lock-red.png') no-repeat 100% 50% / 1.5rem 1.5rem;
+    }
+
+    .lucid {
+      a:after {
+        content: '*';
+      }
     }
 
     .author {

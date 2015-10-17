@@ -1,7 +1,36 @@
-<article class="dream">
-  <h1><%= dream.title_for_view %></h1>
-  <div>
+<article class="dream" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 itemprop="name" class="<%= dream.privacy %> <%= dream.lucid? ? 'lucid' : '' %>">
+    <%= dream.title_for_view %>
+  </h1>
+
+  <meta itemprop="commentCount" content="<%= dream.comments_count %> "/>
+  <meta itemprop="keywords" content="<%= dream.patterns_cache.join(', ') %> "/>
+
+  <% if dream.patterns_cache.any? %>
+      <nav class="tags">
+        <ul>
+          <% dream.patterns_cache.each do |tag_name| %>
+              <li><%= link_to tag_name, tagged_dreams_path(tag_name: tag_name), rel: 'tag' %></li>
+          <% end %>
+        </ul>
+      </nav>
+  <% end %>
+
+  <div class="body" itemprop="articleBody">
     <%= raw prepare_dream_text(dream, current_user) %>
+  </div>
+
+  <div class="footer">
+    <div class="avatar">
+      <%= raw comment_avatar(dream.user) %>
+    </div>
+
+  <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name"><%= user_link dream.user %></span>
+  </span>
+
+    <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
+
   </div>
 
   <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>

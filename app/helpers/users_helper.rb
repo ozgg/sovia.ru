@@ -9,7 +9,7 @@ module UsersHelper
   end
 
   def comment_avatar(user)
-    'comment avatar'
+    'c. a.'
   end
 
   def dream_avatar(user)

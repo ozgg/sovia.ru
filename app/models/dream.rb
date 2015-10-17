@@ -126,6 +126,10 @@ class Dream < ActiveRecord::Base
     body.strip.gsub(/(\r?\n)+/, "\n").count("\n") + 1
   end
 
+  def editable_by?(user)
+    owned_by?(user) || UserRole.user_has_role?(user, :administrator)
+  end
+
   protected
 
   # Place should have the same owner as dream

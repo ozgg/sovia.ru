@@ -4,8 +4,8 @@
       <%= raw dream_avatar(dream.user) %>
     </div>
 
-    <div class="title <%= dream.lucid? ? 'lucid' : '' %>">
-      <%= link_to dream.title_for_view, dream, class: dream.privacy %>
+    <div class="title <%= dream.privacy %> <%= dream.lucid? ? 'lucid' : '' %>">
+      <%= link_to dream.title_for_view, dream %>
     </div>
 
     <div class="author">
