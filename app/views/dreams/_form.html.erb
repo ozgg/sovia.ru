@@ -3,7 +3,7 @@
 <%= form_for entity do |f| %>
     <div>
       <div><%= f.label :title %></div>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, size: 50 %>
     </div>
     <div>
       <div><%= f.label :body %></div>
@@ -14,12 +14,33 @@
       <%= f.label :needs_interpretation %>
     </div>
 
-    <% if current_user.is_a? User %>
-        [:place_id, :privacy, :lucidity, :mood, :azimuth, :body_position, :time_of_day, :show_image, :image]
+    <% if current_user.is_a?(User) && entity.id.blank? || entity.owned_by?(current_user) %>
+        <div>
+          <%= f.label :privacy %>
+          <%= f.select :privacy, dream_privacy_options %>
+        </div>
+        <div class="lucidity">
+          <%= f.label :lucidity %>
+          <% (0..5).each_entry do |lucidity| %>
+              <%= f.radio_button :lucidity, lucidity %>
+              <%= label_tag "dream_lucidity_#{lucidity}", lucidity %>
+          <% end %>
+        </div>
+        <div class="mood">
+          <%= f.label :mood %>
+          <% (-2..2).each_entry do |mood| %>
+              <%= f.radio_button :mood, mood %>
+              <%= label_tag "dream_mood_#{mood}", mood %>
+          <% end %>
+        </div>
+        <!--[:place_id, :azimuth, :body_position, :time_of_day, :show_image, :image]-->
     <% end %>
 
     <% if current_user_has_role? :administrator %>
-        [:interpretation_given]
+        <div>
+          <%= f.check_box :interpretation_given %>
+          <%= f.label :interpretation_given %>
+        </div>
     <% end %>
 
     <div>

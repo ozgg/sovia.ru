@@ -2,6 +2,29 @@ article.dreams {
   padding: 0.5rem;
 }
 
+article.new-dream, article.edit-dream {
+  padding: 0.5rem;
+
+  form {
+    .lucidity, .mood {
+
+      input[type=radio] {
+        display: none;
+
+        & + label {
+          padding: 0 0.5rem;
+          border: dotted #f7f7f7 1px;
+          cursor: pointer;
+        }
+
+        &:checked + label {
+          border: outset 1px;
+        }
+      }
+    }
+  }
+}
+
 article.dream {
   padding: 0.5rem;
   border: dotted #f0f0f0 1px;

@@ -170,6 +170,11 @@ ru:
         title: "название"
         body: "сюжет"
         patterns_cache: "кеш образов"
+        privacies:
+          generally_accessible: "для всех"
+          visible_to_community: "для сообщества"
+          visible_to_followees: "для добавленных мной"
+          personal: "только для меня"
       dream_pattern:
         dream_id: "сон"
         pattern_id: "образ"
