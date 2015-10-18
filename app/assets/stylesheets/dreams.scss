@@ -86,8 +86,14 @@ div.dream-preview {
 
     .avatar {
       float: left;
+      margin-right: 0.5rem;
       width: 5rem;
       height: 5rem;
+
+      img {
+        max-width: 5rem;
+        max-height: 5rem;
+      }
     }
 
     .title {

@@ -33,6 +33,11 @@ class Dream < ActiveRecord::Base
     self.visible_to_user(current_user).recent.page(current_page).per(PER_PAGE)
   end
 
+  def self.tagged_page_for_user(pattern, current_page, current_user)
+    patterns_clause = {dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
+    visible_to_user(current_user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
+  end
+
   # Select dreams that are visible to given user
   #
   # @param [User|nil] user who selects dreams

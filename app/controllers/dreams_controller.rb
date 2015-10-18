@@ -42,9 +42,8 @@ class DreamsController < ApplicationController
   end
 
   def tagged
-    @pattern = Pattern.match_by_name params[:tag_name]
-    raise record_not_found unless @pattern.is_a? Pattern
-    set_collection_with_pattern
+    set_pattern
+    @collection = Dream.tagged_page_for_user @pattern, current_page, current_user
   end
 
   def archive
@@ -62,6 +61,11 @@ class DreamsController < ApplicationController
   def set_entity
     @entity = Dream.find params[:id].to_i
     raise record_not_found unless @entity.visible_to? current_user
+  end
+
+  def set_pattern
+    @pattern = Pattern.match_by_name params[:tag_name]
+    raise record_not_found unless @pattern.is_a? Pattern
   end
 
   def entity_parameters
@@ -84,13 +88,6 @@ class DreamsController < ApplicationController
 
   def visible_dreams
     Dream.visible_to_user(current_user)
-  end
-
-  def set_collection_with_pattern
-    patterns_clause = { pattern: @pattern, status: DreamPattern.visible_statuses }
-    selection       = Dream.visible_to_user(current_user).joins(:dream_patterns).where(dream_patterns: patterns_clause)
-
-    @collection = selection.page(current_page).per(10)
   end
 
   def collect_months

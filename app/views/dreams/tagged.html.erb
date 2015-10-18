@@ -1,0 +1,25 @@
+<% content_for :meta_title, t('.title', tag: @pattern.name, page: current_page) %>
+<% content_for :meta_description, t('.description', tag: @pattern.name, page: current_page) %>
+<%= render 'shared/metrics' %>
+
+<% if current_user_has_role? :administrator %>
+    <nav class="options">
+      <ul>
+        <li><%= link_to t('.edit_pattern'), edit_pattern_path(@pattern) %></li>
+      </ul>
+    </nav>
+<% end %>
+
+<article class="dreams">
+  <h1><%= t('.header', tag: @pattern.name) %></h1>
+  <% unless @pattern.description.blank? %>
+      <p><%= link_to t('.pattern_description'), dreambook_word_path(letter: @pattern.letter, word: @pattern.name) %></p>
+  <% end %>
+  <% if current_user %>
+      <p><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag_name: @pattern.name) %></p>
+  <% end %>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { dreams: @collection } %>
+  <%= paginate @collection %>
+</article>

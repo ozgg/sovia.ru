@@ -9,10 +9,18 @@ module UsersHelper
   end
 
   def comment_avatar(user)
-    'c. a.'
+    if user.is_a?(User) && user.image
+      image_tag user.image.url
+    else
+      'd.a.'
+    end
   end
 
   def dream_avatar(user)
-    'dream avatar'
+    if user.is_a?(User) && user.image
+      image_tag user.image.url
+    else
+      'd.a.'
+    end
   end
 end
