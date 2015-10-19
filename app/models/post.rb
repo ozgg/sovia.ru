@@ -15,12 +15,16 @@ class Post < ActiveRecord::Base
   scope :visible, -> { where show_in_list: true }
   scope :recent, -> (show_hidden) { show_hidden ? order('id desc') : visible.order('id desc') }
 
-  def self.recent_posts(show_hidden)
-    if show_hidden
-      self.recent.first(3)
-    else
-      self.visible.recent.first(3)
-    end
+  PER_PAGE = 10
+
+  def self.page_for_user(current_page, current_user)
+    show_hidden = UserRole.user_has_role?(current_user, :administrator)
+    recent(show_hidden).page(current_page).per(PER_PAGE)
+  end
+
+  def self.tagged_page_for_user(tag, current_page, current_user)
+    show_hidden = UserRole.user_has_role?(current_user, :administrator)
+    recent(show_hidden).joins(:post_tags).where(post_tags: { tag: tag }).page(current_page).per(PER_PAGE)
   end
 
   def tags_string=(tags_string)

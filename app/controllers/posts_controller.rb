@@ -4,11 +4,7 @@ class PostsController < ApplicationController
   before_action :restrict_editing, only: [:edit, :update, :destroy, :toggle]
 
   def index
-    if current_user_has_role? :administrator
-      @collection = Post.order('id desc').page(current_page).per(5)
-    else
-      @collection = Post.visible.order('id desc').page(current_page).per(5)
-    end
+    @collection = Post.page_for_user current_page, current_user
   end
 
   def new
@@ -53,9 +49,8 @@ class PostsController < ApplicationController
   end
 
   def tagged
-    @tag = Tag.match_by_name params[:tag_name]
-    raise record_not_found unless @tag.is_a? Tag
-    @collection = Post.visible.joins(:post_tags).where(post_tags: { tag: @tag }).page(current_page).per(5)
+    set_tag
+    @collection = Post.tagged_page_for_user @tag, current_page, current_user
   end
 
   def archive
@@ -72,6 +67,10 @@ class PostsController < ApplicationController
 
   def set_entity
     @entity = Post.find params[:id]
+  end
+
+  def set_tag
+    @tag = Tag.match_by_name! params[:tag_name]
   end
 
   def entity_parameters

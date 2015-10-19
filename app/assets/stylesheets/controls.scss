@@ -4,13 +4,13 @@
 
   > div {
     margin: 0 0.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    float: left;
+    cursor: pointer;
   }
 
   .visibility {
-    float: left;
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
     background: image_url('checked.png') no-repeat 0 0 / 1.5rem 1.5rem;
 
     &.hidden {
@@ -19,10 +19,13 @@
   }
 
   .edit {
-    float: left;
-    width: 1.5rem;
-    height: 1.5rem;
     background: image_url('edit.png') no-repeat 0 0 / 1.5rem 1.5rem;
-    cursor: pointer;
+  }
+
+  .delete {
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }

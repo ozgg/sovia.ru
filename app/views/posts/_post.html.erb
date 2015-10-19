@@ -1,15 +1,5 @@
-<% if post.editable_by? current_user %>
-    <nav class="options">
-      <ul>
-        <li><%= link_to t(:edit), edit_post_path(post) %></li>
-        <li><%= link_to t(:delete), post, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
-      </ul>
-    </nav>
-<% end %>
-
 <article class="post" itemscope itemtype="http://schema.org/Article">
   <h1 itemprop="name"><%= post.title %></h1>
-  <%= render partial: 'controls', locals: { post: post } %>
 
   <div class="body" itemprop="articleBody">
     <% if post.image.url %>
@@ -29,6 +19,8 @@
   <% end %>
 
   <div class="footer">
+    <%= render partial: 'controls', locals: { post: post } %>
+
     <div class="avatar">
       <%= raw comment_avatar(post.user) %>
     </div>
