@@ -32,6 +32,7 @@
     <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
 
   </div>
+  <%= render partial: 'shared/track_data', locals: { item: dream } %>
 
   <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>
 </article>

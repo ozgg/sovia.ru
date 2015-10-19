@@ -10,8 +10,8 @@
       <%= f.text_area :body, cols: 50, rows: 20, required: true %>
     </div>
     <div>
-      <%= f.check_box :needs_interpretation %>
-      <%= f.label :needs_interpretation %>
+      <div><%= label_tag :grains_string, t('.grains') %></div>
+      <%= text_area_tag :grains_string, entity.grains_string, cols: 50, rows: 3 %>
     </div>
 
     <% if current_user.is_a?(User) && entity.id.blank? || entity.owned_by?(current_user) %>
@@ -35,6 +35,11 @@
         </div>
         <!--[:place_id, :azimuth, :body_position, :time_of_day, :show_image, :image]-->
     <% end %>
+
+    <div>
+      <%= f.check_box :needs_interpretation %>
+      <%= f.label :needs_interpretation %>
+    </div>
 
     <% if current_user_has_role? :administrator %>
         <div>

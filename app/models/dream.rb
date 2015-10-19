@@ -118,6 +118,10 @@ class Dream < ActiveRecord::Base
     update_patterns
   end
 
+  def grains_string
+    self.grains.order('slug asc').map { |grain| grain.name}.join(', ')
+  end
+
   # Cache visible patterns in patterns_cache
   def cache_patterns!
     update patterns_cache: visible_patterns.order('slug asc').map { |pattern| pattern.name }
