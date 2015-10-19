@@ -1,1 +1,28 @@
-<%= @collection.count %>
+<% content_for :meta_title, t('.title', tag: @tag.name, page: current_page) %>
+<% content_for :meta_description, t('.description', tag: @tag.name, page: current_page) %>
+<% content_for :sidebar do %>
+    <% if current_user_has_role? :administrator %>
+        <div>
+          <nav class="options">
+            <ul>
+              <li><%= link_to t('.edit_tag'), edit_tag_path(@tag) %></li>
+            </ul>
+          </nav>
+        </div>
+    <% end %>
+
+    <% if current_user %>
+        <div>
+          <p><%= link_to t('.my_posts'), tagged_my_posts_path(tag_name: Canonizer.urlize(@tag.name)) %></p>
+        </div>
+    <% end %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="posts">
+  <h1><%= t('.header', tag: @tag.name) %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { posts: @collection } %>
+  <%= paginate @collection %>
+</article>

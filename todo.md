@@ -1,5 +1,3 @@
- * Remove English locale and other languages
-
 Views:
 
  * agents          
@@ -43,8 +41,6 @@ Views:
 Refactoring:
 
   * Method for selecting dreams by grain
-  * Method for selecting dreams by pattern
-  * Method for selecting posts by tag
 
 Later:
 
