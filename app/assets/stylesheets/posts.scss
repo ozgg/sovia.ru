@@ -46,11 +46,11 @@ div.post-preview {
   }
 
   .footer {
-    border-top: solid #eeeeee 1px;
     background: #F0F0F0;
-    min-height: 1.4em;
-    padding: 0 15px;
-    font-size: 0.9em;
+    height: 1.5rem;
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
 
     > div.comment-count {
       float: right;

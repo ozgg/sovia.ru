@@ -8,4 +8,7 @@ $(document).ready(function() {
             element.toggleClass('hidden');
         });
     });
+    $('.controls > .edit').on('click', function() {
+        window.location.href = $(this).data('uri');
+    });
 });

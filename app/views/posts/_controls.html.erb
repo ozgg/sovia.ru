@@ -1,8 +1,8 @@
 <div class="controls">
   <% if current_user_has_role? :administrator %>
-      <div class="visibility <%= post.show_in_list? ? '' : 'hidden' %>" data-uri="<%= url_for toggle_post_path(post) %>">&nbsp;</div>
+      <div class="visibility <%= post.show_in_list? ? 'visible' : 'hidden' %>" data-uri="<%= url_for toggle_post_path(post) %>">&nbsp;</div>
   <% end %>
   <% if post.editable_by? current_user %>
-  <div class="edit"><%= link_to t(:edit), edit_post_path(post) %></div>
+  <div class="edit" data-uri="<%= url_for edit_post_path(post) %>">&nbsp;</div>
   <% end %>
 </div>
