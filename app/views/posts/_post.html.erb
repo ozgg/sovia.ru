@@ -11,23 +11,32 @@
   <h1 itemprop="name"><%= post.title %></h1>
   <%= render partial: 'controls', locals: { post: post } %>
 
-  <section class="body" itemprop="articleBody">
+  <div class="body" itemprop="articleBody">
     <% if post.image.url %>
         <figure><%= link_to image_tag(post.image.url, alt: post.title, itemprop: 'image'), post.image.url %></figure>
     <% end %>
     <%= prepare_post_text post %>
-  </section>
+  </div>
 
-  <section class="info">
-    <div>
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"><%= user_link post.user %></span></span>,
-      <time itemprop="datePublished" content="<%= post.created_at.microformat_minutes %>" datetime="<%= post.created_at.w3c %>"><%= post.created_at.strftime('%d.%m.%Y, %H:%M') %></time>
+  <% if post.tags_cache.any? %>
+      <nav class="tags">
+        <ul>
+          <% post.tags_cache.each do |tag_name| %>
+              <li><%= link_to tag_name, tagged_posts_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %></li>
+          <% end %>
+        </ul>
+      </nav>
+  <% end %>
+
+  <div class="footer">
+    <div class="avatar">
+      <%= raw comment_avatar(post.user) %>
     </div>
-    <div>
-      <%= post.tags_cache.join(', ') %>
-    </div>
+    <%= render partial: 'shared/author', locals: { user: post.user } %>
+    <%= render partial: 'shared/publication_time', locals: { time: post.created_at } %>
     <meta itemprop="commentCount" content="<%= post.comments_count %>"/>
-  </section>
+  </div>
+
   <%= render 'shared/track_data', item: post %>
 
   <%= render 'shared/social' %>

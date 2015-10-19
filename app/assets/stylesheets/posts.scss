@@ -8,7 +8,7 @@ div.post-preview {
 
   .header {
     background: #f7f7f0;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     height: 3rem;
 
     .title {
@@ -29,7 +29,7 @@ div.post-preview {
   }
 
   .body {
-    padding: 0 1rem;
+    padding: 0.5rem;
     height: 6rem;
 
     .image {
@@ -62,35 +62,68 @@ article.post {
   padding: 0.5rem;
 
   > h1 {
-    padding: 0 15px;
+    padding: 0 0.5rem;
     background: #f7f7f7;
   }
 
-  section {
-    padding: 0 15px;
+  > .body {
+    padding: 0.5rem;
 
-    &.body {
-      min-height: 300px;
+    figure {
+      float: left;
+      margin: 0 1rem 0 0;
 
-      figure {
-        float: left;
-        margin: 15px 15px 0 0;
+      img {
+        max-width: 15rem;
+        max-height: 15rem;
+      }
+    }
+  }
 
-        img {
-          max-width: 250px;
-          max-height: 250px;
-        }
+  > .footer {
+    background: #f7f7f7;
+    padding: 0 0.5rem;
+    height: 2rem;
+
+    .avatar {
+      float: left;
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+
+      img {
+        max-width: 2rem;
+        max-height: 2rem;
       }
     }
 
-    &.info {
-      background: #f7f7f7;
-      border-radius: 0 0 15px 15px;
-      text-align: right;
+    .author {
+      line-height: 2rem;
+    }
 
-      time {
-        font-size: 0.9em;
-        font-style: italic;
+    time {
+      float: right;
+      font-size: 0.9rem;
+      font-style: italic;
+      line-height: 2rem;
+    }
+  }
+
+  nav.tags {
+    margin: 0.5rem;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        border: outset 1px;
+        list-style: none;
+        display: inline-block;
       }
     }
   }

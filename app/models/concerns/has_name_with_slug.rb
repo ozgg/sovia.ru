@@ -24,6 +24,10 @@ module HasNameWithSlug
     end
   end
 
+  def name_for_url
+    Canonizer.urlize self.name
+  end
+
   protected
 
   def normalize_name
