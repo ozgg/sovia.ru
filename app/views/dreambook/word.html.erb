@@ -26,18 +26,7 @@
   <%= render 'search' %>
   <%= render 'letters' %>
 
-  <section class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
-    <meta itemprop="articleSection" content="<%= t('layouts.main_navigation.dreambook') %>"/>
-    <h1 itemprop="headline"><%= @pattern.name %></h1>
-
-    <div itemprop="articleBody" role="definition">
-      <% if @pattern.description.blank? %>
-          <p>Этот образ ещё не описан.</p>
-      <% else %>
-          <%= raw prepare_pattern_text @pattern %>
-      <% end %>
-    </div>
-  </section>
+  <%= render partial: 'pattern', locals: { pattern: @pattern, links: @pattern.links } %>
 
   <div class="options">
     <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут

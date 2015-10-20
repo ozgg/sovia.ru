@@ -17,7 +17,7 @@ article.patterns {
 }
 
 #dreambook-search {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 nav.dreambook-letters {
@@ -143,10 +143,9 @@ article.pattern {
   margin: 0.5rem 0;
 
   h1 {
-    background: #feefd0;
+    background: #f7f7f0;
     padding: 0.5rem;
     font-size: 1.2rem;
-    font-weight: normal;
     font-variant: small-caps;
 
     &:first-letter {
@@ -156,5 +155,40 @@ article.pattern {
 
   > div {
     padding: 0 0.5rem;
+  }
+
+  .see-instead {
+    margin: 0.5rem 0;
+
+    .header {
+      padding: 0 0.5rem;
+      background: #f7f7f0;
+      font-size: 1.1rem;
+      font-variant: small-caps;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    .description {
+      border-bottom: dotted #cccccc 1px;
+      padding: 0.5rem;
+    }
+  }
+
+  nav.see-also {
+    p {
+      font-weight: bold;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0 0 0 2rem;
+
+      li:first-letter {
+        text-transform: uppercase;
+      }
+    }
   }
 }

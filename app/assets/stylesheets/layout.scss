@@ -12,12 +12,16 @@ h1, h2, h3, h4, h6, h6 {
   font-variant: small-caps;
 }
 
-p:first-of-type {
-  margin-top: 0;
-}
+p {
+  margin: 0.5rem 0;
 
-p:last-of-type {
-  margin-bottom: 0;
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 
 a:link {
