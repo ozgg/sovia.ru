@@ -12,13 +12,14 @@
         <% end %>
     <% else %>
         <h3><%= t('date.nominative_months')[params[:month].to_i] %></h3>
+        <%= paginate @collection %>
         <% if @collection.any? %>
             <% @collection.each do |post| %>
               <%= render partial: 'index/glimpse', locals: { entity: post } %>
             <% end %>
-            <%= paginate @collection %>
         <% else %>
             <%= render 'shared/nothing_found' %>
         <% end %>
+        <%= paginate @collection %>
     <% end %>
 <% end %>

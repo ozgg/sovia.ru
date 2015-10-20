@@ -25,6 +25,8 @@ ru:
     other: "%{count} ошибок"
   date:
     nominative_months: [~, январь, февраль, март, апрель, май, июнь, июль, август, сентябрь, октябрь, ноябрь, декабрь]
+  archive_year: " за %{year} год"
+  archive_month: " за %{month} %{year} года"
   submit: "Отправить"
   untitled: "Без названия"
   comments_list: "Комментарии"
