@@ -6,7 +6,6 @@ Views:
  * dreams          
  * index           
  * posts           
- * tags            
  * violations
  * authentications 
  * code_sender     

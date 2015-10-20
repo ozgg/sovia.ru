@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:list), tags_path %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
+
+<article class="edit-tag">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

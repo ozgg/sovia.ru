@@ -1,0 +1,16 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <div>
+      <div><%= f.label :name %></div>
+      <%= f.text_field :name, required: true, size: 50, maxlength: 50 %>
+    </div>
+    <div>
+      <%= f.label :post_count %>
+      <%= f.text_field :post_count, readonly: true %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

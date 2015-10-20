@@ -49,6 +49,15 @@ ru:
       success: "Метка успешно изменена"
     delete:
       success: "Метка успешно удалена"
+    index:
+      title: "Метки, страница %{page}"
+    edit:
+      title: "Редактирование метки"
+    show:
+      title: "Метка «%{name}»"
+      posts: "Публикации с этой меткой"
+    new:
+      title: "Создать метку"
   users:
     create:
       success: "Пользователь успешно создан"

@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:create), new_tag_path %></li>
+          <li><%= link_to t(:list), tags_path %></li>
+          <li><%= link_to t(:view), @entity %></li>
+          <li><%= link_to t(:delete), @entity, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
+
+<article class="edit-tag">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>
