@@ -1,0 +1,6 @@
+<div class="controls">
+  <% if dream.editable_by? current_user %>
+      <div class="edit" data-uri="<%= url_for edit_dream_path(dream) %>">&nbsp;</div>
+      <div class="delete"><%= link_to image_tag('delete.png', alt: t(:delete)), dream, method: :delete, data: { confirm: t(:are_you_sure)} %></div>
+  <% end %>
+</div>

@@ -21,6 +21,8 @@
   </div>
 
   <div class="footer">
+    <%= render partial: 'controls', locals: { dream: dream } %>
+
     <div class="avatar">
       <%= raw comment_avatar(dream.user) %>
     </div>
