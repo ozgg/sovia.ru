@@ -16,7 +16,7 @@
           <p><%= link_to t('.pattern_description'), dreambook_word_path(letter: @pattern.letter, word: @pattern.name) %></p>
       <% end %>
       <% if current_user %>
-          <p><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag_name: @pattern.name) %></p>
+          <p><%= link_to t('.my_dreams'), tagged_my_dreams_path(tag_name: Canonizer.urlize(@pattern.name)) %></p>
       <% end %>
     </div>
 <% end %>

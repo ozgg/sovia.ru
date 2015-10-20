@@ -6,27 +6,29 @@
     <meta property="og:article:modified_time" content="<%= @pattern.updated_at.iso_day %>"/>
     <meta property="og:article:section" content="<%= t('layouts.main_navigation.dreambook') %>"/>
 <% end %>
-
+<% content_for :sidebar do %>
+    <% if current_user_has_role? :administrator %>
+        <div>
+          <nav class="options">
+            <ul>
+              <li><%= link_to t(:edit), edit_pattern_path(@pattern) %></li>
+            </ul>
+          </nav>
+        </div>
+    <% end %>
+<% end %>
 <%= render 'shared/metrics' %>
 
-<% if current_user_has_role? :administrator %>
-    <nav class="options">
-      <ul>
-        <li><%= link_to t(:edit), edit_pattern_path(@pattern) %></li>
-      </ul>
-    </nav>
-<% end %>
-
-<article>
+<article class="pattern">
   <h1><%= t('.header') %></h1>
 
   <%= render 'search' %>
+  <%= render 'letters' %>
 
   <section class="dreambook-word" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <meta itemprop="articleSection" content="<%= t('layouts.main_navigation.dreambook') %>"/>
-    <header>
-      <h1 itemprop="headline"><%= @pattern.name %></h1>
-    </header>
+    <h1 itemprop="headline"><%= @pattern.name %></h1>
+
     <div itemprop="articleBody" role="definition">
       <% if @pattern.description.blank? %>
           <p>Этот образ ещё не описан.</p>
@@ -34,16 +36,13 @@
           <%= raw prepare_pattern_text @pattern %>
       <% end %>
     </div>
-    <footer>
-      <p>Вы также можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут
-        определить его значение точнее.</p>
-      <nav><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: @pattern.name) %> (<%= @pattern.dream_count %>)
-      </nav>
-    </footer>
   </section>
 
+  <div class="options">
+    <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут
+      определить его значение точнее.</p>
+    <p><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: Canonizer.urlize(@pattern.name)) %> (<%= @pattern.dream_count %>)</p>
+  </div>
+
   <%= render 'shared/social' %>
-
-  <%= render 'letters' %>
-
 </article>

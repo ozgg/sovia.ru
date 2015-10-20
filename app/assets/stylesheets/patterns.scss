@@ -1,9 +1,17 @@
+article.dreambook {
+  padding: 0.5rem;
+}
+
+#dreambook-search {
+  margin: 1rem 0;
+}
+
 nav.dreambook-letters {
   margin: 0;
   padding: 0.3em;
 
   ul {
-    margin: 0.3em 0;
+    margin: 0.4rem 0;
     padding: 0;
 
     li {
@@ -11,7 +19,7 @@ nav.dreambook-letters {
       display: inline-block;
       padding: 0;
       border: solid 1px #eeeeee;
-      min-width: 1.2em;
+      min-width: 1.2rem;
       text-align: center;
 
       a:link, a:visited {
@@ -29,12 +37,12 @@ nav.dreambook-letters {
 }
 
 ul.dreambook-symbols {
-  margin: 0 0 0 0;
+  margin: 0;
   padding: 0;
 
   li {
     list-style: none;
-    padding: 0 1em;
+    padding: 0 0.5rem;
 
     &:first-letter {
       text-transform: capitalize;
@@ -50,11 +58,27 @@ ul.dreambook-symbols {
   }
 }
 
+article.pattern {
+  padding: 0.5rem;
+
+  div.options {
+    margin: 1rem 0 0 0;
+    padding: 0.5rem;
+    background: #F7F7F7;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
 .dreambook-word {
+  margin: 0.5rem 0;
+
   h1 {
     background: #feefd0;
-    padding: 0.5em;
-    font-size: 1.2em;
+    padding: 0.5rem;
+    font-size: 1.2rem;
     font-weight: normal;
     font-variant: small-caps;
 
@@ -63,21 +87,7 @@ ul.dreambook-symbols {
     }
   }
 
-  div {
-    margin: 0;
-    padding: 0;
-
-    p {
-      margin: 0.5em 0;
-      text-indent: 1.5em;
-    }
-  }
-
-  footer {
-    border-top: solid #aaaaaa 1px;
-
-    nav {
-      margin: 0 0 0 1.5em;
-    }
+  > div {
+    padding: 0 0.5rem;
   }
 }

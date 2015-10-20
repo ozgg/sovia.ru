@@ -1,10 +1,20 @@
 <% content_for :meta_title, t('.title', letter: @letter_from_request, page: current_page) %>
 <% content_for :meta_description, t('.description', letter: @letter_from_request, page: current_page) %>
-
+<% content_for :sidebar do %>
+    <% if current_user_has_role? :administrator %>
+        <div>
+          <nav class="options">
+            <ul>
+              <li><%= link_to t(:create), new_pattern_path %></li>
+            </ul>
+          </nav>
+        </div>
+    <% end %>
+<% end %>
 <%= render 'shared/metrics' %>
 
-<section>
-<h1><%= t('.header', letter: @letter_from_request) %></h1>
+<article class="dreambook">
+  <h1><%= t('.header', letter: @letter_from_request) %></h1>
 
   <%= render 'search' %>
   <%= render 'letters' %>
@@ -24,4 +34,4 @@
   <% else %>
       <%= render 'shared/nothing_found' %>
   <% end %>
-</section>
+</article>

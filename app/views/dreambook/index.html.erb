@@ -1,9 +1,19 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :meta_description, t('.description') %>
-
+<% content_for :sidebar do %>
+    <% if current_user_has_role? :administrator %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:create), new_pattern_path %></li>
+        </ul>
+      </nav>
+    </div>
+    <% end %>
+<% end %>
 <%= render 'shared/metrics' %>
 
-<article>
+<article class="dreambook">
   <h1><%= t('.header') %></h1>
 
   <%= render 'greeting' %>
