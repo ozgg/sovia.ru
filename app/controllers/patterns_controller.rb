@@ -3,7 +3,11 @@ class PatternsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Pattern.order('slug asc').page(current_page).per(25)
+    if params[:queue]
+      @collection = Pattern.for_queue.page(current_page).per(25)
+    else
+      @collection = Pattern.order('slug asc').page(current_page).per(25)
+    end
   end
 
   def new

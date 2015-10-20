@@ -4,6 +4,11 @@
       <nav class="options">
         <ul>
           <li><%= link_to t(:create), new_pattern_path %></li>
+          <% if params[:queue] %>
+              <li><%= link_to t(:list), patterns_path %></li>
+          <% else %>
+              <li><%= link_to 'Очередь', patterns_path(queue: 1) %></li>
+          <% end %>
         </ul>
       </nav>
     </div>
