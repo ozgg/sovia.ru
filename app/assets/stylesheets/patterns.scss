@@ -108,6 +108,31 @@ article.pattern {
       }
     }
   }
+
+  figure {
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    img {
+      max-width: 20rem;
+      max-height: 20rem;
+    }
+
+    figcaption {
+      position: absolute;
+      left: 0;
+      bottom: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
 }
 
 .dreambook-word {

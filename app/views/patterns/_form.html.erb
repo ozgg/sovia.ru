@@ -23,7 +23,7 @@
       <% entity.links.each do |category, links| %>
           <div>
             <%= label_tag "links_#{category}", t("activerecord.attributes.pattern_link.categories.#{category}") %>
-            <%= text_field_tag "links[#{category}]", links.join(', ') %>
+            <%= text_field_tag "links[#{category}]", links.map { |p| p.name }.join(', ') %>
           </div>
       <% end %>
     </div>

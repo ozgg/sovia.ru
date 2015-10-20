@@ -1,0 +1,20 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:view), @entity %></li>
+          <li><%= link_to t(:list), patterns_path %></li>
+          <li><%= link_to t(:create), new_pattern_path %></li>
+          <li><%= link_to t('layouts.main_navigation.dreambook'), dreambook_word_path(letter: @entity.letter, word: @entity.name) %></li>
+          <li><%= link_to t(:delete), @entity, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
+
+<article class="pattern">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>
