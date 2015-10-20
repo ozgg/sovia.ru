@@ -1,15 +1,11 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PatternsHelper. For example:
-#
-# describe PatternsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PatternsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#link_to_dreambook' do
+    it 'returns link to word in dreambook' do
+      pattern = create :pattern
+      expected = link_to pattern.name, dreambook_word_path(letter: pattern.letter, word: pattern.name)
+      expect(helper.link_to_dreambook(pattern)).to eq(expected)
+    end
+  end
 end
