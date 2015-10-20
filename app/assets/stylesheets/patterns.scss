@@ -70,6 +70,44 @@ article.pattern {
       margin: 0;
     }
   }
+
+  > h1 {
+    background: #f7f7f0;
+    padding: 0.5rem;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .description {
+    padding: 0.5rem;
+    min-height: 10rem;
+
+    .image {
+      float: left;
+      margin: 0 0.5rem 0 0;
+
+      img {
+        max-width: 10rem;
+        max-height: 10rem;
+      }
+    }
+  }
+
+  .footer {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    background: #F7F7F7;
+
+    p {
+      margin: 0;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
 }
 
 .dreambook-word {

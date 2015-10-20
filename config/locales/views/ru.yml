@@ -137,6 +137,8 @@ ru:
       success: "Образ успешно удалён"
     new:
       title: "Новый образ сна"
+    show:
+      title: "Образ сна «%{name}»"
   grains:
     update:
       success: "Зерно восприятия успешно обновлено"

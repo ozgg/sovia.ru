@@ -1,0 +1,28 @@
+<article class="pattern">
+  <h1><%= pattern.name %></h1>
+
+  <div class="description">
+    <% if pattern.image.url %>
+    <div class="image"><%= image_tag pattern.image.url, alt: pattern.name %></div>
+    <% end %>
+    <%= raw prepare_pattern_text(pattern) %>
+    <% pattern.links.each do |category, links| %>
+        <% if links.any? %>
+            <p>
+              <%= t("activerecord.attributes.pattern_link.categories.#{category}") %>
+              <% links.each do |another_pattern| %>
+                  <%= link_to another_pattern.name, another_pattern %>
+              <% end %>
+            </p>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="footer">
+    <p><%= t('activerecord.attributes.pattern.user_id') %>: <%= user_link pattern.user %></p>
+    <p><%= "#{t(:created_at)}: #{pattern.created_at.pubdate}" %></p>
+    <p><%= "#{t(:updated_at)}: #{pattern.created_at.pubdate}" %></p>
+    <p><%= "#{t('activerecord.attributes.pattern.dream_count')}: #{pattern.dream_count}" %></p>
+  </div>
+  <%= render partial: 'shared/track_data', locals: { item: pattern } %>
+</article>
