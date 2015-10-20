@@ -1,0 +1,26 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:create), new_pattern_path %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
+
+<article class="patterns">
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <% if @collection.any? %>
+      <ul>
+        <% @collection.each do |pattern| %>
+            <li><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</li>
+        <% end %>
+      </ul>
+  <% else %>
+      <%= render 'shared/nothing_found' %>
+  <% end %>
+  <%= paginate @collection %>
+</article>
