@@ -51,6 +51,7 @@ ru:
       success: "Метка успешно удалена"
     index:
       title: "Метки, страница %{page}"
+      header: "Метки"
     edit:
       title: "Редактирование метки"
     show:

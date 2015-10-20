@@ -5,4 +5,10 @@ class Tag < ActiveRecord::Base
   has_many :posts, through: :post_tags
 
   validates_uniqueness_of :slug
+
+  PER_PAGE = 25
+
+  def self.page_for_administrator(current_page)
+    order('slug asc').page(current_page).per(PER_PAGE)
+  end
 end
