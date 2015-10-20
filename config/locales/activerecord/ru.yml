@@ -189,6 +189,11 @@ ru:
         pattern_id: "образ"
         target_id: "образ-цель"
         category: "категория"
+        categories:
+          see_instead: "См. лучше"
+          see_also: "См. также"
+          expands: "Расширяет"
+          expanded_by: "Расширяется"
       code:
         user_id: "пользователь"
         agent_id: "АП"

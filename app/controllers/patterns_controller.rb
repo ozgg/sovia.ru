@@ -61,6 +61,6 @@ class PatternsController < ApplicationController
   end
 
   def set_links
-    @entity.links = params.require(:pattern).permit(:links)
+    @entity.links = params[:links].nil? ? Hash.new : params[:links]
   end
 end

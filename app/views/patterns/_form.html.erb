@@ -1,0 +1,34 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <% if entity.image.url %>
+        <figure>
+          <%= link_to image_tag(entity.image.url), entity.image.url %>
+          <figcaption><%= t('activerecord.attributes.post.image') %></figcaption>
+        </figure>
+    <% end %>
+    <div>
+      <%= f.label :image %>
+      <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
+    </div>
+    <div>
+      <div><%= f.label :name %></div>
+      <%= f.text_field :name, required: true, size: 50 %>
+    </div>
+    <div>
+      <div><%= f.label :description %></div>
+      <%= f.text_area :description, cols: 80, rows: 20, required: true %>
+    </div>
+    <div>
+      <% entity.links.each do |category, links| %>
+          <div>
+            <%= label_tag "links_#{category}", t("activerecord.attributes.pattern_link.categories.#{category}") %>
+            <%= text_field_tag "links[#{category}]", links.join(', ') %>
+          </div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>
