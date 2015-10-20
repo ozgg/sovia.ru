@@ -3,7 +3,7 @@
 <%= form_for entity do |f| %>
     <% if entity.image.url %>
         <figure>
-          <%= image_tag entity.image.url %>
+          <%= link_to image_tag(entity.image.url), entity.image.url %>
           <figcaption><%= t('activerecord.attributes.post.image') %></figcaption>
         </figure>
     <% end %>
@@ -13,19 +13,19 @@
     </div>
     <div>
       <div><%= f.label :title %></div>
-      <%= f.text_field :title, required: true, size: 50 %>
+      <%= f.text_field :title, required: true, size: 80 %>
     </div>
     <div>
       <div><%= f.label :lead %></div>
-      <%= f.text_area :lead, cols: 50, rows: 5, required: true %>
+      <%= f.text_area :lead, cols: 80, rows: 5, required: true %>
     </div>
     <div>
       <div><%= f.label :body %></div>
-      <%= f.text_area :body, cols: 50, rows: 20, required: true %>
+      <%= f.text_area :body, cols: 80, rows: 20, required: true %>
     </div>
     <div>
       <div><%= label_tag :tags_string, t('.tags_list') %></div>
-      <%= text_area_tag 'tags_string', entity.tags_cache.join(', '), cols: 50, rows: 2 %>
+      <%= text_area_tag 'tags_string', entity.tags_cache.join(', '), cols: 80, rows: 2 %>
     </div>
 
     <% if current_user_has_role? :administrator %>

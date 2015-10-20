@@ -1,14 +1,16 @@
 <% content_for :meta_title, t('.title') %>
-
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:list), posts_path %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
 <%= render 'shared/metrics' %>
 
-<nav class="options">
-  <ul>
-    <li><%= link_to t(:list), posts_path %></li>
-  </ul>
-</nav>
-
-<article class="new-post">
+<article class="edit-post">
   <h1><%= t('.title') %></h1>
 
   <%= render partial: 'form', locals: { entity: @entity } %>

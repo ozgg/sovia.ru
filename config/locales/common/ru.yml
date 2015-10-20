@@ -5,20 +5,20 @@ ru:
   email_already_confirmed: "Электронная почта уже подтверждена"
   insufficient_role: "Ваша роль не подходит для доступа к странице"
   comment:
-    zero: "0 комментариев"
+    zero: "комментариев нет"
     one: "%{count} комментарий"
     few: "%{count} комментария"
     many: "%{count} комментариев"
     other: "%{count} комментариев"
     add: "Добавить комментарий"
   answer:
-    zero: "нет ответов"
+    zero: "ответов нет"
     one: "%{count} ответ"
     few: "%{count} ответа"
     many: "%{count} ответов"
     other: "%{count} ответов"
   error:
-    zero: "нет ошибок"
+    zero: "ошибок нет"
     one: "%{count} ошибка"
     few: "%{count} ошибки"
     many: "%{count} ошибок"
@@ -36,3 +36,4 @@ ru:
   view: "В просмотр"
   search: "Искать"
   read_more: "Читать дальше"
+  reply: "Ответить"

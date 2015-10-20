@@ -2,6 +2,40 @@ article.posts {
   padding: 0.5rem;
 }
 
+article.edit-post {
+  padding: 0.5rem;
+
+  form {
+    figure {
+      margin: 0;
+      padding: 0;
+      max-width: 20rem;
+      position: relative;
+      text-align: center;
+
+      img {
+        max-width: 20rem;
+        max-height: 20rem;
+      }
+
+      figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 1rem;
+        background: rgba(127, 127, 127, 0.4);
+        color: #ffffff;
+        text-align: center;
+        width: 100%;
+        padding: 0.5rem 0;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
 div.post-preview {
   margin: 0.5rem 0;
   border: dotted #f7f7f0 1px;
