@@ -164,6 +164,7 @@ ru:
       title: "Сны, страница %{page}"
       header: "Дневник снов"
       description: "Описанные пользователями Совии сны, страница %{page}."
+      archive: "Архив"
     update:
       success: "Сон успешно изменён"
     destroy:
@@ -184,6 +185,8 @@ ru:
       my_dreams: "Ваши сны с этой меткой"
     form:
       grains: "Главные символы сна"
+    archive:
+      title: "Архив снов"
   codes:
     update:
       success: "Код успешно обновлён"

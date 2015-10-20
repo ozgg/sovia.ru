@@ -50,7 +50,7 @@ class DreamsController < ApplicationController
   def archive
     @dates = {}
     collect_months
-    collect_archive unless params[:month].nil?
+    @collection = Dream.archive_page params[:year], params[:month], current_page, current_user if params[:month]
   end
 
   protected
@@ -82,20 +82,11 @@ class DreamsController < ApplicationController
     end
   end
 
-  def visible_dreams
-    Dream.visible_to_user(current_user)
-  end
-
   def collect_months
     Dream.uniq.pluck("date_trunc('month', created_at)").sort.each do |date|
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end
-  end
-
-  def collect_archive
-    first_day   = '%04d-%02d-01 00:00:00' % [params[:year], params[:month]]
-    @collection = visible_dreams.where("date_trunc('month', created_at) = '#{first_day}'").page(current_page).per(20)
   end
 
   def create_dream

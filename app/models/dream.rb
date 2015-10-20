@@ -38,6 +38,11 @@ class Dream < ActiveRecord::Base
     visible_to_user(current_user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
   end
 
+  def self.archive_page(year, month, page, current_user)
+    first_day   = '%04d-%02d-01 00:00:00' % [year, month]
+    visible_to_user(current_user).where("date_trunc('month', created_at) = '#{first_day}'").page(page).per(PER_PAGE)
+  end
+
   # Select dreams that are visible to given user
   #
   # @param [User|nil] user who selects dreams
