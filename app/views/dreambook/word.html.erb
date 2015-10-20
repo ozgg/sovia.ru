@@ -25,14 +25,14 @@
 
   <%= render 'search' %>
   <%= render 'letters' %>
-
-  <%= render partial: 'pattern', locals: { pattern: @pattern, links: @pattern.links } %>
-
   <div class="options">
     <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %> более подробно, и вам помогут
       определить его значение точнее.</p>
     <p><%= link_to t('.read_dreams'), tagged_dreams_path(tag_name: Canonizer.urlize(@pattern.name)) %> (<%= @pattern.dream_count %>)</p>
   </div>
 
+  <%= render partial: 'pattern', locals: { pattern: @pattern, links: @pattern.links } %>
+  <%= render partial: 'shared/track_data', locals: { item: @pattern } %>
   <%= render 'shared/social' %>
+  <%= render partial: 'comments/list', locals: { commentable: @pattern, comments: @pattern.comments } %>
 </article>

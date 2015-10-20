@@ -64,11 +64,21 @@ RSpec.describe PatternsController, type: :controller do
   describe 'get show' do
     before(:each) { get :show, id: pattern }
 
-    it_behaves_like 'administrative_page'
     it_behaves_like 'entity_assigner'
 
     it 'renders view "show"' do
       expect(response).to render_template(:show)
+    end
+  end
+
+  describe 'get show for unauthorized' do
+    before :each do
+      allow(controller).to receive(:current_user).and_return(nil)
+      get :show, id: pattern
+    end
+
+    it 'redirects to dreambook page' do
+      expect(response).to redirect_to(dreambook_word_path(letter: pattern.letter, word: pattern.name))
     end
   end
 

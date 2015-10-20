@@ -1,5 +1,5 @@
 class PatternsController < ApplicationController
-  before_action :restrict_access
+  before_action :restrict_access, except: [:show]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -25,6 +25,9 @@ class PatternsController < ApplicationController
   end
 
   def show
+    unless current_user_has_role? :administrator
+      redirect_to dreambook_word_path(letter: @entity.letter, word: @entity.name)
+    end
   end
 
   def edit

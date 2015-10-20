@@ -26,4 +26,5 @@
     <p><%= link_to t('dreambook.word.read_dreams'), tagged_dreams_path(tag_name: Canonizer.urlize(pattern.name)) %></p>
   </div>
   <%= render partial: 'shared/track_data', locals: { item: pattern } %>
+  <%= render partial: 'comments/list', locals: { commentable: pattern, comments: pattern.comments } %>
 </article>
