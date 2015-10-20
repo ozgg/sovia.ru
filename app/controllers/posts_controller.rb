@@ -49,14 +49,14 @@ class PostsController < ApplicationController
   end
 
   def tagged
-    set_tag
+    @tag        = Tag.match_by_name! params[:tag_name]
     @collection = Post.tagged_page_for_user @tag, current_page, current_user
   end
 
   def archive
     @dates = {}
     collect_months
-    collect_archive unless params[:month].nil?
+    @collection = Post.archive_page params[:year], params[:month], current_page unless params[:month].nil?
   end
 
   protected
@@ -67,10 +67,6 @@ class PostsController < ApplicationController
 
   def set_entity
     @entity = Post.find params[:id]
-  end
-
-  def set_tag
-    @tag = Tag.match_by_name! params[:tag_name]
   end
 
   def entity_parameters
@@ -93,10 +89,5 @@ class PostsController < ApplicationController
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end
-  end
-
-  def collect_archive
-    first_day   = '%04d-%02d-01 00:00:00' % [params[:year], params[:month]]
-    @collection = Post.visible.where("date_trunc('month', created_at) = '#{first_day}'").order('id asc').page(current_page).per(20)
   end
 end

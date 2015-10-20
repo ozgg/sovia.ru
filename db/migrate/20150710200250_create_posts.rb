@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :upvote_count, null: false, default: 0
       t.integer :downvote_count, null: false, default: 0
       t.integer :comments_count, null: false, default: 0
-      t.boolean :show_in_list, null: false, default: false, index: true
+      t.boolean :show_in_list, null: false, default: true, index: true
       t.string :title, null: false
       t.string :image
       t.string :lead, null: false

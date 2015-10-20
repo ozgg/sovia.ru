@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   include CommentableByCommunity
 
   belongs_to :user, counter_cache: true
-  has_many :post_tags, dependent: :destroy
+  has_many :post_tags, dependent: :delete_all
   has_many :tags, through: :post_tags
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -25,6 +25,11 @@ class Post < ActiveRecord::Base
   def self.tagged_page_for_user(tag, current_page, current_user)
     show_hidden = UserRole.user_has_role?(current_user, :administrator)
     recent(show_hidden).joins(:post_tags).where(post_tags: { tag: tag }).page(current_page).per(PER_PAGE)
+  end
+
+  def self.archive_page(year, month, current_page)
+    first_day = '%04d-%02d-01 00:00:00' % [year, month]
+    recent(false).where("date_trunc('month', created_at) = '#{first_day}'").page(current_page).per(PER_PAGE)
   end
 
   def tags_string=(tags_string)

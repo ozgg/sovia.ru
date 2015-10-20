@@ -41,8 +41,9 @@ class DreamsController < ApplicationController
     redirect_to dreams_path
   end
 
+  # noinspection RailsChecklist01
   def tagged
-    set_pattern
+    @pattern    = Pattern.match_by_name! params[:tag_name]
     @collection = Dream.tagged_page_for_user @pattern, current_page, current_user
   end
 
@@ -61,11 +62,6 @@ class DreamsController < ApplicationController
   def set_entity
     @entity = Dream.find params[:id].to_i
     raise record_not_found unless @entity.visible_to? current_user
-  end
-
-  def set_pattern
-    @pattern = Pattern.match_by_name params[:tag_name]
-    raise record_not_found unless @pattern.is_a? Pattern
   end
 
   def entity_parameters

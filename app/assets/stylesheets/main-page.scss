@@ -1,55 +1,55 @@
 article.front-page {
   padding: 0.5rem;
+}
 
-  div.glimpse {
-    min-width: 12rem;
-    width: 50%;
-    height: 10.5rem;
-    margin: 0 0 0.5rem 0;
-    overflow: hidden;
-    float: left;
+div.glimpse {
+  min-width: 12rem;
+  width: 50%;
+  height: 10.5rem;
+  margin: 0 0 0.5rem 0;
+  overflow: hidden;
+  float: left;
 
-    > div {
-      margin: 0 0.5rem;
-      padding: 0 0.5rem;
+  > div {
+    margin: 0 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .header {
+    height: 3rem;
+    overflow: scroll;
+    background: #f7f7f0;
+
+    .title {
+      line-height: 1.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
-    .header {
-      height: 3rem;
-      overflow: scroll;
-      background: #f7f7f0;
-
-      .title {
-        line-height: 1.5rem;
-        font-weight: bold;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      .author {
-        line-height: 1.5rem;
-      }
-
-      time {
-        float: right;
-        font-size: 0.8rem;
-        font-style: italic;
-        line-height: 1.5rem;
-      }
+    .author {
+      line-height: 1.5rem;
     }
 
-    .body {
-      border: solid #f7f7f7 1px;
-      height: 6rem;
-      overflow: scroll;
-    }
-
-    .footer {
-      height: 1rem;
+    time {
+      float: right;
       font-size: 0.8rem;
-      line-height: 1rem;
-      text-align: right;
-      background: #f7f7f7;
+      font-style: italic;
+      line-height: 1.5rem;
     }
+  }
+
+  .body {
+    border: solid #f7f7f7 1px;
+    height: 6rem;
+    overflow: scroll;
+  }
+
+  .footer {
+    height: 1rem;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    text-align: right;
+    background: #f7f7f7;
   }
 }
