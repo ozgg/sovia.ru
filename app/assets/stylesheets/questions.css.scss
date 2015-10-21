@@ -1,41 +1,43 @@
-.question, .answer {
-  margin: 0 0 15px 0;
+article.questions {
+  padding: 0.5rem;
+}
 
-  .header {
-    background: #fef9ee;
-    padding: 5px;
+.question {
+  margin: 0 0 0.5rem 0;
 
-    img {
-      float: left;
-      max-width: 25px;
-      max-height: 25px;
-      margin: 0 5px 0 0;
-    }
-
-    span {
-      a {
-        line-height: 25px;
-      }
-    }
-
-    time {
-      line-height: 25px;
-      font-size: 0.8em;
-      float: right;
-      color: #444444;
-    }
+  h1 {
+    background: #f7f7f0;
+    padding: 0.5rem;
   }
 
   .body {
-    padding: 5px 15px;
+    padding: 0.5rem;
   }
 
   .footer {
-    background: #FaFaFa;
-    padding: 3px 15px;
-  }
-}
+    background: #F7F7F7;
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
 
-.question > .header {
-  background: #f7f7f7;
+    .controls {
+      margin: 0.25rem 0;
+    }
+
+    .avatar {
+      float: left;
+      height: 2rem;
+      margin-right: 0.5rem;
+
+      img {
+        max-width: 2rem;
+        max-height: 2rem;
+      }
+    }
+
+    .count {
+      float: right;
+    }
+  }
 }

@@ -1,22 +1,26 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
 <% content_for :meta_description, t('.description', page: current_page) %>
-
+<% content_for :sidebar do %>
+    <div>
+      <nav class="options">
+        <ul>
+          <li><%= link_to t(:create), new_question_path %></li>
+        </ul>
+      </nav>
+    </div>
+<% end %>
 <%= render 'shared/metrics' %>
 
-<nav class="options">
-  <ul>
-    <li><%= link_to t(:create), new_question_path %></li>
-  </ul>
-</nav>
-
-<div>
-  <%= t('.header') %>
+<article class="questions">
+  <h1><%= t('.header') %></h1>
 
   <%= paginate @collection %>
   <% if @collection.any? %>
-      <%= render @collection, locals: { show_links: true } %>
+      <% @collection.each do |question| %>
+          <%= render partial: 'preview', locals: { question: question } %>
+      <% end %>
   <% else %>
       <%= render 'shared/nothing_found' %>
   <% end %>
   <%= paginate @collection %>
-</div>
+</article>

@@ -9,10 +9,10 @@ module UsersHelper
   end
 
   def comment_avatar(user)
-    if user.is_a?(User) && user.image
+    if user.is_a?(User) && user.image.url
       image_tag user.image.url
     else
-      'd.a.'
+      'c.a.'
     end
   end
 
