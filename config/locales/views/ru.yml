@@ -132,6 +132,8 @@ ru:
       add_answer: "Добавить ответ"
     preview:
       question: "Вопрос №%{id}"
+    question:
+      title: "Вопрос №%{id}"
   patterns:
     update:
       success: "Образ успешно обновлён"

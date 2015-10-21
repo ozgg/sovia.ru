@@ -1,22 +1,18 @@
 <article class="question" itemscope itemtype="http://schema.org/Question">
-  <div class="header">
-    <span class="user" itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <%= comment_avatar(question.user) %>
-      <span itemprop="name"><%= user_link(question.user) %></span>
-    </span>
-    <%= render partial: 'shared/publication_time', locals: { time: question.created_at } %>
-  </div>
+  <h1><%= t('.title', id: question.id) %></h1>
   <div class="body" itemprop="text">
     <%= raw prepare_question_text(question, current_user) %>
   </div>
-  <meta itemprop="answerCount" content="<%= question.comments_count %>" />
-  <% if local_assigns[:locals][:show_links] %>
-     <div class="footer"><%= link_to t(:answer, count: question.comments_count), question %></div>
-  <% end %>
-  <% if local_assigns[:locals][:share] %>
-  <%= render 'shared/social' %>
-  <% end %>
+  <div class="footer">
+    <meta itemprop="answerCount" content="<%= question.comments_count %>" />
+    <%= render partial: 'controls', locals: { question: question } %>
+    <div class="avatar"><%= comment_avatar(question.user) %></div>
+    <%= render partial: 'shared/author', locals: { user: question.user } %>
+    <%= render partial: 'shared/publication_time', locals: { time: question.created_at } %>
+  </div>
   <%= render partial: 'shared/track_data', locals: { item: question } %>
 
-  <%= render partial: 'answers', locals: { question: question } if local_assigns[:locals][:show_answers] %>
+  <%= render 'shared/social' %>
+
+  <%= render partial: 'answers', locals: { question: question } %>
 </article>
