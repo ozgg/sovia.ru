@@ -283,3 +283,12 @@ ru:
       previous: "←"
       next: "→"
       truncate: "..."
+  about:
+    terms_of_service:
+      title: "Пользовательское соглашение"
+    privacy:
+      title: "Соглашение о конфиденциальности"
+    index:
+      title: "О проекте"
+    features:
+      title: "О проекте: возможности"
