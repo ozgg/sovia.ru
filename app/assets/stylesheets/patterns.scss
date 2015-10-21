@@ -157,6 +157,20 @@ article.pattern {
     padding: 0 0.5rem;
   }
 
+  > .description {
+    min-height: 10rem;
+
+    .image {
+      float: left;
+      margin: 0 0.5rem 0 0;
+
+      img {
+        max-width: 10rem;
+        max-height: 10rem;
+      }
+    }
+  }
+
   .see-instead {
     margin: 0.5rem 0;
 

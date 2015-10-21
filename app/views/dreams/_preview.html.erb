@@ -17,7 +17,7 @@
         <nav class="tags">
           <ul>
             <% dream.patterns_cache.each do |tag_name| %>
-                <li><%= link_to tag_name, tagged_dreams_path(tag_name: tag_name), rel: 'tag' %></li>
+                <li><%= link_to tag_name, tagged_dreams_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %></li>
             <% end %>
           </ul>
         </nav>
