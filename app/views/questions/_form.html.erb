@@ -11,7 +11,7 @@
       <div><%= f.label :body %></div>
       <%= f.text_area :body, cols: 80, rows: 10, required: true %>
     </div>
-    <p class="notice"><%= t('.max_length') %></p>
+    <div class="warning"><%= t('.max_length') %></div>
 
     <% if entity.id %>
         <div>

@@ -10,6 +10,12 @@ article.questions, article.question {
     padding: 0.5rem;
   }
 
+  > form {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-top: dotted 1px;
+  }
+
   .body {
     padding: 0.5rem;
   }
