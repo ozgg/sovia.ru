@@ -27,6 +27,14 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def visible_to?(user)
+    if commentable.respond_to? :visible_to?
+      commentable.visible_to? user
+    else
+      true
+    end
+  end
+
   protected
 
   def parent_matches

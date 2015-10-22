@@ -55,6 +55,10 @@ class Post < ActiveRecord::Base
     lead || first_passage
   end
 
+  def title_for_view
+    title
+  end
+
   # Get the first passage from body
   #
   # @return [String]

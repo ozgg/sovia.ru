@@ -89,6 +89,9 @@ ru:
     questions:
       title: "Вопросы пользователя %{user}, страница %{page}"
       header: "Вопросы пользователя %{user}"
+    comments:
+      title: "Комментарии пользователя %{user}, страница %{page}"
+      header: "Комментарии пользователя %{user}"
   posts:
     new:
       title: "Создать публикацию"

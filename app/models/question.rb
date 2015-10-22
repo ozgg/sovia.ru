@@ -19,4 +19,8 @@ class Question < ActiveRecord::Base
   def editable_by?(user)
     owned_by?(user) || UserRole.user_has_role?(user, :administrator)
   end
+
+  def title_for_view
+    I18n.t('questions.preview.question')
+  end
 end

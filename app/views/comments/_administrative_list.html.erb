@@ -1,0 +1,11 @@
+<% if comments.any? %>
+    <% comments.each do |comment| %>
+        <% if comment.visible_to? current_user %>
+            <%= render partial: 'comments/preview', locals: { comment: comment } %>
+        <% else %>
+            <div class="warning">Не хватает прав для просмотра</div>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

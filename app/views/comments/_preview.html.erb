@@ -1,0 +1,20 @@
+<div class="comment <%= comment.best? ? 'best' : '' %>">
+  <div class="header">
+    <div class="avatar"><%= comment_avatar comment.user %></div>
+    <%= render partial: 'shared/author', locals: { user: comment.user } %> @
+    <%= link_to "#{comment.commentable.class} «#{comment.commentable.title_for_view}»", comment.commentable %>
+    <br />
+    <%= render partial: 'shared/time', locals: { time: comment.created_at } %>
+  </div>
+
+  <div class="body">
+    <%= raw prepare_comment_text(comment, current_user) %>
+  </div>
+
+  <div class="actions">
+    <div class="edit"><%= link_to t(:view), comment %></div>
+    <div class="edit"><%= link_to t(:edit), edit_comment_path(comment) %></div>
+  </div>
+
+  <%= render partial: 'shared/track_data', locals: { item: comment } %>
+</div>

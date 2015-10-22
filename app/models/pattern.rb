@@ -53,6 +53,10 @@ class Pattern < ActiveRecord::Base
     name.first
   end
 
+  def title_for_view
+    name
+  end
+
   protected
 
   def set_links_in_category(category, links_string)
