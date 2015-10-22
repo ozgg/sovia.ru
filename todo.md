@@ -54,3 +54,7 @@ Later:
  * Followings
  * Change grain to pattern link for new values
  * Invitations
+ * Dreams of user as resource
+ * Posts of user as resource
+ * Questions of user as resource
+ * Comments of user as resource

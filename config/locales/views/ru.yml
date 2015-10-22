@@ -80,6 +80,9 @@ ru:
       read_comments: "Комментарии этого пользователя"
       read_patterns: "Образы сна от этого пользователя"
       it_is_you: "Это вы"
+    dreams:
+      title: "Сны пользователя %{user}, страница %{page}"
+      header: "Сны пользователя %{user}"
   posts:
     new:
       title: "Создать публикацию"
