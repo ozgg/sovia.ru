@@ -1,0 +1,7 @@
+<% if questions.any? %>
+    <% questions.each do |question| %>
+        <%= render partial: 'questions/preview', locals: { question: question } %>
+    <% end %>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

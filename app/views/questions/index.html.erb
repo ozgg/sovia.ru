@@ -15,12 +15,6 @@
   <h1><%= t('.header') %></h1>
 
   <%= paginate @collection %>
-  <% if @collection.any? %>
-      <% @collection.each do |question| %>
-          <%= render partial: 'preview', locals: { question: question } %>
-      <% end %>
-  <% else %>
-      <%= render 'shared/nothing_found' %>
-  <% end %>
+  <%= render partial: 'list', locals: { questions: @collection } %>
   <%= paginate @collection %>
 </article>

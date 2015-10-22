@@ -5,7 +5,7 @@
   </div>
   <div class="footer">
     <meta itemprop="answerCount" content="<%= question.comments_count %>" />
-    <%= render partial: 'controls', locals: { question: question } %>
+    <%= render partial: 'questions/controls', locals: { question: question } %>
     <div class="avatar"><%= comment_avatar(question.user) %></div>
     <%= render partial: 'shared/author', locals: { user: question.user } %>
     <%= render partial: 'shared/publication_time', locals: { time: question.created_at } %>
