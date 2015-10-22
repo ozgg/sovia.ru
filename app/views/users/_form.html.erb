@@ -52,6 +52,18 @@
       <%= f.label :allow_mail %>
     </div>
 
+    <fieldset>
+      <legend><%= t('.roles') %></legend>
+      <ul>
+        <% UserRole.roles.keys.each do |role| %>
+        <li>
+          <%= check_box_tag "roles[#{role}]", 1, @entity.has_role?(role) %>
+          <%= label_tag "roles_#{role}", role %>
+        </li>
+        <% end %>
+      </ul>
+    </fieldset>
+
     <div>
       <%= f.button t(:submit), type: :submit %>
     </div>

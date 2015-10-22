@@ -97,6 +97,6 @@ class UsersController < ApplicationController
   end
 
   def set_roles
-    @entity.roles = params.require(:user).permit(:roles)
+    @entity.roles = params[:roles].nil? ? Hash.new : params[:roles]
   end
 end
