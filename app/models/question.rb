@@ -21,6 +21,6 @@ class Question < ActiveRecord::Base
   end
 
   def title_for_view
-    I18n.t('questions.preview.question')
+    I18n.t('questions.preview.question', id: id)
   end
 end

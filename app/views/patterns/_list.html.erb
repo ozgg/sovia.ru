@@ -1,0 +1,9 @@
+<% if patterns.any? %>
+    <ul>
+      <% patterns.each do |pattern| %>
+          <li><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
