@@ -16,6 +16,14 @@ module UsersHelper
     end
   end
 
+  def profile_avatar(user)
+    if user.is_a?(User) && user.image.url
+      image_tag user.image.url
+    else
+      'p.a.'
+    end
+  end
+
   def dream_avatar(user)
     if user.is_a?(User) && user.image
       image_tag user.image.url

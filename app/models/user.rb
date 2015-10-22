@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_name
+    screen_name || uid
+  end
+
   def long_uid
     prefix = native? ? '' : network + '-'
     prefix + uid
