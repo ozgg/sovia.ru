@@ -1,0 +1,58 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <% if entity.image.url %>
+        <figure>
+          <%= link_to image_tag(entity.image.url), entity.image.url %>
+          <figcaption><%= t('activerecord.attributes.post.image') %></figcaption>
+        </figure>
+    <% end %>
+    <div>
+      <%= f.label :image %>
+      <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
+    </div>
+    <div>
+      <%= f.label :network %>
+      <%= f.select :network, networks_for_select %>
+    </div>
+    <div>
+      <%= f.label :uid %>
+      <%= f.text_field :uid, required: true, size: 30 %>
+    </div>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name, size: 50 %>
+    </div>
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, size: 50 %>
+    </div>
+    <div>
+      <%= f.label :screen_name %>
+      <%= f.text_field :screen_name, size: 50 %>
+    </div>
+    <div>
+      <%= f.label :gender %>
+      <%= f.select :gender, genders_for_select %>
+    </div>
+    <div>
+      <%= f.check_box :bot %>
+      <%= f.label :bot %>
+    </div>
+    <div>
+      <%= f.check_box :allow_login %>
+      <%= f.label :allow_login %>
+    </div>
+    <div>
+      <%= f.check_box :email_confirmed %>
+      <%= f.label :email_confirmed %>
+    </div>
+    <div>
+      <%= f.check_box :allow_mail %>
+      <%= f.label :allow_mail %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

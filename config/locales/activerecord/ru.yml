@@ -66,6 +66,9 @@ ru:
         allow_login: "пользволить вход"
         email_confirmed: "email подтверждён"
         allow_mail: "получать письма с сервера"
+        genders:
+          female: "женский"
+          male: "мужской"
       user_role:
         user_id: "пользователь"
         role: "роль"

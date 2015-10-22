@@ -1,4 +1,13 @@
 module UsersHelper
+  def networks_for_select
+    User.networks.keys.to_a.map { |network| [network, network] }
+  end
+
+  def genders_for_select
+    genders = [t(:not_selected), '']
+    genders + User.genders.keys.to_a.map { |gender| [I18n.t("activerecord.attributes.user.genders.#{gender}"), gender] }
+  end
+
   def user_link(user)
     if user.is_a? User
       text = user.screen_name || user.long_uid
