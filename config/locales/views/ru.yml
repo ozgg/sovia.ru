@@ -200,6 +200,8 @@ ru:
       grains: "Главные символы сна"
     archive:
       title: "Архив снов"
+    edit:
+      title: "Редактирование сна"
   codes:
     update:
       success: "Код успешно обновлён"

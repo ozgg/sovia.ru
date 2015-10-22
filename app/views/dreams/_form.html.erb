@@ -3,18 +3,18 @@
 <%= form_for entity do |f| %>
     <div>
       <div><%= f.label :title %></div>
-      <%= f.text_field :title, size: 50 %>
+      <%= f.text_field :title, size: 80 %>
     </div>
     <div>
       <div><%= f.label :body %></div>
-      <%= f.text_area :body, cols: 50, rows: 20, required: true %>
-    </div>
-    <div>
-      <div><%= label_tag :grains_string, t('.grains') %></div>
-      <%= text_area_tag :grains_string, entity.grains_string, cols: 50, rows: 3 %>
+      <%= f.text_area :body, cols: 80, rows: 20, required: true %>
     </div>
 
     <% if current_user.is_a?(User) && entity.id.blank? || entity.owned_by?(current_user) %>
+        <div>
+          <div><%= label_tag :grains_string, t('.grains') %></div>
+          <%= text_area_tag :grains_string, entity.grains_string, cols: 80, rows: 3 %>
+        </div>
         <div>
           <%= f.label :privacy %>
           <%= f.select :privacy, dream_privacy_options %>

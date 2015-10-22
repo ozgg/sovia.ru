@@ -17,13 +17,11 @@ Views:
  * tokens
  * browsers        
  * codes           
- * dreambook       
  * grains          
  * metrics         
  * places          
  * side_notes      
  * users
- * about
  * my/comments      
  * my/deeds         
  * my/goals         
@@ -43,6 +41,10 @@ Refactoring:
 
 Later:
 
+ * Advices for dream form
+ * Adjacent dreams
+ * Adjacent posts
+ * Statistics
  * Use grain link in my tagged dreams
  * Social log in
  * Sitemap
