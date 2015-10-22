@@ -83,6 +83,9 @@ ru:
     dreams:
       title: "Сны пользователя %{user}, страница %{page}"
       header: "Сны пользователя %{user}"
+    posts:
+      title: "Публикации пользователя %{user}, страница %{page}"
+      header: "Публикации пользователя %{user}"
   posts:
     new:
       title: "Создать публикацию"
