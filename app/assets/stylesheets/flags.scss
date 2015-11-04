@@ -1,0 +1,33 @@
+ul.flags {
+  margin: 0 0.5rem 0 0;
+  padding: 0;
+  height: 1.25rem;
+  float: left;
+
+  li {
+    list-style: none;
+    float: left;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: no-repeat 0 0 / 1.25rem 1.25rem;
+  }
+}
+
+
+.flags{
+  .bot {
+    background-image: image_url('icons/bot.png');
+
+    &.set {
+      background-image: image_url('icons/bot-set.png');
+    }
+  }
+
+  .mobile {
+    background-image: image_url('icons/mobile.png');
+
+    &.set {
+      background-image: image_url('icons/mobile-set.png');
+    }
+  }
+}
