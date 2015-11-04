@@ -1,2 +1,21 @@
-<h1>Admin#index</h1>
-<p>Find me in app/views/admin/index.html.erb</p>
+<% content_for :meta_title, t('.title') %>
+
+<article>
+  <h1><%= t('.title') %></h1>
+
+  <nav>
+    <ul>
+      <li><%= link_to t('browsers.index.header'), browsers_path %></li>
+      <li><%= link_to t('agents.index.header'), agents_path %></li>
+      <li><%= link_to t('clients.index.header'), clients_path %></li>
+      <li><%= link_to t('codes.index.header'), codes_path %></li>
+      <li><%= link_to t('comments.index.header'), comments_path %></li>
+      <li><%= link_to t('patterns.index.header'), patterns_path %></li>
+      <li><%= link_to t('side_notes.index.header'), side_notes_path %></li>
+      <li><%= link_to t('tags.index.header'), tags_path %></li>
+      <li><%= link_to t('tokens.index.header'), tokens_path %></li>
+      <li><%= link_to t('users.index.header'), users_path %></li>
+      <li><%= link_to t('violations.index.header'), violations_path %></li>
+    </ul>
+  </nav>
+</article>

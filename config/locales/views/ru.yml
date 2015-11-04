@@ -34,16 +34,23 @@ ru:
       success: "Браузер успешно изменён"
     delete:
       success: "Браузер успешно удалён"
+    index:
+      title: "Браузеры, страница %{page}"
+      header: "Браузеры"
   agents:
     update:
       success: "Агент успешно изменён"
     delete:
       success: "Агент успешно удалён"
+    index:
+      header: "Агенты пользователя"
   clients:
     update:
       success: "Клиент успешно изменён"
     delete:
       success: "Клиент успешно удалён"
+    index:
+      header: "Клиенты"
   tags:
     update:
       success: "Метка успешно изменена"
@@ -101,6 +108,8 @@ ru:
       title: "Добавить пользователя"
     form:
       roles: "Роли"
+    index:
+      header: "Пользователи"
   posts:
     new:
       title: "Создать публикацию"
@@ -207,6 +216,8 @@ ru:
     new:
       title: "Добавление комментария"
       description: "Страница с формой добавления комментария на Совии, сайте о снах."
+    index:
+      header: "Комментарии"
   dreams:
     index:
       title: "Сны, страница %{page}"
@@ -242,19 +253,27 @@ ru:
       success: "Код успешно обновлён"
     delete:
       success: "Код успешно удалён"
+    index:
+      header: "Коды"
   tokens:
     update:
       success: "Жетон успешно обновлён"
     delete:
       success: "Жетон успешно удалён"
+    index:
+      header: "Жетоны"
   side_notes:
     update:
       success: "Заметка успешно изменена"
     delete:
       success: "Заметка успешно удалена"
+    index:
+      header: "Заметки на полях"
   violations:
     delete:
       success: "Нарушение успешно удалено"
+    index:
+      header: "Нарушения"
   layouts:
     application:
       title: "Совия"
@@ -329,3 +348,6 @@ ru:
       title: "О проекте"
     features:
       title: "О проекте: возможности"
+  admin:
+    index:
+      title: "Администрирование"

@@ -1,0 +1,10 @@
+<% if current_user.is_a? User %>
+    <div>
+      <ul>
+        <% if current_user.has_role? :administrator %>
+        <li><%= link_to t('admin.index.title'), admin_path %></li>
+        <% end %>
+        <li>:)</li>
+      </ul>
+    </div>
+<% end %>
