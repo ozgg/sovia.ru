@@ -176,3 +176,20 @@ div.track {
   padding: 0.5rem;
   color: #404040;
 }
+
+div.flag {
+  background: #f0f0f0;
+  color: #777777;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  max-width: 10rem;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+
+  &.set {
+    background: #f0f7f0;
+    color: #003300;
+  }
+}

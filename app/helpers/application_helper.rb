@@ -13,4 +13,9 @@ module ApplicationHelper
   def link_to_delete(entity)
     link_to t(:delete), entity, method: :delete, data: { confirm: t(:are_you_sure) }
   end
+
+  def flag(text, set)
+    attributes = 'class="flag' + (set ? ' set' : '') + '"'
+    raw "<div #{attributes}>#{text}</div>"
+  end
 end
