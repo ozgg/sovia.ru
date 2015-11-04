@@ -1,8 +1,7 @@
 <article class="browser">
   <h1><%= browser.name %></h1>
 
-  <%= flag t('activerecord.attributes.browser.bot'), browser.bot? %>
-  <%= flag t('activerecord.attributes.browser.mobile'), browser.mobile? %>
+  <%= render partial: 'admin/flags', locals: { flags: browser.flags } %>
 
   <section>
     <h1><%= t('agents.index.header') %></h1>

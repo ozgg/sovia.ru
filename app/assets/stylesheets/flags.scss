@@ -30,4 +30,12 @@ ul.flags {
       background-image: image_url('icons/mobile-set.png');
     }
   }
+
+  .browser {
+    background-image: image_url('icons/brower.png');
+
+    &.set {
+      background-image: image_url('icons/browser-set.png');
+    }
+  }
 }

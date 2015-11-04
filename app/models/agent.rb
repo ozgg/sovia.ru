@@ -24,4 +24,20 @@ class Agent < ActiveRecord::Base
     criterion = { name: name[0..254] }
     self.find_by(criterion) || self.create(criterion)
   end
+
+  def text_for_list
+    if name.length < 50
+      name
+    else
+      name[0..25] + '…' + name[-25..-1]
+    end
+  end
+
+  def flags
+    {
+        browser: !browser_id.nil?,
+        bot: bot?,
+        mobile: mobile?
+    }
+  end
 end

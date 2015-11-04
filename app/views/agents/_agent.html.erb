@@ -1,0 +1,9 @@
+<article class="agent">
+  <h1><%= agent.text_for_list %></h1>
+
+  <%= render partial: 'admin/flags', locals: { flags: agent.flags } %>
+  <% unless agent.browser.blank? %>
+      <p><%= link_to agent.browser.text_for_list, agent.browser %></p>
+  <% end %>
+  <p><%= agent.name %></p>
+</article>

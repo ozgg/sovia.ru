@@ -6,8 +6,10 @@ class Browser < ActiveRecord::Base
 
   PER_PAGE = 25
 
+  scope :by_name, -> { order 'name asc' }
+
   def self.page_for_administrator(current_page)
-    order('name asc').page(current_page).per(PER_PAGE)
+    by_name.page(current_page).per(PER_PAGE)
   end
 
   def flags
