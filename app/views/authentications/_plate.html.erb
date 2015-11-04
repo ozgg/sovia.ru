@@ -1,2 +1,2 @@
-<%= user.screen_name %>
+<%= link_to current_user.profile_name, my_profile_path %>
 <%= link_to t('.logout'), logout_path, method: :delete %>

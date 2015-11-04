@@ -78,3 +78,39 @@ article.recovery {
     }
   }
 }
+
+article.edit-user {
+  form {
+    figure {
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      img {
+        max-width: 20rem;
+        max-height: 20rem;
+      }
+
+      figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 2rem;
+        background: rgba(127, 127, 127, 0.5);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+    }
+  }
+}

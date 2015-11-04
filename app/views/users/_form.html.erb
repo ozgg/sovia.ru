@@ -1,10 +1,10 @@
 <%= render partial: 'shared/errors_list', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <% if entity.image.url %>
+    <% unless entity.image.blank? %>
         <figure>
           <%= link_to image_tag(entity.image.url), entity.image.url %>
-          <figcaption><%= t('activerecord.attributes.post.image') %></figcaption>
+          <figcaption><%= t(:current_image) %></figcaption>
         </figure>
     <% end %>
     <div>
@@ -58,7 +58,7 @@
         <% UserRole.roles.keys.each do |role| %>
         <li>
           <%= check_box_tag "roles[#{role}]", 1, @entity.has_role?(role) %>
-          <%= label_tag "roles_#{role}", role %>
+          <%= label_tag "roles_#{role}", t("activerecord.attributes.user_role.roles.#{role}") %>
         </li>
         <% end %>
       </ul>

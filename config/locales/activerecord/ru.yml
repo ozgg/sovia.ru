@@ -72,6 +72,9 @@ ru:
       user_role:
         user_id: "пользователь"
         role: "роль"
+        roles:
+          administrator: "Администратор"
+          moderator: "Модератор"
       post:
         user_id: "автор"
         agent_id: "АП"
