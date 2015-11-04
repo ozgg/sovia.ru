@@ -1,0 +1,24 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <div>
+      <%= f.label :category %>
+      <%= f.select :category, code_categories_for_select %>
+    </div>
+    <div>
+      <%= f.label :user_id %>
+      <%= f.number_field :user_id, min: 1, required: true %>
+    </div>
+    <div>
+      <div><%= f.label :body %></div>
+      <%= f.text_field :body, required: true, size: 80 %>
+    </div>
+    <div>
+      <div><%= f.label :payload %></div>
+      <%= f.text_field :payload, size: 80 %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

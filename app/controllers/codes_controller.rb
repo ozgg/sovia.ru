@@ -3,7 +3,7 @@ class CodesController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Code.order('id desc').page(current_page).per(25)
+    @collection = Code.page_for_administrator current_page
   end
 
   def new

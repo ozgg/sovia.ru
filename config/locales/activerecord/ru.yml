@@ -208,6 +208,9 @@ ru:
         activated: "активирован"
         body: "код"
         payload: "полезная нагрузка"
+        categories:
+          confirmation: "Подтверждение почты"
+          recovery: "Сброс пароля"
       token:
         user_id: "пользователь"
         client_id: "клиент"

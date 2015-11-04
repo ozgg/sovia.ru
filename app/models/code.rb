@@ -11,6 +11,14 @@ class Code < ActiveRecord::Base
 
   after_initialize :generate_body
 
+  PER_PAGE = 25
+
+  scope :recent, -> { order 'id desc' }
+
+  def self.page_for_administrator(current_page)
+    recent.page(current_page).per(PER_PAGE)
+  end
+
   # @param [User] user
   def self.recovery_for_user(user)
     parameters = { user: user, category: categories[:recovery], activated: false }
@@ -29,6 +37,16 @@ class Code < ActiveRecord::Base
   # @param [Agent] agent
   def track!(ip, agent)
     update! ip: ip, agent: agent
+  end
+
+  def flags
+    {
+        active: !activated?
+    }
+  end
+
+  def text_for_list
+    "#{category}: #{user.long_uid}, #{created_at.pubdate}"
   end
 
   protected

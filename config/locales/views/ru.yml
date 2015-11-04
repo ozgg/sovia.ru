@@ -275,6 +275,13 @@ ru:
       success: "Код успешно удалён"
     index:
       header: "Коды"
+      title: "Коды, страница %{page}"
+    edit:
+      title: "Редактирование кода"
+    new:
+      title: "Новый код"
+    show:
+      title: "Код «%{body}»"
   tokens:
     update:
       success: "Жетон успешно обновлён"

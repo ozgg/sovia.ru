@@ -13,6 +13,9 @@ ul.flags {
   }
 }
 
+article > ul.flags {
+  float: none;
+}
 
 .flags{
   .bot {
