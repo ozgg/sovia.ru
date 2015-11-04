@@ -1,0 +1,20 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <div>
+      <div><%= f.label :name %></div>
+      <%= f.text_field :name, required: true, size: 80 %>
+    </div>
+    <div>
+      <%= f.check_box :bot %>
+      <%= f.label :bot %>
+    </div>
+    <div>
+      <%= f.check_box :mobile %>
+      <%= f.label :mobile %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

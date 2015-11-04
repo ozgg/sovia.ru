@@ -1,0 +1,15 @@
+<article class="browser">
+  <h1><%= browser.name %></h1>
+
+  <% if browser.bot? %>
+      <div class="flag"><%= t('activerecord.attributes.browser.bot') %></div>
+  <% end %>
+  <% if browser.mobile? %>
+      <div class="flag"><%= t('activerecord.attributes.browser.mobile') %></div>
+  <% end %>
+
+  <section>
+    <h1><%= t('agents.index.header') %></h1>
+    <%= render partial: 'admin/list_of_entities', locals: { collection: browser.agents } %>
+  </section>
+</article>

@@ -37,6 +37,12 @@ ru:
     index:
       title: "Браузеры, страница %{page}"
       header: "Браузеры"
+    new:
+      title: "Новый браузер"
+    show:
+      title: "Браузер %{name}"
+    edit:
+      title: "Редактирование браузера"
   agents:
     update:
       success: "Агент успешно изменён"
