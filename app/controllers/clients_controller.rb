@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Client.order('name asc').page(current_page).per(25)
+    @collection = Client.page_for_administrator current_page
   end
 
   def new
@@ -20,11 +20,9 @@ class ClientsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def update

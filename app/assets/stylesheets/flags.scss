@@ -38,4 +38,12 @@ ul.flags {
       background-image: image_url('icons/browser-set.png');
     }
   }
+
+  .active {
+    background-image: image_url('icons/active.png');
+
+    &.set {
+      background-image: image_url('icons/active-set.png');
+    }
+  }
 }

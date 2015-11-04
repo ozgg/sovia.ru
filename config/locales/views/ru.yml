@@ -64,6 +64,13 @@ ru:
       success: "Клиент успешно удалён"
     index:
       header: "Клиенты"
+      title: "Клиенты, страница %{page}"
+    new:
+      title: "Добавить клиента"
+    edit:
+      title: "Редактирование клиента"
+    show:
+      title: "Клиент «%{name}»"
   tags:
     update:
       success: "Метка успешно изменена"

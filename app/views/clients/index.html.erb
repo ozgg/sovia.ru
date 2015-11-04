@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <div>
+      <ul>
+        <li><%= link_to t(:create), new_client_path %></li>
+      </ul>
+    </div>
+<% end %>
+
+<article class="clients">
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'admin/list_of_entities', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

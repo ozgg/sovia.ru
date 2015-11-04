@@ -1,0 +1,12 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :sidebar do %>
+    <div class="options">
+      <ul>
+        <li><%= link_to t(:list), clients_path %></li>
+        <li><%= link_to t(:edit), edit_client_path(@entity) %></li>
+        <li><%= link_to t(:create), new_client_path %></li>
+      </ul>
+    </div>
+<% end %>
+
+<%= render @entity %>

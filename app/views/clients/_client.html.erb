@@ -1,0 +1,5 @@
+<article class="client">
+  <h1><%= client.name %></h1>
+  <%= render partial: 'admin/flags', locals: { flags: client.flags } %>
+  <p><%= client.secret %></p>
+</article>

@@ -1,7 +1,5 @@
 Views:
 
- * agents          
- * clients         
  * comments        
  * dreams          
  * index           
@@ -15,7 +13,6 @@ Views:
  * patterns        
  * questions       
  * tokens
- * browsers        
  * codes           
  * grains          
  * metrics         
