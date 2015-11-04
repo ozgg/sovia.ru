@@ -40,6 +40,10 @@ Rails.application.routes.draw do
     get '/' => 'index#index'
   end
 
+  scope 'admin', controller: :admin do
+    get '/' => :index, as: :admin
+  end
+
   # Scope of certain user
   scope 'u/(:uid)', controller: :users do
     get '/' => :profile, as: :user_profile

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'has_location' do
+RSpec.shared_examples_for 'has_location' do
   let(:model) { described_class.to_s.underscore.to_sym }
   let(:entity) { build model }
 

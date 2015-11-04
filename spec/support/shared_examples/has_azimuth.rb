@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'has_azimuth' do
+RSpec.shared_examples_for 'has_azimuth' do
   let(:model) { described_class.to_s.underscore.to_sym }
 
   it 'fails for azimuth greater than 359' do

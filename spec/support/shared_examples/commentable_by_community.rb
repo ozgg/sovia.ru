@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'commentable_by_community' do
+RSpec.shared_examples_for 'commentable_by_community' do
   let(:model) { described_class.to_s.underscore.to_sym }
 
   describe '#commentable_by?' do

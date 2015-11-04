@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'finds_by_name' do
+RSpec.shared_examples_for 'finds_by_name' do
   let(:model) { described_class.to_s.underscore.to_sym }
 
   describe '#match_by_name' do

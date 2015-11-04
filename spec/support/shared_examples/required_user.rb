@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for 'required_user' do
+RSpec.shared_examples_for 'required_user' do
   let(:model) { described_class }
 
   it 'is invalid without user' do
