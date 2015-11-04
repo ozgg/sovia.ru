@@ -10,6 +10,13 @@ class Browser < ActiveRecord::Base
     order('name asc').page(current_page).per(PER_PAGE)
   end
 
+  def flags
+    {
+        bot:    bot?,
+        mobile: mobile?
+    }
+  end
+
   def text_for_list
     name
   end

@@ -177,19 +177,36 @@ div.track {
   color: #404040;
 }
 
-div.flag {
-  background: #f0f0f0;
-  color: #777777;
-  padding: 0 0.5rem;
-  font-size: 0.8rem;
-  max-width: 10rem;
+ul.entities {
+  margin: 0;
+  padding: 0;
 
-  &:first-letter {
-    text-transform: uppercase;
+  > li {
+    margin: 0 0 0.3rem 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.25rem;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    > div {
+      display: inline-block;
+    }
   }
+}
 
-  &.set {
-    background: #f0f7f0;
-    color: #003300;
+ul.flags {
+  margin: 0 0.5rem 0 0;
+  padding: 0;
+  height: 1.25rem;
+  float: left;
+
+  li {
+    list-style: none;
+    float: left;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }

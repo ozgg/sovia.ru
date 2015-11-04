@@ -1,0 +1,5 @@
+<ul class="flags">
+  <% flags.each do |flag, set| %>
+      <li class="<%= flag %><%= ' set' if set %>"></li>
+  <% end %>
+</ul>

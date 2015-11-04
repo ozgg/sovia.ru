@@ -1,7 +1,10 @@
 <% if collection.any? %>
-    <ul>
+    <ul class="entities">
       <% collection.each do |entity| %>
-          <li><%= link_to entity.text_for_list, entity %></li>
+          <li>
+            <%= render partial: 'admin/flags', locals: { flags: entity.flags } if entity.respond_to? :flags %>
+            <div><%= link_to entity.text_for_list, entity %></div>
+          </li>
       <% end %>
     </ul>
 <% else %>
