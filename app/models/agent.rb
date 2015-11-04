@@ -14,6 +14,10 @@ class Agent < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  PER_PAGE = 25
+
+  scope :by_name, -> { order 'name asc' }
+
   # Get instance of Agent for given string
   #
   # Trims agent name upto 255 characters
@@ -23,6 +27,10 @@ class Agent < ActiveRecord::Base
   def self.for_string(name)
     criterion = { name: name[0..254] }
     self.find_by(criterion) || self.create(criterion)
+  end
+
+  def self.page_for_administrator(current_page)
+    by_name.page(current_page).per(PER_PAGE)
   end
 
   def text_for_list

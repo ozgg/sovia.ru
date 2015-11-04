@@ -3,7 +3,7 @@ class AgentsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Agent.order('name asc').page(current_page).per(25)
+    @collection = Agent.page_for_administrator current_page
   end
 
   def new
