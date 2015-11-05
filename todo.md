@@ -9,7 +9,6 @@ Views:
  * deeds           
  * goals           
  * layouts         
- * patterns        
  * questions       
  * tokens
  * codes           

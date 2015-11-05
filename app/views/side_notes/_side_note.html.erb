@@ -1,0 +1,19 @@
+<article class="side-note">
+  <h1><%= side_note.title %></h1>
+  <div class="body">
+    <% unless side_note.image.blank? %>
+        <figure><%= link_to image_tag(side_note.image.medium.url, alt: side_note.title), side_note.link %></figure>
+    <% end %>
+    <%= raw prepare_side_note_text(side_note) %>
+  </div>
+  <div class="footer">
+    <div class="avatar">
+      <%= raw comment_avatar(side_note.user) %>
+    </div>
+    <%= render partial: 'shared/author', locals: { user: side_note.user } %>
+    <%= render partial: 'shared/time', locals: { time: side_note.created_at } %>
+  </div>
+  <%= render 'shared/track_data', item: side_note %>
+
+  <%= render partial: 'comments/list', locals: { commentable: side_note, comments: side_note.comments } %>
+</article>

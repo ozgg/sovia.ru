@@ -2,12 +2,12 @@ class SideNotesController < ApplicationController
   before_action :restrict_anonymous_access, except: [:index, :show]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
   before_action :restrict_editing, only: [:edit, :update, :destroy]
-  
+
   def index
     if current_user_has_role? :administrator
-      @collection = SideNote.order('id desc').page(current_page).per(25)
+      @collection = SideNote.page_for_administrator current_page
     else
-      @collection = SideNote.visible.order('id desc').page(current_page).per(25)
+      @collection = SideNote.page_for_users current_page
     end
   end
 
@@ -61,7 +61,7 @@ class SideNotesController < ApplicationController
 
   def entity_parameters
     parameters = SideNote.parameters_for_users
-    parameters.merge SideNote.parameters_for_administrators if current_user_has_role? :administrator
+    parameters += SideNote.parameters_for_administrators if current_user_has_role? :administrator
     params.require(:side_note).permit(parameters)
   end
 

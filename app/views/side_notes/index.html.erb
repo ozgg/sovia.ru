@@ -1,0 +1,19 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <% if current_user.is_a? User %>
+        <div class="options">
+          <ul>
+            <li><%= link_to t(:create), new_side_note_path %></li>
+          </ul>
+        </div>
+    <% end %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="side-notes">
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

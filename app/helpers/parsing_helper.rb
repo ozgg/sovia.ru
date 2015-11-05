@@ -60,6 +60,16 @@ module ParsingHelper
     buffer
   end
 
+  # Prepare side note text for views
+  #
+  # @param [SideNote] side_note
+  # @return [String]
+  def prepare_side_note_text(side_note)
+    buffer = ''
+    side_note.body.split("\n").each { |string| buffer += parse_side_note_string string.squeeze }
+    buffer
+  end
+
   # Parse fragments like [dream 123](link text)
   #
   # @param [String] string
@@ -229,5 +239,13 @@ module ParsingHelper
   def fragments_for_pattern(string)
     quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
     parse_pattern_links quoted_string
+  end
+
+  def parse_side_note_string(string)
+    if string.blank?
+      ''
+    else
+      '<p>' + string.gsub('<', '&lt;').gsub('>', '&gt;') + '</p>'
+    end
   end
 end

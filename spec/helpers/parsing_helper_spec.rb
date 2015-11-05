@@ -186,10 +186,6 @@ RSpec.describe ParsingHelper, type: :helper do
     end
   end
 
-  describe '#prepare_post_text' do
-    pending
-  end
-
   describe '#prepare_pattern_text' do
     let(:pattern) { create :pattern, description: 'Какое-то толкование' }
 
@@ -252,5 +248,13 @@ RSpec.describe ParsingHelper, type: :helper do
       expect(helper).to receive(:parse_post_links).and_call_original
       helper.prepare_question_text question, nil
     end
+  end
+
+  describe '#prepare_post_text' do
+    pending
+  end
+
+  describe '#prepare_side_note_text' do
+    pending
   end
 end

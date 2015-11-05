@@ -9,7 +9,18 @@ class SideNote < ActiveRecord::Base
 
   mount_uploader :image, SideNoteUploader
 
+  PER_PAGE = 25
+
   scope :visible, -> { where active: true }
+  scope :recent, -> { order 'id desc' }
+
+  def self.page_for_administrator(current_page)
+    recent.page(current_page).per(PER_PAGE)
+  end
+
+  def self.page_for_users(current_page)
+    visible.recent.page(current_page).per(PER_PAGE)
+  end
 
   def self.parameters_for_users
     [:image, :link, :title, :body]
@@ -21,5 +32,11 @@ class SideNote < ActiveRecord::Base
 
   def editable_by?(user)
     owned_by?(user) || UserRole.user_has_role?(user, :administrator)
+  end
+
+  def flags
+    {
+        active: active?
+    }
   end
 end
