@@ -46,3 +46,9 @@ ru:
   see_also: "См. также"
   not_selected: "Не выбрано"
   current_image: "Текущая картинка"
+  insufficient_rights: "Не хватает прав для просмотра"
+  comments:
+    edit:
+      title: "Редактирование комментария"
+    show:
+      title: "Комментарий №%{id}"

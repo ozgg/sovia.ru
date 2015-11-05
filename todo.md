@@ -1,6 +1,5 @@
 Views:
 
- * comments        
  * dreams          
  * index           
  * posts           
@@ -45,6 +44,7 @@ Later:
  * Use grain link in my tagged dreams
  * Social log in
  * Sitemap
+ * My tokens
  * Mentions of user
  * Notifications
  * Favorites
@@ -55,3 +55,4 @@ Later:
  * Posts of user as resource
  * Questions of user as resource
  * Comments of user as resource
+ * Output "best" dream comments as interpretation

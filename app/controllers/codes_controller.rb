@@ -56,6 +56,6 @@ class CodesController < ApplicationController
 
   def creation_parameters
     parameters = params.require(:code).permit(:user_id, :category)
-    entity_parameters.merge parameters
+    entity_parameters.merge(parameters).merge(tracking_for_entity)
   end
 end

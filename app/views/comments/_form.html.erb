@@ -8,6 +8,16 @@
     </div>
     <div><%= f.label :body %></div>
     <div><%= f.text_area :body, required: true, cols: 80, rows: 7 %></div>
+    <% if current_user_has_role? :administrator %>
+        <div>
+          <%= f.check_box :visible %>
+          <%= f.label :visible %>
+        </div>
+        <div>
+          <%= f.check_box :best %>
+          <%= f.label :best %>
+        </div>
+    <% end %>
     <div>
       <%= f.button t(:submit), type: 'submit' %>
     </div>

@@ -12,6 +12,7 @@
   </div>
 
   <div class="actions">
+    <%= render partial: 'admin/flags', locals: { flags: comment.flags } %>
     <div class="edit"><%= link_to t(:view), comment %></div>
     <div class="edit"><%= link_to t(:edit), edit_comment_path(comment) %></div>
   </div>

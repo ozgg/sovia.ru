@@ -49,4 +49,20 @@ article > ul.flags {
       background-image: image_url('icons/active-set.png');
     }
   }
+
+  .best {
+    background-image: image_url('icons/best.png');
+
+    &.set {
+      background-image: image_url('icons/best-set.png');
+    }
+  }
+
+  .visible {
+    background-image: image_url('icons/active.png');
+
+    &.set {
+      background-image: image_url('icons/active-set.png');
+    }
+  }
 }

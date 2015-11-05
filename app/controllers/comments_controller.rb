@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Comment.order('id desc').page(current_page).per(25)
+    @collection = Comment.page_for_administrator current_page
   end
 
   def new
@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
   end
 
   def entity_parameters
-    parameters = params.require(:comment).permit(:commentable_id, :commentable_type, :parent_id, :best, :body)
+    parameters = params.require(:comment).permit(:commentable_id, :commentable_type, :parent_id, :best, :body, :visible)
     unless current_user_has_role? :administrator
       %i(visible best).each { |parameter| parameters.reject! parameter if parameters.include? parameter }
     end

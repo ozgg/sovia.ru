@@ -2,7 +2,7 @@
   <% if comments.any? %>
       <h1><%= t(:comments_list) %></h1>
 
-      <% comments.order('id asc').each do |comment| %>
+      <% comments.recent.each do |comment| %>
           <%= render comment %>
       <% end %>
   <% end %>

@@ -14,6 +14,7 @@
 
   <div class="actions">
     <% if current_user_has_role? :administrator %>
+        <%= render partial: 'admin/flags', locals: { flags: comment.flags } %>
         <div class="edit"><%= link_to t(:edit), edit_comment_path(comment) %></div>
     <% end %>
     <% unless comment.commentable.is_a? Question %>

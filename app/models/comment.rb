@@ -5,11 +5,27 @@ class Comment < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   belongs_to :parent, class_name: Comment.to_s
   belongs_to :commentable, polymorphic: true, counter_cache: true
+  has_many :comments, foreign_key: :parent_id, dependent: :nullify
 
   validates_presence_of :commentable, :body
   validate :parent_matches
   validate :commentable_is_visible
   validate :commentable_is_commentable
+
+  PER_PAGE = 20
+
+  scope :recent, -> { order 'id desc' }
+
+  def self.page_for_administrator(current_page)
+    recent.page(current_page).per(PER_PAGE)
+  end
+
+  def flags
+    {
+        visible: visible?,
+        best: best?
+    }
+  end
 
   def notify_entry_owner?
     if parent.is_a?(Comment) && commentable.owned_by?(parent.user)

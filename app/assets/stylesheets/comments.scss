@@ -27,7 +27,7 @@ div.comment {
 
   .header {
     height: 3rem;
-    background: #F7F7F7;
+    background: #F7F7F7 no-repeat right top / 1.25rem 1.25rem;
     line-height: 1.5rem;
 
     .avatar {
@@ -46,16 +46,20 @@ div.comment {
     }
   }
 
+  &.best .header {
+    background-image: image_url('icons/best-set.png');
+  }
+
   .body {
     padding: 0.5rem;
   }
 
   .actions {
     background: #f7f7f7;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
 
     .edit {
-      padding: 0.3rem 0.5rem;
+      padding: 0.25rem 0.5rem;
       display: inline-block;
       border: outset 1px;
       font-size: 0.9rem;
@@ -75,5 +79,16 @@ div.comment {
       padding: 0.5rem 0 0 0;
       margin: 0;
     }
+  }
+}
+
+article.comment {
+  .header {
+    background: #F7F7F7;
+    font-size: 0.9rem;
+  }
+
+  .body {
+    padding: 0.5rem;
   }
 }
