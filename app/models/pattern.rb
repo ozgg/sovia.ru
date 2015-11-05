@@ -17,6 +17,7 @@ class Pattern < ActiveRecord::Base
   scope :starting_with, ->(letter) { where 'slug ilike ?', "#{letter}%" }
   scope :good_for_dreambook, -> { where 'description is not null or dream_count > 0' }
   scope :for_queue, -> { where("description is null or description = ''").order('dream_count desc, slug asc') }
+  scope :by_slug, -> { order 'slug asc' }
 
   PER_PAGE = 50
 
@@ -28,12 +29,20 @@ class Pattern < ActiveRecord::Base
     if query.blank?
       []
     else
-      self.where('slug like ?', "%#{query}%").order('slug asc').limit(PER_PAGE)
+      self.where('slug like ?', "%#{query}%").by_slug.limit(PER_PAGE)
     end
   end
 
   def self.dreambook_page(letter, current_page)
-    self.starting_with(letter).good_for_dreambook.order('slug asc').page(current_page).per(PER_PAGE)
+    self.starting_with(letter).good_for_dreambook.by_slug.page(current_page).per(PER_PAGE)
+  end
+
+  def self.page_for_administrator(current_page)
+    by_slug.page(current_page).per(25)
+  end
+
+  def self.queue_page_for_administrator(current_page)
+    for_queue.page(current_page).per(PER_PAGE)
   end
 
   # @param [Hash] links
@@ -53,8 +62,10 @@ class Pattern < ActiveRecord::Base
     name.first
   end
 
-  def title_for_view
-    name
+  def flags
+    {
+        described: !description.blank?
+    }
   end
 
   protected

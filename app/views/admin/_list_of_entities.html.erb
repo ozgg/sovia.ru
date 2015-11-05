@@ -3,7 +3,7 @@
       <% collection.each do |entity| %>
           <li>
             <%= render partial: 'admin/flags', locals: { flags: entity.flags } if entity.respond_to? :flags %>
-            <div><%= link_to entity.text_for_list, entity %></div>
+            <div><%= link_to entity.respond_to?(:text_for_list) ? entity.text_for_list : entity.name, entity %></div>
           </li>
       <% end %>
     </ul>

@@ -35,7 +35,7 @@ article > ul.flags {
   }
 
   .browser {
-    background-image: image_url('icons/brower.png');
+    background-image: image_url('icons/browser.png');
 
     &.set {
       background-image: image_url('icons/browser-set.png');
@@ -51,6 +51,14 @@ article > ul.flags {
   }
 
   .best {
+    background-image: image_url('icons/best.png');
+
+    &.set {
+      background-image: image_url('icons/best-set.png');
+    }
+  }
+
+  .described {
     background-image: image_url('icons/best.png');
 
     &.set {

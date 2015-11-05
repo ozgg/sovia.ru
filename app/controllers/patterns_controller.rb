@@ -4,9 +4,9 @@ class PatternsController < ApplicationController
 
   def index
     if params[:queue]
-      @collection = Pattern.for_queue.page(current_page).per(25)
+      @collection = Pattern.queue_page_for_administrator current_page
     else
-      @collection = Pattern.order('slug asc').page(current_page).per(25)
+      @collection = Pattern.page_for_administrator current_page
     end
   end
 

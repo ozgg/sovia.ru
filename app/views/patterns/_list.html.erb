@@ -1,7 +1,10 @@
 <% if patterns.any? %>
-    <ul>
+    <ul class="entities">
       <% patterns.each do |pattern| %>
-          <li><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</li>
+          <li>
+            <%= render partial: 'admin/flags', locals: { flags: pattern.flags } %>
+            <div><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</div>
+          </li>
       <% end %>
     </ul>
 <% else %>
