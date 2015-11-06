@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
 
   def uid_should_be_valid
     if native?
-      pattern = /\A[a-z0-9_]{1,30}\z/
+      pattern = /\A[a-z0-9_]{1,18}\z/
       errors.add(:uid, I18n.t('activerecord.errors.models.user.attributes.uid.invalid')) unless uid =~ pattern
     end
   end

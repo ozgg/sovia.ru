@@ -1,8 +1,8 @@
 html {
   margin: 0;
-  padding: 0;
-  background: #271f1d image_url('moon.png') no-repeat 0 0;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  padding: 0 0 0 2rem;
+  background: #181017 image_url('background.jpg') no-repeat 0 0 / 28.5em 22.5em;
+  font-family: "PT Serif", "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 16px;
 }
 
@@ -45,7 +45,7 @@ form {
   }
 
   input, textarea, button {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-family: "PT Serif", "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 1rem;
   }
 
@@ -55,23 +55,22 @@ form {
 }
 
 body {
-  max-width: 75rem;
+  max-width: 52rem;
   min-width: 40rem;
-  margin: 0 auto;
+  margin: 0;
 
   > header {
-    height: 5rem;
-    position: relative;
+    height: 2rem;
 
     .logo {
-      width: calc(100% - 20rem);
-      height: 3rem;
+      float: left;
+      width: 10rem;
+      height: 2rem;
 
       img {
-        padding: 1rem 2rem 0;
         float: left;
-        max-width: 10rem;
-        max-height: 2rem;
+        width: 10rem;
+        height: 2rem;
       }
     }
   }
@@ -92,14 +91,12 @@ body {
 
 #content {
   position: relative;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem;
 }
 
 #main {
-  background: #ffffff;
-  min-width: 20rem;
-  max-width: calc(100% - 20rem);
+  background: #ffffff image_url('content-background.jpg') no-repeat 0 0 / 26rem 20rem;
   min-height: 20rem;
 
   > article {
@@ -113,7 +110,7 @@ body {
 
 nav.main {
   height: 2rem;
-  max-width: calc(100% - 20rem);
+  border-bottom: solid rgba(24, 131, 211, 0.8) 0.125rem;
 
   ul {
     margin: 0;
@@ -128,14 +125,17 @@ nav.main {
       a:link, a:visited {
         display: inline-block;
         height: 100%;
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         line-height: 2rem;
-        font-size: 1.2rem;
-        color: #F7F7F7;
+        font-size: 1.125rem;
+        color: #1883d3;
+        text-decoration: none;
       }
 
       a:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(24, 131, 211, 0.2);
+        text-decoration: underline;
+        color: #d46800;
       }
     }
   }
