@@ -5,22 +5,22 @@ a.profile {
   &.native {
     background-image: image_url('login/native.png');
   }
-}
 
-a.vk:after {
-  content: ' (vk)';
-}
+  &.vk {
+    background-image: image_url('login/vk.png');
+  }
 
-a.twitter:after {
-  content: ' (tw)';
-}
+  &.twitter {
+    background-image: image_url('login/twitter.png');
+  }
 
-a.mail_ru:after {
-  content: ' (mail_ru)';
-}
+  &.fb {
+    background-image: image_url('login/fb.png');
+  }
 
-a.fb:after {
-  content: ' (fb)';
+  &.mail_ru {
+    background-image: image_url('login/mailru.png');
+  }
 }
 
 .user-profile {
