@@ -11,4 +11,10 @@ class Tag < ActiveRecord::Base
   def self.page_for_administrator(current_page)
     order('slug asc').page(current_page).per(PER_PAGE)
   end
+
+  def flags
+    {
+        active: post_count > 0
+    }
+  end
 end

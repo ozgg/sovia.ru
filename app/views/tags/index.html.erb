@@ -10,18 +10,7 @@
 <article class="tags">
   <h1><%= t('.header') %></h1>
 
-  <% paginate @collection %>
-  <% if @collection.any? %>
-      <ul>
-        <% @collection.each do |tag| %>
-            <li>
-              <%= link_to tag.name, tag %> (<%= tag.post_count %>)
-              [<%= link_to t(:edit), edit_tag_path(tag) %>]
-            </li>
-        <% end %>
-      </ul>
-  <% else %>
-      <%= render 'shared/nothing_found' %>
-  <% end %>
-  <% paginate @collection %>
+  <%= paginate @collection %>
+  <%= render partial: 'admin/list_of_entities', locals: { collection: @collection } %>
+  <%= paginate @collection %>
 </article>

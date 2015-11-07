@@ -6,7 +6,7 @@
           <li><%= link_to t(:create), new_tag_path %></li>
           <li><%= link_to t(:list), tags_path %></li>
           <li><%= link_to t(:edit), edit_tag_path(@entity) %></li>
-          <li><%= link_to t(:delete), @entity, method: :delete, data: { confirm: t(:are_you_sure) } %></li>
+          <li><%= link_to_delete @entity %></li>
         </ul>
       </nav>
     </div>
