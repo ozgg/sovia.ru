@@ -10,6 +10,14 @@ class Token < ActiveRecord::Base
   validates_presence_of :user_id
   validates_uniqueness_of :token
 
+  PER_PAGE = 25
+
+  scope :recent, -> { order 'id desc' }
+
+  def self.page_for_administrator(current_page)
+    recent.page(current_page).per(PER_PAGE)
+  end
+
   def self.user_by_token(input)
     unless input.blank?
       pair = input.split(':')
@@ -24,5 +32,19 @@ class Token < ActiveRecord::Base
 
   def cookie_pair
     "#{user_id}:#{token}"
+  end
+
+  def client_name
+    client_id.blank? ? 'web' : client.name
+  end
+
+  def text_for_list
+    "#{user.long_uid}, #{created_at.pubdate}"
+  end
+
+  def flags
+    {
+        active: active?
+    }
   end
 end

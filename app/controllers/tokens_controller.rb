@@ -3,7 +3,7 @@ class TokensController < ApplicationController
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @collection = Token.order('id desc').page(current_page).per(25)
+    @collection = Token.page_for_administrator current_page
   end
 
   def new

@@ -1,0 +1,24 @@
+<%= render partial: 'shared/errors_list', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :client_id %>
+          <%= f.select :client_id, clients_for_select %>
+        </div>
+        <div>
+          <%= f.label :user_id %>
+          <%= f.number_field :user_id, min: 1 %>
+        </div>
+    <% else %>
+        <div><%= entity.client_name %></div>
+        <div><%= user_link entity.user %></div>
+    <% end %>
+    <div>
+      <%= f.check_box :active %>
+      <%= f.label :active %>
+    </div>
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

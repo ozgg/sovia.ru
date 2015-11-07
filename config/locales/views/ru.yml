@@ -294,6 +294,13 @@ ru:
       success: "Жетон успешно удалён"
     index:
       header: "Жетоны"
+      title: "Жетоны, страница %{page}"
+    show:
+      title: "Жетон №%{id}"
+    new:
+      title: "Добавить жетон"
+    edit:
+      title: "Редактирование жетона"
   side_notes:
     update:
       success: "Заметка успешно изменена"
