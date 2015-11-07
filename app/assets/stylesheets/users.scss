@@ -1,5 +1,10 @@
-a.native:after {
-  content: ' (N)';
+a.profile {
+  padding-left: 1.25rem;
+  background: no-repeat 0 center / 1rem 1rem;
+
+  &.native {
+    background-image: image_url('login/native.png');
+  }
 }
 
 a.vk:after {
