@@ -3,7 +3,7 @@ class ViolationsController < ApplicationController
   before_action :set_entity, only: [:show, :destroy]
 
   def index
-    @collection = Violation.order('id desc').page(current_page).per(25)
+    @collection = Violation.page_for_administrator current_page
   end
 
   def show

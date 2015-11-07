@@ -1,0 +1,10 @@
+<article class="violation">
+  <h1><%= t('violations.show.title', id: violation.id) %></h1>
+  <section>
+    <h1><%= t("activerecord.attributes.violation.categories.#{violation.category}") %></h1>
+    <p><%= user_link(violation.user) %></p>
+    <p><%= violation.created_at.pubdate %></p>
+    <p><%= violation.body %></p>
+  </section>
+  <%= render partial: 'shared/track_data', locals: { item: violation } %>
+</article>

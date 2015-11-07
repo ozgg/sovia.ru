@@ -311,6 +311,9 @@ ru:
       success: "Нарушение успешно удалено"
     index:
       header: "Нарушения"
+      title: "Нарушения, страница %{page}"
+    show:
+      title: "Нарушение №%{id}"
   layouts:
     application:
       title: "Совия"

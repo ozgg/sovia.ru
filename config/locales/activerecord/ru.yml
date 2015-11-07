@@ -237,3 +237,6 @@ ru:
         ip: "IP-адрес"
         category: "категория"
         body: "текст"
+        categories:
+          dreams_spam: "Спам в описании сна"
+          comments_spam: "Спам в комментариях"

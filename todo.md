@@ -3,7 +3,6 @@ Views:
  * dreams          
  * index           
  * posts           
- * violations
  * code_sender     
  * deeds           
  * goals           
