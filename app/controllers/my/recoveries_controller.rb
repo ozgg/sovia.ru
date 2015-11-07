@@ -47,7 +47,7 @@ class My::RecoveriesController < ApplicationController
 
   def reset_password
     if @user.update new_user_parameters
-      create_token_for_user @user
+      create_token_for_user @user, tracking_for_entity
       @code.update! activated: true
       redirect_to root_path, notice: t('my.recoveries.update.success')
     else

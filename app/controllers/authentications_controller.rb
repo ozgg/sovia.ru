@@ -11,7 +11,7 @@ class AuthenticationsController < ApplicationController
   def create
     user = User.find_by network: 'native', uid: params[:login].to_s.downcase
     if user.is_a?(User) && user.authenticate(params[:password].to_s) && user.allow_login?
-      create_token_for_user user
+      create_token_for_user user, tracking_for_entity
       redirect_to root_path
     else
       flash.now[:notice] = t(:could_not_log_in)

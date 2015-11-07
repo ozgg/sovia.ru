@@ -11,7 +11,7 @@ RSpec.describe UsersHelper, type: :helper do
     context 'when user is native' do
       it 'renders link to profile with class "native"' do
         user = create :user
-        expected = link_to user.screen_name, user_profile_path(uid: user.uid), class: 'native user'
+        expected = link_to user.screen_name, user_profile_path(uid: user.uid), class: 'profile native'
         expect(helper.user_link(user)).to eq(expected)
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe UsersHelper, type: :helper do
     context 'when user is external' do
       it 'renders link to profile with network name as class' do
         user = create :user, network: :vk, uid: 'id1'
-        expected = link_to user.screen_name, user_profile_path(uid: user.long_uid), class: 'vk user'
+        expected = link_to user.screen_name, user_profile_path(uid: user.long_uid), class: 'profile vk'
         expect(helper.user_link(user)).to eq(expected)
       end
     end

@@ -39,7 +39,7 @@ class Token < ActiveRecord::Base
   end
 
   def text_for_list
-    "#{user.long_uid}, #{created_at.pubdate}"
+    "#{user.long_uid}, #{created_at.pubdate} (#{client_name})"
   end
 
   def flags
