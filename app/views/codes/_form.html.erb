@@ -1,14 +1,19 @@
 <%= render partial: 'shared/errors_list', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
-    <div>
-      <%= f.label :category %>
-      <%= f.select :category, code_categories_for_select %>
-    </div>
-    <div>
-      <%= f.label :user_id %>
-      <%= f.number_field :user_id, min: 1, required: true %>
-    </div>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :category %>
+          <%= f.select :category, code_categories_for_select %>
+        </div>
+        <div>
+          <%= f.label :user_id %>
+          <%= f.number_field :user_id, min: 1, required: true %>
+        </div>
+    <% else %>
+        <div><%= t("activerecord.attributes.code.categories.#{entity.category}") %></div>
+        <div><%= user_link entity.user %></div>
+    <% end %>
     <div>
       <div><%= f.label :body %></div>
       <%= f.text_field :body, required: true, size: 80 %>

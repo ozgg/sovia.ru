@@ -8,8 +8,6 @@ Views:
  * goals           
  * layouts         
  * questions       
- * tokens
- * codes           
  * grains          
  * metrics         
  * places          
