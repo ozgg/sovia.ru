@@ -1,4 +1,33 @@
-.authentication {
+article.authentication {
+  section {
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 0.25rem;
+      padding: 0;
+
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+
+  form {
+    label {
+      width: 4rem;
+    }
+  }
+}
+
+div.authentication {
   position: absolute;
   top: 0;
   right: 0;
@@ -93,3 +122,4 @@
     }
   }
 }
+

@@ -4,7 +4,6 @@ Views:
  * index           
  * posts           
  * violations
- * authentications 
  * code_sender     
  * deeds           
  * goals           

@@ -338,6 +338,20 @@ ru:
       mail_ru: "Войти через mail.ru"
     plate:
       logout: "Выйти"
+    new:
+      title: "Вход"
+    options:
+      native:
+        enter: "Войти"
+        header: "Если у вас есть логин и пароль"
+      social:
+        vk: "Войти через VKontakte"
+        twitter: "Войти через Twitter"
+        facebook: "Войти через Facebook"
+        mail_ru: "Войти через mail.ru"
+        header: "Если у вас есть аккаунт в социальных сетях"
+      other:
+        header: "Не получается войти?"
   index:
     index:
       title: "Сайт о снах"

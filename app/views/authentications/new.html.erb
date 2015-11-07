@@ -1,0 +1,12 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="authentication">
+  <h1><%= t('.title') %></h1>
+
+  <%= render 'authentications/options/social' %>
+  <%= render 'authentications/options/native' %>
+  <%= render 'authentications/options/other' %>
+</article>

@@ -99,46 +99,57 @@ body {
   background: #ffffff image_url('content-background.jpg') no-repeat 0 0 / 26rem 20rem;
   min-height: 20rem;
 
+  > nav.main {
+    height: 2rem;
+    border-bottom: solid rgba(24, 131, 211, 0.8) 0.125rem;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        padding: 0;
+        height: 2rem;
+
+        a:link, a:visited {
+          display: inline-block;
+          padding: 0 0.5rem;
+          line-height: 2rem;
+          font-size: 1.125rem;
+          color: #1883d3;
+          text-decoration: none;
+        }
+
+        a:hover {
+          background: rgba(24, 131, 211, 0.2);
+          text-decoration: underline;
+          color: #d46800;
+        }
+      }
+    }
+  }
+
   > article {
     padding: 0.5rem;
+
+    > h1 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    > section {
+      > h1 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+      }
+    }
   }
 }
 
 .not-found {
   color: #B00100;
-}
-
-nav.main {
-  height: 2rem;
-  border-bottom: solid rgba(24, 131, 211, 0.8) 0.125rem;
-
-  ul {
-    margin: 0;
-    padding: 0;
-
-    li {
-      list-style: none;
-      display: inline-block;
-      padding: 0;
-      height: 2rem;
-
-      a:link, a:visited {
-        display: inline-block;
-        height: 100%;
-        padding: 0 0.5rem;
-        line-height: 2rem;
-        font-size: 1.125rem;
-        color: #1883d3;
-        text-decoration: none;
-      }
-
-      a:hover {
-        background: rgba(24, 131, 211, 0.2);
-        text-decoration: underline;
-        color: #d46800;
-      }
-    }
-  }
 }
 
 div.social-buttons {
