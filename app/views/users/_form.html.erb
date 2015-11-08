@@ -11,10 +11,14 @@
       <%= f.label :image %>
       <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
     </div>
-    <div>
-      <%= f.label :network %>
-      <%= f.select :network, networks_for_select %>
-    </div>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :network %>
+          <%= f.select :network, networks_for_select %>
+        </div>
+    <% else %>
+        <div><%= t('activerecord.attributes.user.network') %>: <%= entity.network %></div>
+    <% end %>
     <div>
       <%= f.label :uid %>
       <%= f.text_field :uid, required: true, size: 30 %>
@@ -56,10 +60,10 @@
       <legend><%= t('.roles') %></legend>
       <ul>
         <% UserRole.roles.keys.each do |role| %>
-        <li>
-          <%= check_box_tag "roles[#{role}]", 1, @entity.has_role?(role) %>
-          <%= label_tag "roles_#{role}", t("activerecord.attributes.user_role.roles.#{role}") %>
-        </li>
+            <li>
+              <%= check_box_tag "roles[#{role}]", 1, @entity.has_role?(role) %>
+              <%= label_tag "roles_#{role}", t("activerecord.attributes.user_role.roles.#{role}") %>
+            </li>
         <% end %>
       </ul>
     </fieldset>
