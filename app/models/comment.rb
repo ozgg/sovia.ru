@@ -12,7 +12,7 @@ class Comment < ActiveRecord::Base
   validate :commentable_is_visible
   validate :commentable_is_commentable
 
-  PER_PAGE = 20
+  PER_PAGE = 10
 
   scope :recent, -> { order 'id desc' }
 

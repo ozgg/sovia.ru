@@ -1,0 +1,64 @@
+<article class="user">
+  <h1><%= user.long_uid %></h1>
+  <%= render partial: 'admin/flags', locals: { flags: user.flags } %>
+
+  <section>
+    <h1><%= user.profile_name %></h1>
+    <figure>
+      <%= profile_avatar user %>
+      <figcaption><%= user_link user %></figcaption>
+    </figure>
+    <table>
+      <caption><%= t('.account_data') %></caption>
+      <tbody>
+      <tr>
+        <th><%= t('activerecord.attributes.user.screen_name') %></th>
+        <td><%= user.screen_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.name') %></th>
+        <td><%= user.name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.inviter_id') %></th>
+        <td><%= user.inviter_id.nil? ? t(:not_set) : user_link(user.inviter) %></td>
+      </tr>
+      <tr>
+        <th><%= t(:created_at) %></th>
+        <td><%= user.created_at.pubdate %></td>
+      </tr>
+         <tr>
+        <th><%= t(:updated_at) %></th>
+        <td><%= user.updated_at.pubdate %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <td><%= user.email %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.gender') %></th>
+        <td><%= user.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{user.gender}") %></td>
+      </tr>
+      <tr>
+        <th><%= t('.contribution') %></th>
+        <td>
+          <%= link_to t(:dream, count: user.dreams_count), user_dreams_path(uid: user.long_uid) %>,
+          <%= link_to t(:post, count: user.posts_count), user_posts_path(uid: user.long_uid) %>,
+          <%= link_to t(:question, count: user.questions_count), user_questions_path(uid: user.long_uid) %>,
+          <%= link_to t(:comment, count: user.comments_count), user_comments_path(uid: user.long_uid) %>,
+          <%= link_to t(:pattern, count: user.patterns.count), user_patterns_path(uid: user.long_uid) %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.rating') %></th>
+        <td><%= user.rating %> (+<%= user.upvote_count %> / -<%= user.downvote_count %>)</td>
+      </tr>
+      <tr>
+        <th><%= t('users.form.roles') %></th>
+        <td><%= user_roles(user).join(', ') %></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+  <%= render partial: 'shared/track_data', locals: { item: user } %>
+</article>

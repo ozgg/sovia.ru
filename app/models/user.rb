@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :dreams, dependent: :delete_all
   has_many :tokens, dependent: :destroy
   has_many :side_notes, dependent: :destroy
+  belongs_to :inviter, class_name: User.to_s
 
   enum gender: [:female, :male]
   enum network: [:native, :vk, :twitter, :fb, :mail_ru]
@@ -27,6 +28,12 @@ class User < ActiveRecord::Base
   validate :email_should_be_reasonable
 
   mount_uploader :image, AvatarUploader
+
+  PER_PAGE = 25
+
+  def self.page_for_administrator(current_page)
+    order('network asc, uid asc').page(current_page).per(PER_PAGE)
+  end
 
   def self.with_long_uid(long_uid)
     parts = long_uid.split('-')
@@ -78,6 +85,17 @@ class User < ActiveRecord::Base
 
   def can_receive_letters?
     allow_mail? && email_confirmed? && !email.blank?
+  end
+
+  def text_for_list
+    "#{long_uid} (#{profile_name})"
+  end
+
+  def flags
+    {
+        active: allow_login?,
+        bot: bot?
+    }
   end
 
   protected

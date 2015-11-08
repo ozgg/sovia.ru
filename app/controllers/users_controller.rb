@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:profile, :posts, :dreams, :questions, :comments, :patterns]
 
   def index
-    @collection = User.order('network asc, uid asc').page(current_page).per(25)
+    @collection = User.page_for_administrator current_page
   end
 
   def new
@@ -51,19 +51,19 @@ class UsersController < ApplicationController
   end
 
   def posts
-    @posts = @user.posts.order('id desc').page(current_page).per(5)
+    @posts = @user.posts.recent.page(current_page).per(5)
   end
 
   def questions
-    @questions = @user.questions.order('id desc').page(current_page).per(5)
+    @questions = @user.questions.recent.page(current_page).per(5)
   end
 
   def comments
-    @comments = @user.comments.order('id desc').page(current_page).per(20)
+    @comments = @user.comments.recent.page(current_page).per(20)
   end
 
   def patterns
-    @patterns = @user.patterns.order('slug asc').page(current_page).per(25)
+    @patterns = @user.patterns.by_slug.page(current_page).per(25)
   end
 
   protected

@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   PER_PAGE = 25
 
   def self.page_for_administrator(current_page)
-    order('slug asc').page(current_page).per(PER_PAGE)
+    by_slug.page(current_page).per(PER_PAGE)
   end
 
   def flags

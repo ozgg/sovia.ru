@@ -47,6 +47,7 @@ ru:
         agent: "АП при регистрации"
         network: "сеть"
         user_id: "пользователь"
+        inviter_id: "кто пригласил"
         uid: "идентификатор"
         password: "пароль"
         password_confirmation: "подтверждение пароля"

@@ -5,6 +5,7 @@ module HasNameWithSlug
     validates_presence_of :name, :slug
 
     before_validation :normalize_name, :generate_slug
+    scope :by_slug, -> { order by 'slug asc' }
   end
 
   module ClassMethods

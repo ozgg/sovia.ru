@@ -17,6 +17,30 @@ ru:
     few: "%{count} ответа"
     many: "%{count} ответов"
     other: "%{count} ответов"
+  question:
+    zero: "вопросов нет"
+    one: "%{count} вопрос"
+    few: "%{count} вопроса"
+    many: "%{count} вопросов"
+    other: "%{count} вопросов"
+  dream:
+    zero: "снов нет"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
+  pattern:
+    zero: "образов сна нет"
+    one: "%{count} образ сна"
+    few: "%{count} образа сна"
+    many: "%{count} образов сна"
+    other: "%{count} образов сна"
+  post:
+    zero: "публикаций нет"
+    one: "%{count} публикация"
+    few: "%{count} публикации"
+    many: "%{count} публикаций"
+    other: "%{count} публикаций"
   error:
     zero: "ошибок нет"
     one: "%{count} ошибка"
@@ -47,3 +71,4 @@ ru:
   not_selected: "Не выбрано"
   current_image: "Текущая картинка"
   insufficient_rights: "Не хватает прав для просмотра"
+  not_set: "Не задано"

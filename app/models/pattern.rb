@@ -17,7 +17,6 @@ class Pattern < ActiveRecord::Base
   scope :starting_with, ->(letter) { where 'slug ilike ?', "#{letter}%" }
   scope :good_for_dreambook, -> { where 'description is not null or dream_count > 0' }
   scope :for_queue, -> { where("description is null or description = ''").order('dream_count desc, slug asc') }
-  scope :by_slug, -> { order 'slug asc' }
 
   PER_PAGE = 50
 
@@ -52,6 +51,10 @@ class Pattern < ActiveRecord::Base
       new_links += set_links_in_category(category, links[category]) if links.has_key? category
     end
     self.pattern_links = new_links
+  end
+
+  def title_for_view
+    name
   end
 
   def links

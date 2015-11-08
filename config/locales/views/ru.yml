@@ -130,6 +130,12 @@ ru:
       roles: "Роли"
     index:
       header: "Пользователи"
+      title: "Пользователи, страница %{page}"
+    show:
+      title: "Пользователь %{name}"
+    user:
+      account_data: "Данные аккаунта"
+      contribution: "Вклад в сообщество"
   posts:
     new:
       title: "Создать публикацию"

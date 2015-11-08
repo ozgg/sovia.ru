@@ -23,6 +23,37 @@ a.profile {
   }
 }
 
+article.user {
+  figure {
+    margin: 0;
+    padding: 0;
+
+    img {
+      max-width: 20rem;
+      max-height: 20rem;
+    }
+  }
+
+  table {
+    tr {
+      th {
+        text-align: left;
+        border-bottom: solid #f7f7f7 1px;
+        vertical-align: top;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
+
+      td {
+        vertical-align: top;
+        border-bottom: solid #f7f7f7 1px;
+      }
+    }
+  }
+}
+
 .user-profile {
   min-height: 20rem;
 
