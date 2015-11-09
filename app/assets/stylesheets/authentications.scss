@@ -62,3 +62,46 @@ div.authentication {
   }
 }
 
+form.login {
+  label {
+    width: 4rem;
+  }
+
+  .actions {
+    > div {
+      button {
+        float: left;
+        width: 4rem;
+        height: 1.75rem;
+      }
+
+      .external {
+        height: 1.75rem;
+        margin: 0 0 0 4.25rem;
+
+        > div {
+          float: left;
+          width: 1.75rem;
+          height: 1.75rem;
+          margin: 0 0.25rem;
+
+          img {
+            width: 1.75rem;
+            height: 1.75rem;
+          }
+        }
+      }
+    }
+
+    ul {
+      margin: 1rem 0 0 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
