@@ -1,0 +1,9 @@
+<div class="avatar">
+  <%= raw comment_avatar(author) %>
+</div>
+<span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name"><%= user_link author %></span>
+</span>
+<time itemprop="datePublished" content="<%= time.microformat_minutes %>" datetime="<%= time.w3c %>">
+  <%= time.pubdate %>
+</time>

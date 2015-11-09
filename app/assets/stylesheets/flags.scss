@@ -17,6 +17,11 @@ article > ul.flags {
   float: none;
 }
 
+article > .footer > ul.flags {
+  float: right;
+  margin: 0.375rem 0.5rem 0 0;
+}
+
 .flags{
   .bot {
     background-image: image_url('icons/bot.png');

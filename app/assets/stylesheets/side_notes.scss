@@ -1,9 +1,4 @@
 article.side-note {
-  > h1 {
-    padding: 0 0.5rem;
-    background: #f7f7f7;
-  }
-
   figure {
     float: right;
     margin: 0 0 0 0.5rem;
@@ -16,37 +11,7 @@ article.side-note {
   }
 
   > .body {
-    padding: 0.5rem;
     min-height: 22.5rem;
-  }
-
-  > .footer {
-    background: #f7f7f7;
-    padding: 0 0.5rem;
-    height: 2rem;
-
-    .avatar {
-      float: left;
-      width: 2rem;
-      height: 2rem;
-      margin-right: 1rem;
-
-      img {
-        max-width: 2rem;
-        max-height: 2rem;
-      }
-    }
-
-    .author {
-      line-height: 2rem;
-    }
-
-    time {
-      float: right;
-      font-size: 0.875rem;
-      font-style: italic;
-      line-height: 2rem;
-    }
   }
 }
 
