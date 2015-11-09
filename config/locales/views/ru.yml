@@ -352,7 +352,7 @@ ru:
       twitter: "Войти через Twitter"
       facebook: "Войти через Facebook"
       mail_ru: "Войти через mail.ru"
-    plate:
+    info:
       logout: "Выйти"
     new:
       title: "Вход"
