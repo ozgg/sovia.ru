@@ -55,7 +55,7 @@ form {
 }
 
 body {
-  max-width: 52rem;
+  max-width: 72rem;
   min-width: 40rem;
   margin: 0;
 
@@ -98,6 +98,8 @@ body {
 #main {
   background: #ffffff image_url('content-background.jpg') no-repeat 0 0 / 26rem 20rem;
   min-height: 20rem;
+  max-width: 51rem;
+  margin-right: 20rem;
 
   > nav.main {
     height: 2rem;

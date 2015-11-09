@@ -2,9 +2,13 @@
     <div>
       <ul>
         <% if current_user.has_role? :administrator %>
-        <li><%= link_to t('admin.index.title'), admin_path %></li>
+            <li><%= link_to t('admin.index.title'), admin_path %></li>
         <% end %>
         <li>:)</li>
       </ul>
+    </div>
+<% else %>
+    <div>
+      Для неавторизованного пользователя
     </div>
 <% end %>
