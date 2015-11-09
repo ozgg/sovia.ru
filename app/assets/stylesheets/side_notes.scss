@@ -12,6 +12,15 @@ article.side-note {
 
   > .body {
     min-height: 22.5rem;
+
+    .link {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
   }
 }
 
