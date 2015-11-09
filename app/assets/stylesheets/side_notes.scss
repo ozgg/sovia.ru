@@ -50,6 +50,32 @@ article.side-note {
   }
 }
 
+div.side-note {
+  .image {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .title {
+    margin: 0.5rem 1rem;
+    padding: 0.5rem;
+    background: rgba(24, 131, 211, 0.2);
+
+    a:link, a:visited {
+      color: #1883d3;
+    }
+
+    a:hover {
+      color: #d46800;
+    }
+  }
+
+  .discuss {
+    text-align: right;
+    font-size: 0.8125rem;
+  }
+}
+
 .side-note > img {
   max-width: 18rem;
   max-height: 27rem;

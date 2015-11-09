@@ -14,6 +14,13 @@ class SideNote < ActiveRecord::Base
   scope :visible, -> { where active: true }
   scope :recent, -> { order 'id desc' }
 
+  def self.random_note
+    max_offset = visible.count
+    if max_offset > 0
+      visible.offset(Time.now.to_i % max_offset).first
+    end
+  end
+
   def self.page_for_administrator(current_page)
     recent.page(current_page).per(PER_PAGE)
   end
