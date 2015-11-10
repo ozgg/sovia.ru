@@ -49,8 +49,9 @@ form {
     font-size: 1rem;
   }
 
-  input:invalid {
-    background: #f7f0f0;
+  input:invalid, textarea:invalid {
+    background: #fff7f7;
+    border-left: solid #ff8080 0.25rem;
   }
 }
 
@@ -146,40 +147,71 @@ body {
       padding: 0.5rem;
     }
 
-    > div.footer {
-      background: rgba(201, 181, 161, 0.3);
-      height: 2rem;
-
-      .avatar {
-        float: left;
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.5rem;
-
-        img {
-          max-width: 2rem;
-          max-height: 2rem;
-        }
-      }
-
-      .author {
-        font-size: 1rem;
-        line-height: 2rem;
-      }
-
-      time {
-        font-size: 0.75rem;
-        line-height: 2rem;
-        margin-left: 1rem;
-      }
-    }
-
     > section {
       > h1 {
         font-size: 1.25rem;
         line-height: 1.5rem;
       }
+
+      > section {
+        > h1 {
+          font-size: 1.25rem;
+          line-height: 1.5rem;
+          font-weight: normal;
+        }
+      }
     }
+  }
+}
+
+section.preview {
+  margin-bottom: 1rem;
+
+  > h1 {
+    padding: 0.5rem;
+    background: rgba(201, 181, 161, 0.2);
+  }
+
+  > .body {
+    padding: 0.5rem;
+  }
+
+  &:last-of-type {
+    margin-bottom: inherit;
+  }
+}
+
+div.footer {
+  background: rgba(201, 181, 161, 0.2);
+  height: 2rem;
+
+  .avatar {
+    float: left;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+
+    img {
+      max-width: 2rem;
+      max-height: 2rem;
+    }
+  }
+
+  .author {
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+
+  time {
+    font-size: 0.75rem;
+    line-height: 2rem;
+    margin-left: 1rem;
+  }
+
+  .count {
+    line-height: 2rem;
+    float: right;
+    margin-right: 0.5rem;
   }
 }
 

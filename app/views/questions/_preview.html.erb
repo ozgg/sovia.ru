@@ -1,14 +1,11 @@
-<section class="question" itemscope itemtype="http://schema.org/Question">
+<section class="question preview" itemscope itemtype="http://schema.org/Question">
   <h1><%= link_to t('.question', id: question.id), question %></h1>
   <div class="body" itemprop="text">
     <%= raw prepare_question_text(question, current_user) %>
   </div>
   <div class="footer">
     <meta itemprop="answerCount" content="<%= question.comments_count %>" />
-    <%= render partial: 'questions/controls', locals: { question: question } %>
-    <div class="avatar"><%= comment_avatar(question.user) %></div>
-    <%= render partial: 'shared/author', locals: { user: question.user } %>
-    <%= render partial: 'shared/publication_time', locals: { time: question.created_at } %>
+    <%= render partial: 'shared/author_and_time', locals: { author: question.user, time: question.created_at } %>
     <div class="count"><%= link_to t(:answer, count: question.comments_count), question %></div>
   </div>
   <%= render partial: 'shared/track_data', locals: { item: question } %>

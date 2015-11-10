@@ -1,11 +1,12 @@
 section.comments {
   margin: 0.5rem 0;
+  border-top: solid rgba(201, 181, 161, 0.3) 0.125rem;
 
   h1 {
-    background: #f7f7f0;
-    padding: 0.5rem;
+    &:first-letter {
+      text-transform: uppercase;
+    }
   }
-
 
   .reply-container {
     margin: 0.5rem 0 0 0;

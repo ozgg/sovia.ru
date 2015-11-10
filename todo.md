@@ -7,7 +7,6 @@ Views:
  * deeds           
  * goals           
  * layouts         
- * questions       
  * grains          
  * metrics         
  * places          

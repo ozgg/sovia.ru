@@ -1,12 +1,10 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
 <% content_for :meta_description, t('.description', page: current_page) %>
 <% content_for :sidebar do %>
-    <div>
-      <nav class="options">
-        <ul>
-          <li><%= link_to t(:create), new_question_path %></li>
-        </ul>
-      </nav>
+    <div class="options">
+      <ul>
+        <li><%= link_to t('questions.new.title'), new_question_path %></li>
+      </ul>
     </div>
 <% end %>
 <%= render 'shared/metrics' %>

@@ -1,6 +1,0 @@
-<div class="controls">
-  <% if question.editable_by? current_user %>
-      <div class="edit" data-uri="<%= url_for edit_question_path(question) %>">&nbsp;</div>
-      <div class="delete"><%= link_to image_tag('delete.png', alt: t(:delete)), question, method: :delete, data: { confirm: t(:are_you_sure)} %></div>
-  <% end %>
-</div>

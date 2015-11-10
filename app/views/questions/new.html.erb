@@ -4,22 +4,27 @@
 
 <article class="question">
   <h1><%= t('.title') %></h1>
+
   <p>Здесь можно задавать короткие вопросы о своих снах, когда сам вопрос можно сформулировать кратко.
     Если вас интересует конкретное толкование сна, имеет смысл <%= link_to 'описать свой сон', new_dream_path %>
     вместо этого, тем более что это можно сделать без регистрации и входа и даёт дополнительные возможности.</p>
   <% if current_user %>
       <%= render partial: 'form', locals: { entity: @entity } %>
   <% else %>
-      <h2>Вам нужно войти или зарегистрироваться</h2>
+      <section>
+        <h1>Вам нужно войти или зарегистрироваться</h1>
 
-      <p>Чтобы задавать вопросы о снах, вам нужно авторизоваться.</p>
-      <p>Мы можете использовать свой аккаунт в некоторых существующих соцсетях, это просто и удобно.</p>
+        <p>Чтобы задавать вопросы о снах, вам нужно авторизоваться.</p>
 
-      <div class="auth-buttons">
-        <span><%= link_to image_tag('login/vk.png'), login_vk_path, title: t('authentications.form.vk') %></span>
-        <span><%= link_to image_tag('login/twitter.png'), auth_external_path(provider: :twitter), title: t('authentications.form.twitter') %></span>
-        <span><%= link_to image_tag('login/fb.png'), auth_external_path(provider: :facebook), title: t('authentications.form.facebook') %></span>
-        <span><%= link_to image_tag('login/mailru.png'), auth_external_path(provider: :mail_ru), title: t('authentications.form.mail_ru') %></span>
-      </div>
+        <p>Мы можете использовать свой аккаунт в некоторых существующих соцсетях, это просто и удобно.</p>
+
+        <div class="auth-buttons">
+          <span><%= link_to image_tag('login/vk.png'), login_vk_path, title: t('authentications.form.vk') %></span>
+          <span><%= link_to image_tag('login/twitter.png'), auth_external_path(provider: :twitter), title: t('authentications.form.twitter') %></span>
+          <span><%= link_to image_tag('login/fb.png'), auth_external_path(provider: :facebook), title: t('authentications.form.facebook') %></span>
+          <span><%= link_to image_tag('login/mailru.png'), auth_external_path(provider: :mail_ru), title: t('authentications.form.mail_ru') %></span>
+        </div>
+
+      </section>
   <% end %>
 </article>
