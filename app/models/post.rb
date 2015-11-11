@@ -59,6 +59,12 @@ class Post < ActiveRecord::Base
     title
   end
 
+  def flags
+    {
+        visible: show_in_list
+    }
+  end
+
   # Get the first passage from body
   #
   # @return [String]

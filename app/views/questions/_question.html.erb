@@ -5,7 +5,7 @@
   </div>
   <div class="footer">
     <meta itemprop="answerCount" content="<%= question.comments_count %>" />
-    <%= render partial: 'shared/author_and_time', locals: { author: question.user, time: question.created_at } %>
+    <%= render partial: 'shared/author_and_time', locals: { item: question } %>
   </div>
   <%= render partial: 'shared/track_data', locals: { item: question } %>
 

@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="footer">
-    <%= render partial: 'shared/author_and_time', locals: { author: side_note.user, time: side_note.created_at } %>
+    <%= render partial: 'shared/author_and_time', locals: { item: side_note } %>
     <%= render partial: 'admin/flags', locals: { flags: side_note.flags } %>
   </div>
   <%= render 'shared/track_data', item: side_note %>

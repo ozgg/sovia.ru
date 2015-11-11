@@ -13,8 +13,6 @@
   <h1><%= t('.header') %></h1>
 
   <%= paginate @collection %>
-
   <%= render partial: 'list', locals: { posts: @collection } %>
-
   <%= paginate @collection %>
 </article>

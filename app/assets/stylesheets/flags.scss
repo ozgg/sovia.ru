@@ -17,7 +17,7 @@ article > ul.flags {
   float: none;
 }
 
-article > .footer > ul.flags {
+article > .footer > ul.flags, .preview > .footer > ul.flags {
   float: right;
   margin: 0.375rem 0.5rem 0 0;
 }

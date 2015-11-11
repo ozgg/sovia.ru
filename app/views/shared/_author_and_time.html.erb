@@ -1,9 +1,9 @@
 <div class="avatar">
-  <%= raw comment_avatar(author) %>
+  <%= raw comment_avatar(item.user) %>
 </div>
 <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <span itemprop="name"><%= user_link author %></span>
+  <span itemprop="name"><%= user_link item.user %></span>
 </span>
-<time itemprop="datePublished" content="<%= time.microformat_minutes %>" datetime="<%= time.w3c %>">
-  <%= time.pubdate %>
+<time itemprop="datePublished" content="<%= item.created_at.microformat_minutes %>" datetime="<%= item.created_at.w3c %>">
+  <%= item.created_at.pubdate %>
 </time>

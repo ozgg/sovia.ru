@@ -1,18 +1,24 @@
-<div class="post-preview">
-  <div class="header">
-    <div class="title"><%= link_to post.title, post %></div>
-    <span class="author"><%= user_link post.user %></span>
-    <%= render partial: 'shared/publication_time', locals: { time: post.created_at } %>
-  </div>
+<section class="post preview">
+  <h1><%= link_to post.title, post %></h1>
+
   <div class="body">
     <% if post.image.url %>
         <div class="image"><%= image_tag post.image.url, alt: post.title %></div>
     <% end %>
     <div class="text"><%= post.lead %></div>
+    <% if post.tags_cache.any? %>
+        <div class="tags">
+          <span><%= t('posts.form.tags_list') %>:</span>
+          <% post.tags_cache.each do |tag_name| %>
+              <%= link_to tag_name, tagged_posts_path(tag_name: tag_name) %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
   <div class="footer">
-    <%= render partial: 'posts/controls', locals: { post: post } %>
-    <div class="comment-count"><%= link_to t(:comment, count: post.comments_count), post %></div>
+    <%= render partial: 'shared/author_and_time', locals: { item: post } %>
+    <%= render partial: 'admin/flags', locals: { flags: post.flags } if current_user_has_role? :administrator %>
+    <div class="count"><%= link_to t(:comment, count: post.comments_count), post %></div>
   </div>
   <%= render 'shared/track_data', item: post %>
-</div>
+</section>

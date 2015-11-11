@@ -30,59 +30,9 @@ article.edit-post {
   }
 }
 
-div.post-preview {
-  margin: 0.5rem 0;
-  border: dotted #f7f7f0 1px;
-
-  .header {
-    background: #f7f7f0;
-    padding: 0 0.5rem;
-    height: 3rem;
-
-    .title {
-      line-height: 1.5rem;
-      font-weight: bold;
-    }
-
-    .author, time {
-      line-height: 1.5rem;
-      font-size: 0.9em;
-    }
-
-    time {
-      font-style: italic;
-      float: right;
-      color: #777777;
-    }
-  }
-
+.post {
   .body {
-    padding: 0.5rem;
-    height: 6rem;
-
-    .image {
-      float: left;
-      margin-right: 0.5rem;
-      width: 6rem;
-      height: 6rem;
-
-      img {
-        max-width: 6rem;
-        max-height: 6rem;
-      }
-    }
-  }
-
-  .footer {
-    background: #F0F0F0;
-    height: 1.5rem;
-    padding: 0 0.5rem;
-    font-size: 0.9rem;
-    line-height: 1.5rem;
-
-    > div.comment-count {
-      float: right;
-    }
+    min-height: 6rem;
   }
 }
 
