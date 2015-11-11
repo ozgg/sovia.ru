@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def posts
-    @posts = @user.posts.recent.page(current_page).per(5)
+    @posts = @user.posts.recent(current_user_has_role? :administrator).page(current_page).per(5)
   end
 
   def questions

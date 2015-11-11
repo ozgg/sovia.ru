@@ -10,7 +10,7 @@
         <div class="tags">
           <span><%= t('posts.form.tags_list') %>:</span>
           <% post.tags_cache.each do |tag_name| %>
-              <%= link_to tag_name, tagged_posts_path(tag_name: tag_name) %>
+              <%= link_to tag_name, tagged_posts_path(tag_name: Canonizer.urlize(tag_name)) %>
           <% end %>
         </div>
     <% end %>

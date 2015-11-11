@@ -37,73 +37,14 @@ article.edit-post {
 }
 
 article.post {
-  > h1 {
-    padding: 0 0.5rem;
-    background: #f7f7f7;
-  }
-
   > .body {
-    padding: 0.5rem;
-
     figure {
-      float: left;
-      margin: 0 1rem 0 0;
+      float: right;
+      margin: 0 0 0 0.5rem;
 
       img {
         max-width: 15rem;
         max-height: 15rem;
-      }
-    }
-  }
-
-  > .footer {
-    background: #f7f7f7;
-    padding: 0 0.5rem;
-    height: 2rem;
-
-    .controls {
-      margin: 0.25rem 0.5rem 0.25rem 0;
-    }
-
-    .avatar {
-      float: left;
-      width: 2rem;
-      height: 2rem;
-      margin-right: 1rem;
-
-      img {
-        max-width: 2rem;
-        max-height: 2rem;
-      }
-    }
-
-    .author {
-      line-height: 2rem;
-    }
-
-    time {
-      float: right;
-      font-size: 0.9rem;
-      font-style: italic;
-      line-height: 2rem;
-    }
-  }
-
-  nav.tags {
-    margin: 0.5rem;
-
-    ul {
-      margin: 0;
-      padding: 0;
-
-      li {
-        margin: 0;
-        padding: 0 0.5rem;
-        font-size: 0.9rem;
-        line-height: 1.2rem;
-        border: outset 1px;
-        list-style: none;
-        display: inline-block;
       }
     }
   }

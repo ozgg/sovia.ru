@@ -6,26 +6,21 @@
         <figure><%= link_to image_tag(post.image.url, alt: post.title, itemprop: 'image'), post.image.url %></figure>
     <% end %>
     <%= prepare_post_text post %>
+
+    <% if post.tags_cache.any? %>
+        <div class="tags">
+          <span><%= t('posts.form.tags_list') %></span>
+          <% post.tags_cache.each do |tag_name| %>
+              <%= link_to tag_name, tagged_posts_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
 
-  <% if post.tags_cache.any? %>
-      <nav class="tags">
-        <ul>
-          <% post.tags_cache.each do |tag_name| %>
-              <li><%= link_to tag_name, tagged_posts_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %></li>
-          <% end %>
-        </ul>
-      </nav>
-  <% end %>
 
   <div class="footer">
-    <%= render partial: 'controls', locals: { post: post } %>
-
-    <div class="avatar">
-      <%= raw comment_avatar(post.user) %>
-    </div>
-    <%= render partial: 'shared/author', locals: { user: post.user } %>
-    <%= render partial: 'shared/publication_time', locals: { time: post.created_at } %>
+    <%= render partial: 'shared/author_and_time', locals: { item: post } %>
+    <%= render partial: 'admin/flags', locals: { flags: post.flags } if current_user_has_role? :administrator %>
     <meta itemprop="commentCount" content="<%= post.comments_count %>"/>
   </div>
 
