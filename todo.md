@@ -2,7 +2,6 @@ Views:
 
  * dreams          
  * index           
- * posts           
  * code_sender     
  * deeds           
  * goals           
@@ -38,6 +37,7 @@ Later:
  * Use grain link in my tagged dreams
  * Social log in
  * Sitemap
+ * Better markup for comments
  * My tokens
  * Mentions of user
  * Notifications

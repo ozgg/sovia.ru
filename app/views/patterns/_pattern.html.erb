@@ -1,7 +1,7 @@
 <article class="pattern">
   <h1><%= pattern.name %></h1>
 
-  <div class="description">
+  <div class="body">
     <% if pattern.image.url %>
     <div class="image"><%= image_tag pattern.image.url, alt: pattern.name %></div>
     <% end %>
@@ -23,7 +23,7 @@
     <p><%= "#{t(:created_at)}: #{pattern.created_at.pubdate}" %></p>
     <p><%= "#{t(:updated_at)}: #{pattern.updated_at.pubdate}" %></p>
     <p><%= "#{t('activerecord.attributes.pattern.dream_count')}: #{pattern.dream_count}" %></p>
-    <p><%= link_to t('dreambook.word.read_dreams'), tagged_dreams_path(tag_name: Canonizer.urlize(pattern.name)) %></p>
+    <p><%= link_to t('dreambook.word.read_dreams'), tagged_dreams_path(tag_name: pattern.name_for_url) %></p>
   </div>
   <%= render partial: 'shared/track_data', locals: { item: pattern } %>
   <%= render partial: 'comments/list', locals: { commentable: pattern, comments: pattern.comments } %>

@@ -1,6 +1,4 @@
 article.dreambook {
-  padding: 0.5rem;
-
   div.options {
     margin: 1rem 0 0 0;
     padding: 0.5rem;
@@ -10,10 +8,6 @@ article.dreambook {
       margin: 0;
     }
   }
-}
-
-article.patterns {
-  padding: 0.5rem;
 }
 
 #dreambook-search {
@@ -73,24 +67,16 @@ ul.dreambook-symbols {
 }
 
 article.pattern {
-  padding: 0.5rem;
-
-  > h1 {
-    background: #f7f7f0;
-    padding: 0.5rem;
-
-    &:first-letter {
-      text-transform: uppercase;
-    }
+  > h1:first-letter {
+    text-transform: uppercase;
   }
 
-  .description {
-    padding: 0.5rem;
+  .body {
     min-height: 10rem;
 
     .image {
-      float: left;
-      margin: 0 0.5rem 0 0;
+      float: right;
+      margin: 0 0 0 0.5rem;
 
       img {
         max-width: 10rem;
@@ -101,8 +87,9 @@ article.pattern {
 
   .footer {
     padding: 0.5rem;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     background: #F7F7F7;
+    height: auto;
 
     p {
       margin: 0;
@@ -142,27 +129,18 @@ article.pattern {
 .dreambook-word {
   margin: 0.5rem 0;
 
-  h1 {
+  > h1 {
     background: #f7f7f0;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    font-variant: small-caps;
-
-    &:first-letter {
-      text-transform: capitalize;
-    }
   }
 
-  > div {
-    padding: 0 0.5rem;
+  h1:first-letter {
+    text-transform: capitalize;
   }
 
-  > .description {
-    min-height: 10rem;
-
+  > .body {
     .image {
-      float: left;
-      margin: 0 0.5rem 0 0;
+      float: right;
+      margin: 0 0 0 0.5rem;
 
       img {
         max-width: 10rem;
@@ -172,23 +150,7 @@ article.pattern {
   }
 
   .see-instead {
-    margin: 0.5rem 0;
-
-    .header {
-      padding: 0 0.5rem;
-      background: #f7f7f0;
-      font-size: 1.1rem;
-      font-variant: small-caps;
-
-      &:first-letter {
-        text-transform: uppercase;
-      }
-    }
-
-    .description {
-      border-bottom: dotted #cccccc 1px;
-      padding: 0.5rem;
-    }
+    border-bottom: dotted #cccccc 1px;
   }
 
   nav.see-also {
