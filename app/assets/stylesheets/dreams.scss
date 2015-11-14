@@ -1,7 +1,3 @@
-article.dreams {
-  padding: 0.5rem;
-}
-
 article.new-dream, article.edit-dream {
   padding: 0.5rem;
 
@@ -24,14 +20,8 @@ article.new-dream, article.edit-dream {
   }
 }
 
-article.dream {
-  padding: 0.5rem;
-  border: dotted #f0f0f0 1px;
-
+.dream {
   > h1 {
-    background: #f7f7f0;
-    padding: 0.5rem;
-
     &.lucid:after {
       content: '*';
     }
@@ -60,131 +50,6 @@ article.dream {
         padding: 0 0.3rem;
         font-size: 0.9rem;
       }
-    }
-  }
-
-  > .body {
-    padding: 0.5rem;
-  }
-
-  > .footer {
-    background: #f7f7f7;
-    padding: 0 0.5rem;
-    height: 2rem;
-
-    .controls {
-      margin: 0.25rem 0.5rem 0.25rem 0;
-    }
-
-    .avatar {
-      float: left;
-      width: 2rem;
-      height: 2rem;
-      margin-right: 1rem;
-
-      img {
-        max-width: 2rem;
-        max-height: 2rem;
-      }
-    }
-
-    .author {
-      line-height: 2rem;
-    }
-
-    time {
-      float: right;
-      font-size: 0.9rem;
-      font-style: italic;
-      line-height: 2rem;
-    }
-  }
-}
-
-div.dream-preview {
-  border: dotted #f0f0f0 1px;
-  margin: 0.5rem 0;
-
-  .header {
-    background: #f7f7f0;
-    padding: 0.5rem;
-    min-height: 5rem;
-
-    .avatar {
-      float: left;
-      margin-right: 0.5rem;
-      width: 5rem;
-      height: 5rem;
-
-      img {
-        max-width: 5rem;
-        max-height: 5rem;
-      }
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 1.1rem;
-      line-height: 1.5rem;
-
-    }
-
-    .visible_to_community {
-      background: image_url('lock-yellow.png') no-repeat 100% 50% / 1.5rem 1.5rem;
-    }
-
-    .personal {
-      background: image_url('lock-red.png') no-repeat 100% 50% / 1.5rem 1.5rem;
-    }
-
-    .lucid {
-      a:after {
-        content: '*';
-      }
-    }
-
-    .author {
-      font-size: 0.9rem;
-
-      time {
-        font-style: italic;
-      }
-    }
-
-    nav.tags {
-      margin: 0.5rem 0 0 0;
-
-      ul {
-        margin: 0;
-        padding: 0;
-
-        li {
-          display: inline-block;
-          list-style: none;
-          border: outset 1px;
-          padding: 0 0.3rem;
-          font-size: 0.8rem;
-          height: 1rem;
-
-          a {
-            line-height: 1rem;
-          }
-        }
-      }
-    }
-  }
-
-  .body {
-    padding: 0.5rem;
-  }
-
-  .footer {
-    background: #F7F7F7;
-    font-size: 0.9rem;
-    padding: 0.4rem 0.5rem;
-
-    .comment-count {
-      text-align: right;
     }
   }
 }

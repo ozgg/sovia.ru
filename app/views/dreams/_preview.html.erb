@@ -1,39 +1,24 @@
-<div class="dream-preview">
-  <div class="header">
-    <div class="avatar">
-      <%= raw dream_avatar(dream.user) %>
-    </div>
-
-    <div class="title <%= dream.privacy %> <%= dream.lucid? ? 'lucid' : '' %>">
-      <%= link_to dream.title_for_view, dream %>
-    </div>
-
-    <div class="author">
-      <%= user_link dream.user %>,
-      <%= render partial: 'shared/publication_time', locals: { time: dream.created_at } %>
-    </div>
-
-    <% if dream.patterns_cache.any? %>
-        <nav class="tags">
-          <ul>
-            <% dream.patterns_cache.each do |tag_name| %>
-                <li><%= link_to tag_name, tagged_dreams_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %></li>
-            <% end %>
-          </ul>
-        </nav>
-    <% end %>
-  </div>
+<section class="dream preview">
+  <h1 class="<%= dream.privacy %> <%= dream.lucid? ? 'lucid' : '' %>"><%= link_to dream.title_for_view, dream %></h1>
 
   <div class="body">
     <%= raw preview(prepare_dream_text(dream, current_user)) %>
     <% if dream.count_passages > 2 %>
         <div class="more"><%= link_to t(:read_more), dream %></div>
     <% end %>
+    <% if dream.patterns_cache.any? %>
+        <div class="tags">
+          <span><%= t('dreams.form.grains') %>:</span>
+          <% dream.patterns_cache.each do |tag_name| %>
+              <%= link_to tag_name, tagged_dreams_path(tag_name: Canonizer.urlize(tag_name)), rel: 'tag' %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
 
   <div class="footer">
-    <div class="comment-count"><%= t('comment', count: dream.comments_count) %></div>
+    <%= render partial: 'shared/author_and_time', locals: { item: dream } %>
+    <div class="count"><%= link_to t('comment', count: dream.comments_count), dream %></div>
   </div>
-</div>
-
-<%= render partial: 'shared/track_data', locals: { item: dream } %>
+  <%= render partial: 'shared/track_data', locals: { item: dream } %>
+</section>
