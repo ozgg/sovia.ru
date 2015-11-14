@@ -262,7 +262,7 @@ ru:
     create:
       success: "Сон успешно добавлен"
     new:
-      title: "Добавить сон"
+      title: "Описать сон"
       description: "Описать свой сон и при желании узнать его интерпретацию можно на этой странице на Совии, сайте о снах."
     show:
       title: "Сон «%{title}»"
@@ -336,7 +336,7 @@ ru:
     main_navigation:
       posts: "Публикации"
       dreams: "Сны"
-      add_dream: "Добавить сон"
+      add_dream: "Описать сон"
       dreambook: "Сонник"
       questions: "Вопросы"
       about: "О проекте"

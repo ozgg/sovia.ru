@@ -1,3 +1,14 @@
 <% content_for :meta_title, t('.title', title: @entity.title_for_view) %>
+<% content_for :sidebar do %>
+    <% if @entity.editable_by? current_user %>
+        <div class="options">
+          <ul>
+            <li><%= link_to t(:edit), edit_dream_path(@entity) %></li>
+            <li><%= link_to_delete @entity %></li>
+          </ul>
+        </div>
+    <% end %>
+<% end %>
+<%= render 'shared/metrics' %>
 
 <%= render @entity %>
