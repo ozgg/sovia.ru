@@ -29,7 +29,11 @@ namespace :export do
     File.open("#{Rails.root}/tmp/users.yml", 'w') do |file|
       User.order('id asc').each do |user|
         file.puts "#{user.id}:"
-        file.puts "  network: \"#{user.network}\""
+        if user.sovia?
+          file.puts "  network: \"native\""
+        else
+          file.puts "  network: \"#{user.network}\""
+        end
         file.puts "  uid: \"#{user.login}\""
         file.puts "  email: \"#{user.email}\"" unless user.email.blank?
         file.puts "  password_digest: \"#{user.password_digest}\""
