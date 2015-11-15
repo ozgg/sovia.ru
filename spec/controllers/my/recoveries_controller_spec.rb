@@ -16,10 +16,6 @@ RSpec.describe My::RecoveriesController, type: :controller do
     it 'calls :allow_unauthorized_only' do
       expect(controller).to have_received(:allow_unauthorized_only)
     end
-
-    it 'tracks user agent' do
-      expect(controller).to have_received(:track_agent)
-    end
   end
 
   describe '#allow_unauthorized_only' do

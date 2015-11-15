@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Grain, type: :model, wip: true do
+RSpec.describe Grain, type: :model do
   describe 'validation' do
     it 'fails without user' do
       grain = build :grain, user: nil

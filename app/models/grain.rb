@@ -1,9 +1,9 @@
 class Grain < ActiveRecord::Base
   include HasUser
   include HasCoordinates
-  include HasLanguage
 
   belongs_to :pattern
+  belongs_to :language
   before_validation :prepare_code!
   validates_presence_of :user, :name, :code
   validates_uniqueness_of :code, scope: [:user_id]

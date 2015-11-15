@@ -29,10 +29,6 @@ RSpec.describe My::ConfirmationsController, type: :controller do
     it 'redirects already confirmed users' do
       expect(controller).to have_received(:redirect_confirmed_user)
     end
-
-    it 'tracks user agent' do
-      expect(controller).to have_received(:track_agent)
-    end
   end
 
   describe '#redirect_confirmed_user' do

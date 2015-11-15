@@ -12,12 +12,6 @@ RSpec.describe QuestionsController, type: :controller do
     allow(controller).to receive(:demand_role)
   end
 
-  shared_examples 'tracking' do
-    it 'tracks user agent' do
-      expect(controller).to have_received(:track_agent)
-    end
-  end
-
   shared_examples 'validating authorization' do
     it 'calls :allow_authorized_only' do
       expect(controller).to have_received(:allow_authorized_only)
@@ -42,8 +36,6 @@ RSpec.describe QuestionsController, type: :controller do
     it 'assigns @questions that includes question' do
       expect(assigns[:questions]).to include(question)
     end
-
-    it_should_behave_like 'tracking'
   end
 
   describe 'get new' do
@@ -52,8 +44,6 @@ RSpec.describe QuestionsController, type: :controller do
     it 'assigns new Question to question' do
       expect(assigns[:question]).to be_a_new(Question)
     end
-
-    it_should_behave_like 'tracking'
   end
 
   describe 'post create' do
@@ -66,7 +56,6 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response).to redirect_to(Question.last)
       end
 
-      it_should_behave_like 'tracking'
       it_should_behave_like 'validating authorization'
     end
 
@@ -81,7 +70,6 @@ RSpec.describe QuestionsController, type: :controller do
     before(:each) { get :show, id: question.id }
 
     it_should_behave_like 'question setter'
-    it_should_behave_like 'tracking'
   end
 
   describe 'get edit' do
@@ -103,7 +91,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     it_should_behave_like 'question setter'
-    it_should_behave_like 'tracking'
     it_should_behave_like 'checking moderator'
   end
 
@@ -119,7 +106,6 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it_should_behave_like 'question setter'
-      it_should_behave_like 'tracking'
       it_should_behave_like 'checking moderator'
     end
 

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
-  after_action :track_agent
+  # after_action :track_agent
 
   class UnauthorizedException < Exception
   end

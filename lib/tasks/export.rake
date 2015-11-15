@@ -1,4 +1,15 @@
 namespace :export do
+  desc 'Expoert user agents to YAML'
+  task agents: :environment do
+    File.open("#{Rails.root}/tmp/agents.yml", 'w') do |file|
+      Agent.order('id asc').each do |agent|
+        file.puts "#{agent.id}:"
+        file.puts "  name: \"#{agent.name}\""
+        file.puts '  bot: true' if agent.is_bot
+      end
+    end
+  end
+
   desc 'Export dream patterns to YAML'
   task patterns: :environment do
     File.open("#{Rails.root}/tmp/patterns.yml", 'w') do |file|
@@ -26,6 +37,7 @@ namespace :export do
         file.puts "  created_at: \"#{user.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
         file.puts "  gender: #{user.gender}" unless user.gender.blank?
         file.puts "  ip: \"#{user.ip}\"" unless user.ip.blank?
+        file.puts "  agent_id: \"#{user.agent_id}\"" unless user.agent_id.blank?
         file.puts "  bot: #{user.bot}" if user.bot?
         file.puts "  name: \"#{user.name}\"" unless user.name.blank?
         file.puts "  screen_name: \"#{user.screen_name}\"" unless user.screen_name.blank?
@@ -75,6 +87,7 @@ namespace :export do
         file.puts "  lead: \"#{normalize_string(post.lead)}\"" unless post.lead.blank?
         file.puts '  show_in_list: true' if post.show_in_list?
         file.puts "  ip: \"#{post.ip}\"" unless post.ip.blank?
+        file.puts "  agent_id: \"#{post.agent_id}\"" unless post.agent_id.blank?
         file.puts "  created_at: \"#{post.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
         file.puts "  body: \"#{normalize_string(post.body)}\""
       end
@@ -106,6 +119,7 @@ namespace :export do
         file.puts "  created_at: \"#{question.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
         file.puts "  body: \"#{normalize_string(question.body)}\""
         file.puts "  ip: \"#{question.ip}\"" unless question.ip.blank?
+        file.puts "  agent_id: \"#{question.agent_id}\"" unless question.agent_id.blank?
       end
     end
   end
@@ -119,6 +133,7 @@ namespace :export do
         file.puts "  user_id: #{comment.user_id}" unless comment.user_id.blank?
         file.puts '  is_visible: false' unless comment.is_visible?
         file.puts "  ip: \"#{comment.ip}\"" unless comment.ip.blank?
+        file.puts "  agent_id: \"#{comment.agent_id}\"" unless comment.agent_id.blank?
         file.puts "  created_at: \"#{comment.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
         file.puts "  commentable_id: #{comment.commentable_id}"
         file.puts "  commentable_type: \"#{comment.commentable_type}\""
@@ -134,6 +149,7 @@ namespace :export do
         file.puts "#{answer.id}:"
         file.puts "  question_id: #{answer.question_id}"
         file.puts "  ip: \"#{answer.ip}\"" unless answer.ip.blank?
+        file.puts "  agent_id: \"#{answer.agent_id}\"" unless answer.agent_id.blank?
         file.puts "  user_id: #{answer.user_id}"
         file.puts "  created_at: \"#{answer.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
         file.puts "  body: \"#{parse_comment_body(answer.body)}\""
