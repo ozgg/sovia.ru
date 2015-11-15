@@ -26,6 +26,7 @@ class Dream < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   scope :recent, -> { order('id desc') }
+  scope :public_entries, -> { where privacy: Dream.privacies[:generally_accessible] }
 
   PER_PAGE = 10
 
@@ -75,6 +76,12 @@ class Dream < ActiveRecord::Base
   # Parameters for controller that are available only for administrators
   def self.parameters_for_administrators
     [:interpretation_given]
+  end
+
+  def self.random_dream
+    max_offset = public_entries.count - 1
+    offset = Time.now.to_i % max_offset
+    public_entries.offset(offset).first
   end
 
   def title_for_view

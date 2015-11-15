@@ -279,6 +279,8 @@ ru:
       title: "Архив снов"
     edit:
       title: "Редактирование сна"
+    random:
+      title: "Случайный сон"
   codes:
     update:
       success: "Код успешно обновлён"
@@ -418,3 +420,6 @@ ru:
   admin:
     index:
       title: "Администрирование"
+  sidebar:
+    more_links:
+      more_links: "Ещё ссылки"

@@ -53,6 +53,10 @@ class DreamsController < ApplicationController
     @collection = Dream.archive_page params[:year], params[:month], current_page, current_user if params[:month]
   end
 
+  def random
+    @entity = Dream.random_dream
+  end
+
   protected
 
   def restrict_editing

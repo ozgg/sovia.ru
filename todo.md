@@ -1,7 +1,5 @@
 Views:
 
- * dreams          
- * index           
  * code_sender     
  * deeds           
  * goals           
@@ -18,7 +16,8 @@ Views:
  * my/posts         
  * my/questions     
  * my/side_notes
- * my/confirmations dreams        
+ * my/confirmations
+ * my/dreams        
  * my/grains        
  * my/places        
  * my/profiles      

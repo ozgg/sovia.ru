@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
+  get 'dreams/random' => 'dreams#random', as: :random_dream
+
   # Administrative resources
   resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
   resources :violations, only: [:index, :show, :destroy]
