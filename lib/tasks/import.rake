@@ -205,7 +205,7 @@ namespace :import do
             post.user_id = data['user_id']
             post.ip = data['ip'] unless data['ip'].blank?
             post.agent_id = data['agent_id'] unless data['agent_id'].blank?
-            post.show_in_list = data['show_in_list'] if data['show_in_list']
+            post.show_in_list = data['show_in_list'] if data.has_key? 'show_in_list'
             post.created_at = data['created_at']
             post.title = data['title']
             post.lead = data['lead'] || data['title']
