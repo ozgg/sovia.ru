@@ -172,18 +172,18 @@ namespace :export do
   end
 
   def normalize_string(string)
-    string.gsub('\\', '\\\\').gsub(/\r?\n/, '\n').gsub('"', '\\"')
+    string.gsub('\\', '\\\\').gsub(/\r?\n/, '\\n').gsub('"', '\\"')
   end
 
   def parse_dream_body(string)
     string_with_dreams = old_dream_links string
     string_with_patterns = replace_old_pattern_links string_with_dreams
-    string_with_patterns.gsub(/\r?\n/, '\n').gsub('"', '\\"')
+    string_with_patterns.gsub(/\r?\n/, '\\n').gsub('"', '\\"')
   end
 
   def parse_comment_body(string)
     string_with_dreams = old_dream_links string
-    string_with_dreams.gsub(/\r?\n/, '\n').gsub('"', '\\"')
+    string_with_dreams.gsub(/\r?\n/, '\\n').gsub('"', '\\"')
   end
 
   def old_dream_links(string)
