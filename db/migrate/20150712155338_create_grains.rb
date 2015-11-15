@@ -3,16 +3,16 @@ class CreateGrains < ActiveRecord::Migration
     create_table :grains do |t|
       t.references :user, index: true, foreign_key: true, null: false
       t.references :pattern, index: true, foreign_key: true
+      t.timestamps null: false
       t.integer :dream_count, null: false, default: 0
-      t.integer :category
+      t.integer :category, limit: 2
       t.float :latitude
       t.float :longitude
+      t.boolean :deleted, null: false, default: false
       t.string :image
       t.string :name, null: false
       t.string :slug, null: false
       t.text :description
-
-      t.timestamps null: false
     end
 
     add_index :grains, [:slug, :user_id]

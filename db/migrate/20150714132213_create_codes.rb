@@ -4,12 +4,11 @@ class CreateCodes < ActiveRecord::Migration
       t.references :user, index: true, foreign_key: true, null: false
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.integer :category, null: false
+      t.timestamps null: false
+      t.integer :category, limit: 2, null: false
       t.boolean :activated, null: false, default: false
       t.string :body, null: false
       t.string :payload
-
-      t.timestamps null: false
     end
   end
 end

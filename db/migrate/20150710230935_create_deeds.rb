@@ -3,9 +3,9 @@ class CreateDeeds < ActiveRecord::Migration
     create_table :deeds do |t|
       t.references :user, index: true, foreign_key: true, null: false
       t.references :goal, index: true, foreign_key: true
-      t.string :essence, null: false
-
       t.timestamps null: false
+      t.boolean :deleted, null: false, default: false
+      t.string :essence, null: false
     end
   end
 end
