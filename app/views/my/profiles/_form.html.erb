@@ -5,34 +5,28 @@
 
   <%= form_tag my_profile_path do %>
       <div>
-        <%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %>
+        <div><%= label_tag :user_screen_name, t('activerecord.attributes.user.screen_name') %></div>
         <%= text_field_tag 'user[screen_name]', @user.screen_name, required: true, size: 30, maxlength: 30 %>
       </div>
-
       <div>
-        <%= label_tag :user_password, t('activerecord.attributes.user.password') %>
+        <div><%= label_tag :user_password, t('activerecord.attributes.user.password') %></div>
         <%= password_field_tag 'user[password]', '', required: true, size: 30 %>
       </div>
-
       <div>
-        <%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+        <div><%= label_tag :user_password_confirmation, t('activerecord.attributes.user.password_confirmation') %></div>
         <%= password_field_tag 'user[password_confirmation]', '', required: true, size: 30 %>
       </div>
-
       <div>
-        <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
+        <div><%= label_tag :user_email, t('activerecord.attributes.user.email') %></div>
         <%= email_field_tag 'user[email]', @user.email, size: 50 %>
       </div>
-
       <div>
         <%= check_box_tag :agree %>
         <%= label_tag :agree, t('.i_am_bot') %>
       </div>
-
       <div>
         <p><%= t('.you_accept_terms_of_service') %></p>
       </div>
-
       <div>
         <%= button_tag t('my.profiles.new.title'), type: :submit, name: 'button' %>
       </div>

@@ -7,16 +7,18 @@ namespace :import do
         YAML.load(file).each do |id, data|
           agent = Agent.find_by id: id
           if agent.is_a? Agent
-            puts "Agent #{id} already exists"
+            print "\rAgent #{id} already exists"
           else
             agent = Agent.new
             agent.id = id
             agent.name = data['name'] unless data['name'].blank?
             agent.bot = true if data['bot']
+            agent.created_at = data['created_at'] if data.has_key? 'created_at'
             agent.save!
           end
-          print "#{id}        \r"
+          print "\r#{id}                       "
         end
+        puts
       end
       puts "Done. We have #{Agent.count} agents"
     else
@@ -66,7 +68,7 @@ namespace :import do
         YAML.load(file).each do |id, data|
           user = User.find_by id: id
           if user.is_a? User
-            puts "User #{id} already exists"
+            print "\rUser #{id} already exists"
           else
             user = User.new
             user.id = id
@@ -86,14 +88,15 @@ namespace :import do
             if File.exists? data['avatar'].to_s
               user.image = File.open data['avatar']
             elsif data['avatar_url_medium']
-              user.remote_image_url = data['avatar_url_medium'].gsub('http://', 'https://')
+              file_link = data['avatar_url_medium'].gsub('http://', 'https://')
+              user.remote_image_url = file_link if File.readable?(file_link)
             end
             user.save!
           end
-          print "#{id}        \r"
+          print "\r#{id}                        "
         end
       end
-      puts "Done. We have #{User.count} users"
+      puts "\rDone. We have #{User.count} users"
     else
       puts "Cannot find file #{file_path}"
     end
