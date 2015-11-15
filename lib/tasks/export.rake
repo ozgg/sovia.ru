@@ -1,6 +1,7 @@
 namespace :export do
   desc 'Expoert user agents to YAML'
   task agents: :environment do
+    puts 'select id, name from agents where name in (select name from agents group by name having count(*) > 1);'
     File.open("#{Rails.root}/tmp/agents.yml", 'w') do |file|
       Agent.order('id asc').each do |agent|
         file.puts "#{agent.id}:"
@@ -178,12 +179,12 @@ namespace :export do
   def parse_dream_body(string)
     string_with_dreams = old_dream_links string
     string_with_patterns = replace_old_pattern_links string_with_dreams
-    string_with_patterns.gsub(/\r?\n/, '\\n').gsub('"', '\\"')
+    normalize_string(string_with_patterns)
   end
 
   def parse_comment_body(string)
     string_with_dreams = old_dream_links string
-    string_with_dreams.gsub(/\r?\n/, '\\n').gsub('"', '\\"')
+    normalize_string(string_with_dreams)
   end
 
   def old_dream_links(string)
