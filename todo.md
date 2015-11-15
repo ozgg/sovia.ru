@@ -1,6 +1,5 @@
 Views:
 
- * code_sender     
  * deeds           
  * goals           
  * layouts         
