@@ -86,7 +86,7 @@ namespace :export do
         file.puts "  image: \"#{Rails.root}/public#{post.image.url}\"" unless post.image.blank?
         file.puts "  title: \"#{normalize_string(post.title)}\""
         file.puts "  lead: \"#{normalize_string(post.lead)}\"" unless post.lead.blank?
-        file.puts '  show_in_list: true' if post.show_in_list?
+        file.puts '  show_in_list: false' unless post.show_in_list?
         file.puts "  ip: \"#{post.ip}\"" unless post.ip.blank?
         file.puts "  agent_id: \"#{post.agent_id}\"" unless post.agent_id.blank?
         file.puts "  created_at: \"#{post.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
