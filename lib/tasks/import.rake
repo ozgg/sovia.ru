@@ -1,4 +1,29 @@
 namespace :import do
+  desc 'Import user agents from YAML'
+  task agents: :environment do
+    file_path = "#{Rails.root}/tmp/agents.yml"
+    if File.exists? file_path
+      File.open file_path, 'r' do |file|
+        YAML.load(file).each do |id, data|
+          agent = Agent.find_by id: id
+          if agent.is_a? Agent
+            puts "Agent #{id} already exists"
+          else
+            agent = Agent.new
+            agent.id = id
+            agent.name = data['name'] unless data['name'].blank?
+            agent.bot = true if data['bot']
+            agent.save!
+          end
+          print "#{id}        \r"
+        end
+      end
+      puts "Done. We have #{Agent.count} agents"
+    else
+      puts "Cannot find file #{file_path}"
+    end
+  end
+
   desc 'Import dream patterns from YAML'
   task patterns: :environment do
     file_path = "#{Rails.root}/tmp/patterns.yml"
@@ -51,6 +76,7 @@ namespace :import do
             user.email = data['email'] unless data['email'].blank?
             user.password_digest = data['password_digest']
             user.ip = data['ip'] unless data['ip'].blank?
+            user.agent_id = data['agent_id'] unless data['agent_id'].blank?
             user.screen_name = data['screen_name'] || data['uid']
             user.name = data['name'] unless data['name'].blank?
             user.bot = true if data['bot']
@@ -148,6 +174,7 @@ namespace :import do
             question.body = data['body']
             question.created_at = data['created_at']
             question.ip = data['ip']
+            question.agent_id = data['agent_id'] unless data['agent_id'].blank?
             question.save!
             print "    \r"
           end
@@ -174,6 +201,7 @@ namespace :import do
             post.id = id
             post.user_id = data['user_id']
             post.ip = data['ip'] unless data['ip'].blank?
+            post.agent_id = data['agent_id'] unless data['agent_id'].blank?
             post.show_in_list = data['show_in_list'] if data['show_in_list']
             post.created_at = data['created_at']
             post.title = data['title']
@@ -246,6 +274,7 @@ namespace :import do
             comment.id = id
             comment.user_id = data['user_id'] unless data['user_id'].blank?
             comment.ip = data['ip'] unless data['ip'].blank?
+            comment.agent_id = data['agent_id'] unless data['agent_id'].blank?
             comment.parent_id = data['parent_id'] unless data['parent_id'].blank?
             comment.created_at = data['created_at']
             comment.body = data['body']
@@ -280,6 +309,7 @@ namespace :import do
             comment.user_id = data['user_id']
             comment.created_at = data['created_at']
             comment.ip = data['ip'] unless data['ip'].blank?
+            comment.agent_id = data['agent_id'] unless data['agent_id'].blank?
             comment.body = data['body']
             comment.save!
           else
