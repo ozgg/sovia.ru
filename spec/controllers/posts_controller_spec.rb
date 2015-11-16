@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   let(:administrator) { create :administrator }
   let(:user) { create :user }
-  let!(:entity) { create :visible_post, user: user }
+  let!(:entity) { create :post, user: user }
 
   before :each do
     allow(controller).to receive(:current_user).and_return(user)
@@ -48,7 +48,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'get index' do
-    let!(:hidden_post) { create :post }
+    let!(:hidden_post) { create :hidden_post }
 
     context 'when user sees hidden posts' do
       before :each do
@@ -223,7 +223,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'when post is visible' do
-      let!(:entity) { create :visible_post }
+      let!(:entity) { create :post }
 
       before(:each) { post :toggle, id: entity.id }
 
@@ -241,7 +241,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'when post is invisible' do
-      let!(:entity) { create :post }
+      let!(:entity) { create :hidden_post }
       before(:each) { post :toggle, id: entity.id }
 
       it_behaves_like 'restricted_editing'
@@ -289,7 +289,7 @@ RSpec.describe PostsController, type: :controller do
   describe 'get archive' do
     let(:year) { entity.created_at.year }
     let(:month) { entity.created_at.month }
-    let!(:hidden_entity) { create :post }
+    let!(:hidden_entity) { create :hidden_post }
 
     shared_examples 'dates_assigner' do
       it 'assigns @dates' do
@@ -318,7 +318,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     context 'when month is passed' do
-      let!(:entity_in_past) { create :visible_post, created_at: 2.months.ago }
+      let!(:entity_in_past) { create :post, created_at: 2.months.ago }
 
       before(:each) { get :archive, year: year, month: month }
 
