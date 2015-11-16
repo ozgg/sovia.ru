@@ -1,6 +1,5 @@
 Views:
 
- * deeds           
  * goals           
  * layouts         
  * grains          
@@ -21,6 +20,7 @@ Views:
  * my/places        
  * my/profiles      
  * my/recoveries
+ * comments (mailer)
  
 Refactoring:
 

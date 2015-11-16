@@ -4,7 +4,7 @@
         <% if current_user.has_role? :administrator %>
             <li><%= link_to t('admin.index.title'), admin_path %></li>
         <% end %>
-        <li>:)</li>
+        <li><%= link_to t('deeds.index.title'), my_deeds_path %></li>
       </ul>
     </div>
 <% else %>
