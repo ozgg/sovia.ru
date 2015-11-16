@@ -1,5 +1,6 @@
 Views:
 
+ * deeds           
  * goals           
  * layouts         
  * grains          
