@@ -2,8 +2,8 @@
 
 <%= form_for entity do |f| %>
     <div>
-      <div><%= f.label :name %></div>
-      Я желаю <%= f.text_field :name, size: 50, required: true %>
+      <%= f.label :name, 'Я желаю' %>
+      <%= f.text_field :name, size: 50, required: true %>
     </div>
     <div>
       <div><%= f.label :description %></div>

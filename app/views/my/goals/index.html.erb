@@ -1,0 +1,20 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <div class="options">
+      <ul>
+        <li><%= link_to t('goals.index.title'), goals_path %></li>
+        <li><%= link_to t(:create), new_goal_path %></li>
+      </ul>
+    </div>
+
+    <%= render 'sidebar/more_links' %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="goals">
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

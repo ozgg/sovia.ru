@@ -1,8 +1,6 @@
 Views:
 
  * deeds           
- * goals           
- * layouts         
  * grains          
  * metrics         
  * places          
@@ -10,7 +8,6 @@ Views:
  * users
  * my/comments      
  * my/deeds         
- * my/goals         
  * my/index         
  * my/posts         
  * my/questions     

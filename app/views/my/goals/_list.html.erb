@@ -1,0 +1,10 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |entity| %>
+      <li><%= link_to entity.name, entity %>
+        (<%= t("activerecord.attributes.goal.statuses.#{entity.status}") %> <%= entity.updated_at.strftime('%d.%m.%Y') %>)</li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
