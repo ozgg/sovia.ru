@@ -7,7 +7,18 @@ class Deed < ActiveRecord::Base
   validates_presence_of :user_id, :essence
   validate :goal_has_same_owner
 
+  PER_PAGE = 25
+
   scope :ordered, -> { order 'id asc' }
+  scope :recent, -> { order 'id desc' }
+
+  def self.page_for_user(current_page, current_user)
+    owned_by(current_user).recent.page(current_page).per(PER_PAGE)
+  end
+
+  def event_time
+    created_at.strftime '%d.%m.%Y'
+  end
 
   protected
 

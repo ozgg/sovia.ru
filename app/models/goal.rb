@@ -11,6 +11,8 @@ class Goal < ActiveRecord::Base
   PER_PAGE = 10
 
   scope :recent, -> { order 'id desc' }
+  scope :only_issued, -> { where status: statuses[:issued] }
+  scope :by_name, -> { order 'name asc' }
 
   def self.page_for_user(current_page, current_user)
     current_user.goals.recent.page(current_page).per(PER_PAGE)

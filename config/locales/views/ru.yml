@@ -33,6 +33,11 @@ ru:
       index:
         title: "Мои цели, страница %{page}"
         header: "Мои цели"
+    deeds:
+      index:
+        title: "Мой журнал успеха, страница %{page}"
+        header: "Мой журнал успеха"
+        about: "О журнале успеха"
   browsers:
     update:
       success: "Браузер успешно изменён"

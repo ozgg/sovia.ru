@@ -1,0 +1,16 @@
+<% if collection.any? %>
+    <%= form_for Deed.new do |f| %>
+        <ul>
+          <li>
+            <%= f.label :essence, 'Сегодня я' %>
+            <%= f.text_field :essence %>, чтобы <%= f.select :goal_id, goals_for_select(current_user) %>
+          </li>
+          <% collection.each do |deed| %>
+              <li><%= deed.event_time %>
+                я <%= deed.essence %><%= ", чтобы #{deed.goal.name}" unless deed.goal.nil? %></li>
+          <% end %>
+        </ul>
+    <% end %>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
