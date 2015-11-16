@@ -2,6 +2,7 @@ class Goal < ActiveRecord::Base
   include HasOwner
 
   belongs_to :user
+  has_many :deeds
 
   enum status: [:issued, :achieved, :rejected]
 

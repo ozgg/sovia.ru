@@ -95,6 +95,10 @@ ru:
         status: "состояние"
         name: "название"
         description: "описание"
+        statuses:
+          issued: "поставлена"
+          achieved: "достигнута"
+          rejected: "заброшена"
       post_tag:
         post_id: "публикация"
         tag_id: "метка"

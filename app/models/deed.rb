@@ -7,6 +7,8 @@ class Deed < ActiveRecord::Base
   validates_presence_of :user_id, :essence
   validate :goal_has_same_owner
 
+  scope :ordered, -> { order 'id asc' }
+
   protected
 
   def goal_has_same_owner

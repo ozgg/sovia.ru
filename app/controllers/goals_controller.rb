@@ -50,6 +50,6 @@ class GoalsController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(owner_for_entity)
+    entity_parameters.merge(owner_for_entity).merge(status: Goal.statuses[:issued])
   end
 end

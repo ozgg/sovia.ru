@@ -1,0 +1,18 @@
+<section>
+  <h1>Шаги для достижения цели</h1>
+  <%= form_for goal.deeds.new do |f| %>
+  <ul>
+    <li>
+      <%= label_tag 'deed_essence', 'Сегодня я' %>
+      <%= f.text_field :essence, required: true, size: 50 %>
+      <%= f.hidden_field :goal_id %>
+      <%= f.button t(:submit), type: :submit %>
+    </li>
+    <% if deeds.any? %>
+        <% deeds.each do |deed| %>
+        <li><%= "#{deed.created_at.strftime('%d.%m.%Y')} я #{deed.essence}" %></li>
+        <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+</section>

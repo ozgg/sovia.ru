@@ -147,9 +147,12 @@ body {
     }
 
     > section {
+      margin: 1rem 0 0 0;
+
       > h1 {
         font-size: 1.25rem;
         line-height: 1.5rem;
+        color: #404040;
       }
 
       > section {
