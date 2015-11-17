@@ -1,13 +1,11 @@
 Views:
 
- * deeds           
  * grains          
  * metrics         
  * places          
  * side_notes      
  * users
  * my/comments      
- * my/deeds         
  * my/index         
  * my/posts         
  * my/questions     

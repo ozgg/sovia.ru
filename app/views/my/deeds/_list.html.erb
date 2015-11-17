@@ -7,7 +7,7 @@
           </li>
           <% collection.each do |deed| %>
               <li><%= deed.event_time %>
-                я <%= deed.essence %><%= ", чтобы #{deed.goal.name}" unless deed.goal.nil? %></li>
+                я <%= link_to deed.essence, deed %><%= ", чтобы #{deed.goal.name}" unless deed.goal.nil? %></li>
           <% end %>
         </ul>
     <% end %>

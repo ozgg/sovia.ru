@@ -1,0 +1,4 @@
+<article class="deed">
+  <h1><%= deed.event_time %></h1>
+  <p>Я <%= deed.essence %><%= ", чтобы #{deed.goal.name}" unless deed.goal_id.nil? %>.</p>
+</article>

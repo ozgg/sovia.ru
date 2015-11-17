@@ -99,6 +99,10 @@ ru:
           issued: "поставлена"
           achieved: "достигнута"
           rejected: "заброшена"
+      deed:
+        user_id: "пользователь"
+        goal_id: "цель"
+        essence: "суть"
       post_tag:
         post_id: "публикация"
         tag_id: "метка"
