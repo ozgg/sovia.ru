@@ -1,0 +1,36 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article>
+  <h1><%= t('.title') %></h1>
+  <% if current_user && current_user.email_confirmed? %>
+      <div class="notice"><%= t('activerecord.attributes.user.email_confirmed') %></div>
+  <% else %>
+      <section>
+        <h1><%= t('.got_code') %></h1>
+        <%= form_tag my_confirmation_path, method: :patch do %>
+            <div>
+              <%= label_tag :code, t('activerecord.attributes.code.body') %>
+              <%= text_field_tag :code, param_from_request(:code), required: true %>
+            </div>
+            <div>
+              <%= button_tag t('.confirm'), type: :submit %>
+            </div>
+        <% end %>
+
+      </section>
+
+      <section>
+        <h1><%= t('.no_code') %></h1>
+        <%= form_tag my_confirmation_path, method: :post do %>
+            <div>
+              <%= button_tag t('.send_code'), type: :submit %>
+            </div>
+        <% end %>
+      </section>
+  <% end %>
+
+</article>
