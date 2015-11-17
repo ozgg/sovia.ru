@@ -227,6 +227,7 @@ ru:
         ip: "IP-адрес"
         active: "активный"
         token: "жетон"
+        last_used: "последний раз использовался"
       side_note:
         user_id: "пользователь"
         agent_id: "АП"

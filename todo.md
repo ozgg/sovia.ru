@@ -1,9 +1,7 @@
 Views:
 
  * grains          
- * metrics         
  * places          
- * side_notes      
  * users
  * my/comments      
  * my/index         
@@ -24,13 +22,13 @@ Refactoring:
 
 Later:
 
+ * Statistics
+ * Social log in
+ * Sitemap
  * Advices for dream form
  * Adjacent dreams
  * Adjacent posts
- * Statistics
  * Use grain link in my tagged dreams
- * Social log in
- * Sitemap
  * Better markup for comments
  * My tokens
  * Mentions of user

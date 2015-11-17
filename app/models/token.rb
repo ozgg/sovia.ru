@@ -27,7 +27,12 @@ class Token < ActiveRecord::Base
 
   def self.user_by_pair(user_id, token)
     instance = self.find_by user_id: user_id, token: token, active: true
-    instance.is_a?(self) ? instance.user : nil
+    if instance.is_a?(self)
+      instance.update last_used: Time.now
+      instance.user
+    else
+      nil
+    end
   end
 
   def cookie_pair
@@ -39,7 +44,7 @@ class Token < ActiveRecord::Base
   end
 
   def text_for_list
-    "#{user.long_uid}, #{created_at.pubdate} (#{client_name})"
+    "#{user.long_uid}, #{created_at.pubdate}/#{last_used.pubdate} (#{client_name})"
   end
 
   def flags
