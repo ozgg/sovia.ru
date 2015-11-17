@@ -3,8 +3,8 @@
   <h1 itemprop="headline"><%= pattern.name %></h1>
 
   <div itemprop="articleBody" role="definition" class="body">
-    <% if pattern.image.url %>
-        <div class="image"><%= image_tag pattern.image.url, alt: pattern.name %></div>
+    <% unless pattern.image.blank? %>
+        <div class="image"><%= image_tag pattern.image.medium.url, alt: pattern.name %></div>
     <% end %>
     <% if pattern.description.blank? %>
         <p>Этот образ ещё не описан.</p>

@@ -2,8 +2,8 @@
   <h1><%= link_to post.title, post %></h1>
 
   <div class="body">
-    <% if post.image.url %>
-        <div class="image"><%= image_tag post.image.url, alt: post.title %></div>
+    <% unless post.image.blank? %>
+        <div class="image"><%= image_tag post.image.preview.url, alt: post.title %></div>
     <% end %>
     <div class="text"><%= post.lead %></div>
     <% if post.tags_cache.any? %>
