@@ -12,6 +12,6 @@
 !/log/.keep
 /tmp
 /public/uploads
+/public/sitemap.*.xml
 /config/database.yml
 /config/secrets.yml
-
