@@ -6,11 +6,9 @@ Views:
  * my/posts         
  * my/questions     
  * my/side_notes
- * my/confirmations
  * my/grains        
  * my/places        
  * my/profiles      
- * my/recoveries
  * comments (mailer)
  
 Refactoring:
