@@ -51,6 +51,11 @@ ru:
       index:
         header: "Мои сны"
         title: "Мои сны, страница %{page}"
+      archive:
+        title: "Мой архив снов"
+      tagged:
+        title: "Мои сны с меткой «%{tag}», страница %{page}"
+        header: "Мои сны с меткой «%{tag}»"
     posts:
       index:
         header: "Мои публикации"

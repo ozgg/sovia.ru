@@ -7,7 +7,6 @@ Views:
  * my/questions     
  * my/side_notes
  * my/confirmations
- * my/dreams        
  * my/grains        
  * my/places        
  * my/profiles      
