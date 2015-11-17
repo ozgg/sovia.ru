@@ -3,7 +3,6 @@ Views:
  * grains          
  * places          
  * my/comments      
- * my/index         
  * my/posts         
  * my/questions     
  * my/side_notes

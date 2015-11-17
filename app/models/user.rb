@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def can_receive_letters?
-    allow_mail? && email_confirmed? && !email.blank?
+    allow_mail? && !email.blank?
   end
 
   def text_for_list
@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
         active: allow_login?,
         bot: bot?
     }
+  end
+
+  def should_confirm_email?
+    !email.blank? && !email_confirmed?
   end
 
   protected

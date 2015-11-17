@@ -18,6 +18,8 @@ ru:
         success: "Код подтверждения выслан"
       update:
         invalid_code: "Недействительный код"
+      show:
+        title: "Подтвердить адрес электронной почты"
     profiles:
       new:
         title: "Присоединиться"
@@ -38,6 +40,30 @@ ru:
         title: "Мой журнал успеха, страница %{page}"
         header: "Мой журнал успеха"
         about: "О журнале успеха"
+    index:
+      index:
+        title: "Мой кабинет"
+    dreams:
+      index:
+        header: "Мои сны"
+    posts:
+      index:
+        header: "Мои публикации"
+    questions:
+      index:
+        header: "Мои вопросы"
+    comments:
+      index:
+        header: "Мои комментарии"
+    side_notes:
+      index:
+        header: "Мои заметки на полях"
+    grains:
+      index:
+        header: "Мои зёрна восприятия"
+    places:
+      index:
+        header: "Мои места для сна"
   browsers:
     update:
       success: "Браузер успешно изменён"
