@@ -22,26 +22,18 @@ module UsersHelper
   end
 
   def comment_avatar(user)
-    if user.is_a?(User) && user.image.url
-      image_tag user.image.url
+    if user.is_a?(User) && !user.image.blank?
+      image_tag user.image.thumb.url
     else
-      'c.a.'
+      image_tag 'fallback/avatar/thumb_default.png'
     end
   end
 
   def profile_avatar(user)
-    if user.is_a?(User) && user.image.url
-      image_tag user.image.url
+    if user.is_a?(User) && !user.image.blank?
+      image_tag user.image.profile.url
     else
-      'p.a.'
-    end
-  end
-
-  def dream_avatar(user)
-    if user.is_a?(User) && user.image
-      image_tag user.image.url
-    else
-      'd.a.'
+      image_tag 'fallback/avatar/default.png'
     end
   end
 end

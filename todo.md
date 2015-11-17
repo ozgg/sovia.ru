@@ -2,7 +2,6 @@ Views:
 
  * grains          
  * places          
- * users
  * my/comments      
  * my/index         
  * my/posts         

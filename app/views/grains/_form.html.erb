@@ -19,14 +19,6 @@
       <div><%= f.label :description %></div>
       <%= f.text_area :description, cols: 80, rows: 20, required: true %>
     </div>
-    <div>
-      <% entity.links.each do |category, links| %>
-          <div>
-            <%= label_tag "links_#{category}", t("activerecord.attributes.pattern_link.categories.#{category}") %>
-            <%= text_field_tag "links[#{category}]", links.map { |p| p.name }.join(', ') %>
-          </div>
-      <% end %>
-    </div>
 
     <div>
       <%= f.button t(:submit), type: :submit %>
