@@ -61,8 +61,9 @@ Rails.application.routes.draw do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
-    get 'auth/vk' => :login_vk, as: :login_vk
+    # get 'auth/vk' => :login_vk, as: :login_vk
     get 'auth/:provider' => :auth_external, as: :auth_external
+    get 'auth/:provider/callback' => :callback, as: :auth_callback
   end
 
   # About project, terms of service and privacy

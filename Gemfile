@@ -38,7 +38,8 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-mail_ru'
-gem 'vkontakte_api', '~> 1.4'
+gem 'omniauth-vkontakte'
+# gem 'vkontakte_api', '~> 1.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

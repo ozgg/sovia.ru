@@ -106,6 +106,15 @@ class User < ActiveRecord::Base
     !email.blank? && !email_confirmed?
   end
 
+  def set_from_auth_hash(data)
+    self.password = self.password_confirmation = 'n/a'
+    self.name = data[:info][:name]
+    self.screen_name = data[:info][:nickname]
+    self.remote_image_url = data[:info][:image] unless data[:info][:image].blank?
+    self.email = data[:info][:email] unless data[:info][:email].blank?
+    self.email_confirmed = !data[:info][:verified].blank?
+  end
+
   protected
 
   def normalize_screen_name

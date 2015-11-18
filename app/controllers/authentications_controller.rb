@@ -25,11 +25,43 @@ class AuthenticationsController < ApplicationController
     redirect_to root_path
   end
 
-  protected
+  def external
+    render plain: params[:provider]
+  end
+
+  def callback
+    render json: request.env['omniauth.auth']
+    # message = "set_#{params[:provider]}_account"
+    # send message if respond_to? message, true
+    #
+    # redirect_to root_path
+  end
+
+  private
 
   def deactivate_token
     token = Token.find_by token: cookies['token'].split(':').last
     token.update active: false
     cookies['token'] = nil
+  end
+
+  def create_account(network, data)
+    parameters = { network: network, uid: data[:uid] }
+    account = User.new parameters
+    account.set_from_auth_hash data
+    account.save!
+    account
+  end
+
+  def set_twitter_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:twitter], uid: data[:uid]) || create_account('twitter', data)
+    create_token_for_user account, tracking_for_entity
+  end
+
+  def set_facebook_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:fb], uid: data[:uid]) || create_account('facebook', data)
+    create_token_for_user account, tracking_for_entity
   end
 end
