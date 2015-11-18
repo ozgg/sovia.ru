@@ -30,11 +30,10 @@ class AuthenticationsController < ApplicationController
   end
 
   def callback
-    render json: request.env['omniauth.auth']
-    # message = "set_#{params[:provider]}_account"
-    # send message if respond_to? message, true
-    #
-    # redirect_to root_path
+    message = "set_#{params[:provider]}_account"
+    send message if respond_to? message, true
+
+    redirect_to root_path
   end
 
   private
@@ -62,6 +61,18 @@ class AuthenticationsController < ApplicationController
   def set_facebook_account
     data = request.env['omniauth.auth']
     account = User.find_by(network: User.networks[:fb], uid: data[:uid]) || create_account('facebook', data)
+    create_token_for_user account, tracking_for_entity
+  end
+
+  def set_vkontakte_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:vk], uid: data[:uid]) || create_account('vk', data)
+    create_token_for_user account, tracking_for_entity
+  end
+
+  def set_mail_ru_account
+    data = request.env['omniauth.auth']
+    account = User.find_by(network: User.networks[:mail_ru], uid: data[:uid]) || create_account('mail_ru', data)
     create_token_for_user account, tracking_for_entity
   end
 end

@@ -13,10 +13,10 @@
       <div>
         <%= button_tag t('.sign_in'), type: 'submit' %>
         <div class="external">
-          <div><%= link_to image_tag('login/vk.png'), login_vk_path, title: t('.vk') %></div>
+          <div><%= link_to image_tag('login/vk.png'), auth_external_path(provider: :vkontakte), title: t('.vk') %></div>
           <div><%= link_to image_tag('login/twitter.png'), auth_external_path(provider: :twitter), title: t('.twitter') %></div>
           <div><%= link_to image_tag('login/fb.png'), auth_external_path(provider: :facebook), title: t('.facebook') %></div>
-          <div><%= link_to image_tag('login/mailru.png'), auth_external_path(provider: :mail_ru), title: t('.mail_ru') %></div>
+          <!--<div><%= link_to image_tag('login/mailru.png'), auth_external_path(provider: :mail_ru), title: t('.mail_ru') %></div>-->
         </div>
       </div>
       <ul>
