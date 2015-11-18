@@ -30,6 +30,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def callback
+    @data = request.env['omniauth.auth']
+    # render json: @data
     message = "set_#{params[:provider]}_account"
     send message if respond_to? message, true
 
@@ -53,14 +55,12 @@ class AuthenticationsController < ApplicationController
   end
 
   def set_twitter_account
-    data = request.env['omniauth.auth']
-    account = User.find_by(network: User.networks[:twitter], uid: data[:uid]) || create_account('twitter', data)
+    account = User.find_by(network: User.networks[:twitter], uid: @data[:uid]) || create_account('twitter', data)
     create_token_for_user account, tracking_for_entity
   end
 
   def set_facebook_account
-    data = request.env['omniauth.auth']
-    account = User.find_by(network: User.networks[:fb], uid: data[:uid]) || create_account('facebook', data)
+    account = User.find_by(network: User.networks[:fb], uid: @data[:uid]) || create_facebook_account
     create_token_for_user account, tracking_for_entity
   end
 
@@ -74,5 +74,26 @@ class AuthenticationsController < ApplicationController
     data = request.env['omniauth.auth']
     account = User.find_by(network: User.networks[:mail_ru], uid: data[:uid]) || create_account('mail_ru', data)
     create_token_for_user account, tracking_for_entity
+  end
+
+  def create_facebook_account
+    parameters = {
+        network: User.networks[:fb],
+        screen_name: @data[:info][:name],
+    }
+    parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
+
+    User.create! parameters.merge(shared_parameters)
+  end
+
+  def shared_parameters
+    {
+        uid: @data[:uid],
+        email: @data[:info][:email],
+        name: @data[:info][:name],
+        email_confirmed: true,
+        allow_mail: true,
+        password_digest: BCrypt::Engine.hash_secret(Time.now.to_s(26), BCrypt::Engine.generate_salt),
+    }.merge(tracking_for_entity)
   end
 end
