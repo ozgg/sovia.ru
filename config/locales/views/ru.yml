@@ -78,6 +78,7 @@ ru:
     comments:
       index:
         header: "Мои комментарии"
+        title: "Мои комментарии, страница %{page}"
     side_notes:
       index:
         header: "Мои заметки на полях"

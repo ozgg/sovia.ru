@@ -1,0 +1,9 @@
+<div class="comment">
+  <div class="header">
+    <%= link_to "#{comment.commentable.class} «#{comment.commentable.title_for_view}»", comment.commentable %>
+  </div>
+
+  <div class="body" itemprop="about">
+    <%= raw prepare_comment_text(comment, current_user) %>
+  </div>
+</div>
