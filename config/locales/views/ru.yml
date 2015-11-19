@@ -83,6 +83,7 @@ ru:
     side_notes:
       index:
         header: "Мои заметки на полях"
+        title: "Мои заметки на полях, страница %{page}"
     grains:
       index:
         header: "Мои зёрна восприятия"
