@@ -1,1 +1,57 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :sidebar do %>
+    <div>
+      <p><%= link_to t(:edit), edit_my_profile_path %></p>
+    </div>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="user">
+  <h1><%= t('.title') %></h1>
+
+  <section>
+    <h1><%= current_user.profile_name %></h1>
+    <figure>
+      <%= profile_avatar current_user %>
+      <figcaption><%= current_user.profile_name %></figcaption>
+    </figure>
+    <table>
+      <caption><%= t('users.user.account_data') %></caption>
+      <tbody>
+      <tr>
+        <th><%= t('activerecord.attributes.user.screen_name') %></th>
+        <td><%= current_user.screen_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.name') %></th>
+        <td><%= current_user.name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.inviter_id') %></th>
+        <td><%= current_user.inviter_id.nil? ? t(:not_set) : user_link(current_user.inviter) %></td>
+      </tr>
+      <tr>
+        <th><%= t(:created_at) %></th>
+        <td><%= current_user.created_at.pubdate %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <td><%= current_user.email %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.gender') %></th>
+        <td><%= current_user.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{current_user.gender}") %></td>
+      </tr>
+      <tr>
+        <th><%= t('users.user.contribution') %></th>
+        <td>
+          <%= link_to t(:dream, count: current_user.dreams_count), my_dreams_path %>,
+          <%= link_to t(:post, count: current_user.posts_count), my_posts_path %>,
+          <%= link_to t(:question, count: current_user.questions_count), my_questions_path %>,
+          <%= link_to t(:comment, count: current_user.comments_count), my_comments_path %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</article>
