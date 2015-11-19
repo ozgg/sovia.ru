@@ -13,7 +13,6 @@ Refactoring:
 
 Later:
 
- * Sitemap
  * Advices for dream form
  * Adjacent dreams
  * Adjacent posts

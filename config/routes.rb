@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   end
 
   # Obsolete routes
+  get 'sitemap', to: redirect('/sitemap.xml')
   get 'articles', to: redirect('/posts')
   get 'articles/:id', to: redirect('/posts/%{id}')
   get 'articles/tagged/:tag', to: redirect('/posts')
