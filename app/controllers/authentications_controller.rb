@@ -31,7 +31,7 @@ class AuthenticationsController < ApplicationController
 
   def callback
     @data = request.env['omniauth.auth']
-    # render json: @data
+    log_data
     message = "set_#{params[:provider]}_account"
     send message if respond_to? message, true
 
