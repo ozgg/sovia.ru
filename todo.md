@@ -3,7 +3,6 @@ Views:
  * grains          
  * places          
  * my/comments      
- * my/posts         
  * my/questions     
  * my/side_notes
  * my/grains        
@@ -18,7 +17,6 @@ Refactoring:
 Later:
 
  * Statistics
- * Social log in
  * Sitemap
  * Advices for dream form
  * Adjacent dreams

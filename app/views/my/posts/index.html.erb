@@ -1,0 +1,15 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <div>
+      <p><%= link_to t('my.posts.archive.title'), archive_my_posts_path %></p>
+    </div>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article class="posts">
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'posts/list', locals: { posts: @collection } %>
+  <%= paginate @collection %>
+</article>

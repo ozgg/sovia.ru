@@ -66,6 +66,12 @@ ru:
     posts:
       index:
         header: "Мои публикации"
+        title: "Мои публикации, страница %{page}"
+      archive:
+        title: "Архив моих публикаций"
+      tagged:
+        title: "Мои публикации с меткой «%{tag}», страница %{page}"
+        header: "Мои публикации с меткой «%{tag}»"
     questions:
       index:
         header: "Мои вопросы"
