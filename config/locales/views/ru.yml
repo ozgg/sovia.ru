@@ -87,9 +87,11 @@ ru:
     grains:
       index:
         header: "Мои зёрна восприятия"
+        title: "Мои зёрна восприятия, страница %{page}"
     places:
       index:
         header: "Мои места для сна"
+        title: "Мои места для сна, страница %{page}"
   browsers:
     update:
       success: "Браузер успешно изменён"
