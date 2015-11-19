@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_page, :current_user, :current_user_has_role?, :param_from_request
 
+  def default_url_options(options = {})
+    options.merge(protocol: :https)
+  end
+
   # Get current page from request
   #
   # @return [Integer]

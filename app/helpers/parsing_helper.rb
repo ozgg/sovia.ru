@@ -156,7 +156,7 @@ module ParsingHelper
     if string.blank?
       ''
     else
-      "<p>#{fragments_for_dream(string, current_user, show_names)}</p>"
+      "<p>#{fragments_for_dream(string, current_user, show_names)}</p>\n"
     end
   end
 
@@ -180,7 +180,7 @@ module ParsingHelper
     if string.blank?
       ''
     else
-      "<p>#{fragments_for_comment(string, current_user)}</p>"
+      "<p>#{fragments_for_comment(string, current_user)}</p>\n"
     end
   end
 
@@ -205,7 +205,7 @@ module ParsingHelper
     if string.blank?
       ''
     else
-      "<p>#{fragments_for_question(string, current_user)}</p>"
+      "<p>#{fragments_for_question(string, current_user)}</p>\n"
     end
   end
 
@@ -229,7 +229,7 @@ module ParsingHelper
     if string.blank?
       ''
     else
-      "<p>#{fragments_for_pattern(string)}</p>"
+      "<p>#{fragments_for_pattern(string)}</p>\n"
     end
   end
 

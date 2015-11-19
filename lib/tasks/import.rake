@@ -88,7 +88,11 @@ namespace :import do
             if File.exists? data['avatar'].to_s
               user.image = File.open data['avatar']
             elsif data['avatar_url_medium']
-              file_link = data['avatar_url_medium'].gsub('http://', 'https://')
+              if data['network'] == 'vk'
+                file_link = data['avatar_url_medium']
+              else
+                file_link = data['avatar_url_medium'].gsub('http://', 'https://')
+              end
               user.remote_image_url = file_link if File.readable?(file_link)
             end
             user.save!

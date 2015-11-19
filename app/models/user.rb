@@ -4,15 +4,15 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :user_roles, dependent: :destroy
-  has_many :posts, dependent: :delete_all
+  has_many :posts, dependent: :destroy
   has_many :goals, dependent: :destroy
   has_many :deeds, dependent: :destroy
   has_many :places, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :patterns, dependent: :nullify
   has_many :grains, dependent: :destroy
-  has_many :comments, dependent: :delete_all
-  has_many :dreams, dependent: :delete_all
+  has_many :comments, dependent: :destroy
+  has_many :dreams, dependent: :destroy
   has_many :tokens, dependent: :destroy
   has_many :side_notes, dependent: :destroy
   belongs_to :inviter, class_name: User.to_s

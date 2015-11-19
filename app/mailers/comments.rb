@@ -1,5 +1,6 @@
 class Comments < ApplicationMailer
   helper CommentsHelper
+  helper ParsingHelper
 
   def entry_reply(comment)
     @comment = comment

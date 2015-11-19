@@ -22,7 +22,7 @@ Rails.application.configure do
       from: 'sovia.ru <support@sovia.ru>',
       reply_to: 'support@sovia.ru'
   }
-  config.action_mailer.default_url_options = { :host => 'sovia.local:3000' }
+  config.action_mailer.default_url_options = { host: 'sovia.local:3000', protocol: :https }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
