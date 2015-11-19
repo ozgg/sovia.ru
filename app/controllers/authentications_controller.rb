@@ -46,16 +46,13 @@ class AuthenticationsController < ApplicationController
     cookies['token'] = nil
   end
 
-  def create_account(network, data)
-    parameters = { network: network, uid: data[:uid] }
-    account = User.new parameters
-    account.set_from_auth_hash data
-    account.save!
-    account
+  def log_data
+    file = "#{Rails.root}/log/oauth.json"
+    File.open(file, 'a') { |f| f.puts @data.to_json }
   end
 
   def set_twitter_account
-    account = User.find_by(network: User.networks[:twitter], uid: @data[:uid]) || create_account('twitter', data)
+    account = User.find_by(network: User.networks[:twitter], uid: @data[:uid]) || create_twitter_account
     create_token_for_user account, tracking_for_entity
   end
 
@@ -65,21 +62,49 @@ class AuthenticationsController < ApplicationController
   end
 
   def set_vkontakte_account
-    data = request.env['omniauth.auth']
-    account = User.find_by(network: User.networks[:vk], uid: data[:uid]) || create_account('vk', data)
+    account = User.find_by(network: User.networks[:vk], uid: @data[:uid]) || create_vk_account
     create_token_for_user account, tracking_for_entity
   end
 
   def set_mail_ru_account
-    data = request.env['omniauth.auth']
-    account = User.find_by(network: User.networks[:mail_ru], uid: data[:uid]) || create_account('mail_ru', data)
+    account = User.find_by(network: User.networks[:mail_ru], uid: @data[:uid]) || create_mail_ru_account
     create_token_for_user account, tracking_for_entity
+  end
+
+  def create_twitter_account
+    parameters = {
+        network: User.networks[:twitter],
+        screen_name: @data[:info][:nickname]
+    }
+    parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
+
+    User.create! parameters.merge(shared_parameters)
   end
 
   def create_facebook_account
     parameters = {
         network: User.networks[:fb],
         screen_name: @data[:info][:name],
+    }
+    parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
+
+    User.create! parameters.merge(shared_parameters)
+  end
+
+  def create_vk_account
+    parameters = {
+        network: User.networks[:vk],
+        screen_name: @data[:info][:nickname] == "id#{@data[:uid]}" ? @data[:info][:name] : @data[:info][:nickname],
+    }
+    parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
+
+    User.create! parameters.merge(shared_parameters)
+  end
+
+  def create_mail_ru_account
+    parameters = {
+        network: User.networks[:mail_ru],
+        screen_name: @data[:info][:nickname]
     }
     parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
 
