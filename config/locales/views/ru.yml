@@ -42,6 +42,16 @@ ru:
         you_accept_terms_of_service: "Регистрируясь на сайте, вы принимаете пользовательское соглашение."
       show:
         title: "Мой профиль"
+      edit:
+        title: "Редактирование профиля"
+        common_parameters: "Общие параметры"
+        update_image: "Загрузить новую картинку"
+        sensitive_parameters: "Связанные с безопасностью параметры"
+        sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль."
+        current_password: "Текущий пароль"
+        leave_blank_if_necessary: "Если не будете менять пароль, оставьте эти поля пустыми."
+        new_password: "Новый пароль"
+        update: "Обновить данные"
     goals:
       index:
         title: "Мои цели, страница %{page}"

@@ -5,7 +5,6 @@ Views:
  * my/side_notes
  * my/grains        
  * my/places        
- * my/profiles      
  * comments (mailer)
  
 Refactoring:
