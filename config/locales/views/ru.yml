@@ -75,6 +75,7 @@ ru:
     questions:
       index:
         header: "Мои вопросы"
+        title: "Мои вопросы, страница %{page}"
     comments:
       index:
         header: "Мои комментарии"
