@@ -510,3 +510,9 @@ ru:
   sidebar:
     more_links:
       more_links: "Ещё ссылки"
+  statistics:
+    index:
+      title: "Статистика"
+    patterns:
+      title: "Образы снов, страница %{page}"
+      header: "Образы снов"

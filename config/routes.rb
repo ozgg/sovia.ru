@@ -56,6 +56,11 @@ Rails.application.routes.draw do
     get 'patterns', as: :user_patterns
   end
 
+  scope 'statistics', controller: :statistics do
+    get '/' => :index, as: :statistics
+    get 'patterns' => :patterns, as: :statistics_patterns
+  end
+
   # Authentication
   controller :authentications do
     get 'login' => :new
@@ -73,6 +78,14 @@ Rails.application.routes.draw do
     get 'tos' => :terms_of_service
     get 'privacy'
   end
+
+  # Obsolete routes
+  get 'articles', to: redirect('/posts')
+  get 'articles/:id', to: redirect('/posts/%{id}')
+  get 'articles/tagged/:tag', to: redirect('/posts')
+  get 'forum/posts/:id', to: redirect('/posts/%{id}')
+  get 'forum/(:community)(/:id)', to: redirect('/posts')
+  get 'statistics/symbols', to: redirect('/statistics/patterns')
 
   # Example resource route with options:
   #   resources :products do

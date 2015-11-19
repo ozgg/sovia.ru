@@ -13,7 +13,6 @@ Refactoring:
 
 Later:
 
- * Statistics
  * Sitemap
  * Advices for dream form
  * Adjacent dreams

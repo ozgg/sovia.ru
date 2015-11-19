@@ -1,0 +1,13 @@
+<% content_for :meta_Title, t('.title', page: current_page) %>
+<% content_for :sidebar do %>
+    <%= render 'sidebar/more_links' %>
+<% end %>
+<%= render 'shared/metrics' %>
+
+<article>
+  <h1><%= t('.header') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

@@ -44,6 +44,10 @@ class Pattern < ActiveRecord::Base
     for_queue.page(current_page).per(PER_PAGE)
   end
 
+  def self.page_for_statistics(current_page)
+    where('dream_count > 0').order('dream_count desc, slug asc').page(current_page).per(PER_PAGE)
+  end
+
   # @param [Hash] links
   def links=(links)
     new_links = []

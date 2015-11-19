@@ -1,0 +1,10 @@
+<% if collection.any? %>
+    <ol start="<%= (current_page.to_i - 1) * Pattern::PER_PAGE + 1 %>">
+      <% collection.each do |pattern| %>
+          <li><%= link_to pattern.name, tagged_dreams_path(tag_name: pattern.name_for_url), rel: 'tag' %> (<%= pattern.dream_count %>)
+          </li>
+      <% end %>
+    </ol>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
