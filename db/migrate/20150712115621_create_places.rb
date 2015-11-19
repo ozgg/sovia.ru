@@ -1,8 +1,8 @@
 class CreatePlaces < ActiveRecord::Migration
   def change
     create_table :places do |t|
-      t.references :user, index: true, foreign_key: true, null: false
       t.timestamps null: false
+      t.references :user, index: true, foreign_key: true, null: false
       t.float :latitude
       t.float :longitude
       t.integer :azimuth, limit: 2

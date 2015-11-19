@@ -1,11 +1,11 @@
 class CreateDreams < ActiveRecord::Migration
   def change
     create_table :dreams do |t|
+      t.timestamps null: false
       t.references :user, index: true, foreign_key: true
       t.references :place, index: true, foreign_key: true
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.timestamps null: false
       t.integer :privacy, limit: 2, null: false, index: true
       t.integer :lucidity, limit: 2, null: false, default: 0
       t.integer :mood, limit: 2, null: false, default: 0

@@ -1,9 +1,9 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
+      t.timestamps null: false
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.timestamps null: false
       t.integer :network, limit: 2, null: false
       t.integer :user_id
       t.integer :inviter_id

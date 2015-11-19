@@ -16,8 +16,16 @@
       <%= f.text_field :name, required: true, size: 50 %>
     </div>
     <div>
+      <div><%= f.label :essence %></div>
+      <%= f.text_field :essence, size: 50 %>
+    </div>
+    <div>
       <div><%= f.label :description %></div>
       <%= f.text_area :description, cols: 80, rows: 20, required: true %>
+    </div>
+    <div>
+      <%= f.check_box :locked %>
+      <%= f.label :locked %>
     </div>
     <div>
       <% entity.links.each do |category, links| %>

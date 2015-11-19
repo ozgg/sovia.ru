@@ -60,7 +60,7 @@ class PatternsController < ApplicationController
   end
 
   def entity_parameters
-    params.require(:pattern).permit(:name, :image, :description)
+    params.require(:pattern).permit(:name, :essence, :image, :description, :locked)
   end
 
   def creation_parameters

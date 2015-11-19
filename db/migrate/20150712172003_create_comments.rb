@@ -1,10 +1,10 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
+      t.timestamps null: false
       t.references :user, index: true, foreign_key: true
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.timestamps null: false
       t.boolean :best, null: false, default: false
       t.boolean :visible, null: false, default: true
       t.integer :rating, null: false, default: 0

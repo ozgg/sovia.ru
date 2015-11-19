@@ -1,10 +1,10 @@
 class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
+      t.timestamps null: false
       t.references :user, index: true, foreign_key: true, null: false
       t.references :agent, index: true, foreign_key: true
       t.inet :ip
-      t.timestamps null: false
       t.integer :rating, null: false, default: 0
       t.integer :upvote_count, null: false, default: 0
       t.integer :downvote_count, null: false, default: 0

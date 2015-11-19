@@ -148,7 +148,9 @@ ru:
         name: "название"
         slug: "идентификатор"
         image: "картинка"
+        essence: "суть"
         description: "описание"
+        locked: "закрыть от изменений"
       comment:
         user_id: "пользователь"
         agent_id: "АП"
