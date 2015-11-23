@@ -62,7 +62,19 @@ class AuthenticationsController < ApplicationController
   end
 
   def set_vkontakte_account
-    account = User.find_by(network: User.networks[:vk], uid: @data[:uid]) || create_vk_account
+    account = User.find_by(network: User.networks[:vk], uid: @data[:uid])
+    if account.is_a? User
+      new_data = Hash.new
+      if account.email.blank?
+        new_data.merge(email: @data[:info][:email], email_confirmed: true, allow_mail: true)
+      end
+      if account.image.blank?
+        new_data[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
+      end
+      account.update(new_data) unless new_data.blank?
+    else
+      account = create_vk_account
+    end
     create_token_for_user account, tracking_for_entity
   end
 
