@@ -22,6 +22,9 @@
   <div class="footer">
     <%= render partial: 'shared/author_and_time', locals: { item: dream } %>
   </div>
+  <% if current_user_has_role? :administrator %>
+      <%= "<p>#{t('activerecord.attributes.dream.needs_interpretation')}</p>" if dream.needs_interpretation? %>
+  <% end %>
   <%= render partial: 'shared/track_data', locals: { item: dream } %>
 
   <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>
