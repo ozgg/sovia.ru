@@ -6,7 +6,7 @@
         <% if params[:queue] %>
             <li><%= link_to t(:list), patterns_path %></li>
         <% else %>
-            <li><%= link_to 'Очередь', patterns_path(queue: 1) %></li>
+            <li><%= link_to t(:queue), patterns_path(queue: 1) %></li>
         <% end %>
       </ul>
     </div>
@@ -14,6 +14,8 @@
 
 <article class="patterns">
   <h1><%= t('.header') %></h1>
+
+  <div><%= Pattern.locked.count %> / <%= Pattern.count %></div>
 
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { patterns: @collection } %>

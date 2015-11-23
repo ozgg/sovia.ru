@@ -6,7 +6,7 @@ html {
   font-size: 16px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   html {
     padding: 0;
     background-position: -2rem 0;
@@ -310,4 +310,8 @@ ul.entities {
       display: inline-block;
     }
   }
+}
+
+textarea, input {
+  max-width: calc(100% - 0.5rem);
 }

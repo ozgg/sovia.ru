@@ -2,13 +2,21 @@ article.front-page {
   padding: 0.5rem;
 }
 
+section.recent {
+  display: flex;
+  flex-wrap: wrap;
+
+  > h1 {
+    width: 100%;
+  }
+}
+
 div.glimpse {
   min-width: 12rem;
   width: 50%;
   height: 14rem;
   margin: 0 0 0.5rem 0;
   overflow: hidden;
-  float: left;
 
   > div {
     margin: 0 0.5rem;
@@ -55,9 +63,12 @@ div.glimpse {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 800px) {
   div.glimpse {
     width: 100%;
-    display: block;
+
+    > div {
+      margin: 0;
+    }
   }
 }

@@ -2,7 +2,7 @@
 <% content_for :sidebar do %>
     <div class="options">
       <ul>
-        <li><%= link_to t(:list), patterns_path %></li>
+        <li><%= link_to t(:queue), patterns_path(queue: 1) %></li>
         <li><%= link_to t(:create), new_pattern_path %></li>
         <li><%= link_to t('layouts.main_navigation.dreambook'), dreambook_word_path(letter: @entity.letter, word: Canonizer.urlize(@entity.name)) %></li>
         <li><%= link_to t(:edit), edit_pattern_path(@entity) %></li>

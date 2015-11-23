@@ -17,6 +17,7 @@ class Pattern < ActiveRecord::Base
   scope :starting_with, ->(letter) { where 'slug ilike ?', "#{letter}%" }
   scope :good_for_dreambook, -> { where 'description is not null or dream_count > 0' }
   scope :for_queue, -> { where(locked: false).order('dream_count desc, slug asc') }
+  scope :locked, -> { where(locked: true) }
 
   PER_PAGE = 50
 
