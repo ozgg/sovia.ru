@@ -78,4 +78,12 @@ article > .footer > ul.flags, .preview > .footer > ul.flags {
       background-image: image_url('icons/active-set.png');
     }
   }
+
+  .locked {
+    background-image: image_url('icons/locked.png');
+
+    &.set {
+      background-image: image_url('icons/locked-set.png');
+    }
+  }
 }

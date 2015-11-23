@@ -3,7 +3,7 @@
       <% patterns.each do |pattern| %>
           <li>
             <%= render partial: 'admin/flags', locals: { flags: pattern.flags } %>
-            <div><%= link_to pattern.name, pattern %> (<%= pattern.dream_count %>)</div>
+            <div><%= link_to pattern.name, edit_pattern_path(pattern) %> (<%= pattern.dream_count %>)</div>
           </li>
       <% end %>
     </ul>

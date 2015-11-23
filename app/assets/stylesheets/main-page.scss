@@ -53,3 +53,10 @@ div.glimpse {
     background: #f7f7f7;
   }
 }
+
+@media screen and (max-width: 320px) {
+  div.glimpse {
+    width: 100%;
+    display: block;
+  }
+}

@@ -53,7 +53,7 @@ task :deploy => :environment do
     queue! "#{rake} sitemap:generate"
 
     to :launch do
-      queue! "bundle exec pumactl -S #{deploy_to}/shared/tmp/puma.state restart"
+      # queue! "bundle exec pumactl -S #{deploy_to}/shared/tmp/puma.state restart"
     end
   end
 end

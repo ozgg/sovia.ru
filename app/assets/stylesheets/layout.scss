@@ -6,6 +6,13 @@ html {
   font-size: 16px;
 }
 
+@media screen and (max-width: 320px) {
+  html {
+    padding: 0;
+    background-position: -2rem 0;
+  }
+}
+
 h1, h2, h3, h4, h6, h6 {
   margin: 0;
   padding: 0;
@@ -102,7 +109,7 @@ body {
   margin-right: 20rem;
 
   > nav.main {
-    height: 2rem;
+    //height: 2rem;
     border-bottom: solid rgba(24, 131, 211, 0.8) 0.125rem;
 
     ul {
