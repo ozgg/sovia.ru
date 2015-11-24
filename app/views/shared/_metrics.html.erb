@@ -1,7 +1,5 @@
 <% if Rails.env.production? %>
-    <% content_for :metrics do %>
-        <%= render 'metrics/yandex' %>
-        <%= render 'metrics/openstat' %>
-        <%= render 'metrics/google' %>
-    <% end %>
+    <%= render 'metrics/yandex' %>
+    <%= render 'metrics/openstat' %>
+    <%= render 'metrics/google' %>
 <% end %>

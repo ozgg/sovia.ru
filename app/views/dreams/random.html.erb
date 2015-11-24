@@ -2,7 +2,6 @@
 <% content_for :sidebar do %>
     <%= render 'sidebar/side_note' %>
 <% end %>
-<%= render 'shared/metrics' %>
 
 <% if @entity.is_a? Dream %>
     <%= render @entity %>
