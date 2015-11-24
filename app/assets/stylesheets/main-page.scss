@@ -34,6 +34,10 @@ div.glimpse {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
 
     .author {

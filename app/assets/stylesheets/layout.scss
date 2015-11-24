@@ -86,6 +86,9 @@ body {
   > footer {
     font-size: 0.75rem;
     color: #cec6b5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
     a:link, a:visited {
       color: #b2b9cd;
