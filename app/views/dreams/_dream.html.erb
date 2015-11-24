@@ -26,6 +26,16 @@
       <%= "<p>#{t('activerecord.attributes.dream.needs_interpretation')}</p>" if dream.needs_interpretation? %>
   <% end %>
   <%= render partial: 'shared/track_data', locals: { item: dream } %>
+  <% if dream.patterns_cache.any? %>
+  <section class="instant-interpretation">
+    <h1>Беглая интерпретация</h1>
+    <ul>
+      <% dream.patterns.each do |pattern| %>
+      <li><%= link_to_dreambook(pattern) %>: <%= pattern.essence || 'См. сонник' %></li>
+      <% end %>
+    </ul>
+  </section>
+  <% end %>
 
   <%= render partial: 'comments/list', locals: { commentable: dream, comments: dream.comments } %>
 </article>

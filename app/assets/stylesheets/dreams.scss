@@ -27,11 +27,11 @@ article.new-dream, article.edit-dream {
     }
 
     &.visible_to_community {
-      background: #f7f7f0 image_url('lock-yellow.png') no-repeat 100% 50% / 2rem 2rem;
+      background: image_url('lock-yellow.png') no-repeat 100% 50% / 2rem 2rem;
     }
 
     &.personal {
-      background: #f7f7f0 image_url('lock-red.png') no-repeat 100% 50% / 2rem 2rem;
+      background: image_url('lock-red.png') no-repeat 100% 50% / 2rem 2rem;
     }
   }
 
@@ -49,6 +49,29 @@ article.new-dream, article.edit-dream {
         border: outset 1px;
         padding: 0 0.3rem;
         font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.instant-interpretation {
+  padding-left: 1rem;
+
+  > h1 {
+    font-size: 1.25rem;
+    font-weight: normal;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    font-size: 0.75rem;
+
+    li {
+      list-style: none;
+
+      &:first-letter {
+        text-transform: uppercase;
       }
     }
   }

@@ -4,6 +4,7 @@
           <li>
             <%= f.label :essence, 'Сегодня я' %>
             <%= f.text_field :essence %>, чтобы <%= f.select :goal_id, goals_for_select(current_user) %>
+            <%= f.button t(:submit), type: :submit %>
           </li>
           <% collection.each do |deed| %>
               <li><%= deed.event_time %>

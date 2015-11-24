@@ -19,6 +19,7 @@
   </div>
 
   <div class="footer">
+    <p><%= pattern.essence %></p>
     <p><%= t('activerecord.attributes.pattern.user_id') %>: <%= user_link pattern.user %></p>
     <p><%= "#{t(:created_at)}: #{pattern.created_at.pubdate}" %></p>
     <p><%= "#{t(:updated_at)}: #{pattern.updated_at.pubdate}" %></p>
