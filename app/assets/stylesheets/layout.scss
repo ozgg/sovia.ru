@@ -63,14 +63,15 @@ form {
 
 body {
   max-width: 72rem;
-  min-width: 40rem;
+  min-width: 20rem;
   margin: 0;
 
   > header {
-    height: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
     .logo {
-      float: left;
       width: 10rem;
       height: 2rem;
 
@@ -100,13 +101,14 @@ body {
   position: relative;
   background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #main {
   background: #ffffff image_url('content-background.jpg') no-repeat 0 0 / 26rem 20rem;
   min-height: 20rem;
-  max-width: 51rem;
-  margin-right: 20rem;
+  width: calc(100% - 20rem);
 
   > nav.main {
     //height: 2rem;
@@ -170,6 +172,16 @@ body {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 680px) {
+  #main {
+    width: 100%;
+  }
+
+  #sidebar {
+    width: 100%;
   }
 }
 

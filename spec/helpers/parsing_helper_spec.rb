@@ -122,19 +122,19 @@ RSpec.describe ParsingHelper, type: :helper do
 
     it 'ignores empty lines' do
       dream = create :dream, body: "\na\r\n\nb\r\n"
-      expected = '<p>a</p><p>b</p>'
+      expected = "<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
     end
 
     it 'encloses each line in passage' do
       dream = create :dream, body: "a\nb"
-      expected = '<p>a</p><p>b</p>'
+      expected = "<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
     end
 
     it 'escapes < and >' do
       dream = create :dream, body: '<a>'
-      expected = '<p>&lt;a&gt;</p>'
+      expected = "<p>&lt;a&gt;</p>\n"
       expect(helper.prepare_dream_text(dream, nil)).to eq(expected)
     end
 
@@ -154,19 +154,19 @@ RSpec.describe ParsingHelper, type: :helper do
 
     it 'ignores empty lines' do
       comment = create :comment, body: "\na\r\n\nb\r\n"
-      expected = '<p>a</p><p>b</p>'
+      expected = "<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
     end
 
     it 'encloses each line in passage' do
       comment = create :comment, body: "a\nb"
-      expected = '<p>a</p><p>b</p>'
+      expected = "<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
     end
 
     it 'escapes < and >' do
       comment = create :comment, body: '<a>'
-      expected = '<p>&lt;a&gt;</p>'
+      expected = "<p>&lt;a&gt;</p>\n"
       expect(helper.prepare_comment_text(comment, nil)).to eq(expected)
     end
 
@@ -191,19 +191,19 @@ RSpec.describe ParsingHelper, type: :helper do
 
     it 'ignores empty lines' do
       pattern = create :pattern, description: "Толкование\na\r\n\nb\r\n"
-      expected = '<p>Толкование</p><p>a</p><p>b</p>'
+      expected = "<p>Толкование</p>\n<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_pattern_text(pattern)).to eq(expected)
     end
 
     it 'encloses each line in passage' do
       pattern = create :pattern, description: "Строка a\nСтрока b"
-      expected = '<p>Строка a</p><p>Строка b</p>'
+      expected = "<p>Строка a</p>\n<p>Строка b</p>\n"
       expect(helper.prepare_pattern_text(pattern)).to eq(expected)
     end
 
     it 'escapes < and >' do
       pattern = create :pattern, description: 'А тут будет тэг <a>'
-      expected = '<p>А тут будет тэг &lt;a&gt;</p>'
+      expected = "<p>А тут будет тэг &lt;a&gt;</p>\n"
       expect(helper.prepare_pattern_text(pattern)).to eq(expected)
     end
 
@@ -218,19 +218,19 @@ RSpec.describe ParsingHelper, type: :helper do
 
     it 'ignores empty lines' do
       question = create :question, body: "Вопрос\na\r\n\nb\r\n"
-      expected = '<p>Вопрос</p><p>a</p><p>b</p>'
+      expected = "<p>Вопрос</p>\n<p>a</p>\n<p>b</p>\n"
       expect(helper.prepare_question_text(question, nil)).to eq(expected)
     end
 
     it 'encloses each line in passage' do
       question = create :question, body: "Строка a\nСтрока b"
-      expected = '<p>Строка a</p><p>Строка b</p>'
+      expected = "<p>Строка a</p>\n<p>Строка b</p>\n"
       expect(helper.prepare_question_text(question, nil)).to eq(expected)
     end
 
     it 'escapes < and >' do
       question = create :question, body: 'А тут будет тэг <a>'
-      expected = '<p>А тут будет тэг &lt;a&gt;</p>'
+      expected = "<p>А тут будет тэг &lt;a&gt;</p>\n"
       expect(helper.prepare_question_text(question, nil)).to eq(expected)
     end
 

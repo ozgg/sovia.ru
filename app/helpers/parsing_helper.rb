@@ -5,7 +5,7 @@ module ParsingHelper
   end
 
   def preview(text, passages = 2)
-    text.split('</p><p>')[0...passages].join('</p><p>')
+    text.split("</p>\n<p>")[0...passages].join('</p><p>')
   end
 
   # Prepare dream text for views

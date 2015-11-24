@@ -1,9 +1,5 @@
 require "rails_helper"
 
-RSpec.configure do |c|
-  c.include CommentsHelper
-end
-
 RSpec.describe Comments, type: :mailer do
   let!(:dream) { create :owned_dream, user: create(:confirmed_user) }
   let!(:parent_comment) { create :comment, commentable: dream, user: create(:confirmed_user) }
@@ -25,7 +21,7 @@ RSpec.describe Comments, type: :mailer do
     end
 
     it 'includes link to comment in letter body' do
-      expect(mail.body.encoded).to match(url_to_comment(comment))
+      expect(mail.body.encoded).to match(url_for(comment.commentable))
     end
   end
 
@@ -45,7 +41,7 @@ RSpec.describe Comments, type: :mailer do
     end
 
     it 'includes link to comment in letter body' do
-      expect(mail.body.encoded).to match(url_to_comment(comment))
+      expect(mail.body.encoded).to match(url_for(comment.commentable))
     end
   end
 end
