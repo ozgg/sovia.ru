@@ -1,7 +1,12 @@
 <% if collection.any? %>
     <ul>
       <% collection.each do |grain| %>
-          <li><%= link_to grain.name, grain %> (<%= t(:dream, count: grain.dream_count) %>)</li>
+          <li>
+            <%= link_to grain.name, grain %> (<%= t(:dream, count: grain.dream_count) %>)
+            <% if grain.pattern_name != grain.name %>
+            &rarr; <%= grain.pattern_name %>
+            <% end %>
+          </li>
       <% end %>
     </ul>
 <% else %>

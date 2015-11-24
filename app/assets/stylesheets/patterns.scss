@@ -168,3 +168,29 @@ article.pattern {
     }
   }
 }
+
+article.grains {
+  li:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+article.grain {
+  > h1:first-letter {
+    text-transform: uppercase;
+  }
+
+  > .body {
+    min-height: 15rem;
+
+    figure {
+      float: right;
+      margin: 0 0 0 0.5rem;
+
+      img {
+        max-width: 15rem;
+        max-height: 15rem;
+      }
+    }
+  }
+}

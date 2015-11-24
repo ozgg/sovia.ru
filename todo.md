@@ -1,6 +1,5 @@
 Views:
 
- * grains          
  * places          
  * my/side_notes
  * my/grains        

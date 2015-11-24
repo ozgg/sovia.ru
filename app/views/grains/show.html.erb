@@ -2,7 +2,9 @@
 <% content_for :sidebar do %>
     <div class="options">
       <ul>
+        <li><%= link_to t(:list), my_grains_path %></li>
         <li><%= link_to t(:edit), edit_grain_path(@entity) %></li>
+        <li><%= link_to t(:create), new_grain_path %></li>
       </ul>
     </div>
 <% end %>
