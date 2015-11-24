@@ -16,8 +16,12 @@
       <%= f.text_field :name, required: true, size: 50 %>
     </div>
     <div>
+      <%= label_tag :grain_pattern_name, t('activerecord.attributes.grain.pattern_id') %>
+      <%= text_field_tag 'grain[pattern_name]', entity.pattern_name %>
+    </div>
+    <div>
       <div><%= f.label :description %></div>
-      <%= f.text_area :description, cols: 80, rows: 20, required: true %>
+      <%= f.text_area :description, cols: 80, rows: 20 %>
     </div>
 
     <div>

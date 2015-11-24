@@ -1,0 +1,13 @@
+<article class="grain">
+  <h1><%= grain.name %></h1>
+
+  <div class="body">
+    <% if grain.pattern_id %>
+        <p>Отображается как <%= link_to_dreambook(grain.pattern) %></p>
+    <% else %>
+        <p>В общем списке образов сна не отображается.</p>
+    <% end %>
+    
+    <%= raw prepare_pattern_text(grain) %>
+  </div>
+</article>

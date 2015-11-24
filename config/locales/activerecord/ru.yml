@@ -136,6 +136,13 @@ ru:
         name: "название"
         slug: "идентификатор"
         description: "описание"
+        categories:
+          person: "человек"
+          place: "место"
+          item: "предмет"
+          event: "событие"
+          action: "действие"
+          creature: "существо"
       pattern:
         user_id: "пользователь"
         agent_id: "АП"

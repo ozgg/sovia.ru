@@ -1,0 +1,9 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |grain| %>
+          <li><%= link_to grain.name, grain %> (<%= t(:dream, count: grain.dream_count) %>)</li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

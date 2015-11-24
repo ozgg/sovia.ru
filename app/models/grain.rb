@@ -1,6 +1,7 @@
 class Grain < ActiveRecord::Base
   include HasOwner
   include HasNameWithSlug
+  include HasLocation
 
   belongs_to :user
   belongs_to :pattern
@@ -72,6 +73,14 @@ class Grain < ActiveRecord::Base
   def self.extract_names(long_name)
     matches = long_name.squish.scan(/\A(?:\(\s*([^)]+)\s*\)|([^(]+)\s*(?:\(\s*(.*)\s*\))?)\z/)[0]
     matches.nil? ? [long_name, long_name] : pair_from_matches(matches)
+  end
+
+  def pattern_name
+    if pattern.is_a? Pattern
+      pattern.name
+    else
+      ''
+    end
   end
 
   protected
