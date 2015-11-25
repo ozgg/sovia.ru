@@ -104,9 +104,14 @@ class AuthenticationsController < ApplicationController
   end
 
   def create_vk_account
+    if @data[:info][:nickname].blank? || (@data[:info][:nickname] == "id#{@data[:uid]}")
+      screen_name = @data[:info][:name]
+    else
+      screen_name = @data[:info][:nickname]
+    end
     parameters = {
         network: User.networks[:vk],
-        screen_name: @data[:info][:nickname] == "id#{@data[:uid]}" ? @data[:info][:name] : @data[:info][:nickname],
+        screen_name: screen_name
     }
     parameters[:remote_image_url] = @data[:info][:image] unless @data[:info][:image].blank?
 
