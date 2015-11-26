@@ -1,6 +1,7 @@
 class Dream < ActiveRecord::Base
   include HasOwner
   include HasTrace
+  include SortingByTime
 
   belongs_to :user, counter_cache: true
   belongs_to :place
@@ -25,20 +26,17 @@ class Dream < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :recent, -> { order('id desc') }
   scope :public_entries, -> { where privacy: Dream.privacies[:generally_accessible] }
-  scope :earlier_than, ->(time) { where 'created_at < ?', time }
-  scope :later_than, ->(time) { where 'created_at > ?', time }
 
   PER_PAGE = 10
 
-  def self.page_for_user(current_page, current_user)
-    self.visible_to_user(current_user).recent.page(current_page).per(PER_PAGE)
-  end
-
-  def self.tagged_page_for_user(pattern, current_page, current_user)
-    patterns_clause = { dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
-    visible_to_user(current_user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
+  def self.page_for_user(current_page, user, pattern = nil)
+    if pattern.is_a? Pattern
+      patterns_clause = { dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
+      visible_to_user(user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
+    else
+      visible_to_user(user).recent.page(current_page).per(PER_PAGE)
+    end
   end
 
   def self.archive_page(year, month, page, current_user)
@@ -200,7 +198,7 @@ class Dream < ActiveRecord::Base
   # @param [Integer] pattern_id
   # @return DreamPattern
   def link_by_owner(old_links, pattern_id)
-    link = old_links[pattern_id] || DreamPattern.new(dream: self, pattern_id: pattern_id)
+    link        = old_links[pattern_id] || DreamPattern.new(dream: self, pattern_id: pattern_id)
 
     link.status = DreamPattern.statuses[:by_owner] unless link.forced?
     link.save

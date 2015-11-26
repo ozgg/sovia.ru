@@ -44,7 +44,7 @@ class DreamsController < ApplicationController
   # noinspection RailsChecklist01
   def tagged
     @pattern    = Pattern.match_by_name! params[:tag_name]
-    @collection = Dream.tagged_page_for_user @pattern, current_page, current_user
+    @collection = Dream.page_for_user current_page, current_user, @pattern
   end
 
   def archive
