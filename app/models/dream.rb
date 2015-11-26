@@ -27,6 +27,8 @@ class Dream < ActiveRecord::Base
 
   scope :recent, -> { order('id desc') }
   scope :public_entries, -> { where privacy: Dream.privacies[:generally_accessible] }
+  scope :earlier_than, ->(time) { where 'created_at < ?', time }
+  scope :later_than, ->(time) { where 'created_at > ?', time }
 
   PER_PAGE = 10
 
@@ -35,12 +37,12 @@ class Dream < ActiveRecord::Base
   end
 
   def self.tagged_page_for_user(pattern, current_page, current_user)
-    patterns_clause = {dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
+    patterns_clause = { dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
     visible_to_user(current_user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
   end
 
   def self.archive_page(year, month, page, current_user)
-    first_day   = '%04d-%02d-01 00:00:00' % [year, month]
+    first_day = '%04d-%02d-01 00:00:00' % [year, month]
     visible_to_user(current_user).where("date_trunc('month', created_at) = '#{first_day}'").page(page).per(PER_PAGE)
   end
 
@@ -80,12 +82,12 @@ class Dream < ActiveRecord::Base
 
   def self.random_dream
     max_offset = public_entries.count - 1
-    offset = Time.now.to_i % max_offset
+    offset     = Time.now.to_i % max_offset
     public_entries.offset(offset).first
   end
 
   def title_for_view
-    result = self.title.to_s.squish
+    result = self.title.to_s.squeeze
     result.blank? ? I18n.t(:untitled) : result
   end
 
@@ -131,7 +133,7 @@ class Dream < ActiveRecord::Base
   end
 
   def grains_string
-    self.grains.order('slug asc').map { |grain| grain.name}.join(', ')
+    self.grains.order('slug asc').map { |grain| grain.name }.join(', ')
   end
 
   # Cache visible patterns in patterns_cache

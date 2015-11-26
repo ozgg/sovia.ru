@@ -330,3 +330,25 @@ ul.entities {
 textarea, input {
   max-width: calc(100% - 0.5rem);
 }
+
+nav.adjacent {
+  ul {
+    margin: 0.5rem 0.5rem 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    li {
+      list-style: none;
+
+      a[rel=prev]:before {
+        content: '←';
+      }
+
+      a[rel=next]:after {
+        content: '→';
+      }
+    }
+  }
+}

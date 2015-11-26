@@ -55,6 +55,7 @@ class DreamsController < ApplicationController
 
   def random
     @entity = Dream.random_dream
+    set_adjacent_dreams
   end
 
   protected
@@ -66,6 +67,7 @@ class DreamsController < ApplicationController
   def set_entity
     @entity = Dream.find params[:id].to_i
     raise record_not_found unless @entity.visible_to? current_user
+    set_adjacent_dreams
   end
 
   def entity_parameters
@@ -108,5 +110,12 @@ class DreamsController < ApplicationController
     Violation.create(parameters.merge tracking_for_entity)
 
     redirect_to dreams_path, notice: t('dreams.create.success')
+  end
+
+  def set_adjacent_dreams
+    @adjacent = {
+        prev: Dream.visible_to_user(current_user).earlier_than(@entity.created_at).last,
+        next: Dream.visible_to_user(current_user).later_than(@entity.created_at).first
+    }
   end
 end

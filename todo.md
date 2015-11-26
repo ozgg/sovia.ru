@@ -12,7 +12,6 @@ Refactoring:
 Later:
 
  * Advices for dream form
- * Adjacent dreams
  * Adjacent posts
  * Use grain link in my tagged dreams
  * Better markup for comments

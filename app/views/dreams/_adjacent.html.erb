@@ -1,0 +1,8 @@
+<% if dreams[:next].is_a?(Dream) || dreams[:prev].is_a?(Dream) %>
+    <nav class="adjacent">
+      <ul>
+        <li><%= link_to dreams[:prev].title_for_view, dreams[:prev], rel: 'prev' unless dreams[:prev].blank? %></li>
+        <li><%= link_to dreams[:next].title_for_view, dreams[:next], rel: 'next' unless dreams[:next].blank? %></li>
+      </ul>
+    </nav>
+<% end %>
