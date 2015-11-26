@@ -87,7 +87,7 @@ class Dream < ActiveRecord::Base
   end
 
   def title_for_view
-    result = self.title.to_s.squeeze
+    result = self.title.to_s.squish
     result.blank? ? I18n.t(:untitled) : result
   end
 

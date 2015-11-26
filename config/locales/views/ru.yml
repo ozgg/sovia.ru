@@ -264,6 +264,8 @@ ru:
       title: "Места для сна"
     new:
       title: "Новое место для сна"
+    edit:
+      title: "Редактирование места сна"
   questions:
     update:
       success: "Вопрос успешно изменён"

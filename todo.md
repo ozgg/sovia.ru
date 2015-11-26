@@ -1,9 +1,6 @@
 Views:
 
- * places          
  * my/side_notes
- * my/grains        
- * my/places        
 
 Later:
 
