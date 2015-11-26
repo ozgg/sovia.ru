@@ -1,6 +1,5 @@
 class StatisticsController < ApplicationController
   def index
-
   end
 
   def patterns

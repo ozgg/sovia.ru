@@ -24,8 +24,4 @@ RSpec.describe UsersHelper, type: :helper do
       end
     end
   end
-
-  describe 'comment_avatar' do
-    pending
-  end
 end
