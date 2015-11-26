@@ -199,6 +199,11 @@ ru:
           visible_to_community: "для сообщества"
           visible_to_followees: "для добавленных мной"
           personal: "только для меня"
+        body_positions:
+          left: "на левом боку"
+          back: "на спине"
+          right: "на правом боку"
+          stomach: "на животе"
       dream_pattern:
         dream_id: "сон"
         pattern_id: "образ"

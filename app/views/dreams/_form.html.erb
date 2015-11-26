@@ -33,7 +33,11 @@
               <%= label_tag "dream_mood_#{mood}", mood %>
           <% end %>
         </div>
-        <!--[:place_id, :azimuth, :body_position, :time_of_day, :show_image, :image]-->
+        <div class="body_position">
+          <%= f.label :body_position %>
+          <%= f.select :body_position, body_positions_for_select %>
+        </div>
+        <!--[:place_id, :azimuth, :time_of_day, :show_image, :image]-->
     <% end %>
 
     <div>

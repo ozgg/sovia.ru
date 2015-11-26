@@ -4,10 +4,6 @@ Views:
  * my/side_notes
  * my/grains        
  * my/places        
- 
-Refactoring:
-
-  * Method for selecting dreams by grain
 
 Later:
 

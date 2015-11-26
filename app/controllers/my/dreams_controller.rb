@@ -5,9 +5,10 @@ class My::DreamsController < ApplicationController
     @collection = current_user.dreams.order('id desc').page(current_page).per(10)
   end
 
+  # noinspection RailsChecklist01
   def tagged
-    @grain = Grain.match_by_name! params[:tag_name], current_user
-    set_collection_with_grains
+    @grain      = Grain.match_by_name! params[:tag_name], current_user
+    @collection = Dream.page_for_user current_page, current_user, @grain
   end
 
   def archive
@@ -17,11 +18,6 @@ class My::DreamsController < ApplicationController
   end
 
   protected
-
-  def set_collection_with_grains
-    selection   = Dream.where(user: current_user).joins(:dream_grains).where(dream_grains: { grain: @grain })
-    @collection = selection.page(current_page).per(10)
-  end
 
   def collect_months
     Dream.owned_by(current_user).uniq.pluck("date_trunc('month', created_at)").sort.each do |date|

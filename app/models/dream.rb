@@ -34,6 +34,8 @@ class Dream < ActiveRecord::Base
     if pattern.is_a? Pattern
       patterns_clause = { dream_patterns: { pattern: pattern, status: DreamPattern.visible_statuses } }
       visible_to_user(user).recent.joins(:dream_patterns).where(patterns_clause).page(current_page).per(PER_PAGE)
+    elsif pattern.is_a? Grain
+      owned_by(user).joins(:dream_grains).where(dream_grains: { grain: pattern }).page(current_page).per(PER_PAGE)
     else
       visible_to_user(user).recent.page(current_page).per(PER_PAGE)
     end
