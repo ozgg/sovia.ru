@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   include HasTrace
   include HasOwner
   include CommentableByCommunity
+  include SortingByTime
 
   belongs_to :user, counter_cache: true
   has_many :post_tags, dependent: :delete_all

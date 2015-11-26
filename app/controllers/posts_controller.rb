@@ -67,6 +67,7 @@ class PostsController < ApplicationController
 
   def set_entity
     @entity = Post.find params[:id]
+    set_adjacent_posts
   end
 
   def entity_parameters
@@ -89,5 +90,12 @@ class PostsController < ApplicationController
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end
+  end
+
+  def set_adjacent_posts
+    @adjacent = {
+        prev: Post.visible.earlier_than(@entity.created_at).last,
+        next: Post.visible.later_than(@entity.created_at).first
+    }
   end
 end
