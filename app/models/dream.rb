@@ -4,7 +4,7 @@ class Dream < ActiveRecord::Base
   include SortingByTime
 
   belongs_to :user, counter_cache: true
-  belongs_to :place
+  belongs_to :place, counter_cache: true
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :dream_patterns, dependent: :destroy

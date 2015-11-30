@@ -6,6 +6,8 @@
     <% end %>
     <%= simple_format place.description %>
   </div>
-  <p><%= "#{place.latitude}, #{place.longitude}, #{place.azimuth}" %></p>
+  <p><%= t('activerecord.attributes.place.latitude') %>: <%= place.latitude %></p>
+  <p><%= t('activerecord.attributes.place.longitude') %>: <%= place.longitude %></p>
+  <p><%= t('activerecord.attributes.place.azimuth') %>: <%= place.azimuth %>&deg;</p>
   <p><%= t(:dream, count: place.dreams_count) %></p>
 </article>

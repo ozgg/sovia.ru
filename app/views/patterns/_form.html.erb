@@ -17,7 +17,7 @@
     </div>
     <div>
       <div><%= f.label :essence %></div>
-      <%= f.text_field :essence, size: 50 %>
+      <%= f.text_field :essence, size: 50, autocomplete: 'off' %>
     </div>
     <div>
       <div><%= f.label :description %></div>
@@ -31,7 +31,7 @@
       <% entity.links.each do |category, links| %>
           <div>
             <%= label_tag "links_#{category}", t("activerecord.attributes.pattern_link.categories.#{category}") %>
-            <%= text_field_tag "links[#{category}]", links.map { |p| p.name }.join(', '), autofill: false %>
+            <%= text_field_tag "links[#{category}]", links.map { |p| p.name }.join(', '), autocomplete: 'off' %>
           </div>
       <% end %>
     </div>

@@ -17,6 +17,23 @@ article.new-dream, article.edit-dream {
         }
       }
     }
+
+    .dream-place {
+      p:first-letter {
+        text-transform: uppercase;
+      }
+
+      ul {
+        margin: 0 0 0 1rem;
+        padding: 0;
+
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
   }
 }
 

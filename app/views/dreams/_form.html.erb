@@ -37,7 +37,29 @@
           <%= f.label :body_position %>
           <%= f.select :body_position, body_positions_for_select %>
         </div>
-        <!--[:place_id, :azimuth, :time_of_day, :show_image, :image]-->
+        <div class="dream-place">
+          <p>
+            <%= t('activerecord.attributes.dream.place_id') %>
+            (<%= link_to t('my.places.index.header'), my_places_path %>)
+          </p>
+          <ul>
+            <li>
+              <%= radio_button_tag 'dream[place_id]', '', entity.place_id.blank?, data: { azimuth: '' } %>
+              <%= label_tag 'dream_place_id_', t(:not_selected) %>
+            </li>
+            <% current_user.places.each do |place| %>
+            <li>
+              <%= radio_button_tag 'dream[place_id]', place.id, entity.place_id == place.id, data: { azimuth: place.azimuth } %>
+              <%= label_tag "dream_place_id_#{place.id}", place.name %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="dream-azimuth">
+          <%= f.label :azimuth %>
+          <%= f.number_field :azimuth, in: (0..359) %>&deg;
+        </div>
+        <!--[:time_of_day, :show_image, :image]-->
     <% end %>
 
     <div>
