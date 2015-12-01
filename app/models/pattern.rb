@@ -77,6 +77,10 @@ class Pattern < ActiveRecord::Base
     }
   end
 
+  def good_for_dreambook?
+    !description.blank? || comments_count > 0 || dream_count > 0 || locked?
+  end
+
   protected
 
   def set_links_in_category(category, links_string)

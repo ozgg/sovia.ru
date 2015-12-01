@@ -32,7 +32,7 @@ namespace :sitemap do
     File.open "#{Rails.root}/public/sitemap.dreambook.xml", 'w' do |f|
       f.puts '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
       Pattern.all.each do |entry|
-        unless entry.description.blank?
+        if entry.good_for_dreambook?
           f.puts "<url><loc>#{dreambook_word_url(letter: entry.letter, word: entry.name)}</loc><lastmod>#{entry.updated_at.w3c}</lastmod></url>"
         end
       end
