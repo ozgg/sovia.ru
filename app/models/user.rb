@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include HasTrace
+  include HasGender
 
   has_secure_password
 
@@ -17,7 +18,6 @@ class User < ActiveRecord::Base
   has_many :side_notes, dependent: :destroy
   belongs_to :inviter, class_name: User.to_s
 
-  enum gender: [:female, :male]
   enum network: [:native, :vk, :twitter, :fb, :mail_ru]
 
   before_validation :normalize_email, :normalize_screen_name

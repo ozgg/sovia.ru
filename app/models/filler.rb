@@ -1,6 +1,7 @@
 class Filler < ActiveRecord::Base
+  include HasGender
+
   enum category: [:question, :dream]
-  enum gender: [:female, :male]
 
   validates_presence_of :body
 

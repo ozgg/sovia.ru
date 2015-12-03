@@ -5,7 +5,7 @@ module UsersHelper
 
   def genders_for_select
     genders = [[t(:not_selected), '']]
-    genders + User.genders.keys.to_a.map { |gender| [I18n.t("activerecord.attributes.user.genders.#{gender}"), gender] }
+    genders + User.genders.keys.to_a.map { |gender| [I18n.t("activerecord.genders.#{gender}"), gender] }
   end
 
   def user_roles(user)
