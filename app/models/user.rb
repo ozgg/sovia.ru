@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
 
   PER_PAGE = 25
 
+  scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
+  scope :network, -> (network) { where network: network unless network.blank? }
+
   def self.page_for_administrator(current_page)
     order('network asc, uid asc').page(current_page).per(PER_PAGE)
   end
@@ -98,21 +101,12 @@ class User < ActiveRecord::Base
   def flags
     {
         active: allow_login?,
-        bot: bot?
+        bot:    bot?
     }
   end
 
   def should_confirm_email?
     !email.blank? && !email_confirmed?
-  end
-
-  def set_from_auth_hash(data)
-    self.password = self.password_confirmation = 'n/a'
-    self.name = data[:info][:name]
-    self.screen_name = data[:info][:nickname]
-    self.remote_image_url = data[:info][:image] unless data[:info][:image].blank?
-    self.email = data[:info][:email] unless data[:info][:email].blank?
-    self.email_confirmed = !data[:info][:verified].blank?
   end
 
   protected
