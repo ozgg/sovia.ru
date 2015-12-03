@@ -518,3 +518,17 @@ ru:
     patterns:
       title: "Образы снов, страница %{page}"
       header: "Образы снов"
+  fillers:
+    update:
+      success: "Наполнитель успешно изменён"
+    delete:
+      success: "Наполнитель успешно удалён"
+    edit:
+      title: "Редактирование наполнителя"
+    index:
+      title: "Наполнители, страница %{page}"
+      header: "Наполнители"
+    new:
+      title: "Создать наполнитель"
+    show:
+      title: "Наполнитель %{id}"

@@ -272,6 +272,6 @@ ru:
         categories:
           question: "вопрос"
           dream: "сон"
-        genders:
-          female: "женский"
-          male: "мужской"
+    genders:
+      female: "женский"
+      male: "мужской"

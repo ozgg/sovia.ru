@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'dreams/random' => 'dreams#random', as: :random_dream
 
   # Administrative resources
-  resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens
+  resources :browsers, :agents, :clients, :tags, :users, :patterns, :codes, :tokens, :fillers
   resources :violations, only: [:index, :show, :destroy]
 
   # Common resources
