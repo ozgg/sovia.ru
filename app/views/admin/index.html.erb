@@ -3,6 +3,15 @@
 <article>
   <h1><%= t('.title') %></h1>
 
+  <ul>
+    <li>Users: <%= User.count %></li>
+    <li>Dreams: <%= Dream.count %></li>
+    <li>Comments: <%= Comment.count %></li>
+    <li>Goals: <%= Goal.count %></li>
+    <li>Deeds: <%= Deed.count %></li>
+    <li>Posts: <%= Post.count %></li>
+  </ul>
+  
   <nav>
     <ul>
       <li><%= link_to t('browsers.index.header'), browsers_path %></li>
@@ -16,6 +25,7 @@
       <li><%= link_to t('tokens.index.header'), tokens_path %></li>
       <li><%= link_to t('users.index.header'), users_path %></li>
       <li><%= link_to t('violations.index.header'), violations_path %></li>
+      <li><%= link_to t('fillers.index.header'), fillers_path %></li>
     </ul>
   </nav>
 </article>
