@@ -264,3 +264,14 @@ ru:
         categories:
           dreams_spam: "Спам в описании сна"
           comments_spam: "Спам в комментариях"
+      filler:
+        category: "категория"
+        gender: "пол пользователя"
+        title: "название"
+        body: "текст"
+        categories:
+          question: "вопрос"
+          dream: "сон"
+        genders:
+          female: "женский"
+          male: "мужской"

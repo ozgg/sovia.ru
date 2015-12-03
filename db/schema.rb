@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829182854) do
+ActiveRecord::Schema.define(version: 20151203135832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,15 @@ ActiveRecord::Schema.define(version: 20150829182854) do
   add_index "dreams", ["place_id"], name: "index_dreams_on_place_id", using: :btree
   add_index "dreams", ["privacy"], name: "index_dreams_on_privacy", using: :btree
   add_index "dreams", ["user_id"], name: "index_dreams_on_user_id", using: :btree
+
+  create_table "fillers", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "category",   limit: 2, null: false
+    t.integer  "gender",     limit: 2
+    t.string   "title"
+    t.text     "body",                 null: false
+  end
 
   create_table "goals", force: :cascade do |t|
     t.datetime "created_at",                            null: false
