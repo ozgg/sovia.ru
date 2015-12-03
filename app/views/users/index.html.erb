@@ -10,6 +10,8 @@
 <article class="users">
   <h1><%= t('.header') %></h1>
 
+  <%= render partial: 'filter', locals: { filter: @filter } %>
+
   <%= paginate @collection %>
   <%= render partial: 'admin/list_of_entities', locals: { collection: @collection } %>
   <%= paginate @collection %>

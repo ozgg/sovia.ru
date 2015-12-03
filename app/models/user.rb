@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
   scope :network, -> (network) { where network: network unless network.blank? }
 
-  def self.page_for_administrator(current_page)
-    order('network asc, uid asc').page(current_page).per(PER_PAGE)
+  def self.page_for_administrator(current_page, filter)
+    order('network asc, uid asc').bots(filter[:bots]).network(filter[:network]).page(current_page).per(PER_PAGE)
   end
 
   def self.with_long_uid(long_uid)

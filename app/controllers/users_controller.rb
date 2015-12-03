@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:profile, :posts, :dreams, :questions, :comments, :patterns]
 
   def index
-    @collection = User.page_for_administrator current_page
+    @filter = params[:filter] || Hash.new
+    @collection = User.page_for_administrator current_page, @filter
   end
 
   def new
