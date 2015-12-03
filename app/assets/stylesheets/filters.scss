@@ -1,0 +1,41 @@
+form.filter fieldset {
+  font-size: 0.75rem;
+
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      font-weight: bold;
+      min-width: 4rem;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        list-style: none;
+        padding: 0 0.25rem;
+
+        input[type=radio] {
+          display: none;
+
+          &:checked + label {
+            background: #aaffaa;
+          }
+        }
+      }
+    }
+  }
+
+  button {
+    font-size: 0.75rem;
+  }
+}
