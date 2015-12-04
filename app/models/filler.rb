@@ -8,6 +8,7 @@ class Filler < ActiveRecord::Base
   PER_PAGE = 10
 
   scope :recent, -> { order 'id desc' }
+  scope :category, -> (category) { where category: category unless category.blank? }
 
   def self.page_for_administrator(page)
     recent.page(page).per(PER_PAGE)

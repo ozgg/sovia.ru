@@ -9,4 +9,8 @@ module HasGender
 
   module ClassMethods
   end
+
+  def numeric_gender
+    self.gender.nil? ? nil : self.class.genders[self.gender]
+  end
 end
