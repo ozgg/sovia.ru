@@ -10,11 +10,11 @@
           </li>
           <li>
             <%= radio_button_tag 'filter[bots]', '1', filter[:bots].to_i == 1 %>
-            <%= label_tag 'filter_bots_1', t(:flagged) %>
+            <%= label_tag 'filter_bots_1', t(:yes) %>
           </li>
           <li>
             <%= radio_button_tag 'filter[bots]', '0', filter[:bots].to_i == 0 %>
-            <%= label_tag 'filter_bots_0', t(:unflagged) %>
+            <%= label_tag 'filter_bots_0', t(:no) %>
           </li>
         </ul>
       </div>
