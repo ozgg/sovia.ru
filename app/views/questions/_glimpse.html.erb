@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="title"><%= link_to 'Вопрос', entity %></div>
+  <div class="title"><%= link_to entity.title_for_view, entity %></div>
   <span class="author"><%= user_link entity.user %></span>
   <%= render partial: 'shared/publication_time', locals: { time: entity.created_at } %>
 </div>

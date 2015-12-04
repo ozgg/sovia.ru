@@ -2,13 +2,12 @@ class Question < ActiveRecord::Base
   include HasTrace
   include HasOwner
   include CommentableByCommunity
+  include SortingByTime
 
   belongs_to :user, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :body, length: { minimum: 10, maximum: 500 }
-
-  scope :recent, -> { order 'id desc' }
 
   PER_PAGE = 10
 

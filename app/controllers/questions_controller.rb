@@ -49,6 +49,7 @@ class QuestionsController < ApplicationController
 
   def set_entity
     @entity = Question.find params[:id]
+    set_adjacent_questions
   end
 
   def entity_parameters
@@ -59,5 +60,12 @@ class QuestionsController < ApplicationController
     parameters = entity_parameters.merge(owner_for_entity).merge(tracking_for_entity)
     parameters.reject! :answered if parameters.include? :answered
     parameters
+  end
+
+  def set_adjacent_questions
+    @adjacent = {
+        prev: Question.earlier_than(@entity.created_at).last,
+        next: Question.later_than(@entity.created_at).first
+    }
   end
 end
