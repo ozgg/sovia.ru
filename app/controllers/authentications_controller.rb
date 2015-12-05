@@ -53,7 +53,7 @@ class AuthenticationsController < ApplicationController
 
   def set_twitter_account
     account = User.find_by(network: User.networks[:twitter], uid: @data[:uid]) || create_twitter_account
-    create_token_for_user account, tracking_for_entity
+    create_token_for_user account, tracking_for_entity if account.allow_login?
   end
 
   def set_facebook_account
@@ -68,7 +68,7 @@ class AuthenticationsController < ApplicationController
       account = create_facebook_account
     end
 
-    create_token_for_user account, tracking_for_entity
+    create_token_for_user account, tracking_for_entity if account.allow_login?
   end
 
   def set_vkontakte_account
@@ -85,12 +85,12 @@ class AuthenticationsController < ApplicationController
     else
       account = create_vk_account
     end
-    create_token_for_user account, tracking_for_entity
+    create_token_for_user account, tracking_for_entity if account.allow_login?
   end
 
   def set_mail_ru_account
     account = User.find_by(network: User.networks[:mail_ru], uid: @data[:uid]) || create_mail_ru_account
-    create_token_for_user account, tracking_for_entity
+    create_token_for_user account, tracking_for_entity if account.allow_login?
   end
 
   def create_twitter_account
