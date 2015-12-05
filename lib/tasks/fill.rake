@@ -27,7 +27,7 @@ namespace :fill do
   # @return [User]
   def bot(gender)
     max_offset = User.bots(1).gender(gender).count - 1
-    offset     = Time.now.to_i % max_offset
+    offset     = Random.rand(max_offset)
     User.bots(1).gender(gender).offset(offset).first
   end
 end

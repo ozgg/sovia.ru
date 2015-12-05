@@ -35,6 +35,16 @@
       <%= f.label :screen_name %>
       <%= f.text_field :screen_name, size: 50 %>
     </div>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :password %>
+          <%= f.text_field :password %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.text_field :password_confirmation %>
+        </div>
+    <% end %>
     <div>
       <%= f.label :gender %>
       <%= f.select :gender, genders_for_select %>
