@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   def entity_parameters
     permitted = [
         :email, :screen_name, :name, :image, :rating, :gender, :bot, :allow_login, :password, :password_confirmation,
-        :email_confirmed, :allow_mail
+        :email_confirmed, :allow_mail, :uid
     ]
     parameters = params.require(:user).permit(permitted)
     parameters[:email] = nil if parameters[:email].blank?
