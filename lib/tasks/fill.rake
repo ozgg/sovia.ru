@@ -8,6 +8,15 @@ namespace :fill do
     end
   end
 
+  desc 'Fill dreams with bots as authors'
+  task dreams: :environment do
+    dream = Dream.last
+    if dream.is_a?(Dream) && dream.created_at < Time.now - 12.hours
+      filler = Filler.category(Filler.categories[:dream]).first
+      add_dream filler unless filler.nil?
+    end
+  end
+
   # Add question from given filler
   #
   # @param [Filler] filler
@@ -19,6 +28,21 @@ namespace :fill do
         body: filler.body
     }
     filler.destroy if Question.create parameters
+  end
+
+  # Add dream from given filler
+  #
+  # @param [Filler] filler
+  # @return [Boolean]
+  def add_dream(filler)
+    parameters = {
+        created_at: Time.now - Random.rand(7200).seconds,
+        user: bot(filler.numeric_gender),
+        privacy: Dream.privacies[:generally_accessible],
+        body: filler.body,
+        title: filler.title,
+    }
+    filler.destroy if Dream.create parameters
   end
 
   # Get random bot of given gender
