@@ -1,5 +1,6 @@
 class Deed < ActiveRecord::Base
   include HasOwner
+  include SortingByTime
 
   belongs_to :user
   belongs_to :goal
@@ -10,7 +11,6 @@ class Deed < ActiveRecord::Base
   PER_PAGE = 25
 
   scope :ordered, -> { order 'id asc' }
-  scope :recent, -> { order 'id desc' }
 
   def self.page_for_user(current_page, current_user)
     owned_by(current_user).recent.page(current_page).per(PER_PAGE)

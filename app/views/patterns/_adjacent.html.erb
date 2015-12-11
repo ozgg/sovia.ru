@@ -1,0 +1,8 @@
+<% if patterns[:next].is_a?(Pattern) || patterns[:prev].is_a?(Pattern) %>
+    <nav class="adjacent">
+      <ul>
+        <li><%= link_to patterns[:prev].title_for_view, patterns[:prev], rel: 'prev' unless patterns[:prev].blank? %></li>
+        <li><%= link_to patterns[:next].title_for_view, patterns[:next], rel: 'next' unless patterns[:next].blank? %></li>
+      </ul>
+    </nav>
+<% end %>

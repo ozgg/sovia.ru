@@ -2,6 +2,7 @@ class Pattern < ActiveRecord::Base
   include HasTrace
   include HasOwner
   include HasNameWithSlug
+  include SortingByTime
 
   belongs_to :user
   has_many :grains, dependent: :nullify
@@ -18,6 +19,7 @@ class Pattern < ActiveRecord::Base
   scope :good_for_dreambook, -> { where 'description is not null or dream_count > 0' }
   scope :for_queue, -> { where(locked: false).order('dream_count desc, slug asc') }
   scope :locked, -> { where(locked: true) }
+  scope :described, -> { where 'description is not null' }
 
   PER_PAGE = 50
 

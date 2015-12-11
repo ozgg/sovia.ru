@@ -2,7 +2,7 @@ namespace :fill do
   desc 'Fill questions with bots as authors'
   task questions: :environment do
     question = Question.last
-    if question.is_a?(Question) && question.created_at < Time.now - 6.hours
+    if question.is_a?(Question) && question.created_at < Time.now - 9.hours
       filler = Filler.category(Filler.categories[:question]).first
       add_question filler unless filler.nil?
     end

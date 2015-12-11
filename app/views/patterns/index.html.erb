@@ -15,7 +15,7 @@
 <article class="patterns">
   <h1><%= t('.header') %></h1>
 
-  <div><%= Pattern.locked.count %> / <%= Pattern.count %></div>
+  <div><%= Pattern.locked.count %> / <%= Pattern.described.count %> / <%= Pattern.count %></div>
 
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { patterns: @collection } %>

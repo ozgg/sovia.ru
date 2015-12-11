@@ -25,6 +25,7 @@ class PatternsController < ApplicationController
   end
 
   def show
+    set_adjacent_patterns
     unless current_user_has_role? :administrator
       redirect_to dreambook_word_path(letter: @entity.letter, word: @entity.name)
     end
@@ -69,5 +70,12 @@ class PatternsController < ApplicationController
 
   def set_links
     @entity.links = params[:links].nil? ? Hash.new : params[:links]
+  end
+
+  def set_adjacent_patterns
+    @adjacent = {
+        prev: Pattern.earlier_than(@entity.created_at).last,
+        next: Pattern.later_than(@entity.created_at).first
+    }
   end
 end
