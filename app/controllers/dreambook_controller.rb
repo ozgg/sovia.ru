@@ -7,6 +7,9 @@ class DreambookController < ApplicationController
   def search
     @query    = Canonizer.canonize param_from_request(:query)
     @patterns = Pattern.search @query
+    if @patterns.count == 1
+      redirect_to dreambook_word_path(letter: @patterns.first.letter, word: @patterns.first.name_for_url)
+    end
   end
 
   def letter
