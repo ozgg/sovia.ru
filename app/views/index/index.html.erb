@@ -14,21 +14,21 @@
 
   <%= render 'dreambook/search' %>
 
-  <div class="warning">
-    Проект может быть закрыт в мае за неимением ресурсов на развитие.<br />
-    Для покрытия текущих издержек требуется сумма в 36676 рублей. Вы можете серьёзно помочь проекту,
-    даже внеся небольшой вклад.<br />
-    С предложениями и пожеланиями можно обращаться в support@sovia.ru<br />
+  <!--<div class="warning">-->
+    <!--Проект может быть закрыт в мае за неимением ресурсов на развитие.<br />-->
+    <!--Для покрытия текущих издержек требуется сумма в 36676 рублей. Вы можете серьёзно помочь проекту,-->
+    <!--даже внеся небольшой вклад.<br />-->
+    <!--С предложениями и пожеланиями можно обращаться в support@sovia.ru<br />-->
 
-    <% if File.exist?('/var/www/sovia4/money.txt') %>
-        <% collected = File.read('/var/www/sovia4/money.txt').to_i %>
-        Сейчас есть <%= collected %> ₽.<br />
-        <progress max="36676" value="<%= collected %>" style="width: 450px; max-width: 100%"></progress>
-    <% end %>
+    <!--<% if File.exist?('/var/www/sovia4/money.txt') %>-->
+        <!--<% collected = File.read('/var/www/sovia4/money.txt').to_i %>-->
+        <!--Сейчас есть <%= collected %> ₽.<br />-->
+        <!--<progress max="36676" value="<%= collected %>" style="width: 450px; max-width: 100%"></progress>-->
+    <!--<% end %>-->
 
-    <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=41001190110894&amp;quickpay=shop&amp;payment-type-choice=on&amp;mobile-payment-type-choice=on&amp;writer=buyer&amp;targets-hint=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0+%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0+sovia.ru&amp;default-sum=300&amp;button-text=03&amp;successURL=" width="450" height="209"></iframe>
-  </div>
-  
+    <!--<iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/shop.xml?account=41001190110894&amp;quickpay=shop&amp;payment-type-choice=on&amp;mobile-payment-type-choice=on&amp;writer=buyer&amp;targets-hint=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0+%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0+sovia.ru&amp;default-sum=300&amp;button-text=03&amp;successURL=" width="450" height="209"></iframe>-->
+  <!--</div>-->
+
   <%= render 'recent' %>
 
   <%= render 'shared/social' %>
