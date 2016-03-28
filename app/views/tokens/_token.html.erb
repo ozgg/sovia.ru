@@ -1,8 +1,0 @@
-<article class="token">
-  <h1><%= t('tokens.show.title', id: token.id) %></h1>
-  <%= render partial: 'admin/flags', locals: { flags: token.flags } %>
-  <p><%= user_link token.user %>, <%= token.created_at.pubdate %></p>
-  <p><%= t('activerecord.attributes.token.last_used') %> <%= token.last_used.pubdate %></p>
-  <p><%= t('activerecord.attributes.token.client_id') %>: <%= token.client_name %></p>
-  <%= render partial: 'shared/track_data', locals: { item: token } %>
-</article>

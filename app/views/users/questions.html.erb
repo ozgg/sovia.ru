@@ -1,9 +1,0 @@
-<% content_for :meta_title, t('.title', user: @user.profile_name, page: current_page) %>
-
-<article class="questions">
-  <h1><%= t('.header', user: @user.profile_name) %></h1>
-
-  <%= paginate @questions %>
-  <%= render partial: 'questions/list', locals: { questions: @questions } %>
-  <%= paginate @questions %>
-</article>

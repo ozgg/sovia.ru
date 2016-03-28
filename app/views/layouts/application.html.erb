@@ -1,31 +1,14 @@
 <!DOCTYPE html>
-<html lang="<%= locale %>" prefix="og: http://ogp.me/ns#">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title><%= yield :meta_title %> :: <%= t('.title') %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sovia5</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <%= render 'layouts/favicons' %>
-  <%= render 'layouts/meta_texts' %>
 </head>
 <body>
-<%= render 'layouts/header' %>
 
-<div id="content">
-  <div id="main" role="main">
-    <%= render 'layouts/main_navigation' %>
-    <%= render 'layouts/flash_messages' %>
-    <%= yield %>
-  </div>
-  <div id="sidebar" role="complementary">
-    <%= render 'sidebar/dashboard' %>
-    <%= yield :sidebar %>
-    <%# render 'sidebar/social_buttons' %>
-  </div>
-</div>
+<%= yield %>
 
-<%= render 'layouts/footer' %>
 </body>
 </html>

@@ -1,8 +1,0 @@
-<% if current_user_has_role? :administrator %>
-    <% if item.ip || item.agent %>
-        <div class="track">
-          <div><%= item.ip %></div>
-          <div><%= item.agent.name if item.agent %></div>
-        </div>
-    <% end %>
-<% end %>

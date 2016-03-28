@@ -13,16 +13,8 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
-
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_options = {
-      from: 'sovia.ru <support@sovia.ru>',
-      reply_to: 'support@sovia.ru'
-  }
-  config.action_mailer.default_url_options = { host: 'sovia.local:3000' }
+  config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -45,5 +37,5 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
-  config.action_view.raise_on_missing_translations = true
+  # config.action_view.raise_on_missing_translations = true
 end

@@ -1,9 +1,0 @@
-<% if (side_note = SideNote.random_note) %>
-    <div class="side-note">
-      <div class="image"><%= link_to image_tag(side_note.image.medium.url), side_note.link %></div>
-      <div class="title"><%= link_to side_note.title, side_note.link %></div>
-      <div class="discuss">
-        <%= link_to "#{t(:discuss)} (#{t(:comment, count: side_note.comments_count)})", side_note %>
-      </div>
-    </div>
-<% end %>

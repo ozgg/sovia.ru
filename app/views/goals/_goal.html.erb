@@ -1,7 +1,0 @@
-<article class="goal">
-  <h1>Я желаю <%= goal.name %></h1>
-
-  <p>Цель <%= t("activerecord.attributes.goal.statuses.#{goal.status}") %> <%= goal.updated_at.pubdate %></p>
-
-  <%= render partial: 'deeds', locals: { goal: goal, deeds: goal.deeds.recent } %>
-</article>

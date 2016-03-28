@@ -1,8 +1,0 @@
-<div>
-  <% dream = Dream.random_dream %>
-  <% unless dream.nil? %>
-      <div class="header"><%= t('dreams.random.title') %></div>
-      <div class="dream-header"><%= link_to dream.title_for_view, dream %></div>
-      <div><%= glimpse(prepare_dream_text(dream, current_user)) %></div>
-  <% end %>
-</div>

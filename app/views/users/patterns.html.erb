@@ -1,9 +1,0 @@
-<% content_for :meta_title, t('.title', user: @user.profile_name, page: current_page) %>
-
-<article class="patterns">
-  <h1><%= t('.header', user: @user.profile_name) %></h1>
-
-  <%= paginate @patterns %>
-  <%= render partial: 'patterns/list', locals: { patterns: @patterns } %>
-  <%= paginate @patterns %>
-</article>

@@ -1,7 +1,0 @@
-<article class="code">
-  <h1><%= code.body %></h1>
-  <%= render partial: 'admin/flags', locals: { flags: code.flags } %>
-  <p><%= t("activerecord.attributes.code.categories.#{code.category}") %>: <%= user_link code.user %></p>
-  <p><%= t('activerecord.attributes.code.payload') %>: <%= code.payload %></p>
-  <%= render partial: 'shared/track_data', locals: { item: code } %>
-</article>

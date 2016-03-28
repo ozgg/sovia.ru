@@ -1,9 +1,0 @@
-<% if collection.any? %>
-    <ul>
-      <% collection.each do |place| %>
-          <li><%= link_to place.name, place %> (<%= t(:dream, count: place.dreams_count) %>)</li>
-      <% end %>
-    </ul>
-<% else %>
-    <%= render 'shared/nothing_found' %>
-<% end %>

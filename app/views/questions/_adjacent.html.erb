@@ -1,8 +1,0 @@
-<% if questions[:next].is_a?(Question) || questions[:prev].is_a?(Question) %>
-    <nav class="adjacent">
-      <ul>
-        <li><%= link_to questions[:prev].title_for_view, questions[:prev], rel: 'prev' unless questions[:prev].blank? %></li>
-        <li><%= link_to questions[:next].title_for_view, questions[:next], rel: 'next' unless questions[:next].blank? %></li>
-      </ul>
-    </nav>
-<% end %>

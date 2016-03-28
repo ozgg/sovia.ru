@@ -1,9 +1,0 @@
-<div class="controls">
-  <% if current_user_has_role? :administrator %>
-      <div class="visibility <%= post.show_in_list? ? 'visible' : 'hidden' %>" data-uri="<%= url_for toggle_post_path(post) %>">&nbsp;</div>
-  <% end %>
-  <% if post.editable_by? current_user %>
-      <div class="edit" data-uri="<%= url_for edit_post_path(post) %>">&nbsp;</div>
-      <div class="delete"><%= link_to image_tag('delete.png', alt: t(:delete)), post, method: :delete, data: { confirm: t(:are_you_sure)} %></div>
-  <% end %>
-</div>

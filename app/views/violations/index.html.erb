@@ -1,9 +1,0 @@
-<% content_for :meta_title, t('.title', page: current_page) %>
-
-<article class="violations">
-  <h1><%= t('.header') %></h1>
-
-  <%= paginate @collection %>
-  <%= render partial: 'admin/list_of_entities', locals: { collection: @collection } %>
-  <%= paginate @collection %>
-</article>
