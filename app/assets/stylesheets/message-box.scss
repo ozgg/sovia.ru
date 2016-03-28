@@ -1,0 +1,33 @@
+div.message-box {
+  background-repeat: no-repeat;
+  background-position: 1rem 1rem;
+  background-size: 1rem 1rem;
+  margin: 0 0 0.5rem 0;
+  padding: 1rem 1rem 1rem 3rem;
+  border-style: dashed;
+  border-width: 0.0625rem;
+}
+
+div.notice {
+  @extend div.message-box;
+  background-color: #eeffee;
+  background-image: image_url('icons/message-box/notice.png');
+  color: #004000;
+  border-color: #ddeedd;
+}
+
+div.warning {
+  @extend div.message-box;
+  background-color: #ffffee;
+  background-image: image_url('icons/message-box/warning.png');
+  color: #404000;
+  border-color: #eeeedd;
+}
+
+div.alert {
+  @extend div.message-box;
+  background-color: #ffeeee;
+  background-image: image_url('icons/message-box/alert.png');
+  color: #400000;
+  border-color: #eedddd;
+}

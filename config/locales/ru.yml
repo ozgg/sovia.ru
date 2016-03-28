@@ -1,0 +1,37 @@
+ru:
+  error:
+    zero: "нет ошибок"
+    one: "%{count} ошибка"
+    few: "%{count} ошибки"
+    many: "%{count} ошибок"
+    other: "%{count} ошибок"
+  nothing_found: "Ничего не нашлось"
+  create: "Создать"
+  view: "В просмотр"
+  list: "К списку"
+  edit: "Редактировать"
+  update: "Обновить"
+  delete: "Удалить"
+  submit: "Отправить"
+  save: "Сохранить"
+  are_you_sure: "Вы уверены?"
+  created_at: "Время создания"
+  updated_at: "Время обновления"
+  not_selected: "Не выбрано"
+  not_set: "Не задано"
+  filter: "Фильтр"
+  "yes": "Да"
+  "no": "Нет"
+  current_image: "Текущая картинка"
+  views:
+    pagination:
+      first: "⇤"
+      last: "⇥"
+      previous: "←"
+      next: "→"
+      truncate: "…"
+  shared:
+    flash_messages:
+      notice: "Замечание"
+      warning: "Предупреждение"
+      alert: "Внимание"
