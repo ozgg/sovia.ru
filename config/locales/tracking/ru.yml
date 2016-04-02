@@ -1,0 +1,27 @@
+ru:
+  agent:
+    zero: "нет агентов пользователя"
+    one: "%{count} агент пользователя"
+    few: "%{count} агента пользователя"
+    many: "%{count} агентов пользователя"
+    other: "%{count} агентов пользователя"
+  activerecord:
+    attributes:
+      browser:
+        bot: "Это бот"
+        mobile: "Мобильный браузер"
+        name: "Название"
+  browsers:
+    update:
+      success: "Браузер успешно обновлён"
+    delete:
+      success: "Браузер успешно удалён"
+    index:
+      header: "Браузеры"
+      title: "Браузеры, страница %{page}"
+    edit:
+      title: "Редактирование браузера"
+    new:
+      title: "Новый браузер"
+    show:
+      title: "Браузер «%{name}»"

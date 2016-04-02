@@ -1,0 +1,9 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |browser| %>
+          <li><%= link_to browser.name, browser %></li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

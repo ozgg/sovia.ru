@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # User-related resources
   resources :users, :tokens, :codes
 
+  # Tracking resources
+  resources :browsers
+
   # Authentication
   controller :authentication do
     get 'login' => :new
