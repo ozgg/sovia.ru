@@ -1,0 +1,75 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :options do %>
+    <div>
+      <p><%= link_to t(:view), my_profile_path %></p>
+    </div>
+<% end %>
+
+<article class="profile">
+  <h1><%= t('.title') %></h1>
+
+  <section>
+    <h1><%= current_user.profile_name %></h1>
+    <figure>
+      <%= profile_avatar current_user %>
+      <figcaption><%= t(:current_image) %></figcaption>
+    </figure>
+
+    <%= render partial: 'shared/list_of_errors', locals: { entity: current_user } %>
+
+    <%= form_tag my_profile_path, method: :patch, multipart: true do %>
+        <fieldset>
+          <legend><%= t('.common_parameters') %></legend>
+          <div>
+            <%= label_tag :user_image, t('.update_image') %><br/>
+            <%= file_field_tag 'user[image]', accept: 'image/jpeg, image/png' %>
+          </div>
+          <div>
+            <%= label_tag :user_name, t('activerecord.attributes.user.name') %>
+            <%= text_field_tag 'user[name]', current_user.name, size: 50 %>
+          </div>
+          <div>
+            <%= check_box_tag 'user[allow_mail]', '1', current_user.allow_mail %>
+            <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
+          </div>
+          <div>
+            <%= label_tag :user_gender, t('activerecord.attributes.user.gender') %>
+            <%= select_tag 'user[gender]', options_for_select(genders_for_select, selected: current_user.gender) %>
+          </div>
+        </fieldset>
+        <% if current_user.native? %>
+            <fieldset>
+              <legend><%= t('.sensitive_parameters') %></legend>
+              <p class="notice"><%= t('.sensitive_parameters_notice') %></p>
+
+              <div>
+                <%= label_tag :password, t('.current_password') %>
+                <br/>
+                <%= password_field_tag 'password', '', size: 30 %>
+              </div>
+              <div>
+                <%= label_tag :user_email, t('activerecord.attributes.user.email') %>
+                <br/>
+                <%= email_field_tag 'user[email]', current_user.email, size: 30 %>
+              </div>
+
+              <p class="notice"><%= t('.leave_blank_if_necessary') %></p>
+
+              <div>
+                <%= label_tag :profile_password, t('.new_password') %>
+                <br/>
+                <%= password_field_tag 'user[password]', '', size: 30 %>
+              </div>
+              <div>
+                <%= label_tag :profile_password_confirmation, t('activerecord.attributes.user.password_confirmation') %>
+                <br/>
+                <%= password_field_tag 'user[password_confirmation]', '', size: 30 %>
+              </div>
+            </fieldset>
+        <% end %>
+        <div>
+          <%= button_tag t('.update'), type: :submit %>
+        </div>
+    <% end %>
+  </section>
+</article>

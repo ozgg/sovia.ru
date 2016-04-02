@@ -1,0 +1,40 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :category %>
+          <%= f.select :category, code_categories_for_select %>
+        </div>
+        <div>
+          <%= f.label :user_id %>
+          <%= f.number_field :user_id, min: 1, required: true %>
+        </div>
+        <div>
+          <%= f.label :quantity %>
+          <%= f.number_field :quantity, in: (1..100), required: true %>
+        </div>
+    <% else %>
+        <div>
+          <%= t("activerecord.attributes.code.categories.#{entity.category}") %>
+          <span><%= user_link entity.user %></span>
+        </div>
+        <div>
+          <%= t('activerecord.attributes.code.quantity') %>
+          <span><%= entity.quantity %></span>
+        </div>
+    <% end %>
+    
+    <div>
+      <%= f.label :body %><br />
+      <%= f.text_field :body, required: true, size: 80 %>
+    </div>
+    <div>
+      <%= f.label :payload %><br />
+      <%= f.text_field :payload, size: 80 %>
+    </div>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

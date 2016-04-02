@@ -1,0 +1,148 @@
+a.profile {
+  padding-left: 1.25rem;
+  background: no-repeat 0 center / 1rem 1rem;
+
+  &.native {
+    background-image: image_url('icons/login/native.png');
+  }
+
+  &.vkontakte {
+    background-image: image_url('icons/login/vkontakte.png');
+  }
+
+  &.twitter {
+    background-image: image_url('icons/login/twitter.png');
+  }
+
+  &.facebook {
+    background-image: image_url('icons/login/facebook.png');
+  }
+}
+
+article.user {
+  figure {
+    margin: 0;
+    padding: 0;
+
+    img {
+      max-width: 20rem;
+      max-height: 20rem;
+    }
+  }
+
+  table {
+    tr {
+      th {
+        text-align: left;
+        border-bottom: solid #f7f7f7 1px;
+        vertical-align: top;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
+
+      td {
+        vertical-align: top;
+        border-bottom: solid #f7f7f7 1px;
+      }
+    }
+  }
+}
+
+.user-profile {
+  min-height: 20rem;
+
+  figure {
+    float: left;
+    position: relative;
+    margin: 1rem;
+
+    img {
+      max-width: 12rem;
+      max-height: 12rem;
+    }
+
+    figcaption {
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      background: rgba(127, 127, 127, 0.6);
+      color: #ffffff;
+      width: 100%;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      line-height: 1.4rem;
+    }
+  }
+
+  table {
+    margin: 0 1rem;
+
+    th {
+      text-align: left;
+    }
+  }
+}
+
+article.profile {
+  figure {
+    margin: 1em;
+
+    figcaption {
+      font-size: 0.9em;
+      color: #777777;
+    }
+
+    img {
+      max-width: 200px;
+      max-height: 200px;
+    }
+  }
+}
+
+article.recovery {
+  form {
+    label {
+      display: inline-block;
+      min-width: 200px;
+    }
+  }
+}
+
+article.edit-user {
+  form {
+    figure {
+      margin: 0;
+      padding: 0;
+      position: relative;
+
+      img {
+        max-width: 20rem;
+        max-height: 20rem;
+      }
+
+      figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 2rem;
+        background: rgba(127, 127, 127, 0.5);
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+    }
+  }
+}

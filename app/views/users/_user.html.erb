@@ -1,0 +1,57 @@
+<article class="user">
+  <h1><%= user.long_slug %></h1>
+  <% if user.deleted? %>
+      <div class="alert"><%= t('activerecord.attributes.user.deleted') %></div>
+  <% end %>
+
+  <section>
+    <h2><%= user.profile_name %></h2>
+    <figure>
+      <%= profile_avatar user %>
+      <figcaption><%= user_link user %></figcaption>
+    </figure>
+    <table>
+      <caption><%= t('.account_data') %></caption>
+      <tbody>
+      <tr>
+        <th><%= t('activerecord.attributes.user.screen_name') %></th>
+        <td><%= user.screen_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.name') %></th>
+        <td><%= user.name %></td>
+      </tr>
+      <tr>
+        <th><%= t(:created_at) %></th>
+        <td><%= time_tag user.created_at %></td>
+      </tr>
+      <tr>
+        <th><%= t(:updated_at) %></th>
+        <td><%= time_tag user.updated_at %></td>
+      </tr>
+      <% unless user.last_seen.blank? %>
+      <tr>
+        <th><%= t('activerecord.attributes.user.last_seen') %></th>
+        <td><%= time_tag user.last_seen %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <th><%= t('activerecord.attributes.user.ip') %></th>
+        <td><%= user.ip %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <td><%= user.email %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.gender') %></th>
+        <td><%= user.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{user.gender}") %></td>
+      </tr>
+      <tr>
+        <th><%= t('users.form.roles') %></th>
+        <td><%= user_roles(user).join(', ') %></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</article>

@@ -1,0 +1,84 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <% unless entity.image.blank? %>
+        <figure>
+          <%= link_to image_tag(entity.image.url), entity.image.url %>
+          <figcaption><%= t(:current_image) %></figcaption>
+        </figure>
+    <% end %>
+    <div>
+      <%= f.label :image %>
+      <%= f.file_field :image, accept: 'image/jpeg, image/png' %>
+    </div>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :network %>
+          <%= f.select :network, networks_for_select %>
+        </div>
+    <% else %>
+        <div><%= t('activerecord.attributes.user.network') %>: <%= entity.network %></div>
+    <% end %>
+    <div>
+      <%= f.label :slug %>
+      <%= f.text_field :slug, required: true, size: 30 %>
+    </div>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name, size: 50 %>
+    </div>
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, size: 50 %>
+    </div>
+    <div>
+      <%= f.label :screen_name %>
+      <%= f.text_field :screen_name, size: 50 %>
+    </div>
+    <% if entity.id.blank? %>
+        <div>
+          <%= f.label :password %>
+          <%= f.text_field :password %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.text_field :password_confirmation %>
+        </div>
+    <% end %>
+    <div>
+      <%= f.label :gender %>
+      <%= f.select :gender, genders_for_select %>
+    </div>
+    <div>
+      <%= f.check_box :bot %>
+      <%= f.label :bot %>
+    </div>
+    <div>
+      <%= f.check_box :allow_login %>
+      <%= f.label :allow_login %>
+    </div>
+    <div>
+      <%= f.check_box :email_confirmed %>
+      <%= f.label :email_confirmed %>
+    </div>
+    <div>
+      <%= f.check_box :allow_mail %>
+      <%= f.label :allow_mail %>
+    </div>
+
+    <fieldset>
+      <legend><%= t('.roles') %></legend>
+      <ul>
+        <% UserRole.roles.keys.each do |role| %>
+            <li>
+              <%= check_box_tag "roles[#{role}]", 1, @entity.has_role?(role) %>
+              <%= label_tag "roles_#{role}", t("activerecord.attributes.user_role.roles.#{role}") %>
+            </li>
+        <% end %>
+      </ul>
+    </fieldset>
+
+    <div>
+      <%= f.button t(:submit), type: :submit %>
+    </div>
+<% end %>

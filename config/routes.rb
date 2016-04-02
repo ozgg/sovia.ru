@@ -1,4 +1,30 @@
 Rails.application.routes.draw do
+  root 'index#index'
+
+  # User-related resources
+  resources :users, :tokens, :codes
+
+  # Authentication
+  controller :authentication do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+    get 'auth/:provider' => :auth_external, as: :auth_external
+    get 'auth/:provider/callback' => :callback, as: :auth_callback
+  end
+
+  namespace :my do
+    resource :profile, except: [:destroy]
+    resource :confirmation, :recovery, only: [:show, :create, :update]
+
+    get '/' => 'index#index'
+  end
+
+  # Public user profile
+  scope 'u/(:slug)', controller: :users do
+    get '/' => :profile, as: :user_profile
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,40 @@
+<%= form_tag users_path, method: :get, class: :filter do %>
+    <fieldset>
+      <legend><%= t(:filter) %></legend>
+      <div>
+        <div><%= t('activerecord.attributes.user.bot') %></div>
+        <ul>
+          <li>
+            <%= radio_button_tag 'filter[bots]', '', filter[:bots].blank? %>
+            <%= label_tag 'filter_bots_', t(:not_set) %>
+          </li>
+          <li>
+            <%= radio_button_tag 'filter[bots]', '1', filter[:bots].to_s == '1' %>
+            <%= label_tag 'filter_bots_1', t(:yes) %>
+          </li>
+          <li>
+            <%= radio_button_tag 'filter[bots]', '0', filter[:bots].to_s == '0' %>
+            <%= label_tag 'filter_bots_0', t(:no) %>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div><%= t('activerecord.attributes.user.network') %></div>
+        <ul>
+          <li>
+            <%= radio_button_tag 'filter[network]', '', filter[:network].blank? %>
+            <%= label_tag 'filter_network_', t(:not_set) %>
+          </li>
+          <% User.networks.each do |name, number| %>
+              <li>
+                <%= radio_button_tag 'filter[network]', number, filter[:network].to_s == number.to_s %>
+                <%= label_tag "filter_network_#{number}", name %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
+    </fieldset>
+<% end %>

@@ -28,6 +28,20 @@ gem 'kaminari'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'puma'
 
+# Backport from rails 5
+gem 'has_secure_token'
+
+# Processing images
+gem 'mini_magick'
+
+# Attaching uploaded files to models
+gem 'carrierwave'
+
+# Аутентификация через OAuth
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -1,0 +1,43 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t(:edit), edit_my_profile_path %></li>
+    </ul>
+<% end %>
+
+<article class="user">
+  <h1><%= t('.title') %></h1>
+
+  <section>
+    <h2><%= current_user.profile_name %></h2>
+    <figure>
+      <%= profile_avatar current_user %>
+      <figcaption><%= current_user.profile_name %></figcaption>
+    </figure>
+    <table>
+      <caption><%= t('users.user.account_data') %></caption>
+      <tbody>
+      <tr>
+        <th><%= t('activerecord.attributes.user.screen_name') %></th>
+        <td><%= current_user.screen_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.name') %></th>
+        <td><%= current_user.name %></td>
+      </tr>
+      <tr>
+        <th><%= t(:created_at) %></th>
+        <td><%= time_tag current_user.created_at %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <td><%= current_user.email %></td>
+      </tr>
+      <tr>
+        <th><%= t('activerecord.attributes.user.gender') %></th>
+        <td><%= current_user.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{current_user.gender}") %></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</article>

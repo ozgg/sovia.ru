@@ -1,0 +1,46 @@
+<% content_for :meta_title, @user.profile_name %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @user.image.url) if @user.image.url %>
+<% content_for :options do %>
+    <% if current_user_has_role? :administrator %>
+        <ul>
+          <li><%= link_to t(:view_as_administrator), user_path(@user) %></li>
+          <li><%= link_to t(:edit), edit_user_path(@user) %></li>
+        </ul>
+    <% end %>
+    <% if current_user == @user %>
+        <div>
+          <p><%= t('.it_is_you') %></p>
+          <p><%= link_to t(:edit), edit_my_profile_path %></p>
+        </div>
+    <% end %>
+<% end %>
+
+<article class="user-profile">
+  <h1><%= @user.profile_name %></h1>
+  <figure>
+    <%= raw profile_avatar(@user) %>
+    <figcaption><%= @user.profile_name %></figcaption>
+  </figure>
+
+  <table>
+    <caption><%= t('.user_info') %></caption>
+    <tbody>
+    <tr>
+      <th><%= t('.registration_date') %></th>
+      <td><%= time_tag @user.created_at %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.user.last_seen') %></th>
+      <td><%= time_tag @user.last_seen %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.user.name') %></th>
+      <td><%= @user.name.blank? ? t(:not_set) : @user.name %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.user.gender') %></th>
+      <td><%= @user.gender.blank? ? t(:not_selected) : t("activerecord.attributes.user.genders.#{@user.gender}") %></td>
+    </tr>
+    </tbody>
+  </table>
+</article>

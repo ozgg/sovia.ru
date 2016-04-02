@@ -1,0 +1,11 @@
+<% content_for :meta_title, t('.title', name: @entity.profile_name) %>
+<% content_for :options do %>
+  <ul>
+    <li><%= link_to t(:create), new_user_path %></li>
+    <li><%= link_to t(:list), users_path %></li>
+    <li><%= link_to t(:edit), edit_user_path(@entity) %></li>
+    <li><%= link_to_delete @entity %></li>
+  </ul>
+<% end %>
+
+<%= render @entity %>

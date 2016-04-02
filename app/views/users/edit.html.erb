@@ -1,0 +1,14 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :options do %>
+  <ul>
+    <li><%= link_to t(:list), users_path %></li>
+    <li><%= link_to t(:view), @entity %></li>
+    <li><%= link_to t(:create), new_user_path %></li>
+  </ul>
+<% end %>
+
+<article class="edit-user">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

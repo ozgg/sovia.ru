@@ -1,0 +1,14 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |user| %>
+          <li>
+            <%= link_to "#{user.long_slug} (#{user.profile_name})", user %>
+            <% if user.deleted? %>
+            (<%= t('activerecord.attributes.user.deleted') %>)
+            <% end %>
+          </li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

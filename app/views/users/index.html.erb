@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t(:create), new_user_path %></li>
+    </ul>
+<% end %>
+
+<article class="users">
+  <h1><%= t('.header') %></h1>
+
+  <%= render partial: 'filter', locals: { filter: @filter } %>
+
+  <%= paginate @collection %>
+  <%= render partial: 'users/list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>
