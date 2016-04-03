@@ -118,8 +118,22 @@ RSpec.describe BrowsersController, type: :controller do
   end
 
   describe 'post toggle' do
-    it 'inverts present togglable attributes'
-    it 'leaves absent togglable attributes intact'
-    it 'returns JSON with new values'
+    before(:each) { post :toggle, id: entity, parameter: 'mobile' }
+
+    it_behaves_like 'page_for_administrator'
+
+    it 'inverts present togglable attributes' do
+      entity.reload
+      expect(entity).to be_mobile
+    end
+
+    it 'leaves absent togglable attributes intact' do
+      entity.reload
+      expect(entity).not_to be_bot
+    end
+
+    it 'returns JSON with new values' do
+      expect(response.body).to eq('{"mobile":true}')
+    end
   end
 end

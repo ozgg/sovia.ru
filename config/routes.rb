@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+  # Toggleable members
+  concern :toggleable do
+    post 'toggle', on: :member
+  end
+
   root 'index#index'
 
   # User-related resources
   resources :users, :tokens, :codes
 
   # Tracking resources
-  resources :browsers
+  resources :browsers, concerns: :toggleable
 
   # Authentication
   controller :authentication do
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback' => :callback, as: :auth_callback
   end
 
+  # Options for authenticated user
   namespace :my do
     resource :profile, except: [:destroy]
     resource :confirmation, :recovery, only: [:show, :create, :update]
@@ -28,24 +34,13 @@ Rails.application.routes.draw do
     get '/' => :profile, as: :user_profile
   end
 
+  # Administration
   namespace :admin do
     get '/' => 'index#index'
   end
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
 
   # Example resource route with options:
   #   resources :products do
@@ -71,19 +66,5 @@ Rails.application.routes.draw do
   #     resources :sales do
   #       get 'recent', on: :collection
   #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
   #   end
 end

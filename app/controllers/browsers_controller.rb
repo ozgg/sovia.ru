@@ -1,15 +1,18 @@
 class BrowsersController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:show, :edit, :update, :destroy, :toggle]
 
+  # get /browsers
   def index
     @collection = Browser.page_for_administration current_page
   end
 
+  # get /browsers/new
   def new
     @entity = Browser.new
   end
 
+  # post /browsers
   def create
     @entity = Browser.new entity_parameters
     if @entity.save
@@ -19,12 +22,15 @@ class BrowsersController < ApplicationController
     end
   end
 
+  # get /browsers/:id
   def show
   end
 
+  # get /browsers/:id/edit
   def edit
   end
 
+  # patch /browsers/:id
   def update
     if @entity.update entity_parameters
       redirect_to @entity, notice: t('browsers.update.success')
@@ -33,11 +39,17 @@ class BrowsersController < ApplicationController
     end
   end
 
+  # delete /browsers/:id
   def destroy
     if @entity.destroy
       flash[:notice] = t('browsers.delete.success')
     end
     redirect_to browsers_path
+  end
+
+  # post /browsers/:id/toggle
+  def toggle
+    render json: @entity.toggle_parameter(params[:parameter].to_s)
   end
 
   protected
