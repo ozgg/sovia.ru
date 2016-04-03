@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     get '/' => :profile, as: :user_profile
   end
 
+  namespace :admin do
+    get '/' => 'index#index'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
