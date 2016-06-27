@@ -1,10 +1,10 @@
-class Browser < ActiveRecord::Base
+class Agent < ActiveRecord::Base
   include RequiredUniqueName
 
   PER_PAGE   = 20
   TOGGLEABLE = %i(mobile bot active)
 
-  has_many :agents, dependent: :nullify
+  belongs_to :browser, counter_cache: true
 
   # @param [Integer] page
   def self.page_for_administration(page)
@@ -12,7 +12,18 @@ class Browser < ActiveRecord::Base
   end
 
   def self.entity_parameters
-    %i(name mobile bot active)
+    %i(browser_id name mobile bot active)
+  end
+
+  # Get instance of Agent for given string
+  #
+  # Trims agent name upto 255 characters
+  #
+  # @param [String] name
+  # @return [Agent]
+  def self.named(name)
+    criterion = { name: name[0..254] }
+    self.find_by(criterion) || self.create(criterion)
   end
 
   # @param [String] attribute

@@ -31,11 +31,15 @@ gem 'puma'
 # Backport from rails 5
 gem 'has_secure_token'
 
+# Auto-prefix CSS for old browsers
+gem 'autoprefixer-rails'
+
 # Processing images
 gem 'mini_magick'
 
 # Attaching uploaded files to models
 gem 'carrierwave'
+gem 'carrierwave-bombshelter'
 
 # Аутентификация через OAuth
 gem 'omniauth-twitter'

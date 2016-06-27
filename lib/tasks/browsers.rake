@@ -1,21 +1,17 @@
 namespace :browsers do
-  desc 'Import browsers from YAML'
+  desc 'Import browsers from YAML with deleting old data'
   task import: :environment do
     file_path = "#{Rails.root}/tmp/import/browsers.yml"
     if File.exists? file_path
+      puts 'Deleting old browsers...'
+      Browser.destroy_all
+      puts 'Done. Importing...'
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          browser = Browser.find_by id: id
-          if browser.is_a? Browser
-            print "\rBrowser #{id} already exists"
-          else
-            browser            = Browser.new id: id, name: data['name']
-            browser.bot        = true if data['bot']
-            browser.mobile     = true if data['mobile']
-            browser.created_at = data['created_at'] if data.has_key? 'created_at'
-            browser.save!
-            print "\r#{id}"
-          end
+          browser = Browser.new id: id
+          browser.assign_attributes data
+          browser.save!
+          print "\r#{id}"
         end
         puts
       end
@@ -32,16 +28,10 @@ namespace :browsers do
     File.open file_path, 'w' do |file|
       Browser.order('id asc').each do |browser|
         file.puts "#{browser.id}:"
-        file.puts "  name: \"#{normalize_string(browser.name)}\""
-        file.puts "  created_at: \"#{browser.created_at.strftime('%Y-%m-%d %H:%M:%S')}\""
-        file.puts '  bot: true' if browser.bot?
-        file.puts '  mobile: true' if browser.mobile?
+        browser.attributes.except(:id).each do |attribute, value|
+          file.puts "  #{attribute}: #{value.inspect}"
+        end
       end
     end
-  end
-
-  # @param [String] string
-  def normalize_string(string)
-    string.gsub('\\', '\\\\').gsub(/\r?\n/, '\\n').gsub('"', '\\"')
   end
 end

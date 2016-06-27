@@ -8,20 +8,52 @@ ru:
   activerecord:
     attributes:
       browser:
-        bot: "Это бот"
-        mobile: "Мобильный браузер"
+        mobile: "Мобильный"
+        bot: "Бот"
+        active: "Активный"
+        locked: "Запрет изменений"
+        deleted: "Удалён"
         name: "Название"
+      agent:
+        browser_id: "Браузер"
+        mobile: "Мобильный"
+        bot: "Бот"
+        active: "Активный"
+        locked: "Запрет изменений"
+        deleted: "Удалён"
+        name: "Название"
+  admin:
+    browsers:
+      index:
+        index: "Браузеры, страница %{page}"
+        heading: "Браузеры"
+    agents:
+      index:
+        index: "Агенты пользователя, страница %{page}"
+        heading: "Агенты пользователя"
   browsers:
-    update:
-      success: "Браузер успешно обновлён"
-    delete:
-      success: "Браузер успешно удалён"
-    index:
-      header: "Браузеры"
-      title: "Браузеры, страница %{page}"
+    new:
+      title: "Создание браузера"
+    create:
+      success: "Браузер успешно создан"
+    show:
+      index: "Браузер «%{name}»"
     edit:
       title: "Редактирование браузера"
+    update:
+      success: "Браузер успешно изменён"
+    destroy:
+      success: "Браузер успешно удалён"
+  agents:
     new:
-      title: "Новый браузер"
+      title: "Создание агента пользователя"
+    create:
+      success: "Агент пользователя успешно создан"
     show:
-      title: "Браузер «%{name}»"
+      index: "Агент пользователя «%{name}»"
+    edit:
+      title: "Редактирование агента пользователя"
+    update:
+      success: "Агент пользователя успешно изменён"
+    destroy:
+      success: "Агент пользователя успешно удалён"
