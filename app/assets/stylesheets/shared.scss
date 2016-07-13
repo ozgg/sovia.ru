@@ -1,0 +1,96 @@
+// Размеры шрифтов
+$huge_size: 1.5rem;        // 24px
+$larger_size: 1.375rem;    // 22px
+$large_size: 1.25rem;      // 20px
+$increased_size: 1.125rem; // 18px
+$normal_size: 1rem;        // 16px
+$decreased_size: 0.875rem; // 14px
+$small_size: 0.75rem;      // 12px
+$smaller_size: 0.625rem;   // 10px
+$tiny_size: 0.5rem;        // 8px
+
+// Зебра для списков
+$row_background_even: #f0f0f0;
+$row_background_odd: #fafafa;
+
+$secondary_text_color: #777777;
+
+@mixin entity-table {
+  margin: 1rem;
+  border-spacing: 0;
+
+  tbody {
+    tr:nth-of-type(even) {
+      background: $row_background_even;
+    }
+
+    tr:nth-of-type(odd) {
+      background: $row_background_odd;
+    }
+
+    th {
+      text-align: right;
+      padding: 0.25rem 0.5rem;
+    }
+
+    td {
+      padding: 0.25rem 0.5rem;
+
+      &[colspan]:first-letter {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+@mixin entity-form-table {
+  th {
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+    line-height: 1.75rem;
+
+    &[colspan] {
+      text-align: center;
+      font-weight: bold;
+      border-top: solid #777777 0.0625rem;
+      padding-top: 1rem;
+    }
+  }
+
+  tfoot {
+    tr {
+      td {
+        padding: 0.5rem 0;
+        text-align: center;
+      }
+    }
+  }
+
+  p.notice {
+    margin: 0;
+    color: $secondary_text_color;
+    font-size: $decreased_size;
+
+    &:before {
+      content: '\261E';
+      margin-right: 0.25rem;
+    }
+  }
+}
+
+@mixin striped-list {
+  margin: 1rem 0;
+  padding: 0;
+
+  > li {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    background: $row_background_odd;
+
+    &:nth-of-type(even) {
+      background: $row_background_even;
+    }
+  }
+}

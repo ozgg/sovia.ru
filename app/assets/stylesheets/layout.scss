@@ -4,7 +4,42 @@ html {
   font-size: 16px;
 }
 
-.field_with_errors {
-  display: inline-block;
-  background: #fff7f7;
+#main {
+  > div.options {
+    > ul {
+      margin: 1rem 0;
+      padding: 0;
+      font-size: $decreased_size;
+      line-height: 2rem;
+
+      > li {
+        list-style: none;
+        display: inline-block;
+        margin: 0 0.5rem;
+
+        &:before {
+          content: '[';
+        }
+
+        &:after {
+          content: ']';
+        }
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+span.not-found {
+  color: #ffaaaa;
+  cursor: default;
+
+  &:before {
+    content: '\26A0';
+    color: #ff0000;
+    margin-right: 0.25rem;
+  }
 }

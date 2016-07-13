@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require "rails"
 # Pick the frameworks you want:
@@ -8,6 +8,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
+require "action_cable/engine"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
@@ -26,15 +27,5 @@ module Sovia5
     %w(app/services lib).each do |path|
       config.autoload_paths << config.root.join(path).to_s
     end
-
-    config.action_dispatch.rescue_responses.merge!(
-        {
-            :'ApplicationController::UnauthorizedException' => :unauthorized,
-            :'ApplicationController::ForbiddenException' => :forbidden,
-        }
-    )
-
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
   end
 end
