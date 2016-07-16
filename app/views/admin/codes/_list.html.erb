@@ -1,0 +1,13 @@
+<% if collection.any? %>
+    <ul>
+      <% collection.each do |code| %>
+          <li>
+            <%= link_to "#{code.category}: #{code.user.long_slug}", code %>
+            (<%= time_tag code.created_at %>)
+            <%= t('activerecord.attributes.code.activated') if code.activated? %>
+          </li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

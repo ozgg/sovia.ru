@@ -1,0 +1,33 @@
+<% if collection.any? %>
+    <ul class="users-list">
+      <% collection.each do |user| %>
+          <% if user.deleted? %>
+              <li class="deleted"><%= "#{user.screen_name} (#{user.profile_name})" %>, id: <%= user.id %></li>
+          <% else %>
+              <li>
+                <div class="image">
+                  <%= profile_avatar user %>
+                </div>
+                <div class="info">
+                  <div><%= link_to "#{user.screen_name} (#{user.profile_name})", user %></div>
+                  <div class="times">
+                    <div>
+                      <span><%= t(:created_at) %></span>:
+                      <%= time_tag user.created_at %>
+                    </div>
+                    <% unless user.last_seen.nil? %>
+                        <div>
+                          <span><%= t('activerecord.attributes.user.last_seen') %></span>:
+                          <%= time_tag user.last_seen %>
+                        </div>
+                    <% end %>
+                  </div>
+                  <%= render partial: 'toggleable', locals: { user: user } %>
+                </div>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

@@ -1,0 +1,8 @@
+<article class="code">
+  <h1><%= code.body %></h1>
+  <% if code.activated? %>
+      <div class="alert"><%= t('activerecord.attributes.code.activated') %></div>
+  <% end %>
+  <p><%= t("activerecord.attributes.code.categories.#{code.category}") %>: <%= user_link code.user %></p>
+  <p><%= t('activerecord.attributes.code.payload') %>: <%= code.payload %></p>
+</article>

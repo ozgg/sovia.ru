@@ -1,0 +1,22 @@
+<%= form_tag login_path, class: 'login' do %>
+    <div class="fields">
+      <div>
+        <%= label_tag :login, t('activerecord.attributes.user.screen_name') %>
+        <%= text_field_tag :login, '', required: true, size: 18 %>
+      </div>
+      <div>
+        <%= label_tag :password, t('activerecord.attributes.user.password') %>
+        <%= password_field_tag :password, '', required: true, size: 18 %>
+      </div>
+    </div>
+    <div class="actions">
+      <div>
+        <%= button_tag t('.sign_in'), type: 'submit' %>
+        <%= render 'authentication/external_login' %>
+      </div>
+      <ul>
+        <li><%= link_to t('.reset_password'), my_recovery_path %></li>
+        <li><%= link_to t('.join'), new_my_profile_path %></li>
+      </ul>
+    </div>
+<% end %>

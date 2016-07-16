@@ -6,6 +6,9 @@ class Agent < ApplicationRecord
   TOGGLEABLE = %i(mobile bot active)
 
   belongs_to :browser, optional: true, counter_cache: true
+  has_many :users, dependent: :nullify
+  has_many :tokens, dependent: :nullify
+  has_many :codes, dependent: :nullify
 
   # @param [Integer] page
   def self.page_for_administration(page)

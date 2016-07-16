@@ -26,10 +26,22 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 # Автоматическая расстановка префиксов в CSS
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', group: :production
 
 gem 'kaminari'
 gem 'rails-i18n', '~> 5.0.0'
+
+# Processing images
+gem 'mini_magick'
+
+# Attaching uploaded files to models
+gem 'carrierwave'
+gem 'carrierwave-bombshelter'
+
+# Аутентификация через OAuth
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 
 group :development, :test do
   gem 'rspec-rails'
