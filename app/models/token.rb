@@ -20,7 +20,11 @@ class Token < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(user_id)
+    %i(active)
+  end
+
+  def self.creation_parameters
+    entity_parameters + %i(user_id)
   end
 
   # @param [String] input

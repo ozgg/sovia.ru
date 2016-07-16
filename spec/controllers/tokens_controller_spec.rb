@@ -7,20 +7,18 @@ RSpec.describe TokensController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
+    allow(Token).to receive(:find).and_call_original
   end
 
   describe 'get new' do
     before(:each) { get :new }
 
     it_behaves_like 'page_for_administrator'
-
-    it 'assigns a new instance of Token to @entity' do
-      expect(assigns[:entity]).to be_a_new(Token)
-    end
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, token: attributes_for(:token).merge(user_id: user.id) } }
+    let(:params) { { token: attributes_for(:token).merge(user_id: user.id) } }
+    let(:action) { -> { post :create, params: params } }
 
     context 'authorization and redirects' do
       before(:each) { action.call }
@@ -40,26 +38,26 @@ RSpec.describe TokensController, type: :controller do
   end
 
   describe 'get show' do
-    before(:each) { get :show, id: entity }
+    before(:each) { get :show, params: { id: entity } }
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
+    it_behaves_like 'entity_finder'
   end
 
   describe 'get edit' do
-    before(:each) { get :edit, id: entity }
+    before(:each) { get :edit, params: { id: entity } }
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
+    it_behaves_like 'entity_finder'
   end
 
   describe 'patch update' do
     before(:each) do
-      patch :update, id: entity, token: { active: '0' }
+      patch :update, params: { id: entity, token: { active: '0' } }
     end
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
+    it_behaves_like 'entity_finder'
 
     it 'updates token' do
       entity.reload
@@ -72,7 +70,7 @@ RSpec.describe TokensController, type: :controller do
   end
 
   describe 'delete destroy' do
-    let(:action) { -> { delete :destroy, id: entity } }
+    let(:action) { -> { delete :destroy, params: { id: entity } } }
 
     context 'authorization' do
       before(:each) { action.call }

@@ -10,6 +10,8 @@ class TokensController < ApplicationController
   # post /tokens
   def create
     @entity = Token.new creation_parameters
+    add_tracking @entity
+    assign_owner @entity
     if @entity.save
       redirect_to @entity
     else
@@ -37,7 +39,7 @@ class TokensController < ApplicationController
   # delete /tokens/:id
   def destroy
     if @entity.destroy
-      flash[:notice] = t('tokens.delete.success')
+      flash[:notice] = t('tokens.destroy.success')
     end
     redirect_to tokens_path
   end
@@ -53,11 +55,10 @@ class TokensController < ApplicationController
   end
 
   def entity_parameters
-    params.require(:token).permit(:active)
+    params.require(:token).permit(Token.entity_parameters)
   end
 
   def creation_parameters
-    parameters = params.require(:token).permit(Token.entity_parameters)
-    entity_parameters.merge(parameters).merge(tracking_for_entity)
+    params.require(:token).permit(Token.creation_parameters)
   end
 end
