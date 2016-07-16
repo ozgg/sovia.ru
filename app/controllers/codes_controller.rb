@@ -37,7 +37,7 @@ class CodesController < ApplicationController
   # delete /codes/:id
   def destroy
     if @entity.destroy
-      flash[:notice] = t('codes.delete.success')
+      flash[:notice] = t('codes.destroy.success')
     end
     redirect_to codes_path
   end
@@ -53,11 +53,10 @@ class CodesController < ApplicationController
   end
 
   def entity_parameters
-    params.require(:code).permit(:body, :payload)
+    params.require(:code).permit(Code.entity_parameters)
   end
 
   def creation_parameters
-    parameters = params.require(:code).permit(:user_id, :category)
-    entity_parameters.merge(parameters)
+    params.require(:code).permit(Code.creation_parameters)
   end
 end

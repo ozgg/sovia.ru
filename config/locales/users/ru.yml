@@ -146,7 +146,7 @@ ru:
   tokens:
     update:
       success: "Жетон успешно обновлён"
-    delete:
+    destroy:
       success: "Жетон успешно удалён"
     show:
       title: "Жетон №%{id}"
@@ -157,7 +157,7 @@ ru:
   codes:
     update:
       success: "Код успешно обновлён"
-    delete:
+    destroy:
       success: "Код успешно удалён"
     edit:
       title: "Редактирование кода"
