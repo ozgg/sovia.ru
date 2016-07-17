@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
       subject.slug        = 'invalid slug'
       subject.screen_name = nil
       expect(subject).not_to be_valid
-      expect(subject.errors.messages).to have_key(:slug)
+      expect(subject.errors.messages).to have_key(:screen_name)
     end
 
     it 'fails with non-unique slug for network' do

@@ -29,19 +29,19 @@ RSpec.describe UserRole, type: :model do
     end
 
     it 'returns true for pair with valid role in set' do
-      expect(UserRole.user_has_role(user, :moderator, :administrator)).to be
+      expect(UserRole.user_has_role?(user, :moderator, :administrator)).to be
     end
 
     it 'returns true for existing pair' do
-      expect(UserRole.user_has_role(user, :administrator)).to be
+      expect(UserRole.user_has_role?(user, :administrator)).to be
     end
 
     it 'returns false for absent pair' do
-      expect(UserRole.user_has_role(user, :moderator)).not_to be
+      expect(UserRole.user_has_role?(user, :moderator)).not_to be
     end
 
     it 'returns false for unknown role' do
-      expect(UserRole.user_has_role(user, :non_existent)).not_to be
+      expect(UserRole.user_has_role?(user, :non_existent)).not_to be
     end
   end
 end

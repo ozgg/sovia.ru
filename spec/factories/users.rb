@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     network User.networks[:native]
     sequence(:screen_name) { |n| "User_#{n}" }
+    sequence(:slug) { |n| "user_#{n}" }
     password 'secret'
     password_confirmation 'secret'
 

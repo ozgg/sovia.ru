@@ -89,7 +89,7 @@ class User < ApplicationRecord
 
   # @param [Symbol] role
   def remove_role(role)
-    UserRole.destroy_all(user: self, role: UserRole.roles[role]) if UserRole.role_exists? role
+    UserRole.where(user: self, role: UserRole.roles[role]).destroy_all if UserRole.role_exists? role
   end
 
   # @param [Hash] roles
