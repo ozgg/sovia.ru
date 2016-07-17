@@ -55,13 +55,11 @@ class UsersController < ApplicationController
   end
 
   def entity_parameters
-    parameters         = params.require(:user).permit(User.entity_parameters)
-    parameters[:email] = nil if parameters[:email].blank?
-    parameters
+    params.require(:user).permit(User.entity_parameters)
   end
 
   def creation_parameters
-    params.require(:user).permit(User.entity_parameters + [:network]).merge(tracking_for_entity)
+    params.require(:user).permit(User.creation_parameters).merge(tracking_for_entity)
   end
 
   def set_roles

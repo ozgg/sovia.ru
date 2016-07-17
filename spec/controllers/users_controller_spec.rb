@@ -8,30 +8,18 @@ RSpec.describe UsersController, type: :controller do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(current_user)
     allow(User).to receive(:with_long_slug).and_return(entity)
-  end
-
-  shared_examples 'user_assigner' do
-    it 'finds user by long slug' do
-      expect(User).to have_received(:with_long_slug).with(entity.long_slug)
-    end
-
-    it 'assigns user to @user' do
-      expect(assigns[:user]).to eq(entity)
-    end
+    allow(User).to receive(:find).and_call_original
   end
 
   describe 'get new' do
     before(:each) { get :new }
 
     it_behaves_like 'page_for_administrator'
-
-    it 'assigns a new instance of User to @entity' do
-      expect(assigns[:entity]).to be_a_new(User)
-    end
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, user: attributes_for(:user).merge(network: 'native') } }
+    let(:params) { { user: attributes_for(:user).merge(network: 'native') } }
+    let(:action) { -> { post :create, params: params } }
 
     context 'authorization and redirects' do
       before(:each) { action.call }
@@ -51,30 +39,26 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'get show' do
-    before(:each) { get :show, id: entity }
+    before(:each) { get :show, params: { id: entity } }
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
-
-    it 'renders view "show"' do
-      expect(response).to render_template(:show)
-    end
+    it_behaves_like 'entity_finder'
   end
 
   describe 'get edit' do
-    before(:each) { get :edit, id: entity }
+    before(:each) { get :edit, params: { id: entity } }
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
+    it_behaves_like 'entity_finder'
   end
 
   describe 'patch update' do
     before(:each) do
-      patch :update, id: entity, user: { name: 'changed' }
+      patch :update, params: { id: entity, user: { name: 'changed' } }
     end
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_assigner'
+    it_behaves_like 'entity_finder'
 
     it 'updates user' do
       entity.reload
@@ -87,13 +71,13 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'delete destroy' do
-    before(:each) { delete :destroy, id: entity }
+    before(:each) { delete :destroy, params: { id: entity } }
 
     context 'authorization' do
       it_behaves_like 'page_for_administrator'
 
-      it 'redirects to users page' do
-        expect(response).to redirect_to(users_path)
+      it 'redirects to administrative users page' do
+        expect(response).to redirect_to(admin_users_path)
       end
     end
 

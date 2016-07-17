@@ -47,6 +47,10 @@ class User < ApplicationRecord
     )
   end
 
+  def self.creation_parameters
+    entity_parameters + %i(network)
+  end
+
   # @param [String] long_slug
   def self.with_long_slug(long_slug)
     parts = long_slug.split('-')
@@ -106,8 +110,10 @@ class User < ApplicationRecord
   end
 
   def email_should_be_reasonable
-    unless email.nil? || email =~ EMAIL_PATTERN
-      errors.add(:email, I18n.t('activerecord.errors.models.user.attributes.email.unreasonable'))
+    if email.blank?
+      self.email = nil
+    else
+      errors.add(:email, I18n.t('activerecord.errors.models.user.attributes.email.unreasonable')) unless email =~ EMAIL_PATTERN
     end
   end
 

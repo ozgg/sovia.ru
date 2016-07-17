@@ -10,8 +10,6 @@ class TokensController < ApplicationController
   # post /tokens
   def create
     @entity = Token.new creation_parameters
-    add_tracking @entity
-    assign_owner @entity
     if @entity.save
       redirect_to @entity
     else
@@ -59,6 +57,6 @@ class TokensController < ApplicationController
   end
 
   def creation_parameters
-    params.require(:token).permit(Token.creation_parameters)
+    params.require(:token).permit(Token.creation_parameters).merge(owner_for_entity).merge(tracking_for_entity)
   end
 end
