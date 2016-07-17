@@ -15,7 +15,7 @@ class AuthenticationController < ApplicationController
       redirect_to root_path
     else
       flash.now[:alert] = t(:could_not_log_in)
-      render :new
+      render :new, status: :unauthorized
     end
   end
 

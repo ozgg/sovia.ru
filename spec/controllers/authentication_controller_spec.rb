@@ -10,9 +10,7 @@ RSpec.describe AuthenticationController, type: :controller do
         get :new
       end
 
-      it 'renders action "new"' do
-        expect(response).to render_template(:new)
-      end
+      it_behaves_like 'successful_response'
     end
 
     context 'when user is logged in' do
@@ -40,15 +38,15 @@ RSpec.describe AuthenticationController, type: :controller do
     end
 
     context 'when credentials are invalid' do
-      let(:action) { -> { post :create, login: user.slug, password: 'incorrect' } }
+      let(:action) { -> { post :create, params: { login: user.slug, password: 'incorrect' } } }
 
       before(:each) do
         allow(subject).to receive(:current_user).and_return(nil)
       end
 
-      it 'renders view "new"' do
+      it 'responds with HTTP 401' do
         action.call
-        expect(response).to render_template(:new)
+        expect(response).to have_http_status(:unauthorized)
       end
 
       it 'does not set token cookie' do
@@ -62,7 +60,7 @@ RSpec.describe AuthenticationController, type: :controller do
     end
 
     context 'when credentials are valid' do
-      let(:action) { -> { post :create, login: user.screen_name, password: '1234' } }
+      let(:action) { -> { post :create, params: { login: user.screen_name, password: '1234' } } }
 
       before(:each) do
         allow(subject).to receive(:current_user).and_return(nil)
@@ -86,16 +84,16 @@ RSpec.describe AuthenticationController, type: :controller do
 
     context 'when user is not allowed to log in' do
       let(:user) { create :user, password: '1', password_confirmation: '1', network: 0, allow_login: false }
-      let(:action) { -> { post :create, login: user.slug, password: '1' } }
+      let(:action) { -> { post :create, params: { login: user.slug, password: '1' } } }
 
       before(:each) do
         request.cookies['token'] = nil
         allow(subject).to receive(:current_user).and_return(nil)
       end
 
-      it 'renders template "new"' do
+      it 'responds with HTTP 401' do
         action.call
-        expect(response).to render_template(:new)
+        expect(response).to have_http_status(:unauthorized)
       end
 
       it 'does not create token' do
