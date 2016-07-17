@@ -47,7 +47,7 @@ class My::ProfilesController < ApplicationController
       create_token_for_user @user, tracking_for_entity
       redirect_to my_profile_path, notice: t('my.profiles.create.success')
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 

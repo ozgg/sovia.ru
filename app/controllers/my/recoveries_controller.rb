@@ -11,7 +11,7 @@ class My::RecoveriesController < ApplicationController
   # post /my/recovery
   def create
     if @user.nil? || @user.email.blank?
-      redirect_to my_recovery_path, notice: t('my.recoveries.create.impossible')
+      redirect_to my_recovery_path, alert: t('my.recoveries.create.impossible')
     else
       send_code
       redirect_to my_recovery_path, notice: t('my.recoveries.create.completed')
@@ -22,7 +22,7 @@ class My::RecoveriesController < ApplicationController
   def update
     find_code
     if @code.nil?
-      redirect_to my_recovery_path, notice: t('my.recoveries.update.invalid_code')
+      redirect_to my_recovery_path, alert: t('my.recoveries.update.invalid_code')
     else
       reset_password
     end
@@ -53,14 +53,14 @@ class My::RecoveriesController < ApplicationController
       @code.decrement! :quantity
       redirect_to root_path, notice: t('my.recoveries.update.success')
     else
-      render :show
+      render :show, status: :bad_request
     end
   end
 
   def new_user_parameters
     parameters = params.require(:user).permit(:password)
     parameters[:password] = nil if parameters[:password].blank?
-    parameters.merge!(email_confirmed: true) if @code.payload == @user.email
+    parameters[:email_confirmed] = true if @code.payload == @user.email
     parameters
   end
 end

@@ -11,15 +11,13 @@ RSpec.describe My::RecoveriesController, type: :controller do
   describe 'get show' do
     before(:each) { get :show }
 
-    it 'renders view "show"' do
-      expect(response).to render_template(:show)
-    end
+    it_behaves_like 'successful_response'
   end
 
   describe 'post create' do
     context 'when user does not have email' do
       let(:user) { create :user }
-      let(:action) { -> { post :create, login: user.screen_name } }
+      let(:action) { -> { post :create, params: { login: user.screen_name } } }
 
       it 'does not create new code' do
         expect(action).not_to change(Code, :count)
@@ -33,7 +31,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
 
     context 'when user has email' do
       let(:code) { create :recovery_code, user: user }
-      let(:action) { -> { post :create, login: user.screen_name } }
+      let(:action) { -> { post :create, params: { login: user.screen_name } } }
 
       before :each do
         allow(Code).to receive(:recovery_for_user).and_return(code)
@@ -55,7 +53,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
     end
 
     context 'when user enters non-existent login' do
-      let(:action) { -> { post :create, login: 'non_existent' } }
+      let(:action) { -> { post :create, params: { login: 'non_existent' } } }
 
       it 'does not create new code' do
         expect(action).not_to change(Code, :count)
@@ -74,7 +72,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
 
     context 'when code is invalid' do
       before :each do
-        patch :update, { login: user.screen_name, code: 'nope' }.merge(new_password)
+        patch :update, params: { login: user.screen_name, code: 'nope' }.merge(new_password)
       end
 
       it 'does not change user' do
@@ -91,7 +89,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
       let(:code) { create :recovery_code }
 
       before :each do
-        patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
+        patch :update, params: { login: user.screen_name, code: code.body }.merge(new_password)
       end
 
       it 'does not change code' do
@@ -108,7 +106,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
       let(:code) { create :recovery_code, user: user, quantity: 0 }
 
       before :each do
-        patch :update, { login: user.screen_name, code: code.body }.merge(new_password)
+        patch :update, params: { login: user.screen_name, code: code.body }.merge(new_password)
       end
 
       it 'does not change user' do
@@ -123,7 +121,7 @@ RSpec.describe My::RecoveriesController, type: :controller do
 
     context 'when form is invalid' do
       before :each do
-        patch :update, login: user.slug, code: code.body, user: { password: ' ' }
+        patch :update, params: { login: user.slug, code: code.body, user: { password: ' ' } }
       end
 
       it 'does not change user' do
@@ -136,13 +134,13 @@ RSpec.describe My::RecoveriesController, type: :controller do
         expect(code).not_to be_activated
       end
 
-      it 'renders view "show"' do
-        expect(response).to render_template(:show)
+      it 'responds with HTTP 400' do
+        expect(response).to have_http_status(:bad_request)
       end
     end
 
     context 'when everything is valid' do
-      let(:action) { -> { patch :update, { login: user.screen_name, code: code.body }.merge(new_password) } }
+      let(:action) { -> { patch :update, params: { login: user.screen_name, code: code.body }.merge(new_password) } }
 
       it 'updates password for user' do
         action.call

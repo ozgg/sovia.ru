@@ -10,7 +10,7 @@ RSpec.describe CodeSender, type: :mailer do
     end
 
     it 'sends from support email' do
-      expect(mail.from).to eq(['support@example.com'])
+      expect(mail.from).to eq(['support@sovia.ru'])
     end
 
     it 'sends to code owner' do
@@ -31,7 +31,7 @@ RSpec.describe CodeSender, type: :mailer do
     end
 
     it 'sends from support email' do
-      expect(mail.from).to eq(['support@example.com'])
+      expect(mail.from).to eq(['support@sovia.ru'])
     end
 
     it 'sends to code owner' do

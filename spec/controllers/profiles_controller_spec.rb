@@ -6,22 +6,17 @@ RSpec.describe ProfilesController, type: :controller do
   end
 
   describe 'get show' do
-    let(:action) { -> { get :show, slug: entity.long_slug } }
+    let(:action) { -> { get :show, params: { slug: entity.long_slug } } }
 
     context 'when user is not deleted' do
       let!(:entity) { create :user }
 
       before(:each) { action.call }
 
-      it_behaves_like 'entity_assigner'
       it_behaves_like 'successful_response'
 
       it 'finds user by long slug' do
         expect(User).to have_received(:with_long_slug).with(entity.long_slug)
-      end
-
-      it 'renders template "show"' do
-        expect(response).to render_template(:show)
       end
     end
 

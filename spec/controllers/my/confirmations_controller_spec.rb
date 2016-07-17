@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe My::ConfirmationsController, type: :controller do
   describe 'get show' do
-    it 'renders view "show"' do
-      get :show
-      expect(response).to render_template(:show)
-    end
+    before(:each) { get :show }
+
+    it_behaves_like 'successful_response'
   end
 
   describe 'post create' do
@@ -86,7 +85,7 @@ RSpec.describe My::ConfirmationsController, type: :controller do
     context 'when code is valid' do
       let(:code) { create :confirmation_code, user: user, payload: user.email }
 
-      before(:each) { patch :update, code: code.body }
+      before(:each) { patch :update, params: { code: code.body } }
 
       it 'sets email_confirmed to true' do
         user.reload
@@ -104,7 +103,7 @@ RSpec.describe My::ConfirmationsController, type: :controller do
     end
 
     context 'when code is invalid' do
-      before(:each) { patch :update, code: 'invalid' }
+      before(:each) { patch :update, params: { code: 'invalid' } }
 
       it 'redirects to my_confirmation_path' do
         expect(response).to redirect_to(my_confirmation_path)

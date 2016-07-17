@@ -22,19 +22,13 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :new
       end
 
-      it 'renders view "new"' do
-        expect(response).to render_template(:new)
-      end
-
-      it 'assigns new user to @user' do
-        expect(assigns[:user]).to be_a_new(User)
-      end
+      it_behaves_like 'successful_response'
     end
   end
 
   describe 'post create' do
     let(:user_parameters) { { screen_name: 'new_user', password: '1', password_confirmation: '1' } }
-    let(:action) { -> { post :create, user: user_parameters } }
+    let(:action) { -> { post :create, params: { user: user_parameters } } }
 
     context 'when user is logged in' do
       before(:each) { allow(controller).to receive(:current_user).and_return(user) }
@@ -70,33 +64,23 @@ RSpec.describe My::ProfilesController, type: :controller do
           action.call
           expect(response).to redirect_to(my_profile_path)
         end
-
-        it 'assigns User instance to @user' do
-          action.call
-          expect(assigns[:user]).to be_a(User)
-        end
       end
 
       context 'when parameters are invalid' do
-        let(:action) { -> { post :create, user: { screen_name: '?' } } }
+        let(:action) { -> { post :create, params: { user: { screen_name: '?' } } } }
 
         it 'does not add user to database' do
           expect(action).not_to change(User, :count)
         end
 
-        it 'assigns User instance to @user' do
+        it 'responds with HTTP 400' do
           action.call
-          expect(assigns[:user]).to be_a(User)
-        end
-
-        it 'renders view "new"' do
-          action.call
-          expect(response).to render_template(:new)
+          expect(response).to have_http_status(:bad_request)
         end
       end
 
       context 'when user is bot' do
-        let(:action) { -> { post :create, agree: '1', user: user_parameters } }
+        let(:action) { -> { post :create, params: { agree: '1', user: user_parameters } } }
 
         it 'does not add user to database' do
           expect(action).not_to change(User, :count)
@@ -117,9 +101,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :show
       end
 
-      it 'renders view "show"' do
-        expect(response).to render_template(:show)
-      end
+      it_behaves_like 'successful_response'
     end
 
     context 'when user is not logged in' do
@@ -141,9 +123,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :edit
       end
 
-      it 'renders view "edit"' do
-        expect(response).to render_template(:edit)
-      end
+      it_behaves_like 'successful_response'
     end
 
     context 'when user is not logged in' do
@@ -159,13 +139,13 @@ RSpec.describe My::ProfilesController, type: :controller do
   end
 
   describe 'patch update' do
-    let(:action) { -> { patch :update, user: { name: 'Random Guy' } } }
+    let(:action) { -> { patch :update, params: { user: { name: 'Random Guy' } } } }
 
     context 'when user is logged in' do
       before(:each) { allow(controller).to receive(:current_user).and_return(user) }
 
       it 'calls #update for user' do
-        expect(user).to receive(:update).with(name: 'Random Guy')
+        expect(user).to receive(:update)
         action.call
       end
 
@@ -178,7 +158,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         let(:new_data) { { password: '1', password_confirmation: '1' } }
 
         context 'with valid current password' do
-          let(:action) { -> { patch :update, password: password, user: new_data } }
+          let(:action) { -> { patch :update, params: { password: password, user: new_data } } }
 
           it 'updates password for user' do
             expect(action).to change(user, :password_digest)
@@ -186,7 +166,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         end
 
         context 'with invalid current password' do
-          let(:action) { -> { patch :update, password: 'wrong', user: new_data } }
+          let(:action) { -> { patch :update, params: { password: 'wrong', user: new_data } } }
 
           it 'leaves password digest intact' do
             expect(action).not_to change(user, :password_digest)
@@ -198,7 +178,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         let(:new_data) { { email: 'user@example.org' } }
 
         context 'with valid password' do
-          let(:action) { -> { patch :update, password: password, user: new_data } }
+          let(:action) { -> { patch :update, params: { password: password, user: new_data } } }
 
           it 'changes email' do
             expect(action).to change(user, :email)
@@ -212,7 +192,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         end
 
         context 'with invalid password' do
-          let(:action) { -> { patch :update, password: 'wrong', user: new_data } }
+          let(:action) { -> { patch :update, params: { password: 'wrong', user: new_data } } }
           it 'leaves email intact' do
             expect(action).not_to change(user, :email)
           end
