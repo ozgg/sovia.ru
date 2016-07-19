@@ -5,6 +5,8 @@ ru:
     few: "%{count} публикации"
     many: "%{count} публикаций"
     other: "%{count} публикаций"
+  archive_year: " за %{year} год"
+  archive_month: " за %{month} %{year} года"
   activerecord:
     models:
       post: "Публикация"
