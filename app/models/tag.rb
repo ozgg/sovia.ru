@@ -6,7 +6,7 @@ class Tag < ApplicationRecord
   before_validation :normalize_name, :generate_slug
 
   scope :ordered_by_slug, -> { order 'slug asc' }
-  scope :visible, -> { where visible: true }
+  scope :visible, -> { where deleted: false }
 
   # @param [Integer] page
   def self.page_for_administration(page)

@@ -5,6 +5,7 @@ module HasOwner
     scope :owned_by, ->(user) { where user: user }
   end
 
+  # @param [User] user
   def owned_by?(user)
     user.is_a?(User) && (self.user == user)
   end

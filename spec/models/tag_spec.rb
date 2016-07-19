@@ -63,4 +63,17 @@ RSpec.describe Tag, type: :model do
       end
     end
   end
+
+  describe '::page_for_visitors' do
+    let!(:visible_tag) { create :tag }
+    let!(:deleted_tag) { create :tag, deleted: true }
+
+    it 'includes non-deleted tags' do
+      expect(Tag.page_for_visitors(1)).to include(visible_tag)
+    end
+
+    it 'does not include deleted tags' do
+      expect(Tag.page_for_visitors(1)).not_to include(deleted_tag)
+    end
+  end
 end
