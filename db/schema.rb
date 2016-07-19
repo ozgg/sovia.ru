@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628000030) do
+ActiveRecord::Schema.define(version: 20160719200020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,47 @@ ActiveRecord::Schema.define(version: 20160628000030) do
     t.string   "payload"
     t.index ["agent_id"], name: "index_codes_on_agent_id", using: :btree
     t.index ["user_id"], name: "index_codes_on_user_id", using: :btree
+  end
+
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id",  null: false
+    t.index ["post_id"], name: "index_post_tags_on_post_id", using: :btree
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id", using: :btree
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.boolean  "deleted",        default: false, null: false
+    t.boolean  "locked",         default: false, null: false
+    t.boolean  "visible",        default: true,  null: false
+    t.integer  "comments_count", default: 0,     null: false
+    t.integer  "rating",         default: 0,     null: false
+    t.integer  "upvote_count",   default: 0,     null: false
+    t.integer  "downvote_count", default: 0,     null: false
+    t.string   "image"
+    t.string   "title"
+    t.string   "slug"
+    t.text     "lead"
+    t.text     "body",                           null: false
+    t.string   "tags_cache",     default: [],    null: false, array: true
+    t.index "date_trunc('month'::text, created_at)", name: "posts_created_month_idx", using: :btree
+    t.index ["agent_id"], name: "index_posts_on_agent_id", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "posts_count", default: 0,     null: false
+    t.boolean  "locked",      default: false, null: false
+    t.boolean  "deleted",     default: false, null: false
+    t.string   "name",                        null: false
+    t.string   "slug",                        null: false
   end
 
   create_table "tokens", force: :cascade do |t|
@@ -106,6 +147,10 @@ ActiveRecord::Schema.define(version: 20160628000030) do
   add_foreign_key "agents", "browsers"
   add_foreign_key "codes", "agents"
   add_foreign_key "codes", "users"
+  add_foreign_key "post_tags", "posts"
+  add_foreign_key "post_tags", "tags"
+  add_foreign_key "posts", "agents"
+  add_foreign_key "posts", "users"
   add_foreign_key "tokens", "agents"
   add_foreign_key "tokens", "users"
   add_foreign_key "user_roles", "users"

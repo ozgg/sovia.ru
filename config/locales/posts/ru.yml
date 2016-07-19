@@ -1,0 +1,55 @@
+ru:
+  post:
+    zero: "публикаций нет"
+    one: "%{count} публикация"
+    few: "%{count} публикации"
+    many: "%{count} публикаций"
+    other: "%{count} публикаций"
+  activerecord:
+    models:
+      post: "Публикация"
+      tag: "Метка"
+    attributes:
+      post:
+        user: "Пользователь"
+        deleted: "Удалено"
+        locked: "Редактирование запрещено"
+        visible: "Показывать"
+        image: "Картинка"
+        title: "Название"
+        slug: "Идентификатор"
+        lead: "Аннотация"
+        body: "Текст"
+      tag:
+        name: "Название"
+        slug: "Идентификатор"
+        deleted: "Удалено"
+        locked: "Редактирование запрещено"
+  posts:
+    update:
+      success: "Публикация успешно обновлена"
+    destroy:
+      success: "Публикация успешно удалена"
+    index:
+      title: "Публикации, страница %{page}"
+      heading: "Публикации"
+    new:
+      title: "Добавить публикацию"
+    edit:
+      title: "Редактирование публикации"
+    form:
+      tags: "Метки"
+    preview:
+      read: "Читать полностью"
+  tags:
+    update:
+      success: "Метка успешно обновлена"
+    destroy:
+      success: "Метка успешно удалена"
+    index:
+      title: "Метки, страница %{page}"
+      heading: "Метки"
+    new:
+      title: "Добавить метку"
+    edit:
+      title: "Редактирование метки"

@@ -9,6 +9,7 @@ class Agent < ApplicationRecord
   has_many :users, dependent: :nullify
   has_many :tokens, dependent: :nullify
   has_many :codes, dependent: :nullify
+  has_many :posts, dependent: :nullify
 
   # @param [Integer] page
   def self.page_for_administration(page)
