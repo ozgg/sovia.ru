@@ -5,7 +5,8 @@ class Post < ApplicationRecord
   PER_PAGE    = 5
   TITLE_LIMIT = 200
   LEAD_LIMIT  = 500
-  TOGGLEABLE  = %i(visible)
+
+  toggleable :visible
 
   belongs_to :user
   belongs_to :agent, optional: true
@@ -33,6 +34,12 @@ class Post < ApplicationRecord
   # @param [Integer] page
   def self.page_for_visitors(page)
     visible.recent.page(page).per(PER_PAGE)
+  end
+
+  # @param [User] user
+  # @param [Integer] page
+  def self.page_for_owner(user, page)
+    owned_by(user).where(deleted: false).recent.page(page).per(PER_PAGE)
   end
 
   def self.entity_parameters

@@ -3,7 +3,8 @@ class Agent < ApplicationRecord
   include RequiredUniqueName
 
   PER_PAGE   = 20
-  TOGGLEABLE = %i(mobile bot active)
+
+  toggleable %i(mobile bot active)
 
   belongs_to :browser, optional: true, counter_cache: true
   has_many :users, dependent: :nullify

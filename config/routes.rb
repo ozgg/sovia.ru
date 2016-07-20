@@ -7,8 +7,16 @@ Rails.application.routes.draw do
   # Lockable members
   concern :lockable do
     member do
-      put 'lock', as: :lock
-      delete 'lock', as: :unlock
+      put 'lock'
+      delete 'lock', action: :unlock
+    end
+  end
+
+  # Collections that have tags and archive (e.g. posts and dreams)
+  concern :tagged_archive do
+    collection do
+      get 'tagged/:tag_name' => :tagged, as: :tagged
+      get 'archive/(:year)/(:month)' => :archive, as: :archive, constraints: { year: /\d{4}/, month: /(\d|1[0-2])/ }
     end
   end
 
@@ -19,18 +27,22 @@ Rails.application.routes.draw do
 
     resources :browsers, :agents, only: [:index]
     resources :users, :tokens, :codes, only: [:index]
+    resources :posts, :tags, only: [:index]
   end
 
   namespace :api, defaults: { format: :json } do
-    resources :browsers, :agents, concerns: [:toggleable, :lockable]
-    resources :users, :tokens, concerns: [:toggleable]
+    resources :browsers, :agents, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :users, :tokens, except: [:new, :edit], concerns: [:toggleable]
+    resources :posts, except: [:new, :edit], concerns: [:toggleable, :lockable]
   end
 
   namespace :my do
+    get '/' => 'index#index'
+
     resource :profile, except: [:destroy]
     resource :confirmation, :recovery, only: [:show, :create, :update]
 
-    get '/' => 'index#index'
+    resources :posts, only: [:index]
   end
 
   resources :browsers, except: [:index] do
@@ -42,6 +54,8 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index]
   resources :tokens, :codes, except: [:index]
+
+  resources :posts, except: [:index], concerns: [:tagged_archive]
 
   controller :authentication do
     get 'login' => :new
