@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719200020) do
+ActiveRecord::Schema.define(version: 20160720000030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20160719200020) do
     t.string   "payload"
     t.index ["agent_id"], name: "index_codes_on_agent_id", using: :btree
     t.index ["user_id"], name: "index_codes_on_user_id", using: :btree
+  end
+
+  create_table "figures", force: :cascade do |t|
+    t.integer "post_id"
+    t.string  "slug",     null: false
+    t.string  "image"
+    t.string  "caption"
+    t.string  "alt_text"
+    t.index ["post_id"], name: "index_figures_on_post_id", using: :btree
   end
 
   create_table "post_tags", force: :cascade do |t|
@@ -147,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160719200020) do
   add_foreign_key "agents", "browsers"
   add_foreign_key "codes", "agents"
   add_foreign_key "codes", "users"
+  add_foreign_key "figures", "posts"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "agents"
