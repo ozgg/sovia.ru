@@ -32,6 +32,11 @@ class Figure < ApplicationRecord
     end
   end
 
+  # @param [User] user
+  def editable_by?(user)
+    post.editable_by? user
+  end
+
   private
 
   def generate_slug
