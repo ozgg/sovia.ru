@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TagsController, type: :controller, focus: true do
+RSpec.describe TagsController, type: :controller do
   let(:user) { create :chief_editor }
   let!(:entity) { create :tag }
 

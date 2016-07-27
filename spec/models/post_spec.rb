@@ -90,4 +90,56 @@ RSpec.describe Post, type: :model do
       expect(subject.tags_cache).to eq(%w(a b))
     end
   end
+
+  describe '#editable_by?' do
+    let(:owner) { subject.user }
+    let(:editor) { create :editor }
+    let(:chief_editor) { create :chief_editor }
+
+    context 'when post is deleted' do
+      before(:each) { subject.deleted = true }
+
+      it 'returns false for owner' do
+        expect(subject).not_to be_editable_by(owner)
+      end
+
+      it 'returns false for chief_editor' do
+        expect(subject).not_to be_editable_by(chief_editor)
+      end
+
+      it 'returns false for editor' do
+        expect(subject).not_to be_editable_by(editor)
+      end
+    end
+
+    context 'when post is locked' do
+      before(:each) { subject.locked = true }
+
+      it 'returns false for owner' do
+        expect(subject).not_to be_editable_by(owner)
+      end
+
+      it 'returns false for chief_editor' do
+        expect(subject).not_to be_editable_by(chief_editor)
+      end
+
+      it 'returns false for editor' do
+        expect(subject).not_to be_editable_by(editor)
+      end
+    end
+
+    context 'when post is not deleted or locked' do
+      it 'returns true for owner' do
+        expect(subject).to be_editable_by(owner)
+      end
+
+      it 'returns true for chief_editor' do
+        expect(subject).to be_editable_by(chief_editor)
+      end
+
+      it 'returns false for editor' do
+        expect(subject).not_to be_editable_by(editor)
+      end
+    end
+  end
 end

@@ -7,7 +7,7 @@ ru:
     other: "%{count} пользователей"
   invalid_code: "Недействительный код"
   insufficient_role: "Ваша роль не подходит для доступа к странице"
-  insufficient_rights: "Не хватает прав для просмотра"
+  insufficient_rights: "Не хватает прав для доступа"
   could_not_log_in: "Не удалось выполнить вход"
   please_log_in: "Пожалуйста, выполните вход"
   logout: "Выйти"
