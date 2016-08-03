@@ -100,5 +100,12 @@ class PostsController < ApplicationController
   def set_dependent_entities
     @entity.tag_ids = params[:tag_ids]
     @entity.cache_tags!
+    add_figures unless params[:figures].blank?
+  end
+
+  def add_figures
+    params[:figures].values.reject { |f| f[:slug].blank? || f[:image].blank? }.each do |data|
+      @entity.figures.create(data.select { |key, _| Figure.creation_parameters.include? key } )
+    end
   end
 end

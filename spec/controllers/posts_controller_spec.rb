@@ -12,8 +12,6 @@ RSpec.describe PostsController, type: :controller do
   end
 
   shared_examples 'setting_dependent_entities' do
-    it 'sets figures'
-
     it 'sets tags' do
       expect_any_instance_of(Post).to receive(:tag_ids=)
       action.call
