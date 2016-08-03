@@ -1,0 +1,14 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t(:create), new_tag_path %></li>
+    </ul>
+<% end %>
+
+<article class="tags">
+  <h1><%= t('.heading') %></h1>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

@@ -11,12 +11,6 @@ RSpec.describe FiguresController, type: :controller do
     allow(Figure).to receive(:find).and_call_original
   end
 
-  shared_examples 'restricted_editing' do
-    it 'calls #restrict_editing' do
-      expect(subject).to have_received(:restrict_editing)
-    end
-  end
-
   describe 'get show' do
     before :each do
       get :show, params: { id: entity }

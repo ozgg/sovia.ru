@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   resources :users, except: [:index]
   resources :tokens, :codes, except: [:index]
 
-  resources :posts, except: [:index], concerns: [:tagged_archive]
+  resources :posts, concerns: [:tagged_archive]
   resources :figures, only: [:show, :edit, :update, :destroy]
   resources :tags
 

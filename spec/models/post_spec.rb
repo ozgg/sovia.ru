@@ -48,7 +48,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe '::page_for_visitor' do
+  describe '::page_for_visitors' do
     let!(:visible_post) { create :post }
     let!(:invisible_post) { create :post, visible: false }
     let!(:deleted_post) { create :post, deleted: true }
@@ -139,6 +139,22 @@ RSpec.describe Post, type: :model do
 
       it 'returns false for editor' do
         expect(subject).not_to be_editable_by(editor)
+      end
+    end
+  end
+
+  describe '#visible_to?' do
+    context 'when post is visible' do
+      it 'returns true' do
+        expect(subject).to be_visible_to(nil)
+      end
+    end
+
+    context 'when post is not visible' do
+      it 'relies on #editable_by?' do
+        subject.visible = false
+        expect(subject).to receive(:editable_by?)
+        subject.visible_to? nil
       end
     end
   end

@@ -1,0 +1,17 @@
+<div class="image">
+  <%= image_tag post.image.preview.url %>
+</div>
+<div class="data">
+  <div class="title">
+    <cite><%= link_to post.title, post %></cite>
+    <span><%= link_to t(:edit), edit_post_path(post) %></span>
+  </div>
+  <div class="time">
+    <%= time_tag post.created_at %> (<%= time_tag post.publication_time %>)
+  </div>
+  <div class="tags">
+    <%= t('posts.form.tags') %>: <%= raw post.tags.map { |tag| link_to tag.name, tag }.join(', ') %>
+  </div>
+
+  <%= render partial: 'admin/posts/toggleable', locals: { post: post } %>
+</div>

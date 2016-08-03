@@ -70,6 +70,11 @@ class Post < ApplicationRecord
     user.is_a? User
   end
 
+  # @param [User] user
+  def visible_to?(user)
+    visible? || editable_by?(user)
+  end
+
   private
 
   def generate_slug
