@@ -47,6 +47,10 @@ class Post < ApplicationRecord
     %i(image title lead body)
   end
 
+  def tags_string
+    tags.ordered_by_slug.map { |tag| tag.name }.join(', ')
+  end
+
   # @param [String] tags_string
   def tags_string=(tags_string)
     list_of_tags = []
