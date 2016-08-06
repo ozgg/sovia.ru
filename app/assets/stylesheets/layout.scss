@@ -2,6 +2,90 @@ html {
   margin: 0;
   padding: 0;
   font-size: 16px;
+  font-family: "PT Serif", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+body {
+  outline: solid red 1px;
+  margin: 0;
+  padding: 0;
+  min-width: 20rem;
+  max-width: $content_width;
+
+  > header {
+    outline: solid green 1px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .logo {
+      outline: solid blue 1px;
+      width: 10rem;
+      height: 3.75rem;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .authentication {
+      outline: solid violet 1px;
+      width: 13rem;
+
+      form {
+        margin: 0;
+        padding: 0;
+
+        .fields {
+          outline: solid lime 1px;
+          > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+
+        .actions {
+          outline: solid orange 1px;
+          margin: 0.25rem 0;
+
+          ul {
+            margin: 0;
+            padding: 0;
+            font-size: $decreased_size;
+            line-height: 1.25rem;
+
+            > li {
+              list-style: none;
+              margin: 0 0.25rem;
+              padding: 0;
+            }
+          }
+
+          > div {
+            display: flex;
+            justify-content: space-between;
+
+            .external-login {
+              display: flex;
+
+              > li {
+                img {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    > nav {
+      width: 100%;
+    }
+  }
 }
 
 #main {

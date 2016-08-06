@@ -1,0 +1,7 @@
+<div class="authentication">
+  <% if current_user.is_a? User %>
+      <%= render 'authentication/plate' %>
+  <% else %>
+      <%= render 'authentication/form' %>
+  <% end %>
+</div>

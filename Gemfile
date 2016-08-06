@@ -35,7 +35,7 @@ gem 'rails-i18n', '~> 5.0.0'
 gem 'mini_magick'
 
 # Attaching uploaded files to models
-gem 'carrierwave'
+gem 'carrierwave', git: 'https://github.com/carrierwaveuploader/carrierwave'
 gem 'carrierwave-bombshelter'
 
 # Аутентификация через OAuth

@@ -18,6 +18,10 @@ ru:
           attributes:
             slug:
               invalid: "должен содержать от 1 до 30 английских букв, цифр или знаков подчёркивания"
+        post:
+          attributes:
+            user:
+              required: "не может быть пустым"
     attributes:
       post:
         user: "Пользователь"
@@ -71,6 +75,8 @@ ru:
       title: "Редактирование публикации"
     form:
       tags: "Метки"
+      figures: "Иллюстрации"
+      add_figure: "Добавить иллюстрацию"
     preview:
       read: "Читать полностью"
   tags:

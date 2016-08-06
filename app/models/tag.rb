@@ -44,6 +44,11 @@ class Tag < ApplicationRecord
     Canonizer.urlize self.name
   end
 
+  # @param [Post] post
+  def has_post?(post)
+    PostTag.exists? tag: self, post: post
+  end
+
   private
 
   def normalize_name

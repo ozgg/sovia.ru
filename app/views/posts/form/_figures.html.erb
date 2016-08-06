@@ -44,3 +44,22 @@
   </ul>
   <button type="button" id="add-figure"><%= t('posts.form.add_figure') %></button>
 </fieldset>
+
+<script>/*<![CDATA[*/
+$(document).ready(function () {
+  var default_src = 'src="<%= image_path 'image-placeholder.png' %>"';
+
+  $('#add-figure').on('click', function () {
+    var $container = $(this).parent().find('ul');
+    var $last_item = $container.find('li:last-of-type');
+    var last_index = $last_item.find('input[type=file]').attr('id').replace(/\D+(\d+)\D+/, '$1');
+    var next_index = $container.find('li').length;
+    var pattern = new RegExp('([_\\[])' + last_index + '([_\\]])', 'g');
+    var $new_element = '<li>' + $last_item.html().replace(pattern, '$1' + next_index + '$2') + '</li>';
+
+    $new_element = $new_element.replace(/src=".+"/, default_src);
+    $container.append($new_element.replace(new RegExp('figure-' + last_index, 'g'), 'figure-' + next_index));
+    $('#figures_' + next_index + '_slug').val(next_index + 1);
+  });
+});
+/*]]>*/</script>

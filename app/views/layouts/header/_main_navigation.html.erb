@@ -1,0 +1,8 @@
+<nav>
+  <ul>
+    <li><%= link_to t('posts.index.heading'), posts_path %></li>
+    <% if UserRole.has_any_role? current_user %>
+        <li><%= link_to t('admin.index.index.title'), admin_path %></li>
+    <% end %>
+  </ul>
+</nav>

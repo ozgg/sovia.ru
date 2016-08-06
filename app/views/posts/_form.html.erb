@@ -14,24 +14,12 @@
     </figure>
 
     <div>
-      <%= f.label :publication_time %>
-      <%= f.datetime_select :publication_time %>
-    </div>
-    <div>
       <%= f.check_box :visible %>
       <%= f.label :visible %>
     </div>
     <div>
-      <%= f.check_box :hide_from_robots %>
-      <%= f.label :hide_from_robots %>
-    </div>
-    <div>
       <%= f.label :title %><br />
       <%= f.text_field :title, size: 50, mexlength: Post::TITLE_LIMIT, required: true %>
-    </div>
-    <div>
-      <%= f.label :meta_title %><br />
-      <%= f.text_field :meta_title, size: 50, mexlength: Post::TITLE_LIMIT %>
     </div>
     <div>
       <%= f.label :lead %><br/>
@@ -41,21 +29,13 @@
       <%= f.label :body %><br/>
       <%= f.text_area :body, cols: 80, rows: 25, required: true %>
     </div>
-    <div>
-      <%= f.label :description %><br/>
-      <%= f.text_area :description, cols: 80, rows: 5 %>
-    </div>
-    <div>
-      <%= f.label :keywords %><br/>
-      <%= f.text_area :keywords, cols: 80, rows: 3 %>
-    </div>
 
     <fieldset>
       <legend><%= t('posts.form.tags') %></legend>
       <% Tag.visible.ordered_by_slug.each do |tag| %>
           <div>
             <%= check_box_tag 'tag_ids[]', tag.id, tag.has_post?(entity), id: "tag_id_#{tag.id}" %>
-            <%= label_tag "tag_id_#{tag.id}", tag.name %> (<%= t(:post, count: tag.post_count) %>)
+            <%= label_tag "tag_id_#{tag.id}", tag.name %> (<%= t(:post, count: tag.posts_count) %>)
           </div>
       <% end %>
     </fieldset>
@@ -66,22 +46,3 @@
       <%= f.button t(:save), type: :submit %>
     </div>
 <% end %>
-
-<script>/*<![CDATA[*/
-$(document).ready(function () {
-  var default_src = 'src="<%= image_path 'image-placeholder.png' %>"';
-
-  $('#add-figure').on('click', function () {
-    var $container = $(this).parent().find('ul');
-    var $last_item = $container.find('li:last-of-type');
-    var last_index = $last_item.find('input[type=file]').attr('id').replace(/\D+(\d+)\D+/, '$1');
-    var next_index = $container.find('li').length;
-    var pattern = new RegExp('([_\\[])' + last_index + '([_\\]])', 'g');
-    var $new_element = '<li>' + $last_item.html().replace(pattern, '$1' + next_index + '$2') + '</li>';
-
-    $new_element = $new_element.replace(/src=".+"/, default_src);
-    $container.append($new_element.replace(new RegExp('figure-' + last_index, 'g'), 'figure-' + next_index));
-    $('#figures_' + next_index + '_slug').val(next_index + 1);
-  });
-});
-/*]]>*/</script>

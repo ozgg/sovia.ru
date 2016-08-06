@@ -5,7 +5,7 @@
               <li class="deleted"><%= t('activerecord.attributes.tag.deleted') %>, id: <%= tag.id %></li>
           <% else %>
               <li>
-                <%= link_to tag.name, tag %> (<%= t(:post, count: tag.post_count) %>)
+                <%= link_to tag.name, tag %> (<%= t(:post, count: tag.posts_count) %>)
               </li>
           <% end %>
       <% end %>

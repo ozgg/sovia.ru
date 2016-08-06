@@ -26,11 +26,11 @@ class PostImageUploader < CarrierWave::Uploader::Base
     resize_to_fit 640, 360
   end
 
-  version :small, from_version: :medium do
+  version :small do
     resize_to_fit 320, 180
   end
 
-  version :preview, from_version: :small do
+  version :preview do
     resize_to_fit 160, 90
   end
 

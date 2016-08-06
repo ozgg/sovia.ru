@@ -25,6 +25,10 @@ RSpec.describe Figure, type: :model do
       expect(subject.errors.messages).to have_key(:slug)
     end
 
-    it 'fails without image'
+    it 'fails without image' do
+      subject.image = nil
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages).to have_key(:image)
+    end
   end
 end

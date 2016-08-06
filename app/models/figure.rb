@@ -5,7 +5,7 @@ class Figure < ApplicationRecord
 
   mount_uploader :image, PostImageUploader
 
-  validates_presence_of :slug #, :image
+  validates_presence_of :slug, :image
   validates_uniqueness_of :slug, scope: [:post_id]
   validate :slug_should_be_valid
 
