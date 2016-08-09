@@ -1,0 +1,12 @@
+<% if collection.any? %>
+    <ul class="list-of-agents">
+      <% collection.each do |agent| %>
+      <li>
+        <%= link_to agent.name, agent %>
+        <%= render partial: 'admin/agents/toggleable', locals: { agent: agent } %>
+      </li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

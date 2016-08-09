@@ -1,0 +1,12 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t(:list), admin_browsers_path %></li>
+    </ul>
+<% end %>
+
+<article class="edit-browser">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

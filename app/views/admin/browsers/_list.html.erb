@@ -1,0 +1,12 @@
+<% if collection.any? %>
+    <ul class="list-of-browsers">
+      <% collection.each do |browser| %>
+      <li>
+        <%= link_to browser.name, browser %> (<%= t(:agent, count: browser.agents_count) %>)
+        <%= render partial: 'admin/browsers/toggleable', locals: { browser: browser } %>
+      </li>
+      <% end %>
+    </ul>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>
