@@ -1,0 +1,12 @@
+article.edit-browser {
+  outline: solid red 1px;
+
+  form {
+    outline: solid green 1px;
+
+    table {
+      outline: solid blue 1px;
+      @include entity-form-table;
+    }
+  }
+}

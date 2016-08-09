@@ -1,3 +1,6 @@
 <article class="browser">
-  <h1><%= entity.name %></h1>
+  <h1><%= browser.name %></h1>
+
+  <%= render partial: 'admin/browsers/toggleable', locals: { browser: browser } %>
+
 </article>
