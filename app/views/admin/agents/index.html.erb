@@ -8,6 +8,8 @@
 <article class="agents">
   <h1><%= t('.heading') %></h1>
 
+  <%= render partial: 'filter', locals: { filter: @filter } %>
+
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { collection: @collection } %>
   <%= paginate @collection %>

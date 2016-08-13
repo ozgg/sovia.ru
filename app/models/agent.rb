@@ -12,9 +12,15 @@ class Agent < ApplicationRecord
   has_many :codes, dependent: :nullify
   has_many :posts, dependent: :nullify
 
+  scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
+  scope :mobile, -> (flag) { where mobile: flag.to_i > 0 unless flag.blank? }
+  scope :active, -> (flag) { where active: flag.to_i > 0 unless flag.blank? }
+  scope :filtered, -> (f) { with_name_like(f[:name]).bots(f[:bots]).mobile(f[:mobile]).active(f[:active]) }
+
   # @param [Integer] page
-  def self.page_for_administration(page)
-    ordered_by_name.page(page).per(PER_PAGE)
+  # @param [Hash] filter
+  def self.page_for_administration(page, filter = {})
+    filtered(filter).ordered_by_name.page(page).per(PER_PAGE)
   end
 
   def self.entity_parameters

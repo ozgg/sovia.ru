@@ -3,7 +3,8 @@ class Admin::AgentsController < ApplicationController
 
   # get /admin/agents
   def index
-    @collection = Agent.page_for_administration current_page
+    @filter     = params[:filter] || Hash.new
+    @collection = Agent.page_for_administration current_page, @filter
   end
 
   protected

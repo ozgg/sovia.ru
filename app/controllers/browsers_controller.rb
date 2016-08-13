@@ -1,6 +1,6 @@
 class BrowsersController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:show, :edit, :update, :destroy, :agents]
 
   # get /browsers/new
   def new
@@ -40,6 +40,11 @@ class BrowsersController < ApplicationController
       flash[:notice] = t('browsers.destroy.success')
     end
     redirect_to admin_browsers_path
+  end
+
+  # get /browsers/:id/agents
+  def agents
+    @collection = @entity.agents.page_for_administration current_page
   end
 
   private

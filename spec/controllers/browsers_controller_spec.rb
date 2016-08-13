@@ -72,6 +72,7 @@ RSpec.describe BrowsersController, type: :controller do
     before(:each) { delete :destroy, params: { id: entity } }
 
     it_behaves_like 'page_for_administrator'
+    it_behaves_like 'entity_finder'
 
     it 'redirects to browsers page' do
       expect(response).to redirect_to(admin_browsers_path)
@@ -80,6 +81,20 @@ RSpec.describe BrowsersController, type: :controller do
     it 'marks browser as deleted' do
       entity.reload
       expect(entity).to be_deleted
+    end
+  end
+
+  describe 'get agents' do
+    before(:each) do
+      allow(Agent).to receive(:page_for_administration)
+      get :agents, params: { id: entity }
+    end
+
+    it_behaves_like 'page_for_administrator'
+    it_behaves_like 'entity_finder'
+
+    it 'gets administrative page of agents' do
+      expect(Agent).to have_received(:page_for_administration)
     end
   end
 end

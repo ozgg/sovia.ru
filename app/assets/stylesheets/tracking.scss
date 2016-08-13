@@ -10,3 +10,25 @@ article.edit-browser {
     }
   }
 }
+
+article.edit-agent {
+  form {
+    table {
+      @include  entity-form-table;
+    }
+  }
+}
+
+article.browser {
+  table {
+    @include entity-table;
+  }
+}
+
+ul.list-of-browsers {
+  @include striped-list;
+}
+
+ul.list-of-agents {
+  @include striped-list;
+}
