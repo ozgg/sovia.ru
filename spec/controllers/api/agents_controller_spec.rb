@@ -9,6 +9,47 @@ RSpec.describe Api::AgentsController, type: :controller do
     allow(Agent).to receive(:page_for_administration)
   end
 
+  describe 'get index' do
+    before(:each) { get :index }
+
+    it_behaves_like 'page_for_administrator'
+
+    it 'calls Agent::page_for_administration' do
+      expect(Agent).to have_received(:page_for_administration)
+    end
+  end
+
+  describe 'patch update', focus: true do
+    before(:each) do
+      patch :update, params: { id: entity, agent: { name: 'changed' } }
+    end
+
+    context 'when entity is not locked' do
+      let(:entity) { create :agent }
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_finder'
+      it_behaves_like 'successful_response'
+
+      it 'updates agent' do
+        entity.reload
+        expect(entity.name).to eq('changed')
+      end
+    end
+
+    context 'when entity is locked' do
+      let(:entity) { create :agent, locked: true }
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'http_forbidden'
+
+      it 'does not update agent' do
+        entity.reload
+        expect(entity.name).not_to eq('changed')
+      end
+    end
+  end
+
   describe 'post toggle' do
     before(:each) { post :toggle, params: { id: entity, parameter: :mobile } }
 

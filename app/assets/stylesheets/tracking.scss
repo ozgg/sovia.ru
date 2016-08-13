@@ -31,4 +31,29 @@ ul.list-of-browsers {
 
 ul.list-of-agents {
   @include striped-list;
+
+  &.dynamic {
+    li {
+      display: flex;
+      align-items: center;
+
+      .actions {
+        flex-basis: 2.5rem;
+
+        button {
+          text-align: center;
+          width: 2rem;
+          height: 2rem;
+          font-size: $increased_size;
+          box-sizing: border-box;
+          border-radius: 0.25rem;
+        }
+      }
+
+      .data {
+        flex: 1;
+        margin: 0 0 0 0.5rem;
+      }
+    }
+  }
 }

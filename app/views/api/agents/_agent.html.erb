@@ -1,0 +1,5 @@
+<div class="name"><%= agent.name %></div>
+<% unless agent.browser.nil? %>
+    <div class="browser"><%= link_to agent.browser.name, agent.browser %></div>
+<% end %>
+<%= render partial: 'admin/agents/toggleable.html.erb', locals: { agent: agent } %>
