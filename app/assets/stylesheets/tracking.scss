@@ -66,3 +66,16 @@ ul.list-of-agents {
     }
   }
 }
+
+div.track {
+  font-size: $small_size;
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: dotted 0.0625rem;
+
+  > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

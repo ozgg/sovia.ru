@@ -22,6 +22,7 @@ ru:
   filter: "Фильтр"
   "yes": "Да"
   "no": "Нет"
+  page: "Страница"
   current_image: "Текущая картинка"
   views:
     pagination:
@@ -42,4 +43,3 @@ ru:
   index:
     index:
       title: "Сайт о снах"
-  page: "Страница"

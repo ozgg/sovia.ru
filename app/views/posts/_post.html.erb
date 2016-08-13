@@ -1,3 +1,5 @@
 <article class="post">
   <h1><%= post.title %></h1>
+
+  <%= render partial: 'shared/track', locals: { item: post } %>
 </article>
