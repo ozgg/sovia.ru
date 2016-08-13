@@ -57,8 +57,8 @@ $(function () {
   });
 
   $(document).on('click', '#found-agents > li button', function () {
-    var $button = $(this);
-    var url  = $(this).closest('li').data('url');
+    var $li = $(this).closest('li');
+    var url  = $li.data('url');
     var data = {
       agent: {
         browser_id: $(this).closest('ul').data('browser-id')
@@ -70,7 +70,7 @@ $(function () {
       data: data,
       success: function(response) {
         if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('agent')) {
-          $button.addClass('hidden');
+          $li.addClass('hidden');
           add_agent(response['data']['agent']);
         }
       }

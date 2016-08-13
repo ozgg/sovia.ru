@@ -1,11 +1,6 @@
 article.edit-browser {
-  outline: solid red 1px;
-
   form {
-    outline: solid green 1px;
-
     table {
-      outline: solid blue 1px;
       @include entity-form-table;
     }
   }
@@ -54,6 +49,20 @@ ul.list-of-agents {
         flex: 1;
         margin: 0 0 0 0.5rem;
       }
+    }
+  }
+}
+
+#agents-filter {
+  .pages {
+    display: flex;
+    align-items: center;
+
+    button {
+      width: 2rem;
+      height: 1.2rem;
+      padding: 0;
+      margin: 0;
     }
   }
 }
