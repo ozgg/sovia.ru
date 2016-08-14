@@ -105,7 +105,7 @@ class PostsController < ApplicationController
 
   def add_figures
     params[:figures].values.reject { |f| f[:slug].blank? || f[:image].blank? }.each do |data|
-      @entity.figures.create(data.select { |key, _| Figure.creation_parameters.include? key } )
+      @entity.figures.create(data.select { |key, _| Figure.creation_parameters.include? key.to_sym } )
     end
   end
 end

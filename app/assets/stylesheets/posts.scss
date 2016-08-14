@@ -1,0 +1,46 @@
+article.edit-post {
+  form {
+    table {
+      @include entity-form-table;
+
+      .preview {
+        margin: 0;
+        padding: 0;
+        width: 20rem;
+
+        img {
+          max-width: 20rem;
+          max-height: 20rem;
+        }
+      }
+    }
+  }
+}
+
+ul.list-of-figures {
+  @include striped-list;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    .image {
+      margin: 0 0.5rem 0 0;
+      flex-basis: 5rem;
+      text-align: center;
+
+      img {
+        max-width: 5rem;
+        max-height: 5rem;
+      }
+    }
+
+    .data {
+      flex: 1;
+
+      input[type=text] {
+        width: auto;
+      }
+    }
+  }
+}

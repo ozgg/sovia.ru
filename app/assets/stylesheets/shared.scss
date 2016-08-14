@@ -58,7 +58,13 @@ $content_width: 62rem;
       border-top: solid #777777 0.0625rem;
       padding-top: 1rem;
     }
+  }
 
+  input[type=text], textarea {
+    width: calc(100% - 1rem);
+  }
+
+  td[colspan] {
   }
 
   tfoot {

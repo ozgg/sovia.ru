@@ -5,7 +5,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def max_pixel_dimensions
-    [1920, 1920]
+    [3840, 3840]
   end
 
   def store_dir
@@ -26,11 +26,11 @@ class PostImageUploader < CarrierWave::Uploader::Base
     resize_to_fit 640, 360
   end
 
-  version :small do
+  version :small, from_version: :big do
     resize_to_fit 320, 180
   end
 
-  version :preview do
+  version :preview, from_version: :small do
     resize_to_fit 160, 90
   end
 

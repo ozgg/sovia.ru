@@ -47,7 +47,8 @@ class Api::AgentsController < ApplicationController
   private
 
   def set_entity
-    @entity = Agent.find_by! id: params[:id], deleted: false
+    @entity = Agent.find params[:id]
+    raise record_not_found if @entity.deleted?
   end
 
   def entity_parameters

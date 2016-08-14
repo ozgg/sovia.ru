@@ -4,7 +4,7 @@ module ParsingHelper
   # @param [Post] post
   # @return [String]
   def prepare_post_text(post)
-    simple_format post.body
+    raw post.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_post_string(post, s) }.join
   end
 
   # Prepare comment text for views
@@ -34,7 +34,30 @@ module ParsingHelper
     end
   end
 
+  def parse_figure_links(post, string)
+    pattern = Figure::LINK_PATTERN
+    string.gsub pattern do |chunk|
+      match  = pattern.match chunk
+      figure = post.figures.find_by(slug: match[:id])
+      if figure.is_a? Figure
+        image   = image_tag(figure.image.big.url, alt: figure.text_for_alt)
+        caption = figure.caption.blank? ? '' : "<figcaption>#{figure.caption}</figcaption>"
+        "<figure>#{image}#{caption}</figure>\n"
+      else
+        '<figure><span class="not-found">figure ' + match[:id] + "</span></figure>\n"
+      end
+    end
+  end
+
   protected
+
+  def parse_post_string(post, string)
+    if string =~ Figure::LINK_PATTERN
+      parse_figure_links post, string
+    else
+      parse_common_string(string)
+    end
+  end
 
   # Parse string as string from common text
   #

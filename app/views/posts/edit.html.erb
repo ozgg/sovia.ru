@@ -1,4 +1,13 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t(:list), admin_posts_path %></li>
+      <li><%= link_to t(:view), @entity %></li>
+      <% unless @entity.locked? %>
+          <li><%= link_to_delete @entity %></li>
+      <% end %>
+    </ul>
+<% end %>
 
 <article class="edit-post">
   <h1><%= t('.title') %></h1>

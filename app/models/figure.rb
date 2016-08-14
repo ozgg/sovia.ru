@@ -1,5 +1,6 @@
 class Figure < ApplicationRecord
   SLUG_PATTERN = /[a-zA-Z0-9_]{1,30}/
+  LINK_PATTERN = /\[figure (?<id>[a-zA-Z0-9]{1,30})\]/
 
   belongs_to :post
 

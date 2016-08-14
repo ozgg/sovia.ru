@@ -1,1 +1,18 @@
+<% content_for :meta_title, @entity.title %>
+<% content_for :meta_description, @entity.lead %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+    <meta property="og:article:published_time" content="<%= @entity.created_at.strftime('%Y-%m-%d') %>"/>
+    <meta property="og:article:modified_time" content="<%= @entity.updated_at.strftime('%Y-%m-%d') %>"/>
+    <meta property="og:article:author" content="<%= @entity.user.screen_name %>"/>
+<% end %>
+<% content_for :meta_image, (request.protocol + request.host_with_port + @entity.image.url) if @entity.image.url %>
+<% content_for :options do %>
+    <% if @entity.editable_by? current_user %>
+        <ul>
+          <li><%= link_to t(:edit), edit_post_path(@entity) %></li>
+        </ul>
+    <% end %>
+<% end %>
+
 <%= render @entity %>

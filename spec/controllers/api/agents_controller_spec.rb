@@ -7,6 +7,7 @@ RSpec.describe Api::AgentsController, type: :controller do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
     allow(Agent).to receive(:page_for_administration)
+    allow(Agent).to receive(:find).and_call_original
   end
 
   describe 'get index' do
@@ -19,7 +20,7 @@ RSpec.describe Api::AgentsController, type: :controller do
     end
   end
 
-  describe 'patch update', focus: true do
+  describe 'patch update' do
     before(:each) do
       patch :update, params: { id: entity, agent: { name: 'changed' } }
     end
