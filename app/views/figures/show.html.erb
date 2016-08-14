@@ -1,0 +1,11 @@
+<% content_for :meta_title, t('.title', figure: @entity.slug, post: @entity.post.title) %>
+<% content_for :options do %>
+    <ul>
+      <li><%= link_to t('activerecord.attributes.figure.post'), @entity.post %></li>
+      <% if @entity.editable_by? current_user %>
+      <li><%= link_to t(:edit), edit_figure_path(@entity) %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<%= render @entity %>

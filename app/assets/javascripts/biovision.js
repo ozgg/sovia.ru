@@ -26,12 +26,12 @@ $(function () {
 
             $.post({
                 url: url,
-                data: { parameter: parameter },
-                beforeSend: function() {
+                data: {parameter: parameter},
+                beforeSend: function () {
                     $flag.removeClass();
                     $flag.addClass('switch');
                 },
-                success: function(response) {
+                success: function (response) {
                     $flag.removeClass();
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty(parameter)) {
                         switch (response['data'][parameter]) {
@@ -48,7 +48,7 @@ $(function () {
                         $flag.addClass('unknown');
                     }
                 }
-            }).fail(function(response) {
+            }).fail(function (response) {
                 $flag.removeClass();
                 $flag.addClass('unknown');
                 handle_ajax_failure(response);
@@ -56,7 +56,36 @@ $(function () {
         }
     });
 
-    $('div[data-destroy-url] button.destroy').on('click', function() {
+    $(document).on('click', 'span.lock > a', function () {
+        var $span = $(this).closest('span');
+        var $edit = $span.parent().find('.edit');
+        var url = $span.data('url');
+
+        if (url.length > 1) {
+            $.ajax(url, {
+                method: $(this).hasClass('lock') ? 'put' : 'delete',
+                success: function(response) {
+                    if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
+                        var locked = response['data']['locked'];
+
+                        locked ? $edit.addClass('hidden') : $edit.removeClass('hidden');
+
+                        $span.find('a').each(function() {
+                            if ($(this).hasClass('lock')) {
+                                locked ? $(this).addClass('hidden') : $(this).removeClass('hidden');
+                            } else {
+                                locked ? $(this).removeClass('hidden') : $(this).addClass('hidden');
+                            }
+                        });
+                    }
+                }
+            }).fail(handle_ajax_failure);
+        }
+
+        return false;
+    });
+
+    $('div[data-destroy-url] button.destroy').on('click', function () {
         var $button = $(this);
         var $container = $(this).closest('div[data-destroy-url]');
 
@@ -64,7 +93,7 @@ $(function () {
 
         $.ajax($container.data('destroy-url'), {
             method: 'delete',
-            success: function(response) {
+            success: function (response) {
                 $container.remove();
             }
         }).fail(handle_ajax_failure);

@@ -1,4 +1,4 @@
-article.edit-post {
+article.edit-post, article.edit-figure {
   form {
     table {
       @include entity-form-table;
@@ -17,30 +17,20 @@ article.edit-post {
   }
 }
 
-ul.list-of-figures {
+ul.list-of-posts, ul.list-of-figures {
   @include striped-list;
 
   li {
-    display: flex;
-    align-items: center;
+    @include list-item-with-image;
+  }
+}
 
-    .image {
-      margin: 0 0.5rem 0 0;
-      flex-basis: 5rem;
-      text-align: center;
-
-      img {
-        max-width: 5rem;
-        max-height: 5rem;
-      }
-    }
-
-    .data {
-      flex: 1;
-
-      input[type=text] {
-        width: auto;
-      }
+ul.list-of-posts {
+  li {
+    .tags {
+      font-size: $small_size;
+      padding-left: 1rem;
+      background: image_url('icons/tag.png') no-repeat center left / 0.75rem 0.75rem;
     }
   }
 }

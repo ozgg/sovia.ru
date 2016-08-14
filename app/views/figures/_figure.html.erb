@@ -1,0 +1,8 @@
+<article class="figure">
+  <h1><%= "#{figure.post.title}: #{figure.slug}" %></h1>
+
+  <figure>
+    <%= image_tag figure.image.big.url, alt: figure.alt_text %>
+    <figcaption><%= figure.caption %></figcaption>
+  </figure>
+</article>

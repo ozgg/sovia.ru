@@ -1,0 +1,36 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <td colspan="2">
+          <figure class="preview" id="figure-image">
+            <%= image_tag entity.image.big.url %>
+            <figcaption>
+              <%= f.label :image %>
+              <%= f.file_field :image, accept: 'image/jpeg,image/png', data: { image: 'figure-image' } %>
+            </figcaption>
+          </figure>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :slug %></th>
+        <td><%= f.text_field :slug %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :caption %></th>
+        <td><%= f.text_field :caption %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :alt_text %></th>
+        <td><%= f.text_field :alt_text %></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: :submit %></td>
+      </tr>
+      </tfoot>
+    </table>
+<% end %>

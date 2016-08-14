@@ -122,3 +122,50 @@ $content_width: 62rem;
     }
   }
 }
+
+@mixin list-item-with-image {
+  display: flex;
+  align-items: center;
+
+  .image {
+    margin: 0 0.5rem 0 0;
+    flex-basis: 5rem;
+    text-align: center;
+
+    img {
+      max-width: 5rem;
+      max-height: 5rem;
+    }
+  }
+
+  .data {
+    flex: 1;
+
+    .heading {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+
+      .actions {
+        > span {
+          margin: 0.25rem;
+
+          img {
+            max-width: 1rem;
+            max-height: 1rem;
+          }
+        }
+      }
+    }
+
+    .creation-info {
+      font-size: $small_size;
+      line-height: 1.5rem;
+    }
+
+    input[type=text] {
+      width: auto;
+    }
+  }
+}
