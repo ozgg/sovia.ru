@@ -7,6 +7,7 @@ RSpec.describe BrowsersController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
+    allow(subject).to receive(:restrict_editing)
     allow(Browser).to receive(:find).and_call_original
   end
 
@@ -48,6 +49,7 @@ RSpec.describe BrowsersController, type: :controller do
 
     it_behaves_like 'page_for_administrator'
     it_behaves_like 'entity_finder'
+    it_behaves_like 'restricted_editing'
   end
 
   describe 'patch update' do
@@ -57,6 +59,7 @@ RSpec.describe BrowsersController, type: :controller do
 
     it_behaves_like 'page_for_administrator'
     it_behaves_like 'entity_finder'
+    it_behaves_like 'restricted_editing'
 
     it 'updates browser' do
       entity.reload
@@ -73,6 +76,7 @@ RSpec.describe BrowsersController, type: :controller do
 
     it_behaves_like 'page_for_administrator'
     it_behaves_like 'entity_finder'
+    it_behaves_like 'restricted_editing'
 
     it 'redirects to browsers page' do
       expect(response).to redirect_to(admin_browsers_path)

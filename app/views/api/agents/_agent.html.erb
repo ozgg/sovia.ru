@@ -1,5 +1,18 @@
-<div class="name"><%= agent.name %></div>
-<% unless agent.browser.nil? %>
-    <div class="browser"><%= link_to agent.browser.name, agent.browser %></div>
-<% end %>
-<%= render partial: 'admin/agents/toggleable.html.erb', locals: { agent: agent } %>
+<div class="data">
+  <div class="heading">
+    <div class="name"><%= agent.name %></div>
+    <div class="actions">
+      <span class="edit <%= agent.locked? ? 'hidden' : '' %>">
+        <%= link_to image_tag('icons/edit.png', alt: t(:edit)), edit_agent_path(agent), title: t(:edit) %>
+      </span>
+      <span class="lock" data-url="<%= lock_api_agent_path(agent) %>">
+        <%= link_to image_tag('icons/locked.png'), '#', class: "unlock #{agent.locked? ? '' : 'hidden'}" %>
+        <%= link_to image_tag('icons/unlocked.png'), '#', class: "lock #{agent.locked? ? 'hidden' : ''}" %>
+      </span>
+    </div>
+  </div>
+  <% unless agent.browser.nil? %>
+      <div class="browser"><%= link_to agent.browser.name, agent.browser %></div>
+  <% end %>
+  <%= render partial: 'admin/agents/toggleable.html.erb', locals: { agent: agent } %>
+</div>

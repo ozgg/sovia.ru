@@ -75,20 +75,7 @@ ul.users-list {
   @include striped-list;
 
   li {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-
-    .image {
-      width: 4rem;
-      height: 4rem;
-      margin: 0 0.5rem 0 0;
-
-      img {
-        max-width: 4rem;
-        max-height: 4rem;
-      }
-    }
+    @include list-item-with-image;
 
     .times {
       font-size: $small_size;

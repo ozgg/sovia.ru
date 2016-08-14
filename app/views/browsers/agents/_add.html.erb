@@ -20,10 +20,9 @@ $(function () {
     $(agents).each(function() {
       var agent = $(this)[0]['agent'];
       var $li = $('<li data-url="' + agent['url'] + '">');
-      var $data = $('<div class="data">' + agent['html'] + '</div>');
 
-      $li.html('<div class="actions"><button type="button">&plus;</button></div>');
-      $li.append($data);
+      $li.html('<div class="add"><button type="button">&plus;</button></div>' + agent['html']);
+
       $container.append($li);
     });
   }
@@ -34,7 +33,7 @@ $(function () {
     var $container;
     var $li = $('<li>');
 
-    if ($notice) {
+    if ($notice.hasOwnProperty(0)) {
       $notice.remove();
       $container = $('<ul class="list-of-agents">');
       $section.append($container);

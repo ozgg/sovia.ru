@@ -29,10 +29,7 @@ ul.list-of-agents {
 
   &.dynamic {
     li {
-      display: flex;
-      align-items: center;
-
-      .actions {
+      .add {
         flex-basis: 2.5rem;
 
         button {
@@ -43,11 +40,6 @@ ul.list-of-agents {
           box-sizing: border-box;
           border-radius: 0.25rem;
         }
-      }
-
-      .data {
-        flex: 1;
-        margin: 0 0 0 0.5rem;
       }
     }
   }

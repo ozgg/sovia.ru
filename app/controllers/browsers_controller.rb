@@ -1,6 +1,7 @@
 class BrowsersController < ApplicationController
   before_action :restrict_access
   before_action :set_entity, only: [:show, :edit, :update, :destroy, :agents]
+  before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   # get /browsers/new
   def new
@@ -55,6 +56,10 @@ class BrowsersController < ApplicationController
 
   def set_entity
     @entity = Browser.find params[:id]
+  end
+
+  def restrict_editing
+    raise record_not_found if @entity.locked?
   end
 
   def entity_parameters

@@ -2,17 +2,6 @@ article.edit-post, article.edit-figure {
   form {
     table {
       @include entity-form-table;
-
-      .preview {
-        margin: 0;
-        padding: 0;
-        width: 20rem;
-
-        img {
-          max-width: 20rem;
-          max-height: 20rem;
-        }
-      }
     }
   }
 }
@@ -31,6 +20,14 @@ ul.list-of-posts {
       font-size: $small_size;
       padding-left: 1rem;
       background: image_url('icons/tag.png') no-repeat center left / 0.75rem 0.75rem;
+    }
+  }
+}
+
+ul.list-of-figures {
+  li {
+    input[type=text] {
+      width: auto;
     }
   }
 }

@@ -2,8 +2,23 @@
     <ul class="list-of-browsers">
       <% collection.each do |browser| %>
       <li>
-        <%= link_to browser.name, browser %> (<%= t(:agent, count: browser.agents_count) %>)
-        <%= render partial: 'admin/browsers/toggleable', locals: { browser: browser } %>
+        <div class="data">
+          <div class="heading">
+            <div class="name">
+              <%= link_to browser.name, browser %> (<%= t(:agent, count: browser.agents_count) %>)
+            </div>
+            <div class="actions">
+              <span class="edit <%= browser.locked? ? 'hidden' : '' %>">
+                <%= link_to image_tag('icons/edit.png', alt: t(:edit)), edit_browser_path(browser), title: t(:edit) %>
+              </span>
+              <span class="lock" data-url="<%= lock_api_browser_path(browser) %>">
+                <%= link_to image_tag('icons/locked.png'), '#', class: "unlock #{browser.locked? ? '' : 'hidden'}" %>
+                <%= link_to image_tag('icons/unlocked.png'), '#', class: "lock #{browser.locked? ? 'hidden' : ''}" %>
+              </span>
+            </div>
+          </div>
+          <%= render partial: 'admin/browsers/toggleable', locals: { browser: browser } %>
+        </div>
       </li>
       <% end %>
     </ul>

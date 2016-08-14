@@ -65,6 +65,16 @@ $content_width: 62rem;
   }
 
   td[colspan] {
+    .preview {
+      margin: 0 auto;
+      width: 20rem;
+      text-align: center;
+
+      img {
+        max-width: 20rem;
+        max-height: 20rem;
+      }
+    }
   }
 
   tfoot {
@@ -115,18 +125,45 @@ $content_width: 62rem;
     list-style: none;
     margin: 0;
     padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     background: $row_background_odd;
 
     &:nth-of-type(even) {
       background: $row_background_even;
     }
+
+    .data {
+      flex: 1;
+
+      .heading {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+
+        .actions {
+          > span {
+            margin: 0.25rem;
+
+            img {
+              max-width: 1rem;
+              max-height: 1rem;
+            }
+          }
+        }
+      }
+
+      .creation-info {
+        font-size: $small_size;
+        line-height: 1.5rem;
+      }
+    }
   }
 }
 
 @mixin list-item-with-image {
-  display: flex;
-  align-items: center;
-
   .image {
     margin: 0 0.5rem 0 0;
     flex-basis: 5rem;
@@ -135,37 +172,6 @@ $content_width: 62rem;
     img {
       max-width: 5rem;
       max-height: 5rem;
-    }
-  }
-
-  .data {
-    flex: 1;
-
-    .heading {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-
-      .actions {
-        > span {
-          margin: 0.25rem;
-
-          img {
-            max-width: 1rem;
-            max-height: 1rem;
-          }
-        }
-      }
-    }
-
-    .creation-info {
-      font-size: $small_size;
-      line-height: 1.5rem;
-    }
-
-    input[type=text] {
-      width: auto;
     }
   }
 }

@@ -64,13 +64,13 @@ $(function () {
         if (url.length > 1) {
             $.ajax(url, {
                 method: $(this).hasClass('lock') ? 'put' : 'delete',
-                success: function(response) {
+                success: function (response) {
                     if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('locked')) {
                         var locked = response['data']['locked'];
 
                         locked ? $edit.addClass('hidden') : $edit.removeClass('hidden');
 
-                        $span.find('a').each(function() {
+                        $span.find('a').each(function () {
                             if ($(this).hasClass('lock')) {
                                 locked ? $(this).addClass('hidden') : $(this).removeClass('hidden');
                             } else {
@@ -101,5 +101,9 @@ $(function () {
 });
 
 function handle_ajax_failure(response) {
-    console.log(response);
+    if (response.hasOwnProperty('responseJSON')) {
+        console.log(response['responseJSON']);
+    } else {
+        console.log(response);
+    }
 }
