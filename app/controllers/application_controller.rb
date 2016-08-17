@@ -59,17 +59,6 @@ class ApplicationController < ActionController::Base
     @agent ||= Agent.named(request.user_agent || 'n/a')
   end
 
-  # @param [ApplicationRecord] entity
-  def add_tracking(entity)
-    entity.agent = agent
-    entity.ip = request.env['HTTP_X_REAL_IP'] || request.remote_ip
-  end
-
-  # @param [ApplicationRecord] entity
-  def assign_owner(entity)
-    entity.user = current_user
-  end
-
   # @return [Hash]
   def tracking_for_entity
     { agent: agent, ip: request.env['HTTP_X_REAL_IP'] || request.remote_ip }
