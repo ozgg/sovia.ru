@@ -79,6 +79,12 @@ ru:
       add_figure: "Добавить иллюстрацию"
     preview:
       read: "Читать полностью"
+    tagged:
+      title: "Публикации с меткой «%{tag}», страница %{page}"
+      heading: "Публикации с меткой «%{tag}»"
+    archive:
+      title: "Архив публикаций"
+      year: "За %{year} год"
   tags:
     update:
       success: "Метка успешно обновлена"

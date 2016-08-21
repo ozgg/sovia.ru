@@ -55,7 +55,7 @@ module ParsingHelper
     if string =~ Figure::LINK_PATTERN
       parse_figure_links post, string
     else
-      parse_common_string(string)
+      string[0] == '<' ? string : "<p>#{string}</p>"
     end
   end
 

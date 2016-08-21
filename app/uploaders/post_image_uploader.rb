@@ -20,18 +20,18 @@ class PostImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  resize_to_fit 1280, 720
+  resize_to_fit 1280, 1280
 
   version :big do
-    resize_to_fit 640, 360
+    resize_to_fit 640, 640
   end
 
   version :small, from_version: :big do
-    resize_to_fit 320, 180
+    resize_to_fit 320, 320
   end
 
   version :preview, from_version: :small do
-    resize_to_fit 160, 90
+    resize_to_fit 160, 160
   end
 
   def extension_white_list
