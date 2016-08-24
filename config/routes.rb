@@ -28,12 +28,14 @@ Rails.application.routes.draw do
     resources :browsers, :agents, only: [:index]
     resources :users, :tokens, :codes, only: [:index]
     resources :posts, :tags, only: [:index]
+    resources :comments, only: [:index]
   end
 
   namespace :api, defaults: { format: :json } do
     resources :browsers, :agents, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :users, :tokens, except: [:new, :edit], concerns: [:toggleable]
     resources :posts, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :comments, except: [:new, :edit], concerns: [:toggleable, :lockable]
   end
 
   namespace :my do
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
     resource :confirmation, :recovery, only: [:show, :create, :update]
 
     resources :posts, only: [:index]
+    resources :comments, only: [:index]
   end
 
   resources :browsers, except: [:index] do
@@ -58,6 +61,7 @@ Rails.application.routes.draw do
   resources :posts, concerns: [:tagged_archive]
   resources :figures, only: [:show, :edit, :update, :destroy]
   resources :tags
+  resources :comments, except: [:index, :new]
 
   controller :authentication do
     get 'login' => :new

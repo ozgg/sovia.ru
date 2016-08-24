@@ -1,0 +1,15 @@
+<div class="comment">
+  <div class="title">
+    <%= comment.commentable.model_name.human %>
+    <cite><%= link_to comment.commentable.title, comment.commentable %></cite>
+  </div>
+
+  <div class="author">
+    <span></span>
+    <%= time_tag comment.created_at %>
+  </div>
+
+  <div class="body">
+    <%= prepare_comment_text(comment) %>
+  </div>
+</div>

@@ -71,7 +71,7 @@ class Post < ApplicationRecord
 
   # @param [User] user
   def commentable_by?(user)
-    user.is_a? User
+    visible? && !deleted? && user.is_a?(User)
   end
 
   # @param [User] user
