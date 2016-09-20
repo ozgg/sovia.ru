@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   include Toggleable
 
-  EMAIL_PATTERN = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
-  SLUG_PATTERN  = /\A[a-z0-9_]{1,20}\z/
-  PER_PAGE      = 25
+  EMAIL_PATTERN     = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z0-9][-a-z0-9]+)\z/i
+  SLUG_PATTERN      = /\A[a-z0-9_]{1,30}\z/
+  NETWORK_SEPARATOR = '-'
+  PER_PAGE          = 25
 
   toggleable %i(email_confirmed allow_mail allow_login bot)
 
@@ -31,41 +32,52 @@ class User < ApplicationRecord
   scope :network, -> (network) { where network: network unless network.blank? }
   scope :name_like, -> (val) { where 'name ilike ?', "%#{val}%" unless val.blank? }
   scope :email_like, -> (val) { where 'email ilike ?', "%#{val}%" unless val.blank? }
+  scope :with_email, -> (email) { where 'email ikike ?', email }
   scope :screen_name_like, -> (val) { where 'screen_name ilike ?', "%#{val}%" unless val.blank? }
+  scope :filtered, -> (f) { name_like(f[:name]).email_like(f[:email]).screen_name_like(f[:screen_name]) }
 
   # @param [Integer] page
   # @param [Hash] filter
-  def self.page_for_administration(page, filter)
-    self.order('network asc, slug asc').bots(filter[:bots]).network(filter[:network]).
-        name_like(filter[:name]).email_like(filter[:email]).screen_name_like(filter[:screen_name]).
-        page(page).per(PER_PAGE)
+  def self.page_for_administration(page, filter = {})
+    bots(filter[:bots]).network(filter[:network]).filtered(filter).order('slug asc').page(page).per(PER_PAGE)
+  end
+
+  def self.profile_parameters
+    %i(image name patronymic surname birthday gender allow_mail)
+  end
+
+  def self.sensitive_parameters
+    %i(email phone password password_confirmation)
+  end
+
+  # Параметры при регистрации
+  def self.new_profile_parameters
+    profile_parameters + sensitive_parameters + %i(screen_name)
   end
 
   # Параметры для администрирования
   def self.entity_parameters
-    %i(
-      slug email screen_name name image gender birthday
-      bot allow_login password password_confirmation email_confirmed allow_mail
-    )
+    new_profile_parameters + %i(slug bot allow_login email_confirmed phone_confirmed notice)
   end
 
+  # Параметры для создания в админке
   def self.creation_parameters
     entity_parameters + %i(network)
   end
 
   # @param [String] long_slug
   def self.with_long_slug(long_slug)
-    parts = long_slug.split('-')
+    parts = long_slug.split NETWORK_SEPARATOR
     if parts.length > 1
       code = parts.shift
-      find_by(network: networks[code], slug: parts.join('-')) if networks.has_key?(code)
+      find_by(network: networks[code], slug: parts.join(NETWORK_SEPARATOR)) if networks.has_key?(code)
     else
       find_by slug: long_slug
     end
   end
 
   def long_slug
-    prefix = native? ? '' : network + '-'
+    prefix = native? ? '' : network + NETWORK_SEPARATOR
     prefix + slug
   end
 

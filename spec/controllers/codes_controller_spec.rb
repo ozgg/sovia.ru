@@ -7,41 +7,50 @@ RSpec.describe CodesController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(Code).to receive(:find).and_call_original
+    allow(entity.class).to receive(:find).and_call_original
   end
 
   describe 'get new' do
     before(:each) { get :new }
 
     it_behaves_like 'page_for_administrator'
+    it_behaves_like 'http_success'
   end
 
   describe 'post create' do
-    let(:params) { { code: attributes_for(:code).merge(category: 'recovery', user_id: user.id) } }
     let(:action) { -> { post :create, params: params } }
 
-    context 'authorization and redirects' do
-      before(:each) { action.call }
+    context 'when parameters are valid' do
+      let(:params) { { code: attributes_for(:code).merge(category: 'recovery', user_id: user.id) } }
 
-      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_creator'
 
-      it 'redirects to created code' do
-        expect(response).to redirect_to(Code.last)
+      context 'authorization and redirects' do
+        before :each do
+          action.call
+        end
+
+        it_behaves_like 'page_for_administrator'
+
+        it 'redirects to created entity' do
+          expect(response).to redirect_to(admin_code_path(entity.class.last))
+        end
       end
     end
 
-    context 'database change' do
-      it 'inserts row into codes table' do
-        expect(action).to change(Code, :count).by(1)
+    context 'when parameters are invalid' do
+      let(:params) { { code: { body: ' ' } } }
+
+      it_behaves_like 'entity_constant_count'
+
+      context 'response status' do
+        before :each do
+          action.call
+        end
+
+        it_behaves_like 'http_bad_request'
       end
     end
-  end
-
-  describe 'get show' do
-    before(:each) { get :show, params: { id: entity } }
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
   end
 
   describe 'get edit' do
@@ -49,41 +58,57 @@ RSpec.describe CodesController, type: :controller do
 
     it_behaves_like 'page_for_administrator'
     it_behaves_like 'entity_finder'
+    it_behaves_like 'http_success'
   end
 
   describe 'patch update' do
-    before(:each) do
-      patch :update, params: { id: entity, code: { payload: 'changed' } }
+    context 'when parameters are valid' do
+      before :each do
+        patch :update, params: { id: entity, code: { payload: 'changed' } }
+      end
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_finder'
+
+      it 'updates code' do
+        entity.reload
+        expect(entity.payload).to eq('changed')
+      end
+
+      it 'redirects to entity page' do
+        expect(response).to redirect_to(admin_code_path(entity))
+      end
     end
 
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
+    context 'when parameters are invalid' do
+      before :each do
+        patch :update, params: { id: entity, code: { body: ' ' } }
+      end
 
-    it 'updates code' do
-      entity.reload
-      expect(entity.payload).to eq('changed')
-    end
+      it_behaves_like 'http_bad_request'
 
-    it 'redirects to code page' do
-      expect(response).to redirect_to(entity)
+      it 'does not change entity' do
+        entity.reload
+        expect(entity.body).not_to be_blank
+      end
     end
   end
 
   describe 'delete destroy' do
     let(:action) { -> { delete :destroy, params: { id: entity } } }
 
+    it_behaves_like 'entity_destroyer'
+
     context 'authorization' do
-      before(:each) { action.call }
+      before :each do
+        action.call
+      end
 
       it_behaves_like 'page_for_administrator'
 
-      it 'redirects to codes page' do
-        expect(response).to redirect_to(codes_path)
+      it 'redirects to entities page' do
+        expect(response).to redirect_to(admin_codes_path)
       end
-    end
-
-    it 'removes code from database' do
-      expect(action).to change(Code, :count).by(-1)
     end
   end
 end

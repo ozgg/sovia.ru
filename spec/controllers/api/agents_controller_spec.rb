@@ -30,7 +30,7 @@ RSpec.describe Api::AgentsController, type: :controller do
 
       it_behaves_like 'page_for_administrator'
       it_behaves_like 'entity_finder'
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
 
       it 'updates agent' do
         entity.reload
@@ -58,7 +58,7 @@ RSpec.describe Api::AgentsController, type: :controller do
       let(:entity) { create :agent }
 
       it_behaves_like 'page_for_administrator'
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
 
       it 'toggles parameters' do
         entity.reload

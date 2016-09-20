@@ -7,7 +7,7 @@ RSpec.describe TokensController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(Token).to receive(:find).and_call_original
+    allow(entity.class).to receive(:find).and_call_original
   end
 
   describe 'get new' do
@@ -20,28 +20,17 @@ RSpec.describe TokensController, type: :controller do
     let(:params) { { token: attributes_for(:token).merge(user_id: user.id) } }
     let(:action) { -> { post :create, params: params } }
 
+    it_behaves_like 'entity_creator'
+
     context 'authorization and redirects' do
       before(:each) { action.call }
 
       it_behaves_like 'page_for_administrator'
 
-      it 'redirects to created token' do
-        expect(response).to redirect_to(Token.last)
+      it 'redirects to created entity' do
+        expect(response).to redirect_to(admin_token_path(entity.class.last))
       end
     end
-
-    context 'database change' do
-      it 'inserts row into tokens table' do
-        expect(action).to change(Token, :count).by(1)
-      end
-    end
-  end
-
-  describe 'get show' do
-    before(:each) { get :show, params: { id: entity } }
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
   end
 
   describe 'get edit' do
@@ -59,31 +48,29 @@ RSpec.describe TokensController, type: :controller do
     it_behaves_like 'page_for_administrator'
     it_behaves_like 'entity_finder'
 
-    it 'updates token' do
+    it 'updates entity' do
       entity.reload
       expect(entity).not_to be_active
     end
 
-    it 'redirects to token page' do
-      expect(response).to redirect_to(entity)
+    it 'redirects to entity administration page' do
+      expect(response).to redirect_to(admin_token_path(entity))
     end
   end
 
   describe 'delete destroy' do
     let(:action) { -> { delete :destroy, params: { id: entity } } }
 
+    it_behaves_like 'entity_destroyer'
+
     context 'authorization' do
       before(:each) { action.call }
 
       it_behaves_like 'page_for_administrator'
 
-      it 'redirects to tokens page' do
-        expect(response).to redirect_to(tokens_path)
+      it 'redirects to entities administration page' do
+        expect(response).to redirect_to(admin_tokens_path)
       end
-    end
-
-    it 'removes token from database' do
-      expect(action).to change(Token, :count).by(-1)
     end
   end
 end

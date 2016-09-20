@@ -109,30 +109,34 @@ RSpec.describe User, type: :model do
 
     it 'returns vk user' do
       subject.network = User.networks[:vkontakte]
-      subject.slug = '42'
+      subject.slug    = '42'
       subject.save!
       expect(User.with_long_slug subject.long_slug).to eq(subject)
     end
 
     it 'returns nil for unknown network' do
       subject.save!
-      expect(User.with_long_slug "invalid-#{subject.slug}").to be_nil
+      expect(User.with_long_slug "invalid#{User::NETWORK_SEPARATOR}#{subject.slug}").to be_nil
     end
   end
 
   describe '#can_receive_letters?' do
     it 'returns false for users without email' do
+      subject.email = nil
       expect(subject.can_receive_letters?).not_to be
     end
 
     it 'returns false for users without "allow mail" flag' do
-      entity = create :confirmed_user, allow_mail: false
-      expect(entity.can_receive_letters?).not_to be
+      subject.allow_mail      = false
+      subject.email_confirmed = true
+      expect(subject.can_receive_letters?).not_to be
     end
 
     it 'returns true for users with confirmed email and "allow mail" flag' do
-      entity = create :confirmed_user, allow_mail: true
-      expect(entity.can_receive_letters?).to be
+      subject.email           = 'another.user@example.com'
+      subject.allow_mail      = true
+      subject.email_confirmed = true
+      expect(subject.can_receive_letters?).to be
     end
   end
 end

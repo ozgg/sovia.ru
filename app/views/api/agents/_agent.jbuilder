@@ -1,5 +1,5 @@
 json.agent do
-  json.(agent, :id, :name)
+  json.(agent, :id, :name, :deleted)
   json.flags do
     json.bot do
       json.name t('activerecord.attributes.agent.bot')
@@ -16,5 +16,5 @@ json.agent do
   end
   json.url api_agent_path(agent)
   json.browser agent.browser.nil? ? nil : agent.browser.name
-  json.html render(partial: 'api/agents/agent.html.erb', locals: { agent: agent } )
+  json.html render(partial: 'admin/agents/entity/in_list', locals: { agent: agent }, formats: [:html] )
 end

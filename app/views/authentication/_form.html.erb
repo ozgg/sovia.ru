@@ -10,13 +10,6 @@
       </div>
     </div>
     <div class="actions">
-      <div>
-        <%= button_tag t('.sign_in'), type: 'submit' %>
-        <%= render 'authentication/external_login' %>
-      </div>
-      <ul>
-        <li><%= link_to t('.reset_password'), my_recovery_path %></li>
-        <li><%= link_to t('.join'), new_my_profile_path %></li>
-      </ul>
+      <%= button_tag t('authentication.new.title'), type: 'submit' %>
     </div>
 <% end %>

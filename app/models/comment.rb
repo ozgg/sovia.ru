@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
 
   toggleable :visible
 
+  belongs_to :agent, optional: true
   belongs_to :user, optional: true
   belongs_to :commentable, polymorphic: true, counter_cache: true, touch: false
 
@@ -32,11 +33,11 @@ class Comment < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i(commentable_id commentable_type body)
+    %i(body visible)
   end
 
-  def self.administrative_parameters
-    entity_parameters + %i(deleted)
+  def self.creation_parameters
+    entity_parameters + %i(commentable_id commentable_type)
   end
 
   # @param [User] user

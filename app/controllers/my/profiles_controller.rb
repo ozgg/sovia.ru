@@ -31,7 +31,7 @@ class My::ProfilesController < ApplicationController
     if current_user.update user_parameters
       redirect_to my_profile_path, notice: t('my.profiles.update.success')
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
@@ -52,20 +52,20 @@ class My::ProfilesController < ApplicationController
   end
 
   def creation_parameters
-    parameters = params.require(:user).permit(:screen_name, :email, :password, :password_confirmation)
+    parameters = params.require(:user).permit(User.new_profile_parameters)
     parameters.merge(tracking_for_entity).merge(network: User.networks[:native])
   end
 
   def user_parameters
     sensitive  = sensitive_parameters
-    editable   = [:name, :image, :gender] + sensitive
+    editable   = User.profile_parameters + sensitive
     parameters = params.require(:user).permit(editable)
     filter_parameters parameters, sensitive
   end
 
   def sensitive_parameters
     if current_user.authenticate params[:password].to_s
-      [:password, :password_confirmation, :email]
+      User.sensitive_parameters
     else
       []
     end
@@ -74,6 +74,7 @@ class My::ProfilesController < ApplicationController
   def filter_parameters(parameters, sensitive)
     sensitive.each { |parameter| parameters.except! parameter if parameter.blank? }
     parameters[:email_confirmed] = false if parameters[:email] && parameters[:email] != current_user.email
+    parameters[:phone_confirmed] = false if parameters[:phone] && parameters[:phone] != current_user.phone
     parameters
   end
 end

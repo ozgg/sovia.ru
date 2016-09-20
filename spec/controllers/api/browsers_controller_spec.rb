@@ -6,7 +6,6 @@ RSpec.describe Api::BrowsersController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(Browser).to receive(:page_for_administration)
   end
 
   describe 'post toggle' do
@@ -16,7 +15,7 @@ RSpec.describe Api::BrowsersController, type: :controller do
       let(:entity) { create :browser }
 
       it_behaves_like 'page_for_administrator'
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
 
       it 'toggles parameters' do
         entity.reload

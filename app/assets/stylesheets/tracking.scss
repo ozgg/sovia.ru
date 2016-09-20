@@ -1,50 +1,3 @@
-article.edit-browser {
-  form {
-    table {
-      @include entity-form-table;
-    }
-  }
-}
-
-article.edit-agent {
-  form {
-    table {
-      @include  entity-form-table;
-    }
-  }
-}
-
-article.browser {
-  table {
-    @include entity-table;
-  }
-}
-
-ul.list-of-browsers {
-  @include striped-list;
-}
-
-ul.list-of-agents {
-  @include striped-list;
-
-  &.dynamic {
-    li {
-      .add {
-        flex-basis: 2.5rem;
-
-        button {
-          text-align: center;
-          width: 2rem;
-          height: 2rem;
-          font-size: $increased_size;
-          box-sizing: border-box;
-          border-radius: 0.25rem;
-        }
-      }
-    }
-  }
-}
-
 #agents-filter {
   .pages {
     display: flex;
@@ -60,10 +13,10 @@ ul.list-of-agents {
 }
 
 div.track {
-  font-size: $small_size;
-  margin: 0.25rem;
-  padding: 0.25rem;
-  border: dotted 0.0625rem;
+  font-size: $small_font_size;
+  margin: 4rem;
+  padding: 4rem;
+  border: dotted 0.1rem;
 
   > div {
     white-space: nowrap;

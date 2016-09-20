@@ -50,8 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def entity_parameters
-    permitted = current_user_has_role?(:administrator) ? Comment.administrative_parameters : Comment.entity_parameters
-    params.require(:comment).permit(permitted)
+    params.require(:comment).permit(Comment.entity_parameters)
   end
 
   def creation_parameters

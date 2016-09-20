@@ -1,6 +1,6 @@
 class AgentsController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:edit, :update, :destroy]
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   # get /agents/new
@@ -12,9 +12,9 @@ class AgentsController < ApplicationController
   def create
     @entity = Agent.new entity_parameters
     if @entity.save
-      redirect_to @entity
+      redirect_to admin_agent_path(@entity)
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 
@@ -29,7 +29,7 @@ class AgentsController < ApplicationController
   # patch /agents/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('agents.update.success')
+      redirect_to admin_agent_path(@entity), notice: t('agents.update.success')
     else
       render :edit, status: :bad_request
     end
@@ -51,10 +51,13 @@ class AgentsController < ApplicationController
 
   def set_entity
     @entity = Agent.find params[:id]
+    raise record_not_found if @entity.deleted?
   end
 
   def restrict_editing
-    raise record_not_found if @entity.locked?
+    if @entity.locked?
+      redirect_to admin_agent_path(@entity), alert: t('agents.edit.forbidden')
+    end
   end
 
   def entity_parameters

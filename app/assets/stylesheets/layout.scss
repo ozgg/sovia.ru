@@ -1,16 +1,19 @@
 html {
   margin: 0;
   padding: 0;
-  font-size: 16px;
-  font-family: "PT Serif", "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 10px;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
 }
 
 body {
   outline: solid red 1px;
   margin: 0;
   padding: 0;
-  min-width: 20rem;
+  min-width: 32rem;
   max-width: $content_width;
+  font-size: $normal_font_size;
 
   > header {
     outline: solid green 1px;
@@ -20,8 +23,8 @@ body {
 
     .logo {
       outline: solid blue 1px;
-      width: 10rem;
-      height: 3.75rem;
+      width: 16rem;
+      height: 6rem;
 
       img {
         max-width: 100%;
@@ -31,7 +34,7 @@ body {
 
     .authentication {
       outline: solid violet 1px;
-      width: 13rem;
+      width: 20.8rem;
 
       form {
         margin: 0;
@@ -48,17 +51,17 @@ body {
 
         .actions {
           outline: solid orange 1px;
-          margin: 0.25rem 0;
+          margin: 0.4rem 0;
 
           ul {
             margin: 0;
             padding: 0;
-            font-size: $decreased_size;
-            line-height: 1.25rem;
+            font-size: $decreased_font_size;
+            line-height: 2rem;
 
             > li {
               list-style: none;
-              margin: 0 0.25rem;
+              margin: 0 0.4rem;
               padding: 0;
             }
           }
@@ -72,8 +75,8 @@ body {
 
               > li {
                 img {
-                  width: 1.5rem;
-                  height: 1.5rem;
+                  width: 2.4rem;
+                  height: 2.4rem;
                 }
               }
             }
@@ -89,46 +92,8 @@ body {
 }
 
 #main {
-  > div.options {
-    > ul {
-      margin: 1rem 0;
-      padding: 0;
-      font-size: $decreased_size;
-      line-height: 2rem;
-
-      > li {
-        list-style: none;
-        display: inline-block;
-        margin: 0 0.5rem;
-
-        &:before {
-          content: '[';
-        }
-
-        &:after {
-          content: ']';
-        }
-      }
-    }
-  }
 }
 
 .hidden {
   display: none !important;
-}
-
-span.not-found {
-  color: #ffaaaa;
-  cursor: default;
-
-  &:before {
-    content: '\26A0';
-    color: #ff0000;
-    margin-right: 0.25rem;
-  }
-}
-
-figure {
-  margin: 0;
-  padding: 0;
 }

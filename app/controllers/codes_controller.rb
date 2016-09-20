@@ -1,6 +1,6 @@
 class CodesController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:edit, :update, :destroy]
 
   # get /codes/new
   def new
@@ -11,14 +11,10 @@ class CodesController < ApplicationController
   def create
     @entity = Code.new creation_parameters
     if @entity.save
-      redirect_to @entity
+      redirect_to admin_code_path(@entity)
     else
-      render :new
+      render :new, status: :bad_request
     end
-  end
-
-  # get /codes/:id
-  def show
   end
 
   # get /codes/:id/edit
@@ -28,9 +24,9 @@ class CodesController < ApplicationController
   # patch /codes/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('codes.update.success')
+      redirect_to admin_code_path(@entity), notice: t('codes.update.success')
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
@@ -39,7 +35,7 @@ class CodesController < ApplicationController
     if @entity.destroy
       flash[:notice] = t('codes.destroy.success')
     end
-    redirect_to codes_path
+    redirect_to admin_codes_path
   end
 
   protected

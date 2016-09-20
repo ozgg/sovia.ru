@@ -1,0 +1,342 @@
+// Zebra for lists
+$row_background_even: #f0f0f0;
+$row_background_odd: #fafafa;
+
+// Toggleable flags statuses
+$toggleable_active: #c0ffc0;
+$toggleable_inactive: #ffc0c0;
+$toggleable_switch: #ffffc0;
+$toggleable_unknown: #c0c0c0;
+$toggleable_background: #ffffff;
+
+.toggleable {
+  margin: 0.8rem;
+  font-size: $small_font_size;
+
+  > span {
+    display: inline-block;
+    line-height: $huge_font_size;
+    padding: 0 0.8rem 0 0;
+    margin: 0.4rem;
+    cursor: pointer;
+    border: solid 0.1rem;
+    border-radius: 0.8rem;
+    background-color: $toggleable_background;
+
+    &::before {
+      line-height: $huge_font_size;
+      display: inline-block;
+      width: 2.2rem;
+      text-align: center;
+      margin: 0 0.4rem 0 0;
+      border-radius: 0.6rem 0 0 0.6rem;
+    }
+  }
+
+  .active {
+    border-color: $toggleable_active;
+
+    &::before {
+      content: '\2611';
+      background-color: $toggleable_active;
+    }
+  }
+
+  .inactive {
+    border-color: $toggleable_inactive;
+
+    &::before {
+      content: '\2610';
+      background-color: $toggleable_inactive;
+    }
+  }
+
+  .switch {
+    border-color: $toggleable_switch;
+    cursor: not-allowed;
+
+    &::before {
+      content: '\231B';
+      background-color: $toggleable_switch;
+    }
+  }
+
+  .unknown {
+    border-color: $toggleable_unknown;
+
+    &::before {
+      content: '\26A0';
+      background-color: $toggleable_unknown;
+    }
+  }
+}
+
+button.destroy {
+  font-size: $small_font_size;
+  line-height: $normal_font_size;
+  background: #fff7f7;
+  border: solid #800000 0.1rem;
+}
+
+article.entity-page {
+  position: relative;
+
+  > section {
+    border-top: solid $secondary_text_color 0.1rem;
+    padding: 0.8rem 0 0 0;
+
+    > h2 {
+      font-size: $increased_font_size;
+    }
+  }
+
+  table {
+    margin: 1.6rem;
+    border-spacing: 0;
+
+    tbody {
+      tr:nth-of-type(even) {
+        background: $row_background_even;
+      }
+
+      tr:nth-of-type(odd) {
+        background: $row_background_odd;
+      }
+
+      th {
+        text-align: right;
+        padding: 0.4rem 0.8rem;
+      }
+
+      td {
+        padding: 0.4rem 0.8rem;
+
+        &[colspan]:first-letter {
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+
+  form {
+    table {
+      th {
+        font-weight: normal;
+        text-align: right;
+        vertical-align: top;
+        line-height: 2.8rem;
+
+        &[colspan] {
+          text-align: center;
+          font-weight: bold;
+          border-top: solid $secondary_text_color 0.1rem;
+          padding-top: 1.6rem;
+        }
+      }
+
+      input[type=text], textarea {
+        width: calc(100% - 1rem);
+      }
+
+      td[colspan].preview {
+        margin: 0 auto;
+        width: 32rem;
+        text-align: center;
+
+        img {
+          max-width: 32rem;
+          max-height: 32rem;
+        }
+      }
+
+      tfoot {
+        tr {
+          td {
+            padding: 0.8rem 0;
+            text-align: center;
+          }
+        }
+      }
+
+      .flags {
+        text-align: left;
+
+        ul {
+          margin: 0;
+          padding: 0;
+
+          > li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            label {
+              font-weight: normal;
+            }
+          }
+        }
+      }
+
+      .tree {
+        text-align: left;
+
+        > ul {
+          margin: 0;
+          padding: 0;
+
+          li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            label {
+              font-weight: normal;
+            }
+
+            ul {
+              margin: 0 0 0 2rem;
+              padding: 0;
+            }
+          }
+        }
+      }
+
+      p.notice {
+        margin: 0;
+        color: $secondary_text_color;
+        font-size: $decreased_font_size;
+
+        &::before {
+          content: '\261E';
+          margin-right: 0.4rem;
+        }
+      }
+    }
+  }
+}
+
+ul.actions {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0.4rem;
+  right: 0.4rem;
+  box-shadow: 0 0 0.2rem 0.2rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 0.5;
+  transition: 0.25s;
+  background: #ffffff;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  > li {
+    list-style: none;
+    margin: 0.4rem;
+    flex-basis: 1.6rem;
+    line-height: 1.6rem;
+    height: 1.6rem;
+
+    &.danger {
+      margin-left: 3.2rem;
+    }
+
+    &.priority-changer {
+      flex-basis: 3.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    > a, button {
+      display: inline-block;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 1.6rem;
+      max-height: 1.6rem;
+    }
+  }
+}
+
+.list-of-entities {
+  margin: 1.6rem 0;
+  padding: 0;
+
+  > li {
+    list-style: none;
+    margin: 0;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background: $row_background_odd;
+
+    &:nth-of-type(even) {
+      background: $row_background_even;
+    }
+
+    &[data-number]::before {
+      content: attr(data-number) ":";
+      width: 2.4rem;
+      display: inline-block;
+      text-align: right;
+      margin: 0 0.8rem 0 0;
+    }
+
+    .image {
+      margin: 0 0.8rem 0 0;
+      flex-basis: 8rem;
+      text-align: center;
+
+      img {
+        max-width: 8rem;
+        max-height: 8rem;
+      }
+    }
+
+    .data {
+      flex: 1;
+      position: relative;
+
+      .info {
+        font-size: $small_font_size;
+      }
+
+      .secondary {
+        color: $secondary_text_color;
+      }
+
+      .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .compact {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .toggleable, > span {
+          margin: 0 0.8rem;
+        }
+      }
+
+      .children {
+        margin-left: 1.6rem;
+        border-left: dotted 0.1rem;
+      }
+    }
+  }
+}

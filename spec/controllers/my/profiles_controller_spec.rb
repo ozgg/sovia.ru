@@ -22,7 +22,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :new
       end
 
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
     end
   end
 
@@ -101,7 +101,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :show
       end
 
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
     end
 
     context 'when user is not logged in' do
@@ -123,7 +123,7 @@ RSpec.describe My::ProfilesController, type: :controller do
         get :edit
       end
 
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
     end
 
     context 'when user is not logged in' do

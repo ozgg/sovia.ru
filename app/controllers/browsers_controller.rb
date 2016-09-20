@@ -1,6 +1,6 @@
 class BrowsersController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy, :agents]
+  before_action :set_entity, only: [:edit, :update, :destroy]
   before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   # get /browsers/new
@@ -12,14 +12,10 @@ class BrowsersController < ApplicationController
   def create
     @entity = Browser.new entity_parameters
     if @entity.save
-      redirect_to @entity
+      redirect_to admin_browser_path(@entity)
     else
-      render :new
+      render :new, status: :bad_request
     end
-  end
-
-  # get /browsers/:id
-  def show
   end
 
   # get /browsers/:id/edit
@@ -29,7 +25,7 @@ class BrowsersController < ApplicationController
   # patch /browsers/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('browsers.update.success')
+      redirect_to admin_browser_path(@entity), notice: t('browsers.update.success')
     else
       render :edit, status: :bad_request
     end
@@ -43,11 +39,6 @@ class BrowsersController < ApplicationController
     redirect_to admin_browsers_path
   end
 
-  # get /browsers/:id/agents
-  def agents
-    @collection = @entity.agents.page_for_administration current_page
-  end
-
   private
 
   def restrict_access
@@ -56,10 +47,13 @@ class BrowsersController < ApplicationController
 
   def set_entity
     @entity = Browser.find params[:id]
+    raise record_not_found if @entity.deleted?
   end
 
   def restrict_editing
-    raise record_not_found if @entity.locked?
+    if @entity.locked?
+      redirect_to admin_browser_path(@entity), alert: t('browsers.edit.forbidden')
+    end
   end
 
   def entity_parameters

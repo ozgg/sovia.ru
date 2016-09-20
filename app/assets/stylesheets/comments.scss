@@ -17,10 +17,6 @@ section.comments {
   }
 }
 
-ul.comments-list {
-  @include striped-list;
-}
-
 div.comment {
   .title {
     padding: 0 0 0.25rem 0;
@@ -51,7 +47,7 @@ div.comment {
     padding: 0 0.5rem;
 
     time {
-      font-size: $decreased_size;
+      font-size: $decreased_font-size;
       font-style: italic;
     }
   }

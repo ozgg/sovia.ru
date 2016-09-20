@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  # Toggleable members
   concern :toggleable do
     post 'toggle', on: :member
   end
 
-  # Lockable members
   concern :lockable do
     member do
       put 'lock'
@@ -12,7 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # Collections that have tags and archive (e.g. posts and dreams)
   concern :tagged_archive do
     collection do
       get 'tagged/:tag_name' => :tagged, as: :tagged
@@ -25,8 +22,21 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'index#index'
 
-    resources :browsers, :agents, only: [:index]
-    resources :users, :tokens, :codes, only: [:index]
+    resources :browsers, only: [:index, :show] do
+      member do
+        get 'agents'
+      end
+    end
+    resources :agents, only: [:index, :show]
+
+    resources :users, only: [:index, :show] do
+      member do
+        get 'tokens'
+        get 'codes'
+      end
+    end
+    resources :tokens, :codes, only: [:index, :show]
+
     resources :posts, :tags, only: [:index]
     resources :comments, only: [:index]
   end
@@ -48,15 +58,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:index]
   end
 
-  resources :browsers, except: [:index] do
-    member do
-      get 'agents'
-    end
-  end
-  resources :agents, except: [:index]
+  resources :browsers, :agents, except: [:index, :show]
 
-  resources :users, except: [:index]
-  resources :tokens, :codes, except: [:index]
+  resources :users, except: [:index, :show]
+  resources :tokens, :codes, except: [:index, :show]
 
   resources :posts, concerns: [:tagged_archive]
   resources :figures, only: [:show, :edit, :update, :destroy]

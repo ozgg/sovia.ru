@@ -1,12 +1,10 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
-<% content_for :options do %>
-    <ul>
-      <li><%= link_to t(:create), new_user_path %></li>
-    </ul>
-<% end %>
 
-<article class="users">
+<article class="entity-page">
   <h1><%= t('.heading') %></h1>
+  <ul class="actions">
+    <li><%= create_icon new_user_path %></li>
+  </ul>
 
   <%= render partial: 'filter', locals: { filter: @filter } %>
 

@@ -13,7 +13,7 @@ RSpec.describe ProfilesController, type: :controller do
 
       before(:each) { action.call }
 
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
 
       it 'finds user by long slug' do
         expect(User).to have_received(:with_long_slug).with(entity.long_slug)

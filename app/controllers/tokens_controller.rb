@@ -1,6 +1,6 @@
 class TokensController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:edit, :update, :destroy]
 
   # get /tokens/new
   def new
@@ -11,14 +11,10 @@ class TokensController < ApplicationController
   def create
     @entity = Token.new creation_parameters
     if @entity.save
-      redirect_to @entity
+      redirect_to admin_token_path(@entity)
     else
-      render :new
+      render :new, status: :bad_request
     end
-  end
-
-  # get /tokens/:id
-  def show
   end
 
   # get /tokens/:id/edit
@@ -28,9 +24,9 @@ class TokensController < ApplicationController
   # patch /tokens/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('tokens.update.success')
+      redirect_to admin_token_path(@entity), notice: t('tokens.update.success')
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
@@ -39,7 +35,7 @@ class TokensController < ApplicationController
     if @entity.destroy
       flash[:notice] = t('tokens.destroy.success')
     end
-    redirect_to tokens_path
+    redirect_to admin_tokens_path
   end
 
   protected

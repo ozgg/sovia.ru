@@ -1,6 +1,6 @@
 a.profile {
-  padding-left: 1.25rem;
-  background: no-repeat 0 center / 1rem 1rem;
+  padding-left: 2rem;
+  background: no-repeat 0 center / 1.6rem 1.6rem;
 
   &.native {
     background-image: image_url('icons/login/native.png');
@@ -19,70 +19,11 @@ a.profile {
   }
 }
 
-article.user {
-  figure {
-    margin: 0;
-    padding: 0;
-
-    img {
-      max-width: 20rem;
-      max-height: 20rem;
-    }
-  }
-
-  table {
-    @include entity-table;
-  }
-}
-
-article.profile {
-  form {
-    table {
-      @include entity-form-table;
-    }
-  }
-}
-
 article.recovery {
   form {
     label {
       display: inline-block;
-      min-width: 12.5rem;
-    }
-  }
-}
-
-article.edit-user {
-  form {
-    table {
-      @include entity-form-table;
-    }
-
-    ul {
-      margin: 0;
-      padding: 0;
-
-      li {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-    }
-  }
-}
-
-ul.users-list {
-  @include striped-list;
-
-  li {
-    @include list-item-with-image;
-
-    .times {
-      font-size: $small_size;
-
-      time {
-        font-style: italic;
-      }
+      min-width: 20rem;
     }
   }
 }

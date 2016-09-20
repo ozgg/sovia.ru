@@ -38,8 +38,20 @@
         <td><%= f.text_field :name, size: 30 %></td>
       </tr>
       <tr>
+        <th><%= f.label :patronymic %></th>
+        <td><%= f.text_field :patronymic, size: 30 %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :surname %></th>
+        <td><%= f.text_field :surname, size: 30 %></td>
+      </tr>
+      <tr>
         <th><%= f.label :email %></th>
         <td><%= f.email_field :email, size: 30 %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :phone %></th>
+        <td><%= f.phone_field :phone, size: 15 %></td>
       </tr>
       <% if entity.id.blank? %>
           <tr>
@@ -56,23 +68,14 @@
         <td><%= f.select :gender, genders_for_select %></td>
       </tr>
       <tr>
-        <td colspan="2">
-          <div>
-            <%= f.check_box :bot %>
-            <%= f.label :bot %>
-          </div>
-          <div>
-            <%= f.check_box :allow_login %>
-            <%= f.label :allow_login %>
-          </div>
-          <div>
-            <%= f.check_box :email_confirmed %>
-            <%= f.label :email_confirmed %>
-          </div>
-          <div>
-            <%= f.check_box :allow_mail %>
-            <%= f.label :allow_mail %>
-          </div>
+        <td colspan="2" class="flags">
+          <ul>
+            <li><%= f.check_box :bot %><%= f.label :bot %></li>
+            <li><%= f.check_box :allow_login %><%= f.label :allow_login %></li>
+            <li><%= f.check_box :email_confirmed %><%= f.label :email_confirmed %></li>
+            <li><%= f.check_box :phone_confirmed %><%= f.label :phone_confirmed %></li>
+            <li><%= f.check_box :allow_mail %><%= f.label :allow_mail %></li>
+          </ul>
         </td>
       </tr>
       <tr>
@@ -89,6 +92,10 @@
             </ul>
           </fieldset>
         </td>
+      </tr>
+      <tr>
+        <th><%= f.label :notice %></th>
+        <td><%= f.text_field :notice %></td>
       </tr>
       </tbody>
       <tfoot>

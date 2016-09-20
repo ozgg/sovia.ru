@@ -1,14 +1,14 @@
 <% content_for :meta_title, t('.title') %>
-<% content_for :options do %>
-  <ul>
-    <li><%= link_to t(:list), admin_users_path %></li>
-    <li><%= link_to t(:view), @entity %></li>
-    <li><%= link_to t(:create), new_user_path %></li>
-  </ul>
-<% end %>
 
-<article class="edit-user">
+<article class="entity-page">
   <h1><%= t('.title') %></h1>
+  <ul class="actions">
+    <li><%= list_icon admin_users_path %></li>
+    <li><%= detail_icon admin_user_path(@entity) %></li>
+    <% unless @entity.deleted? %>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
 
   <%= render partial: 'form', locals: { entity: @entity } %>
 </article>

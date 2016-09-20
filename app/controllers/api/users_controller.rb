@@ -10,7 +10,8 @@ class Api::UsersController < ApplicationController
   private
 
   def set_entity
-    @entity = User.find_by! id: params[:id], deleted: false
+    @entity = User.find params[:id]
+    raise record_not_found if @entity.deleted?
   end
 
   def restrict_access

@@ -1,3 +1,4 @@
+<% show_form = !commentable.respond_to?(:commentable_by?) || commentable.commentable_by?(current_user) %>
 <section class="comments">
   <% if comments.any? %>
       <h2><%= t(:comments_list) %></h2>
@@ -7,11 +8,13 @@
       <% end %>
   <% end %>
 
-  <section class="reply-container">
-    <h2><%= t(:add_comment) %></h2>
+  <% if show_form %>
+      <section class="reply-container">
+        <h3><%= t(:add_comment) %></h3>
 
-    <div class="container">
-      <%= render partial: 'comments/form', locals: { entity: Comment.new(commentable: commentable) } %>
-    </div>
-  </section>
+        <div class="container">
+          <%= render partial: 'comments/form', locals: { entity: Comment.new(commentable: commentable) } %>
+        </div>
+      </section>
+  <% end %>
 </section>

@@ -43,13 +43,18 @@ class Token < ApplicationRecord
   def self.user_by_pair(user_id, token, touch_user = false)
     instance = self.find_by user_id: user_id, token: token, active: true
     if instance.is_a?(self)
-      instance.touch
+      instance.update_columns(last_used: Time.now)
       user = instance.user
       user.update_columns(last_seen: Time.now) if touch_user
       user
     else
       nil
     end
+  end
+
+  # @param [User] user
+  def editable_by?(user)
+    owned_by?(user) || UserRole.user_has_role?(user, :administrator)
   end
 
   def cookie_pair

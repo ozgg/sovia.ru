@@ -7,8 +7,16 @@ RSpec.describe BrowsersController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(subject).to receive(:restrict_editing)
-    allow(Browser).to receive(:find).and_call_original
+    allow(entity.class).to receive(:find).and_call_original
+  end
+
+  shared_examples 'forbidden_editing' do
+    it_behaves_like 'page_for_administrator'
+    it_behaves_like 'entity_finder'
+
+    it 'redirects to entity administration page' do
+      expect(response).to redirect_to(admin_browser_path(entity))
+    end
   end
 
   describe 'get new' do
@@ -18,87 +26,143 @@ RSpec.describe BrowsersController, type: :controller do
   end
 
   describe 'post create' do
-    let(:action) { -> { post :create, params: { browser: attributes_for(:browser) } } }
+    context 'when parameters are valid' do
+      let(:action) { -> { post :create, params: { browser: attributes_for(:browser) } } }
 
-    context 'authorization and redirects' do
-      before(:each) { action.call }
+      it_behaves_like 'entity_creator'
 
-      it_behaves_like 'page_for_administrator'
+      context 'authorization and redirects' do
+        before :each do
+          action.call
+        end
 
-      it 'redirects to created browser' do
-        expect(response).to redirect_to(Browser.last)
+        it_behaves_like 'page_for_administrator'
+
+        it 'redirects to created entity' do
+          expect(response).to redirect_to(admin_browser_path(entity.class.last))
+        end
       end
     end
 
-    context 'database change' do
-      it 'inserts row into browsers table' do
-        expect(action).to change(Browser, :count).by(1)
+    context 'when parameters are invalid' do
+      let(:action) { -> { post :create, params: { browser: { name: ' ' } } } }
+
+      it_behaves_like 'entity_constant_count'
+
+      context 'response' do
+        before :each do
+          action.call
+        end
+
+        it_behaves_like 'page_for_administrator'
+        it_behaves_like 'http_bad_request'
       end
     end
-  end
-
-  describe 'get show' do
-    before(:each) { get :show, params: { id: entity } }
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
   end
 
   describe 'get edit' do
-    before(:each) { get :edit, params: { id: entity } }
+    let(:action) { -> { get :edit, params: { id: entity } } }
 
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
-    it_behaves_like 'restricted_editing'
+    it_behaves_like 'not_found_deleted_entity'
+
+    context 'when entity is locked' do
+      before :each do
+        entity.update! locked: true
+        action.call
+      end
+
+      it_behaves_like 'forbidden_editing'
+    end
+
+    context 'when entity is not locked' do
+      before :each do
+        action.call
+      end
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_finder'
+      it_behaves_like 'http_success'
+    end
   end
 
   describe 'patch update' do
-    before(:each) do
-      patch :update, params: { id: entity, browser: { name: 'changed' } }
+    let(:action) { -> { patch :update, params: { id: entity, browser: { name: 'Changed' } } } }
+
+    it_behaves_like 'not_found_deleted_entity'
+
+    context 'when entity is not locked' do
+      before :each do
+        action.call
+      end
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_finder'
+
+      it 'updates entity' do
+        entity.reload
+        expect(entity.name).to eq('Changed')
+      end
+
+      it 'redirects to entity administration page' do
+        expect(response).to redirect_to(admin_browser_path(entity))
+      end
     end
 
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
-    it_behaves_like 'restricted_editing'
+    context 'when entity is locked' do
+      before :each do
+        entity.update! locked: true
+        action.call
+      end
 
-    it 'updates browser' do
-      entity.reload
-      expect(entity.name).to eq('changed')
+      it_behaves_like 'forbidden_editing'
+
+      it 'does not update entity' do
+        entity.reload
+        expect(entity.name).not_to eq('Changed')
+      end
     end
 
-    it 'redirects to browser page' do
-      expect(response).to redirect_to(entity)
+    context 'when parameters are invalid' do
+      before :each do
+        patch :update, params: { id: entity, browser: { name: ' ' } }
+      end
+
+      it_behaves_like 'http_bad_request'
+
+      it 'does not change entity' do
+        entity.reload
+        expect(entity.name).not_to be_blank
+      end
     end
   end
 
   describe 'delete destroy' do
-    before(:each) { delete :destroy, params: { id: entity } }
+    let(:action) { -> { delete :destroy, params: { id: entity } } }
 
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
-    it_behaves_like 'restricted_editing'
+    it_behaves_like 'not_found_deleted_entity'
 
-    it 'redirects to browsers page' do
-      expect(response).to redirect_to(admin_browsers_path)
+    context 'when entity is not locked' do
+      before :each do
+        action.call
+      end
+
+      it_behaves_like 'page_for_administrator'
+      it_behaves_like 'entity_finder'
+      it_behaves_like 'entity_deleter'
+
+      it 'redirects to entities page' do
+        expect(response).to redirect_to(admin_browsers_path)
+      end
     end
 
-    it 'marks browser as deleted' do
-      entity.reload
-      expect(entity).to be_deleted
-    end
-  end
+    context 'when entity is locked' do
+      before :each do
+        entity.update! locked: true
+        action.call
+      end
 
-  describe 'get agents' do
-    before(:each) do
-      allow(Agent).to receive(:page_for_administration)
-      get :agents, params: { id: entity }
-    end
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
-
-    it 'gets administrative page of agents' do
-      expect(Agent).to have_received(:page_for_administration)
+      it_behaves_like 'forbidden_editing'
+      it_behaves_like 'entity_not_deleted'
     end
   end
 end

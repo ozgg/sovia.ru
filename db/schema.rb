@@ -10,36 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822000010) do
+ActiveRecord::Schema.define(version: 20160920000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "agents", force: :cascade do |t|
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "browser_id"
-    t.boolean  "bot",        default: false, null: false
-    t.boolean  "mobile",     default: false, null: false
-    t.boolean  "active",     default: true,  null: false
-    t.boolean  "locked",     default: false, null: false
-    t.boolean  "deleted",    default: false, null: false
-    t.string   "name",                       null: false
+    t.integer "browser_id"
+    t.boolean "bot",        default: false, null: false
+    t.boolean "mobile",     default: false, null: false
+    t.boolean "active",     default: true,  null: false
+    t.boolean "locked",     default: false, null: false
+    t.boolean "deleted",    default: false, null: false
+    t.string  "name",                       null: false
     t.index ["browser_id"], name: "index_agents_on_browser_id", using: :btree
     t.index ["name"], name: "index_agents_on_name", using: :btree
   end
 
   create_table "browsers", force: :cascade do |t|
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "agents_count", default: 0,     null: false
-    t.boolean  "bot",          default: false, null: false
-    t.boolean  "mobile",       default: false, null: false
-    t.boolean  "active",       default: true,  null: false
-    t.boolean  "locked",       default: false, null: false
-    t.boolean  "deleted",      default: false, null: false
-    t.string   "name",                         null: false
-    t.index ["name"], name: "index_browsers_on_name", using: :btree
+    t.integer "agents_count", default: 0,     null: false
+    t.boolean "bot",          default: false, null: false
+    t.boolean "mobile",       default: false, null: false
+    t.boolean "active",       default: true,  null: false
+    t.boolean "locked",       default: false, null: false
+    t.boolean "deleted",      default: false, null: false
+    t.string  "name",                         null: false
   end
 
   create_table "codes", force: :cascade do |t|
@@ -126,12 +121,14 @@ ActiveRecord::Schema.define(version: 20160822000010) do
   create_table "tokens", force: :cascade do |t|
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.datetime "last_used"
     t.integer  "user_id",                   null: false
     t.integer  "agent_id"
     t.inet     "ip"
     t.boolean  "active",     default: true, null: false
     t.string   "token",                     null: false
     t.index ["agent_id"], name: "index_tokens_on_agent_id", using: :btree
+    t.index ["last_used"], name: "index_tokens_on_last_used", using: :btree
     t.index ["token"], name: "index_tokens_on_token", unique: true, using: :btree
     t.index ["user_id"], name: "index_tokens_on_user_id", using: :btree
   end
@@ -151,13 +148,14 @@ ActiveRecord::Schema.define(version: 20160822000010) do
     t.integer  "native_id"
     t.string   "slug",                                      null: false
     t.integer  "gender",          limit: 2
-    t.date     "birthday"
     t.boolean  "deleted",                   default: false, null: false
     t.boolean  "bot",                       default: false, null: false
     t.boolean  "allow_login",               default: true,  null: false
     t.boolean  "email_confirmed",           default: false, null: false
+    t.boolean  "phone_confirmed",           default: false, null: false
     t.boolean  "allow_mail",                default: true,  null: false
     t.datetime "last_seen"
+    t.date     "birthday"
     t.integer  "dreams_count",              default: 0,     null: false
     t.integer  "posts_count",               default: 0,     null: false
     t.integer  "comments_count",            default: 0,     null: false
@@ -165,7 +163,11 @@ ActiveRecord::Schema.define(version: 20160822000010) do
     t.string   "email"
     t.string   "screen_name"
     t.string   "name"
+    t.string   "partonymic"
+    t.string   "surname"
+    t.string   "phone"
     t.string   "image"
+    t.string   "notice"
     t.index ["agent_id"], name: "index_users_on_agent_id", using: :btree
     t.index ["slug", "network"], name: "index_users_on_slug_and_network", unique: true, using: :btree
   end

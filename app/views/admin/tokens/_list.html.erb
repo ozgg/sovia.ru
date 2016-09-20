@@ -1,7 +1,7 @@
 <% if collection.any? %>
-    <ul>
+    <ul class="list-of-entities">
       <% collection.each do |token| %>
-          <li><%= user_link token.user %> <%= link_to "#{token.created_at}/#{token.updated_at}", token %></li>
+          <li><%= render partial: 'admin/tokens/entity/in_list', locals: { token: token } %></li>
       <% end %>
     </ul>
 <% else %>

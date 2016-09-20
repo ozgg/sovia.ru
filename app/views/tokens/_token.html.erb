@@ -1,7 +1,0 @@
-<article class="token">
-  <h1><%= t('tokens.show.title', id: token.id) %></h1>
-
-  <p><%= user_link token.user %>, <%= time_tag token.created_at %></p>
-  <p><%= t('activerecord.attributes.token.last_used') %> <%= time_tag token.updated_at %></p>
-  <p><%= t('activerecord.attributes.token.ip') %>: <%= token.ip %></p>
-</article>

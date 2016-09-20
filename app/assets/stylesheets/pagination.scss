@@ -1,14 +1,14 @@
 nav.pagination {
-  margin: 1rem 0 0 0;
+  margin: 1.6rem 0 0 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
   span {
     display: inline-block;
-    padding: 0 0.25rem;
-    line-height: 1.5rem;
-    min-width: 1rem;
+    padding: 0 0.4rem;
+    line-height: 2.4rem;
+    min-width: 1.6rem;
     text-align: center;
 
     &.current {
@@ -24,11 +24,11 @@ nav.pagination {
 
 @media screen and (max-width: 320px) {
   nav.pagination {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
 
     span {
-      padding: 0.25rem 0.5rem;
-      margin: 0 0.5rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0 0.8rem;
 
       &.page {
         display: none;

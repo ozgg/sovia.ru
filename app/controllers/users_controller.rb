@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :set_entity, only: [:edit, :update, :destroy]
 
   # get /users/new
   def new
@@ -12,14 +12,10 @@ class UsersController < ApplicationController
     @entity = User.new creation_parameters
     if @entity.save
       set_roles
-      redirect_to @entity, notice: t('users.create.success')
+      redirect_to admin_user_path(@entity), notice: t('users.create.success')
     else
-      render :new
+      render :new, status: :bad_request
     end
-  end
-
-  # get /users/:id
-  def show
   end
 
   # get /users/:id/edit
@@ -30,9 +26,9 @@ class UsersController < ApplicationController
   def update
     if @entity.update entity_parameters
       set_roles
-      redirect_to @entity, notice: t('users.update.success')
+      redirect_to admin_user_path(@entity), notice: t('users.update.success')
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
@@ -63,6 +59,6 @@ class UsersController < ApplicationController
   end
 
   def set_roles
-    @entity.roles = params[:roles].nil? ? Hash.new : params[:roles]
+    @entity.roles = (params[:roles] || Hash.new)
   end
 end

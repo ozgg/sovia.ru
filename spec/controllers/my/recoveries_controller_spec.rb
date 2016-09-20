@@ -4,14 +4,14 @@ RSpec.describe My::RecoveriesController, type: :controller do
   let(:user) { create :unconfirmed_user }
 
   before :each do
-    expect(controller).to receive(:redirect_authenticated_user)
-    allow(controller).to receive(:current_user).and_return(nil)
+    expect(subject).to receive(:redirect_authenticated_user)
+    allow(subject).to receive(:current_user).and_return(nil)
   end
 
   describe 'get show' do
     before(:each) { get :show }
 
-    it_behaves_like 'successful_response'
+    it_behaves_like 'http_success'
   end
 
   describe 'post create' do

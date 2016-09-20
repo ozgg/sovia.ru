@@ -12,6 +12,6 @@ RSpec.describe Admin::IndexController, type: :controller do
     before(:each) { get :index }
 
     it_behaves_like 'page_for_administrator'
-    it_behaves_like 'successful_response'
+    it_behaves_like 'http_success'
   end
 end

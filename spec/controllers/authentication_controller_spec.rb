@@ -10,7 +10,7 @@ RSpec.describe AuthenticationController, type: :controller do
         get :new
       end
 
-      it_behaves_like 'successful_response'
+      it_behaves_like 'http_success'
     end
 
     context 'when user is logged in' do

@@ -20,6 +20,12 @@ FactoryGirl.define do
       end
     end
 
+    factory :moderator do
+      after :create do |user|
+        create :user_role, user: user, role: :moderator
+      end
+    end
+
     factory :chief_editor do
       after :create do |user|
         create :user_role, user: user, role: :chief_editor
