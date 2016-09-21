@@ -1,0 +1,40 @@
+ru:
+  pattern:
+    zero: "образов нет"
+    one: "%{count} образ"
+    few: "%{count} образа"
+    many: "%{count} образов"
+    other: "%{count} образов"
+  add_pattern: "Добавить образ"
+  activerecord:
+    models:
+      pattern: "Образ"
+    attributes:
+      pattern:
+        name: "Название"
+        image: "Картинка"
+        essence: "Суть"
+        description: "Описание"
+  admin:
+    patterns:
+      index:
+        heading: "Образы"
+        title: "Образы, страница %{page}"
+      show:
+        title: "Образ «%{name}»"
+      dreams:
+        title: "Сны с образом «%{name}», страница %{page}"
+      comments:
+        title: "Комментарии к образу «%{name}», страница %{page}"
+  patterns:
+    create:
+      success: "Образ добавлен"
+    update:
+      success: "Образ изменён"
+    destroy:
+      success: "Образ удалён"
+    new:
+      title: "Добавление образа"
+    edit:
+      title: "Редактирование образа"
+      forbidden: "Редактирование этого образа запрещено"

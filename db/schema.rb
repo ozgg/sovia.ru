@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920000000) do
+ActiveRecord::Schema.define(version: 20160921125428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,20 @@ ActiveRecord::Schema.define(version: 20160920000000) do
     t.string  "caption"
     t.string  "alt_text"
     t.index ["post_id"], name: "index_figures_on_post_id", using: :btree
+  end
+
+  create_table "patterns", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "locked",         default: false, null: false
+    t.boolean  "deleted",        default: false, null: false
+    t.integer  "dreams_count",   default: 0,     null: false
+    t.integer  "comments_count", default: 0,     null: false
+    t.string   "name",                           null: false
+    t.string   "image"
+    t.string   "essence"
+    t.text     "description"
+    t.index ["name"], name: "index_patterns_on_name", using: :btree
   end
 
   create_table "post_tags", force: :cascade do |t|
