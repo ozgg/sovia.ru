@@ -15,6 +15,7 @@ ru:
         image: "Картинка"
         essence: "Суть"
         description: "Описание"
+        described: "Описан"
   admin:
     patterns:
       index:

@@ -42,12 +42,6 @@
           <td><%= @entity.name %></td>
         </tr>
     <% end %>
-    <% unless @entity.patronymic.blank? %>
-        <tr>
-          <th><%= t('activerecord.attributes.user.patronymic') %></th>
-          <td><%= @entity.patronymic %></td>
-        </tr>
-    <% end %>
     <% unless @entity.surname.blank? %>
         <tr>
           <th><%= t('activerecord.attributes.user.surname') %></th>

@@ -16,5 +16,8 @@
         <li><%= link_to t('admin.tags.index.heading'), admin_tags_path %></li>
         <li><%= link_to t('admin.posts.index.heading'), admin_posts_path %></li>
     <% end %>
+    <% if current_user_has_role? :interpreter, :chief_interpreter %>
+        <li><%= link_to t('admin.patterns.index.heading'), admin_patterns_path %></li>
+    <% end %>
   </ul>
 </article>

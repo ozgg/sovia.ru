@@ -8,10 +8,12 @@ module UsersHelper
     genders + User.genders.keys.to_a.map { |gender| [I18n.t("activerecord.attributes.user.genders.#{gender}"), gender] }
   end
 
+  # @param [User] user
   def user_roles(user)
     UserRole.owned_by(user).map { |role| I18n.t("activerecord.attributes.user_role.roles.#{role.role}") }
   end
 
+  # @param [User] user
   def user_link(user)
     if user.is_a? User
       if user.deleted?
@@ -25,6 +27,17 @@ module UsersHelper
     end
   end
 
+  # @param [User] user
+  def admin_user_link(user)
+    if user.is_a? User
+      text = user.profile_name
+      link_to text, admin_user_path(user), class: "profile #{user.network}"
+    else
+      I18n.t(:anonymous)
+    end
+  end
+
+  # @param [User] user
   def profile_avatar(user)
     if user.is_a?(User) && !user.image.blank? && !user.deleted?
       image_tag user.image.profile.url

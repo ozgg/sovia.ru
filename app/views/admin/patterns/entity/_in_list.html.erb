@@ -1,0 +1,26 @@
+<div class="image">
+  <% unless pattern.image.blank? %>
+      <%= image_tag pattern.image.small.url, alt: pattern.name %>
+  <% end %>
+</div>
+<div class="data">
+  <div><%= link_to pattern.name, admin_pattern_path(pattern) %></div>
+  <% unless pattern.essence.blank? %>
+      <div class="info truncate">
+        <%= pattern.essence %>
+      </div>
+  <% end %>
+  <div class="secondary info">
+    <%= link_to pattern.dreams_count, dreams_admin_pattern_path(pattern) %>,
+    <%= link_to t(:comment, count: pattern.comments_count), comments_admin_pattern_path(pattern) %>,
+    <%= pattern.words_count %>
+  </div>
+  <%= render partial: 'admin/patterns/toggleable', locals: { pattern: pattern } %>
+
+  <ul class="actions">
+    <li class="lockable <%= pattern.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_pattern_path(pattern) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { entity: pattern, path: lock_api_pattern_path(pattern) } %>
+  </ul>
+</div>

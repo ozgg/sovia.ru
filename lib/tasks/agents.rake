@@ -6,10 +6,11 @@ namespace :agents do
       puts 'Deleting old agents...'
       Agent.destroy_all
       puts 'Done. Importing...'
+      ignored = %w(created_at updated_at)
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
           agent = Agent.new id: id
-          agent.assign_attributes data
+          agent.assign_attributes data.reject { |a| ignored.include? a }
           agent.save!
           print "\r#{id}    "
         end

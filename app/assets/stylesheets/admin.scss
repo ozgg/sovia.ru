@@ -120,6 +120,17 @@ article.entity-page {
 
   form {
     table {
+      figure {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+
+        img {
+          max-width: 32rem;
+          max-height: 32rem;
+        }
+      }
+
       th {
         font-weight: normal;
         text-align: right;

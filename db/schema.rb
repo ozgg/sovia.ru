@@ -82,12 +82,16 @@ ActiveRecord::Schema.define(version: 20160921125428) do
     t.datetime "updated_at",                     null: false
     t.boolean  "locked",         default: false, null: false
     t.boolean  "deleted",        default: false, null: false
+    t.boolean  "described",      default: false, null: false
     t.integer  "dreams_count",   default: 0,     null: false
     t.integer  "comments_count", default: 0,     null: false
+    t.integer  "words_count",    default: 0,     null: false
     t.string   "name",                           null: false
     t.string   "image"
     t.string   "essence"
     t.text     "description"
+    t.index ["described"], name: "index_patterns_on_described", using: :btree
+    t.index ["dreams_count"], name: "index_patterns_on_dreams_count", using: :btree
     t.index ["name"], name: "index_patterns_on_name", using: :btree
   end
 

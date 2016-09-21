@@ -1,0 +1,59 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+
+<article class="entity-page">
+  <h1><%= @entity.name %></h1>
+  <ul class="actions">
+    <li><%= create_icon new_pattern_path %></li>
+    <li><%= list_icon admin_patterns_path %></li>
+    <% unless @entity.locked? %>
+        <li><%= edit_icon edit_pattern_path(@entity) %></li>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
+
+  <table>
+    <tbody>
+    <% unless @entity.image.blank? %>
+        <tr>
+          <td colspan="2">
+            <figure><%= image_tag @entity.image.big.url, alt: @entity.name %></figure>
+          </td>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag @entity.created_at %></td>
+    </tr>
+    <tr>
+      <th><%= t(:updated_at) %></th>
+      <td><%= time_tag @entity.updated_at %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.pattern.essence') %></th>
+      <td><%= @entity.essence %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.pattern.description') %></th>
+      <td><%= simple_format @entity.description %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= render partial: 'admin/patterns/toggleable', locals: { pattern: @entity } %>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2">
+        <nav>
+          <ul>
+            <li><%= link_to t(:comment, count: @entity.comments_count), comments_admin_pattern_path(@entity) %></li>
+            <li><%= @entity.dreams_count %></li>
+            <li><%= @entity.words_count %></li>
+          </ul>
+        </nav>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</article>

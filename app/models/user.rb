@@ -6,7 +6,7 @@ class User < ApplicationRecord
   NETWORK_SEPARATOR = '-'
   PER_PAGE          = 25
 
-  toggleable %i(email_confirmed allow_mail allow_login bot)
+  toggleable %i(email_confirmed phone_confirmed allow_mail allow_login bot)
 
   belongs_to :agent, optional: true
   has_many :user_roles, dependent: :destroy

@@ -39,6 +39,13 @@ Rails.application.routes.draw do
 
     resources :posts, :tags, only: [:index]
     resources :comments, only: [:index]
+
+    resources :patterns, only: [:index, :show] do
+      member do
+        get 'dreams'
+        get 'comments'
+      end
+    end
   end
 
   namespace :api, defaults: { format: :json } do
@@ -46,6 +53,7 @@ Rails.application.routes.draw do
     resources :users, :tokens, except: [:new, :edit], concerns: [:toggleable]
     resources :posts, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :comments, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :patterns, except: [:new, :edit], concerns: [:toggleable, :lockable]
   end
 
   namespace :my do
@@ -67,6 +75,7 @@ Rails.application.routes.draw do
   resources :figures, only: [:show, :edit, :update, :destroy]
   resources :tags
   resources :comments, except: [:index, :new]
+  resources :patterns, except: [:index]
 
   controller :authentication do
     get 'login' => :new
