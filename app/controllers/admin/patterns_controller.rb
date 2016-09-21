@@ -4,7 +4,8 @@ class Admin::PatternsController < ApplicationController
 
   # get /admin/patterns
   def index
-    @collection = Pattern.page_for_administration current_page
+    @filter = params[:filter] || Hash.new
+    @collection = Pattern.page_for_administration current_page, @filter
   end
 
   # get /admin/patterns/:id

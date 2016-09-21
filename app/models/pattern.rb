@@ -9,8 +9,8 @@ class Pattern < ApplicationRecord
   mount_uploader :image, PatternImageUploader
 
   scope :visible, -> { where deleted: false }
-  scope :ordered_by_popularity, -> { order 'dreams_count desc' }
-  scope :described, -> (flag) { where described: flag.to_i > 1 unless flag.blank? }
+  scope :ordered_by_popularity, -> { order 'dreams_count desc, name asc' }
+  scope :described, -> (flag) { where described: flag.to_i > 0 unless flag.blank? }
   scope :filtered, -> (f) { described(f[:described]).with_name_like(f[:name]) }
 
   # @param [Integer] page
