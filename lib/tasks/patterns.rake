@@ -9,9 +9,10 @@ namespace :patterns do
       puts 'Deleting old patterns...'
       Pattern.destroy_all
       puts 'Done. Importing...'
+      ignored = %w(id image dream_count upvote_count downvote_count slug rating)
       File.open file_path, 'r' do |file|
         YAML.load(file).each do |id, data|
-          attributes = data.reject { |key| %w(image).include? key }
+          attributes = data.reject { |key| ignored.include? key }
           pattern    = Pattern.new id: id
           pattern.assign_attributes attributes
           if data.has_key? 'image'
