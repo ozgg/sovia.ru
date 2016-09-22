@@ -39,7 +39,7 @@ RSpec.describe Word, type: :model do
     end
 
     context 'adding new patterns' do
-      let(:action) { -> { subject.patterns_string = 'первое, второе, первое' } }
+      let(:action) { -> { subject.patterns_string = 'первое, ,второе,, первое' } }
 
       it 'inserts new patterns into table' do
         expect(action).to change(Pattern, :count).by(2)

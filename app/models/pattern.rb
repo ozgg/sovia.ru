@@ -30,4 +30,13 @@ class Pattern < ApplicationRecord
   def self.entity_parameters
     %i(image name essence description described)
   end
+
+  # @param [String] string
+  def words_string=(string)
+    new_word_ids = []
+    string.mb_chars.downcase.to_s.strip.split(/,\s*/).reject { |s| s.blank? }.uniq.each do |body|
+      new_word_ids << Word.find_or_create_by(body: body).id
+    end
+    self.word_ids = new_word_ids
+  end
 end
