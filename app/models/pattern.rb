@@ -14,7 +14,7 @@ class Pattern < ApplicationRecord
   scope :visible, -> { where deleted: false }
   scope :ordered_by_popularity, -> { order 'dreams_count desc, name asc' }
   scope :described, -> (flag) { where described: flag.to_i > 0 unless flag.blank? }
-  scope :filtered, -> (f) { described(f[:described]).with_name_like(f[:name]) }
+  scope :filtered, -> (f) { described(f[:described]).with_name(f[:name]) }
 
   # @param [Integer] page
   # @param [Hash] filters
@@ -38,5 +38,9 @@ class Pattern < ApplicationRecord
       new_word_ids << Word.find_or_create_by(body: body).id
     end
     self.word_ids = new_word_ids
+  end
+
+  def words_string
+    words.map { |word| word.body }.join(', ')
   end
 end

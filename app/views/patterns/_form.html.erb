@@ -23,6 +23,10 @@
         <td><%= f.text_field :name, required: true %></td>
       </tr>
       <tr>
+        <th><%= label_tag :words_string, t('activerecord.attributes.pattern.words') %></th>
+        <td><%= text_field_tag :words_string, entity.words_string %></td>
+      </tr>
+      <tr>
         <th><%= f.label :essence %></th>
         <td><%= f.text_field :essence %></td>
       </tr>

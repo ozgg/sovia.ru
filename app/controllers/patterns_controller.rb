@@ -12,6 +12,7 @@ class PatternsController < ApplicationController
   def create
     @entity = Pattern.new entity_parameters
     if @entity.save
+      set_dependent_entities
       redirect_to admin_pattern_path(@entity)
     else
       render :new, status: :bad_request
@@ -25,6 +26,7 @@ class PatternsController < ApplicationController
   # patch /patterns/:id
   def update
     if @entity.update entity_parameters
+      set_dependent_entities
       redirect_to admin_pattern_path(@entity), notice: t('patterns.update.success')
     else
       render :edit, status: :bad_request
@@ -58,5 +60,9 @@ class PatternsController < ApplicationController
 
   def entity_parameters
     params.require(:pattern).permit(Pattern.entity_parameters)
+  end
+
+  def set_dependent_entities
+    @entity.words_string = params[:words_string].to_s
   end
 end

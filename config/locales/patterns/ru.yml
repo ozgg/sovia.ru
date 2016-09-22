@@ -23,6 +23,7 @@ ru:
         essence: "Суть"
         description: "Описание"
         described: "Описан"
+        words: "Слова"
       word:
         body: "Слово"
         processed: "Обработано"

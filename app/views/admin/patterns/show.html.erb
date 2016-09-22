@@ -29,6 +29,10 @@
       <td><%= time_tag @entity.updated_at %></td>
     </tr>
     <tr>
+      <th><%= t('activerecord.attributes.pattern.words') %></th>
+      <td><%= @entity.words_string %></td>
+    </tr>
+    <tr>
       <th><%= t('activerecord.attributes.pattern.essence') %></th>
       <td><%= @entity.essence %></td>
     </tr>
