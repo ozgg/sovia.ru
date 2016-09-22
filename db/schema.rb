@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921125428) do
+ActiveRecord::Schema.define(version: 20160922001426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -188,6 +188,14 @@ ActiveRecord::Schema.define(version: 20160921125428) do
     t.string   "notice"
     t.index ["agent_id"], name: "index_users_on_agent_id", using: :btree
     t.index ["slug", "network"], name: "index_users_on_slug_and_network", unique: true, using: :btree
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.boolean "significant",  default: true,  null: false
+    t.boolean "locked",       default: false, null: false
+    t.integer "dreams_count", default: 0,     null: false
+    t.string  "body"
+    t.index ["body"], name: "index_words_on_body", using: :btree
   end
 
   add_foreign_key "agents", "browsers"
