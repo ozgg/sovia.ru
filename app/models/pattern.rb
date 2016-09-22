@@ -2,9 +2,12 @@ class Pattern < ApplicationRecord
   include RequiredUniqueName
   include Toggleable
 
+  PER_PAGE = 20
+
   toggleable :described
 
-  PER_PAGE = 20
+  has_many :pattern_words, dependent: :destroy
+  has_many :words, through: :pattern_words
 
   mount_uploader :image, PatternImageUploader
 

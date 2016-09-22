@@ -6,6 +6,9 @@ class Word < ApplicationRecord
 
   toggleable :significant
 
+  has_many :pattern_words, dependent: :destroy
+  has_many :patterns, through: :pattern_words
+
   validates_presence_of :body
   validates_uniqueness_of :body
   validates_length_of :body, maximum: BODY_LIMIT
@@ -27,6 +30,15 @@ class Word < ApplicationRecord
 
   def self.entity_parameters
     %i(significant body)
+  end
+
+  # @param [String] string
+  def patterns_string=(string)
+    new_pattern_ids = []
+    string.split(/,\s*/).reject { |s| s.blank? }.uniq.each do |name|
+      new_pattern_ids << Pattern.find_or_create_by(name: name).id
+    end
+    self.pattern_ids = new_pattern_ids
   end
 
   private
