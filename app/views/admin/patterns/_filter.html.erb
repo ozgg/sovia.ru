@@ -4,7 +4,7 @@
 
       <div>
         <div><%= label_tag 'filter_name', t('activerecord.attributes.pattern.name') %></div>
-        <div><%= search_field_tag 'filter[name]', filter[:name], size: 30, results: 5, autosave: 'agent_name' %></div>
+        <div><%= search_field_tag 'filter[name]', filter[:name], size: 30, results: 5, autosave: 'pattern_name' %></div>
       </div>
 
       <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.pattern.described'), name: 'described', state: filter[:described] } %>

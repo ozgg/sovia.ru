@@ -5,10 +5,17 @@ ru:
     few: "%{count} образа"
     many: "%{count} образов"
     other: "%{count} образов"
+  word:
+    zero: "слов нет"
+    one: "%{count} слово"
+    few: "%{count} слова"
+    many: "%{count} слов"
+    other: "%{count} слов"
   add_pattern: "Добавить образ"
   activerecord:
     models:
       pattern: "Образ"
+      word: "Слово"
     attributes:
       pattern:
         name: "Название"
@@ -16,6 +23,11 @@ ru:
         essence: "Суть"
         description: "Описание"
         described: "Описан"
+      word:
+        body: "Слово"
+        processed: "Обработано"
+        significant: "Значимое"
+        patterns: "Образы"
   admin:
     patterns:
       index:
@@ -27,15 +39,31 @@ ru:
         title: "Сны с образом «%{name}», страница %{page}"
       comments:
         title: "Комментарии к образу «%{name}», страница %{page}"
+    words:
+      index:
+        heading: "Слова"
+        title: "Слова, страница %{page}"
+      show:
+        title: "Слово «%{word}»"
+      dreams:
+        title: "Сны со словом «%{word}», страница %{page}"
   patterns:
-    create:
-      success: "Образ добавлен"
     update:
-      success: "Образ изменён"
+      success: "Образ успешно изменён"
     destroy:
-      success: "Образ удалён"
+      success: "Образ успешно удалён"
     new:
       title: "Добавление образа"
     edit:
       title: "Редактирование образа"
       forbidden: "Редактирование этого образа запрещено"
+  words:
+    update:
+      success: "Слово успешно изменено"
+    destroy:
+      success: "Слово успешно удалено"
+    new:
+      title: "Добавление слова"
+    edit:
+      title: "Редактирование слова"
+      forbidden: "Редактирование этого слова запрещено"

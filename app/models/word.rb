@@ -4,7 +4,7 @@ class Word < ApplicationRecord
   BODY_LIMIT = 50
   PER_PAGE   = 20
 
-  toggleable :significant
+  toggleable :significant, :processed
 
   has_many :pattern_words, dependent: :destroy
   has_many :patterns, through: :pattern_words
@@ -39,6 +39,10 @@ class Word < ApplicationRecord
       new_pattern_ids << Pattern.find_or_create_by(name: name).id
     end
     self.pattern_ids = new_pattern_ids
+  end
+
+  def patterns_string
+    patterns.map { |pattern| pattern.name }.join(', ')
   end
 
   private

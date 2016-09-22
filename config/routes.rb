@@ -17,6 +17,18 @@ Rails.application.routes.draw do
     end
   end
 
+  concern :list_of_dreams do
+    member do
+      get 'dreams'
+    end
+  end
+
+  concern :list_of_comments do
+    member do
+      get 'comments'
+    end
+  end
+
   root 'index#index'
 
   namespace :admin do
@@ -29,10 +41,11 @@ Rails.application.routes.draw do
     end
     resources :agents, only: [:index, :show]
 
-    resources :users, only: [:index, :show] do
+    resources :users, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments] do
       member do
         get 'tokens'
         get 'codes'
+        get 'posts'
       end
     end
     resources :tokens, :codes, only: [:index, :show]
@@ -40,12 +53,8 @@ Rails.application.routes.draw do
     resources :posts, :tags, only: [:index]
     resources :comments, only: [:index]
 
-    resources :patterns, only: [:index, :show] do
-      member do
-        get 'dreams'
-        get 'comments'
-      end
-    end
+    resources :patterns, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments]
+    resources :words, only: [:index, :show], concerns: [:list_of_dreams]
   end
 
   namespace :api, defaults: { format: :json } do
@@ -54,6 +63,7 @@ Rails.application.routes.draw do
     resources :posts, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :comments, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :patterns, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :words, except: [:new, :edit], concerns: [:toggleable, :lockable]
   end
 
   namespace :my do
@@ -62,6 +72,7 @@ Rails.application.routes.draw do
     resource :profile, except: [:destroy]
     resource :confirmation, :recovery, only: [:show, :create, :update]
 
+    resources :dreams, only: [:index]
     resources :posts, only: [:index]
     resources :comments, only: [:index]
   end
@@ -76,6 +87,7 @@ Rails.application.routes.draw do
   resources :tags
   resources :comments, except: [:index, :new]
   resources :patterns, except: [:index]
+  resources :words, except: [:index, :show]
 
   controller :authentication do
     get 'login' => :new

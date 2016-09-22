@@ -56,10 +56,10 @@ $(function () {
         }
     });
 
-    $(document).on('click', 'span.lock > a', function () {
-        var $span = $(this).closest('span');
-        var $edit = $span.parent().find('.edit');
-        var url = $span.data('url');
+    $(document).on('click', 'li.lock > a', function () {
+        var $container = $(this).closest('li');
+        var $edit = $container.parent().find('.lockable');
+        var url = $container.data('url');
 
         if (url.length > 1) {
             $.ajax(url, {
@@ -70,7 +70,7 @@ $(function () {
 
                         locked ? $edit.addClass('hidden') : $edit.removeClass('hidden');
 
-                        $span.find('a').each(function () {
+                        $container.find('a').each(function () {
                             if ($(this).hasClass('lock')) {
                                 locked ? $(this).addClass('hidden') : $(this).removeClass('hidden');
                             } else {
@@ -83,6 +83,41 @@ $(function () {
         }
 
         return false;
+    });
+
+    $(document).on('click', 'li.priority-changer > button', function () {
+        var $li = $(this).closest('li[data-number]');
+        var delta = parseInt($(this).data('delta'));
+        var url = $(this).parent().data('url');
+
+        if (parseInt($li.data('number')) + delta > 0) {
+            $.post(url, {delta: delta}, function (response) {
+                if (response.hasOwnProperty('data') && response['data'].hasOwnProperty('priority')) {
+                    var $container = $li.parent();
+                    var $list = $container.children('li');
+
+                    $li.data('number', response['data']['priority']);
+                    $li.attr('data-number', response['data']['priority']);
+
+                    $list.sort(function (a, b) {
+                        var an = parseInt($(a).data('number'));
+                        var bn = parseInt($(b).data('number'));
+
+                        if (an > bn) {
+                            return 1;
+                        } else if (an < bn) {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                    });
+
+                    $list.detach().appendTo($container);
+                } else {
+                    console.log(response);
+                }
+            }).fail(handle_ajax_failure);
+        }
     });
 
     $('div[data-destroy-url] button.destroy').on('click', function () {

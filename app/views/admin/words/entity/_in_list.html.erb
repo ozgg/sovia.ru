@@ -1,0 +1,15 @@
+<div class="data">
+  <div><%= link_to word.body, admin_word_path(word) %></div>
+  <div class="info"><%= word.patterns_string %></div>
+  <div class="secondary info">
+    <%= link_to word.dreams_count, dreams_admin_word_path(word) %>,
+  </div>
+  <%= render partial: 'admin/words/toggleable', locals: { word: word } %>
+
+  <ul class="actions">
+    <li class="lockable <%= word.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_word_path(word) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { entity: word, path: lock_api_word_path(word) } %>
+  </ul>
+</div>
