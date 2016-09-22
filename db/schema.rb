@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922001426) do
+ActiveRecord::Schema.define(version: 20160922135100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 20160922001426) do
     t.string  "caption"
     t.string  "alt_text"
     t.index ["post_id"], name: "index_figures_on_post_id", using: :btree
+  end
+
+  create_table "pattern_words", force: :cascade do |t|
+    t.integer "pattern_id"
+    t.integer "word_id"
+    t.index ["pattern_id"], name: "index_pattern_words_on_pattern_id", using: :btree
+    t.index ["word_id"], name: "index_pattern_words_on_word_id", using: :btree
   end
 
   create_table "patterns", force: :cascade do |t|
@@ -207,6 +214,8 @@ ActiveRecord::Schema.define(version: 20160922001426) do
   add_foreign_key "comments", "agents"
   add_foreign_key "comments", "users"
   add_foreign_key "figures", "posts"
+  add_foreign_key "pattern_words", "patterns"
+  add_foreign_key "pattern_words", "words"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "agents"
