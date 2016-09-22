@@ -193,9 +193,12 @@ ActiveRecord::Schema.define(version: 20160922001426) do
   create_table "words", force: :cascade do |t|
     t.boolean "significant",  default: true,  null: false
     t.boolean "locked",       default: false, null: false
+    t.boolean "processed",    default: false, null: false
     t.integer "dreams_count", default: 0,     null: false
     t.string  "body"
     t.index ["body"], name: "index_words_on_body", using: :btree
+    t.index ["dreams_count"], name: "index_words_on_dreams_count", using: :btree
+    t.index ["processed"], name: "index_words_on_processed", using: :btree
   end
 
   add_foreign_key "agents", "browsers"

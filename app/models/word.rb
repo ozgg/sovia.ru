@@ -14,9 +14,10 @@ class Word < ApplicationRecord
 
   scope :ordered_by_weight, -> { order 'dreams_count desc, body asc' }
   scope :significant, -> (flag) { where significant: flag.to_i > 0 unless flag.blank? }
-  scope :with_body_like, -> (body) { where 'body like ?', "%#{body}%" unless body.blank? }
+  scope :processed, -> (flag) { where processed: flag.to_i > 0 unless flag.blank? }
+  scope :with_body_like, -> (body) { where 'body like ?', body unless body.blank? }
   scope :with_body, -> (body) { where body: body.mb_chars.downcase.to_s.strip unless body.blank? }
-  scope :filtered, -> (f) { significant(f[:significant]).with_body_like(f[:body]) }
+  scope :filtered, -> (f) { processed(f[:processed]).significant(f[:significant]).with_body_like(f[:body]) }
 
   # @param [Integer] page
   # @param [Hash] filter
