@@ -33,6 +33,7 @@ ru:
         slug: "Идентификатор"
         lead: "Аннотация"
         body: "Текст"
+        tags: "Метки"
       tag:
         name: "Название"
         slug: "Идентификатор"
@@ -52,6 +53,10 @@ ru:
       index:
         title: "Публикации, страница %{page}"
         heading: "Публикации"
+      show:
+        title: "Публикация «%{title}»"
+      comments:
+        title: "Комментарии к публикации «%{title}», страница %{page}"
     tags:
       index:
         title: "Метки, страница %{page}"

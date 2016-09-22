@@ -92,6 +92,9 @@ body {
 }
 
 #main {
+  > article {
+    position: relative;
+  }
 }
 
 .hidden {

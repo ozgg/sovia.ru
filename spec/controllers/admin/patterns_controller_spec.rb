@@ -6,7 +6,7 @@ RSpec.describe Admin::PatternsController, type: :controller do
   it_behaves_like 'list_for_interpreters'
 
   describe 'get show' do
-    let(:user) { create :administrator }
+    let(:user) { create :chief_interpreter }
 
     before :each do
       allow(subject).to receive(:require_role)

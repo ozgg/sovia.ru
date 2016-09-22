@@ -1,0 +1,26 @@
+<div class="image">
+  <% unless post.image.blank? %>
+      <%= image_tag post.image.preview.url %>
+  <% end %>
+</div>
+<div class="data">
+  <div><cite><%= link_to post.title, admin_post_path(post) %></cite></div>
+  <div class="info">
+    <%= user_link post.user %>,
+    <%= time_tag post.created_at %>,
+    <%= link_to t(:comment, count: post.comments_count), comments_admin_post_path(post) %>
+  </div>
+
+  <div class="info tags">
+    <%= t('posts.form.tags') %>: <%= raw post.tags.map { |tag| link_to tag.name, tag }.join(', ') %>
+  </div>
+
+  <%= render partial: 'admin/posts/toggleable', locals: { post: post } %>
+
+  <ul class="actions">
+    <li class="toggleable <%= post.editable_by?(current_user) ? '' : 'hidden' %>">
+      <%= edit_icon edit_post_path(post) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { path: current_user_has_role?(:chief_editor) ? lock_api_post_path(post) : '', entity: post } %>
+  </ul>
+</div>

@@ -50,8 +50,9 @@ Rails.application.routes.draw do
     end
     resources :tokens, :codes, only: [:index, :show]
 
-    resources :posts, :tags, only: [:index]
-    resources :comments, only: [:index]
+    resources :posts, only: [:index, :show], concerns: [:list_of_comments]
+    resources :tags, only: [:index, :show]
+    resources :comments, only: [:index, :show]
 
     resources :patterns, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments]
     resources :words, only: [:index, :show], concerns: [:list_of_dreams]

@@ -7,12 +7,5 @@
     <meta property="og:article:author" content="<%= @entity.user.screen_name %>"/>
 <% end %>
 <% content_for :meta_image, (request.protocol + request.host_with_port + @entity.image.url) if @entity.image.url %>
-<% content_for :options do %>
-    <% if @entity.editable_by? current_user %>
-        <ul>
-          <li><%= link_to t(:edit), edit_post_path(@entity) %></li>
-        </ul>
-    <% end %>
-<% end %>
 
 <%= render @entity %>

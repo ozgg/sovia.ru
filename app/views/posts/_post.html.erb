@@ -1,5 +1,11 @@
 <article class="post" itemscope itemtype="http://schema.org/Article">
   <h1 itemprop="name"><%= post.title %></h1>
+  <% if @entity.editable_by? current_user %>
+      <ul class="actions">
+        <li><%= detail_icon admin_post_path(post) %></li>
+        <li><%= edit_icon edit_post_path(post) %></li>
+      </ul>
+  <% end %>
 
   <div class="body" itemprop="articleBody">
     <% unless post.image.blank? %>
