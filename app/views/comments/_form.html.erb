@@ -1,19 +1,28 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
 <%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <th><%= f.label :body %></th>
+        <td><%= f.text_area :body, required: true, cols: 80, rows: 10 %></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="flags">
+          <ul>
+            <li><%= f.check_box :visible %> <%= f.label :visible %></li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="2"><%= f.button t(:save), type: 'submit' %></td>
+      </tr>
+      </tfoot>
+    </table>
     <div>
       <%= f.hidden_field :commentable_id %>
       <%= f.hidden_field :commentable_type %>
-      <%= f.label :body %><br />
-      <%= f.text_area :body, required: true, cols: 80, rows: 7 %>
-    </div>
-    <% if current_user_has_role?(:administrator) && !entity.id.nil? %>
-        <div>
-          <%= f.check_box :deleted %>
-          <%= f.label :deleted %>
-        </div>
-    <% end %>
-    <div>
-      <%= f.button t(:submit), type: 'submit' %>
     </div>
 <% end %>

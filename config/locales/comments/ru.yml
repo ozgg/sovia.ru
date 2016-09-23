@@ -20,13 +20,15 @@ ru:
         commentable_id: "Комментируемый объект"
         commentable_type: "Тип комментируемого объекта"
         user_id: "Автор"
-        deleted: "Комментарий удалён"
+        visible: "Показывать"
         body: "Текст"
   admin:
     comments:
       index:
         heading: "Комментарии"
         title: "Комментарии, страница %{page}"
+      show:
+        title: "Комментарий №%{id}"
   my:
     comments:
       index:
@@ -43,7 +45,5 @@ ru:
       title: "Добавление комментария"
     edit:
       title: "Редактирование комментария"
-    show:
-      title: "Комментарий №%{id}"
     entry_reply:
       subject: "Новый комментарий к вашей записи"

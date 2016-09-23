@@ -1,0 +1,22 @@
+<div class="data">
+  <div>
+    <%= comment.commentable.model_name.human %>
+    <cite><%= link_to comment.commentable.title, comment.commentable %></cite>
+  </div>
+  <div class="info">
+    <%= user_link comment.user %>
+    <%= time_tag comment.created_at %>
+  </div>
+  <div class="info">
+    <%= prepare_comment_text(comment) %>
+  </div>
+
+  <%= render partial: 'admin/comments/toggleable', locals: { comment: comment } %>
+  <ul class="actions">
+    <li><%= detail_icon admin_comment_path(comment) %></li>
+    <li class="lockable <%= comment.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_comment_path(comment) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { entity: comment, path: lock_api_comment_path(comment) } %>
+  </ul>
+</div>

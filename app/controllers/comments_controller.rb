@@ -10,12 +10,13 @@ class CommentsController < ApplicationController
       notify_participants
       redirect_to(@entity.commentable || admin_comments_path, notice: t('comments.create.success'))
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 
   # get /comments/:id
   def show
+    redirect_to @entity.commentable
   end
 
   # get /comments/:id/edit
@@ -25,9 +26,9 @@ class CommentsController < ApplicationController
   # patch /comments/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('comments.update.success')
+      redirect_to admin_comment_path(@entity), notice: t('comments.update.success')
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 
