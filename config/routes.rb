@@ -18,15 +18,11 @@ Rails.application.routes.draw do
   end
 
   concern :list_of_dreams do
-    member do
-      get 'dreams'
-    end
+    get 'dreams', on: :member
   end
 
   concern :list_of_comments do
-    member do
-      get 'comments'
-    end
+    get 'comments', on: :member
   end
 
   root 'index#index'
@@ -73,6 +69,7 @@ Rails.application.routes.draw do
     resource :profile, except: [:destroy]
     resource :confirmation, :recovery, only: [:show, :create, :update]
 
+    resources :places, only: [:index, :show], concerns: [:list_of_dreams]
     resources :dreams, only: [:index]
     resources :posts, only: [:index]
     resources :comments, only: [:index]
@@ -82,6 +79,8 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index, :show]
   resources :tokens, :codes, except: [:index, :show]
+
+  resources :places, except: [:index, :show]
 
   resources :posts, concerns: [:tagged_archive]
   resources :figures, only: [:show, :edit, :update, :destroy]

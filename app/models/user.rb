@@ -5,6 +5,7 @@ class User < ApplicationRecord
   SLUG_PATTERN      = /\A[a-z0-9_]{1,30}\z/
   NETWORK_SEPARATOR = '-'
   PER_PAGE          = 25
+  PLACE_LIMIT       = 5
 
   toggleable %i(email_confirmed phone_confirmed allow_mail allow_login bot)
 
@@ -13,6 +14,7 @@ class User < ApplicationRecord
   has_many :tokens, dependent: :destroy
   has_many :codes, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :places, dependent: :destroy
 
   has_secure_password
 

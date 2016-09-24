@@ -23,13 +23,15 @@ ru:
   my:
     dreams:
       index:
-        heading: "Мои сны"
         title: "Мои сны, страница %{page}"
+        heading: "Мои сны"
     places:
       index:
         title: "Мои места для сна"
       show:
         title: "Место для сна «%{name}»"
+      dreams:
+        title: "Сны в месте «%{name}», страница %{page}"
   dreams:
     index:
       title: "Дневник снов, страница %{page}"
