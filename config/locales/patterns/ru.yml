@@ -34,6 +34,12 @@ ru:
         words: "Слова"
       grain_category:
         name: "Название"
+      grain:
+        user: "Пользователь"
+        grain_category_id: "Категория"
+        name: "Название"
+        image: "Картинка"
+        description: "Описание"
       word:
         body: "Слово"
         processed: "Обработано"
@@ -63,6 +69,15 @@ ru:
         title: "Слово «%{word}»"
       dreams:
         title: "Сны со словом «%{word}», страница %{page}"
+  my:
+    grains:
+      index:
+        title: "Мои образы снов, страница %{page}"
+        heading: "Мои образы снов"
+      show:
+        title: "Мой образ сна «%{name}»"
+      dreams:
+        title: "Сны с моим образом «%{name}», страница %{page}"
   patterns:
     update:
       success: "Образ успешно изменён"
@@ -83,6 +98,15 @@ ru:
     edit:
       title: "Редактирование категории образа"
       forbidden: "Редактирование этой категории образа запрещено"
+  grains:
+    update:
+      success: "Личный образ успешно изменён"
+    destroy:
+      success: "Личный образ успешно удалён"
+    new:
+      title: "Добавление личного образа"
+    edit:
+      title: "Редактирование личного образа"
   words:
     update:
       success: "Слово успешно изменено"

@@ -1,0 +1,40 @@
+<%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+<%= form_for entity do |f| %>
+    <table>
+      <tbody>
+      <tr>
+        <td colspan="2">
+          <figure class="preview" id="grain-image">
+            <% if entity.image.blank? %>
+                <%= image_tag 'image-placeholder.png' %>
+            <% else %>
+                <%= image_tag entity.image.big.url, alt: t(:current_image) %>
+            <% end %>
+            <figcaption>
+              <%= f.label :image %>
+              <%= f.file_field :image, accept: 'image/jpeg', data: { image: 'grain-image' } %>
+            </figcaption>
+          </figure>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :grain_category_id %></th>
+        <td><%= f.select :grain_category_id, grain_categories_for_select %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :name %></th>
+        <td><%= f.text_field :name, required: true %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :description %></th>
+        <td><%= f.text_area :description, cols: 50, rows: 20 %></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <%= f.button t(:save), type: :submit %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>

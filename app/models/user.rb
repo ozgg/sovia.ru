@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :codes, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :places, dependent: :destroy
+  has_many :grains, dependent: :destroy
 
   has_secure_password
 

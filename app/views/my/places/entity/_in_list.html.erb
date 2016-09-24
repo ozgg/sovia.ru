@@ -1,7 +1,7 @@
 <div class="data">
   <div><%= link_to place.name, my_place_path(place) %></div>
   <div class="info">
-    <%= link_to t(:dream, count: place.dreams_count), dreams_admin_place_path(place) %>
+    <%= link_to t(:dream, count: place.dreams_count), dreams_my_place_path(place) %>
   </div>
 
   <ul class="actions">

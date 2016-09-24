@@ -5,3 +5,5 @@ Disallow: /my
 Disallow: /api
 Disallow: /places
 Disallow: /grains
+Disallow: /posts/tagged
+Disallow: /dreams/tagged

@@ -72,6 +72,7 @@ Rails.application.routes.draw do
     resource :confirmation, :recovery, only: [:show, :create, :update]
 
     resources :places, only: [:index, :show], concerns: [:list_of_dreams]
+    resources :grains, only: [:index, :show], concerns: [:list_of_dreams]
     resources :dreams, only: [:index]
     resources :posts, only: [:index]
     resources :comments, only: [:index]
@@ -83,6 +84,7 @@ Rails.application.routes.draw do
   resources :tokens, :codes, except: [:index, :show]
 
   resources :places, except: [:index, :show]
+  resources :grain_categories, :grains, except: [:index, :show]
 
   resources :posts, concerns: [:tagged_archive]
   resources :figures, only: [:show, :edit, :update, :destroy]
@@ -90,7 +92,6 @@ Rails.application.routes.draw do
   resources :comments, except: [:index, :new]
   resources :patterns, except: [:index]
   resources :words, except: [:index, :show]
-  resources :grain_categories, except: [:index, :show]
 
   controller :authentication do
     get 'login' => :new

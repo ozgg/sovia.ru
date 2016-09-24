@@ -43,6 +43,10 @@ class Grain < ApplicationRecord
     entity || create(user: user, name: name)
   end
 
+  def self.entity_parameters
+    %i(grain_category_id name image description)
+  end
+
   private
 
   def set_uuid
