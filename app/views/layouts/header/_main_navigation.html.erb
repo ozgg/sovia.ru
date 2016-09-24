@@ -1,4 +1,4 @@
-<nav>
+<nav class="main-navigation">
   <ul>
     <li><%= link_to t('posts.index.heading'), posts_path %></li>
     <% if UserRole.has_any_role? current_user %>
