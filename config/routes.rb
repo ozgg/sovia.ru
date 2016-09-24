@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
     resources :patterns, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments]
     resources :words, only: [:index, :show], concerns: [:list_of_dreams]
+    resources :grain_categories, only: [:index, :show]
   end
 
   namespace :api, defaults: { format: :json } do
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
     resources :comments, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :patterns, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :words, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :grain_categories, except: [:new, :edit], concerns: [:lockable]
   end
 
   namespace :my do
@@ -88,6 +90,7 @@ Rails.application.routes.draw do
   resources :comments, except: [:index, :new]
   resources :patterns, except: [:index]
   resources :words, except: [:index, :show]
+  resources :grain_categories, except: [:index, :show]
 
   controller :authentication do
     get 'login' => :new

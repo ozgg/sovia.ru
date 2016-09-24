@@ -73,7 +73,7 @@ ru:
     edit:
       title: "Редактирование образа"
       forbidden: "Редактирование этого образа запрещено"
-  patterns:
+  grain_categories:
     update:
       success: "Категория образа успешно изменена"
     destroy:

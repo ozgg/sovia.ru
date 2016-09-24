@@ -1,0 +1,13 @@
+<div class="data">
+  <div><%= link_to grain_category.name, admin_grain_category_path(grain_category) %></div>
+  <div class="secondary info">
+    <%= t(:grain, count: grain_category.grains_count) %>
+  </div>
+
+  <ul class="actions">
+    <li class="lockable <%= grain_category.locked? ? 'hidden' : '' %>">
+      <%= edit_icon edit_grain_category_path(grain_category) %>
+    </li>
+    <%= render partial: 'shared/actions/locks', locals: { entity: grain_category, path: lock_api_grain_category_path(grain_category) } %>
+  </ul>
+</div>

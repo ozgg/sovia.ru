@@ -11,6 +11,7 @@
         <li><%= link_to t('admin.browsers.index.heading'), admin_browsers_path %></li>
         <li><%= link_to t('admin.agents.index.heading'), admin_agents_path %></li>
         <li><%= link_to t('admin.comments.index.heading'), admin_comments_path %></li>
+        <li><%= link_to t('admin.grain_categories.index.title'), admin_grain_categories_path %></li>
     <% end %>
     <% if current_user_has_role? :editor, :chief_editor %>
         <li><%= link_to t('admin.tags.index.heading'), admin_tags_path %></li>
