@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924094013) do
+ActiveRecord::Schema.define(version: 20160924104420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 20160924094013) do
     t.boolean "locked",       default: false, null: false
     t.boolean "deleted",      default: false, null: false
     t.string  "name",                         null: false
+  end
+
+  create_table "grains", force: :cascade do |t|
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "grain_category_id"
+    t.integer  "user_id",                       null: false
+    t.integer  "dreams_count",      default: 0, null: false
+    t.string   "uuid",                          null: false
+    t.string   "name",                          null: false
+    t.string   "slug",                          null: false
+    t.string   "image"
+    t.text     "description"
+    t.index ["grain_category_id"], name: "index_grains_on_grain_category_id", using: :btree
+    t.index ["slug"], name: "index_grains_on_slug", using: :btree
+    t.index ["user_id"], name: "index_grains_on_user_id", using: :btree
   end
 
   create_table "pattern_words", force: :cascade do |t|
@@ -229,6 +245,8 @@ ActiveRecord::Schema.define(version: 20160924094013) do
   add_foreign_key "comments", "agents"
   add_foreign_key "comments", "users"
   add_foreign_key "figures", "posts"
+  add_foreign_key "grains", "grain_categories"
+  add_foreign_key "grains", "users"
   add_foreign_key "pattern_words", "patterns"
   add_foreign_key "pattern_words", "words"
   add_foreign_key "places", "users"
