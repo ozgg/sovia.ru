@@ -1,1 +1,12 @@
 <% content_for :meta_title, t('.title') %>
+
+<article class="entity-page">
+  <h1><%= t('.title') %></h1>
+  <% if Place.owned_by(current_user).count < User::PLACE_LIMIT %>
+      <ul class="actions">
+        <li><%= create_icon new_place_path %></li>
+      </ul>
+  <% end %>
+
+  <%= render partial: 'list', locals: { collection: @collection } %>
+</article>
