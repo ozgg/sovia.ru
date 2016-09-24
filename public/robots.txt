@@ -1,5 +1,7 @@
 User-agent: *
 Host: sovia.ru
-Disallow: /admin/*
-Disallow: /my/*
-Disallow: /api/*
+Disallow: /admin
+Disallow: /my
+Disallow: /api
+Disallow: /places
+Disallow: /grains

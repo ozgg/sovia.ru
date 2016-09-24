@@ -5,6 +5,12 @@ ru:
     few: "%{count} образа"
     many: "%{count} образов"
     other: "%{count} образов"
+  grain:
+    zero: "личных образов нет"
+    one: "%{count} личный образ"
+    few: "%{count} личных образа"
+    many: "%{count} личных образов"
+    other: "%{count} личных образов"
   word:
     zero: "слов нет"
     one: "%{count} слово"
@@ -15,6 +21,8 @@ ru:
   activerecord:
     models:
       pattern: "Образ"
+      grain_category: "Категория личного образа"
+      grain: "Личный образ"
       word: "Слово"
     attributes:
       pattern:
@@ -24,6 +32,8 @@ ru:
         description: "Описание"
         described: "Описан"
         words: "Слова"
+      grain_category:
+        name: "Название"
       word:
         body: "Слово"
         processed: "Обработано"
@@ -32,14 +42,19 @@ ru:
   admin:
     patterns:
       index:
-        heading: "Образы"
         title: "Образы, страница %{page}"
+        heading: "Образы"
       show:
         title: "Образ «%{name}»"
       dreams:
         title: "Сны с образом «%{name}», страница %{page}"
       comments:
         title: "Комментарии к образу «%{name}», страница %{page}"
+    grain_categories:
+      index:
+        title: "Категория личных образов"
+      show:
+        title: "Категория личного образа «%{name}»"
     words:
       index:
         heading: "Слова"
@@ -58,6 +73,16 @@ ru:
     edit:
       title: "Редактирование образа"
       forbidden: "Редактирование этого образа запрещено"
+  patterns:
+    update:
+      success: "Категория образа успешно изменена"
+    destroy:
+      success: "Категория образа успешно удалена"
+    new:
+      title: "Новая категория образа"
+    edit:
+      title: "Редактирование категории образа"
+      forbidden: "Редактирование этой категории образа запрещено"
   words:
     update:
       success: "Слово успешно изменено"
