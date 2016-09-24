@@ -20,4 +20,18 @@ RSpec.describe Place, type: :model do
       expect(subject).to be_valid
     end
   end
+
+  describe '::page_for_owner' do
+    let(:user) { create :user }
+    let!(:entity) { create :place, user: user }
+    let!(:foreign_entity) { create :place }
+
+    it 'includes entity' do
+      expect(subject.class.page_for_owner(user)).to include(entity)
+    end
+
+    it 'does not include foreign entity' do
+      expect(subject.class.page_for_owner(user)).not_to include(foreign_entity)
+    end
+  end
 end
