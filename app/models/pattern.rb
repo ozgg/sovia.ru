@@ -8,6 +8,7 @@ class Pattern < ApplicationRecord
 
   has_many :pattern_words, dependent: :destroy
   has_many :words, through: :pattern_words
+  has_many :comments, as: :commentable
 
   mount_uploader :image, PatternImageUploader
 

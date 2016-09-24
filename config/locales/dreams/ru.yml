@@ -1,0 +1,54 @@
+ru:
+  dream:
+    zero: "снов нет"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
+  activerecord:
+    model:
+      place: "Место для сна"
+    attributes:
+      place:
+        user: "Пользователь"
+        name: "Название"
+        description: "Описание"
+  admin:
+    dreams:
+      index:
+        title: "Сны, страница %{page}"
+        heading: "Сны"
+      show:
+        title: "Сон «%{title}»"
+  my:
+    dreams:
+      index:
+        heading: "Мои сны"
+        title: "Мои сны, страница %{page}"
+    places:
+      index:
+        title: "Мои места для сна"
+      show:
+        title: "Место для сна «%{name}»"
+  dreams:
+    index:
+      title: "Дневник снов, страница %{page}"
+      heading: "Дневник снов"
+    update:
+      success: "Сон успешно изменён"
+    destroy:
+      success: "Сон успешно удалён"
+    new:
+      title: "Описать сон"
+    edit:
+      title: "Редактирование сна"
+  places:
+    update:
+      success: "Место для сна успешно изменено"
+    destroy:
+      success: "Место для сна успешно удалено"
+    new:
+      title: "Новое место для сна"
+      maxed_out: "Вы уже добавили максимальное количество мест для сна"
+    edit:
+      title: "Редактирование места для сна"

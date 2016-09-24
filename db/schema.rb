@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922135100) do
+ActiveRecord::Schema.define(version: 20160924000058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,14 @@ ActiveRecord::Schema.define(version: 20160922135100) do
     t.index ["described"], name: "index_patterns_on_described", using: :btree
     t.index ["dreams_count"], name: "index_patterns_on_dreams_count", using: :btree
     t.index ["name"], name: "index_patterns_on_name", using: :btree
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "dreams_count", default: 0, null: false
+    t.string  "name",                     null: false
+    t.text    "description"
+    t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
   create_table "post_tags", force: :cascade do |t|
@@ -216,6 +224,7 @@ ActiveRecord::Schema.define(version: 20160922135100) do
   add_foreign_key "figures", "posts"
   add_foreign_key "pattern_words", "patterns"
   add_foreign_key "pattern_words", "words"
+  add_foreign_key "places", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "agents"
