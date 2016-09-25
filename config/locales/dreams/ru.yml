@@ -8,6 +8,14 @@ ru:
   activerecord:
     model:
       place: "Место для сна"
+      dream: "Сон"
+    errors:
+      models:
+        dream:
+          place_id:
+            foreign: "принадлежит другому пользователю"
+          privacy:
+            invalid: "имеет недопустимое значение"
     attributes:
       place:
         user: "Пользователь"

@@ -24,6 +24,7 @@ ru:
   "no": "Нет"
   page: "Страница"
   current_image: "Текущая картинка"
+  untitled: "Без названия"
   date:
     nominative_months:
       -

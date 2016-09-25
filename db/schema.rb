@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924104420) do
+ActiveRecord::Schema.define(version: 20160924183748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,33 @@ ActiveRecord::Schema.define(version: 20160924104420) do
     t.index ["agent_id"], name: "index_comments_on_agent_id", using: :btree
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "dreams", force: :cascade do |t|
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.integer  "place_id"
+    t.inet     "ip"
+    t.integer  "privacy",              limit: 2, default: 0,     null: false
+    t.boolean  "deleted",                        default: false, null: false
+    t.boolean  "patterns_set",                   default: false, null: false
+    t.integer  "lucidity",             limit: 2, default: 0,     null: false
+    t.integer  "mood",                 limit: 2, default: 0,     null: false
+    t.boolean  "needs_interpretation",           default: false, null: false
+    t.boolean  "interpretation_given",           default: false, null: false
+    t.integer  "comments_count",                 default: 0,     null: false
+    t.boolean  "show_image",                     default: true,  null: false
+    t.string   "uuid",                                           null: false
+    t.string   "image"
+    t.string   "title"
+    t.string   "slug"
+    t.text     "body",                                           null: false
+    t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx", using: :btree
+    t.index ["agent_id"], name: "index_dreams_on_agent_id", using: :btree
+    t.index ["place_id"], name: "index_dreams_on_place_id", using: :btree
+    t.index ["user_id"], name: "index_dreams_on_user_id", using: :btree
   end
 
   create_table "figures", force: :cascade do |t|
@@ -244,6 +271,9 @@ ActiveRecord::Schema.define(version: 20160924104420) do
   add_foreign_key "codes", "users"
   add_foreign_key "comments", "agents"
   add_foreign_key "comments", "users"
+  add_foreign_key "dreams", "agents"
+  add_foreign_key "dreams", "places"
+  add_foreign_key "dreams", "users"
   add_foreign_key "figures", "posts"
   add_foreign_key "grains", "grain_categories"
   add_foreign_key "grains", "users"

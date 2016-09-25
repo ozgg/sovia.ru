@@ -5,6 +5,7 @@ RSpec.describe Post, type: :model do
 
   it_behaves_like 'has_valid_factory'
   it_behaves_like 'required_user'
+  it_behaves_like 'required_body'
   it_behaves_like 'has_owner'
   it_behaves_like 'commentable_by_community'
 
@@ -39,12 +40,6 @@ RSpec.describe Post, type: :model do
       subject.lead = 'A' * 501
       expect(subject).not_to be_valid
       expect(subject.errors.messages).to have_key(:lead)
-    end
-
-    it 'fails without body' do
-      subject.body = ' '
-      expect(subject).not_to be_valid
-      expect(subject.errors.messages).to have_key(:body)
     end
   end
 

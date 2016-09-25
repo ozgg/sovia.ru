@@ -120,6 +120,11 @@ class User < ApplicationRecord
     allow_mail? && !email.blank?
   end
 
+  # @param [User] user
+  def follows?(user)
+    user == self
+  end
+
   protected
 
   def normalize_screen_name

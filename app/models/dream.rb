@@ -1,0 +1,115 @@
+class Dream < ApplicationRecord
+  include HasOwner
+  include Toggleable
+
+  PER_PAGE = 10
+
+  toggleable :needs_interpretation, :interpretation_given
+
+  belongs_to :agent, optional: true
+  belongs_to :user, optional: true, counter_cache: true
+  belongs_to :place, optional: true, counter_cache: true
+
+  mount_uploader :image, DreamImageUploader
+
+  enum privacy: [:generally_accessible, :visible_to_community, :visible_to_followees, :personal]
+
+  after_initialize :set_uuid
+  before_validation :normalize_title
+
+  validates_presence_of :body
+  validates_inclusion_of :mood, in: (-2..2)
+  validates_inclusion_of :lucidity, in: (0..5)
+  validate :place_has_same_owner
+  validate :privacy_consistence
+
+  scope :not_deleted, -> { where deleted: false }
+  scope :with_privacy, -> (value) { where privacy: value unless value.blank? }
+  scope :recent, -> { order 'id desc' }
+
+  # @param [Integer] page
+  def self.page_for_administration(page)
+    not_deleted.with_privacy(Dream.community_privacies).recent.page(page).per(PER_PAGE)
+  end
+
+  # @param [User] user
+  # @param [Integer] page
+  def self.page_for_visitors(user, page)
+    privacy = user.is_a?(User) ? Dream.community_privacies : Dream.privacies[:generally_accessible]
+    not_deleted.with_privacy(privacy).recent.page(page).per(PER_PAGE)
+  end
+
+  # @param [User] user
+  # @param [Integer] page
+  def self.page_for_owner(user, page)
+    owned_by(user).not_deleted.recent.page(page).per(PER_PAGE)
+  end
+
+  def self.community_privacies
+    [Dream.privacies[:generally_accessible], Dream.privacies[:visible_to_community]]
+  end
+
+  # Is dream visible to user?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
+  def visible_to?(user)
+    method = "#{self.privacy}_to?".to_sym
+    respond_to?(method) ? send(method, user) : owned_by?(user)
+  end
+
+  # Is dream visible to user as generally accessible dream?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
+  def generally_accessible_to?(user)
+    user.nil? || user.is_a?(User)
+  end
+
+  # Is dream visible to user as dream for community?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
+  def visible_to_community_to?(user)
+    user.is_a? User
+  end
+
+  # Is dream visible to user as dream for followees?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [Boolean]
+  def visible_to_followees_to?(user)
+    owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
+  end
+
+  private
+
+  def normalize_title
+    if title.blank?
+      self.title, self.slug = nil, nil
+    else
+      self.title = title.strip
+      self.slug  = Canonizer.transliterate title
+    end
+  end
+
+  # Place should have the same owner as dream
+  def place_has_same_owner
+    if place.is_a?(Place) && !place.owned_by?(user)
+      errors.add :place_id, I18n.t('activerecord.errors.models.dream.place_id.foreign')
+    end
+  end
+
+  # Anonymous users can add only generally accessible dreams
+  def privacy_consistence
+    if user.nil? && !generally_accessible?
+      errors.add :privacy, I18n.t('activerecord.errors.models.dream.privacy.invalid')
+    end
+  end
+
+  def set_uuid
+    if uuid.nil?
+      self.uuid = SecureRandom.uuid
+    end
+  end
+end
