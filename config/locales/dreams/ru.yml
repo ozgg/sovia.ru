@@ -21,6 +21,21 @@ ru:
         user: "Пользователь"
         name: "Название"
         description: "Описание"
+      dream:
+        user: "Пользователь"
+        place: "Место для сна"
+        privacy: "Видимость"
+        patterns_set: "Образы"
+        lucidity: "Осознанность"
+        mood: "Настроение"
+        needs_interpretation: "Нужно толкование"
+        interpretation_given: "Толкование получено"
+        show_image: "Показывать картинку"
+        uuid: "UUID"
+        image: "Картинка"
+        title: "Название"
+        slug: "Идентификатор"
+        body: "Сюжет"
   admin:
     dreams:
       index:

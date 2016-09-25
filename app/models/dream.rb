@@ -88,7 +88,7 @@ class Dream < ApplicationRecord
     if title.blank?
       self.title, self.slug = nil, nil
     else
-      self.title = title.strip
+      self.title = title.strip[0..200]
       self.slug  = Canonizer.transliterate title
     end
   end
