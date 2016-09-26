@@ -1,0 +1,21 @@
+<div class="image">
+  <% unless dream.image.blank? %>
+      <%= image_tag dream.image.preview.url %>
+  <% end %>
+</div>
+<div class="data">
+  <div><cite><%= link_to dream.title, admin_dream_path(dream) %></cite></div>
+  <div class="info">
+    <%= user_link dream.user %>,
+    <%= time_tag dream.created_at %>,
+    <%= link_to t(:comment, count: dream.comments_count), comments_admin_dream_path(dream) %>
+  </div>
+
+  <%= render partial: 'admin/dreams/toggleable', locals: { dream: dream } %>
+
+  <% if dream.editable_by? current_user %>
+      <ul class="actions">
+        <li><%= edit_icon edit_dream_path(dream) %></li>
+      </ul>
+  <% end %>
+</div>

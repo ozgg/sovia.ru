@@ -1,0 +1,57 @@
+<% content_for :meta_title, t('.title', title: @entity.title) %>
+
+<article class="entity-page">
+  <h1><%= @entity.title %></h1>
+  <ul class="actions">
+    <li><%= list_icon admin_dreams_path %></li>
+    <li><%= view_icon dream_path(@entity) %></li>
+    <% unless @entity.locked? %>
+        <li><%= edit_icon edit_dream_path(@entity) %></li>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
+
+  <table>
+    <tbody>
+    <% unless @entity.image.blank? %>
+        <tr>
+          <td colspan="2">
+            <figure><%= image_tag @entity.image.small.url, alt: @entity.title %></figure>
+          </td>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag @entity.created_at %></td>
+    </tr>
+    <tr>
+      <th><%= t(:updated_at) %></th>
+      <td><%= time_tag @entity.updated_at %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.dream.slug') %></th>
+      <td><%= @entity.slug %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.dream.body') %></th>
+      <td><%= prepare_dream_text @entity %></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= render partial: 'admin/dreams/toggleable', locals: { dream: @entity } %>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2">
+        <nav>
+          <ul>
+            <li><%= link_to t(:comment, count: @entity.comments_count), comments_admin_dream_path(@entity) %></li>
+          </ul>
+        </nav>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</article>

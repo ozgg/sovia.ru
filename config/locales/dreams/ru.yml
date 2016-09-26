@@ -43,6 +43,8 @@ ru:
         heading: "Сны"
       show:
         title: "Сон «%{title}»"
+      comments:
+        title: "Комментарии к сну «%{title}», страница %{page}"
   my:
     dreams:
       index:

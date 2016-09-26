@@ -82,6 +82,10 @@ class Dream < ApplicationRecord
     owned_by?(user) || (self.user.is_a?(User) && self.user.follows?(user))
   end
 
+  def editable_by?(user)
+    owned_by?(user) || (UserRole.user_has_role?(:administrator) && visible_to?(user))
+  end
+
   private
 
   def normalize_title

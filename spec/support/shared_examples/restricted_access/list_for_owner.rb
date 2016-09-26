@@ -10,6 +10,7 @@ RSpec.shared_examples_for 'list_for_owner' do
     end
 
     it_behaves_like 'page_for_user'
+    it_behaves_like 'http_success'
 
     it 'calls ::page_for_owner on entity class' do
       expect(entity.class).to have_received(:page_for_owner)
