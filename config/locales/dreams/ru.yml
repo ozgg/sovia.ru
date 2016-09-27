@@ -6,7 +6,7 @@ ru:
     many: "%{count} снов"
     other: "%{count} снов"
   activerecord:
-    model:
+    models:
       place: "Место для сна"
       dream: "Сон"
     errors:
@@ -39,6 +39,8 @@ ru:
         title: "Название"
         slug: "Идентификатор"
         body: "Сюжет"
+        patterns: "Образы"
+        words: "Слова"
       dream_grain:
         dream: "Сон"
         grain: "Личный образ"

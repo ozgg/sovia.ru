@@ -7,6 +7,12 @@ module ParsingHelper
     raw post.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_post_string(post, s) }.join
   end
 
+  # @param [Dream] dream
+  # @param [User] user
+  def prepare_dream_text(dream, user)
+    raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_common_string s }.join
+  end
+
   # Prepare comment text for views
   #
   # @param [Comment] comment

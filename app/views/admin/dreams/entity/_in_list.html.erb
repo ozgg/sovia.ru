@@ -4,7 +4,7 @@
   <% end %>
 </div>
 <div class="data">
-  <div><cite><%= link_to dream.title, admin_dream_path(dream) %></cite></div>
+  <div><cite><%= admin_dream_link(dream) %></cite></div>
   <div class="info">
     <%= user_link dream.user %>,
     <%= time_tag dream.created_at %>,

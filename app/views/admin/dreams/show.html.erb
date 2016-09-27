@@ -5,7 +5,7 @@
   <ul class="actions">
     <li><%= list_icon admin_dreams_path %></li>
     <li><%= view_icon dream_path(@entity) %></li>
-    <% unless @entity.locked? %>
+    <% if @entity.editable_by? current_user %>
         <li><%= edit_icon edit_dream_path(@entity) %></li>
         <li class="danger"><%= destroy_icon @entity %></li>
     <% end %>
@@ -34,7 +34,15 @@
     </tr>
     <tr>
       <th><%= t('activerecord.attributes.dream.body') %></th>
-      <td><%= prepare_dream_text @entity %></td>
+      <td><%= prepare_dream_text @entity, current_user %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.dream.patterns') %></th>
+      <td><%= @entity.patterns.ordered_by_popularity.map { |pattern| pattern.name }.join(', ') %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.dream.words') %></th>
+      <td><%= @entity.words.ordered_by_weight.map { |word| word.name }.join(', ') %></td>
     </tr>
     <tr>
       <td colspan="2">

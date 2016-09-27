@@ -9,6 +9,10 @@ class Dream < ApplicationRecord
   belongs_to :agent, optional: true
   belongs_to :user, optional: true, counter_cache: true
   belongs_to :place, optional: true, counter_cache: true
+  has_many :dream_patterns, dependent: :destroy
+  has_many :patterns, through: :dream_patterns
+  has_many :dream_words, dependent: :destroy
+  has_many :words, through: :dream_words
 
   mount_uploader :image, DreamImageUploader
 
@@ -85,7 +89,7 @@ class Dream < ApplicationRecord
   end
 
   def editable_by?(user)
-    owned_by?(user) || (UserRole.user_has_role?(:administrator) && visible_to?(user))
+    owned_by?(user) || (UserRole.user_has_role?(user, :administrator) && visible_to?(user))
   end
 
   private

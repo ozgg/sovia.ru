@@ -3,8 +3,10 @@
       <% collection.each do |dream| %>
           <% if dream.deleted? %>
               <li class="deleted"><%= t(:deleted_entity) %>, id: <%= dream.id %></li>
-          <% else %>
+          <% elsif dream.visible_to? current_user %>
               <li><%= render partial: 'admin/dreams/entity/in_list', locals: { dream: dream } %></li>
+          <% else %>
+              <li><%= dream.model_name.human %> <%= dream.id %></li>
           <% end %>
       <% end %>
     </ul>
