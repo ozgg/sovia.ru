@@ -16,6 +16,9 @@ ru:
             foreign: "принадлежит другому пользователю"
           privacy:
             invalid: "имеет недопустимое значение"
+        dream_grain:
+          grain_id:
+            foreign: "принадлежит другому пользователю"
     attributes:
       place:
         user: "Пользователь"
@@ -36,6 +39,16 @@ ru:
         title: "Название"
         slug: "Идентификатор"
         body: "Сюжет"
+      dream_grain:
+        dream: "Сон"
+        grain: "Личный образ"
+        grain_id: "Личный образ"
+      dream_pattern:
+        dream: "Сон"
+        pattern: "Образ"
+      dream_word:
+        dream: "Сон"
+        word: "Слово"
   admin:
     dreams:
       index:

@@ -36,7 +36,7 @@ RSpec.describe DreamsController, type: :controller, focus: true do
       allow(Pattern).to receive(:find_by!).and_return(pattern)
       allow(entity.class).to receive(:tagged).and_call_original
       allow(entity.class).to receive(:page_for_visitors)
-      get :tagged, params: { tag_name: tag.name }
+      get :tagged, params: { tag_name: pattern.name }
     end
 
     it 'finds tag' do

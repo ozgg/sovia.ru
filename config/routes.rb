@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   resources :comments, except: [:index, :new]
   resources :patterns, except: [:index]
   resources :words, except: [:index, :show]
-  resources :dreams
+  resources :dreams, concerns: [:tagged_archive]
 
   controller :authentication do
     get 'login' => :new

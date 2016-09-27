@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924183748) do
+ActiveRecord::Schema.define(version: 20160926235847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,27 @@ ActiveRecord::Schema.define(version: 20160924183748) do
     t.index ["agent_id"], name: "index_comments_on_agent_id", using: :btree
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "dream_grains", force: :cascade do |t|
+    t.integer "dream_id", null: false
+    t.integer "grain_id", null: false
+    t.index ["dream_id"], name: "index_dream_grains_on_dream_id", using: :btree
+    t.index ["grain_id"], name: "index_dream_grains_on_grain_id", using: :btree
+  end
+
+  create_table "dream_patterns", force: :cascade do |t|
+    t.integer "dream_id",   null: false
+    t.integer "pattern_id", null: false
+    t.index ["dream_id"], name: "index_dream_patterns_on_dream_id", using: :btree
+    t.index ["pattern_id"], name: "index_dream_patterns_on_pattern_id", using: :btree
+  end
+
+  create_table "dream_words", force: :cascade do |t|
+    t.integer "dream_id", null: false
+    t.integer "word_id",  null: false
+    t.index ["dream_id"], name: "index_dream_words_on_dream_id", using: :btree
+    t.index ["word_id"], name: "index_dream_words_on_word_id", using: :btree
   end
 
   create_table "dreams", force: :cascade do |t|
@@ -271,6 +292,12 @@ ActiveRecord::Schema.define(version: 20160924183748) do
   add_foreign_key "codes", "users"
   add_foreign_key "comments", "agents"
   add_foreign_key "comments", "users"
+  add_foreign_key "dream_grains", "dreams"
+  add_foreign_key "dream_grains", "grains"
+  add_foreign_key "dream_patterns", "dreams"
+  add_foreign_key "dream_patterns", "patterns"
+  add_foreign_key "dream_words", "dreams"
+  add_foreign_key "dream_words", "words"
   add_foreign_key "dreams", "agents"
   add_foreign_key "dreams", "places"
   add_foreign_key "dreams", "users"
