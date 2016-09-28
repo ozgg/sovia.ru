@@ -10,7 +10,7 @@ module ParsingHelper
   # @param [Dream] dream
   # @param [User] user
   def prepare_dream_text(dream, user)
-    raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_common_string s }.join
+    raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_dream_string s, user }.join
   end
 
   # Prepare comment text for views
@@ -40,6 +40,26 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments like [dream 123](link text)
+  #
+  # @param [String] string
+  # @param [User] user
+  # @return [String]
+  def parse_dream_links(string, user)
+    pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
+    string.gsub pattern do |chunk|
+      match = pattern.match chunk
+      dream = Dream.not_deleted.find_by id: match[:id]
+      if dream.is_a?(Dream) && dream.visible_to?(user)
+        link_text = match[:text].blank? ? (dream.title || t(:untitled)) : match[:text]
+        link_tag  = link_to(link_text, dream, title: (dream.title || t(:untitled)))
+        "<cite>#{link_tag}</cite>"
+      else
+        '<span class="not-found">dream ' + match[:id] + '</span>'
+      end
+    end
+  end
+
   def parse_figure_links(post, string)
     pattern = Figure::LINK_PATTERN
     string.gsub pattern do |chunk|
@@ -63,6 +83,14 @@ module ParsingHelper
     else
       string[0] == '<' ? string : "<p>#{string}</p>"
     end
+  end
+
+  # @param [String] string
+  # @param [User] user
+  def parse_dream_string(string, user)
+    output = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    output = parse_dream_links output, user
+    "<p>#{output}</p>\n"
   end
 
   # Parse string as string from common text
