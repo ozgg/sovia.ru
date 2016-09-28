@@ -9,6 +9,44 @@
       <%= f.label :body %><br />
       <%= f.text_area :body, cols: 80, rows: 20, required: true %>
     </div>
+    <% if current_user.is_a?(User) && (entity.id.nil? || entity.owned_by?(current_user)) %>
+        <div class="lucidity">
+          <span><%= t('activerecord.attributes.dream.lucidity') %></span>
+          <% Dream::LUCIDITY_RANGE.each_with_index do |l, i| %>
+          <span>
+            <%= radio_button_tag 'dream[lucidity]', l, entity.lucidity == l, id: "dream_lucidity_#{i}" %>
+            <%= label_tag 'dream[lucidity]', l, id: "dream_lucidity_#{i}" %>
+          </span>
+          <% end %>
+        </div>
+        <div class="mood">
+          <span><%= t('activerecord.attributes.dream.mood') %></span>
+          <% Dream::MOOD_RANGE.each_with_index do |m, i| %>
+          <span>
+            <%= radio_button_tag 'dream[mood]', m, entity.mood == m, id: "dream_mood_#{i}" %>
+            <%= label_tag 'dream[mood]', m, id: "dream_mood_#{i}" %>
+          </span>
+          <% end %>
+        </div>
+        <div class="place">
+          <div><%= t('activerecord.attributes.dream.place') %></div>
+          <ul>
+            <li>
+              <%= radio_button_tag 'dream[place_id]', '', entity.place_id.nil?, id: 'dream_place_0' %>
+              <%= label_tag 'dream[place_id]', t(:not_selected), for: 'dream_place_0' %>
+            </li>
+            <% Place.page_for_owner(current_user).each do |place| %>
+                <li>
+                  <% element_id = "dream_place_#{place.id}" %>
+                  <%= radio_button_tag 'dream[place_id]', place.id, entity.place_id == place.id, id: element_id %>
+                  <%= label_tag 'dream[place_id]', place.name, for: element_id %>
+                  (<%= t(:dream, count: place.dreams_count) %>)
+                </li>
+            <% end %>
+          </ul>
+          <div><%= link_to t('my.places.index.title'), my_places_path %></div>
+        </div>
+    <% end %>
     <div class="buttons">
       <%= f.button t(:save), type: :submit %>
     </div>

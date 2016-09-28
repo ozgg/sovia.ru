@@ -2,7 +2,9 @@ class Dream < ApplicationRecord
   include HasOwner
   include Toggleable
 
-  PER_PAGE = 10
+  PER_PAGE       = 10
+  LUCIDITY_RANGE = (0..5)
+  MOOD_RANGE     = (-2..2)
 
   toggleable :needs_interpretation, :interpretation_given
 
@@ -23,8 +25,8 @@ class Dream < ApplicationRecord
   before_validation :normalize_title
 
   validates_presence_of :body
-  validates_inclusion_of :mood, in: (-2..2)
-  validates_inclusion_of :lucidity, in: (0..5)
+  validates_inclusion_of :mood, in: MOOD_RANGE
+  validates_inclusion_of :lucidity, in: LUCIDITY_RANGE
   validate :place_has_same_owner
   validate :privacy_consistence
 
