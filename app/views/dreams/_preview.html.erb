@@ -1,0 +1,21 @@
+<div class="<%= dream.privacy %>">
+  <div class="header">
+    <div class="image"><%= profile_avatar dream.user %></div>
+    <div class="info">
+      <div class="title"><%= dream_link dream, current_user %></div>
+      <div class="author"><%= user_link dream.user %></div>
+      <div class="time"><%= time_tag dream.created_at %></div>
+    </div>
+  </div>
+  <div class="body">
+    <%= raw preview(prepare_dream_text(dream, current_user)) %>
+    <% if dream.body.scan(/\r?\n/).count > 1 %>
+        <div class="more"><%= dream_link dream, current_user, t(:read_all) %></div>
+    <% end %>
+  </div>
+  <div class="footer">
+    <div class="comments">
+      <%= dream_link dream, current_user, t(:comment, count: dream.comments_count), { anchor: 'comments' } %>
+    </div>
+  </div>
+</div>

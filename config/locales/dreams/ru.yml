@@ -41,6 +41,11 @@ ru:
         body: "Сюжет"
         patterns: "Образы"
         words: "Слова"
+        privacies:
+          generally_accessible: "Для всех"
+          visible_to_community: "Для сообщества"
+          visible_to_followees: "Для добавленных мной"
+          personal: "Только для меня"
       dream_grain:
         dream: "Сон"
         grain: "Личный образ"

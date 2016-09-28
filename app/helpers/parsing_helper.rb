@@ -1,4 +1,10 @@
 module ParsingHelper
+  # @param [String] text
+  # @param [Integer] passages
+  def preview(text, passages = 2)
+    text.split("</p>\n<p>")[0...passages].join('</p><p>')
+  end
+
   # Prepare post text for views
   #
   # @param [Post] post
