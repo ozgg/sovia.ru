@@ -1,7 +1,5 @@
 <div class="image">
-  <% unless dream.image.blank? %>
-      <%= image_tag dream.image.preview.url %>
-  <% end %>
+  <%= profile_avatar dream.user %>
 </div>
 <div class="data">
   <div><cite><%= admin_dream_link(dream) %></cite></div>

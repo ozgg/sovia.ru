@@ -84,6 +84,8 @@ ru:
       title: "Описать сон"
     edit:
       title: "Редактирование сна"
+    show:
+      title: "Сон «%{title}»"
   places:
     update:
       success: "Место для сна успешно изменено"

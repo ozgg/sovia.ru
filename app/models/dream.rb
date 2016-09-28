@@ -55,6 +55,20 @@ class Dream < ApplicationRecord
     [Dream.privacies[:generally_accessible], Dream.privacies[:visible_to_community]]
   end
 
+  # @params [User] user
+  def self.creation_parameters(user)
+    result = %i(title body)
+    result += %i(place_id mood lucidity image) if user.is_a? User
+    result
+  end
+
+  # @params [Boolean] owner
+  def self.entity_parameters(owner)
+    result = %i(title body)
+    result += %i(place_id mood lucidity image) if owner
+    result
+  end
+
   # Is dream visible to user?
   #
   # @param [User|nil] user who tries to see the dream
