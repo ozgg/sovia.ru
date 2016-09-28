@@ -8,7 +8,7 @@
     <%= time_tag comment.created_at %>
   </div>
   <div class="info">
-    <%= prepare_comment_text(comment) %>
+    <%= prepare_comment_text(comment, current_user) %>
   </div>
 
   <%= render partial: 'admin/comments/toggleable', locals: { comment: comment } %>

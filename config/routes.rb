@@ -97,6 +97,12 @@ Rails.application.routes.draw do
   resources :words, except: [:index, :show]
   resources :dreams, concerns: [:tagged_archive]
 
+  scope 'dreambook', controller: :dreambook do
+    get '/' => :index, as: :dreambook
+    get '/:word' => :word, as: :dreambook_word
+    get '/:letter/:word' => :word
+  end
+
   controller :authentication do
     get 'login' => :new
     post 'login' => :create

@@ -34,7 +34,7 @@
     </tr>
     <tr>
       <th><%= t('activerecord.attributes.comment.body') %></th>
-      <td><%= prepare_comment_text(@entity) %></td>
+      <td><%= prepare_comment_text(@entity, current_user) %></td>
     </tr>
     </tbody>
     <tfoot>

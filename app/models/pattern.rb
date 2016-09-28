@@ -32,6 +32,10 @@ class Pattern < ApplicationRecord
     %i(image name essence description described)
   end
 
+  def self.match_by_name(string)
+    find_by('name ilike ?', string)
+  end
+
   # @param [String] string
   def words_string=(string)
     new_word_ids = []

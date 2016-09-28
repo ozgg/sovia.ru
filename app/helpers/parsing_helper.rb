@@ -10,15 +10,17 @@ module ParsingHelper
   # @param [Dream] dream
   # @param [User] user
   def prepare_dream_text(dream, user)
-    raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_dream_string s, user }.join
+    owner = dream.user
+    raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_dream_string s, owner, user }.join
   end
 
   # Prepare comment text for views
   #
   # @param [Comment] comment
+  # @param [User] user
   # @return [String]
-  def prepare_comment_text(comment)
-    raw comment.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_common_string s }.join
+  def prepare_comment_text(comment, user)
+    raw comment.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_comment_string s, user }.join
   end
 
   # Parse fragments like [post 123](link text)
@@ -75,6 +77,43 @@ module ParsingHelper
     end
   end
 
+  # Parse fragments like [[Pattern]](link text)
+  #
+  # @param [String] string
+  # @return [String]
+  def parse_pattern_links(string)
+    regex = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
+    string.gsub regex do |chunk|
+      match   = regex.match chunk
+      pattern = Pattern.match_by_name match[:body]
+      if pattern.is_a? Pattern
+        link_text = match[:text].blank? ? match[:body] : match[:text]
+        link_to link_text, dreambook_word_path(word: pattern.name)
+      else
+        '<span class="not-found">' + match[:body] + '</span>'
+      end
+    end
+  end
+
+  # Parse fragments like {Real Name}(text)
+  #
+  # @param [String] string
+  # @param [Boolean] show_names
+  # @return [String]
+  def parse_names(string, show_names)
+    pattern = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
+    string.gsub pattern do |chunk|
+      match = pattern.match chunk
+      if match[:text]
+        name = match[:text]
+      else
+        name = match[:name].split(/[\s-]+/).map { |word| word.first }.join('')
+      end
+      attribute = show_names ? " title=\"#{match[:name]}\"" : ''
+      "<span class=\"name\"#{attribute}>#{name}</span>"
+    end
+  end
+
   protected
 
   def parse_post_string(post, string)
@@ -86,27 +125,24 @@ module ParsingHelper
   end
 
   # @param [String] string
+  # @param [User] owner
   # @param [User] user
-  def parse_dream_string(string, user)
+  def parse_dream_string(string, owner, user)
     output = string.gsub('<', '&lt;').gsub('>', '&gt;')
     output = parse_dream_links output, user
+    output = parse_names output, user == owner unless owner.nil?
     "<p>#{output}</p>\n"
   end
 
   # Parse string as string from common text
   #
   # @param [String] string
+  # @param [User] user
   # @return [String]
-  def parse_common_string(string)
-    "<p>#{fragments_for_string(string)}</p>\n"
-  end
-
-  # Parse fragments available for common texts
-  #
-  # @param [String] string
-  # @return [String]
-  def fragments_for_string(string)
-    quoted_string = string.gsub('<', '&lt;').gsub('>', '&gt;')
-    parse_post_links quoted_string
+  def parse_comment_string(string, user = nil)
+    output = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    output = parse_dream_links output, user
+    output = parse_post_links output
+    "<p>#{output}</p>\n"
   end
 end

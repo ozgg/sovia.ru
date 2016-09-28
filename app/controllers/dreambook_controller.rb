@@ -1,0 +1,2 @@
+class DreambookController < ApplicationController
+end
