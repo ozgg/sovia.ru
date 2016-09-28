@@ -120,7 +120,8 @@ module ParsingHelper
     if string =~ Figure::LINK_PATTERN
       parse_figure_links post, string
     else
-      string[0] == '<' ? string : "<p>#{string}</p>"
+      output = parse_pattern_links string
+      output[0] == '<' ? output : "<p>#{output}</p>"
     end
   end
 
@@ -143,6 +144,7 @@ module ParsingHelper
     output = string.gsub('<', '&lt;').gsub('>', '&gt;')
     output = parse_dream_links output, user
     output = parse_post_links output
+    output = parse_pattern_links output
     "<p>#{output}</p>\n"
   end
 end
