@@ -13,6 +13,7 @@ class Dream < ApplicationRecord
   has_many :patterns, through: :dream_patterns
   has_many :dream_words, dependent: :destroy
   has_many :words, through: :dream_words
+  has_many :comments, as: :commentable
 
   mount_uploader :image, DreamImageUploader
 

@@ -5,6 +5,12 @@ module ParsingHelper
     text.split("</p>\n<p>")[0...passages].join('</p><p>')
   end
 
+  # @param [String] text
+  # @param [Integer] words
+  def glimpse(text, words = 50)
+    strip_tags(text).gsub(/(\S{20})/, '\1 ').strip.split(/\s+/)[0..words].join(' ') + '…'
+  end
+
   # Prepare post text for views
   #
   # @param [Post] post

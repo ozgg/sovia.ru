@@ -72,3 +72,17 @@ div.list-of-dreams {
     }
   }
 }
+
+article.dream {
+  .footer {
+    background: $row_background_odd;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.8rem;
+
+    time {
+      font-size: $decreased_font_size;
+    }
+  }
+}
