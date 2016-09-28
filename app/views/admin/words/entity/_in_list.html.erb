@@ -2,7 +2,7 @@
   <div><%= link_to word.body, admin_word_path(word) %></div>
   <div class="info"><%= word.patterns_string %></div>
   <div class="secondary info">
-    <%= link_to word.dreams_count, dreams_admin_word_path(word) %>,
+    <%= link_to t(:dream, count: word.dreams_count), dreams_admin_word_path(word) %>,
   </div>
   <%= render partial: 'admin/words/toggleable', locals: { word: word } %>
 

@@ -14,7 +14,7 @@ class Admin::PatternsController < ApplicationController
 
   # get /admin/patterns/:id/dreams
   def dreams
-    # @collection = @entity.dreams.page_for_administration current_page
+    @collection = @entity.dreams.page_for_administration current_page
   end
 
   # get /admin/patterns/:id/comments

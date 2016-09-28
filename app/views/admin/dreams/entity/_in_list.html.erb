@@ -8,6 +8,7 @@
     <%= time_tag dream.created_at %>,
     <%= link_to t(:comment, count: dream.comments_count), comments_admin_dream_path(dream) %>
   </div>
+  <div class="secondary info"><%= glimpse prepare_dream_text(dream, current_user) %></div>
 
   <%= render partial: 'admin/dreams/toggleable', locals: { dream: dream } %>
 

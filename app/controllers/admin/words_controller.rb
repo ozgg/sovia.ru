@@ -14,7 +14,7 @@ class Admin::WordsController < ApplicationController
 
   # get /admin/words/:id/dreams
   def dreams
-    # @collection = @entity.dreams.page_for_administration current_page
+    @collection = @entity.dreams.page_for_administration current_page
   end
 
   private

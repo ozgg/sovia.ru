@@ -52,8 +52,8 @@
         <nav>
           <ul>
             <li><%= link_to t(:comment, count: @entity.comments_count), comments_admin_pattern_path(@entity) %></li>
-            <li><%= @entity.dreams_count %></li>
-            <li><%= @entity.words_count %></li>
+            <li><%= link_to t(:dream, count: @entity.dreams_count), dreams_admin_pattern_path(@entity) %></li>
+            <li><%= t(:word, count: @entity.words_count) %></li>
           </ul>
         </nav>
       </td>
