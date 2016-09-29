@@ -99,6 +99,9 @@ ru:
       year: "За %{year} год"
     random:
       title: "Случайный сон"
+    entity:
+      patterns:
+        automatic_interpretation: "Автоматическое толкование"
   places:
     update:
       success: "Место для сна успешно изменено"

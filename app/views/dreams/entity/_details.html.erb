@@ -1,0 +1,20 @@
+<% if dream.owned_by? current_user %>
+    <section>
+      <table>
+        <tr>
+          <th><%= t('activerecord.attributes.dream.lucidity') %></th>
+          <td><%= dream.lucidity %></td>
+        </tr>
+        <tr>
+          <th><%= t('activerecord.attributes.dream.mood') %></th>
+          <td><%= dream.mood %></td>
+        </tr>
+        <% unless dream.place.nil? %>
+            <tr>
+              <th><%= t('activerecord.attributes.dream.place') %></th>
+              <td><%= link_to dream.place.name, dream.place %></td>
+            </tr>
+        <% end %>
+      </table>
+    </section>
+<% end %>
