@@ -5,6 +5,11 @@ class ProfilesController < ApplicationController
   def show
   end
 
+  # get /u/slug/:dreams
+  def dreams
+    @collection = Dream.owned_by(@entity).page_for_visitors(current_user, current_page)
+  end
+
   private
 
   def set_entity

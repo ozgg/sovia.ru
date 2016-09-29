@@ -148,6 +148,9 @@ ru:
     profile:
       user_info: "Информация о пользователе"
       registration_date: "Дата регистрации"
+    dreams:
+      title: "Сны пользователя %{user}, страница %{page}"
+      heading: "Сны пользователя %{user}"
   tokens:
     update:
       success: "Жетон успешно обновлён"

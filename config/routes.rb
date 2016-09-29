@@ -114,5 +114,6 @@ Rails.application.routes.draw do
   # Public user profile
   scope 'u/:slug', controller: :profiles do
     get '/' => :show, as: :user_profile
+    get 'dreams', as: :user_dreams
   end
 end
