@@ -44,8 +44,7 @@ class Dream < ApplicationRecord
   # @param [User] user
   # @param [Integer] page
   def self.page_for_visitors(user, page)
-    privacy = user.is_a?(User) ? Dream.community_privacies : Dream.privacies[:generally_accessible]
-    not_deleted.with_privacy(privacy).recent.page(page).per(PER_PAGE)
+    not_deleted.with_privacy(Dream.privacy_for_user(user)).recent.page(page).per(PER_PAGE)
   end
 
   # @param [User] user
@@ -70,6 +69,11 @@ class Dream < ApplicationRecord
     result = %i(title body)
     result += %i(place_id mood lucidity image) if owner
     result
+  end
+
+  # @param [User] user
+  def self.privacy_for_user(user)
+    user.is_a?(User) ? Dream.community_privacies : Dream.privacies[:generally_accessible]
   end
 
   # Is dream visible to user?

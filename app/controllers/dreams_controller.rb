@@ -25,6 +25,7 @@ class DreamsController < ApplicationController
   # get /dreams/:id
   def show
     raise record_not_found unless @entity.visible_to? current_user
+    set_adjacent_entities
   end
 
   # get /dreams/:id/edit
@@ -92,5 +93,13 @@ class DreamsController < ApplicationController
       @dates[date.year] = [] unless @dates.has_key? date.year
       @dates[date.year] << date.month
     end
+  end
+
+  def set_adjacent_entities
+    privacy   = Dream.privacy_for_user(current_user)
+    @adjacent = {
+        prev: Dream.with_privacy(privacy).where('id < ?', @entity.id).order('id desc').first,
+        next: Dream.with_privacy(privacy).where('id > ?', @entity.id).order('id asc').first
+    }
   end
 end

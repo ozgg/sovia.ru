@@ -9,6 +9,7 @@
     <% end %>
 <% end %>
 
+<%= render partial: 'dreams/adjacent', locals: { dreams: @adjacent } %>
 <article class="entity-page dream <%= @entity.privacy %>" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 itemprop="name"><%= @entity.title || t(:untitled) %></h1>
 
