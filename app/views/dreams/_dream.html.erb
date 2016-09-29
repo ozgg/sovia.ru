@@ -1,0 +1,24 @@
+<article class="entity-page dream <%= dream.privacy %>" itemscope itemtype="http://schema.org/BlogPosting">
+  <h1 itemprop="name"><%= dream.title || t(:untitled) %></h1>
+
+  <meta itemprop="commentCount" content="<%= dream.comments_count %> "/>
+  <meta itemprop="keywords" content="<%= dream.patterns.map { |tag| tag.name }.join(', ') %> "/>
+
+  <% if dream.editable_by? current_user %>
+      <ul class="actions">
+        <li><%= edit_icon edit_dream_path(dream) %></li>
+      </ul>
+  <% end %>
+
+  <div class="body" itemprop="articleBody">
+    <%= raw prepare_dream_text dream, current_user %>
+  </div>
+
+  <div class="footer">
+    <%= user_link dream.user %>
+    <%= time_tag dream.created_at %>
+  </div>
+  <%= render partial: 'shared/track', locals: { item: dream } %>
+
+  <%= render partial: 'comments/list', locals: { comments: dream.comments.visible.recent, commentable: dream } %>
+</article>

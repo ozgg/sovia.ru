@@ -225,4 +225,14 @@ RSpec.describe DreamsController, type: :controller do
       end
     end
   end
+
+  describe 'get random' do
+    before :each do
+      create :dream
+      get :random
+    end
+
+    it_behaves_like 'http_success'
+    it_behaves_like 'page_for_everybody'
+  end
 end

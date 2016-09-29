@@ -97,6 +97,8 @@ ru:
     archive:
       title: "Архив снов"
       year: "За %{year} год"
+    random:
+      title: "Случайный сон"
   places:
     update:
       success: "Место для сна успешно изменено"

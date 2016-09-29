@@ -32,6 +32,7 @@ class Dream < ApplicationRecord
 
   scope :not_deleted, -> { where deleted: false }
   scope :with_privacy, -> (value) { where privacy: value unless value.blank? }
+  scope :public_entries, -> { where privacy: Dream.privacies[:generally_accessible] }
   scope :recent, -> { order 'id desc' }
   scope :tagged, -> (tag) { joins(:dream_patterns).where(dream_patterns: { pattern: tag }) }
   scope :archive, -> (year, month) { where "date_trunc('month', created_at) = ?", '%04d-%02d-01' % [year, month] }
@@ -74,6 +75,12 @@ class Dream < ApplicationRecord
   # @param [User] user
   def self.privacy_for_user(user)
     user.is_a?(User) ? Dream.community_privacies : Dream.privacies[:generally_accessible]
+  end
+
+  def self.random_dream
+    max_offset = public_entries.count - 1
+    offset     = (Time.now.to_f * 1000).to_i % max_offset
+    public_entries.offset(offset).first
   end
 
   # Is dream visible to user?

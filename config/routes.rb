@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
+  get 'dreams/random' => 'dreams#random', as: :random_dream
+
   namespace :admin do
     get '/' => 'index#index'
 

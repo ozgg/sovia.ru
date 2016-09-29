@@ -64,6 +64,11 @@ class DreamsController < ApplicationController
     end
   end
 
+  # get /dreams/random
+  def random
+    @entity = Dream.random_dream
+  end
+
   private
 
   def set_entity
