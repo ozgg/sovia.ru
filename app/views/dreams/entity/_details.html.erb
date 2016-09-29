@@ -2,6 +2,10 @@
     <section>
       <table>
         <tr>
+          <th><%= t('activerecord.attributes.dream.privacy') %></th>
+          <td><%= t("activerecord.attributes.dream.privacies.#{dream.privacy}") %></td>
+        </tr>
+        <tr>
           <th><%= t('activerecord.attributes.dream.lucidity') %></th>
           <td><%= dream.lucidity %></td>
         </tr>

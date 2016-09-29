@@ -17,11 +17,6 @@ class Admin::PatternsController < ApplicationController
     @collection = @entity.dreams.page_for_administration current_page
   end
 
-  # get /admin/patterns/:id/comments
-  def comments
-    # @collection = @entity.comments.page_for_administration current_page
-  end
-
   private
 
   def restrict_access

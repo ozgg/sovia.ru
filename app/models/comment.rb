@@ -54,7 +54,7 @@ class Comment < ApplicationRecord
   end
 
   def notify_entry_owner?
-    entry_owner = commentable.user
+    entry_owner = commentable.respond_to?(:user) ? commentable.user : nil
     if entry_owner.is_a?(User) && !owned_by?(entry_owner)
       entry_owner.can_receive_letters?
     else

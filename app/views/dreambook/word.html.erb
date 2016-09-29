@@ -1,0 +1,42 @@
+<% content_for :meta_title, t('.title', pattern: @entity.name) %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+    <meta property="og:article:section" content="<%= t('dreambook.index.title') %>"/>
+<% end %>
+
+<article itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <h1 itemprop="headline"><%= @entity.name %></h1>
+
+  <% if current_user_has_role? :chief_interpreter, :interpreter %>
+      <ul class="actions">
+        <li><%= detail_icon admin_pattern_path(@entity) %></li>
+        <% unless @entity.locked? %>
+            <li><%= edit_icon edit_pattern_path(@entity) %></li>
+        <% end %>
+      </ul>
+  <% end %>
+  <meta itemprop="articleSection" content="<%= t('dreambook.index.title') %>"/>
+
+  <div itemprop="articleBody" role="definition" class="body">
+    <% unless @entity.image.blank? %>
+        <figure><%= image_tag @entity.image.medium.url, alt: @entity.name %></figure>
+    <% end %>
+    <% if @entity.description.blank? %>
+        <p>Этот образ ещё не описан.</p>
+        <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам помогут его растолковать.</p>
+    <% else %>
+        <%= raw prepare_pattern_text(@entity) %>
+    <% end %>
+  </div>
+
+  <% if @entity.dreams_count > 0 %>
+      <section>
+        <h2><%= t(:dream, count: @entity.dreams_count) %></h2>
+        <nav>
+          <p><%= link_to t(:see_all), tagged_dreams_path(tag_name: @entity.name) %></p>
+        </nav>
+
+        <%= render partial: 'dreams/list', locals: { collection: @entity.dreams.page_for_visitors(current_user, 1) } %>
+      </section>
+  <% end %>
+</article>

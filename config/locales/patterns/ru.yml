@@ -117,3 +117,8 @@ ru:
     edit:
       title: "Редактирование слова"
       forbidden: "Редактирование этого слова запрещено"
+  dreambook:
+    index:
+      title: "Сонник"
+    word:
+      title: "Сонник: %{pattern}"

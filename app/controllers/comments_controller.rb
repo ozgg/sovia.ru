@@ -59,10 +59,6 @@ class CommentsController < ApplicationController
   end
 
   def notify_participants
-    begin
-      Comments.entry_reply(@entity).deliver_now if @entity.notify_entry_owner?
-    rescue Net::SMTPAuthenticationError => error
-      logger.warn error.message
-    end
+    Comments.entry_reply(@entity).deliver_now if @entity.notify_entry_owner?
   end
 end

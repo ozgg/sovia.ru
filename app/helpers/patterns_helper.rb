@@ -10,4 +10,9 @@ module PatternsHelper
     GrainCategory.page_for_users.each { |c| options << [c.name, c.id] }
     options
   end
+
+  # @param [Pattern] pattern
+  def pattern_in_dreambook(pattern)
+    link_to pattern.name, dreambook_word_path(word: pattern.name)
+  end
 end

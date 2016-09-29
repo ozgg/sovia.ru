@@ -3,7 +3,7 @@
 
   <dl class="interpretation">
     <% dream.patterns.ordered_by_popularity.first(20).each do |pattern| %>
-        <dt><%= pattern.name %></dt>
+        <dt><%= pattern_in_dreambook pattern %></dt>
         <dd><%= pattern.essence %></dd>
     <% end %>
   </dl>

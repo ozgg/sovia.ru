@@ -19,6 +19,14 @@ module ParsingHelper
     raw post.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_post_string(post, s) }.join
   end
 
+  # Prepare post text for views
+  #
+  # @param [Pattern] pattern
+  # @return [String]
+  def prepare_pattern_text(pattern)
+    raw pattern.description.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_pattern_string(s) }.join
+  end
+
   # @param [Dream] dream
   # @param [User] user
   def prepare_dream_text(dream, user)
@@ -147,7 +155,18 @@ module ParsingHelper
     "<p>#{output}</p>\n"
   end
 
-  # Parse string as string from common text
+  # Parse string as string from pattern description
+  #
+  # @param [String] string
+  # @return [String]
+  def parse_pattern_string(string)
+    output = string.gsub('<', '&lt;').gsub('>', '&gt;')
+    output = parse_post_links output
+    output = parse_pattern_links output
+    "<p>#{output}</p>\n"
+  end
+
+  # Parse string as string from comment text
   #
   # @param [String] string
   # @param [User] user

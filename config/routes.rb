@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :show]
     resources :comments, only: [:index, :show]
 
-    resources :patterns, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments]
+    resources :patterns, only: [:index, :show], concerns: [:list_of_dreams]
     resources :words, only: [:index, :show], concerns: [:list_of_dreams]
     resources :grain_categories, only: [:index, :show]
 
@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   resources :figures, only: [:show, :edit, :update, :destroy]
   resources :tags
   resources :comments, except: [:index, :new]
-  resources :patterns, except: [:index]
+  resources :patterns, except: [:index, :show]
   resources :words, except: [:index, :show]
   resources :dreams, concerns: [:tagged_archive]
 

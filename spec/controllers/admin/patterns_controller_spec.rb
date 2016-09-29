@@ -34,8 +34,4 @@ RSpec.describe Admin::PatternsController, type: :controller do
       expect(Dream).to have_received(:page_for_administration)
     end
   end
-
-  describe 'get comments' do
-    pending
-  end
 end
