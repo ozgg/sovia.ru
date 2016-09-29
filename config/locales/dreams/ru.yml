@@ -91,6 +91,9 @@ ru:
       title: "Редактирование сна"
     show:
       title: "Сон «%{title}»"
+    tagged:
+      title: "Сны с образом «%{tag}», страница %{page}"
+      heading: "Сны с образом «%{tag}»"
     archive:
       title: "Архив снов"
       year: "За %{year} год"
