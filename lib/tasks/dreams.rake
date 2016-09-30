@@ -13,10 +13,10 @@ namespace :dreams do
         ignored = %w(image)
         YAML.load(file).each do |id, data|
           attributes = data.reject { |key| ignored.include? key }
-          dream       = Dream.new id: id
+          dream      = Dream.new id: id
           dream.assign_attributes attributes
           if data.has_key? 'image'
-            image_file = "#{image_dir}/#{id}/#{data['image']}"
+            image_file  = "#{image_dir}/#{id}/#{data['image']}"
             dream.image = Pathname.new(image_file).open if File.exists?(image_file)
           end
           dream.save!
@@ -54,5 +54,21 @@ namespace :dreams do
       end
       puts
     end
+  end
+
+  desc 'Analyze dream words'
+  task analyze: :environment do
+    total = Dream.count
+    Dream.where(patterns_set: false).each_with_index do |dream, index|
+      string  = dream.body.gsub(Dream::LINK_PATTERN, '').gsub(Dream::NAME_PATTERN, '')
+      handler = WordHandler.new(string, true)
+      ids     = dream.pattern_ids
+
+      print "\r#{index}/#{total}: #{dream.id}\t#{handler.word_ids.count} "
+
+      dream.word_ids    = handler.word_ids
+      dream.pattern_ids = (handler.pattern_ids | ids).uniq
+    end
+    puts
   end
 end
