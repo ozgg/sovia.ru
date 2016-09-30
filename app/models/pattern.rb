@@ -2,7 +2,8 @@ class Pattern < ApplicationRecord
   include RequiredUniqueName
   include Toggleable
 
-  PER_PAGE = 20
+  PER_PAGE     = 20
+  LINK_PATTERN = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
 
   toggleable :described
 

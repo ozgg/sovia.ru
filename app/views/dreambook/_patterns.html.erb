@@ -1,0 +1,10 @@
+<% if collection.any? %>
+    <dl class="patterns">
+      <% collection.each do |pattern| %>
+          <dt><%= pattern_in_dreambook(pattern) %></dt>
+          <dd><%= pattern.essence %></dd>
+      <% end %>
+    </dl>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

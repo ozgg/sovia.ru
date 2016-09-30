@@ -1,1 +1,7 @@
 <% content_for :meta_title, t('.title') %>
+
+<article>
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { query: '' } %>
+</article>

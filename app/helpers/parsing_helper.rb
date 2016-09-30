@@ -48,7 +48,7 @@ module ParsingHelper
   # @param [String] string
   # @return [String]
   def parse_post_links(string)
-    pattern = /\[post (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
+    pattern = Post::LINK_PATTERN
     string.gsub pattern do |chunk|
       match = pattern.match chunk
       post  = Post.visible.find_by id: match[:id]
@@ -68,7 +68,7 @@ module ParsingHelper
   # @param [User] user
   # @return [String]
   def parse_dream_links(string, user)
-    pattern = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
+    pattern = Dream::LINK_PATTERN
     string.gsub pattern do |chunk|
       match = pattern.match chunk
       dream = Dream.not_deleted.find_by id: match[:id]
@@ -102,7 +102,7 @@ module ParsingHelper
   # @param [String] string
   # @return [String]
   def parse_pattern_links(string)
-    regex = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
+    regex = Pattern::LINK_PATTERN
     string.gsub regex do |chunk|
       match   = regex.match chunk
       pattern = Pattern.match_by_name match[:body]
@@ -121,7 +121,7 @@ module ParsingHelper
   # @param [Boolean] show_names
   # @return [String]
   def parse_names(string, show_names)
-    pattern = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
+    pattern = Dream::NAME_PATTERN
     string.gsub pattern do |chunk|
       match = pattern.match chunk
       if match[:text]

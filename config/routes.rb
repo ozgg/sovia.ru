@@ -101,6 +101,7 @@ Rails.application.routes.draw do
 
   scope 'dreambook', controller: :dreambook do
     get '/' => :index, as: :dreambook
+    get '/search' => :search, as: :dreambook_search
     get '/:word' => :word, as: :dreambook_word
     get '/:letter/:word' => :word
   end

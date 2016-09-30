@@ -5,6 +5,8 @@ class Dream < ApplicationRecord
   PER_PAGE       = 10
   LUCIDITY_RANGE = (0..5)
   MOOD_RANGE     = (-2..2)
+  LINK_PATTERN   = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
+  NAME_PATTERN   = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
 
   toggleable :needs_interpretation, :interpretation_given
 
