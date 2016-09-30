@@ -42,7 +42,7 @@
     </tr>
     <tr>
       <th><%= t('activerecord.attributes.dream.words') %></th>
-      <td><%= @entity.words.ordered_by_weight.map { |word| word.name }.join(', ') %></td>
+      <td><%= @entity.words.ordered_by_weight.map { |word| word.body }.join(', ') %></td>
     </tr>
     <tr>
       <td colspan="2">

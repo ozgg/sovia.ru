@@ -60,6 +60,8 @@ namespace :dreams do
   task analyze: :environment do
     total = Dream.count
     Dream.where(patterns_set: false).each_with_index do |dream, index|
+      next if index < 1820
+      break if index > 2000
       string  = dream.body.gsub(Dream::LINK_PATTERN, '').gsub(Dream::NAME_PATTERN, '')
       handler = WordHandler.new(string, true)
       ids     = dream.pattern_ids

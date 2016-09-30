@@ -65,7 +65,9 @@ Rails.application.routes.draw do
     resources :posts, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :comments, except: [:new, :edit], concerns: [:toggleable, :lockable]
     resources :patterns, except: [:new, :edit], concerns: [:toggleable, :lockable]
-    resources :words, except: [:new, :edit], concerns: [:toggleable, :lockable]
+    resources :words, except: [:new, :edit], concerns: [:toggleable, :lockable] do
+      put 'patterns', on: :member
+    end
     resources :grain_categories, except: [:new, :edit], concerns: [:lockable]
     resources :dreams, except: [:new, :edit], concerns: [:toggleable]
   end

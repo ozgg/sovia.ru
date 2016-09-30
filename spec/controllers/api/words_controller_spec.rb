@@ -57,4 +57,8 @@ RSpec.describe Api::WordsController, type: :controller do
     it_behaves_like 'page_for_chief_interpreter'
     it_behaves_like 'entity_unlocker'
   end
+
+  describe 'put patterns' do
+    pending
+  end
 end

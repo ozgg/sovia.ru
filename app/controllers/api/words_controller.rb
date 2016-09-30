@@ -1,6 +1,6 @@
 class Api::WordsController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:toggle, :lock, :unlock]
+  before_action :set_entity
 
   # post /api/words/:id/toggle
   def toggle
@@ -27,6 +27,18 @@ class Api::WordsController < ApplicationController
     render json: { data: { locked: @entity.locked? } }
   end
 
+  # put /api/words/:id/patterns
+  def patterns
+    patterns_string = params[:patterns_string]
+    if @entity.locked?
+      render json: { errors: { locked: @entity.locked } }, status: :forbidden
+    elsif patterns_string.blank?
+      render json: { errors: { patterns_string: patterns_string} }, status: :bad_request
+    else
+      set_new_patterns
+    end
+  end
+
   private
 
   def set_entity
@@ -35,5 +47,18 @@ class Api::WordsController < ApplicationController
 
   def restrict_access
     require_role :chief_interpreter, :interpreter
+  end
+
+  def set_new_patterns
+    @entity.patterns_string = params[:patterns_string]
+    update_dreams if @entity.significant?
+    render json: { data: { pattern_ids: @entity.pattern_ids, dream_ids: @entity.dream_ids } }
+  end
+
+  def update_dreams
+    @entity.dreams.each do |dream|
+      pattern_ids       = dream.pattern_ids | @entity.pattern_ids
+      dream.pattern_ids = pattern_ids
+    end
   end
 end

@@ -1,6 +1,11 @@
 <div class="data">
   <div><%= link_to word.body, admin_word_path(word) %></div>
-  <div class="info"><%= word.patterns_string %></div>
+  <div class="info">
+    <%= form_tag patterns_api_word_path(word), method: 'put', class: 'patterns-setter' do %>
+        <%= text_field_tag('patterns_string', word.patterns_string, disabled: word.locked?) %>
+        <%= button_tag t(:update), type: :submit %>
+    <% end %>
+  </div>
   <div class="secondary info">
     <%= link_to t(:dream, count: word.dreams_count), dreams_admin_word_path(word) %>,
   </div>

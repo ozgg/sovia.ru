@@ -7,3 +7,28 @@
 <% else %>
     <%= render 'shared/nothing_found' %>
 <% end %>
+
+<script>/*<![CDATA[*/
+$(function () {
+  $('form.patterns-setter').on('submit', function () {
+    var $form   = $(this);
+    var $button = $(this).find('button');
+
+    if (!$button.hasClass('hidden')) {
+      $button.addClass('hidden');
+      $.ajax($form.attr('action'), {
+        method: 'put',
+        data: $form.serialize(),
+        success: function(response) {
+          if (response.hasOwnProperty('data')) {
+            console.log(response['data']);
+            $button.removeClass('hidden');
+          }
+        }
+      }).fail(handle_ajax_failure);
+    }
+
+    return false;
+  });
+});
+/*]]>*/</script>
