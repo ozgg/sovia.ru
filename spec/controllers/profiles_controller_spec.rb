@@ -41,7 +41,7 @@ RSpec.describe ProfilesController, type: :controller do
     end
   end
 
-  describe 'get posts', focus: true do
+  describe 'get posts' do
     before :each do
       allow(Post).to receive(:page_for_visitors)
       get :posts, params: { slug: entity.long_slug }
