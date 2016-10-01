@@ -18,7 +18,7 @@ class WordHandler
   def prepare_word_ids(create_words)
     @word_ids = []
     @parts.reject { |part| part.blank? }.map do |part|
-      word = Word.find_by('body ilike ?', part)
+      word = Word.find_by(body: part.mb_chars.downcase.to_s.strip)
       if word.nil?
         @word_ids << Word.create(body: part).id if create_words
       else

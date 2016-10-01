@@ -59,17 +59,15 @@ namespace :dreams do
   desc 'Analyze dream words'
   task analyze: :environment do
     total = Dream.count
-    Dream.where(patterns_set: false).each_with_index do |dream, index|
-      next if index < 1820
-      break if index > 2000
+    Dream.order('id asc').each_with_index do |dream, index|
       string  = dream.body.gsub(Dream::LINK_PATTERN, '').gsub(Dream::NAME_PATTERN, '')
       handler = WordHandler.new(string, true)
-      ids     = dream.pattern_ids
+      # ids     = dream.pattern_ids
 
       print "\r#{index}/#{total}: #{dream.id}\t#{handler.word_ids.count} "
 
       dream.word_ids    = handler.word_ids
-      dream.pattern_ids = (handler.pattern_ids | ids).uniq
+      # dream.pattern_ids = (handler.pattern_ids | ids).uniq
     end
     puts
   end

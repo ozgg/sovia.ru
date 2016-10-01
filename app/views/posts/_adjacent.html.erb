@@ -1,0 +1,8 @@
+<% if posts[:next].is_a?(Post) || posts[:prev].is_a?(Post) %>
+    <nav class="adjacent">
+      <ul>
+        <li><%= post_link posts[:prev], current_user unless posts[:prev].blank? %></li>
+        <li><%= post_link posts[:next], current_user unless posts[:next].blank? %></li>
+      </ul>
+    </nav>
+<% end %>

@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   # get /posts/:id
   def show
     raise record_not_found unless @entity.visible_to? current_user
+    set_adjacent_entities
   end
 
   # get /posts/:id/edit
@@ -107,5 +108,12 @@ class PostsController < ApplicationController
     params[:figures].values.reject { |f| f[:slug].blank? || f[:image].blank? }.each do |data|
       @entity.figures.create(data.select { |key, _| Figure.creation_parameters.include? key.to_sym } )
     end
+  end
+
+  def set_adjacent_entities
+    @adjacent = {
+        prev: Post.visible.where('id < ?', @entity.id).order('id desc').first,
+        next: Post.visible.where('id > ?', @entity.id).order('id asc').first
+    }
   end
 end
