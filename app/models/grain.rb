@@ -5,6 +5,8 @@ class Grain < ApplicationRecord
 
   belongs_to :grain_category, optional: true, counter_cache: true
   belongs_to :user
+  has_many :dream_grains, dependent: :destroy
+  has_many :dreams, through: :dream_grains
 
   validates_presence_of :name, :slug
   validates_uniqueness_of :slug, scope: [:user_id]

@@ -40,4 +40,17 @@ RSpec.describe ProfilesController, type: :controller do
       expect(Dream).to have_received(:page_for_visitors)
     end
   end
+
+  describe 'get posts', focus: true do
+    before :each do
+      allow(Post).to receive(:page_for_visitors)
+      get :posts, params: { slug: entity.long_slug }
+    end
+
+    it_behaves_like 'finding_user_by_slug'
+
+    it 'prepares list of posts' do
+      expect(Post).to have_received(:page_for_visitors)
+    end
+  end
 end

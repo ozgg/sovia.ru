@@ -77,6 +77,9 @@ ru:
         title: "Место для сна «%{name}»"
       dreams:
         title: "Сны в месте «%{name}», страница %{page}"
+    grains:
+      dreams:
+        heading: "Мои сны с личным образом «%{name}»"
   dreams:
     index:
       title: "Дневник снов, страница %{page}"

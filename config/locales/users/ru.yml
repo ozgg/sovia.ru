@@ -72,6 +72,7 @@ ru:
           interpreter: "Толколватель"
       token:
         user: "Пользователь"
+        user_id: "Пользователь"
         ip: "IP-адрес"
         last_used: "Последнее использование"
         active: "Активен"
@@ -92,6 +93,8 @@ ru:
       index:
         title: "Пользователи, страница %{page}"
         heading: "Пользователи"
+      posts:
+        title: "Публикации пользователя %{user}, страница %{page}"
     tokens:
       index:
         title: "Жетоны, страница %{page}"
@@ -151,6 +154,9 @@ ru:
     dreams:
       title: "Сны пользователя %{user}, страница %{page}"
       heading: "Сны пользователя %{user}"
+    posts:
+      title: "Публикации пользователя %{user}, страница %{page}"
+      heading: "Публикации пользователя %{user}"
   tokens:
     update:
       success: "Жетон успешно обновлён"

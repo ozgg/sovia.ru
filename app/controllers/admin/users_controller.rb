@@ -22,6 +22,11 @@ class Admin::UsersController < ApplicationController
     @collection = Code.owned_by(@entity).page_for_administration(current_page)
   end
 
+  # get /admin/users/:id/posts
+  def posts
+    @collection = Post.owned_by(@entity).page_for_administration(current_page)
+  end
+
   protected
 
   def restrict_access

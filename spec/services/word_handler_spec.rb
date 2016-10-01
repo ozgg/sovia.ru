@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe WordHandler, focus: true do
+RSpec.describe WordHandler do
   pending
 end

@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <div class="secondary info">
-    <%= link_to t(:dream, count: word.dreams_count), dreams_admin_word_path(word) %>,
+    <%= link_to t(:dream, count: word.dreams_count), dreams_admin_word_path(word) %>
   </div>
   <%= render partial: 'admin/words/toggleable', locals: { word: word } %>
 

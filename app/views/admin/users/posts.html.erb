@@ -1,0 +1,13 @@
+<% content_for :meta_title, t('.title', user: @entity.profile_name, page: current_page) %>
+
+<article class="entity-page">
+  <h1><%= t('admin.posts.index.heading') %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon admin_user_path(@entity) %></li>
+  </ul>
+
+  <%= paginate @collection %>
+  <%= render partial: 'admin/posts/list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

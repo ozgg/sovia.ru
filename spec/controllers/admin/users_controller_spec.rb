@@ -50,4 +50,24 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(Code).to have_received(:page_for_administration)
     end
   end
+
+  describe 'get posts' do
+    before :each do
+      allow(Post).to receive(:page_for_administration)
+      allow(Post).to receive(:owned_by).and_call_original
+      get :posts, params: { id: entity }
+    end
+
+    it_behaves_like 'entity_finder'
+    it_behaves_like 'page_for_administrator'
+    it_behaves_like 'http_success'
+
+    it 'filters posts by ownership' do
+      expect(Post).to have_received(:owned_by)
+    end
+
+    it 'sends :page_for_administration to Post' do
+      expect(Post).to have_received(:page_for_administration)
+    end
+  end
 end

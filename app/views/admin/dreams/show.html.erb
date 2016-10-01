@@ -22,6 +22,10 @@
         </tr>
     <% end %>
     <tr>
+      <th><%= t('activerecord.attributes.dream.user') %></th>
+      <td><%= admin_user_link(@entity.user) %></td>
+    </tr>
+    <tr>
       <th><%= t(:created_at) %></th>
       <td><%= time_tag @entity.created_at %></td>
     </tr>

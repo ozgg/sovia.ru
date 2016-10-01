@@ -10,6 +10,11 @@ class ProfilesController < ApplicationController
     @collection = Dream.owned_by(@entity).page_for_visitors(current_user, current_page)
   end
 
+  # get /u/slug/:posts
+  def posts
+    @collection = Post.owned_by(@entity).page_for_visitors(current_page)
+  end
+
   private
 
   def set_entity

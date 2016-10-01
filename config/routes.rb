@@ -120,5 +120,6 @@ Rails.application.routes.draw do
   scope 'u/:slug', controller: :profiles do
     get '/' => :show, as: :user_profile
     get 'dreams', as: :user_dreams
+    get 'posts', as: :user_posts
   end
 end

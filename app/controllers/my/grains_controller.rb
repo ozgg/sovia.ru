@@ -13,7 +13,7 @@ class My::GrainsController < ApplicationController
 
   # get /my/grains/:id/dreams
   def dreams
-
+    @collection = @entity.dreams.page_for_owner(current_user, current_page)
   end
 
   private

@@ -53,6 +53,6 @@ class TokensController < ApplicationController
   end
 
   def creation_parameters
-    params.require(:token).permit(Token.creation_parameters).merge(owner_for_entity).merge(tracking_for_entity)
+    params.require(:token).permit(Token.creation_parameters).merge(tracking_for_entity)
   end
 end

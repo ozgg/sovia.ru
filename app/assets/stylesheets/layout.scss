@@ -147,7 +147,7 @@ nav.adjacent {
       &:first-of-type {
         text-align: left;
 
-        &::before {
+        span::before {
           content: '<';
         }
       }
@@ -155,7 +155,7 @@ nav.adjacent {
       &:last-of-type {
         text-align: right;
 
-        ::after {
+        span::after {
           content: '>';
         }
       }
