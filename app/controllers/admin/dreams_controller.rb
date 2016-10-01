@@ -9,6 +9,7 @@ class Admin::DreamsController < ApplicationController
 
   # get /admin/dreams/:id
   def show
+    set_adjacent_entities
   end
 
   protected
@@ -20,5 +21,13 @@ class Admin::DreamsController < ApplicationController
   def set_entity
     @entity = Dream.find params[:id]
     raise record_not_found if @entity.deleted?
+  end
+
+  def set_adjacent_entities
+    privacy   = Dream.privacy_for_user(current_user)
+    @adjacent = {
+        prev: Dream.with_privacy(privacy).where('id < ?', @entity.id).order('id desc').first,
+        next: Dream.with_privacy(privacy).where('id > ?', @entity.id).order('id asc').first
+    }
   end
 end

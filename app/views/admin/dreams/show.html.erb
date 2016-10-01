@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', title: @entity.title) %>
 
+<%= render partial: 'adjacent', locals: { dreams: @adjacent } %>
 <article class="entity-page">
   <h1><%= @entity.title %></h1>
   <ul class="actions">
@@ -41,10 +42,6 @@
       <td><%= @entity.patterns.ordered_by_popularity.map { |pattern| pattern.name }.join(', ') %></td>
     </tr>
     <tr>
-      <th><%= t('activerecord.attributes.dream.words') %></th>
-      <td><%= @entity.words.ordered_by_weight.map { |word| word.body }.join(', ') %></td>
-    </tr>
-    <tr>
       <td colspan="2">
         <%= render partial: 'admin/dreams/toggleable', locals: { dream: @entity } %>
       </td>
@@ -62,4 +59,10 @@
     </tr>
     </tfoot>
   </table>
+
+  <section>
+    <h2><%= t('activerecord.attributes.dream.words') %></h2>
+
+    <%= render partial: 'admin/words/list', locals: { collection: @entity.words.ordered_by_weight } %>
+  </section>
 </article>
