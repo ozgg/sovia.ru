@@ -1,1 +1,21 @@
 <% content_for :meta_title, t('.title') %>
+
+<article>
+  <h1>Сайт о снах</h1>
+  <p>Совия — это сайт о снах, где можно вести свой дневник снов, общаться на сответствующие темы,
+    а также искать интерпретацию того, что приснилось, в соннике.</p>
+
+  <%= render partial: 'dreambook/form', locals: { query: '' } %>
+
+  <section id="recent-activity">
+    <div class="list-of-posts">
+      <h2>Недавние публикации</h2>
+      <%= render partial: 'posts/recent', locals: { posts: Post.visible.recent.first(5) } %>
+    </div>
+    <div class="list-of-posts">
+      <h2>Недавние сны</h2>
+      <% privacy = Dream.privacy_for_user(current_user) %>
+      <%= render partial: 'dreams/recent', locals: { dreams: Dream.with_privacy(privacy).recent.first(3) } %>
+    </div>
+  </section>
+</article>

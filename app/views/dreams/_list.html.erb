@@ -1,5 +1,5 @@
 <% if collection.any? %>
-    <div class="list-of-dreams">
+    <div class="list-of-posts">
       <% collection.each do |dream| %>
           <%= render partial: 'dreams/preview', locals: { dream: dream } %>
       <% end %>

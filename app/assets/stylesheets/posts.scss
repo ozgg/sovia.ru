@@ -1,80 +1,80 @@
 div.list-of-posts {
   > div {
     background: $row_background_odd;
-    margin: 0.8rem 0;
-    padding: 0.8rem;
-    position: relative;
 
     &:nth-of-type(even) {
       background: $row_background_even;
     }
-
-    .header {
-      display: flex;
-
-      .image {
-        flex-basis: 8rem;
-        width: 8rem;
-        height: 8rem;
-
-        img {
-          max-width: 8rem;
-          max-height: 8rem;
-        }
-      }
-
-      .info {
-        display: flex;
-        align-content: space-between;
-        flex-wrap: wrap;
-        margin: 0 0 0 0.8rem;
-
-        > div {
-          width: 100%;
-        }
-
-        .title {
-          font-size: $increased_font_size;
-          font-weight: bold;
-        }
-
-        .time {
-          font-size: $decreased_font_size;
-        }
-      }
-    }
-
-    .body {
-      background: #fff;
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0.8rem 0;
-      padding: 0.8rem;
-
-      .image {
-        flex-basis: 24rem;
-        margin: 0 0.8rem 0 0;
-
-        img {
-          max-width: 24rem;
-        }
-      }
-
-      .lead {
-        flex: 1;
-        min-width: 24rem;
-      }
-    }
-
-    .footer {
-      border-top: solid $secondary_text_color 0.1rem;
-      text-align: right;
-      padding: 0.8rem 0.8rem 0;
-      font-size: $decreased_font_size;
-    }
   }
 }
 
+.post-preview {
+  margin: 0.8rem 0;
+  padding: 0.8rem;
+  position: relative;
+
+  .header {
+    display: flex;
+
+    .image {
+      flex-basis: 8rem;
+      width: 8rem;
+      height: 8rem;
+
+      img {
+        max-width: 8rem;
+        max-height: 8rem;
+      }
+    }
+
+    .info {
+      display: flex;
+      align-content: space-between;
+      flex-wrap: wrap;
+      margin: 0 0 0 0.8rem;
+
+      > div {
+        width: 100%;
+      }
+
+      .title {
+        font-size: $increased_font_size;
+        font-weight: bold;
+      }
+
+      .time {
+        font-size: $decreased_font_size;
+      }
+    }
+  }
+
+  .body {
+    background: #fff;
+    margin: 0.8rem 0;
+    padding: 0.8rem;
+
+    p:first-of-type {
+      margin-top: 0;
+    }
+
+    .more {
+      &::before {
+        content: '(';
+      }
+
+      &::after {
+        content: ')';
+      }
+    }
+  }
+
+  .footer {
+    border-top: solid $secondary_text_color 0.1rem;
+    text-align: right;
+    padding: 0.8rem 0.8rem 0;
+    font-size: $decreased_font_size;
+  }
+}
 
 article.post {
   figure {

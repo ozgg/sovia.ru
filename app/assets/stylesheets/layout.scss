@@ -166,3 +166,14 @@ nav.adjacent {
 input, textarea {
   max-width: 100%;
 }
+
+#recent-activity {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  > div {
+    flex: 1;
+    margin: 0 0.4rem;
+  }
+}

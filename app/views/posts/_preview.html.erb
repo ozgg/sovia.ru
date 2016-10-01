@@ -14,10 +14,7 @@
     </div>
   </div>
   <div class="body">
-    <% unless post.image.blank? %>
-        <div class="image"><%= image_tag post.image.small.url %></div>
-    <% end %>
-    <div class="lead"><%= post.lead %></div>
+    <p><%= post.lead %></p>
   </div>
   <div class="footer">
     <div class="comments">
