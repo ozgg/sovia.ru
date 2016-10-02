@@ -43,6 +43,8 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 
+gem 'sidekiq'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'

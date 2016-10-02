@@ -16,6 +16,7 @@ class DreamsController < ApplicationController
   def create
     @entity = Dream.new creation_parameters
     if @entity.save
+      AnalyzeDreamJob.perform_later(@entity.id)
       redirect_to @entity
     else
       render :new, status: :bad_request
@@ -35,6 +36,7 @@ class DreamsController < ApplicationController
   # patch /dreams/:id
   def update
     if @entity.update entity_parameters
+      AnalyzeDreamJob.perform_later(@entity.id)
       redirect_to @entity, notice: t('dreams.update.success')
     else
       render :edit, status: :bad_request

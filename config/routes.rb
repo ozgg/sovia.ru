@@ -116,10 +116,34 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback' => :callback, as: :auth_callback
   end
 
+  controller :about do
+    get 'about' => :index
+    get 'tos' => :terms_of_service
+  end
+
   # Public user profile
   scope 'u/:slug', controller: :profiles do
     get '/' => :show, as: :user_profile
     get 'dreams', as: :user_dreams
     get 'posts', as: :user_posts
   end
+
+  # Obsolete routes
+
+  scope 'statistics', controller: :statistics do
+    get '/' => :index, as: :statistics
+    get 'patterns' => :patterns, as: :statistics_patterns
+  end
+
+  get 'sitemap', to: redirect('/sitemap.xml')
+  get 'about/features', to: redirect('/about')
+  get 'articles', to: redirect('/posts')
+  get 'articles/:id', to: redirect('/posts/%{id}')
+  get 'articles/tagged/:tag', to: redirect('/posts')
+  get 'forum/posts/:id', to: redirect('/posts/%{id}')
+  get 'forum/(:community)(/:id)', to: redirect('/posts')
+  get 'privacy', to: redirect('/tos')
+  get 'statistics/symbols', to: redirect('/statistics/patterns')
+
+  # resources :goals, :deeds, :questions, :side_notes
 end

@@ -27,5 +27,7 @@ module Sovia5
     %w(app/services lib).each do |path|
       config.autoload_paths << config.root.join(path).to_s
     end
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
