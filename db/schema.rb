@@ -213,13 +213,14 @@ ActiveRecord::Schema.define(version: 20161002231712) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
     t.integer  "agent_id"
     t.inet     "ip"
-    t.boolean  "locked",     default: false, null: false
-    t.boolean  "deleted",    default: false, null: false
+    t.boolean  "locked",         default: false, null: false
+    t.boolean  "deleted",        default: false, null: false
+    t.integer  "comments_count", default: 0,     null: false
     t.text     "body"
     t.index ["agent_id"], name: "index_questions_on_agent_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree

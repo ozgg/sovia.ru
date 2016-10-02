@@ -51,10 +51,11 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show], concerns: [:list_of_comments]
     resources :tags, only: [:index, :show]
     resources :comments, only: [:index, :show]
+    resources :questions, only: [:index, :show], concerns: [:list_of_comments]
 
+    resources :grain_categories, only: [:index, :show]
     resources :patterns, only: [:index, :show], concerns: [:list_of_dreams]
     resources :words, only: [:index, :show], concerns: [:list_of_dreams]
-    resources :grain_categories, only: [:index, :show]
 
     resources :dreams, only: [:index, :show], concerns: [:list_of_comments]
   end
@@ -70,6 +71,7 @@ Rails.application.routes.draw do
     end
     resources :grain_categories, except: [:new, :edit], concerns: [:lockable]
     resources :dreams, except: [:new, :edit], concerns: [:toggleable]
+    resources :questions, except: [:new, :edit], concerns: [:lockable]
   end
 
   namespace :my do
@@ -83,6 +85,7 @@ Rails.application.routes.draw do
     resources :dreams, only: [:index]
     resources :posts, only: [:index]
     resources :comments, only: [:index]
+    resources :questions, only: [:index]
   end
 
   resources :browsers, :agents, except: [:index, :show]
@@ -100,6 +103,7 @@ Rails.application.routes.draw do
   resources :patterns, except: [:index, :show]
   resources :words, except: [:index, :show]
   resources :dreams, concerns: [:tagged_archive]
+  resources :questions
 
   scope 'dreambook', controller: :dreambook do
     get '/' => :index, as: :dreambook
@@ -144,6 +148,4 @@ Rails.application.routes.draw do
   get 'forum/(:community)(/:id)', to: redirect('/posts')
   get 'privacy', to: redirect('/tos')
   get 'statistics/symbols', to: redirect('/statistics/patterns')
-
-  # resources :goals, :deeds, :questions, :side_notes
 end

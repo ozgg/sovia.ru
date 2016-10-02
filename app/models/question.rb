@@ -5,6 +5,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :agent, optional: true
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates_presence_of :body
 
