@@ -1,0 +1,18 @@
+<div class="post-preview">
+  <div class="header">
+    <div class="image"><%= profile_avatar question.user %></div>
+    <div class="info">
+      <div class="title"><%= question_link question %></div>
+      <div class="author"><%= user_link question.user %></div>
+      <div class="time"><%= time_tag question.created_at %></div>
+    </div>
+  </div>
+  <div class="body">
+    <%= prepare_question_text question %>
+  </div>
+  <div class="footer">
+    <div class="comments">
+      <%= question_link question, t(:answer, count: question.comments_count), { anchor: 'comments' } %>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,12 @@ ru:
     few: "%{count} вопроса"
     many: "%{count} вопросов"
     other: "%{count} вопросов"
+  answer:
+    zero: "ответов нет"
+    one: "%{count} ответ"
+    few: "%{count} ответа"
+    many: "%{count} ответов"
+    other: "%{count} ответов"
   activerecord:
     models:
       question: "Вопрос"
@@ -41,3 +47,5 @@ ru:
       forbidden: "Редактирование этого вопроса запрещено"
     show:
       title: "Вопрос №%{id}"
+    answers:
+      add_answer: "Добавить ответ"

@@ -1,0 +1,7 @@
+<% content_for :meta_title, t('.title') %>
+
+<article class="dream-form">
+  <h1><%= t('.title') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

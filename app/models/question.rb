@@ -32,6 +32,10 @@ class Question < ApplicationRecord
     %i(body)
   end
 
+  def title
+    id
+  end
+
   def editable_by?(user)
     owned_by?(user) || UserRole.user_has_role?(user, :administrator)
   end

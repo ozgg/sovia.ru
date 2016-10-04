@@ -4,6 +4,6 @@
   <h1><%= t('.heading') %></h1>
 
   <%= paginate @collection %>
-  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= render partial: 'questions/list', locals: { collection: @collection } %>
   <%= paginate @collection %>
 </article>

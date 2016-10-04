@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe QuestionsController, type: :controller, focus: true do
+RSpec.describe QuestionsController, type: :controller do
   let(:user) { create :user }
   let!(:entity) { create :question, user: user }
   let(:valid_creation_parameters) { { question: attributes_for(:question) } }
@@ -9,6 +9,7 @@ RSpec.describe QuestionsController, type: :controller, focus: true do
 
   before :each do
     allow(subject).to receive(:require_role)
+    allow(subject).to receive(:restrict_anonymous_access)
     allow(subject).to receive(:current_user).and_return(user)
     allow(entity.class).to receive(:find).and_call_original
   end

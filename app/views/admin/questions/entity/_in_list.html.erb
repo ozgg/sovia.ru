@@ -1,9 +1,9 @@
 <div class="data">
-  <div><cite><%= link_to question.title, admin_question_path(question) %></cite></div>
+  <div><cite><%= admin_question_link question %></cite></div>
   <div class="info">
     <%= user_link question.user %>,
     <%= time_tag question.created_at %>,
-    <%= link_to t(:comment, count: question.comments_count), comments_admin_question_path(question) %>
+    <%= link_to t(:answer, count: question.comments_count), comments_admin_question_path(question) %>
   </div>
 
   <ul class="actions">
