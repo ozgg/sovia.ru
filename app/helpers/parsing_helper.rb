@@ -34,6 +34,11 @@ module ParsingHelper
     raw dream.body.split("\n").map(&:squish).reject(&:blank?).map { |s| parse_dream_string s, owner, user }.join
   end
 
+  # @param [Question] question
+  def prepare_question_text(question)
+    simple_format question.body
+  end
+
   # Prepare comment text for views
   #
   # @param [Comment] comment

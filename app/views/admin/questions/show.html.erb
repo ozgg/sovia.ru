@@ -1,0 +1,46 @@
+<% content_for :meta_title, t('.title', id: @entity.id) %>
+
+<article class="entity-page">
+  <h1><%= @entity.id %></h1>
+  <ul class="actions">
+    <li><%= create_icon new_question_path %></li>
+    <li><%= list_icon admin_questions_path %></li>
+    <li><%= view_icon question_path(@entity) %></li>
+    <% unless @entity.locked? %>
+        <li><%= edit_icon edit_question_path(@entity) %></li>
+        <li class="danger"><%= destroy_icon @entity %></li>
+    <% end %>
+  </ul>
+
+  <table>
+    <tbody>
+    <tr>
+      <th><%= t('activerecord.attributes.question.user') %></th>
+      <td><%= admin_user_link(@entity.user) %></td>
+    </tr>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag @entity.created_at %></td>
+    </tr>
+    <tr>
+      <th><%= t(:updated_at) %></th>
+      <td><%= time_tag @entity.updated_at %></td>
+    </tr>
+    <tr>
+      <th><%= t('activerecord.attributes.question.body') %></th>
+      <td><%= prepare_question_text @entity %></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2">
+        <nav>
+          <ul>
+            <li><%= link_to t(:comment, count: @entity.comments_count), comments_admin_question_path(@entity) %></li>
+          </ul>
+        </nav>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</article>

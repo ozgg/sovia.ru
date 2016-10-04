@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe My::QuestionsController, type: :controller, focus: true do
+RSpec.describe My::QuestionsController, type: :controller do
   let(:user) { create :user }
   let(:entity) { create :question, user: user }
 

@@ -1,10 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Admin::QuestionsController, type: :controller, focus: true do
+RSpec.describe Admin::QuestionsController, type: :controller do
   let!(:entity) { create :question }
 
-  it_behaves_like 'list_for_administration'
-  it_behaves_like 'deletable_entity_for_administration'
+  before :each do
+    allow(subject).to receive(:require_role)
+    allow(entity.class).to receive(:find).and_call_original
+  end
+
+  it_behaves_like 'list_for_interpreters'
+  it_behaves_like 'deletable_entity_for_interpreters'
 
   describe 'get comments' do
     before :each do
@@ -13,7 +18,7 @@ RSpec.describe Admin::QuestionsController, type: :controller, focus: true do
       get :comments, params: { id: entity }
     end
 
-    it_behaves_like 'page_for_administrator'
+    it_behaves_like 'page_for_interpreters'
     it_behaves_like 'entity_finder'
     it_behaves_like 'http_success'
 

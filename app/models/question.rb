@@ -23,7 +23,8 @@ class Question < ApplicationRecord
   end
 
   # @param [User] user
-  def self.page_for_owner(user)
+  # @param [Integer] page
+  def self.page_for_owner(user, page)
     owned_by(user).visible.recent.page(page).per(PER_PAGE)
   end
 
