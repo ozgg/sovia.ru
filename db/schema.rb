@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002231712) do
+ActiveRecord::Schema.define(version: 20161007000010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,6 +146,19 @@ ActiveRecord::Schema.define(version: 20161002231712) do
     t.index ["grain_category_id"], name: "index_grains_on_grain_category_id", using: :btree
     t.index ["slug"], name: "index_grains_on_slug", using: :btree
     t.index ["user_id"], name: "index_grains_on_user_id", using: :btree
+  end
+
+  create_table "metric_values", force: :cascade do |t|
+    t.integer  "metric_id",             null: false
+    t.datetime "time",                  null: false
+    t.integer  "quantity",  default: 1, null: false
+    t.index "date_trunc('day'::text, \"time\")", name: "metric_values_day_idx", using: :btree
+    t.index ["metric_id"], name: "index_metric_values_on_metric_id", using: :btree
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.string "name",        null: false
+    t.string "description"
   end
 
   create_table "pattern_words", force: :cascade do |t|
@@ -318,6 +331,7 @@ ActiveRecord::Schema.define(version: 20161002231712) do
   add_foreign_key "figures", "posts"
   add_foreign_key "grains", "grain_categories"
   add_foreign_key "grains", "users"
+  add_foreign_key "metric_values", "metrics"
   add_foreign_key "pattern_words", "patterns"
   add_foreign_key "pattern_words", "words"
   add_foreign_key "places", "users"

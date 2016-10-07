@@ -3,11 +3,11 @@ $row_background_even: #f0f0f0;
 $row_background_odd: #fafafa;
 
 // Toggleable flags statuses
-$toggleable_active: #c0ffc0;
-$toggleable_inactive: #ffc0c0;
-$toggleable_switch: #ffffc0;
+$toggleable_active: #34c749;
+$toggleable_inactive: #fc605c;
+$toggleable_switch: #fdbc40;
 $toggleable_unknown: #c0c0c0;
-$toggleable_background: #ffffff;
+$toggleable_background: #fff;
 
 .toggleable {
   margin: 0.8rem;
@@ -238,7 +238,8 @@ ul.actions {
   align-items: center;
   opacity: 0.5;
   transition: 0.25s;
-  background: #ffffff;
+  background: #fff;
+  border-radius: 0.4rem;
 
   &:hover {
     opacity: 1;

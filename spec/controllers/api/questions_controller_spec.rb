@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::QuestionsController, type: :controller, focus: true do
+RSpec.describe Api::QuestionsController, type: :controller do
   let(:user) { create :administrator }
 
   before :each do

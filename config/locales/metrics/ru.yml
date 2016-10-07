@@ -1,0 +1,12 @@
+ru:
+  activerecord:
+    models:
+      metric: "Метрика"
+      metric_value: "Значение метрики"
+    attributes:
+      metric:
+        name: "Название"
+        description: "Описание"
+      metric_value:
+        metric: "Метрика"
+        quantity: "Количество"
