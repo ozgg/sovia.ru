@@ -4,6 +4,9 @@ class Comment < ApplicationRecord
 
   PER_PAGE = 20
 
+  METRIC_COUNT   = 'comments.count'
+  METRIC_COMMENT = 'comments.comment.count'
+
   toggleable :visible
 
   belongs_to :agent, optional: true

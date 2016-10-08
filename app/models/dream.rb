@@ -8,6 +8,8 @@ class Dream < ApplicationRecord
   LINK_PATTERN   = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/
   NAME_PATTERN   = /\{(?<name>[^}]{1,30})\}(?:\((?<text>[^)]{1,30})\))?/
 
+  METRIC_COUNT = 'dreams.count'
+
   toggleable :needs_interpretation, :interpretation_given
 
   belongs_to :agent, optional: true

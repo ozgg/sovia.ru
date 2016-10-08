@@ -7,6 +7,10 @@ class User < ApplicationRecord
   PER_PAGE          = 25
   PLACE_LIMIT       = 5
 
+  METRIC_COUNT         = 'users.count'
+  METRIC_REGISTRATION  = 'users.registration.count'
+  METRIC_AUTHORIZATION = 'users.authorization.count'
+
   toggleable %i(email_confirmed phone_confirmed allow_mail allow_login bot)
 
   belongs_to :agent, optional: true

@@ -4,6 +4,9 @@ class Word < ApplicationRecord
   BODY_LIMIT = 50
   PER_PAGE   = 20
 
+  METRIC_COUNT     = 'words.count'
+  METRIC_PROCESSED = 'words.processed.count'
+
   toggleable :significant, :processed
 
   has_many :pattern_words, dependent: :destroy
