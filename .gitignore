@@ -19,6 +19,7 @@
 /config/database.yml
 /config/secrets.yml
 
+/public/sitemap.*.xml
 /public/uploads
 
 /spec/examples.txt

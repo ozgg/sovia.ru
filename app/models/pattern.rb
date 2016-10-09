@@ -42,6 +42,10 @@ class Pattern < ApplicationRecord
     find_by('name ilike ?', string)
   end
 
+  def good_for_dreambook?
+    described? || !description.blank?
+  end
+
   # @param [String] string
   def words_string=(string)
     new_word_ids = []
