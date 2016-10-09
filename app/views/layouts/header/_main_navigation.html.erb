@@ -5,6 +5,7 @@
     <li><%= link_to t('dreams.new.title'), new_dream_path %></li>
     <li><%= link_to t('dreambook.index.title'), dreambook_path %></li>
     <li><%= link_to t('questions.index.heading'), questions_path %></li>
+    <li><%= link_to t('about.index.heading'), about_path %></li>
     <% if UserRole.has_any_role? current_user %>
         <li><%= link_to t('admin.index.index.title'), admin_path %></li>
     <% end %>

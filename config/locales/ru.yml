@@ -62,3 +62,17 @@ ru:
   deleted_entity: "Удалённый объект"
   read_all: "Читать целиком"
   see_all: "Посмотреть все"
+  about:
+    index:
+      title: "О проекте «Совия»"
+      heading: "О проекте"
+    tos:
+      title: "Пользовательское соглашение"
+      heading: "Пользовательское соглашение"
+  statistics:
+    index:
+      title: "Статистика"
+      heading: "Статистика"
+    patterns:
+      title: "Статистика по образам снов"
+      heading: "Статистика по образам снов"
