@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'index#index'
 
+    resources :metrics, only: [:index, :show]
+
     resources :browsers, only: [:index, :show] do
       member do
         get 'agents'

@@ -1,0 +1,14 @@
+<% if values.any? %>
+    <table>
+      <tbody>
+      <% values.each do |metric_value| %>
+          <tr>
+            <th><%= time_tag metric_value.time %></th>
+            <td><%= metric_value.quantity %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <%= render 'shared/nothing_found' %>
+<% end %>

@@ -10,3 +10,10 @@ ru:
       metric_value:
         metric: "Метрика"
         quantity: "Количество"
+  admin:
+    metrics:
+      index:
+        title: "Метрики"
+        heading: "Метрики"
+      show:
+        title: "Метрика «%{name}»"

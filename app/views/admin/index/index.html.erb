@@ -14,6 +14,7 @@
         <li><%= link_to t('admin.grain_categories.index.title'), admin_grain_categories_path %></li>
         <li><%= link_to t('admin.dreams.index.heading'), admin_dreams_path %></li>
         <li><%= link_to t('admin.questions.index.heading'), admin_questions_path %></li>
+        <li><%= link_to t('admin.metrics.index.heading'), admin_metrics_path %></li>
     <% end %>
     <% if current_user_has_role? :editor, :chief_editor %>
         <li><%= link_to t('admin.tags.index.heading'), admin_tags_path %></li>

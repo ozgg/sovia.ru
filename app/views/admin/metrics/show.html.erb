@@ -1,0 +1,12 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+
+<article class="entity-page">
+  <h1><%= @entity.name %></h1>
+  <ul class="actions">
+    <li><%= back_icon admin_metrics_path %></li>
+  </ul>
+
+  <div><%= @entity.description %></div>
+
+  <%= render partial: 'admin/metrics/entity/values', locals: { values: @entity.metric_values.page_for_administration } %>
+</article>

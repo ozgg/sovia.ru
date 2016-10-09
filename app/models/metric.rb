@@ -3,6 +3,10 @@ class Metric < ApplicationRecord
 
   has_many :metric_values, dependent: :destroy
 
+  def self.page_for_administration
+    order('name asc')
+  end
+
   # @param [String] name
   # @param [Integer] quantity
   def self.register(name, quantity = 1)
