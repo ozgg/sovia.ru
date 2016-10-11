@@ -8,6 +8,22 @@ html {
   -ms-text-size-adjust: none;
 }
 
+a {
+  &:link {
+    color: #005391;
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: #1c2b56;
+  }
+
+  &:hover {
+    color: #C85540;
+    text-decoration: underline;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;

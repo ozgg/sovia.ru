@@ -22,8 +22,8 @@ div.list-of-posts {
       height: 8rem;
 
       img {
-        max-width: 8rem;
-        max-height: 8rem;
+        max-width: 100%;
+        max-height: 100%;
       }
     }
 
@@ -32,6 +32,7 @@ div.list-of-posts {
       align-content: space-between;
       flex-wrap: wrap;
       margin: 0 0 0 0.8rem;
+      flex: 1;
 
       > div {
         width: 100%;
@@ -39,7 +40,7 @@ div.list-of-posts {
 
       .title {
         font-size: $increased_font_size;
-        font-weight: bold;
+        font-weight: normal;
       }
 
       .time {
@@ -79,5 +80,17 @@ div.list-of-posts {
 article.post {
   figure {
     text-align: center;
+  }
+}
+
+@media screen and(max-width: 400px) {
+  .post-preview {
+    .header {
+      .image {
+        flex-basis: 4rem;
+        width: 4rem;
+        height: 4rem;
+      }
+    }
   }
 }
