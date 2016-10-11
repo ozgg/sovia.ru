@@ -187,9 +187,45 @@ input, textarea {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 1.6rem 0 0 0;
 
   > div {
     flex: 1;
-    margin: 0 0.4rem;
+
+    &:first-of-type {
+      margin: 0 0.2rem 0 0;
+    }
+
+    &:last-of-type {
+      margin: 0 0 0 0.2rem;
+    }
+  }
+}
+
+@media screen and(max-width: 420px) {
+  body {
+    > header {
+      display: block;
+
+      .logo {
+        margin: 0 auto;
+      }
+
+      .authentication {
+        margin: 0.4rem auto;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 600px) {
+  #recent-activity {
+    display: block;
+
+    > div {
+      &:first-of-type, &:last-of-type {
+        margin: 0;
+      }
+    }
   }
 }
