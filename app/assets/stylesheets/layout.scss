@@ -1,28 +1,29 @@
 html {
+  background: radial-gradient(circle at bottom left, #604878, #001848);
   margin: 0;
   padding: 0;
-  font-size: 10px;
+  font: 10px "Roboto", sans-serif;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
 }
 
 body {
-  outline: solid red 1px;
   margin: 0;
   padding: 0;
   min-width: 32rem;
   max-width: $content_width;
   font-size: $normal_font_size;
+  font-weight: 300;
+  background: radial-gradient(circle at top left, rgba(242, 234, 184, 0.5), rgba(255, 252, 235, 0.2));
 
   > header {
-    outline: solid green 1px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 
     .logo {
-      outline: solid blue 1px;
+      margin: 0.4rem 1.6rem;
       width: 16rem;
       height: 6rem;
 
@@ -33,15 +34,14 @@ body {
     }
 
     .authentication {
-      outline: solid violet 1px;
-      width: 20.8rem;
+      background: rgba(255, 255, 255, 0.5);
+      width: 22rem;
 
       form {
-        margin: 0;
+        margin: 0.4rem;
         padding: 0;
 
         .fields {
-          outline: solid lime 1px;
           > div {
             display: flex;
             justify-content: space-between;
@@ -50,7 +50,6 @@ body {
         }
 
         .actions {
-          outline: solid orange 1px;
           margin: 0.4rem 0;
 
           ul {
@@ -97,8 +96,18 @@ body {
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  margin: 0;
+}
+
 #main {
+  background: rgba(251, 236, 217, 0.5);
+  padding: 0.4rem;
+
   > article {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.4rem;
     position: relative;
   }
 }
@@ -115,16 +124,23 @@ nav.main-navigation {
     padding: 0;
 
     > li {
-      outline: solid greenyellow 1px;
       font-size: $increased_font_size;
-      line-height: 3.2rem;
       list-style: none;
       margin: 0 0.8rem;
       padding: 0;
 
       a:link, a:visited {
-        color: #33f;
-        padding: 0 0.4rem;
+        color: #fbecd9;
+        display: inline-block;
+        font-variant: small-caps;
+        font-weight: 400;
+        line-height: 3.2rem;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #ffd6d6;
+        text-decoration: underline;
       }
     }
   }
