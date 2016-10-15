@@ -30,10 +30,11 @@
     <div class="time">
       <%= time_tag post.created_at, itemProp: 'datePublished' %>
     </div>
-    <meta itemprop="commentCount" content="<%= post.comments_count %>" />
   </div>
 
   <%= render partial: 'shared/track', locals: { item: post } %>
+
+  <meta itemprop="commentCount" content="<%= post.comments_count %>" />
 
   <%= render partial: 'comments/list', locals: { commentable: post, comments: post.comments } %>
 </article>

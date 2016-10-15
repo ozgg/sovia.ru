@@ -8,6 +8,9 @@
     </div>
   </div>
   <div class="body">
+    <% unless dream.image.blank? %>
+        <div class="image"><%= image_tag(dream.image.small.url, alt: dream.title) %></div>
+    <% end %>
     <%= raw preview(prepare_dream_text(dream, current_user)) %>
     <% if dream.body.scan(/\r?\n/).count > 1 %>
         <div class="more"><%= dream_link dream, current_user, t(:read_all) %></div>

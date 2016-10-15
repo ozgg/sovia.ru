@@ -54,6 +54,15 @@ div.list-of-posts {
     margin: 0.8rem 0;
     padding: 0.8rem;
 
+    .image {
+      margin: 0.8rem;
+      text-align: center;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
     p:first-of-type {
       margin-top: 0;
     }
@@ -80,6 +89,37 @@ div.list-of-posts {
 article.post {
   figure {
     text-align: center;
+    margin: 0;
+    padding: 0;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .tags {
+    margin: 0.4rem;
+    padding: 0.4rem 2.4rem;
+    font-size: $decreased_font_size;
+    background: rgba(114, 91, 117, 0.1) image_url('icons/tag.png') no-repeat center left 0.4rem / 1.6rem 1.6rem;
+
+    a {
+      margin: 0 0.8rem 0 0;
+    }
+  }
+
+  .footer {
+    align-items: center;
+    border-bottom: dotted 0.1rem;
+    color: $secondary_text_color;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.4rem;
+    padding: 0 0 0.4rem 0;
+
+    time {
+      font-size: $small_font_size;
+    }
   }
 }
 

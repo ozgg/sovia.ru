@@ -163,24 +163,28 @@ nav.main-navigation {
 }
 
 nav.adjacent {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 0;
+
   ul {
-    margin: 1.6rem 0;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin: 0.8rem;
+    padding: 0;
 
     li {
-      width: 50%;
       list-style: none;
       margin: 0;
       padding: 0;
+      width: 50%;
 
       &:first-of-type {
         text-align: left;
 
         span::before {
-          content: '<';
+          color: $secondary_text_color;
+          content: '◀ ';
         }
       }
 
@@ -188,7 +192,8 @@ nav.adjacent {
         text-align: right;
 
         span::after {
-          content: '>';
+          color: $secondary_text_color;
+          content: ' ▶';
         }
       }
     }
@@ -229,6 +234,16 @@ input, textarea {
 
       .authentication {
         margin: 0.4rem auto;
+      }
+    }
+  }
+
+  nav.adjacent {
+    ul {
+      display: block;
+
+      li {
+        width: 100%;
       }
     }
   }

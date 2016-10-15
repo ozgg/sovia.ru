@@ -5,15 +5,20 @@
       <div class="title"><%= post_link post, current_user %></div>
       <div class="author"><%= user_link post.user %></div>
       <div class="time"><%= time_tag post.created_at %></div>
-      <div class="tags">
-        <%= t('posts.form.tags') %>:
-        <% post.tags_cache.each do |tag| %>
-            <span><%= link_to tag, tagged_posts_path(tag_name: Canonizer.urlize(tag)) %></span>
-        <% end %>
-      </div>
+      <% unless post.tags_cache.blank? %>
+          <div class="tags">
+            <%= t('posts.form.tags') %>:
+            <% post.tags_cache.each do |tag| %>
+                <span><%= link_to tag, tagged_posts_path(tag_name: Canonizer.urlize(tag)) %></span>
+            <% end %>
+          </div>
+      <% end %>
     </div>
   </div>
   <div class="body">
+    <% unless post.image.blank? %>
+        <div class="image"><%= image_tag(post.image.big.url, alt: post.title) %></div>
+    <% end %>
     <p><%= post.lead %></p>
   </div>
   <div class="footer">
