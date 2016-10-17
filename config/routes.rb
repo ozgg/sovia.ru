@@ -124,7 +124,7 @@ Rails.application.routes.draw do
 
   controller :about do
     get 'about' => :index
-    get 'tos' => :terms_of_service
+    get 'tos' => :tos
   end
 
   # Public user profile
