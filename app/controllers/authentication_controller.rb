@@ -36,7 +36,6 @@ class AuthenticationController < ApplicationController
     account = User.find_by(network: User.networks[provider], slug: data[:uid]) || create_account(provider, data)
     create_token_for_user account, tracking_for_entity if account.allow_login?
 
-
     message = "set_#{params[:provider]}_account"
     send message if respond_to? message, true
 

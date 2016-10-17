@@ -8,6 +8,8 @@
         <%= render partial: 'comments/form', locals: { entity: question.comments.new } %>
       </section>
   <% else %>
-      <div class="warning">Отвечать могут только зарегистрированные пользователи.</div>
+      <div>
+        <div class="warning">Отвечать могут только зарегистрированные пользователи.</div>
+      </div>
   <% end %>
 </section>

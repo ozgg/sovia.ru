@@ -1,6 +1,6 @@
 <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
 
-<%= form_for entity do |f| %>
+<%= form_for entity, class: 'dream-form' do |f| %>
     <div>
       <%= f.label :title %><br />
       <%= f.text_field :title, size: 50 %>
@@ -9,17 +9,19 @@
       <%= f.label :body %><br />
       <%= f.text_area :body, cols: 80, rows: 20, required: true %>
     </div>
+    <!--
     <div>
       <%= f.check_box :needs_interpretation %>
       <%= f.label :needs_interpretation %>
     </div>
+    -->
     <% if current_user.is_a?(User) && (entity.id.nil? || entity.owned_by?(current_user)) %>
         <div class="lucidity">
           <span><%= t('activerecord.attributes.dream.lucidity') %></span>
           <% Dream::LUCIDITY_RANGE.each_with_index do |l, i| %>
           <span>
             <%= radio_button_tag 'dream[lucidity]', l, entity.lucidity == l, id: "dream_lucidity_#{i}" %>
-            <%= label_tag 'dream[lucidity]', l, id: "dream_lucidity_#{i}" %>
+            <%= label_tag 'dream[lucidity]', l, for: "dream_lucidity_#{i}" %>
           </span>
           <% end %>
         </div>
@@ -28,7 +30,7 @@
           <% Dream::MOOD_RANGE.each_with_index do |m, i| %>
           <span>
             <%= radio_button_tag 'dream[mood]', m, entity.mood == m, id: "dream_mood_#{i}" %>
-            <%= label_tag 'dream[mood]', m, id: "dream_mood_#{i}" %>
+            <%= label_tag 'dream[mood]', m, for: "dream_mood_#{i}" %>
           </span>
           <% end %>
         </div>
@@ -47,8 +49,8 @@
                   (<%= t(:dream, count: place.dreams_count) %>)
                 </li>
             <% end %>
+            <li><%= link_to t('my.places.index.title'), my_places_path %></li>
           </ul>
-          <div><%= link_to t('my.places.index.title'), my_places_path %></div>
         </div>
     <% end %>
     <div class="buttons">

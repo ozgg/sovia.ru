@@ -216,25 +216,26 @@ ru:
     profiles:
       new:
         title: "Присоединиться"
+        form:
+          registration_form: "Форма регистрации"
+          i_am_bot: "Эту галку отмечать не надо"
+          you_accept_terms_of_service: "Регистрируясь на сайте, вы принимаете пользовательское соглашение"
       create:
         success: "Вы зарегистрировались и вошли"
       update:
         success: "Профиль успешно изменён"
       advantages:
         advantages: "Преимущества зарегистрированных пользователей"
-      form:
-        i_am_bot: "Я — бот и не собираюсь пользоваться сайтом"
-        registration_form: "Форма регистрации"
-        you_accept_terms_of_service: "Регистрируясь на сайте, вы принимаете пользовательское соглашение."
       show:
         title: "Мой профиль"
       edit:
         title: "Редактирование профиля"
-        common_parameters: "Общие параметры"
-        update_image: "Загрузить новую картинку"
-        sensitive_parameters: "Связанные с безопасностью параметры"
-        sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль."
-        current_password: "Текущий пароль"
-        leave_blank_if_necessary: "Если не будете менять пароль, оставьте эти поля пустыми."
-        new_password: "Новый пароль"
-        update: "Обновить данные"
+        form:
+          common_parameters: "Общие параметры"
+          update_image: "Загрузить новую картинку"
+          sensitive_parameters: "Связанные с безопасностью параметры"
+          sensitive_parameters_notice: "Для изменения этих данных нужно ввести текущий пароль."
+          current_password: "Текущий пароль"
+          leave_blank_if_necessary: "Если не будете менять пароль, оставьте эти поля пустыми."
+          new_password: "Новый пароль"
+          update: "Обновить данные"

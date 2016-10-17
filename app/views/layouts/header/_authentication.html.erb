@@ -2,6 +2,6 @@
   <% if current_user.is_a? User %>
       <%= render 'authentication/plate' %>
   <% else %>
-      <%= render 'authentication/form' %>
+      <%= render 'authentication/form' unless content_for? :hide_auth_form %>
   <% end %>
 </div>

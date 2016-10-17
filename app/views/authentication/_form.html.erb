@@ -11,5 +11,11 @@
     </div>
     <div class="actions">
       <%= button_tag t('authentication.new.title'), type: 'submit' %>
+      <%= link_to t('.join'), new_my_profile_path %>
     </div>
+    <ul class="external-login">
+      <% %w(vkontakte twitter facebook).each do |provider| %>
+          <li><%= link_to image_tag("icons/login/#{provider}.png"), auth_external_path(provider: provider), title: t("sessions.new.external.#{provider}") %></li>
+      <% end %>
+    </ul>
 <% end %>

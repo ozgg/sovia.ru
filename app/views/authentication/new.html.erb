@@ -1,16 +1,10 @@
 <% content_for :meta_title, t('.title') %>
+<% content_for :hide_auth_form, '1' %>
 
 <article class="authentication">
   <h1><%= t('.title') %></h1>
 
   <%= render 'form' %>
 
-  <ul class="external-login">
-    <% %w(vkontakte twitter facebook).each do |provider| %>
-        <li><%= link_to image_tag("icons/login/#{provider}.png"), auth_external_path(provider: provider), title: t(".external.#{provider}") %></li>
-    <% end %>
-  </ul>
-
-  <p><%= link_to t('my.profiles.new.title'), new_my_profile_path %></p>
   <p><%= link_to t('my.recoveries.show.title'), my_recovery_path %></p>
 </article>
