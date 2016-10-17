@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :restrict_anonymous_access
+  before_action :restrict_anonymous_access, except: [:create]
   before_action :restrict_access, except: [:create]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
 

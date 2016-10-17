@@ -122,3 +122,7 @@ ru:
       title: "Сонник"
     word:
       title: "Сонник: %{pattern}"
+  dreams:
+    entity:
+      patterns:
+        see_dreambook: "Смотрите описание в соннике"

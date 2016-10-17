@@ -1,4 +1,4 @@
-<article class="dream <%= dream.privacy %>" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post <%= dream.privacy %>" itemscope itemtype="http://schema.org/BlogPosting">
   <h1 itemprop="name"><%= dream.title || t(:untitled) %></h1>
 
   <meta itemprop="commentCount" content="<%= dream.comments_count %> "/>
@@ -15,8 +15,12 @@
   </div>
 
   <div class="footer">
-    <%= user_link dream.user %>
-    <%= time_tag dream.created_at %>
+    <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <span itemprop="name"><%= user_link dream.user %></span>
+    </div>
+    <div class="time">
+      <%= time_tag dream.created_at, itemProp: 'datePublished' %>
+    </div>
   </div>
   <% if dream.needs_interpretation && !dream.interpretation_given %>
       <div class="needs_interpretation"><%= t('activerecord.attributes.dream.needs_interpretation') %></div>

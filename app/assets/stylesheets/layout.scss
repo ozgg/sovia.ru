@@ -201,7 +201,7 @@ nav.adjacent {
 }
 
 input, textarea {
-  max-width: 100%;
+  max-width: calc(100% - 1rem);
 }
 
 #recent-activity {
