@@ -10,7 +10,7 @@ namespace :comments do
         YAML.load(file).each do |id, data|
           comment = Comment.new id: id
           comment.assign_attributes data
-          comment.save!
+          comment.save
           print "\r#{id}    "
         end
         puts

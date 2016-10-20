@@ -44,7 +44,7 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  config.log_level = :warn
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -66,7 +66,7 @@ Rails.application.configure do
       port: 587,
       domain: 'sovia.ru',
       user_name: 'support@sovia.ru',
-      password: Rails.application.secrets.mail_password,
+      password: ENV['MAIL_PASSWORD'],
       authentication: :plain,
       enable_starttls_auto: true
   }

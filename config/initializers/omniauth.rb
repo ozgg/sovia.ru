@@ -1,16 +1,16 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, Rails.application.secrets.twitter['api_key'], Rails.application.secrets.twitter['api_secret'], {
+  provider :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'], {
       secure_image_url: true,
       image_size: 'original'
   }
 
-  provider :facebook, Rails.application.secrets.facebook['app_id'], Rails.application.secrets.facebook['app_secret'], {
+  provider :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], {
       scope: 'email,public_profile',
       image_size: 'large',
       secure_image_url: true
   }
 
-  provider :vkontakte, Rails.application.secrets.vkontakte['app_id'], Rails.application.secrets.vkontakte['app_secret'], {
+  provider :vkontakte, ENV['VKONTAKTE_APP_ID'], ENV['VKONTAKTE_APP_SECRET'], {
       scope: 'email'
   }
 end
