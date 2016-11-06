@@ -14,7 +14,7 @@ set :branch, 'master'
 
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_dirs, fetch(:shared_dirs, []).push('tmp', 'log', 'public/uploads')
-set :shared_files, fetch(:shared_files, []).push('.env')
+set :shared_files, fetch(:shared_files, []).push('.env', 'public/sitemap.dreambook.xml', 'public/sitemap.dreams.xml', 'public/sitemap.posts.xml', 'public/sitemap.questions.xml')
 
 # This task is the environment that is loaded all remote run commands, such as
 # `mina deploy` or `mina rake`.

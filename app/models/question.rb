@@ -3,7 +3,7 @@ class Question < ApplicationRecord
 
   PER_PAGE = 10
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :agent, optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
