@@ -353,3 +353,29 @@ ul.actions {
     }
   }
 }
+
+.list-of-metrics {
+  thead {
+    th {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  tbody {
+    tr:nth-of-type(odd) {
+      background: $row_background_odd;
+    }
+
+    tr:nth-of-type(even) {
+      background: $row_background_even;
+    }
+
+    td {
+      padding: 0.4rem;
+
+      &:first-of-type {
+        text-align: right;
+      }
+    }
+  }
+}

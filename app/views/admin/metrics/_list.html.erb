@@ -1,11 +1,26 @@
 <% if collection.any? %>
-    <ul class="list-of-entities">
+    <table class="list-of-metrics">
+      <thead>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.metric.name') %></th>
+        <th scope="col"><%= t('activerecord.attributes.metric.value') %></th>
+      </tr>
+      </thead>
+      <tbody>
       <% collection.each do |metric| %>
-      <li>
-        <%= render partial: 'admin/metrics/entity/in_list', locals: { metric: metric } %>
-      </li>
+          <tr>
+            <td>
+              <% if metric.description.blank? %>
+                  <%= link_to metric.name, admin_metric_path(metric.id) %>
+              <% else %>
+                  <%= link_to metric.description, admin_metric_path(metric.id) %>
+              <% end %>
+            </td>
+            <td><%= metric.value %></td>
+          </tr>
       <% end %>
-    </ul>
+      </tbody>
+    </table>
 <% else %>
     <%= render 'shared/nothing_found' %>
 <% end %>
