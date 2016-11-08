@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106012130) do
+ActiveRecord::Schema.define(version: 20161108011610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,8 +157,10 @@ ActiveRecord::Schema.define(version: 20161106012130) do
   end
 
   create_table "metrics", force: :cascade do |t|
-    t.string "name",        null: false
-    t.string "description"
+    t.string  "name",                        null: false
+    t.string  "description"
+    t.boolean "incremental", default: false, null: false
+    t.integer "value",       default: 0,     null: false
   end
 
   create_table "pattern_words", force: :cascade do |t|

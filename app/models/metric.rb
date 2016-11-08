@@ -12,5 +12,6 @@ class Metric < ApplicationRecord
   def self.register(name, quantity = 1)
     instance = Metric.find_or_create_by(name: name)
     instance.metric_values.create(time: Time.now, quantity: quantity)
+    instance.update(value: Metric.where(name: name).count)
   end
 end
