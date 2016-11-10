@@ -43,7 +43,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 #   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 # end
 
-if ENV.fetch('RAILS_ENV') == 'production'
+if ENV['RAILS_ENV'] == 'production'
   shared_path = '/var/www/sovia5/shared'
   logs_dir    = "#{shared_path}/log"
 

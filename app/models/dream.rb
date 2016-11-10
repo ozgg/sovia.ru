@@ -65,14 +65,14 @@ class Dream < ApplicationRecord
   # @params [User] user
   def self.creation_parameters(user)
     result = %i(title body)
-    result += %i(place_id mood lucidity image) if user.is_a? User
+    result += %i(place_id privacy mood lucidity image) if user.is_a? User
     result
   end
 
   # @params [Boolean] owner
   def self.entity_parameters(owner)
     result = %i(title body)
-    result += %i(place_id mood lucidity image) if owner
+    result += %i(place_id privacy mood lucidity image) if owner
     result
   end
 
