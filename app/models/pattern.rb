@@ -5,7 +5,6 @@ class Pattern < ApplicationRecord
   PER_PAGE     = 20
   LINK_PATTERN = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
 
-  METRIC_COUNT     = 'patterns.count'
   METRIC_DESCRIBED = 'patterns.described.count'
 
   toggleable :described

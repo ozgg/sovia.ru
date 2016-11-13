@@ -54,4 +54,25 @@ namespace :patterns do
       puts
     end
   end
+
+  desc 'Expand existing patterns to words'
+  task expand: :environment do
+    patterns = Pattern.where(words_count: 0).order('id asc')
+    skipped  = 0
+    puts "#{patterns.count} patterns without words"
+    patterns.each do |pattern|
+      name = pattern.name
+      print "\r#{pattern.id}: #{name}    "
+      if name =~ /\s+/
+        skipped += 1
+        next
+      end
+      word     = Word.with_body(name).first || Word.create!(body: name)
+      word_ids = pattern.word_ids + [word.id]
+
+      pattern.word_ids = word_ids.uniq
+      word.update!(processed: true)
+    end
+    puts "Skipped: #{skipped}"
+  end
 end
