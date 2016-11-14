@@ -2,7 +2,7 @@
     <ul class="list-of-entities">
       <% collection.each do |pattern| %>
           <% if pattern.deleted? %>
-              <li><%= t(:deleted_entity) %> id: <%= pattern.id %></li>
+              <li><%= t(:deleted_entity) %> id: <%= pattern.id %> [<%= pattern.name %>]</li>
           <% else %>
               <li><%= render partial: 'admin/patterns/entity/in_list', locals: { pattern: pattern } %></li>
           <% end %>
