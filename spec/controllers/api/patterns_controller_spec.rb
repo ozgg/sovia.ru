@@ -57,4 +57,12 @@ RSpec.describe Api::PatternsController, type: :controller do
     it_behaves_like 'page_for_chief_interpreter'
     it_behaves_like 'entity_unlocker'
   end
+
+  describe 'patch update' do
+    pending
+  end
+
+  describe 'delete destroy' do
+    pending
+  end
 end

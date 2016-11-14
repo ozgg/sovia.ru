@@ -65,6 +65,11 @@ ru:
         title: "Сон «%{title}»"
       comments:
         title: "Комментарии к сну «%{title}», страница %{page}"
+    patterns:
+      entity:
+        in_list:
+          no_description: "Описания нет"
+          has_description: "Описание есть"
   my:
     dreams:
       index:

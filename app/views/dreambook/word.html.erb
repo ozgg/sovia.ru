@@ -18,11 +18,14 @@
   <meta itemprop="articleSection" content="<%= t('dreambook.index.title') %>"/>
 
   <div itemprop="articleBody" role="definition" class="body">
+    <% unless @entity.essence.blank? %>
+        <div class="essence"><%= @entity.essence %></div>
+    <% end %>
     <% unless @entity.image.blank? %>
         <figure><%= image_tag @entity.image.medium.url, alt: @entity.name %></figure>
     <% end %>
     <% if @entity.description.blank? %>
-        <p>Этот образ ещё не описан.</p>
+        <p>Этот образ подробно ещё не описан.</p>
         <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам помогут его растолковать.</p>
     <% else %>
         <%= raw prepare_pattern_text(@entity) %>

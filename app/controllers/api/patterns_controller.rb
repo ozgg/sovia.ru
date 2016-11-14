@@ -1,6 +1,32 @@
 class Api::PatternsController < ApplicationController
   before_action :restrict_access
-  before_action :set_entity, only: [:toggle, :lock, :unlock]
+  before_action :set_entity, except: [:index]
+  before_action :restrict_editing, only: [:update, :destroy]
+
+  # get /api/patterns
+  def index
+    @collection = Pattern.page_for_administration(current_page)
+  end
+
+  # get /api/patterns/:id
+  def show
+  end
+
+  # patch /api/patterns/:id
+  def update
+    if @entity.update entity_parameters
+      set_dependent_entities
+      render :show
+    else
+      render json: { errors: @entity.errors.messages }, status: :bad_request
+    end
+  end
+
+  # delete /api/patterns/:id
+  def destroy
+    @entity.destroy
+    head :no_content
+  end
 
   # post /api/patterns/:id/toggle
   def toggle
@@ -36,5 +62,17 @@ class Api::PatternsController < ApplicationController
 
   def restrict_access
     require_role :chief_interpreter, :interpreter
+  end
+
+  def restrict_editing
+    raise record_not_found if @entity.locked?
+  end
+
+  def entity_parameters
+    params.require(:pattern).permit(Pattern.entity_parameters)
+  end
+
+  def set_dependent_entities
+    @entity.words_string = params[:words_string].to_s
   end
 end

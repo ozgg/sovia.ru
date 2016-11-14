@@ -1,0 +1,7 @@
+.pattern-updater {
+  padding: 0.4rem;
+  input[type=text] {
+    font-size: $small_font_size;
+    width: calc(100% - 2rem);
+  }
+}

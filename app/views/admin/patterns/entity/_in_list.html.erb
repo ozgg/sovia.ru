@@ -5,14 +5,28 @@
 </div>
 <div class="data">
   <div><%= link_to pattern.name, admin_pattern_path(pattern) %></div>
-  <% unless pattern.essence.blank? %>
-      <div class="info truncate">
-        <%= pattern.essence %>
-      </div>
-  <% end %>
+  <div class="info">
+    <%= form_tag api_pattern_path(pattern.id), method: 'patch', class: 'pattern-updater' do %>
+        <div>
+          <%= label_tag "essence_#{pattern.id}", t('activerecord.attributes.pattern.essence') %>
+          <br/>
+          <%= text_field_tag('pattern[essence]', pattern.essence, disabled: pattern.locked?, autocomplete: 'off', id: "essence_#{pattern.id}") %>
+        </div>
+        <div>
+          <%= label_tag "words_#{pattern.id}", t('activerecord.attributes.pattern.words') %>
+          <br/>
+          <%= text_field_tag('words_string', pattern.words_string, disabled: pattern.locked?, autocomplete: 'off', id: "words_#{pattern.id}") %>
+        </div>
+        <%= button_tag t(:update), type: :submit %>
+    <% end %>
+  </div>
   <div class="secondary info">
-    <div><%= pattern.words_string %></div>
-    <%= link_to t(:dream, count: pattern.dreams_count), dreams_admin_pattern_path(pattern) %>,
+    <div><%= link_to t(:dream, count: pattern.dreams_count), dreams_admin_pattern_path(pattern) %></div>
+    <% if pattern.description.blank? %>
+        <div><%= t('.no_description') %></div>
+    <% else %>
+        <div><%= t('.has_description') %></div>
+    <% end %>
   </div>
   <%= render partial: 'admin/patterns/toggleable', locals: { pattern: pattern } %>
 
