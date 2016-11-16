@@ -1,6 +1,4 @@
 User-agent: *
-Host: sovia.ru
-Sitemap: https://sovia.ru/sitemap.xml
 Disallow: /admin
 Disallow: /api
 Disallow: /my
@@ -20,3 +18,5 @@ Disallow: /posts/new
 Disallow: /posts/tagged
 Disallow: /dreams/tagged
 Disallow: /dreambook/search
+Host: sovia.ru
+Sitemap: https://sovia.ru/sitemap.xml
