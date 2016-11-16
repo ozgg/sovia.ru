@@ -18,5 +18,5 @@ Disallow: /posts/new
 Disallow: /posts/tagged
 Disallow: /dreams/tagged
 Disallow: /dreambook/search
-Host: sovia.ru
+Host: https://sovia.ru
 Sitemap: https://sovia.ru/sitemap.xml
