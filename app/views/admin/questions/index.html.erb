@@ -2,6 +2,10 @@
 
 <article>
   <h1><%= t('.heading') %></h1>
+  <ul class="actions">
+    <li><%= back_icon(admin_path) %></li>
+    <li><%= create_icon(new_question_path) %></li>
+  </ul>
 
   <%= paginate @collection %>
   <%= render partial: 'list', locals: { collection: @collection } %>

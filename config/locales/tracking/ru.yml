@@ -25,12 +25,12 @@ ru:
   admin:
     browsers:
       index:
-        index: "Браузеры, страница %{page}"
+        title: "Браузеры, страница %{page}"
         heading: "Браузеры"
         description: "Управление браузерами"
     agents:
       index:
-        index: "Агенты пользователя, страница %{page}"
+        title: "Агенты пользователя, страница %{page}"
         heading: "Агенты пользователя"
         description: "Управление агентами пользователя"
   browsers:
