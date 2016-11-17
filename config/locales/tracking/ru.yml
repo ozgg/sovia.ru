@@ -27,12 +27,12 @@ ru:
       index:
         index: "Браузеры, страница %{page}"
         heading: "Браузеры"
-        title: "Браузеры, страница %{page}"
+        description: "Управление браузерами"
     agents:
       index:
         index: "Агенты пользователя, страница %{page}"
         heading: "Агенты пользователя"
-        title: "Агенты пользователя, страница %{page}"
+        description: "Управление агентами пользователя"
   browsers:
     new:
       title: "Создание браузера"

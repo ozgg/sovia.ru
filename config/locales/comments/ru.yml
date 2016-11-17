@@ -25,8 +25,9 @@ ru:
   admin:
     comments:
       index:
-        heading: "Комментарии"
         title: "Комментарии, страница %{page}"
+        heading: "Комментарии"
+        description: "Управление оставленными пользователями комментариями"
       show:
         title: "Комментарий №%{id}"
   my:

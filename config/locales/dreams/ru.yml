@@ -61,6 +61,7 @@ ru:
       index:
         title: "Сны, страница %{page}"
         heading: "Сны"
+        description: "Управление описанными пользователями и ботами снами"
       show:
         title: "Сон «%{title}»"
       comments:

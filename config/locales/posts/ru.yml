@@ -53,6 +53,7 @@ ru:
       index:
         title: "Публикации, страница %{page}"
         heading: "Публикации"
+        description: "Управление публикациями"
       show:
         title: "Публикация «%{title}»"
       comments:
@@ -61,6 +62,7 @@ ru:
       index:
         title: "Метки, страница %{page}"
         heading: "Метки"
+        description: "Управление метками публикаций"
   my:
     posts:
       index:

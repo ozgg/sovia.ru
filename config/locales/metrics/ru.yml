@@ -17,5 +17,6 @@ ru:
       index:
         title: "Метрики"
         heading: "Метрики"
+        description: "Ппросмотр метрик"
       show:
         title: "Метрика «%{name}»"

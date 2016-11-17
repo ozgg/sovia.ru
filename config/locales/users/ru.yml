@@ -93,16 +93,19 @@ ru:
       index:
         title: "Пользователи, страница %{page}"
         heading: "Пользователи"
+        description: "Управление пользователями сайта и ботами"
       posts:
         title: "Публикации пользователя %{user}, страница %{page}"
     tokens:
       index:
         title: "Жетоны, страница %{page}"
         heading: "Жетоны"
+        description: "Управление жетонами доступа пользователей"
     codes:
       index:
         title: "Коды, страница %{page}"
         heading: "Коды"
+        description: "Управление кодами подтверждения почты, сброса пароля и прочими"
   authentication:
     new:
       title: "Вход на сайт"

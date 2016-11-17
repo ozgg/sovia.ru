@@ -375,3 +375,36 @@ ul.actions {
     }
   }
 }
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  nav {
+    box-shadow: $block-shadow;
+    margin: 0.4rem;
+    max-width: 32rem;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        background: $row_background_odd;
+        list-style: none;
+        margin: 0;
+        padding: 0.4rem;
+
+        &:nth-last-of-type(even) {
+          background: $row_background_even;
+        }
+
+        .description {
+          color: $secondary_text_color;
+          font-size: $decreased_font_size;
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@ ru:
       index:
         title: "Вопросы, страница %{page}"
         heading: "Вопросы"
+        description: "Управление заданными вопросами"
       show:
         title: "Вопрос №%{id}"
       comments:

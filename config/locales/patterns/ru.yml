@@ -50,6 +50,7 @@ ru:
       index:
         title: "Образы, страница %{page}"
         heading: "Образы"
+        description: "Управление образами сна (сонник)"
       show:
         title: "Образ «%{name}»"
       dreams:
@@ -59,12 +60,15 @@ ru:
     grain_categories:
       index:
         title: "Категория личных образов"
+        heading: "Категория личных образов"
+        description: "Управление категориями личных образов пользователей"
       show:
         title: "Категория личного образа «%{name}»"
     words:
       index:
-        heading: "Слова"
         title: "Слова, страница %{page}"
+        heading: "Слова"
+        description: "Управление словами (слова из описанных снов)"
       show:
         title: "Слово «%{word}»"
       dreams:
