@@ -2,6 +2,9 @@
 
 <article class="dreams">
   <h1><%= t('.heading') %></h1>
+  <ul class="actions">
+    <li><%= back_icon(my_path) %></li>
+  </ul>
 
   <%= paginate @collection %>
   <%= render partial: 'dreams/list', locals: { collection: @collection } %>

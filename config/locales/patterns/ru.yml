@@ -78,6 +78,7 @@ ru:
       index:
         title: "Мои образы снов, страница %{page}"
         heading: "Мои образы снов"
+        description: "Описание ваших личных образов сна"
       show:
         title: "Мой образ сна «%{name}»"
       dreams:

@@ -68,6 +68,7 @@ ru:
       index:
         title: "Мои, страница %{page}"
         heading: "Мои публикации"
+        description: "Управление вашими публикациями"
   posts:
     update:
       success: "Публикация успешно обновлена"

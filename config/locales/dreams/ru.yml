@@ -76,9 +76,12 @@ ru:
       index:
         title: "Мои сны, страница %{page}"
         heading: "Мои сны"
+        description: "Ваш личный дневник снов"
     places:
       index:
         title: "Мои места для сна"
+        heading: "Мои места для сна"
+        description: "Управление вашими местами для сна"
       show:
         title: "Место для сна «%{name}»"
       dreams:
