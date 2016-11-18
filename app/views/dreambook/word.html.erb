@@ -4,7 +4,7 @@
     <meta property="og:article:section" content="<%= t('dreambook.index.title') %>"/>
 <% end %>
 
-<article itemscope itemtype="http://schema.org/ScholarlyArticle">
+<article class="dreambook post" itemscope itemtype="http://schema.org/ScholarlyArticle">
   <h1 itemprop="headline"><%= @entity.name %></h1>
 
   <% if current_user_has_role? :chief_interpreter, :interpreter %>

@@ -100,6 +100,38 @@ div.list-of-posts {
 }
 
 article.post {
+  > h1 {
+    background: #fff;
+    padding: 0.8rem;
+  }
+
+  &.dreambook {
+    > h1:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  .body {
+    padding: 1.6rem;
+    background: #fff;
+
+    p:first-of-type {
+      margin-top: 0;
+    }
+
+    p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .essence {
+    background: rgba(127, 127, 127, .1);
+    margin: 0 1.6rem 1.6rem;
+    padding: 0.8rem;
+    font-size: $decreased_font_size;
+    font-style: italic;
+  }
+
   figure {
     text-align: center;
     margin: 0;
@@ -127,8 +159,8 @@ article.post {
     color: $secondary_text_color;
     display: flex;
     justify-content: space-between;
-    margin: 0.4rem;
-    padding: 0 0 0.4rem 0;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, .5);
 
     time {
       font-size: $small_font_size;
@@ -168,6 +200,35 @@ article.post {
         margin: 0;
         padding: 0;
       }
+    }
+  }
+}
+
+.interpretation {
+  background: rgba(255, 255, 255, 0.5);
+  margin: 1.6rem 0 0 0;
+
+  h2 {
+    background: #fff;
+    padding: 0.8rem;
+    font-size: $large_font_size;
+  }
+
+  dl {
+    margin: 0;
+    padding: 1.6rem;
+
+    dt {
+      font-size: $normal_font_size;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    dd {
+      font-size: $decreased_font_size;
+      margin: 0 0 0.8rem 1.6rem;
     }
   }
 }
