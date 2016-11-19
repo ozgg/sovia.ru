@@ -1,14 +1,34 @@
 <% if values.any? %>
-    <table>
-      <tbody>
-      <% values.each do |metric_value| %>
-          <tr>
-            <th><%= time_tag metric_value.time %></th>
-            <td><%= metric_value.quantity %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+    <canvas id="metric-chart" width="640" height="480"></canvas>
+    <script>
+      $(function() {
+          var ctx = document.getElementById('metric-chart');
+
+          var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: ['<%= values.map { |v| v.time.strftime('%d.%m.%Y %H:%M') }.join("','").html_safe %>'],
+                  datasets: [{
+                      label: '<%= metric.name %>',
+                      data: [<%= values.map { |v| v.quantity }.join(',') %>],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+                  }
+              }
+          });
+
+      });
+    </script>
 <% else %>
     <%= render 'shared/nothing_found' %>
 <% end %>

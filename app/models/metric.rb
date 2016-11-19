@@ -3,6 +3,10 @@ class Metric < ApplicationRecord
 
   has_many :metric_values, dependent: :destroy
 
+  def values(period = 7)
+    metric_values.where('time > ?', period.days.ago).order('time asc')
+  end
+
   def self.page_for_administration
     order('name asc')
   end

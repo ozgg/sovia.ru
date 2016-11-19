@@ -8,5 +8,5 @@
 
   <div><%= @entity.description %></div>
 
-  <%= render partial: 'admin/metrics/entity/values', locals: { values: @entity.metric_values.page_for_administration } %>
+  <%= render partial: 'admin/metrics/entity/values', locals: { values: @entity.values, metric: @entity } %>
 </article>
