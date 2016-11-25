@@ -96,6 +96,8 @@ ru:
         description: "Управление пользователями сайта и ботами"
       posts:
         title: "Публикации пользователя %{user}, страница %{page}"
+      show:
+        title: "Пользователь %{name}"
     tokens:
       index:
         title: "Жетоны, страница %{page}"

@@ -94,7 +94,7 @@
           <li><%= link_to t('admin.tokens.index.heading'), tokens_admin_user_path(@entity) %></li>
           <li><%= link_to t('admin.codes.index.heading'), codes_admin_user_path(@entity) %></li>
           <li><%= link_to t('admin.posts.index.heading'), posts_admin_user_path(@entity) %></li>
-          <li><%= link_to t('admin.dreams.index.heading'), user_dreams_path(@entity) %></li>
+          <li><%= link_to t('admin.dreams.index.heading'), user_dreams_path(@entity.long_slug) %></li>
         </ul>
       </td>
     </tr>

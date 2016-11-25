@@ -6,7 +6,7 @@
     <li><%= back_icon admin_dream_path(@entity) %></li>
   </ul>
 
-  <div><%= @entity.lead %></div>
+  <div><%= render partial: 'dreams/preview', locals: { dream: @entity } %></div>
 
   <section>
     <h2><%= t(:comments_list) %></h2>

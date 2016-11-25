@@ -41,6 +41,17 @@ class ApplicationController < ActionController::Base
     ActiveRecord::RecordNotFound
   end
 
+  # Handle HTTP error with status 404 without raising exception
+  #
+  # @param [String] message
+  # @param [String] metric
+  # @param [Symbol|String] view
+  def handle_http_404(message, metric = nil, view = :not_found)
+    logger.warn message
+    Metric.register(metric || Metric::METRIC_HTTP_404)
+    render view, status: :not_found
+  end
+
   def restrict_anonymous_access
     redirect_to login_path, alert: t(:please_log_in) unless current_user.is_a? User
   end
@@ -65,7 +76,11 @@ class ApplicationController < ActionController::Base
   end
 
   # user id for new entity
-  def owner_for_entity
-    { user: current_user }
+  #
+  # @param [Boolean] track
+  def owner_for_entity(track = false)
+    result = { user: current_user }
+    result.merge!(tracking_for_entity) if track
+    result
   end
 end

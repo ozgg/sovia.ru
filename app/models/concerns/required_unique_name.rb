@@ -2,6 +2,7 @@ module RequiredUniqueName
   extend ActiveSupport::Concern
 
   included do
+    before_validation { self.name = name.strip unless name.nil? }
     validates_presence_of :name
     validates_uniqueness_of :name
 
