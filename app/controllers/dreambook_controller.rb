@@ -1,6 +1,12 @@
 class DreambookController < ApplicationController
   # get /dreambook
   def index
+    letter = params[:letter].to_s.gsub(/[%_]/, '')
+    if letter.blank?
+      @collection = []
+    else
+      @collection = Pattern.letter(letter).page_for_visitors(current_page)
+    end
   end
 
   # get /dreambook/:word

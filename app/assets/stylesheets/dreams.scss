@@ -5,3 +5,38 @@
     width: calc(100% - 2rem);
   }
 }
+
+.dreambook-letters {
+  margin: 1.6rem;
+  padding: .4rem;
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  box-shadow: $block-shadow;
+  flex-wrap: wrap;
+
+  li {
+    list-style: none;
+    font-size: $increased_font_size;
+    margin: 0;
+    padding: 0.4rem;
+  }
+}
+
+
+.dreambook-words {
+  margin: .8rem;
+  padding: 0;
+  box-shadow: $block-shadow;
+
+  li {
+    list-style: none;
+    background: $row_background_odd;
+    margin: 0;
+    padding: 0.4rem;
+
+    &:nth-of-type(even) {
+      background: $row_background_even;
+    }
+  }
+}

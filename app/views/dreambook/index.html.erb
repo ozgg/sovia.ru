@@ -5,7 +5,8 @@
 
   <%= render partial: 'form', locals: { query: '' } %>
 
-  <p><%= link_to 'Опишите свой сон', new_dream_path %>, и вам помогут его растолковать.</p>
+  <p><%= link_to 'Опишите свой сон', new_dream_path %>, и вам помогут его
+    растолковать.</p>
   <p>В соннике собраны общие интерпретации символов. Имейте в виду, что лучше
     сначала подумать над тем,
     с чем у вас лично ассоциируется то или иное увиденное во сне, и если особых
@@ -16,5 +17,27 @@
     для разных людей разный смысл.</p>
   <p>Работа над сонником ведётся постоянно, так что он улучшается и
     дополняется.</p>
+
+  <section>
+    <h2>Алфавитный указатель</h2>
+
+    <nav>
+      <ul class="dreambook-letters">
+        <% Pattern::LETTERS.split('').each do |letter| %>
+            <li><%= link_to(letter, dreambook_path(letter: letter)) %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <% if @collection.any? %>
+        <%= paginate @collection %>
+        <ul class="dreambook-words">
+          <% @collection.each do |pattern| %>
+          <li><%= link_to(pattern.name, dreambook_word_path(word: pattern.name)) %></li>
+          <% end %>
+        </ul>
+        <%= paginate @collection %>
+    <% end %>
+  </section>
 
 </article>

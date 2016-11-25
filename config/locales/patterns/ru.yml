@@ -127,6 +127,7 @@ ru:
       title: "Сонник"
     word:
       title: "Сонник: %{pattern}"
+      heading: "Сонник"
   dreams:
     entity:
       patterns:

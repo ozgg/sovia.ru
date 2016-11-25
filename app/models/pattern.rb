@@ -4,6 +4,7 @@ class Pattern < ApplicationRecord
 
   PER_PAGE     = 20
   LINK_PATTERN = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/
+  LETTERS      = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ'
 
   METRIC_DESCRIBED = 'patterns.described.count'
 
@@ -19,6 +20,7 @@ class Pattern < ApplicationRecord
   scope :visible, -> { where deleted: false }
   scope :ordered_by_popularity, -> { order 'dreams_count desc, name asc' }
   scope :good_for_dreambook, -> { where("described = true or essence != '' or description != ''") }
+  scope :letter, -> (letter) { where("name ilike ?", "#{letter[0]}%") unless letter.blank? }
   scope :described, -> (flag) { where described: flag.to_i > 0 unless flag.blank? }
   scope :filtered, -> (f) { described(f[:described]).with_name(f[:name]) }
 
@@ -30,7 +32,7 @@ class Pattern < ApplicationRecord
 
   # @param [Integer] page
   def self.page_for_visitors(page)
-    visible.ordered_by_name.page(page).per(PER_PAGE)
+    visible.good_for_dreambook.ordered_by_name.page(page).per(PER_PAGE)
   end
 
   def self.entity_parameters

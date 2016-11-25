@@ -1,10 +1,18 @@
 <% if collection.any? %>
-    <dl class="patterns">
-      <% collection.each do |pattern| %>
-          <dt><%= pattern_in_dreambook(pattern) %></dt>
-          <dd><%= pattern.essence %></dd>
-      <% end %>
-    </dl>
+    <section class="interpretation">
+      <dl class="patterns">
+        <% collection.each do |pattern| %>
+            <dt><%= pattern_in_dreambook(pattern) %></dt>
+            <dd>
+              <% if pattern.essence.blank? %>
+                  <%= t('dreams.entity.patterns.see_dreambook') %>
+              <% else %>
+                  <%= pattern.essence %>
+              <% end %>
+            </dd>
+        <% end %>
+      </dl>
+    </section>
 <% else %>
     <%= render 'shared/nothing_found' %>
 <% end %>

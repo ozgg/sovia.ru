@@ -5,7 +5,7 @@
 <% end %>
 
 <article class="dreambook post" itemscope itemtype="http://schema.org/ScholarlyArticle">
-  <h1 itemprop="headline"><%= @entity.name %></h1>
+  <h1 itemprop="headline"><%= t('.heading') %>: <span><%= @entity.name %></span></h1>
 
   <% if current_user_has_role? :chief_interpreter, :interpreter %>
       <ul class="actions">
