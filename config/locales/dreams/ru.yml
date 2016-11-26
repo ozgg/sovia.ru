@@ -114,6 +114,8 @@ ru:
     entity:
       patterns:
         automatic_interpretation: "Автоматическое толкование"
+    not_found:
+      title: "Сон не найден"
   places:
     update:
       success: "Место для сна успешно изменено"

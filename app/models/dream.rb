@@ -122,6 +122,10 @@ class Dream < ApplicationRecord
     owned_by?(user) || (UserRole.user_has_role?(user, :administrator) && visible_to?(user))
   end
 
+  def interpretation(count = 20)
+    patterns.good_for_dreambook.long_enough.ordered_by_popularity.first(count)
+  end
+
   private
 
   def normalize_title

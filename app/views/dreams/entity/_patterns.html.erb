@@ -2,7 +2,7 @@
   <h2><%= t('.automatic_interpretation') %></h2>
 
   <dl>
-    <% dream.patterns.good_for_dreambook.long_enough.ordered_by_popularity.first(20).each do |pattern| %>
+    <% dream.interpretation.each do |pattern| %>
         <dt><%= pattern_in_dreambook pattern %></dt>
         <dd>
           <% if pattern.essence.blank? %>

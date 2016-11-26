@@ -72,7 +72,9 @@ Rails.application.routes.draw do
       put 'patterns', on: :member
     end
     resources :grain_categories, except: [:new, :edit], concerns: [:lockable]
-    resources :dreams, except: [:new, :edit], concerns: [:toggleable]
+    resources :dreams, except: [:new, :edit], concerns: [:toggleable] do
+      get 'interpretation', on: :member
+    end
     resources :questions, except: [:new, :edit], concerns: [:lockable]
   end
 
