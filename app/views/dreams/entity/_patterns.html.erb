@@ -1,16 +1,55 @@
 <section class="interpretation">
   <h2><%= t('.automatic_interpretation') %></h2>
 
-  <dl>
-    <% dream.interpretation.each do |pattern| %>
-        <dt><%= pattern_in_dreambook pattern %></dt>
-        <dd>
-          <% if pattern.essence.blank? %>
-              <%= t('.see_dreambook') %>
-          <% else %>
-              <%= pattern.essence %>
-          <% end %>
-        </dd>
-    <% end %>
-  </dl>
+  <% patterns = dream.interpretation %>
+  <% if patterns.any? %>
+      <dl>
+        <% patterns.each do |pattern| %>
+            <dt><%= pattern_in_dreambook pattern %></dt>
+            <dd>
+              <% if pattern.essence.blank? %>
+                  <%= t('.see_dreambook') %>
+              <% else %>
+                  <%= pattern.essence %>
+              <% end %>
+            </dd>
+        <% end %>
+      </dl>
+  <% else %>
+      <div id="interpretation-preloader" data-url="<%= interpretation_api_dream_path(dream.id) %>">
+        <%= t('.preparing_interpretation') %>
+      </div>
+      <script>
+          $(function () {
+              var $preloader = $('#interpretation-preloader');
+
+              function check_interpretation() {
+                  $.get($preloader.data('url'), function (response) {
+                      if (response.hasOwnProperty('data')) {
+                          var patterns = response['data']['patterns'];
+
+                          if (patterns.length > 0) {
+                              var $list = $('<dl>');
+                              var pattern;
+
+                              for (var i in patterns) {
+                                  if (patterns.hasOwnProperty(i)) {
+                                      pattern = patterns[i];
+                                      $list.append('<dt><a href="' + pattern.links.self + '">' + pattern.attributes['name'] + '</a></dt>');
+                                      $list.append('<dd>' + pattern.attributes['essence'] + '</dd>');
+                                  }
+                              }
+
+                              $preloader.after($list);
+                          }
+
+                          $preloader.hide();
+                      }
+                  }).fail(handle_ajax_failure);
+              }
+
+              window.setTimeout(check_interpretation, 500);
+          });
+      </script>
+  <% end %>
 </section>

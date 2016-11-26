@@ -6,6 +6,15 @@
   }
 }
 
+#interpretation-preloader {
+  box-shadow: $block-shadow;
+  text-align: center;
+  font-size: $larger_font_size;
+  margin: 1.6rem;
+  padding: 1.6rem;
+  background: #f0fff0
+}
+
 .dreambook-letters {
   margin: 1.6rem;
   padding: .4rem;

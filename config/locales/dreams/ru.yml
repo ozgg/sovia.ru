@@ -114,6 +114,7 @@ ru:
     entity:
       patterns:
         automatic_interpretation: "Автоматическое толкование"
+        preparing_interpretation: "Автоматическое толкование загружается…"
     not_found:
       title: "Сон не найден"
   places:
