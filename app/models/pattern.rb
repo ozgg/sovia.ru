@@ -19,7 +19,8 @@ class Pattern < ApplicationRecord
 
   scope :visible, -> { where deleted: false }
   scope :ordered_by_popularity, -> { order 'dreams_count desc, name asc' }
-  scope :good_for_dreambook, -> { where("described = true or essence != '' or description != ''") }
+  scope :good_for_dreambook, -> { where("described = true or coalesce(essence, '') != '' or coalesce(description, '') != ''") }
+  scope :long_enough, -> (length = 2) { where('length(name) > ?', length) }
   scope :letter, -> (letter) { where("name ilike ?", "#{letter[0]}%") unless letter.blank? }
   scope :described, -> (flag) { where described: flag.to_i > 0 unless flag.blank? }
   scope :filtered, -> (f) { described(f[:described]).with_name(f[:name]) }

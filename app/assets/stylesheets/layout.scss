@@ -24,6 +24,10 @@ a {
   }
 }
 
+input, textarea {
+  font-size: $normal_font_size;
+}
+
 body {
   margin: 0 auto;
   padding: 0;
