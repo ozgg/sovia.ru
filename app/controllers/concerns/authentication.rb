@@ -11,4 +11,10 @@ module Authentication
     token = user.tokens.create! tracking
     cookies['token'] = { value: token.cookie_pair, expires: 1.year.from_now }
   end
+
+  def deactivate_token
+    token = Token.find_by token: cookies['token'].split(':').last
+    token.update active: false
+    cookies['token'] = nil
+  end
 end

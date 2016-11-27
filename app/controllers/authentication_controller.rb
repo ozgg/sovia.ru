@@ -32,38 +32,67 @@ class AuthenticationController < ApplicationController
 
   # get /auth/:provider/callback
   def callback
-    provider, data = params[:provider], request.env['omniauth.auth']
-    account = User.find_by(network: User.networks[provider], slug: data[:uid]) || create_account(provider, data)
-    create_token_for_user account, tracking_for_entity if account.allow_login?
-
-    message = "set_#{params[:provider]}_account"
-    send message if respond_to? message, true
+    network = User.networks[params[:provider]]
+    data    = request.env['omniauth.auth']
+    account = find_account(network, data)
+    create_token_for_user(account, tracking_for_entity) if account.allow_login?
 
     redirect_to root_path
   end
 
   private
 
-  def deactivate_token
-    token = Token.find_by token: cookies['token'].split(':').last
-    token.update active: false
-    cookies['token'] = nil
+  # @param [Integer] network
+  # @param [Hash] data
+  def find_account(network, data)
+    account = User.find_by(network: network, slug: data[:uid])
+    if account.nil?
+      account = create_account(network, data)
+    end
+    account.native_user || account
   end
 
-  # @param [String] provider
+  # @param [Integer] network
   # @param [Hash] data
-  def create_account(provider, data)
+  def create_account(network, data)
     parameters = {
-        network: User.networks[provider],
-        screen_name: data[:info][:nickname],
-        slug: data[:uid],
-        email: data[:info][:email],
-        name: data[:info][:name],
+        network:         network,
+        screen_name:     data[:info][:nickname],
+        slug:            data[:uid],
+        email:           data[:info][:email],
+        name:            data[:info][:name],
         email_confirmed: true,
-        allow_mail: true,
+        allow_mail:      true,
         password_digest: BCrypt::Engine.hash_secret(Time.now.to_s(26), BCrypt::Engine.generate_salt),
     }
-    parameters[:remote_image_url] = data[:info][:image] unless data[:info][:image].blank?
+    if network == User.networks[:facebook]
+      parameters[:screen_name] = data[:info][:name]
+    end
+    if network == User.networks[:vkontakte]
+      if data[:info][:nickname].blank? || (data[:info][:nickname] == "id#{data[:uid]}")
+        parameters[:screen_name] = data[:info][:name]
+      end
+    end
+    if data[:info].has_key? :first_name
+      parameters[:name] = data[:info][:first_name]
+    end
+    if data[:info].has_key? :last_name
+      parameters[:surname] = data[:info][:last_name]
+    end
+
+    big_photo = data.dig(:extra, :raw_info, :photo_400_orig)
+
+    if big_photo.nil?
+      unless data[:info][:image].blank?
+        parameters[:remote_image_url] = data[:info][:image]
+      end
+    else
+      parameters[:remote_image_url] = big_photo
+    end
+
+    unless data[:info][:email].blank?
+      parameters[:native_id] = User.native.with_email(data[:info][:email]).first&.id
+    end
 
     User.create! parameters.merge(tracking_for_entity)
   end

@@ -2,13 +2,18 @@
   <%= profile_avatar user %>
 </div>
 <div class="data">
-  <div><%= admin_user_link user %></div>
+  <div>
+    <%= admin_user_link user %>
+    <% unless user.native_id.nil? %>
+        &rarr; <%= admin_user_link(user.native_user) %>
+    <% end %>
+  </div>
   <% unless user.notice.blank? %>
       <div><%= user.notice %></div>
   <% end %>
   <% unless user.email.blank? %>
       <div class="info">
-        <div><%= t('activerecord.attributes.user.email') %>: <%= user.email %></div>
+        <%= t('activerecord.attributes.user.email') %>: <%= user.email %>
       </div>
   <% end %>
   <div class="secondary info">

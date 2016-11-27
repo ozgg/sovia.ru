@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  enum network: [:native, :facebook, :twitter, :vkontakte, :mailru]
+  enum network: [:native, :vkontakte, :twitter, :facebook, :mailru]
   enum gender: [:female, :male]
 
   before_validation :normalize_screen_name
@@ -36,11 +36,12 @@ class User < ApplicationRecord
 
   mount_uploader :image, AvatarUploader
 
+  scope :native, -> { where(network: User.networks[:native]) }
   scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
   scope :network, -> (network) { where network: network unless network.blank? }
   scope :name_like, -> (val) { where 'name ilike ?', "%#{val}%" unless val.blank? }
   scope :email_like, -> (val) { where 'email ilike ?', "%#{val}%" unless val.blank? }
-  scope :with_email, -> (email) { where 'email ikike ?', email }
+  scope :with_email, -> (email) { where 'email ilike ?', email }
   scope :screen_name_like, -> (val) { where 'screen_name ilike ?', "%#{val}%" unless val.blank? }
   scope :filtered, -> (f) { name_like(f[:name]).email_like(f[:email]).screen_name_like(f[:screen_name]) }
 
@@ -128,6 +129,10 @@ class User < ApplicationRecord
   # @param [User] user
   def follows?(user)
     user == self
+  end
+
+  def native_user
+    User.native.find_by(id: native_id) unless native_id.nil?
   end
 
   protected
