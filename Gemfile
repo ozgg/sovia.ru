@@ -44,6 +44,7 @@ gem 'carrierwave-bombshelter'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'omniauth-mail_ru'
 
 gem 'sidekiq'
 

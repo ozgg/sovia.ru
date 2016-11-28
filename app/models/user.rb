@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  enum network: [:native, :vkontakte, :twitter, :facebook, :mailru]
+  enum network: [:native, :vkontakte, :twitter, :facebook, :mail_ru]
   enum gender: [:female, :male]
 
   before_validation :normalize_screen_name

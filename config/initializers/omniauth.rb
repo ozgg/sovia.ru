@@ -13,4 +13,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :vkontakte, ENV['VKONTAKTE_APP_ID'], ENV['VKONTAKTE_APP_SECRET'], {
       scope: 'email'
   }
+
+  provider :mail_ru, ENV['MAIL_RU_APP_ID'], ENV['MAIL_RU_PRIVATE_KEY']
 end
