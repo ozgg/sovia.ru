@@ -16,7 +16,7 @@ class Metric < ApplicationRecord
   # @param [String] name
   # @param [Integer] quantity
   def self.register(name, quantity = 1)
-    instance = Metric.find_by(name: name) || create(name: name, incremental: name =~ /\.hit\z/)
+    instance = Metric.find_by(name: name) || create(name: name, incremental: !(name =~ /\.hit\z/).nil?)
     instance.metric_values.create(time: Time.now, quantity: quantity)
     value = instance.incremental? ? instance.metric_values.sum(:quantity) : quantity
 

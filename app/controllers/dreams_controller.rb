@@ -55,7 +55,7 @@ class DreamsController < ApplicationController
   # get /dreams/tagged/:tag_name
   def tagged
     set_tag
-    @collection = Dream.tagged(@tag).page_for_visitors(current_user, current_page)
+    @collection = Dream.tagged(@tag).distinct.page_for_visitors(current_user, current_page)
   end
 
   # get /dreams/archive/(:year)/(:month)
