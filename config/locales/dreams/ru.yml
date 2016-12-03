@@ -9,6 +9,7 @@ ru:
     models:
       place: "Место для сна"
       dream: "Сон"
+      filler: "Наполнитель"
     errors:
       models:
         dream:
@@ -19,6 +20,9 @@ ru:
         dream_grain:
           grain_id:
             foreign: "принадлежит другому пользователю"
+        filler:
+          user:
+            not_bot: "должен быть ботом"
     attributes:
       place:
         user: "Пользователь"
@@ -56,6 +60,11 @@ ru:
       dream_word:
         dream: "Сон"
         word: "Слово"
+      filler:
+        user: "Пользователь"
+        gender: "Пол"
+        title: "Название"
+        body: "Текст"
   admin:
     dreams:
       index:
@@ -71,6 +80,11 @@ ru:
         in_list:
           no_description: "Описания нет"
           has_description: "Описание есть"
+    fillers:
+      index:
+        title: "Наполнители, страница %{page}"
+        heading: "Наполнители"
+        description: "Наполнители для поддержания количества новых снов"
   my:
     dreams:
       index:
@@ -132,3 +146,12 @@ ru:
       title: "Поиск по соннику"
     form:
       search: "Поиск по соннику"
+  fillers:
+    new:
+      title: "Новый наполнитель"
+    edit:
+      title: "Редактирование наполнителя"
+    update:
+      success: "Наполнитель успешно изменён"
+    destroy:
+      success: "Наполнитель успешно удалён"

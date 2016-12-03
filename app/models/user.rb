@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :places, dependent: :destroy
   has_many :grains, dependent: :destroy
   has_many :dreams, dependent: :destroy
+  has_many :fillers, dependent: :destroy
 
   has_secure_password
 
