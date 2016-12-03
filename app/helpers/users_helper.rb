@@ -8,6 +8,13 @@ module UsersHelper
     genders + User.genders.keys.to_a.map { |gender| [I18n.t("activerecord.attributes.user.genders.#{gender}"), gender] }
   end
 
+  def bots_for_select
+    list = [[t(:not_selected), '']]
+    list + User.bots(1).order('network asc, screen_name asc').map do |bot|
+      ["#{bot.network}: #{bot.profile_name}", bot.id]
+    end
+  end
+
   # @param [User] user
   def user_roles(user)
     UserRole.owned_by(user).map { |role| I18n.t("activerecord.attributes.user_role.roles.#{role.role}") }

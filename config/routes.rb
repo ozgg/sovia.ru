@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :words, only: [:index, :show], concerns: [:list_of_dreams]
 
     resources :dreams, only: [:index, :show], concerns: [:list_of_comments]
+    resources :fillers, only: [:index, :show]
   end
 
   namespace :api, defaults: { format: :json } do
@@ -108,6 +109,7 @@ Rails.application.routes.draw do
   resources :words, except: [:index, :show]
   resources :dreams, concerns: [:tagged_archive]
   resources :questions
+  resources :fillers, except: [:index, :show]
 
   scope 'dreambook', controller: :dreambook do
     get '/' => :index, as: :dreambook

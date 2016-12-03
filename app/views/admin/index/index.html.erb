@@ -57,6 +57,10 @@
               <div><%= link_to t('admin.posts.index.heading'), admin_posts_path %></div>
               <div class="description"><%= t('admin.posts.index.description') %></div>
             </li>
+            <li>
+              <div><%= link_to t('admin.fillers.index.heading'), admin_fillers_path %></div>
+              <div class="description"><%= t('admin.fillers.index.description') %></div>
+            </li>
         <% end %>
         <% if current_user_has_role? :interpreter, :chief_interpreter %>
             <li>

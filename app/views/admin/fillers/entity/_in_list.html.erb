@@ -1,0 +1,20 @@
+<div class="data">
+  <div><%= link_to "#{entity.model_name.human} #{entity.id}", admin_filler_path(entity.id) %></div>
+  <div class="info">
+    <%= time_tag entity.created_at %>; <%= entity.title %>
+  </div>
+  <div class="secondary info">
+    <% unless entity.user.nil? %>
+        <div><%= admin_user_link(entity.user) %></div>
+    <% end %>
+    <% unless entity.gender.nil? %>
+        <div><%= t("activerecord.attributes.user.genders.#{entity.gender}") %></div>
+    <% end %>
+  </div>
+
+  <ul class="actions">
+    <li>
+      <%= edit_icon(edit_filler_path(entity)) %>
+    </li>
+  </ul>
+</div>

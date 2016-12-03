@@ -11,7 +11,7 @@ class Filler < ApplicationRecord
   scope :queued, -> { order('id asc') }
 
   # @param [Integer] page
-  def self.page_for_administration(page)
+  def self.page_for_administration(page = 1)
     queued.page(page).per(PER_PAGE)
   end
 

@@ -1,0 +1,46 @@
+<% content_for :meta_title, t('.title', id: @entity.id) %>
+
+<article class="entity-page">
+  <h1><%= @entity.model_name.human %> <%= @entity.id %></h1>
+  <ul class="actions">
+    <li><%= back_icon admin_fillers_path %></li>
+    <li><%= create_icon new_filler_path %></li>
+    <li><%= edit_icon edit_filler_path(@entity.id) %></li>
+    <li class="danger"><%= destroy_icon @entity %></li>
+  </ul>
+
+  <table>
+    <tbody>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag @entity.created_at %></td>
+    </tr>
+    <tr>
+      <th><%= t(:updated_at) %></th>
+      <td><%= time_tag @entity.updated_at %></td>
+    </tr>
+    <% unless @entity.user.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.filler.user') %></th>
+          <td><%= admin_user_link(@entity.user) %></td>
+        </tr>
+    <% end %>
+    <% unless @entity.gender.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.filler.gender') %></th>
+          <td><%= t("activerecord.attributes.user.genders.#{@entity.gender}") %></td>
+        </tr>
+    <% end %>
+    <% unless @entity.title.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.filler.title') %></th>
+          <td><%= @entity.title %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= t('activerecord.attributes.filler.body') %></th>
+      <td><%= simple_format @entity.body %></td>
+    </tr>
+    </tbody>
+  </table>
+</article>
