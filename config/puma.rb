@@ -47,9 +47,12 @@ if ENV['RAILS_ENV'] == 'production'
   shared_path = '/var/www/sovia5/shared'
   logs_dir    = "#{shared_path}/log"
 
+  pidfile "#{shared_path}/tmp/pids/puma.pid"
   state_path "#{shared_path}/tmp/puma.state"
   bind "unix://#{shared_path}/tmp/puma.sock"
   stdout_redirect "#{logs_dir}/stdout.log", "#{logs_dir}/stderr.log", true
+
+  activate_control_app
 end
 
 # Allow puma to be restarted by `rails restart` command.

@@ -16,8 +16,12 @@ namespace :fillers do
         else
           dream.user = filler.user
         end
-        dream.save
-        filler.destroy
+        if dream.save
+          filler.destroy
+          AnalyzeDreamJob.perform_later(dream.id)
+        else
+          puts "Cannot save dream from filler #{filler.id}: #{dream.errors}"
+        end
       end
     end
   end
