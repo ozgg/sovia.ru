@@ -6,7 +6,7 @@ class Word < ApplicationRecord
 
   METRIC_PROCESSED = 'words.processed.count'
 
-  toggleable :significant, :processed
+  toggleable :processed
 
   has_many :pattern_words, dependent: :destroy
   has_many :patterns, through: :pattern_words
