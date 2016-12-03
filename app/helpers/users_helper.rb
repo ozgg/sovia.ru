@@ -11,7 +11,7 @@ module UsersHelper
   def bots_for_select
     list = [[t(:not_selected), '']]
     list + User.bots(1).order('network asc, screen_name asc').map do |bot|
-      ["#{bot.network}: #{bot.profile_name}", bot.id]
+      ["#{bot.network}: #{bot.profile_name} #{bot.gender}".strip, bot.id]
     end
   end
 
