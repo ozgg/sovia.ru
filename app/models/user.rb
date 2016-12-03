@@ -7,9 +7,8 @@ class User < ApplicationRecord
   PER_PAGE          = 25
   PLACE_LIMIT       = 5
 
-  METRIC_COUNT         = 'users.count'
-  METRIC_REGISTRATION  = 'users.registration.count'
-  METRIC_AUTHORIZATION = 'users.authorization.count'
+  METRIC_REGISTRATION  = 'users.registration.hit'
+  METRIC_AUTHORIZATION = 'users.authorization.hit'
 
   toggleable %i(email_confirmed phone_confirmed allow_mail allow_login bot)
 
@@ -36,7 +35,7 @@ class User < ApplicationRecord
 
   mount_uploader :image, AvatarUploader
 
-  scope :native, -> { where(network: User.networks[:native]) }
+  scope :native_users, -> { where(network: User.networks[:native]) }
   scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
   scope :network, -> (network) { where network: network unless network.blank? }
   scope :name_like, -> (val) { where 'name ilike ?', "%#{val}%" unless val.blank? }

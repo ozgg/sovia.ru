@@ -49,6 +49,9 @@ class AuthenticationController < ApplicationController
     if account.nil?
       account = create_account(network, data)
     end
+    if account.email.blank? && !data[:info][:email].blank?
+      account.update(email: data[:info][:email])
+    end
     account.native_user || account
   end
 
@@ -91,7 +94,7 @@ class AuthenticationController < ApplicationController
     end
 
     unless data[:info][:email].blank?
-      parameters[:native_id] = User.native.with_email(data[:info][:email]).first&.id
+      parameters[:native_id] = User.native_users.with_email(data[:info][:email]).first&.id
     end
 
     User.create! parameters.merge(tracking_for_entity)
