@@ -12,7 +12,9 @@ class DreambookController < ApplicationController
   # get /dreambook/:word
   def word
     @entity = Pattern.match_by_name params[:word]
-    raise record_not_found unless @entity.is_a?(Pattern)
+    unless @entity.is_a?(Pattern)
+      handle_http_404("Cannot find pattern with word #{params[:word]}")
+    end
   end
 
   # get /dreambook/search

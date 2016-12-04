@@ -26,7 +26,8 @@
     <% end %>
     <% if @entity.description.blank? %>
         <p>Этот образ подробно ещё не описан.</p>
-        <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам помогут его растолковать.</p>
+        <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам
+          помогут его растолковать.</p>
     <% else %>
         <%= raw prepare_pattern_text(@entity) %>
     <% end %>
