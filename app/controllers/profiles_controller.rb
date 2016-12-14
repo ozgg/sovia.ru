@@ -5,14 +5,19 @@ class ProfilesController < ApplicationController
   def show
   end
 
-  # get /u/slug/:dreams
+  # get /u/:slug/dreams
   def dreams
     @collection = Dream.owned_by(@entity).page_for_visitors(current_user, current_page)
   end
 
-  # get /u/slug/:posts
+  # get /u/:slug/posts
   def posts
     @collection = Post.owned_by(@entity).page_for_visitors(current_page)
+  end
+
+  # get /u/:slug/questions
+  def questions
+    @collection = Question.owned_by(@entity).page_for_visitors(current_page)
   end
 
   private

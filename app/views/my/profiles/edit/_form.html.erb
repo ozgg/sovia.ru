@@ -30,6 +30,7 @@
       </tr>
       <tr>
         <td colspan="2">
+          <%= hidden_field_tag 'user[allow_mail]', '0' %>
           <%= check_box_tag 'user[allow_mail]', '1', entity.allow_mail %>
           <%= label_tag :user_allow_mail, t('activerecord.attributes.user.allow_mail') %>
         </td>

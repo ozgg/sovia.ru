@@ -33,6 +33,8 @@
         <div><%= search_field_tag 'filter[email]', filter[:email], size: 30, results: 5, autosave: 'email' %></div>
       </div>
 
+      <%= render partial: 'shared/filter/flag', locals: { title: t('activerecord.attributes.user.bot'), name: :bots, state: filter[:bots] } %>
+
       <div class="button"><%= button_tag t(:submit), type: :submit, name: '' %></div>
     </fieldset>
 <% end %>

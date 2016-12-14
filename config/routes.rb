@@ -136,6 +136,7 @@ Rails.application.routes.draw do
     get '/' => :show, as: :user_profile
     get 'dreams', as: :user_dreams
     get 'posts', as: :user_posts
+    get 'questions', as: :user_questions
   end
 
   # Obsolete routes

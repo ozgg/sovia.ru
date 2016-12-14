@@ -53,4 +53,17 @@ RSpec.describe ProfilesController, type: :controller do
       expect(Post).to have_received(:page_for_visitors)
     end
   end
+
+  describe 'get questions' do
+    before :each do
+      allow(Question).to receive(:page_for_visitors)
+      get :questions, params: { slug: entity.long_slug }
+    end
+
+    it_behaves_like 'finding_user_by_slug'
+
+    it 'prepares list of questions' do
+      expect(Question).to have_received(:page_for_visitors)
+    end
+  end
 end

@@ -27,3 +27,21 @@ article.recovery {
     }
   }
 }
+
+article.profile {
+  th:not([colspan]) {
+    text-align: right;
+    font-weight: normal;
+  }
+
+  p.notice {
+    margin: 0;
+    color: $secondary_text_color;
+    font-size: $decreased_font_size;
+
+    &::before {
+      content: '\261E';
+      margin-right: 0.4rem;
+    }
+  }
+}

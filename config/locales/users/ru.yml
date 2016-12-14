@@ -162,6 +162,9 @@ ru:
     posts:
       title: "Публикации пользователя %{user}, страница %{page}"
       heading: "Публикации пользователя %{user}"
+    questions:
+      title: "Вопросы пользователя %{user}, страница %{page}"
+      heading: "Вопросы пользователя %{user}"
   tokens:
     update:
       success: "Жетон успешно обновлён"
