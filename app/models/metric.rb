@@ -6,7 +6,11 @@ class Metric < ApplicationRecord
   has_many :metric_values, dependent: :destroy
 
   def values(period = 7)
-    metric_values.where('time > ?', period.days.ago).order('time asc')
+    current_value = 0
+    metric_values.where('time > ?', period.days.ago).order('time asc').map do |v|
+      current_value = incremental? ? current_value + v.quantity : v.quantity
+      [v.time.strftime('%d.%m.%Y %H:%M'), current_value]
+    end.to_h
   end
 
   def self.page_for_administration

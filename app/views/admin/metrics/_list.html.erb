@@ -4,6 +4,7 @@
       <tr>
         <th scope="col"><%= t('activerecord.attributes.metric.name') %></th>
         <th scope="col"><%= t('activerecord.attributes.metric.value') %></th>
+        <th scope="col"><%= t('activerecord.attributes.metric.previous_value') %></th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
               <% end %>
             </td>
             <td><%= metric.value %></td>
+            <td><%= metric.previous_value %></td>
           </tr>
       <% end %>
       </tbody>

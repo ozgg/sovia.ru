@@ -9,10 +9,10 @@
           var myChart = new Chart(ctx, {
               type: 'line',
               data: {
-                  labels: ['<%= values.map { |v| v.time.strftime('%d.%m.%Y %H:%M') }.join("','").html_safe %>'],
+                  labels: ['<%= values.keys.map { |v| v }.join("','").html_safe %>'],
                   datasets: [{
                       label: '<%= metric.name %>',
-                      data: [<%= values.map { |v| v.quantity }.join(',') %>],
+                      data: [<%= values.values.map { |v| v }.join(',') %>],
                       borderWidth: 1
                   }]
               },
@@ -20,7 +20,7 @@
                   scales: {
                       yAxes: [{
                           ticks: {
-                              beginAtZero:false
+                              beginAtZero: <%= metric.incremental? %>
                           }
                       }]
                   }

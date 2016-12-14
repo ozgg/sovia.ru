@@ -9,6 +9,7 @@ ru:
         description: "Описание"
         incremental: "Суммарная"
         value: "Значение"
+        previous_value: "Предыдущее значение"
       metric_value:
         metric: "Метрика"
         quantity: "Количество"
