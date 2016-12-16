@@ -1,11 +1,17 @@
 <% content_for :meta_title, t('.title', pattern: @entity.name) %>
+<% content_for :meta_description do %>
+    <%= t('.description', pattern: @entity.name) %>
+    <%= (@entity.essence.blank? ? t('.description_default') : @entity.essence) %>
+<% end %>
 <% content_for :meta_type, 'article' %>
 <% content_for :meta_type_extension do %>
     <meta property="og:article:section" content="<%= t('dreambook.index.title') %>"/>
 <% end %>
 
 <article class="dreambook post" itemscope itemtype="http://schema.org/ScholarlyArticle">
-  <h1 itemprop="headline"><%= t('.heading') %>: <span><%= @entity.name %></span></h1>
+  <h1 itemprop="headline">
+    <%= t('.heading') %>: <span><%= @entity.name %></span>
+  </h1>
 
   <% if current_user_has_role? :chief_interpreter, :interpreter %>
       <ul class="actions">
@@ -22,7 +28,9 @@
         <div class="essence"><%= @entity.essence %></div>
     <% end %>
     <% unless @entity.image.blank? %>
-        <figure><%= image_tag @entity.image.medium.url, alt: @entity.name %></figure>
+        <figure>
+          <%= image_tag @entity.image.medium.url, alt: @entity.name %>
+        </figure>
     <% end %>
     <% if @entity.description.blank? %>
         <p>Этот образ подробно ещё не описан.</p>
