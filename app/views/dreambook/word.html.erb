@@ -33,6 +33,12 @@
     <% end %>
   </div>
 
+  <section class="dream-form">
+    <h2><%= t('.what_is_your_dream') %></h2>
+
+    <%= render partial: 'dreams/form', locals: { entity: Dream.new } %>
+  </section>
+
   <% if @entity.dreams_count > 0 %>
       <section>
         <h2><%= t(:dream, count: @entity.dreams_count) %></h2>

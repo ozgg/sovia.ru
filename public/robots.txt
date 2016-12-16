@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /admin
 Disallow: /api
 Disallow: /my
+Disallow: /auth
 Disallow: /places
 Disallow: /grains
 Disallow: /agents

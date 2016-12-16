@@ -128,6 +128,7 @@ ru:
     word:
       title: "Сонник: %{pattern}"
       heading: "Сонник"
+      what_is_your_dream: "А что вам приснилось?"
   dreams:
     entity:
       patterns:
