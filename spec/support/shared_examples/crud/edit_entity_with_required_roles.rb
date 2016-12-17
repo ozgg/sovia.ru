@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'edit_entity_with_required_roles' do
   describe 'get edit' do
     before :each do
+      allow(subject).to receive(:require_role)
       get :edit, params: { id: entity.id }
     end
 

@@ -18,8 +18,10 @@ class Api::DreamsController < ApplicationController
   private
 
   def set_entity
-    @entity = Dream.find params[:id]
-    # raise record_not_found unless @entity.editable_by? current_user
+    @entity = Dream.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted dream #{params[:id]}")
+    end
   end
 
   def restrict_access

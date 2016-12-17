@@ -1,20 +1,25 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
+RSpec.shared_examples_for 'update_entity_with_editability_check' do
   describe 'patch update' do
+    let(:user) { create :user }
+
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:current_user).and_return(user)
       allow(entity).to receive(:update).and_call_original
     end
 
-    context 'when entity is locked' do
+    context 'when entity is not editable by user' do
       before :each do
-        allow(entity).to receive(:locked?).and_return(true)
+        allow(entity).to receive(:editable_by?).and_return(false)
         patch :update, params: valid_update_params
       end
 
-      it_behaves_like 'required_roles'
       it_behaves_like 'entity_finder'
+
+      it 'checks editablilty' do
+        expect(entity).to have_received(:editable_by?).with(user)
+      end
 
       it 'does not update entity' do
         expect(entity).not_to have_received(:update)
@@ -25,9 +30,9 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
       end
     end
 
-    context 'when entity is not locked' do
+    context 'when entity is editable by user' do
       before :each do
-        allow(entity).to receive(:locked?).and_return(false)
+        allow(entity).to receive(:editable_by?).and_return(true)
       end
 
       context 'when parameters are valid' do
@@ -35,8 +40,11 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
           patch :update, params: valid_update_params
         end
 
-        it_behaves_like 'required_roles'
         it_behaves_like 'entity_finder'
+
+        it 'checks editablilty' do
+          expect(entity).to have_received(:editable_by?).with(user)
+        end
 
         it 'tries to update entity' do
           expect(entity).to have_received(:update)
@@ -52,9 +60,12 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
           patch :update, params: invalid_update_params
         end
 
-        it_behaves_like 'required_roles'
         it_behaves_like 'entity_finder'
         it_behaves_like 'http_bad_request'
+
+        it 'checks editablilty' do
+          expect(entity).to have_received(:editable_by?).with(user)
+        end
 
         it 'tries to update entity' do
           expect(entity).to have_received(:update)

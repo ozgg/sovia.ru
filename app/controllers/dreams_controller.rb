@@ -25,8 +25,11 @@ class DreamsController < ApplicationController
 
   # get /dreams/:id
   def show
-    raise record_not_found unless @entity.visible_to? current_user
-    set_adjacent_entities
+    if @entity.visible_to? current_user
+      set_adjacent_entities
+    else
+      handle_http_404("Dream is not visible to user #{current_user&.id}")
+    end
   end
 
   # get /dreams/:id/edit
@@ -74,11 +77,16 @@ class DreamsController < ApplicationController
   private
 
   def set_entity
-    @entity = Dream.find params[:id]
+    @entity = Dream.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted dream #{params[:id]}")
+    end
   end
 
   def restrict_editing
-    raise record_not_found unless @entity.editable_by? current_user
+    unless @entity.editable_by?(current_user)
+      redirect_to dream_path(@entity.id), alert: t('dreams.edit.unauthorized')
+    end
   end
 
   def creation_parameters
@@ -91,7 +99,10 @@ class DreamsController < ApplicationController
   end
 
   def set_tag
-    @tag = Pattern.find_by! name: params[:tag_name]
+    @tag = Pattern.find_by(name: params[:tag_name])
+    if @tag.nil?
+      handle_http_404("Cannot find pattern #{params[:tag_name]}")
+    end
   end
 
   def collect_months

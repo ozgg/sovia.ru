@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'delete_entity_with_required_roles' do
   describe 'delete destroy' do
     before :each do
+      allow(subject).to receive(:require_role)
       delete :destroy, params: { id: entity.id }
     end
 

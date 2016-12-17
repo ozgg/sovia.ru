@@ -9,7 +9,11 @@ class Admin::DreamsController < ApplicationController
 
   # get /admin/dreams/:id
   def show
-    set_adjacent_entities
+    if @entity.visible_to?(current_user)
+      set_adjacent_entities
+    else
+      handle_http_404("Dream #{params[:id]} is not visible to #{current_user.id}")
+    end
   end
 
   protected
@@ -19,8 +23,10 @@ class Admin::DreamsController < ApplicationController
   end
 
   def set_entity
-    @entity = Dream.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = Dream.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted dream #{params[:id]}")
+    end
   end
 
   def set_adjacent_entities

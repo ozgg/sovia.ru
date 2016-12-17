@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-RSpec.shared_examples_for 'delete_lockable_entity_with_required_roles' do
+RSpec.shared_examples_for 'delete_entity_with_editability_check' do
   describe 'delete destroy' do
+    let(:user) { create :user }
     let(:action) { -> { delete :destroy, params: { id: entity.id } } }
 
     before :each do
-      allow(subject).to receive(:require_role)
+      allow(subject).to receive(:current_user).and_return(user)
     end
 
-    context 'when entity is locked' do
+    context 'when entity is not editable' do
       before :each do
-        allow(entity).to receive(:locked?).and_return(true)
+        allow(entity).to receive(:editable_by?).and_return(false)
         action.call
       end
 
-      it_behaves_like 'required_roles'
       it_behaves_like 'entity_finder'
 
       it 'does not delete entity' do
@@ -27,13 +27,12 @@ RSpec.shared_examples_for 'delete_lockable_entity_with_required_roles' do
       end
     end
 
-    context 'when entity is not locked' do
+    context 'when entity is editable' do
       before :each do
-        allow(entity).to receive(:locked?).and_return(false)
+        allow(entity).to receive(:editable_by?).and_return(true)
         action.call
       end
 
-      it_behaves_like 'required_roles'
       it_behaves_like 'entity_finder'
       it_behaves_like 'entity_deleter'
 

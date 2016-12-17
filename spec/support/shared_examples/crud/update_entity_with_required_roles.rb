@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.shared_examples_for 'update_entity_with_required_roles' do
   describe 'patch update' do
+    before :each do
+      allow(subject).to receive(:require_role)
+    end
+
     context 'when parameters are valid' do
       before :each do
         patch :update, params: valid_update_params

@@ -4,6 +4,10 @@ RSpec.shared_examples_for 'edit_lockable_entity_with_required_roles' do
   describe 'get edit' do
     let(:action) { -> { get :edit, params: { id: entity.id } } }
 
+    before :each do
+      allow(subject).to receive(:require_role)
+    end
+
     context 'when entity is locked' do
       before :each do
         allow(entity).to receive(:locked?).and_return(true)

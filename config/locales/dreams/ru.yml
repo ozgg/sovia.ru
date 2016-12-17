@@ -122,6 +122,7 @@ ru:
       title: "Описать сон"
     edit:
       title: "Редактирование сна"
+      unauthorized: "Вы не можете редактировать этот сон"
     show:
       title: "Сон «%{title}»"
     tagged:

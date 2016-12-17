@@ -7,7 +7,7 @@ RSpec.describe Api::DreamsController, type: :controller do
   before :each do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(entity.class).to receive(:find).and_return(entity)
+    allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
   describe 'post toggle' do

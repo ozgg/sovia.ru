@@ -4,6 +4,10 @@ RSpec.shared_examples_for 'destroy_entity_with_required_roles' do
   describe 'delete destroy' do
     let(:action) { -> { delete :destroy, params: { id: entity.id } } }
 
+    before :each do
+      allow(subject).to receive(:require_role)
+    end
+
     context 'database change' do
       it_behaves_like 'entity_destroyer'
     end

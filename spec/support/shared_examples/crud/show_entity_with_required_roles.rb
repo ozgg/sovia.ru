@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.shared_examples_for 'show_entity_with_required_roles' do
   describe 'get show' do
     before :each do
+      allow(subject).to receive(:require_role)
       get :show, params: { id: entity.id }
     end
 

@@ -12,7 +12,6 @@ RSpec.describe UsersController, type: :controller do
   let(:path_after_destroy) { admin_users_path }
 
   before :each do
-    allow(subject).to receive(:require_role)
     allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
