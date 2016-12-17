@@ -11,7 +11,7 @@ class DreambookController < ApplicationController
 
   # get /dreambook/:word
   def word
-    @entity = Pattern.match_by_name params[:word].gsub('-', '_')
+    @entity = Pattern.match_by_name params[:word].gsub('-', '_').gsub('+', ' ')
     unless @entity.is_a?(Pattern)
       handle_http_404("Cannot find pattern with word #{params[:word]}")
     end
