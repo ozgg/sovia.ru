@@ -47,7 +47,10 @@ class UsersController < ApplicationController
   end
 
   def set_entity
-    @entity = User.find params[:id]
+    @entity = User.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted user #{params[:id]}")
+    end
   end
 
   def entity_parameters

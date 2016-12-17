@@ -45,7 +45,10 @@ class CodesController < ApplicationController
   end
 
   def set_entity
-    @entity = Code.find params[:id]
+    @entity = Code.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404("Cannot find code #{params[:id]}")
+    end
   end
 
   def entity_parameters
@@ -53,6 +56,6 @@ class CodesController < ApplicationController
   end
 
   def creation_parameters
-    params.require(:code).permit(Code.creation_parameters).merge(tracking_for_entity)
+    params.require(:code).permit(Code.creation_parameters)
   end
 end

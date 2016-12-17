@@ -18,6 +18,9 @@ class Admin::MetricsController < ApplicationController
   end
 
   def set_entity
-    @entity = Metric.find params[:id]
+    @entity = Metric.find_by id: params[:id]
+    if @entity.nil?
+      handle_http_404("Cannot find metric #{params[:id]}")
+    end
   end
 end

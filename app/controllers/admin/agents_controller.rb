@@ -19,7 +19,9 @@ class Admin::AgentsController < ApplicationController
   end
 
   def set_entity
-    @entity = Agent.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = Agent.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted agent #{params[:id]}")
+    end
   end
 end

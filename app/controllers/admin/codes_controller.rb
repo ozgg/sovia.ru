@@ -18,6 +18,9 @@ class Admin::CodesController < ApplicationController
   end
 
   def set_entity
-    @entity = Code.find params[:id]
+    @entity = Code.find_by id: params[:id]
+    if @entity.nil?
+      handle_http_404("Cannot find code #{params[:id]}")
+    end
   end
 end

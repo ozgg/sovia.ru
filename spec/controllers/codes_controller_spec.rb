@@ -1,114 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe CodesController, type: :controller do
-  let(:user) { create :administrator }
   let!(:entity) { create :code }
+  let(:required_roles) { [:administrator] }
+  let(:code_params) { { category: Code.categories.keys.first, user_id: create(:user).id } }
+  let(:valid_create_params) { { code: attributes_for(:code).merge(code_params) } }
+  let(:valid_update_params) { { id: entity.id, code: { payload: 'Changed' } } }
+  let(:invalid_create_params) { { code: { body: ' ' } } }
+  let(:invalid_update_params) { { id: entity.id, code: { body: ' ' } } }
+  let(:path_after_create) { admin_code_path(entity.class.last.id) }
+  let(:path_after_update) { admin_code_path(entity.id) }
+  let(:path_after_destroy) { admin_codes_path }
 
   before :each do
     allow(subject).to receive(:require_role)
-    allow(subject).to receive(:current_user).and_return(user)
-    allow(entity.class).to receive(:find).and_call_original
+    allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
-  describe 'get new' do
-    before(:each) { get :new }
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'http_success'
-  end
-
-  describe 'post create' do
-    let(:action) { -> { post :create, params: params } }
-
-    context 'when parameters are valid' do
-      let(:params) { { code: attributes_for(:code).merge(category: 'recovery', user_id: user.id) } }
-
-      it_behaves_like 'entity_creator'
-
-      context 'authorization and redirects' do
-        before :each do
-          action.call
-        end
-
-        it_behaves_like 'page_for_administrator'
-
-        it 'redirects to created entity' do
-          expect(response).to redirect_to(admin_code_path(entity.class.last))
-        end
-      end
-    end
-
-    context 'when parameters are invalid' do
-      let(:params) { { code: { body: ' ' } } }
-
-      it_behaves_like 'entity_constant_count'
-
-      context 'response status' do
-        before :each do
-          action.call
-        end
-
-        it_behaves_like 'http_bad_request'
-      end
-    end
-  end
-
-  describe 'get edit' do
-    before(:each) { get :edit, params: { id: entity } }
-
-    it_behaves_like 'page_for_administrator'
-    it_behaves_like 'entity_finder'
-    it_behaves_like 'http_success'
-  end
-
-  describe 'patch update' do
-    context 'when parameters are valid' do
-      before :each do
-        patch :update, params: { id: entity, code: { payload: 'changed' } }
-      end
-
-      it_behaves_like 'page_for_administrator'
-      it_behaves_like 'entity_finder'
-
-      it 'updates code' do
-        entity.reload
-        expect(entity.payload).to eq('changed')
-      end
-
-      it 'redirects to entity page' do
-        expect(response).to redirect_to(admin_code_path(entity))
-      end
-    end
-
-    context 'when parameters are invalid' do
-      before :each do
-        patch :update, params: { id: entity, code: { body: ' ' } }
-      end
-
-      it_behaves_like 'http_bad_request'
-
-      it 'does not change entity' do
-        entity.reload
-        expect(entity.body).not_to be_blank
-      end
-    end
-  end
-
-  describe 'delete destroy' do
-    let(:action) { -> { delete :destroy, params: { id: entity } } }
-
-    it_behaves_like 'entity_destroyer'
-
-    context 'authorization' do
-      before :each do
-        action.call
-      end
-
-      it_behaves_like 'page_for_administrator'
-
-      it 'redirects to entities page' do
-        expect(response).to redirect_to(admin_codes_path)
-      end
-    end
-  end
+  it_behaves_like 'new_entity_with_required_roles'
+  it_behaves_like 'create_entity_with_required_roles'
+  it_behaves_like 'edit_entity_with_required_roles'
+  it_behaves_like 'update_entity_with_required_roles'
+  it_behaves_like 'destroy_entity_with_required_roles'
 end
