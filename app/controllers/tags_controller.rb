@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
-  before_action :restrict_access, except: [:index]
+  before_action :restrict_access, except: [:index, :show]
   before_action :set_entity, only: [:show, :edit, :update, :destroy]
+  before_action :restrict_editing, only: [:edit, :update, :destroy]
 
   # get /tags
   def index
@@ -16,9 +17,9 @@ class TagsController < ApplicationController
   def create
     @entity = Tag.new entity_parameters
     if @entity.save
-      redirect_to @entity
+      redirect_to admin_tag_path(@entity.id)
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 
@@ -33,7 +34,7 @@ class TagsController < ApplicationController
   # patch /tags/:id
   def update
     if @entity.update entity_parameters
-      redirect_to @entity, notice: t('tags.update.success')
+      redirect_to admin_tag_path(@entity.id), notice: t('tags.update.success')
     else
       render :edit, status: :bad_request
     end
@@ -51,6 +52,12 @@ class TagsController < ApplicationController
 
   def restrict_access
     require_role :chief_editor, :editor
+  end
+
+  def restrict_editing
+    if @entity.locked?
+      redirect_to admin_tag_path(@entity.id), alert: t('tags.edit.forbidden')
+    end
   end
 
   def set_entity

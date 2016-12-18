@@ -11,7 +11,6 @@ RSpec.describe GrainsController, type: :controller do
   before :each do
     allow(subject).to receive(:current_user).and_return(user)
     allow(subject).to receive(:restrict_anonymous_access)
-    expect(entity.class).to receive(:owned_by).and_call_original
     allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
@@ -63,6 +62,7 @@ RSpec.describe GrainsController, type: :controller do
   describe 'get edit' do
     context 'when entity is owned by user' do
       before :each do
+        expect(entity.class).to receive(:owned_by).and_call_original
         get :edit, params: { id: entity }
       end
 
@@ -77,6 +77,7 @@ RSpec.describe GrainsController, type: :controller do
     context 'when entity is owned by user' do
       context 'when parameters are valid' do
         before :each do
+          expect(entity.class).to receive(:owned_by).and_call_original
           patch :update, params: { id: entity }.merge(valid_parameters)
         end
 
@@ -109,6 +110,10 @@ RSpec.describe GrainsController, type: :controller do
   end
 
   describe 'delete destroy' do
+    before :each do
+      expect(entity.class).to receive(:owned_by).and_call_original
+    end
+
     context 'when entity is owned by user' do
       let(:action) { -> { delete :destroy, params: { id: entity } } }
 
