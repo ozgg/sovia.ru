@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe TokensController, type: :controller do
   let!(:entity) { create :token }
-  let(:required_roles) { [:administrator] }
+  let(:required_roles) { :administrator }
   let(:valid_create_params) { { token: attributes_for(:token).merge(user_id: create(:user).id ) } }
   let(:valid_update_params) { { id: entity.id, token: { active: '0' } } }
   let(:invalid_create_params) { { token: { user_id: '' } } }
@@ -17,6 +17,8 @@ RSpec.describe TokensController, type: :controller do
 
   describe 'patch update' do
     before :each do
+      allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
       patch :update, params: valid_update_params
     end
 
