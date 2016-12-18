@@ -7,6 +7,7 @@ RSpec.describe My::PlacesController, type: :controller do
   before :each do
     allow(subject).to receive(:current_user).and_return(user)
     allow(subject).to receive(:restrict_anonymous_access)
+    allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
   it_behaves_like 'list_for_owner'

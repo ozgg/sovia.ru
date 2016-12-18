@@ -19,7 +19,9 @@ class Admin::CommentsController < ApplicationController
   end
 
   def set_entity
-    @entity = Comment.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = Comment.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted comment #{params[:id]}")
+    end
   end
 end

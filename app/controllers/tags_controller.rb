@@ -54,7 +54,10 @@ class TagsController < ApplicationController
   end
 
   def set_entity
-    @entity = Tag.find params[:id]
+    @entity = Tag.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find tag #{params[:id]}")
+    end
   end
 
   def entity_parameters

@@ -3,11 +3,16 @@ require 'rails_helper'
 RSpec.describe DreambookController, type: :controller do
   let!(:entity) { create :pattern }
 
+  before :each do
+    allow(subject).to receive(:require_role)
+  end
+
   describe 'get index' do
     before :each do
       get :index
     end
 
+    it_behaves_like 'no_roles_required'
     it_behaves_like 'http_success'
   end
 
@@ -21,6 +26,7 @@ RSpec.describe DreambookController, type: :controller do
         get :word, params: { word: entity.name }
       end
 
+      it_behaves_like 'no_roles_required'
       it_behaves_like 'http_success'
 
       it 'sends :match_by_name to entity class' do
@@ -29,9 +35,12 @@ RSpec.describe DreambookController, type: :controller do
     end
 
     context 'when pattern does not exist' do
-      let(:action) { -> { get :word, params: { word: 'non-existent' } } }
+      before :each do
+        get :word, params: { word: 'non-existent' }
+      end
 
-      it_behaves_like 'record_not_found_exception'
+      it_behaves_like 'no_roles_required'
+      it_behaves_like 'http_not_found'
     end
   end
 

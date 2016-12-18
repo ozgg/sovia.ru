@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.shared_examples_for 'index_entities_without_required_roles' do
-  describe 'get new' do
+  describe 'get index' do
     before :each do
       allow(subject).to receive(:require_role)
       allow(entity.class).to receive(:page_for_visitors).and_call_original

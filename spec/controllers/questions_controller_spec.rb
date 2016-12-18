@@ -11,7 +11,7 @@ RSpec.describe QuestionsController, type: :controller do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:restrict_anonymous_access)
     allow(subject).to receive(:current_user).and_return(user)
-    allow(entity.class).to receive(:find).and_call_original
+    allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
   it_behaves_like 'list_for_visitors'

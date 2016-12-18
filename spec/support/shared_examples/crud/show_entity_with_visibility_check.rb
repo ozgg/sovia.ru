@@ -7,6 +7,7 @@ RSpec.shared_examples_for 'show_entity_with_visibility_check' do
 
     before :each do
       allow(subject).to receive(:current_user).and_return(user)
+      allow(entity.class).to receive(:find_by).and_return(entity)
     end
 
     context 'when entity is visible to user' do

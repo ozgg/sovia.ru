@@ -42,8 +42,11 @@ class GrainsController < ApplicationController
   private
 
   def set_entity
-    @entity = Grain.find params[:id]
-    raise record_not_found unless @entity.owned_by? current_user
+    @entity = Grain.owned_by(current_user).find_by(id: params[:id])
+    if @entity.nil?
+      error = "Cannot find grain #{params[:id]} owned by #{current_user.id}"
+      handle_http_404(error)
+    end
   end
 
   def entity_parameters

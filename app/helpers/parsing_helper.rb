@@ -87,21 +87,6 @@ module ParsingHelper
     end
   end
 
-  def parse_figure_links(post, string)
-    pattern = Figure::LINK_PATTERN
-    string.gsub pattern do |chunk|
-      match  = pattern.match chunk
-      figure = post.figures.find_by(slug: match[:id])
-      if figure.is_a? Figure
-        image   = image_tag(figure.image.big.url, alt: figure.text_for_alt)
-        caption = figure.caption.blank? ? '' : "<figcaption>#{figure.caption}</figcaption>"
-        "<figure>#{image}#{caption}</figure>\n"
-      else
-        '<figure><span class="not-found">figure ' + match[:id] + "</span></figure>\n"
-      end
-    end
-  end
-
   # Parse fragments like [[Pattern]](link text)
   #
   # @param [String] string
@@ -142,12 +127,8 @@ module ParsingHelper
   protected
 
   def parse_post_string(post, string)
-    if string =~ Figure::LINK_PATTERN
-      parse_figure_links post, string
-    else
-      output = parse_pattern_links string
-      output[0] == '<' ? output : "<p>#{output}</p>"
-    end
+    output = parse_pattern_links string
+    output[0] == '<' ? output : "<p>#{output}</p>"
   end
 
   # @param [String] string

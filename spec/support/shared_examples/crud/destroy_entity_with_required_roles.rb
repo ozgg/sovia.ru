@@ -6,6 +6,7 @@ RSpec.shared_examples_for 'destroy_entity_with_required_roles' do
 
     before :each do
       allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
     end
 
     context 'database change' do

@@ -43,8 +43,11 @@ class PlacesController < ApplicationController
   private
 
   def set_entity
-    @entity = Place.find params[:id]
-    raise record_not_found unless @entity.owned_by? current_user
+    @entity = Place.owned_by(current_user).find_by(id: params[:id])
+    if @entity.nil?
+      error = "Cannot find place #{params[:id]} owned by #{current_user.id}"
+      handle_http_404(error)
+    end
   end
 
   def entity_parameters

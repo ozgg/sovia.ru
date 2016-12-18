@@ -4,6 +4,7 @@ RSpec.shared_examples_for 'delete_entity_with_required_roles' do
   describe 'delete destroy' do
     before :each do
       allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
       delete :destroy, params: { id: entity.id }
     end
 

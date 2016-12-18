@@ -45,7 +45,10 @@ class TokensController < ApplicationController
   end
 
   def set_entity
-    @entity = Token.find params[:id]
+    @entity = Token.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404("Cannot find token #{params[:id]}")
+    end
   end
 
   def entity_parameters

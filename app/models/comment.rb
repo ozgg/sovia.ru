@@ -4,9 +4,6 @@ class Comment < ApplicationRecord
 
   PER_PAGE = 20
 
-  METRIC_COUNT   = 'comments.count'
-  METRIC_COMMENT = 'comments.comment.count'
-
   toggleable :visible
 
   belongs_to :agent, optional: true
@@ -26,7 +23,7 @@ class Comment < ApplicationRecord
 
   # @param [Integer] page
   def self.page_for_visitor(page)
-    recent.visible.page(page).per(PER_PAGE)
+    order('id asc').visible.page(page).per(PER_PAGE)
   end
 
   # @param [User] user

@@ -4,6 +4,7 @@ RSpec.shared_examples_for 'update_lockable_entity_with_required_roles' do
   describe 'patch update' do
     before :each do
       allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
       allow(entity).to receive(:update).and_call_original
     end
 

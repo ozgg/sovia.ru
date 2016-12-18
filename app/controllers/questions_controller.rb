@@ -53,7 +53,10 @@ class QuestionsController < ApplicationController
   private
 
   def set_entity
-    @entity = Question.find params[:id]
+    @entity = Question.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404("Cannot find question #{params[:id]}")
+    end
   end
 
   def restrict_editing

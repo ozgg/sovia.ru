@@ -2,32 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Admin::PatternsController, type: :controller do
   let!(:entity) { create :pattern }
+  let(:required_roles) { [:chief_interpreter, :interpreter] }
 
-  before :each do
-    allow(subject).to receive(:require_role)
-  end
-
-  it_behaves_like 'list_for_interpreters'
-
-  describe 'get show' do
-    let(:user) { create :chief_interpreter }
-
-    before :each do
-      allow(entity.class).to receive(:find).and_call_original
-      get :show, params: { id: entity }
-    end
-
-    it_behaves_like 'page_for_interpreters'
-    it_behaves_like 'entity_finder'
-  end
+  it_behaves_like 'index_entities_with_required_roles'
+  it_behaves_like 'show_entity_with_required_roles'
 
   describe 'get dreams' do
     before :each do
+      allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
+      expect(entity).to receive(:dreams).and_call_original
       allow(Dream).to receive(:page_for_administration)
-      get :dreams, params: { id: entity }
+      get :dreams, params: { id: entity.id }
     end
 
-    it_behaves_like 'page_for_interpreters'
+    it_behaves_like 'required_roles'
+    it_behaves_like 'entity_finder'
     it_behaves_like 'http_success'
 
     it 'sends :page_for_administration to Dream' do

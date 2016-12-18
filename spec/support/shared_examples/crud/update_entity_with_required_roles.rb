@@ -4,6 +4,7 @@ RSpec.shared_examples_for 'update_entity_with_required_roles' do
   describe 'patch update' do
     before :each do
       allow(subject).to receive(:require_role)
+      allow(entity.class).to receive(:find_by).and_return(entity)
     end
 
     context 'when parameters are valid' do

@@ -23,7 +23,9 @@ class Admin::QuestionsController < ApplicationController
   end
 
   def set_entity
-    @entity = Question.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = Question.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted question #{params[:id]}")
+    end
   end
 end

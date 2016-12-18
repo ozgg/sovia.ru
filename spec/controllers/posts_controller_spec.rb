@@ -8,7 +8,7 @@ RSpec.describe PostsController, type: :controller do
     allow(subject).to receive(:require_role)
     allow(subject).to receive(:current_user).and_return(user)
     allow(subject).to receive(:restrict_editing)
-    allow(Post).to receive(:find).and_call_original
+    allow(Post).to receive(:find_by).and_return(entity)
   end
 
   shared_examples 'setting_dependent_entities' do

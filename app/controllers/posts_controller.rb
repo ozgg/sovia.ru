@@ -67,7 +67,10 @@ class PostsController < ApplicationController
   private
 
   def set_entity
-    @entity = Post.find params[:id]
+    @entity = Post.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404("Cannot find post #{params[:id]}")
+    end
   end
 
   def set_tag
@@ -101,13 +104,6 @@ class PostsController < ApplicationController
   def set_dependent_entities
     @entity.tag_ids = params[:tag_ids]
     @entity.cache_tags!
-    add_figures unless params[:figures].blank?
-  end
-
-  def add_figures
-    params[:figures].values.reject { |f| f[:slug].blank? || f[:image].blank? }.each do |data|
-      @entity.figures.create(data.select { |key, _| Figure.creation_parameters.include? key.to_sym } )
-    end
   end
 
   def set_adjacent_entities

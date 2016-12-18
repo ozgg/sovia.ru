@@ -46,8 +46,10 @@ class GrainCategoriesController < ApplicationController
   end
 
   def set_entity
-    @entity = GrainCategory.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = GrainCategory.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted grain category #{params[:id]}")
+    end
   end
 
   def restrict_editing

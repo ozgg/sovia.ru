@@ -24,6 +24,9 @@ class Admin::WordsController < ApplicationController
   end
 
   def set_entity
-    @entity = Word.find params[:id]
+    @entity = Word.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404("Cannot find word #{params[:id]}")
+    end
   end
 end

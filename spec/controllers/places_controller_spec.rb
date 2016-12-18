@@ -11,7 +11,8 @@ RSpec.describe PlacesController, type: :controller do
   before :each do
     allow(subject).to receive(:current_user).and_return(user)
     allow(subject).to receive(:restrict_anonymous_access)
-    allow(entity.class).to receive(:find).and_call_original
+    expect(entity.class).to receive(:owned_by).and_call_original
+    allow(entity.class).to receive(:find_by).and_return(entity)
   end
 
   shared_examples 'reached_place_limit' do
@@ -99,12 +100,6 @@ RSpec.describe PlacesController, type: :controller do
       it_behaves_like 'entity_finder'
       it_behaves_like 'successful_response'
     end
-
-    context 'when entity is not owned by user' do
-      let(:action) { -> { get :edit, params: { id: foreign_entity } } }
-
-      it_behaves_like 'record_not_found_exception'
-    end
   end
 
   describe 'patch update' do
@@ -140,12 +135,6 @@ RSpec.describe PlacesController, type: :controller do
         end
       end
     end
-
-    context 'when entity is not owned by user' do
-      let(:action) { -> { patch :update, params: { id: foreign_entity }.merge(valid_parameters) } }
-
-      it_behaves_like 'record_not_found_exception'
-    end
   end
 
   describe 'delete destroy' do
@@ -158,12 +147,6 @@ RSpec.describe PlacesController, type: :controller do
         action.call
         expect(response).to redirect_to(my_places_path)
       end
-    end
-
-    context 'when entity is not owned by user' do
-      let(:action) { -> { delete :destroy, params: { id: foreign_entity } } }
-
-      it_behaves_like 'record_not_found_exception'
     end
   end
 end

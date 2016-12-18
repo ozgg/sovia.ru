@@ -24,7 +24,9 @@ class Admin::PatternsController < ApplicationController
   end
 
   def set_entity
-    @entity = Pattern.find params[:id]
-    raise record_not_found if @entity.deleted?
+    @entity = Pattern.find_by(id: params[:id], deleted: false)
+    if @entity.nil?
+      handle_http_404("Cannot find non-deleted pattern #{params[:id]}")
+    end
   end
 end

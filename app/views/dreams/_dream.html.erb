@@ -30,5 +30,5 @@
   <%= render partial: 'dreams/entity/details', locals: { dream: dream } %>
   <%= render partial: 'dreams/entity/patterns', locals: { dream: dream } %>
 
-  <%= render partial: 'comments/list', locals: { comments: dream.comments.visible.recent, commentable: dream } %>
+  <%= render partial: 'comments/list', locals: { comments: dream.comments.visible.order('id asc'), commentable: dream } %>
 </article>
