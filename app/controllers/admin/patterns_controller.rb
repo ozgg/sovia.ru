@@ -4,12 +4,13 @@ class Admin::PatternsController < ApplicationController
 
   # get /admin/patterns
   def index
-    @filter = params[:filter] || Hash.new
+    @filter     = params[:filter] || Hash.new
     @collection = Pattern.page_for_administration current_page, @filter
   end
 
   # get /admin/patterns/:id
   def show
+    set_adjacent_entities
   end
 
   # get /admin/patterns/:id/dreams
@@ -28,5 +29,13 @@ class Admin::PatternsController < ApplicationController
     if @entity.nil?
       handle_http_404("Cannot find non-deleted pattern #{params[:id]}")
     end
+  end
+
+  def set_adjacent_entities
+    weight    = @entity.dreams_count
+    @adjacent = {
+        prev: Pattern.where('dreams_count <= ? and id < ?', weight, @entity.id).order('id desc').first,
+        next: Pattern.where('dreams_count >= ? and id > ?', weight, @entity.id).order('id asc').first
+    }
   end
 end

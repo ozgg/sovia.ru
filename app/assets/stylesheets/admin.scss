@@ -87,8 +87,8 @@ article.entity-page {
   }
 
   table {
-    margin: 1.6rem;
     border-spacing: 0;
+    margin: 1.6rem;
 
     tbody {
       tr:nth-of-type(even) {
@@ -110,7 +110,15 @@ article.entity-page {
         &[colspan]:first-letter {
           text-transform: capitalize;
         }
+
+        input:not([size]), textarea {
+          width: calc(100% - 1rem);
+        }
       }
+    }
+
+    .buttons {
+      text-align: center;
     }
   }
 

@@ -60,69 +60,66 @@ RSpec.describe GrainsController, type: :controller do
   end
 
   describe 'get edit' do
-    context 'when entity is owned by user' do
-      before :each do
-        expect(entity.class).to receive(:owned_by).and_call_original
-        get :edit, params: { id: entity }
-      end
-
-      it_behaves_like 'page_for_user'
-      it_behaves_like 'entity_finder'
-      it_behaves_like 'successful_response'
+    before :each do
+      expect(entity.class).to receive(:owned_by).and_return(entity.class)
+      get :edit, params: { id: entity }
     end
 
+    it_behaves_like 'page_for_user'
+    it_behaves_like 'entity_finder'
+    it_behaves_like 'http_success'
   end
 
   describe 'patch update' do
-    context 'when entity is owned by user' do
-      context 'when parameters are valid' do
-        before :each do
-          expect(entity.class).to receive(:owned_by).and_call_original
-          patch :update, params: { id: entity }.merge(valid_parameters)
-        end
+    before :each do
+      expect(entity.class).to receive(:owned_by).and_return(entity.class)
+    end
 
-        it_behaves_like 'page_for_user'
-
-        it 'updates entity' do
-          entity.reload
-          expect(entity.name).to eq('Changed')
-        end
-
-        it 'redirects to entity page' do
-          expect(response).to redirect_to(my_grain_path(entity))
-        end
+    context 'when parameters are valid' do
+      before :each do
+        patch :update, params: { id: entity }.merge(valid_parameters)
       end
 
-      context 'when parameters are invalid' do
-        before :each do
-          patch :update, params: { id: entity }.merge(invalid_parameters)
-        end
+      it_behaves_like 'page_for_user'
 
-        it_behaves_like 'page_for_user'
-        it_behaves_like 'http_bad_request'
+      it 'updates entity' do
+        entity.reload
+        expect(entity.name).to eq('Changed')
+      end
 
-        it 'does not change entity' do
-          entity.reload
-          expect(entity.name).not_to be_blank
-        end
+      it 'redirects to entity page' do
+        expect(response).to redirect_to(my_grain_path(entity))
+      end
+    end
+
+    context 'when parameters are invalid' do
+      before :each do
+        patch :update, params: { id: entity }.merge(invalid_parameters)
+      end
+
+      it_behaves_like 'page_for_user'
+      it_behaves_like 'http_bad_request'
+
+      it 'does not change entity' do
+        entity.reload
+        expect(entity.name).not_to be_blank
       end
     end
   end
 
   describe 'delete destroy' do
+    let(:action) { -> { delete :destroy, params: { id: entity } } }
+
     before :each do
-      expect(entity.class).to receive(:owned_by).and_call_original
+      expect(entity.class).to receive(:owned_by).and_return(entity.class)
     end
 
-    context 'when entity is owned by user' do
-      let(:action) { -> { delete :destroy, params: { id: entity } } }
+    it_behaves_like 'entity_finder'
+    it_behaves_like 'entity_destroyer'
 
-      it_behaves_like 'entity_destroyer'
-
-      it 'redirects to entity list' do
-        action.call
-        expect(response).to redirect_to(my_grains_path)
-      end
+    it 'redirects to entity list' do
+      action.call
+      expect(response).to redirect_to(my_grains_path)
     end
   end
 end

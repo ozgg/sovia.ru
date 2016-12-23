@@ -5,6 +5,12 @@ module PatternsHelper
     link_to text, pattern
   end
 
+  # @param [Pattern] pattern
+  # @param [String] text
+  def admin_pattern_link(pattern, text = pattern.name)
+    link_to(text, admin_pattern_path(pattern.id))
+  end
+
   def grain_categories_for_select
     options = [[t(:not_selected), '']]
     GrainCategory.page_for_users.each { |c| options << [c.name, c.id] }
