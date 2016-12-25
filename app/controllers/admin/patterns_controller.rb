@@ -32,10 +32,12 @@ class Admin::PatternsController < ApplicationController
   end
 
   def set_adjacent_entities
-    weight    = @entity.dreams_count
+    weight = @entity.dreams_count
+    name   = @entity.name
+
     @adjacent = {
-        prev: Pattern.where('dreams_count <= ? and id < ?', weight, @entity.id).order('id desc').first,
-        next: Pattern.where('dreams_count >= ? and id > ?', weight, @entity.id).order('id asc').first
+        prev: Pattern.where("(dreams_count = #{weight} and name < ?) or dreams_count > #{weight}", name).order('dreams_count asc, name asc').first,
+        next: Pattern.where("(dreams_count = #{weight} and name > ?) or dreams_count < #{weight}", name).order('dreams_count desc, name desc').first
     }
   end
 end

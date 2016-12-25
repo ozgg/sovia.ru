@@ -2,7 +2,7 @@ html {
   background: radial-gradient(circle at bottom left, #604878, #001848);
   margin: 0;
   padding: 0;
-  font: 10px "Roboto", sans-serif;
+  font: 10px $main-font-family;
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   -ms-text-size-adjust: none;
@@ -202,7 +202,13 @@ input, textarea {
       justify-content: space-between;
       align-items: center;
 
+      button {
+        @include action-button;
+        font-size: $decreased_font_size;
+      }
+
       a {
+        @include nav-button;
         font-size: $decreased_font_size;
       }
     }
@@ -265,4 +271,8 @@ input, textarea {
       }
     }
   }
+}
+
+button[type=submit] {
+  @include create-button;
 }
