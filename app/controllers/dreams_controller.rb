@@ -99,7 +99,8 @@ class DreamsController < ApplicationController
   end
 
   def set_tag
-    @tag = Pattern.find_by(name: params[:tag_name])
+    tag_name = params[:tag_name].to_s.gsub('-', '_').gsub('+', ' ')
+    @tag = Pattern.with_name_like(tag_name).first
     if @tag.nil?
       handle_http_404("Cannot find pattern #{params[:tag_name]}")
     end
