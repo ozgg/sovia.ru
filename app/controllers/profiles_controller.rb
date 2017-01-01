@@ -24,6 +24,8 @@ class ProfilesController < ApplicationController
 
   def set_entity
     @entity = User.with_long_slug(params[:slug])
-    raise record_not_found unless @entity.is_a?(User) && !@entity.deleted?
+    if @entity.nil? || @entity.deleted?
+      handle_http_404("Cannot find user #{params[:slug]}")
+    end
   end
 end
