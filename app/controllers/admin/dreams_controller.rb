@@ -16,6 +16,15 @@ class Admin::DreamsController < ApplicationController
     end
   end
 
+  # get /admin/dreams/:id/comments
+  def comments
+    if @entity.visible_to?(current_user)
+      @collection = @entity.comments.page_for_administration(current_page)
+    else
+      handle_http_404("Dream #{params[:id]} is not visible to #{current_user.id}")
+    end
+  end
+
   protected
 
   def restrict_access
