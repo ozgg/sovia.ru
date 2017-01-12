@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201005859) do
+ActiveRecord::Schema.define(version: 20170112094706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,6 +317,19 @@ ActiveRecord::Schema.define(version: 20161201005859) do
     t.index ["slug", "network"], name: "index_users_on_slug_and_network", unique: true, using: :btree
   end
 
+  create_table "violations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.inet     "ip"
+    t.string   "tag"
+    t.string   "title"
+    t.text     "body",       null: false
+    t.index ["agent_id"], name: "index_violations_on_agent_id", using: :btree
+    t.index ["user_id"], name: "index_violations_on_user_id", using: :btree
+  end
+
   create_table "words", force: :cascade do |t|
     t.boolean "significant",  default: true,  null: false
     t.boolean "locked",       default: false, null: false
@@ -360,4 +373,6 @@ ActiveRecord::Schema.define(version: 20161201005859) do
   add_foreign_key "tokens", "users"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "agents"
+  add_foreign_key "violations", "agents"
+  add_foreign_key "violations", "users"
 end

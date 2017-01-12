@@ -8,6 +8,10 @@
       <ul>
         <% if current_user_has_role? :administrator %>
             <li>
+              <div><%= link_to t('admin.violations.index.heading'), admin_violations_path %></div>
+              <div class="description"><%= t('admin.violations.index.description') %></div>
+            </li>
+            <li>
               <div><%= link_to t('admin.users.index.heading'), admin_users_path %></div>
               <div class="description"><%= t('admin.users.index.description') %></div>
             </li>

@@ -1,0 +1,24 @@
+ru:
+  activerecord:
+    models:
+      violation: "Нарушение"
+    attributes:
+      violation:
+        user: "Пользователь"
+        agent: "Агент пользователя"
+        ip: "IP-адрес"
+        tag: "Метка"
+        title: "Название"
+        body: "Текст"
+  admin:
+    violations:
+      index:
+        title: "Нарушения, страница %{page}"
+        heading: "Нарушения"
+        description: "Список нарушений со спамом"
+      show:
+        title: "Нарушение №%{id}"
+      not_found:
+        title: "Нарушение не найдено"
+        heading: "Нарушение не найдена"
+        message: "Нарушения с таким идентификатором не существует"

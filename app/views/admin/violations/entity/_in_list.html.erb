@@ -1,0 +1,13 @@
+<div class="data">
+  <div><%= link_to "#{entity.model_name.human} #{entity.id}", admin_violation_path(entity.id) %></div>
+  <div class="info">
+    <%= time_tag entity.created_at %>; <%= entity.tag %>; <%= entity.title %>
+  </div>
+  <div class="secondary info">
+    <div><%= admin_user_link(entity.user) %></div>
+    <div><%= entity.ip %></div>
+    <% unless entity.agent.nil? %>
+        <div><%= entity.agent.name %></div>
+    <% end %>
+  </div>
+</div>

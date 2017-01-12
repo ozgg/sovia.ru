@@ -61,6 +61,8 @@ Rails.application.routes.draw do
 
     resources :dreams, only: [:index, :show], concerns: [:list_of_comments]
     resources :fillers, only: [:index, :show]
+
+    resources :violations, only: [:index, :show]
   end
 
   namespace :api, defaults: { format: :json } do

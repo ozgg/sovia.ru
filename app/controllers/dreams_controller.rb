@@ -15,12 +15,7 @@ class DreamsController < ApplicationController
   # post /dreams
   def create
     @entity = Dream.new creation_parameters
-    if @entity.save
-      AnalyzeDreamJob.perform_later(@entity.id)
-      redirect_to @entity
-    else
-      render :new, status: :bad_request
-    end
+    save_if_not_spam
   end
 
   # get /dreams/:id
@@ -120,5 +115,25 @@ class DreamsController < ApplicationController
         prev: Dream.with_privacy(privacy).where('id < ?', @entity.id).order('id desc').first,
         next: Dream.with_privacy(privacy).where('id > ?', @entity.id).order('id asc').first
     }
+  end
+
+  def save_if_not_spam
+    if Violation.suspicious?(@entity.body)
+      violation = Violation.new
+      violation.use_entity(@entity)
+      violation.save
+      redirect_to dreams_path
+    else
+      save_dream
+    end
+  end
+
+  def save_dream
+    if @entity.save
+      AnalyzeDreamJob.perform_later(@entity.id)
+      redirect_to @entity
+    else
+      render :new, status: :bad_request
+    end
   end
 end

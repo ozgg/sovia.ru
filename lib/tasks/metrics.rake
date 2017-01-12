@@ -9,5 +9,6 @@ namespace :metrics do
     Metric.register("#{Word::table_name}.count", Word.count)
     Metric.register(Word::METRIC_PROCESSED, Word.processed(1).count)
     Metric.register("#{Filler::table_name}.count", Filler.count)
+    Metric.register("#{Violation::table_name}.count", Violation.count)
   end
 end

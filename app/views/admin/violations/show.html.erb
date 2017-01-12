@@ -1,0 +1,42 @@
+<% content_for :meta_title, t('.title', id: @entity.id) %>
+
+<article class="entity-page">
+  <h1><%= @entity.model_name.human %> <%= @entity.id %></h1>
+  <ul class="actions">
+    <li><%= back_icon admin_violations_path %></li>
+  </ul>
+
+  <table>
+    <tbody>
+    <tr>
+      <th><%= t(:created_at) %></th>
+      <td><%= time_tag @entity.created_at %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= t('activerecord.attributes.violation.tag') %>
+      </th>
+      <td>
+        <%= @entity.tag %>
+      </td>
+    </tr>
+    <% unless @entity.user.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.violation.user') %></th>
+          <td><%= admin_user_link(@entity.user) %></td>
+        </tr>
+    <% end %>
+    <% unless @entity.title.blank? %>
+        <tr>
+          <th><%= t('activerecord.attributes.violation.title') %></th>
+          <td><%= @entity.title %></td>
+        </tr>
+    <% end %>
+    <tr>
+      <th><%= t('activerecord.attributes.violation.body') %></th>
+      <td><%= @entity.body %></td>
+    </tr>
+    </tbody>
+  </table>
+  <%= render partial: 'shared/track', locals: { item: @entity } %>
+</article>

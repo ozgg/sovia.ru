@@ -6,12 +6,7 @@ class CommentsController < ApplicationController
   # post /comments
   def create
     @entity = Comment.new creation_parameters
-    if @entity.save
-      notify_participants
-      redirect_to(@entity.commentable || admin_comments_path, notice: t('comments.create.success'))
-    else
-      render :new, status: :bad_request
-    end
+    save_if_not_spam
   end
 
   # get /comments/:id
@@ -60,5 +55,25 @@ class CommentsController < ApplicationController
 
   def notify_participants
     Comments.entry_reply(@entity).deliver_later if @entity.notify_entry_owner?
+  end
+
+  def save_if_not_spam
+    if Violation.suspicious?(@entity.body)
+      violation = Violation.new
+      violation.use_entity(@entity)
+      violation.save
+      redirect_to(@entity.commentable || root_path, notice: t('comments.create.success'))
+    else
+      save_comment
+    end
+  end
+
+  def save_comment
+    if @entity.save
+      notify_participants
+      redirect_to(@entity.commentable || admin_comments_path, notice: t('comments.create.success'))
+    else
+      render :new, status: :bad_request
+    end
   end
 end
