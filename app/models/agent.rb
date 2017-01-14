@@ -14,6 +14,7 @@ class Agent < ApplicationRecord
   has_many :dreams, dependent: :nullify
   has_many :comments, dependent: :nullify
   has_many :questions, dependent: :nullify
+  has_many :search_queries, dependent: :nullify
 
   scope :bots, -> (flag) { where bot: flag.to_i > 0 unless flag.blank? }
   scope :mobile, -> (flag) { where mobile: flag.to_i > 0 unless flag.blank? }

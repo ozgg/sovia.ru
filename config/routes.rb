@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     resources :fillers, only: [:index, :show]
 
     resources :violations, only: [:index, :show]
+    resources :search_queries, only: [:index]
   end
 
   namespace :api, defaults: { format: :json } do

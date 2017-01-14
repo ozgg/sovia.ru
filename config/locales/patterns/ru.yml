@@ -73,6 +73,11 @@ ru:
         title: "Слово «%{word}»"
       dreams:
         title: "Сны со словом «%{word}», страница %{page}"
+    search_queries:
+      index:
+        title: "Запросы в поиске, страница %{page}"
+        heading: "Запросы в поиске"
+        description: "История поисковых запросов сонника"
   my:
     grains:
       index:

@@ -21,11 +21,18 @@ class DreambookController < ApplicationController
   def search
     @query = param_from_request(:q)[0..100]
     unless @query.blank?
+      log_search_query
       handler     = WordHandler.new(@query, false)
       @collection = Pattern.where(id: handler.pattern_ids)
       if @collection.count == 1
         redirect_to dreambook_word_path(word: @collection.first.name)
       end
     end
+  end
+
+  private
+
+  def log_search_query
+    SearchQuery.create({ body: @query }.merge(owner_for_entity(true)))
   end
 end
