@@ -20,6 +20,11 @@ class ProfilesController < ApplicationController
     @collection = Question.owned_by(@entity).page_for_visitors(current_page)
   end
 
+  # get /u/:slug/comments
+  def comments
+    @collection = Comment.owned_by(@entity).recent.page_for_visitors(current_page)
+  end
+
   private
 
   def set_entity

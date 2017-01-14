@@ -1,10 +1,10 @@
 <article class="user entity-page">
   <h1><%= user.profile_name %></h1>
   <% if current_user == user %>
-  <ul class="actions">
-    <li><%= back_icon(my_path) %></li>
-    <li><%= edit_icon(edit_my_profile_path) %></li>
-  </ul>
+      <ul class="actions">
+        <li><%= back_icon(my_path) %></li>
+        <li><%= edit_icon(edit_my_profile_path) %></li>
+      </ul>
   <% end %>
   <table>
     <caption><%= t('.user_info') %></caption>
@@ -31,10 +31,10 @@
         </tr>
     <% end %>
     <% if current_user == user && !user.email.blank? %>
-      <tr>
-        <th><%= t('activerecord.attributes.user.email') %></th>
-        <td><%= user.email %></td>
-      </tr>
+        <tr>
+          <th><%= t('activerecord.attributes.user.email') %></th>
+          <td><%= user.email %></td>
+        </tr>
     <% end %>
     <% unless user.gender.blank? %>
         <tr>
@@ -44,4 +44,12 @@
     <% end %>
     </tbody>
   </table>
+
+  <nav>
+    <ul>
+      <li><%= link_to t('.dreams'), user_dreams_path(slug: user.long_slug) %></li>
+      <li><%= link_to t('.posts'), user_posts_path(slug: user.long_slug) %></li>
+      <li><%= link_to t('.comments'), user_comments_path(slug: user.long_slug) %></li>
+    </ul>
+  </nav>
 </article>

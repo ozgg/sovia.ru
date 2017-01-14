@@ -8,6 +8,10 @@
   </div>
 
   <div class="body" itemprop="about">
-    <%= prepare_comment_text(comment, current_user) %>
+    <% if comment.visible_to?(current_user) %>
+        <%= prepare_comment_text(comment, current_user) %>
+    <% else %>
+        <%= t('.unavailable_to_you') %>
+    <% end %>
   </div>
 </div>

@@ -22,8 +22,8 @@ class Comment < ApplicationRecord
   end
 
   # @param [Integer] page
-  def self.page_for_visitor(page)
-    order('id asc').visible.page(page).per(PER_PAGE)
+  def self.page_for_visitors(page)
+    visible.page(page).per(PER_PAGE)
   end
 
   # @param [User] user

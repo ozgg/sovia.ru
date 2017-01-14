@@ -2,6 +2,9 @@
 
 <article>
   <h1><%= t('.heading', user: @entity.profile_name) %></h1>
+  <ul class="actions">
+    <li><%= back_icon(user_profile_path(slug: @entity.long_slug)) %></li>
+  </ul>
 
   <%= paginate @collection %>
   <%= render partial: 'questions/list', locals: { collection: @collection } %>

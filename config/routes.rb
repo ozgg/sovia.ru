@@ -140,6 +140,7 @@ Rails.application.routes.draw do
     get 'dreams', as: :user_dreams
     get 'posts', as: :user_posts
     get 'questions', as: :user_questions
+    get 'comments', as: :user_comments
   end
 
   # Obsolete routes

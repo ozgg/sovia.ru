@@ -167,3 +167,6 @@ ru:
       success: "Наполнитель успешно изменён"
     destroy:
       success: "Наполнитель успешно удалён"
+  profiles:
+    profile:
+      dreams: "Сны этого пользователя"

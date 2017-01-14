@@ -3,7 +3,7 @@
   <% if comments.any? %>
       <h2><%= t(:comments_list) %></h2>
 
-      <% comments.recent.each do |comment| %>
+      <% comments.each do |comment| %>
           <%= render comment %>
       <% end %>
   <% end %>

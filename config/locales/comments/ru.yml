@@ -48,3 +48,11 @@ ru:
       title: "Редактирование комментария"
     entry_reply:
       subject: "Новый комментарий к вашей записи"
+    comment:
+      unavailable_to_you: "Комментарий недоступен для просмотра."
+  profiles:
+    comments:
+      title: "Комментарии пользователя %{user}, страница %{page}"
+      heading: "Комментарии пользователя %{user}"
+    profile:
+      comments: "Комментарии этого пользователя"

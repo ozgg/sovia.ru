@@ -66,4 +66,17 @@ RSpec.describe ProfilesController, type: :controller do
       expect(Question).to have_received(:page_for_visitors)
     end
   end
+
+  describe 'get comments' do
+    before :each do
+      allow(Comment).to receive(:page_for_visitors)
+      get :comments, params: { slug: entity.long_slug }
+    end
+
+    it_behaves_like 'finding_user_by_slug'
+
+    it 'prepares list of comments' do
+      expect(Comment).to have_received(:page_for_visitors)
+    end
+  end
 end
