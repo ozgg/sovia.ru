@@ -35,6 +35,9 @@ class AuthenticationController < ApplicationController
     network = User.networks[params[:provider]]
     data    = request.env['omniauth.auth']
     account = find_account(network, data)
+    File.open("#{Rails.root}/log/oauth.log", 'a') do |file|
+      file.puts "#{Time.now}\t#{data}"
+    end
     create_token_for_user(account, tracking_for_entity) if account.allow_login?
 
     redirect_to root_path

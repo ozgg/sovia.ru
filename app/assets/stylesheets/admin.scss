@@ -111,7 +111,7 @@ article.entity-page {
           text-transform: capitalize;
         }
 
-        input:not([size]), textarea {
+        input:not([type=checkbox]):not([size]), textarea {
           width: calc(100% - 1rem);
         }
       }
