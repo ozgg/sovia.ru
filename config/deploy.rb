@@ -2,13 +2,13 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 
-set :domain, 'sovia.ru'
-set :deploy_to, '/var/www/sovia5'
+set :domain, '89.108.104.88'
+set :deploy_to, '/var/www/sovia.ru'
 set :repository, 'git@github.com:ozgg/Sovia.git'
 set :branch, 'master'
 
 # Optional settings:
-#   set :user, 'foobar'          # Username in the server to SSH to.
+set :user, 'developer'          # Username in the server to SSH to.
 #   set :port, '30000'           # SSH port number.
 #   set :forward_agent, true     # SSH forward_agent.
 
