@@ -44,7 +44,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # end
 
 if ENV['RAILS_ENV'] == 'production'
-  shared_path = '/var/www/sovia5/shared'
+  shared_path = '/var/www/sovia.ru/shared'
   logs_dir    = "#{shared_path}/log"
 
   pidfile "#{shared_path}/tmp/puma/pid"
