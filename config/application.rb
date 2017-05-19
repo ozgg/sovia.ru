@@ -28,6 +28,9 @@ module Sovia5
       config.autoload_paths << config.root.join(path).to_s
     end
 
-    config.active_job.queue_adapter = :sidekiq
+    config.assets.precompile += %w(admin.scss)
+    config.assets.precompile += %w(biovision/base/icons/*)
+    config.assets.precompile += %w(biovision/base/placeholders/*)
+    config.assets.precompile += %w(biovision/vote/icons/*)
   end
 end

@@ -25,21 +25,15 @@ Rails.application.routes.draw do
     get 'comments', on: :member
   end
 
+  mount Biovision::Base::Engine, at: '/'
+  mount Biovision::Vote::Engine, at: '/'
+
   root 'index#index'
 
   get 'dreams/random' => 'dreams#random', as: :random_dream
 
   namespace :admin do
     get '/' => 'index#index'
-
-    resources :metrics, only: [:index, :show]
-
-    resources :browsers, only: [:index, :show] do
-      member do
-        get 'agents'
-      end
-    end
-    resources :agents, only: [:index, :show]
 
     resources :users, only: [:index, :show], concerns: [:list_of_dreams, :list_of_comments] do
       member do
@@ -48,7 +42,6 @@ Rails.application.routes.draw do
         get 'posts'
       end
     end
-    resources :tokens, :codes, only: [:index, :show]
 
     resources :posts, only: [:index, :show], concerns: [:list_of_comments]
     resources :tags, only: [:index, :show]
@@ -126,7 +119,7 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
     get 'auth/:provider' => :auth_external, as: :auth_external
-    get 'auth/:provider/callback' => :callback, as: :auth_callback
+    # get 'auth/:provider/callback' => :callback, as: :auth_callback
   end
 
   controller :about do
@@ -136,7 +129,6 @@ Rails.application.routes.draw do
 
   # Public user profile
   scope 'u/:slug', controller: :profiles do
-    get '/' => :show, as: :user_profile
     get 'dreams', as: :user_dreams
     get 'posts', as: :user_posts
     get 'questions', as: :user_questions

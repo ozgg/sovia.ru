@@ -5,7 +5,7 @@ require 'mina/rbenv'
 set :domain, '89.108.104.88'
 set :deploy_to, '/var/www/sovia.ru'
 set :repository, 'git@github.com:ozgg/Sovia.git'
-set :branch, 'master'
+set :branch, 'version-5-0'
 
 # Optional settings:
 set :user, 'developer'          # Username in the server to SSH to.
