@@ -1,7 +1,0 @@
-<div class="toggleable" data-url="<%= toggle_api_word_path(word) %>">
-  <% Word.toggleable_attributes.each do |flag| %>
-  <span class="<%= word.attributes[flag.to_s] ? 'active' : 'inactive' %>" data-flag="<%= flag %>">
-    <%= t("activerecord.attributes.word.#{flag}") %>
-  </span>
-  <% end %>
-</div>

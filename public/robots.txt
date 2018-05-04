@@ -1,24 +1,4 @@
-Host: https://sovia.ru
-Sitemap: https://sovia.ru/sitemap.xml
-
-User-agent: *
+User-Agent: *
 Disallow: /admin
-Disallow: /api
-Disallow: /my
 Disallow: /auth
-Disallow: /places
-Disallow: /grains
-Disallow: /agents
-Disallow: /browsers
-Disallow: /codes
-Disallow: /comments
-Disallow: /grain_categories
-Disallow: /patterns
-Disallow: /tags
-Disallow: /tokens
-Disallow: /users
-Disallow: /words
-Disallow: /posts/new
-Disallow: /posts/tagged
-Disallow: /dreams/tagged
-Disallow: /dreambook/search
+Disallow: /my

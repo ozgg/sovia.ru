@@ -1,9 +1,0 @@
-<% if collection.any? %>
-    <div class="list-of-posts">
-      <% collection.each do |post| %>
-          <%= render partial: 'posts/preview', locals: { post: post } %>
-      <% end %>
-    </div>
-<% else %>
-    <%= render 'shared/nothing_found' %>
-<% end %>

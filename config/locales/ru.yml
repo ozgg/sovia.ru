@@ -1,83 +1,10 @@
 ru:
-  error:
-    zero: "нет ошибок"
-    one: "%{count} ошибка"
-    few: "%{count} ошибки"
-    many: "%{count} ошибок"
-    other: "%{count} ошибок"
-  nothing_found: "Ничего не нашлось"
-  create: "Создать"
-  view: "В просмотр"
-  list: "К списку"
-  edit: "Редактировать"
-  update: "Обновить"
-  delete: "Удалить"
-  submit: "Отправить"
-  save: "Сохранить"
-  are_you_sure: "Вы уверены?"
-  created_at: "Время создания"
-  updated_at: "Время обновления"
-  not_selected: "Не выбрано"
-  not_set: "Не задано"
-  filter: "Фильтр"
-  "yes": "Да"
-  "no": "Нет"
-  page: "Страница"
-  current_image: "Текущая картинка"
-  untitled: "Без названия"
-  date:
-    nominative_months:
-      -
-      - "январь"
-      - "февраль"
-      - "март"
-      - "апрель"
-      - "май"
-      - "июнь"
-      - "июль"
-      - "август"
-      - "сентябрь"
-      - "октябрь"
-      - "ноябрь"
-      - "декабрь"
-  views:
-    pagination:
-      first: "⇤"
-      last: "⇥"
-      previous: "←"
-      next: "→"
-      truncate: "…"
+  copyright: "2018 example.com"
   shared:
-    flash_messages:
-      notice: "Замечание"
-      warning: "Предупреждение"
-      alert: "Внимание"
-  admin:
-    index:
-      index:
-        title: "Администрирование"
+    meta_texts:
+      site_name: "example.com"
   index:
     index:
-      title: "Сайт о снах"
-  deleted_entity: "Удалённый объект"
-  read_all: "Читать целиком"
-  see_all: "Посмотреть все"
-  about:
-    index:
-      title: "О проекте «Совия»"
-      heading: "О проекте"
-    tos:
-      title: "Пользовательское соглашение"
-      heading: "Пользовательское соглашение"
-  statistics:
-    index:
-      title: "Статистика"
-      heading: "Статистика"
-    patterns:
-      title: "Статистика по образам снов"
-      heading: "Статистика по образам снов"
-  application:
-    not_found:
-      title: "Страница не найдена"
-      heading: "Страница не найдена"
-      message: "Страница, к которой вы обращаетесь, не найдена, недоступна или удалена."
+      description: "Новый сайт на движке biovision"
+      heading: "Главная страница"
+      title: "Главная страница"

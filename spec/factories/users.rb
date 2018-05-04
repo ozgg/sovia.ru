@@ -1,53 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
-    network User.networks[:native]
-    sequence(:screen_name) { |n| "User_#{n}" }
-    sequence(:slug) { |n| "user_#{n}" }
+    sequence(:screen_name) { |n| "User#{n}" }
+    sequence(:email) { |n| "user#{n}@example.com" }
     password 'secret'
     password_confirmation 'secret'
-
-    factory :unconfirmed_user do
-      sequence(:email) { |n| "user#{n}@example.com" }
-
-      factory :confirmed_user do
-        email_confirmed true
-      end
-    end
-
-    factory :administrator do
-      after :create do |user|
-        create :user_role, user: user, role: :administrator
-      end
-    end
-
-    factory :moderator do
-      after :create do |user|
-        create :user_role, user: user, role: :moderator
-      end
-    end
-
-    factory :chief_editor do
-      after :create do |user|
-        create :user_role, user: user, role: :chief_editor
-      end
-    end
-
-    factory :editor do
-      after :create do |user|
-        create :user_role, user: user, role: :editor
-      end
-    end
-
-    factory :chief_interpreter do
-      after :create do |user|
-        create :user_role, user: user, role: :chief_interpreter
-      end
-    end
-
-    factory :interpreter do
-      after :create do |user|
-        create :user_role, user: user, role: :interpreter
-      end
-    end
   end
 end

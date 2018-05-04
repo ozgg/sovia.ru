@@ -1,7 +1,0 @@
-<% if dreams.any? %>
-    <% dreams.each do |dream| %>
-        <%= render partial: 'dreams/preview', locals: { dream: dream } %>
-    <% end %>
-<% else %>
-    <%= render 'shared/nothing_found' %>
-<% end %>

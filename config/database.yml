@@ -1,13 +1,13 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see rails configuration guide
+  # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: sovia5
+  database: sovia5_1
   #username: sovia5
   #password:
   #host: localhost
@@ -15,16 +15,13 @@ development:
   #schema_search_path: myapp,sharedapp,public
   #min_messages: notice
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: sovia5_test
+  database: sovia5_1_test
 
 production:
   <<: *default
-  database: sovia5
+  database: sovia5_1
   username: sovia
-  host: localhost
   password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: localhost
