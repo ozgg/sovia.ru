@@ -1,8 +1,8 @@
 ru:
-  copyright: "2018 example.com"
+  copyright: "2006–2018 sovia.ru"
   shared:
     meta_texts:
-      site_name: "example.com"
+      site_name: "sovia.ru"
   index:
     index:
       description: "Новый сайт на движке biovision"

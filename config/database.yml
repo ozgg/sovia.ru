@@ -7,8 +7,8 @@ default: &default
 
 development:
   <<: *default
-  database: sovia5_1
-  #username: sovia5
+  database: sovia6
+  #username: sovia
   #password:
   #host: localhost
   #port: 5432
@@ -17,11 +17,11 @@ development:
 
 test:
   <<: *default
-  database: sovia5_1_test
+  database: sovia6_test
 
 production:
   <<: *default
-  database: sovia5_1
+  database: sovia6
   username: sovia
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost

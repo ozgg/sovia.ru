@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= locale %>" prefix="og: http://ogp.me/ns#">
+<html lang="<%= locale %>">
 <head>
   <meta charset="UTF-8"/>
   <title><%= yield :meta_title %></title>
@@ -7,21 +7,24 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <%= yield :alternate_links %>
-  <%= render 'shared/meta_texts' %>
 </head>
 <body>
-<%= render 'layouts/application/header' %>
+<%= render 'layouts/profile/header' %>
 
 <main id="main">
   <%= render 'shared/flash_messages' %>
-  <%= render 'shared/breadcrumbs' %>
+  <%= render 'shared/breadcrumbs_profile' %>
 
-  <%= yield %>
+  <div id="profile-content">
+    <% unless content_for?(:hide_sidebar) || current_user.nil? %>
+      <%= render 'layouts/profile/sidebar' %>
+    <% end %>
+    <div class="content">
+      <%= yield %>
+    </div>
+  </div>
 </main>
 
-<%= render 'layouts/application/footer' %>
-<%= render 'shared/counters' %>
+<%= render 'layouts/profile/footer' %>
 </body>
 </html>
