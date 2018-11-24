@@ -1,0 +1,33 @@
+ru:
+  dream_count:
+    zero: "снов нет"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
+  activerecord:
+    models:
+      dream: "Сон"
+      sleep_place: "Место для сна"
+    attributes:
+      dream:
+        body: "Сюжет"
+        interpreted: "Толкование получено"
+        lucidity: "Осознанность"
+        mood: "Настроение"
+        needs_interpretation: "Нужно толкование"
+        privacy: "Видимость"
+        sleep_place: "Место для сна"
+        sleep_place_id: "Место для сна"
+        title: "Название"
+        user: "Пользователь"
+        user_id: "Пользователь"
+        privacies:
+          generally_accessible: "Для всех"
+          visible_to_community: "Для сообщества"
+          visible_to_interpreter: "Для меня и толкователя"
+          personal: "Только для меня"
+      sleep_place:
+        dreams_count: "Количество снов"
+        name: "Название"
+        user: "Пользователь"

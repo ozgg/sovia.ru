@@ -1,7 +1,7 @@
 PATH
   remote: /Users/maxim/Projects/Biovision/gems/biovision-base
   specs:
-    biovision-base (0.28.181116.1)
+    biovision-base (0.28.181121.0)
       bcrypt (~> 3.1)
       carrierwave (~> 1.2)
       carrierwave-bombshelter (~> 0.2)
@@ -211,7 +211,7 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.19)
+    uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     web-console (3.7.0)
       actionview (>= 5.0)
