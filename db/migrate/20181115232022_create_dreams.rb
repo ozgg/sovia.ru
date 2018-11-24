@@ -16,6 +16,9 @@ class CreateDreams < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :body
     end
+
+    add_index :dreams, %i[visible privacy]
+    execute "create index dreams_created_month_idx on dreams using btree (date_trunc('month', created_at));"
   end
 
   def down
