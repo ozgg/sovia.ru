@@ -32,6 +32,10 @@ class Dream < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :sleep_place, optional: true
   belongs_to :agent, optional: true
+  has_many :dream_patterns, dependent: :destroy
+  has_many :patterns, through: :dream_patterns
+  has_many :dream_words, dependent: :destroy
+  has_many :words, through: :dream_words
 
   before_validation :normalize_title
   before_validation :normalize_lucidity

@@ -1,3 +1,6 @@
+# frozen_string_literal
+
+# Table for legacy dreambook entries
 class CreateDreambookEntries < ActiveRecord::Migration[5.2]
   def up
     return if DreambookEntry.table_exists?
