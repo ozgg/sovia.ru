@@ -1,0 +1,57 @@
+ru:
+  pattern_count:
+    zero: "образов нет"
+    one: "%{count} образ"
+    few: "%{count} образа"
+    many: "%{count} образов"
+    other: "%{count} образов"
+  word_count:
+    zero: "слов нет"
+    one: "%{count} слово"
+    few: "%{count} слова"
+    many: "%{count} слов"
+    other: "%{count} слов"
+  activerecord:
+    models:
+      dream_pattern: "Образ в сне"
+      dream_word: "Слово в сне"
+      dreambook_entry: "Запись в соннике"
+      pattern: "Образ сна"
+      word: "Слово"
+    attributes:
+      dream_pattern:
+        dream: "Сон"
+        dream_id: "Сон"
+        pattern: "Образ сна"
+        pattern_id: "Образ сна"
+        weight: "Вес"
+      dream_word:
+        dream: "Сон"
+        dream_id: "Сон"
+        weight: "Вес"
+        word: "Слово"
+        word_id: "Слово"
+      dreambook_entry:
+        described: "Описан"
+        description: "Описание"
+        name: "Название"
+        pattern: "Образ сна"
+        pattern_id: "Образ сна"
+        summary: "Суть"
+        visible: "Показывать"
+      pattern:
+        dreams_count: "Количество снов"
+        name: "Название"
+        summary: "Суть"
+        words_count: "Количество слов"
+      word:
+        body: "Текст"
+        dreams_count: "Количество снов"
+        pattern: "Образ сна"
+        pattern_id: "Образ сна"
+        processed: "Обработано"
+  biovision:
+    components:
+      dreambook:
+        name: "Сонник"
+        description: "Образы сна, слова и старый сонник"

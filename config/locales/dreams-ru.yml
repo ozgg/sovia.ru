@@ -31,3 +31,10 @@ ru:
         dreams_count: "Количество снов"
         name: "Название"
         user: "Пользователь"
+  biovision:
+    components:
+      dreams:
+        name: "Сны"
+        description: "Дневник снов пользователей"
+        settings:
+          place_limit: "Максимальное количество мест для сна на пользователя"

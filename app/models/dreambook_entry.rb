@@ -7,6 +7,7 @@
 #   described [Boolean]
 #   description [Text], optional
 #   name [String]
+#   pattern_id [Pattern], optional
 #   summary [String], optional
 #   updated_at [DateTime]
 #   visible [Boolean]
@@ -20,6 +21,8 @@ class DreambookEntry < ApplicationRecord
   SUMMARY_LIMIT     = 255
 
   toggleable :described, :visible
+
+  belongs_to :pattern, optional: true
 
   validates_length_of :description, maximum: DESCRIPTION_LIMIT
   validates_length_of :name, maximum: NAME_LIMIT
@@ -44,6 +47,6 @@ class DreambookEntry < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i[described description name summary visible]
+    %i[described description name pattern_id summary visible]
   end
 end

@@ -19,6 +19,7 @@ class Pattern < ApplicationRecord
   has_many :words, dependent: :destroy
   has_many :dream_patterns, dependent: :delete_all
   has_many :dreams, through: :dream_patterns
+  has_many :dreambook_entries, dependent: :nullify
 
   validates_presence_of :summary
   validates_length_of :name, maximum: NAME_LIMIT
