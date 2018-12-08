@@ -38,3 +38,27 @@ ru:
         description: "Дневник снов пользователей"
         settings:
           place_limit: "Максимальное количество мест для сна на пользователя"
+  my:
+    sleep_places:
+      index:
+        heading: "Мои места для сна"
+        nav_text: "Места для сна"
+        title: "Мои места для сна"
+      list:
+        empty_list: "Вы пока не добавили ни одного места для сна"
+      show:
+        title: "Место для сна «%{name}»"
+  sleep_places:
+    destroy:
+      success: "Место для сна успешно удалено"
+    edit:
+      heading: "Редактирование места для сна"
+      nav_text: "Редактировать"
+      title: "Редактирование места для сна"
+    form:
+      guidelines:
+        name: "Максимум 50 символов"
+    new:
+      heading: "Новое место для сна"
+      nav_text: "Добавить"
+      title: "Добавление места для сна"

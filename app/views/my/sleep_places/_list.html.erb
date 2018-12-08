@@ -1,0 +1,16 @@
+<% if collection.any? %>
+  <ul class="list-of-entities">
+    <% collection.each do |entity| %>
+      <li data-id="<%= entity.id %>">
+        <div>
+          <div class="data"><%= my_sleep_place_link(entity) %></div>
+          <div class="info">
+            <%= t(:dream_count, count: entity.dreams_count) %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="message-box-warning"><%= t('.empty_list') %></div>
+<% end %>

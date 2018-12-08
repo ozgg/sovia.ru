@@ -28,7 +28,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
   end
 
   def create_sleep_places
-    create_table :sleep_places, comment: 'Places where users sleep' do |t|
+    create_table :sleep_places, comment: 'Place where user sleeps' do |t|
       t.timestamps
       t.references :user, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.integer :dreams_count, default: 0, null: false
@@ -37,7 +37,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
   end
 
   def create_dreams
-    create_table :dreams, comment: 'Dreams of users' do |t|
+    create_table :dreams, comment: 'Dream of user' do |t|
       t.timestamps
       t.references :user, foreign_key: { on_update: :cascade, on_delete: :cascade }
       t.references :sleep_place, foreign_key: { on_update: :cascade, on_delete: :nullify }

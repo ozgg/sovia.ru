@@ -47,11 +47,18 @@ class Dream < ApplicationRecord
   scope :with_privacy, ->(v) { where(privacy: v) }
   scope :list_for_visitors, ->(u) { visible.with_privacy(Dream.privacy_for_user(u)).recent }
   scope :list_for_administration, -> { where('privacy <= ?', Dream.privacies[:personal]).recent }
+  scope :list_for_owner, ->(v) { owned_by(v).recent }
 
   # @param [User] user
   # @param [Integer] page
   def self.page_for_visitor(user, page = 1)
     list_for_visitors(user).page(page)
+  end
+
+  # @param [User] user
+  # @param [Integer] page
+  def self.page_for_owner(user, page = 1)
+    list_for_owner(user).page(page)
   end
 
   # @param [User|nil] user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_230956) do
+ActiveRecord::Schema.define(version: 2018_12_07_233935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,61 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
     t.index ["body", "code_type_id", "quantity"], name: "index_codes_on_body_and_code_type_id_and_quantity"
     t.index ["code_type_id"], name: "index_codes_on_code_type_id"
     t.index ["user_id"], name: "index_codes_on_user_id"
+  end
+
+  create_table "dream_patterns", comment: "Usage of pattern in dream", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "dream_id", null: false
+    t.bigint "pattern_id", null: false
+    t.integer "weight", default: 0, null: false
+    t.index ["dream_id"], name: "index_dream_patterns_on_dream_id"
+    t.index ["pattern_id"], name: "index_dream_patterns_on_pattern_id"
+  end
+
+  create_table "dream_words", comment: "Usage of word in dream", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "dream_id", null: false
+    t.bigint "word_id", null: false
+    t.integer "weight", default: 0, null: false
+    t.index ["dream_id"], name: "index_dream_words_on_dream_id"
+    t.index ["word_id"], name: "index_dream_words_on_word_id"
+  end
+
+  create_table "dreambook_entries", comment: "Legacy dreambook entry", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pattern_id"
+    t.boolean "described", default: false, null: false
+    t.boolean "visible", default: true, null: false
+    t.string "name", null: false
+    t.string "summary"
+    t.text "description"
+    t.index ["name"], name: "index_dreambook_entries_on_name"
+    t.index ["pattern_id"], name: "index_dreambook_entries_on_pattern_id"
+  end
+
+  create_table "dreams", comment: "Dreams of users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "sleep_place_id"
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.boolean "visible", default: true, null: false
+    t.boolean "needs_interpretation", default: false, null: false
+    t.boolean "interpreted", default: false, null: false
+    t.integer "lucidity", limit: 2, default: 0, null: false
+    t.integer "privacy", limit: 2
+    t.integer "comments_count", default: 0, null: false
+    t.string "title"
+    t.text "body"
+    t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx"
+    t.index ["agent_id"], name: "index_dreams_on_agent_id"
+    t.index ["sleep_place_id"], name: "index_dreams_on_sleep_place_id"
+    t.index ["user_id"], name: "index_dreams_on_user_id"
+    t.index ["visible", "privacy"], name: "index_dreams_on_visible_and_privacy"
   end
 
   create_table "editable_blocks", force: :cascade do |t|
@@ -289,6 +344,16 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
     t.string "description", default: "", null: false
   end
 
+  create_table "patterns", comment: "Dream pattern", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "dreams_count", default: 0, null: false
+    t.integer "words_count", default: 0, null: false
+    t.string "name", null: false
+    t.string "summary"
+    t.index ["name"], name: "index_patterns_on_name"
+  end
+
   create_table "privilege_group_privileges", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -324,6 +389,15 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
     t.string "slug", null: false
     t.string "description", default: "", null: false
     t.index ["slug"], name: "index_privileges_on_slug", unique: true
+  end
+
+  create_table "sleep_places", comment: "Places where users sleep", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.integer "dreams_count", default: 0, null: false
+    t.string "name"
+    t.index ["user_id"], name: "index_sleep_places_on_user_id"
   end
 
   create_table "tokens", force: :cascade do |t|
@@ -407,11 +481,30 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  create_table "words", comment: "Word used in dream plot", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pattern_id"
+    t.boolean "processed", default: false, null: false
+    t.integer "dreams_count", default: 0, null: false
+    t.string "body", null: false
+    t.index ["body"], name: "index_words_on_body"
+    t.index ["pattern_id"], name: "index_words_on_pattern_id"
+  end
+
   add_foreign_key "agents", "browsers", on_update: :cascade, on_delete: :cascade
   add_foreign_key "biovision_parameters", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "codes", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "codes", "code_types", on_update: :cascade, on_delete: :cascade
   add_foreign_key "codes", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_patterns", "dreams", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_patterns", "patterns", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_words", "dreams", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_words", "words", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dreambook_entries", "patterns", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "sleep_places", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "editable_blocks", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "editable_pages", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "feedback_requests", "agents", on_update: :cascade, on_delete: :nullify
@@ -433,6 +526,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
   add_foreign_key "privilege_group_privileges", "privilege_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privileges", "privileges", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "sleep_places", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tokens", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "languages", on_update: :cascade, on_delete: :cascade
@@ -443,4 +537,5 @@ ActiveRecord::Schema.define(version: 2018_11_15_230956) do
   add_foreign_key "users", "languages", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "users", column: "inviter_id", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "users", column: "native_id", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "words", "patterns", on_update: :cascade, on_delete: :nullify
 end

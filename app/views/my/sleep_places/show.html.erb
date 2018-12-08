@@ -1,0 +1,25 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('my.sleep_places.index.nav_text'), my_sleep_places_path) %>
+  <%= @entity.name %>
+<% end %>
+
+<article>
+  <h1><%= @entity.name %></h1>
+
+  <nav>
+    <%= link_to(t('sleep_places.edit.nav_text'), edit_sleep_place_path(id: @entity.id)) %>
+  </nav>
+
+  <% if @collection.any? %>
+    <section>
+      <h2><%= t(:dream_count, count: @entity.dreams_count) %></h2>
+      <%= paginate @collection %>
+      <%= paginate @collection %>
+    </section>
+  <% else %>
+    <div class="message-box-warning">
+      Вы пока не описали ни одного сна в этом месте
+    </div>
+  <% end %>
+</article>

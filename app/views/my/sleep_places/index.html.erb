@@ -1,0 +1,31 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <p class="lead">
+    Вы можете добавить до 10 мест для сна и указывать их при описании
+    своих снов.
+  </p>
+
+  <%= render partial: 'list', locals: { collection: @collection } %>
+
+  <% place_limit = BiovisionComponent['dreams']&.settings['place_limit'].to_i %>
+  <% if @collection.count < place_limit %>
+    <section>
+      <h2><%= t('sleep_places.new.nav_text') %></h2>
+
+      <%=
+        render(
+            partial: 'sleep_places/form',
+            locals:  {
+                entity: SleepPlace.new
+            }
+        )
+      %>
+    </section>
+  <% end %>
+</article>
