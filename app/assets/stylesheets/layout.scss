@@ -1,3 +1,41 @@
-:focus {
-  outline: none;
+//:focus {
+//  outline: none;
+//}
+
+body {
+  background: $background-body;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#main {
+  background: $bg-shader;
+  flex: 1;
+  margin: 0 auto;
+  max-width: $content-width;
+  padding: var(--spacer-xs);
+  width: 100%;
+
+  article,
+  > section {
+    background: $background-main;
+    padding: var(--spacer-s);
+  }
+}
+
+h1 {
+     font: 400 var(--font-size-xl) $font-family-heading;
+     margin: 0;
+   }
+
+h2 {
+  font: 400 var(--font-size-large) $font-family-heading;
+  margin: 0;
+}
+
+.breadcrumbs {
+  background: $background-main;
+  margin: var(--spacer-xs) 0;
+  padding: var(--spacer-xs);
 }

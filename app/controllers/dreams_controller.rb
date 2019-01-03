@@ -3,12 +3,18 @@
 # Managing dreams for users
 class DreamsController < ApplicationController
   before_action :set_entity, only: %i[edit update destroy]
+  before_action :restrict_editing, only: %i[edit update destroy]
 
   # post /dreams/check
   def check
     @entity = Dream.instance_for_check(params[:entity_id], creation_parameters)
 
     render 'shared/forms/check'
+  end
+
+  # get /dreams
+  def index
+    @collection = Dream.page_for_visitor(current_user, current_page)
   end
 
   # get /dreams/new
@@ -20,9 +26,18 @@ class DreamsController < ApplicationController
   def create
     @entity = Dream.new(creation_parameters)
     if @entity.save
-      form_processed_ok(my_dream_path(id: @entity.id))
+      form_processed_ok(dream_path(id: @entity.id))
     else
       form_processed_with_error(:new)
+    end
+  end
+
+  # get /dreams/:id
+  def show
+    @entity = Dream.find_by(id: params[:id])
+
+    unless @entity&.visible_to?(current_user)
+      handle_http_404("Cannot find dream visible to user #{current_user&.id}")
     end
   end
 
@@ -33,7 +48,7 @@ class DreamsController < ApplicationController
   # patch /dreams/:id
   def update
     if @entity.update(entity_parameters)
-      form_processed_ok(my_dream_path(id: @entity.id))
+      form_processed_ok(dream_path(id: @entity.id))
     else
       form_processed_with_error(:edit)
     end

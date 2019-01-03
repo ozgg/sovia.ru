@@ -55,3 +55,6 @@ ru:
       dreambook:
         name: "Сонник"
         description: "Образы сна, слова и старый сонник"
+  dreams:
+    show:
+      title: "Сон «%{title}»"

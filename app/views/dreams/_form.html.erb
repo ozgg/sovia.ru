@@ -56,7 +56,7 @@
         <dt><%= f.label :privacy %></dt>
         <dd>
           <ul>
-            <% Dream.privacies.keys.each do |privacy| %>
+            <% Dream.privacies.keys.reject { |i| i == 'for_interpreter' }.each do |privacy| %>
               <li>
                 <% field_id = "dream_privacy_#{privacy}" %>
                 <%=
@@ -119,7 +119,8 @@
         </dd>
 
         <dt><%= f.label :lucidity %></dt>
-        <dd>
+        <dd class="lucidity">
+          ☁
           <% Dream::LUCIDITY_RANGE.each do |lucidity| %>
             <% element_id = "dream_lucidity_#{lucidity}" %>
             <%=
@@ -132,6 +133,7 @@
             %>
             <%= label_tag(element_id, lucidity) %>
           <% end %>
+          ☼
         </dd>
       <% end %>
     <% end %>

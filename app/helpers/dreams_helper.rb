@@ -16,6 +16,13 @@ module DreamsHelper
   end
 
   # @param [Dream] entity
+  # @param [String] text
+  # @param [Hash] options
+  def dream_link(entity, text = entity.title, options = {})
+    link_to(text || t(:untitled), dream_path(id: entity.id), options)
+  end
+
+  # @param [Dream] entity
   def dream_privacy(entity)
     t("activerecord.attributes.dream.privacies.#{entity.privacy}")
   end

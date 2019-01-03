@@ -1,0 +1,22 @@
+<svg version="1.1" width="320px" height="120px" xmlns="http://www.w3.org/2000/svg">
+  <title>Sovia</title>
+  <defs>
+    <style>
+      * { stroke: #000; stroke-linejoin: round; }
+      polyline { stroke-width: 2px; fill: none; }
+    </style>
+  </defs>
+  <g>
+    <g id="runes">
+      <polyline points="120,16 108,22 120,28 108,34 120,40"/>
+      <polyline points="132,40 148,24 140,16 132,24 148,40"/>
+      <polyline points="164,40 164,16 174,24 164,32"/>
+      <polyline points="188,40 188,16"/>
+      <g>
+        <polyline points="204,40 204,16 212,22"/>
+        <polyline points="204,24 212,30"/>
+      </g>
+    </g>
+    <path id="owl" d="M 1,54 Q 70,56 140,78 A 22,22 0 1,0 180,78 Q 250,56 319,54 L 303,46 Q 220,55 176,72 Q 160,68 144,72 Q 100,55 17,46 z"/>
+  </g>
+</svg>

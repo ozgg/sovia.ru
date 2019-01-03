@@ -1,0 +1,25 @@
+<% content_for :meta_title, t('.title', title: @entity.title!) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('dreams.index.nav_text'), dreams_path) %>
+  <span><%= @entity.title! %></span>
+<% end %>
+<% component = Biovision::Components::BaseComponent.handler('dreams') %>
+
+<article class="dream-item">
+  <h1><%= @entity.title! %></h1>
+
+  <div class="body">
+    <%= raw(component.parsed_dream(@entity, current_user)) %>
+  </div>
+
+  <footer>
+    <div class="author">
+      <div class="image">
+        <%= user_image_tiny(@entity.user) %>
+      </div>
+      <%= user_link(@entity.user) %>
+    </div>
+
+    <%= time_tag(@entity.created_at.to_date) %>
+  </footer>
+</article>

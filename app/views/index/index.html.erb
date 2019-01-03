@@ -1,11 +1,19 @@
-<% if @editable_page.nil? %>
-  <% content_for :meta_title, t('.title') %>
-  <% content_for :meta_description, t('.description') %>
-<% else %>
-  <%= render partial: 'editable_pages/entity/metadata', locals: { entity: @editable_page } %>
-<% end %>
+<% content_for :meta_title, t('.title') %>
+<% content_for :meta_description, t('.description') %>
 
 <article id="homepage">
-  <%= render partial: 'index/index/editable', locals: { entity: @editable_page } %>
-  <%= render 'index/index/default_dashboard' %>
+  <h1><%= t('.heading') %></h1>
+
+  <section>
+    <h2>Недавние сны</h2>
+
+    <%=
+      render(
+          partial: 'dreams/list',
+          locals: {
+              collection: Dream.page_for_visitor(current_user)
+          }
+      )
+    %>
+  </section>
 </article>

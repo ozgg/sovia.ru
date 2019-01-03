@@ -1,12 +1,12 @@
 ru:
-  copyright: "2006–2018 sovia.ru"
+  copyright: "2006–2019 sovia.ru"
   shared:
     meta_texts:
       site_name: "sovia.ru"
   index:
     index:
       description: "Новый сайт на движке biovision"
-      heading: "Главная страница"
-      title: "Главная страница"
+      heading: "Sovia — сайт о снах"
+      title: "Совия: сайт о снах"
   untitled: "Без названия"
   read_all: "Читать целиком"

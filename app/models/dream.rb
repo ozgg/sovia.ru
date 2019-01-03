@@ -62,7 +62,7 @@ class Dream < ApplicationRecord
   end
 
   # @param [User|nil] user
-  def self.privacy_for_visitor(user)
+  def self.privacy_for_user(user)
     interpreter = UserPrivilege.user_has_privilege?(user, :interpreter)
     values      = [privacies[:generally_accessible]]
     values << privacies[:for_community] unless user.nil?
@@ -93,6 +93,10 @@ class Dream < ApplicationRecord
     else
       UserPrivilege.user_has_privilege?(user, :interpreter)
     end
+  end
+
+  def title!
+    title || I18n.t(:untitled)
   end
 
   private

@@ -1,9 +1,14 @@
 <header id="main-header">
   <div>
-    <%= render 'layouts/application/header/logo' %>
-    <nav>
-      <%= render 'layouts/application/header/navigation' %>
-    </nav>
+    <div class="logo">
+      <%= link_to(image_tag('logo.svg', alt: 'Sovia'), root_path) %>
+    </div>
     <%= render 'layouts/application/header/authentication' %>
   </div>
+  <nav>
+    <ul>
+      <li><%= link_to(t('dreams.index.nav_text'), dreams_path) %></li>
+      <li><%= link_to(t('dreams.new.nav_text'), new_dream_path) %></li>
+    </ul>
+  </nav>
 </header>
