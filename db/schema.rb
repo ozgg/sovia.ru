@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_233935) do
+ActiveRecord::Schema.define(version: 2019_01_02_223407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_233935) do
     t.integer "quantity", limit: 2, default: 1, null: false
     t.string "body", null: false
     t.string "payload"
+    t.json "data", default: {}, null: false
     t.index ["agent_id"], name: "index_codes_on_agent_id"
     t.index ["body", "code_type_id", "quantity"], name: "index_codes_on_body_and_code_type_id_and_quantity"
     t.index ["code_type_id"], name: "index_codes_on_code_type_id"
@@ -148,7 +149,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_233935) do
     t.boolean "needs_interpretation", default: false, null: false
     t.boolean "interpreted", default: false, null: false
     t.integer "lucidity", limit: 2, default: 0, null: false
-    t.integer "privacy", limit: 2
+    t.integer "privacy", limit: 2, default: 0
     t.integer "comments_count", default: 0, null: false
     t.string "title"
     t.text "body"
@@ -342,6 +343,8 @@ ActiveRecord::Schema.define(version: 2018_12_07_233935) do
     t.integer "previous_value", default: 0, null: false
     t.string "name", null: false
     t.string "description", default: "", null: false
+    t.bigint "biovision_component_id"
+    t.index ["biovision_component_id"], name: "index_metrics_on_biovision_component_id"
   end
 
   create_table "patterns", comment: "Dream pattern", force: :cascade do |t|
@@ -473,6 +476,8 @@ ActiveRecord::Schema.define(version: 2018_12_07_233935) do
     t.string "search_string"
     t.string "referral_link"
     t.json "profile_data", default: {}, null: false
+    t.uuid "uuid"
+    t.json "data", default: {"profile"=>{}}, null: false
     t.index ["agent_id"], name: "index_users_on_agent_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["language_id"], name: "index_users_on_language_id"
@@ -523,6 +528,7 @@ ActiveRecord::Schema.define(version: 2018_12_07_233935) do
   add_foreign_key "media_folders", "media_folders", column: "parent_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "media_folders", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "metric_values", "metrics", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "metrics", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privilege_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privileges", "privileges", column: "parent_id", on_update: :cascade, on_delete: :cascade

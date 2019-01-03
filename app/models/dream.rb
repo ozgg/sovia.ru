@@ -27,10 +27,10 @@ class Dream < ApplicationRecord
 
   toggleable :visible, :interpreted
 
-  enum privacy: %i[generally_accessible visible_to_community visible_to_interpreter personal]
+  enum privacy: %i[generally_accessible for_community for_interpreter personal]
 
   belongs_to :user, optional: true
-  belongs_to :sleep_place, optional: true
+  belongs_to :sleep_place, optional: true, counter_cache: true
   belongs_to :agent, optional: true
   has_many :dream_patterns, dependent: :destroy
   has_many :patterns, through: :dream_patterns
@@ -65,8 +65,8 @@ class Dream < ApplicationRecord
   def self.privacy_for_visitor(user)
     interpreter = UserPrivilege.user_has_privilege?(user, :interpreter)
     values      = [privacies[:generally_accessible]]
-    values << privacies[:visible_to_community] unless user.nil?
-    values << privacies[:visible_to_interpreter] if interpreter
+    values << privacies[:for_community] unless user.nil?
+    values << privacies[:for_interpreter] if interpreter
 
     values
   end
@@ -79,6 +79,20 @@ class Dream < ApplicationRecord
     end
 
     result
+  end
+
+  # Is dream visible to user?
+  #
+  # @param [User|nil] user who tries to see the dream
+  # @return [TrueClass|FalseClass]
+  def visible_to?(user)
+    return true if owned_by?(user) || generally_accessible?
+
+    if for_community?
+      user.is_a?(User)
+    else
+      UserPrivilege.user_has_privilege?(user, :interpreter)
+    end
   end
 
   private

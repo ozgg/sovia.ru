@@ -1,0 +1,16 @@
+<% content_for :meta_title, t('.title', page: current_page) %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <nav>
+    <%= link_to(t('dreams.new.nav_text'), new_dream_path, class: 'button-nav') %>
+  </nav>
+
+  <%= paginate @collection %>
+  <%= render partial: 'list', locals: { collection: @collection } %>
+  <%= paginate @collection %>
+</article>

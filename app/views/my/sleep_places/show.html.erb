@@ -15,6 +15,12 @@
     <section>
       <h2><%= t(:dream_count, count: @entity.dreams_count) %></h2>
       <%= paginate @collection %>
+      <%=
+        render(
+            partial: 'my/dreams/list',
+            locals: { collection: @collection }
+        )
+      %>
       <%= paginate @collection %>
     </section>
   <% else %>

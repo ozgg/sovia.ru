@@ -24,8 +24,8 @@ ru:
         user_id: "Пользователь"
         privacies:
           generally_accessible: "Для всех"
-          visible_to_community: "Для сообщества"
-          visible_to_interpreter: "Для меня и толкователя"
+          for_community: "Для сообщества"
+          for_interpreter: "Для меня и толкователя"
           personal: "Только для меня"
       sleep_place:
         dreams_count: "Количество снов"
@@ -39,6 +39,15 @@ ru:
         settings:
           place_limit: "Максимальное количество мест для сна на пользователя"
   my:
+    dreams:
+      index:
+        heading: "Мои сны"
+        nav_text: "Сны"
+        title: "Мои сны, страница %{page}"
+      list:
+        empty_list: "Вы пока не описали ни одного сна"
+      show:
+        title: "Мой сон «%{title}»"
     sleep_places:
       index:
         heading: "Мои места для сна"
@@ -48,6 +57,22 @@ ru:
         empty_list: "Вы пока не добавили ни одного места для сна"
       show:
         title: "Место для сна «%{name}»"
+  dreams:
+    destroy:
+      success: "Сон успешно удалён"
+    edit:
+      heading: "Редактирование сна"
+      nav_text: "Редактировать"
+      title: "Редактирование сна"
+    form:
+      guidelines:
+        body: "Опишите сюжет достаточно подробно"
+        title: "Максимум 255 символов"
+      no_sleep_places: "Вы не добавили ни одного места для сна"
+    new:
+      heading: "Новый сон"
+      nav_text: "Добавить"
+      title: "Описание нового сна"
   sleep_places:
     destroy:
       success: "Место для сна успешно удалено"

@@ -15,6 +15,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
     BiovisionComponent.where(slug: 'dreams').destroy_all
     PrivilegeGroup.where(slug: 'dream_managers').destroy_all
     Privilege.where(slug: 'dream_manager').destroy_all
+    Privilege.where(slug: 'interpreter').destroy_all
   end
 
   private
@@ -22,9 +23,9 @@ class CreateDreams < ActiveRecord::Migration[5.2]
   def create_component
     BiovisionComponent.create(slug: 'dreams', settings: { place_limit: 5 })
 
-    group     = PrivilegeGroup.create(slug: 'dream_managers', name: 'Dream Managers')
-    privilege = Privilege.create(slug: 'dream_manager', name: 'Dream Manager')
-    group.add_privilege(privilege)
+    group = PrivilegeGroup.create(slug: 'dream_managers', name: 'Dream Managers')
+    group.add_privilege(Privilege.create(slug: 'dream_manager', name: 'Dream Manager'))
+    group.add_privilege(Privilege.create(slug: 'interpreter', name: 'Interpreter'))
   end
 
   def create_sleep_places
@@ -47,7 +48,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
       t.boolean :needs_interpretation, default: false, null: false
       t.boolean :interpreted, default: false, null: false
       t.integer :lucidity, limit: 2, default: 0, null: false
-      t.integer :privacy, limit: 2
+      t.integer :privacy, limit: 2, default: Dream.privacies[:generally_accessible]
       t.integer :comments_count, default: 0, null: false
       t.string :title
       t.text :body
