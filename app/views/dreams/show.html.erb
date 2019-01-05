@@ -6,7 +6,9 @@
 <% component = Biovision::Components::BaseComponent.handler('dreams') %>
 
 <article class="dream-item">
-  <h1><%= @entity.title! %></h1>
+  <header>
+    <h1><%= @entity.title! %></h1>
+  </header>
 
   <div class="body">
     <%= raw(component.parsed_dream(@entity, current_user)) %>

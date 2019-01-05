@@ -1,4 +1,8 @@
 [class|=dream] {
+  header {
+    background: no-repeat top var(--spacer-xs) right var(--spacer-xs) / 1.6rem 1.6rem;
+  }
+
   .author {
     align-items: center;
     display: flex;
@@ -59,7 +63,7 @@
   }
 
   header {
-    background: #f7f7f7;
+    background-color: #f7f7f7;
     padding: var(--spacer-xs);
   }
 
@@ -119,5 +123,11 @@
       display: inline-block;
       padding: var(--spacer-xs);
     }
+  }
+}
+
+.privacy-for_community {
+  header {
+    background-image: image_url('icons/lock.svg');
   }
 }

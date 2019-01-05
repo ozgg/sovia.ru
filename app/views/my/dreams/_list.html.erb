@@ -1,18 +1,17 @@
 <% if collection.any? %>
   <% component = Biovision::Components::BaseComponent.handler('dreams') %>
-  <ul class="dreams-list">
+  <div class="dreams-list">
     <% collection.each do |entity| %>
-      <li data-id="<%= entity.id %>">
         <div class="dream-preview">
-          <div class="header">
-            <%= my_dream_link(entity) %>
+          <header>
+            <h3><%= my_dream_link(entity) %></h3>
             (<%= dream_privacy(entity) %>)
-          </div>
+          </header>
           <div class="body">
             <%= raw(component.dream_preview(entity, current_user)) %>
             <%= my_dream_link(entity, t(:read_all), class: 'more') %>
           </div>
-          <div class="footer">
+          <footer>
             <% unless entity.sleep_place.nil? %>
               <div class="sleep-place">
                 <%= entity.sleep_place.name %>
@@ -21,11 +20,10 @@
             <%= time_tag(entity.created_at.to_date) %>,
             <%= t('activerecord.attributes.dream.lucidity') %>:
             <%= entity.lucidity %>
-          </div>
+          </footer>
         </div>
-      </li>
     <% end %>
-  </ul>
+  </div>
 <% else %>
   <div class="message-box-warning"><%= t('.empty_list') %></div>
 <% end %>

@@ -2,26 +2,15 @@
   <% component = Biovision::Components::BaseComponent.handler('dreams') %>
   <div class="dreams-list">
     <% collection.each do |dream| %>
-    <div class="dream-preview privacy-<%= dream.privacy %>">
-      <header>
-        <h3><%= dream_link(dream) %></h3>
-      </header>
-      <div class="body">
-        <%= raw(component.dream_preview(dream, current_user)) %>
-        <div class="more">
-          <%= dream_link(dream, t(:read_all)) %>
-        </div>
-      </div>
-      <footer>
-        <div class="author">
-          <div class="image">
-            <%= user_image_tiny(dream.user) %>
-          </div>
-          <%= user_link(dream.user) %>
-        </div>
-        <%= time_tag(dream.created_at.to_date) %>
-      </footer>
-    </div>
+      <%=
+        render(
+            partial: 'dreams/preview',
+            locals: {
+                component: component,
+                dream: dream
+            }
+        )
+      %>
     <% end %>
   </div>
 <% else %>
