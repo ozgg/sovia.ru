@@ -78,6 +78,8 @@ ru:
       heading: "Новый сон"
       nav_text: "Описать сон"
       title: "Описание нового сна"
+    show:
+      title: "Сон «%{title}»"
   sleep_places:
     destroy:
       success: "Место для сна успешно удалено"

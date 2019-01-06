@@ -1,0 +1,39 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.dreambook_entries.nav_item.text'), admin_dreambook_entries_path) %>
+  <span><%= @entity.name %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.name %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_dreambook_entries_path) %></li>
+<!--    <li><%#= world_icon(@entity.id) %></li>-->
+    <li><%= edit_icon(edit_dreambook_entry_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <dt><%= t('activerecord.attributes.dreambook_entry.summary') %></dt>
+    <dd><%= @entity.summary %></dd>
+
+    <dt><%= t('activerecord.attributes.dreambook_entry.description') %></dt>
+    <dd>
+      <div class="text">
+        <%= simple_format(@entity.description) %>
+      </div>
+    </dd>
+
+    <%= render partial: 'shared/entity/timestamps', locals: { entity: @entity } %>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_dreambook_entry_path(id: @entity.id)
+        }
+    )
+  %>
+</article>

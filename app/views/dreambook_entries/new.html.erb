@@ -1,0 +1,11 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('admin.dreambook_entries.nav_item.text'), admin_dreambook_entries_path) %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <h1><%= t('.heading') %></h1>
+
+  <%= render partial: 'form', locals: { entity: @entity } %>
+</article>

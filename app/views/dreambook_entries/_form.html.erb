@@ -1,0 +1,80 @@
+<% model_name = entity.class.to_s.underscore %>
+<%=
+  form_with(
+      model: entity,
+      html:  {
+          id:   "#{model_name}-form",
+          data: { check_url: check_dreambook_entries_path }
+      }
+  ) do |f|
+%>
+  <%= render partial: 'shared/list_of_errors', locals: { entity: entity } %>
+
+  <dl>
+    <dt><%= f.label :name %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :name,
+            id:        "#{model_name}_name",
+            size:      nil,
+            maxlength: DreambookEntry::NAME_LIMIT,
+            required:  true,
+            data:      {
+                check: :name
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="name"></div>
+      <div class="guideline"><%= t('.guidelines.name') %></div>
+    </dd>
+
+    <dt><%= f.label :summary %></dt>
+    <dd>
+      <%=
+        f.text_field(
+            :summary,
+            id:        "#{model_name}_summary",
+            size:      nil,
+            maxlength: DreambookEntry::SUMMARY_LIMIT,
+            data:      {
+                check: :summary
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="summary"></div>
+      <div class="guideline"><%= t('.guidelines.summary') %></div>
+    </dd>
+
+    <dt><%= f.label :description %></dt>
+    <dd>
+      <%=
+        f.text_area(
+            :description,
+            id:        "#{model_name}_description",
+            cols:      80,
+            rows:      15,
+            class:     'auto-expand',
+            maxlength: DreambookEntry::DESCRIPTION_LIMIT,
+            required:  true,
+            data:      {
+                check:    :description,
+                min_rows: 15,
+                max_rows: 80
+            }
+        )
+      %>
+      <div class="check-result-error hidden" data-field="description"></div>
+      <div class="guideline"><%= t('.guidelines.description') %></div>
+    </dd>
+
+    <%= render partial: 'shared/forms/entity_flags', locals: { f: f } %>
+  </dl>
+
+  <%= render 'shared/forms/state_container' %>
+
+  <div class="buttons">
+    <%= hidden_field_tag :entity_id, entity.id %>
+    <%= f.button t(:save), type: :submit, class: 'button-save' %>
+  </div>
+<% end %>

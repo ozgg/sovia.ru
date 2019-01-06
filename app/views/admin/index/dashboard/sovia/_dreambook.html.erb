@@ -1,0 +1,9 @@
+<% if current_user_has_privilege?(:dreambook_manager) %>
+  <nav>
+    <h3><%= t('.heading') %></h3>
+    <ul>
+      <li><%= render 'admin/dreambook_entries/nav_item' %></li>
+      <li><%= render 'admin/patterns/nav_item' %></li>
+    </ul>
+  </nav>
+<% end %>
