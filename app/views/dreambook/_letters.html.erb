@@ -1,0 +1,9 @@
+<h2>Алфавитный указатель</h2>
+
+<nav>
+  <ul class="dreambook-letters">
+    <% DreambookEntry::LETTERS.split('').each do |letter| %>
+      <li><%= link_to(letter, dreambook_path(letter: letter)) %></li>
+    <% end %>
+  </ul>
+</nav>

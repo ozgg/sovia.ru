@@ -4,12 +4,13 @@
   <span><%= @entity.name %></span>
 <% end %>
 
+<% component = Biovision::Components::BaseComponent.handler('dreambook') %>
 <article>
   <h1><%= @entity.name %></h1>
 
   <ul class="actions">
     <li><%= back_icon(admin_dreambook_entries_path) %></li>
-<!--    <li><%#= world_icon(@entity.id) %></li>-->
+    <li><%= world_icon(dreambook_path(word: @entity.name)) %></li>
     <li><%= edit_icon(edit_dreambook_entry_path(id: @entity.id)) %></li>
   </ul>
 
@@ -20,7 +21,7 @@
     <dt><%= t('activerecord.attributes.dreambook_entry.description') %></dt>
     <dd>
       <div class="text">
-        <%= simple_format(@entity.description) %>
+        <%= raw(component.pattern_text(@entity.description)) %>
       </div>
     </dd>
 

@@ -17,6 +17,7 @@ class DreambookEntry < ApplicationRecord
   include Toggleable
 
   DESCRIPTION_LIMIT = 65_535
+  LETTERS           = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ'
   NAME_LIMIT        = 50
   SUMMARY_LIMIT     = 255
 
@@ -44,6 +45,11 @@ class DreambookEntry < ApplicationRecord
   # @param [Integer] page
   def self.page_for_visitors(page = 1)
     list_for_visitors.page(page)
+  end
+
+  # @param [String] string
+  def self.match_by_name(string)
+    find_by('name ilike ?', string)
   end
 
   def self.entity_parameters

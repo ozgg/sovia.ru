@@ -1,0 +1,42 @@
+<% content_for :meta_title, t('.title', pattern: @entity.name) %>
+<% content_for :meta_description do %>
+  <%= t('.description', pattern: @entity.name) %>
+  <%= (@entity.summary.blank? ? t('.description_default') : @entity.summary) %>
+<% end %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+  <meta property="og:article:section" content="<%= t('dreambook.index.title') %>"/>
+<% end %>
+
+<article class="dreambook post" itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <h1 itemprop="headline">
+    <%= t('.heading') %>: <span><%= @entity.name %></span>
+  </h1>
+
+  <% if current_user_has_privilege? :interpreter %>
+    <ul class="actions">
+      <li><%= gear_icon(admin_pattern_path(id: @entity.id)) %></li>
+      <li><%= edit_icon(edit_pattern_path(id: @entity.id)) %></li>
+    </ul>
+  <% end %>
+  <meta itemprop="articleSection" content="<%= t('dreambook.index.title') %>"/>
+
+  <div itemprop="articleBody" role="definition" class="body">
+    <% unless @entity.summary.blank? %>
+      <div class="essence"><%= @entity.summary %></div>
+    <% end %>
+    <% if @entity.description.blank? %>
+      <p>Этот образ подробно ещё не описан.</p>
+      <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам
+        помогут его растолковать.</p>
+    <% else %>
+      <%= raw Biovision::Components::BaseComponent.handler('dreambook').pattern_text(@entity.description) %>
+    <% end %>
+  </div>
+
+  <section class="dream-form">
+    <h2>Опишите свой сон</h2>
+
+    <%= render partial: 'dreams/form', locals: { entity: Dream.new } %>
+  </section>
+</article>

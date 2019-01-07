@@ -110,3 +110,14 @@ ru:
       heading: "Новый образ сна"
       nav_text: "Описать образ сна"
       title: "Создание нового образа сна"
+  dreambook:
+    index:
+      title: "Сонник"
+      heading: "Сонник"
+    word:
+      description: "Сонник: %{pattern} во сне."
+      description_default: "Значение образа и примеры снов пользователей с этим символом."
+      heading: "Сонник"
+      title: "Сонник: %{pattern}"
+    new:
+      nav_text: "Сонник"

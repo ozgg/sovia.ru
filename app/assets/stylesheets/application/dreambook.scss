@@ -1,0 +1,33 @@
+.dreambook-letters {
+  margin: var(--spacer-s);
+  padding: var(--spacer-xs);
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  box-shadow: $block-shadow;
+  flex-wrap: wrap;
+
+  li {
+    list-style: none;
+    font-size: var(--font-size-increased);
+    margin: 0;
+    padding: var(--spacer-xs);
+  }
+}
+
+.dreambook-words {
+  margin: var(--spacer-s);
+  padding: 0;
+  box-shadow: $block-shadow;
+
+  li {
+    list-style: none;
+    background: $row_background_odd;
+    margin: 0;
+    padding: var(--spacer-xs);
+
+    &:nth-of-type(even) {
+      background: $row_background_even;
+    }
+  }
+}

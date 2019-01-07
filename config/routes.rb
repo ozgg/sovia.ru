@@ -20,6 +20,13 @@ Rails.application.routes.draw do
   resources :sleep_places, only: %i[update destroy]
   resources :dreams, only: %i[update destroy]
 
+  scope 'dreambook', controller: :dreambook do
+    get '/' => :index, as: :dreambook
+    get '/search' => :search, as: :dreambook_search
+    get '/:word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
+    get '/:letter/:word' => :word, constraints: { word: %r{[^/]+} }
+  end
+
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
 
