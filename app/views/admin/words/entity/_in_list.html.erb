@@ -1,0 +1,16 @@
+<div class="data">
+  <div><%= admin_word_link(entity) %></div>
+  <% if entity.patterns_count.positive? %>
+    <div class="info">
+      &rarr; <%= entity.patterns_string %>
+    </div>
+  <% end %>
+  <div class="secondary info">
+    <%= t(:pattern_count, count: entity.patterns_count) %>,
+    <%= t(:dream_count, count: entity.dreams_count) %>
+  </div>
+
+  <ul class="actions">
+    <li><%= edit_icon(edit_word_path(id: entity.id)) %></li>
+  </ul>
+</div>

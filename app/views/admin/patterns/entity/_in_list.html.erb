@@ -3,6 +3,26 @@
   <div class="info">
     <%= entity.summary %>
   </div>
+  <div class="info">
+    <%=
+      text_area_tag(
+          :words_string,
+          entity.words_string,
+          id: nil,
+          class: 'auto-expand patter-words-updater',
+          data: {
+              min_rows: 1,
+              max_rows: 5,
+              url: words_admin_pattern_path(id: entity.id)
+          }
+      )
+    %>
+    <div class="state"></div>
+  </div>
+  <div class="secondary info">
+    <%= t(:word_count, count: entity.words_count) %>,
+    <%= t(:dream_count, count: entity.dreams_count) %>
+  </div>
 
   <ul class="actions">
     <li><%= edit_icon(edit_pattern_path(id: entity.id)) %></li>

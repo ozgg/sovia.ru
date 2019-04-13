@@ -16,7 +16,8 @@ class Pattern < ApplicationRecord
   NAME_LIMIT    = 50
   SUMMARY_LIMIT = 255
 
-  has_many :words, dependent: :destroy
+  has_many :pattern_words, dependent: :destroy
+  has_many :words, through: :pattern_words
   has_many :dream_patterns, dependent: :delete_all
   has_many :dreams, through: :dream_patterns
   has_many :dreambook_entries, dependent: :nullify
@@ -37,5 +38,18 @@ class Pattern < ApplicationRecord
 
   def self.entity_parameters
     %i[name summary]
+  end
+
+  # @param [String] string
+  def words_string=(string)
+    new_word_ids = []
+    string.downcase.strip.split(/,\s*/).reject(&:blank?).uniq.each do |body|
+      new_word_ids << Word.find_or_create_by(body: body).id
+    end
+    self.word_ids = new_word_ids
+  end
+
+  def words_string
+    words.map(&:body).join(', ')
   end
 end

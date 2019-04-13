@@ -79,6 +79,15 @@ ru:
         title: "Образы снов, страница %{page}"
       show:
         title: "Образ сна «%{name}»"
+    words:
+      nav_item:
+        description: "Управление словами"
+        text: "Слова"
+      index:
+        heading: "Слова"
+        title: "Слова, страница %{page}"
+      show:
+        title: "Слово «%{body}»"
   dreambook_entries:
     destroy:
       success: "Образ сонника успешно удалён"
@@ -121,3 +130,17 @@ ru:
       title: "Сонник: %{pattern}"
     new:
       nav_text: "Сонник"
+  words:
+    destroy:
+      success: "Слово успешно удалено"
+    edit:
+      heading: "Редактирование слова"
+      nav_text: "Редактировать"
+      title: "Редактирование слова"
+    form:
+      guidelines:
+        name: "Максимум 50 символов"
+    new:
+      heading: "Новое слово"
+      nav_text: "Добавить слово"
+      title: "Создание нового слова"

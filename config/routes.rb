@@ -43,7 +43,12 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :dreambook_entries, only: %i[index show], concerns: %i[toggle]
-      resources :patterns, :words, only: %i[index show]
+      resources :patterns, only: %i[index show] do
+        member do
+          put 'words', defaults: { format: :json }
+        end
+      end
+      resources :words, only: %i[index show]
 
       resources :dreams, only: %i[index show], concerns: %i[toggle]
     end

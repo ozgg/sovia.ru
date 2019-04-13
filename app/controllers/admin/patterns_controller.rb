@@ -2,8 +2,6 @@
 
 # Administrative part of patterns management
 class Admin::PatternsController < AdminController
-  include ToggleableEntity
-
   before_action :set_entity, except: :index
 
   # get /admin/patterns

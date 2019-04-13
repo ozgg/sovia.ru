@@ -47,7 +47,7 @@ namespace :dreambook do
         puts
       end
       DreambookEntry.connection.execute "select setval('dreambook_entries_id_seq', (select max(id) from dreambook_entries));"
-      puts "Done. We have #{DreambookEntry.count} legacy patterns and #{Pattern.count} patterns now"
+      puts "Done. We have #{DreambookEntry.count} dreambook entries and #{Pattern.count} patterns now"
     else
       puts "Cannot find file #{file_path}"
     end

@@ -6,6 +6,7 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
     create_component
     create_patterns_table unless Pattern.table_exists?
     create_words_table unless Word.table_exists?
+    create_pattern_words unless PatternWord.table_exists?
     create_pattern_links unless DreamPattern.table_exists?
     create_word_links unless DreamWord.table_exists?
     create_dreambook_entries unless DreambookEntry.table_exists?
@@ -15,6 +16,7 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
     drop_table :dreambook_entries if DreambookEntry.table_exists?
     drop_table :dream_words if DreamWord.table_exists?
     drop_table :dream_patterns if DreamPattern.table_exists?
+    drop_table :pattern_words if PatternWord.table_exists?
     drop_table :words if Word.table_exists?
     drop_table :patterns if Pattern.table_exists?
 
@@ -46,11 +48,20 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
   def create_words_table
     create_table :words, comment: 'Word used in dream plot' do |t|
       t.timestamps
-      t.references :pattern, foreign_key: { on_update: :cascade, on_delete: :nullify }
       t.boolean :processed, default: false, null: false
       t.integer :dreams_count, default: 0, null: false
+      t.integer :patterns_count, default: 0, null: false
       t.string :body, null: false, index: true
     end
+  end
+
+  def create_pattern_words
+    create_table :pattern_words, comment: 'Link between word and pattern' do |t|
+      t.timestamps
+      t.references :pattern, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+      t.references :word, null: false, foreign_key: { on_update: :cascade, on_delete: :cascade }
+    end
+
   end
 
   def create_pattern_links
@@ -74,7 +85,6 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
   def create_dreambook_entries
     create_table :dreambook_entries, comment: 'Legacy dreambook entry' do |t|
       t.timestamps
-      t.references :pattern, foreign_key: { on_update: :cascade, on_delete: :nullify }
       t.boolean :described, default: false, null: false
       t.boolean :visible, default: true, null: false
       t.string :name, null: false, index: true
