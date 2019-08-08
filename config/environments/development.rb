@@ -34,11 +34,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_options = {
-      from: 'sovia.ru <support@sovia.ru>',
-      reply_to: 'support@sovia.ru'
+    from: 'sovia.ru <support@sovia.ru>',
+    reply_to: 'support@sovia.ru'
   }
-  config.action_mailer.default_url_options = { :host => 'sovia.local:3000' }
-
+  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.

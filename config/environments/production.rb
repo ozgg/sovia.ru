@@ -44,7 +44,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://sovia.ru/cable'
-  # config.action_cable.allowed_request_origins = [ 'https://sovia.ru', /http:\/\/example.*/ ]
+  # config.action_cable.allowed_request_origins = [ 'http://sovia.ru', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -61,7 +61,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "sovia_ru_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "sovia6_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
 
@@ -70,23 +70,23 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      domain: 'sovia.ru',
-      user_name: 'support@sovia.ru',
-      password: ENV['MAIL_PASSWORD'],
-      authentication: :plain,
-      enable_starttls_auto: true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'sovia.ru',
+    user_name: 'webmaster@sovia.ru',
+    password: ENV['MAIL_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-      from: 'sovia.ru <support@sovia.ru>',
-      reply_to: 'support@sovia.ru'
+    from: 'sovia.ru <webmaster@sovia.ru>',
+    reply_to: 'support@sovia.ru'
   }
-  config.action_mailer.default_url_options = { host: 'sovia.ru', protocol: :https }
+  config.action_mailer.default_url_options = { host: 'sovia.ru' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
+  config.i18n.fallbacks = [I18n.default_locale]
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify

@@ -38,10 +38,10 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
   config.action_mailer.default_options = {
-      from: 'sovia.ru <support@sovia.ru>',
-      reply_to: 'support@sovia.ru'
+    from: 'sovia.ru <support@sovia.ru>',
+    reply_to: 'support@sovia.ru'
   }
-  config.action_mailer.default_url_options = { :host => 'sovia.local:3000' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

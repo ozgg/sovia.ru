@@ -6,11 +6,9 @@
 #   agent_id [Agent], optional
 #   body [Text]
 #   created_at [DateTime]
-#   interpreted [Boolean]
 #   ip [Inet], optional
 #   lucidity [Integer]
-#   needs_interpretation [Boolean]
-#   privacy [Integer]
+#   privacy [Integer], enum
 #   sleep_place_id [SleepPlace], optional
 #   title [String], optional
 #   updated_at [DateTime]
@@ -21,21 +19,17 @@ class Dream < ApplicationRecord
   include HasOwner
   include Toggleable
 
-  BODY_LIMIT     = 65_535
+  BODY_LIMIT = 65_535
   LUCIDITY_RANGE = (0..5).freeze
-  TITLE_LIMIT    = 255
+  TITLE_LIMIT = 255
 
-  toggleable :visible, :interpreted
+  toggleable :visible
 
-  enum privacy: %i[generally_accessible for_community for_interpreter personal]
+  enum privacy: %i[generally_accessible for_community personal]
 
   belongs_to :user, optional: true
   belongs_to :sleep_place, optional: true, counter_cache: true
   belongs_to :agent, optional: true
-  has_many :dream_patterns, dependent: :destroy
-  has_many :patterns, through: :dream_patterns
-  has_many :dream_words, dependent: :destroy
-  has_many :words, through: :dream_words
 
   before_validation :normalize_title
   before_validation :normalize_lucidity
@@ -63,10 +57,8 @@ class Dream < ApplicationRecord
 
   # @param [User|nil] user
   def self.privacy_for_user(user)
-    interpreter = UserPrivilege.user_has_privilege?(user, :interpreter)
-    values      = [privacies[:generally_accessible]]
+    values = [privacies[:generally_accessible]]
     values << privacies[:for_community] unless user.nil?
-    values << privacies[:for_interpreter] if interpreter
 
     values
   end
@@ -74,9 +66,7 @@ class Dream < ApplicationRecord
   # @param [User] user
   def self.entity_parameters(user)
     result = %i[body lucidity title]
-    unless user.nil?
-      result += %i[needs_interpretation sleep_place_id privacy]
-    end
+    result += %i[sleep_place_id privacy] unless user.nil?
 
     result
   end
