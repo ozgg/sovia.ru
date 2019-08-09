@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', page: current_page) %>
 <% content_for :breadcrumbs do %>
+  <%= link_to(t('my.index.index.nav_text'), my_path) %>
   <span><%= t('.nav_text') %></span>
 <% end %>
 

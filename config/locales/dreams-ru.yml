@@ -1,0 +1,93 @@
+ru:
+  dream_count:
+    zero: "снов нет"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
+  activerecord:
+    models:
+      dream: "Сон"
+      sleep_place: "Место для сна"
+    attributes:
+      dream:
+        body: "Сюжет"
+        lucidity: "Осознанность"
+        privacy: "Видимость"
+        sleep_place: "Место для сна"
+        sleep_place_id: "Место для сна"
+        title: "Название"
+        user: "Пользователь"
+        user_id: "Пользователь"
+        privacies:
+          generally_accessible: "Для всех"
+          for_community: "Для сообщества"
+          personal: "Только для меня"
+      sleep_place:
+        dreams_count: "Количество снов"
+        name: "Название"
+        user: "Пользователь"
+  biovision:
+    components:
+      dreams:
+        name: "Сны"
+        description: "Дневник снов пользователей"
+        settings:
+          place_limit: "Максимальное количество мест для сна на пользователя"
+  my:
+    dreams:
+      index:
+        heading: "Мои сны"
+        nav_text: "Сны"
+        title: "Мои сны, страница %{page}"
+      list:
+        empty_list: "Вы пока не описали ни одного сна"
+      show:
+        title: "Мой сон «%{title}»"
+    sleep_places:
+      index:
+        heading: "Мои места для сна"
+        nav_text: "Места для сна"
+        title: "Мои места для сна"
+      list:
+        empty_list: "Вы пока не добавили ни одного места для сна"
+      show:
+        title: "Место для сна «%{name}»"
+  dreams:
+    destroy:
+      success: "Сон успешно удалён"
+    edit:
+      heading: "Редактирование сна"
+      nav_text: "Редактировать"
+      title: "Редактирование сна"
+    form:
+      guidelines:
+        body: "Опишите сюжет достаточно подробно"
+        title: "Максимум 255 символов"
+      no_sleep_places: "Вы не добавили ни одного места для сна"
+    index:
+      description: "Сны, описанные пользователями на сайте о снах Sovia (Совия), страница %{page}"
+      heading: "Дневник снов"
+      nav_text: "Дневник снов"
+      title: "Дневник снов, страница %{page}"
+    new:
+      heading: "Новый сон"
+      nav_text: "Описать сон"
+      title: "Описание нового сна"
+    show:
+      title: "Сон «%{title}»"
+  sleep_places:
+    destroy:
+      success: "Место для сна успешно удалено"
+    edit:
+      heading: "Редактирование места для сна"
+      nav_text: "Редактировать"
+      title: "Редактирование места для сна"
+    form:
+      guidelines:
+        name: "Максимум 50 символов"
+    new:
+      heading: "Новое место для сна"
+      nav_text: "Добавить"
+      title: "Добавление места для сна"
+      limit_reached: "Вы создали максимальное количество мест для сна"

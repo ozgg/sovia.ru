@@ -19,4 +19,8 @@ class My::DreamsController < ProfileController
     @entity = Dream.owned_by(current_user).find_by(id: params[:id])
     handle_http_404('Cannot find dream') if @entity.nil?
   end
+
+  def component_slug
+    Biovision::Components::DreamsComponent::SLUG
+  end
 end

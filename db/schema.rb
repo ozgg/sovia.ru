@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_205952) do
+ActiveRecord::Schema.define(version: 2019_08_08_212121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,29 @@ ActiveRecord::Schema.define(version: 2019_08_08_205952) do
     t.index ["code_type_id"], name: "index_codes_on_code_type_id"
     t.index ["data"], name: "index_codes_on_data", using: :gin
     t.index ["user_id"], name: "index_codes_on_user_id"
+  end
+
+  create_table "dreams", comment: "Dream", force: :cascade do |t|
+    t.uuid "uuid"
+    t.bigint "user_id"
+    t.bigint "sleep_place_id"
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "visible", default: true, null: false
+    t.integer "lucidity", limit: 2, default: 0, null: false
+    t.integer "privacy", limit: 2, default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
+    t.string "title"
+    t.text "body", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx"
+    t.index ["agent_id"], name: "index_dreams_on_agent_id"
+    t.index ["sleep_place_id"], name: "index_dreams_on_sleep_place_id"
+    t.index ["user_id"], name: "index_dreams_on_user_id"
+    t.index ["uuid"], name: "index_dreams_on_uuid"
+    t.index ["visible", "privacy"], name: "index_dreams_on_visible_and_privacy"
   end
 
   create_table "editable_pages", comment: "Editable page", force: :cascade do |t|
@@ -295,6 +318,15 @@ ActiveRecord::Schema.define(version: 2019_08_08_205952) do
     t.index ["slug"], name: "index_simple_blocks_on_slug"
   end
 
+  create_table "sleep_places", comment: "Sleep place", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "dreams_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.index ["user_id"], name: "index_sleep_places_on_user_id"
+  end
+
   create_table "tokens", comment: "Authentication token", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -375,6 +407,9 @@ ActiveRecord::Schema.define(version: 2019_08_08_205952) do
   add_foreign_key "codes", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "codes", "code_types", on_update: :cascade, on_delete: :cascade
   add_foreign_key "codes", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dreams", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "sleep_places", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "editable_pages", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "feedback_requests", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "feedback_requests", "languages", on_update: :cascade, on_delete: :nullify
@@ -395,6 +430,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_205952) do
   add_foreign_key "privilege_group_privileges", "privilege_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privileges", "privileges", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "sleep_places", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tokens", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "languages", on_update: :cascade, on_delete: :cascade

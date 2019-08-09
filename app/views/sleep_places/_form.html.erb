@@ -2,8 +2,8 @@
 <%=
   form_with(
       model: entity,
-      html:  {
-          id:   "#{model_name}-form",
+      html: {
+          id: "#{model_name}-form",
           data: { check_url: check_sleep_places_path }
       }
   ) do |f|
@@ -16,16 +16,16 @@
       <%=
         f.text_field(
             :name,
-            id:        "#{model_name}_name",
-            size:      nil,
-            maxlength: SleepPlace::NAME_LIMIT,
-            required:  true,
             data: {
                 check: :name
-            }
+            },
+            id: "#{model_name}_name",
+            maxlength: SleepPlace::NAME_LIMIT,
+            required: true,
+            size: nil
         )
       %>
-      <div class="check-result-error hidden" data-field="name"></div>
+      <div class="check-result-error" data-field="name"></div>
       <div class="guideline"><%= t('.guidelines.name') %></div>
     </dd>
   </dl>

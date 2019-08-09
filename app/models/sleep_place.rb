@@ -12,13 +12,13 @@ class SleepPlace < ApplicationRecord
   include HasOwner
   include Checkable
 
-  NAME_LIMIT = 100
+  NAME_LIMIT = 50
 
   belongs_to :user
   has_many :dreams, dependent: :nullify
 
   validates_presence_of :name
-  validates_uniqueness_of :name, scope: [:user_id]
+  validates_uniqueness_of :name, scope: :user_id
   validates_length_of :name, maximum: NAME_LIMIT
 
   scope :ordered_by_name, -> { order('name asc') }

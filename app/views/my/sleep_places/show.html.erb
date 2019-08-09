@@ -1,5 +1,6 @@
 <% content_for :meta_title, t('.title', name: @entity.name) %>
 <% content_for :breadcrumbs do %>
+  <%= link_to(t('my.index.index.nav_text'), my_path) %>
   <%= link_to(t('my.sleep_places.index.nav_text'), my_sleep_places_path) %>
   <%= @entity.name %>
 <% end %>

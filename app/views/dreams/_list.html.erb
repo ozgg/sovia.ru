@@ -1,12 +1,12 @@
 <% if collection.any? %>
-  <% component = Biovision::Components::BaseComponent.handler('dreams') %>
+  <% handler ||= component_handler %>
   <div class="dreams-list">
     <% collection.each do |dream| %>
       <%=
         render(
             partial: 'dreams/preview',
             locals: {
-                component: component,
+                handler: handler,
                 dream: dream
             }
         )

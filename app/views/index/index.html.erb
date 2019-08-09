@@ -11,7 +11,8 @@
       render(
           partial: 'dreams/list',
           locals: {
-              collection: Dream.page_for_visitor(current_user)
+              collection: Dream.page_for_visitor(current_user),
+              handler: Biovision::Components::BaseComponent.handler('dreams', current_user)
           }
       )
     %>

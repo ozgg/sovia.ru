@@ -4,28 +4,29 @@ module Biovision
   module Components
     # Component for handling dreams
     class DreamsComponent < BaseComponent
+      SLUG = 'dreams'
+
       LINK_PATTERN = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/.freeze
       NAME_PATTERN = /{(?<name>[^}]{1,30})}(?:\((?<text>[^)]{1,30})\))?/.freeze
 
       # @param [Dream] dream
-      # @param [User] user
-      def parsed_dream(dream, user)
+      def parsed_dream(dream)
         owner   = dream.user
         strings = dream.body.split("\n").map(&:squish).reject(&:blank?)
-        strings.map { |s| parse(s, owner, user) }.join
-      end
-
-      def dream_preview(dream, user)
-        owner   = dream.user
-        strings = dream.body.split("\n").map(&:squish).reject(&:blank?).first(2)
-        strings.map { |s| parse(s, owner, user) }.join
+        strings.map { |s| parse(s, owner) }.join
       end
 
       # @param [Dream] dream
-      # @param [User] user
+      def dream_preview(dream)
+        owner   = dream.user
+        strings = dream.body.split("\n").map(&:squish).reject(&:blank?).first(2)
+        strings.map { |s| parse(s, owner) }.join
+      end
+
+      # @param [Dream] dream
       # @param [String] text
       # @param [Integer] fallback_id
-      def dream_link(dream, user, text, fallback_id)
+      def dream_link(dream, text, fallback_id)
         if dream&.visible_to?(user)
           title     = dream.title || I18n.t(:untitled)
           link_text = text.blank? ? title : text
@@ -39,14 +40,13 @@ module Biovision
       # Parse fragments like [dream 123](link text)
       #
       # @param [String] string
-      # @param [User] user
       # @return [String]
-      def parse_links(string, user)
+      def parse_links(string)
         pattern = LINK_PATTERN
         string.gsub(pattern) do |chunk|
           match = pattern.match(chunk)
           dream = Dream.visible.find_by(id: match[:id])
-          dream_link(dream, user, match[:text], match[:id])
+          dream_link(dream, match[:text], match[:id])
         end
       end
 
@@ -68,12 +68,17 @@ module Biovision
 
       # @param [String] string
       # @param [User] owner
-      # @param [User] user
-      def parse(string, owner, user)
+      def parse(string, owner)
         output = string.gsub('<', '&lt;').gsub('>', '&gt;')
-        output = parse_links(output, user)
+        output = parse_links(output)
         output = parse_names(output, user == owner) unless owner.nil?
         "<p>#{output}</p>\n"
+      end
+
+      def can_add_sleep_place?
+        return false if user.nil?
+
+        SleepPlace.owned_by(user).count < settings['place_limit']
       end
     end
   end

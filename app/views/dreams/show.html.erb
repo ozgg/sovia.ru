@@ -3,7 +3,6 @@
   <%= link_to(t('dreams.index.nav_text'), dreams_path) %>
   <span><%= @entity.title! %></span>
 <% end %>
-<% component = Biovision::Components::BaseComponent.handler('dreams') %>
 
 <article class="dream-item">
   <header>
@@ -11,7 +10,7 @@
   </header>
 
   <div class="body">
-    <%= raw(component.parsed_dream(@entity, current_user)) %>
+    <%= raw component_handler.parsed_dream(@entity) %>
   </div>
 
   <footer>

@@ -5,6 +5,7 @@
 # Attributes:
 #   agent_id [Agent], optional
 #   body [Text]
+#   comments_count [Integer]
 #   created_at [DateTime]
 #   ip [Inet], optional
 #   lucidity [Integer]
@@ -13,6 +14,7 @@
 #   title [String], optional
 #   updated_at [DateTime]
 #   user_id [User], optional
+#   uuid [UUID]
 #   visible [Boolean]
 class Dream < ApplicationRecord
   include Checkable
@@ -31,10 +33,8 @@ class Dream < ApplicationRecord
   belongs_to :sleep_place, optional: true, counter_cache: true
   belongs_to :agent, optional: true
 
-  before_validation :normalize_title
-  before_validation :normalize_lucidity
-  before_validation :normalize_place
-  before_validation :normalize_privacy
+  after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
+  before_validation :normalize_attributes
 
   scope :visible, -> { where(visible: true) }
   scope :recent, -> { order('id desc') }
@@ -47,6 +47,11 @@ class Dream < ApplicationRecord
   # @param [Integer] page
   def self.page_for_visitor(user, page = 1)
     list_for_visitors(user).page(page)
+  end
+
+  # @param [Integer] page
+  def self.page_for_administration(page = 1)
+    list_for_administration.page(page)
   end
 
   # @param [User] user
@@ -74,15 +79,10 @@ class Dream < ApplicationRecord
   # Is dream visible to user?
   #
   # @param [User|nil] user who tries to see the dream
-  # @return [TrueClass|FalseClass]
   def visible_to?(user)
     return true if owned_by?(user) || generally_accessible?
 
-    if for_community?
-      user.is_a?(User)
-    else
-      UserPrivilege.user_has_privilege?(user, :interpreter)
-    end
+    for_community? && user.is_a?(User)
   end
 
   def title!
@@ -90,6 +90,13 @@ class Dream < ApplicationRecord
   end
 
   private
+
+  def normalize_attributes
+    normalize_title
+    normalize_lucidity
+    normalize_place
+    normalize_privacy
+  end
 
   def normalize_title
     self.title = title.blank? ? nil : title[0..(TITLE_LIMIT - 1)]

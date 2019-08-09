@@ -20,4 +20,8 @@ class My::SleepPlacesController < ProfileController
     @entity = SleepPlace.owned_by(current_user).find_by(id: params[:id])
     handle_http_404('Cannot find sleep place') if @entity.nil?
   end
+
+  def component_slug
+    Biovision::Components::DreamsComponent::SLUG
+  end
 end

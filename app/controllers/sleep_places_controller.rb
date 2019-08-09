@@ -3,6 +3,7 @@
 # Managing sleep places for users
 class SleepPlacesController < ProfileController
   before_action :set_entity, only: %i[edit update destroy]
+  before_action :check_place_limit, only: %i[new create]
 
   # post /sleep_places/check
   def check
@@ -58,5 +59,16 @@ class SleepPlacesController < ProfileController
 
   def creation_parameters
     entity_parameters.merge(owner_for_entity)
+  end
+
+  def check_place_limit
+    return if component_handler.can_add_sleep_place?
+
+    flash[:alert] = t('sleep_places.new.limit_reached')
+    redirect_to my_sleep_places_path
+  end
+
+  def component_slug
+    Biovision::Components::DreamsComponent::SLUG
   end
 end

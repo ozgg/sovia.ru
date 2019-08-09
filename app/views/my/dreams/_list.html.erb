@@ -1,5 +1,4 @@
 <% if collection.any? %>
-  <% component = Biovision::Components::BaseComponent.handler('dreams') %>
   <div class="dreams-list">
     <% collection.each do |entity| %>
         <div class="dream-preview">
@@ -8,7 +7,7 @@
             (<%= dream_privacy(entity) %>)
           </header>
           <div class="body">
-            <%= raw(component.dream_preview(entity, current_user)) %>
+            <%= raw component_handler.dream_preview(entity) %>
             <%= my_dream_link(entity, t(:read_all), class: 'more') %>
           </div>
           <footer>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   concern :check do
     post :check, on: :collection, defaults: { format: :json }
@@ -22,7 +24,22 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sleep_places, only: %i[update destroy]
+  resources :dreams, only: %i[update destroy]
+
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
+
+    resources :sleep_places, only: %i[new create edit], concerns: %i[check]
+    resources :dreams, except: %i[update destroy], concerns: %i[check]
+
+    namespace :my do
+      resources :sleep_places, only: %i[index show]
+      resources :dreams, only: %i[index show]
+    end
+
+    namespace :admin do
+      resources :dreams, only: %i[index show], concerns: %i[toggle]
+    end
   end
 end
