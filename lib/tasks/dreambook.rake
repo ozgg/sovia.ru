@@ -16,7 +16,7 @@ namespace :dreambook do
           attributes = {
             created_at: data['created_at'],
             description: data['description'],
-            summary: data['summary'],
+            summary: data['essence'],
             updated_at: data['updated_at']
           }
 
