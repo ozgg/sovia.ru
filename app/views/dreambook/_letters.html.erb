@@ -1,0 +1,10 @@
+
+<nav>
+  <h2>Алфавитный указатель</h2>
+
+  <ul class="dreambook-letters">
+    <% Biovision::Components::DreambookComponent::LETTERS.split('').each do |letter| %>
+      <li><%= link_to(letter, dreambook_path(letter: letter)) %></li>
+    <% end %>
+  </ul>
+</nav>

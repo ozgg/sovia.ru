@@ -1,0 +1,47 @@
+<% content_for :meta_title, t('.title', name: @entity.name) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.patterns.nav_item.text'), admin_patterns_path) %>
+  <span><%= @entity.name %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.name %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_patterns_path) %></li>
+    <li><%= edit_icon(edit_pattern_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <div>
+      <dt><%= t('activerecord.attributes.pattern.name') %></dt>
+      <dd><%= @entity.name %></dd>
+    </div>
+
+    <% unless @entity.summary.blank? %>
+      <div>
+        <dt><%= t('activerecord.attributes.pattern.summary') %></dt>
+        <dd><%= @entity.summary %></dd>
+      </div>
+    <% end %>
+
+    <div>
+      <dt><%= t('activerecord.attributes.pattern.description') %></dt>
+      <dd>
+        <div class="text">
+          <%= raw component_handler.parse(@entity.description) %>
+        </div>
+      </dd>
+    </div>
+
+    <%=
+      render(
+          partial: 'shared/entity/timestamps',
+          locals: {
+              entity: @entity
+          }
+      )
+    %>
+  </dl>
+</article>

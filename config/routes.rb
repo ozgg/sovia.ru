@@ -27,11 +27,20 @@ Rails.application.routes.draw do
   resources :sleep_places, only: %i[update destroy]
   resources :dreams, only: %i[update destroy]
 
+  resources :patterns, only: %i[update destroy]
+
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
 
-    resources :sleep_places, only: %i[new create edit], concerns: %i[check]
-    resources :dreams, except: %i[update destroy], concerns: %i[check]
+    resources :sleep_places, only: %i[new create edit], concerns: :check
+    resources :dreams, except: %i[update destroy], concerns: :check
+
+    resources :patterns, only: %i[new create edit], concerns: :check
+
+    scope 'dreambook', controller: :dreambook do
+      get '/' => :index, as: :dreambook
+      get '/:word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
+    end
 
     namespace :my do
       resources :sleep_places, only: %i[index show]
@@ -39,7 +48,8 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      resources :dreams, only: %i[index show], concerns: %i[toggle]
+      resources :dreams, only: %i[index show], concerns: :toggle
+      resources :patterns, only: %i[index show]
     end
   end
 end

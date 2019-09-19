@@ -1,0 +1,38 @@
+<% content_for :meta_title, t('.title', pattern: @entity.name) %>
+<% content_for :meta_type, 'article' %>
+<% content_for :meta_type_extension do %>
+  <meta property="og:article:section" content="<%= t('dreambook.index.title') %>"/>
+<% end %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('dreambook.index.nav_text'), dreambook_path) %>
+  <%= link_to(@entity.name[0].upcase, dreambook_path(letter: @entity.name[0].upcase)) %>
+  <span><%= @entity.name %></span>
+<% end %>
+
+<article class="dreambook-pattern" itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <h1 itemprop="headline">
+    <%= t('.heading') %>: <span><%= @entity.name %></span>
+  </h1>
+
+  <% if component_handler.allow? %>
+    <ul class="actions">
+      <li><%= gear_icon(admin_pattern_path(id: @entity.id)) %></li>
+      <li><%= edit_icon(edit_pattern_path(id: @entity.id)) %></li>
+    </ul>
+  <% end %>
+  <meta itemprop="articleSection" content="<%= t('dreambook.index.title') %>"/>
+
+  <div itemprop="articleBody" role="definition" class="text">
+    <% unless @entity.summary.blank? %>
+      <div class="summary"><%= @entity.summary %></div>
+    <% end %>
+
+    <% if @entity.description.blank? %>
+      <p>Этот образ подробно ещё не описан.</p>
+      <p>Вы можете <%= link_to 'описать свой сон', new_dream_path %>, и вам
+        помогут его растолковать.</p>
+    <% else %>
+      <%= raw component_handler.parse(@entity.description) %>
+    <% end %>
+  </div>
+</article>

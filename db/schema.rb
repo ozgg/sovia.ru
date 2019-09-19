@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_212121) do
+ActiveRecord::Schema.define(version: 2019_09_19_184619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_212121) do
     t.string "slug", null: false
     t.jsonb "settings", default: {}, null: false
     t.jsonb "parameters", default: {}, null: false
+    t.integer "priority", limit: 2, default: 1, null: false
     t.index ["slug"], name: "index_biovision_components_on_slug", unique: true
   end
 
@@ -266,6 +267,15 @@ ActiveRecord::Schema.define(version: 2019_08_08_212121) do
     t.integer "previous_value", default: 0, null: false
     t.string "name", null: false
     t.index ["biovision_component_id"], name: "index_metrics_on_biovision_component_id"
+  end
+
+  create_table "patterns", comment: "Dreambook pattern", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.string "summary"
+    t.text "description"
+    t.index ["name"], name: "index_patterns_on_name", unique: true
   end
 
   create_table "privilege_group_privileges", comment: "Privilege in group", force: :cascade do |t|

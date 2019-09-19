@@ -17,18 +17,12 @@ class Admin::DreamsController < AdminController
 
   private
 
-  def restrict_access
-    component_restriction Biovision::Components::DreamsComponent
+  def component_slug
+    Biovision::Components::DreamsComponent::SLUG
   end
 
   def set_entity
     @entity = Dream.find_by(id: params[:id])
     handle_http_404('Cannot find dream') if @entity.nil?
-  end
-
-  def set_handler
-    slug = Biovision::Components::DreamsComponent::SLUG
-
-    @handler = Biovision::Components::BaseComponent.handler(slug, current_user)
   end
 end
