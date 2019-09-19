@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :dreams, only: %i[index show], concerns: :toggle
+      resources :sleep_places, only: :index
       resources :patterns, only: %i[index show]
     end
   end

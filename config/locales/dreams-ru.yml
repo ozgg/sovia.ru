@@ -91,3 +91,11 @@ ru:
       nav_text: "Добавить"
       title: "Добавление места для сна"
       limit_reached: "Вы создали максимальное количество мест для сна"
+  admin:
+    sleep_places:
+      nav_item:
+        text: "Места для сна"
+        description: "Список мест для сна пользователей"
+      index:
+        title: "Места для сна, страница %{page}"
+        heading: "Места для сна"

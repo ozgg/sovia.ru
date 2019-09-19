@@ -9,6 +9,10 @@ module Biovision
       LINK_PATTERN = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/.freeze
       NAME_PATTERN = /{(?<name>[^}]{1,30})}(?:\((?<text>[^)]{1,30})\))?/.freeze
 
+      def use_parameters?
+        false
+      end
+
       # @param [Dream] dream
       def parsed_dream(dream)
         owner   = dream.user

@@ -24,6 +24,12 @@ class SleepPlace < ApplicationRecord
   scope :ordered_by_name, -> { order('name asc') }
   scope :ordered_by_count, -> { order('dreams_count desc, name asc') }
   scope :list_for_owner, ->(user) { owned_by(user).ordered_by_name }
+  scope :list_for_administration, -> { order('id desc') }
+
+  # @param [Integer] page
+  def self.page_for_administration(page = 1)
+    list_for_administration.page(page)
+  end
 
   def self.entity_parameters
     %i[name]
