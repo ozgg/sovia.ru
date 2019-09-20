@@ -63,12 +63,16 @@ class DreamsController < ApplicationController
   protected
 
   def set_entity
-    @entity = Dream.owned_by(current_user).find_by(id: params[:id])
-    handle_http_404('Cannot find dream') if @entity.nil?
+    @entity = Dream.find_by(id: params[:id])
+    if @entity.nil?
+      handle_http_404('Cannot find dream')
+    elsif !component_handler.visible?(@entity)
+      handle_http_404('Dream is not visible to current user')
+    end
   end
 
   def restrict_editing
-    redirect_to dreams_path unless @entity.editable_by?(current_user)
+    redirect_to dreams_path unless component_handler.editable?(@entity)
   end
 
   def entity_parameters

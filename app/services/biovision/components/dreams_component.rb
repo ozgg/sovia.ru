@@ -13,6 +13,20 @@ module Biovision
         false
       end
 
+      # @param [Dream] entity
+      def visible?(entity)
+        return true if entity.owned_by?(user) || entity.generally_accessible?
+
+        entity.for_community? && user.is_a?(User)
+      end
+
+      # @param [Dream] entity
+      def editable?(entity)
+        return true if entity.owned_by?(user)
+
+        administrator? && visible?(entity)
+      end
+
       # @param [Dream] dream
       def parsed_dream(dream)
         owner   = dream.user
@@ -32,7 +46,7 @@ module Biovision
       # @param [Integer] fallback_id
       def dream_link(dream, text, fallback_id)
         if dream&.visible_to?(user)
-          title     = dream.title || I18n.t(:untitled)
+          title     = dream.title!
           link_text = text.blank? ? title : text
           href      = "/dreams/#{dream.id}"
           %(<cite><a href="#{href}" title="#{title}">#{link_text}</a></cite>)

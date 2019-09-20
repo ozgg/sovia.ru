@@ -49,7 +49,7 @@ module Biovision
           href = "/dreambook/#{CGI.escape(pattern.name)}"
           %(<a href="#{href}" class="dreambook-pattern">#{link_text}</a>)
         else
-          %(<span class="dreambook-not-found">#{match[:body]}</span>)
+          %(<span class="not-found">#{match[:body]}</span>)
         end
       end
     end

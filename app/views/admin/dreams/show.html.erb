@@ -1,0 +1,60 @@
+<% content_for :meta_title, t('.title', title: @entity.title!) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.dreams.nav_item.text'), admin_dreams_path) %>
+  <span><%= @entity.title! %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.title! %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_dreams_path) %></li>
+    <% if component_handler.visible?(@entity) %>
+      <li><%= world_icon(dream_path(id: @entity.id)) %></li>
+    <% end %>
+    <% if component_handler.editable?(@entity) %>
+      <li><%= edit_icon(edit_dream_path(id: @entity.id)) %></li>
+      <li class="danger"><%= destroy_icon(@entity) %></li>
+    <% end %>
+  </ul>
+
+  <dl>
+    <div>
+      <dt><%= t('activerecord.attributes.dream.user') %></dt>
+      <dd><%= admin_user_link(@entity.user) %></dd>
+    </div>
+
+    <div>
+      <dt><%= t('activerecord.attributes.dream.privacy') %></dt>
+      <dd><%= dream_privacy(@entity) %></dd>
+    </div>
+
+    <% unless @entity.title.blank? %>
+      <div>
+        <dt><%= t('activerecord.attributes.dream.title') %></dt>
+        <dd><%= @entity.title %></dd>
+      </div>
+    <% end %>
+
+    <% if component_handler.visible?(@entity) %>
+      <div>
+        <dt><%= t('activerecord.attributes.dream.body') %></dt>
+        <dd>
+          <div class="text">
+            <%= simple_format(@entity.body) %>
+          </div>
+        </dd>
+      </div>
+    <% end %>
+
+    <%=
+      render(
+          partial: 'shared/entity/timestamps',
+          locals: {
+              entity: @entity
+          }
+      )
+    %>
+  </dl>
+</article>

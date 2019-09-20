@@ -99,3 +99,12 @@ ru:
       index:
         title: "Места для сна, страница %{page}"
         heading: "Места для сна"
+    dreams:
+      nav_item:
+        text: "Описанные сны"
+        description: "Описанные пользователями сны"
+      index:
+        title: "Сны, страница %{page}"
+        heading: "Сны"
+      show:
+        title: "Сон «%{title}»"

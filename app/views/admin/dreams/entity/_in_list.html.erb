@@ -1,0 +1,22 @@
+<div class="image">
+  <%= profile_avatar(entity.user) %>
+</div>
+<div class="data">
+  <div><%= admin_dream_link(entity) %></div>
+  <div class="info">
+    <%= time_tag(entity.created_at) %>,
+    <%= dream_privacy(entity) %>
+  </div>
+  <div class="secondary info">
+    <%= admin_user_link(entity.user) %>
+  </div>
+
+  <ul class="actions">
+    <% if handler.visible?(entity) %>
+      <li><%= world_icon(dream_path(id: entity.id)) %></li>
+    <% end %>
+    <% if handler.editable?(entity) %>
+      <li><%= edit_icon(edit_dream_path(id: entity.id)) %></li>
+    <% end %>
+  </ul>
+</div>
