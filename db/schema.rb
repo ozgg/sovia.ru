@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_20_210550) do
+ActiveRecord::Schema.define(version: 2019_09_28_090050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,34 @@ ActiveRecord::Schema.define(version: 2019_09_20_210550) do
     t.index ["code_type_id"], name: "index_codes_on_code_type_id"
     t.index ["data"], name: "index_codes_on_data", using: :gin
     t.index ["user_id"], name: "index_codes_on_user_id"
+  end
+
+  create_table "comments", id: :serial, comment: "Comment for commentable item", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.integer "user_id"
+    t.integer "agent_id"
+    t.inet "ip"
+    t.boolean "visible", default: true, null: false
+    t.boolean "locked", default: false, null: false
+    t.boolean "deleted", default: false, null: false
+    t.boolean "spam", default: false, null: false
+    t.boolean "approved", default: true, null: false
+    t.integer "upvote_count", default: 0, null: false
+    t.integer "downvote_count", default: 0, null: false
+    t.integer "vote_result", default: 0, null: false
+    t.integer "commentable_id", null: false
+    t.string "commentable_type", null: false
+    t.string "author_name"
+    t.string "author_email"
+    t.text "body", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index ["agent_id"], name: "index_comments_on_agent_id"
+    t.index ["approved", "agent_id", "ip"], name: "index_comments_on_approved_and_agent_id_and_ip"
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+    t.index ["data"], name: "index_comments_on_data", using: :gin
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "dreams", comment: "Dream", force: :cascade do |t|
@@ -707,6 +735,9 @@ ActiveRecord::Schema.define(version: 2019_09_20_210550) do
   add_foreign_key "codes", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "codes", "code_types", on_update: :cascade, on_delete: :cascade
   add_foreign_key "codes", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "comments", "comments", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "dreams", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "dreams", "sleep_places", on_update: :cascade, on_delete: :nullify
   add_foreign_key "dreams", "users", on_update: :cascade, on_delete: :cascade

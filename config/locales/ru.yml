@@ -9,3 +9,11 @@ ru:
       heading: "Главная страница"
       title: "Главная страница"
   read_all: "Читать полностью"
+  log_in: "Вход/регистрация"
+  log_out: "Выход"
+  layouts:
+    application:
+      header:
+        navigation:
+          toggle_navigation: "Открыть/закрыть меню"
+      title: "Совия"

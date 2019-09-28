@@ -1,6 +1,12 @@
+//* { outline: solid pink 1px; }
+
 //:focus {
 //  outline: none;
 //}
+
+html {
+  height: 100%;
+}
 
 body {
   background: $background-body;
@@ -12,7 +18,7 @@ body {
 #main {
   background: $bg-shader;
   flex: 1;
-  margin: 0 auto;
+  margin: var(--spacer-s) auto 0;
   max-width: $content-width;
   padding: var(--spacer-xs);
   width: 100%;
@@ -36,6 +42,17 @@ h2 {
 
 .breadcrumbs {
   background: $background-main;
+  font-family: $font-family-nav;
+  font-weight: 300;
   margin: var(--spacer-xs) 0;
   padding: var(--spacer-xs);
 }
+
+.content-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $content-width;
+}
+
+@import "application/layout/header";
+@import "application/layout/footer";

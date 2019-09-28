@@ -1,0 +1,37 @@
+.header-authentication {
+  align-items: center;
+  display: flex;
+  margin: 0;
+  padding: var(--spacer-s) 0;
+
+  .avatar {
+    border-radius: 50%;
+    box-shadow: 0 0 .4rem .2rem rgba(255, 255, 255, .5);
+    height: 3.2rem;
+    margin-right: var(--spacer-s);
+    overflow: hidden;
+    transition: .25s;
+    width: 3.2rem;
+
+    &:active,
+    &:hover {
+      box-shadow: 0 0 .4rem .2rem #fff;
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  .icon {
+    border-bottom: .2rem solid transparent;
+    border-top: .2rem solid transparent;
+
+    &:active,
+    &:focus {
+      border-bottom-color: $link-color;
+    }
+  }
+}

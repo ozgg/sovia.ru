@@ -1,16 +1,9 @@
-<header id="main-header">
-  <div>
+<header class="main-header">
+  <div class="content-wrapper">
     <div class="logo">
       <%= link_to(image_tag('logo.svg', alt: 'Sovia'), root_path) %>
     </div>
+    <%= render 'layouts/application/header/navigation' %>
     <%= render 'layouts/application/header/authentication' %>
   </div>
-  <nav>
-    <ul>
-      <li><%= link_to(t('about.index.nav_text'), about_path) %></li>
-      <li><%= link_to(t('dreams.index.nav_text'), dreams_path) %></li>
-      <li><%= link_to(t('dreambook.index.nav_text'), dreambook_path) %></li>
-      <li><%= link_to(t('dreams.new.nav_text'), new_dream_path) %></li>
-    </ul>
-  </nav>
 </header>

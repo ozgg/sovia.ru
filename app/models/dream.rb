@@ -18,6 +18,7 @@
 #   visible [Boolean]
 class Dream < ApplicationRecord
   include Checkable
+  include CommentableItem
   include HasOwner
   include Toggleable
 
@@ -80,7 +81,7 @@ class Dream < ApplicationRecord
   #
   # @param [User|nil] user who tries to see the dream
   def visible_to?(user)
-    return true if owned_by?(user) || generally_accessible?
+    return true if generally_accessible? || owned_by?(user)
 
     for_community? && user.is_a?(User)
   end
@@ -114,8 +115,6 @@ class Dream < ApplicationRecord
   end
 
   def normalize_privacy
-    return unless user.nil?
-
-    self.visibility = Dream.privacies[:generally_accessible]
+    self.visibility = Dream.privacies[:generally_accessible] if user.nil?
   end
 end

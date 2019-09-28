@@ -1,10 +1,10 @@
-#main-footer {
+.main-footer {
+  background: $bg-shader;
   color: $text-color-secondary;
   font-size: var(--font-size-decreased);
   margin-top: auto;
 
   > div {
-    background: $bg-shader;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
