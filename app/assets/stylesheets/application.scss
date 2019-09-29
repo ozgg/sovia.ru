@@ -1,8 +1,9 @@
 @import "shared";
 @import "biovision/base/default";
 @import "biovision/base/default_application";
+@import "biovision/base/components/carousel";
 //@import "biovision/base/themes/simple-layout";
-@import "biovision/post/posts";
 @import "layout";
+@import "components/posts";
 @import "application/dreams";
 @import "application/dreambook";

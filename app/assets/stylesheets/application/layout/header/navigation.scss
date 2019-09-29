@@ -20,8 +20,7 @@
   }
 
   a {
-    box-shadow: 0 .4rem .2rem rgba(20, 77, 127, .125), 0 .8rem .4rem rgba(96, 96, 127, .125);
-    border-radius: .6rem;
+    border-bottom: .2rem solid transparent;
     color: $text-color-primary;
     display: inline-block;
     padding: var(--spacer-xxs) var(--spacer-xs);
@@ -29,7 +28,7 @@
 
     &:active,
     &:hover {
-      box-shadow: 0 .2rem .4rem rgba(20, 77, 250, .25), 0 .6rem .8rem rgba(0, 0, 196, .25);
+      border-bottom-color: $link-color;
       color: $link-color;
       text-decoration: none;
     }
@@ -82,6 +81,7 @@
         display: inline-block;
         height: .3rem;
         left: .2rem;
+        overflow: hidden;
         position: absolute;
         transform-origin: 0 50%;
         transition: .5s;

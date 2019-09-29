@@ -1,20 +1,30 @@
 <% content_for :meta_title, t('.title') %>
 <% content_for :meta_description, t('.description') %>
 
-<article id="homepage">
-  <h1><%= t('.heading') %></h1>
-
-  <section>
-    <h2>Недавние сны</h2>
-
+<article class="homepage">
+  <div class="content-wrapper">
     <%=
       render(
-          partial: 'dreams/list',
+          partial: 'index/index/featured_posts',
           locals: {
-              collection: Dream.page_for_visitor(current_user),
-              handler: Biovision::Components::BaseComponent.handler('dreams', current_user)
+              collection: FeaturedPost.ordered_by_priority.first(5)
           }
       )
     %>
-  </section>
+    <h1><%= t('.heading') %></h1>
+
+    <section>
+      <h2>Недавние сны</h2>
+
+      <%=
+        render(
+            partial: 'dreams/list',
+            locals: {
+                collection: Dream.page_for_visitor(current_user),
+                handler: Biovision::Components::BaseComponent.handler('dreams', current_user)
+            }
+        )
+      %>
+    </section>
+  </div>
 </article>

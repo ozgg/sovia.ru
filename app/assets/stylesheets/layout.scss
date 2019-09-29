@@ -12,28 +12,19 @@ body {
   background: $background-body;
   display: flex;
   flex-direction: column;
+  font-weight: 300;
   height: 100%;
 }
 
 #main {
-  background: $bg-shader;
   flex: 1;
-  margin: var(--spacer-s) auto 0;
-  max-width: $content-width;
-  padding: var(--spacer-xs);
   width: 100%;
-
-  article,
-  > section {
-    background: $background-main;
-    padding: var(--spacer-s);
-  }
 }
 
 h1 {
-     font: 400 var(--font-size-xl) $font-family-heading;
-     margin: 0;
-   }
+  font: 400 var(--font-size-xl) $font-family-heading;
+  margin: 0;
+}
 
 h2 {
   font: 400 var(--font-size-large) $font-family-heading;
@@ -43,9 +34,18 @@ h2 {
 .breadcrumbs {
   background: $background-main;
   font-family: $font-family-nav;
-  font-weight: 300;
-  margin: var(--spacer-xs) 0;
-  padding: var(--spacer-xs);
+
+  > div {
+    margin: 0 auto;
+    max-width: $content-width;
+    padding: var(--spacer-xs);
+  }
+}
+
+article {
+  .content-wrapper {
+    background-color: $background-main;
+  }
 }
 
 .content-wrapper {

@@ -1,0 +1,20 @@
+<% if collection.any? %>
+  <section class="index-featured-posts js-biovision-carousel">
+    <button class="prev"></button>
+    <ul class="carousel-container">
+      <% collection.each do |entity| %>
+        <li class="carousel-item">
+          <%=
+            render(
+                partial: 'posts/featured',
+                locals: {
+                    entity: entity.post
+                }
+            )
+          %>
+        </li>
+      <% end %>
+    </ul>
+    <button class="next"></button>
+  </section>
+<% end %>

@@ -1,15 +1,13 @@
 .main-footer {
-  background: $bg-shader;
-  color: $text-color-secondary;
+  background: $bg-footer;
+  color: $text-color-inverted-secondary;
   font-size: var(--font-size-decreased);
   margin-top: auto;
 
-  > div {
+  .content-wrapper {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: $content-width;
-    padding: var(--spacer-s);
+    padding: var(--spacer-s) var(--spacer-xs) var(--spacer-l);
   }
 
   nav {
@@ -28,6 +26,7 @@
     }
 
     a {
+      color: $text-color-inverted-primary;
       display: inline-block;
       padding: var(--spacer-xxs);
     }
