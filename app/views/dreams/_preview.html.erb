@@ -1,12 +1,10 @@
 <div class="dream-preview privacy-<%= dream.privacy %>">
   <header>
-    <h3><%= dream_link(dream) %></h3>
+    <%= dream_link(dream) %>
   </header>
   <div class="body">
     <%= raw handler.dream_preview(dream) %>
-    <div class="more">
-      <%= dream_link(dream, t(:read_all)) %>
-    </div>
+    <div class="more"><%= dream_link(dream, t(:read_all)) %></div>
   </div>
   <footer>
     <div class="author">

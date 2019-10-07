@@ -3,7 +3,7 @@
 @import "biovision/base/default_application";
 @import "biovision/base/components/carousel";
 //@import "biovision/base/themes/simple-layout";
-@import "layout";
+@import "application/layout";
 @import "components/posts";
-@import "application/dreams";
-@import "application/dreambook";
+@import "components/dreams";
+@import "components/dreambook";

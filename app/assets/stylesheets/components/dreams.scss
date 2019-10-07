@@ -1,0 +1,58 @@
+.dreams-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--spacer-m);
+}
+
+.name-in-dream {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+#dream-form {
+  dl {
+    margin: var(--spacer-xs) 0 var(--spacer-s);
+  }
+
+  dt {
+    font-weight: 400;
+  }
+
+  dd {
+    margin: 0;
+    padding: 0;
+  }
+
+  input[type=text],
+  textarea {
+    width: 100%;
+  }
+
+  .lucidity {
+    input {
+      position: absolute;
+      left: -10000rem;
+
+      &:checked {
+        + label {
+          background: rgba(255, 255, 127, .5);
+          box-shadow: 0 0 .4rem rgba(127, 127, 0, .75);
+        }
+      }
+    }
+
+    label {
+      border-radius: .4rem;
+      display: inline-block;
+      padding: var(--spacer-xs);
+    }
+  }
+}
+
+.privacy-for_community {
+  header {
+    background-image: image_url('icons/lock.svg');
+  }
+}
+
+@import "components/dreams/preview";

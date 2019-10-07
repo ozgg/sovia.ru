@@ -11,20 +11,9 @@
           }
       )
     %>
-    <h1><%= t('.heading') %></h1>
-
-    <section>
-      <h2>Недавние сны</h2>
-
-      <%=
-        render(
-            partial: 'dreams/list',
-            locals: {
-                collection: Dream.page_for_visitor(current_user),
-                handler: Biovision::Components::BaseComponent.handler('dreams', current_user)
-            }
-        )
-      %>
-    </section>
+    <%= render partial: 'index/index/about', locals: { editable_page: @editable_page } %>
+    <%= render 'index/index/dreams' %>
+    <%= render 'index/index/dreambook' %>
+    <%= render 'index/index/posts' %>
   </div>
 </article>

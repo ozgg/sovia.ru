@@ -1,0 +1,28 @@
+.homepage {
+  h1,
+  h2 {
+    font-size: var(--font-size-xl);
+    text-align: center;
+  }
+}
+
+.index-about {
+  padding: var(--spacer-m);
+}
+
+.index-dreams {
+  background: $bg-stripe;
+  padding: var(--spacer-m) 0;
+
+  footer {
+    margin-top: var(--spacer-s);
+    text-align: center;
+  }
+}
+
+@media (max-width: 800px) {
+  .index-about {
+    padding-left: var(--spacer-s);
+    padding-right: var(--spacer-s);
+  }
+}

@@ -8,6 +8,9 @@ ru:
       description: "Новый сайт на движке biovision"
       heading: "Главная страница"
       title: "Главная страница"
+      posts:
+        heading: "Последние публикации"
+        more: "Ещё"
   read_all: "Читать полностью"
   log_in: "Вход/регистрация"
   log_out: "Выход"
