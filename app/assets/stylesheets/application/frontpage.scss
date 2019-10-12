@@ -11,13 +11,33 @@
 }
 
 .index-dreams {
-  background: $bg-stripe;
+  border-top: $border-secondary;
   padding: var(--spacer-m) 0;
 
   footer {
     margin-top: var(--spacer-s);
     text-align: center;
   }
+}
+
+.index-dreambook {
+  border-top: $border-secondary;
+  padding: var(--spacer-m) 0;
+
+  .text {
+    padding: 0 var(--spacer-m);
+  }
+
+  nav {
+    h2 {
+      font-size: var(--font-size-increased);
+    }
+  }
+}
+
+.index-posts {
+  border-top: $border-secondary;
+  padding: var(--spacer-m) 0;
 }
 
 @media (max-width: 800px) {

@@ -16,4 +16,5 @@
 //= require biovision/base/components/carousel
 //= require biovision/base/components/oembed
 //= require biovision/post/biovision-posts
+//= require biovision/comment/biovision-comments
 //= require_tree .

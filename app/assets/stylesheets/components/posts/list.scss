@@ -1,0 +1,10 @@
+.posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--spacer-m);
+}
+
+.more-posts {
+  margin-top: var(--spacer-m);
+  text-align: center;
+}
