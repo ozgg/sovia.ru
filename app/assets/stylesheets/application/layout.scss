@@ -42,6 +42,12 @@ h2 {
   }
 }
 
+.content-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $content-width;
+}
+
 article {
   .content-wrapper {
     background-color: $background-main;
@@ -50,17 +56,27 @@ article {
   }
 }
 
-.content-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: $content-width;
-}
-
 div.track {
   background: $bg-main;
   margin: 0 auto;
   max-width: $content-width;
   padding: var(--spacer-xs);
+}
+
+.author {
+  .image {
+    border-radius: 50%;
+    height: 2.4rem;
+    margin-right: var(--spacer-xxs);
+    overflow: hidden;
+    width: 2.4rem;
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
 }
 
 @import "application/layout/header";

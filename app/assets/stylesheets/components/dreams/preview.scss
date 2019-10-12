@@ -76,20 +76,6 @@
     display: flex;
     font-weight: 400;
   }
-
-  .image {
-    border-radius: 50%;
-    height: 2.4rem;
-    margin-right: var(--spacer-xxs);
-    overflow: hidden;
-    width: 2.4rem;
-  }
-
-  img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-  }
 }
 
 @media (pointer: fine) {

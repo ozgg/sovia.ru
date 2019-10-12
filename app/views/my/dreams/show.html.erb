@@ -5,25 +5,27 @@
   <%= @entity.title! %>
 <% end %>
 
-<article class="dream">
-  <header>
-    <h1><%= @entity.title! %></h1>
+<article class="dream privacy-<%= @entity.privacy %>">
+  <div class="content-wrapper">
+    <header>
+      <h1><%= @entity.title! %></h1>
+    </header>
 
     <nav>
       <%= link_to(t('dreams.edit.nav_text'), edit_dream_path(id: @entity.id)) %>
     </nav>
-  </header>
 
-  <div class="text">
-    <%= raw component_handler.parsed_dream(@entity) %>
+    <div class="text">
+      <%= raw component_handler.parsed_dream(@entity) %>
+    </div>
+
+    <footer>
+      <%= t('activerecord.attributes.dream.lucidity') %>: <%= @entity.lucidity %>,
+      <%= dream_privacy(@entity) %>,
+      <% unless @entity.sleep_place_id.nil? %>
+        <%= my_sleep_place_link(@entity.sleep_place) %>,
+      <% end %>
+      <%= time_tag(@entity.created_at) %>
+    </footer>
   </div>
-
-  <footer>
-    <%= t('activerecord.attributes.dream.lucidity') %>: <%= @entity.lucidity %>,
-    <%= dream_privacy(@entity) %>,
-    <% unless @entity.sleep_place_id.nil? %>
-      <%= my_sleep_place_link(@entity.sleep_place) %>,
-    <% end %>
-    <%= time_tag(@entity.created_at) %>
-  </footer>
 </article>

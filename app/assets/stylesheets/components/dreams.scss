@@ -55,4 +55,11 @@
   }
 }
 
+.privacy-personal {
+  header {
+    background-image: image_url('icons/lock_red.svg');
+  }
+}
+
 @import "components/dreams/preview";
+@import "components/dreams/dream";

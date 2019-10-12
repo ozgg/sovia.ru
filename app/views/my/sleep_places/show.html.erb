@@ -6,27 +6,29 @@
 <% end %>
 
 <article>
-  <h1><%= @entity.name %></h1>
+  <div class="content-wrapper">
+    <h1><%= @entity.name %></h1>
 
-  <nav>
-    <%= link_to(t('sleep_places.edit.nav_text'), edit_sleep_place_path(id: @entity.id)) %>
-  </nav>
+    <nav>
+      <%= link_to(t('sleep_places.edit.nav_text'), edit_sleep_place_path(id: @entity.id)) %>
+    </nav>
 
-  <% if @collection.any? %>
-    <section>
-      <h2><%= t(:dream_count, count: @entity.dreams_count) %></h2>
-      <%= paginate @collection %>
-      <%=
-        render(
-            partial: 'my/dreams/list',
-            locals: { collection: @collection }
-        )
-      %>
-      <%= paginate @collection %>
-    </section>
-  <% else %>
-    <div class="message-box-warning">
-      Вы пока не описали ни одного сна в этом месте
-    </div>
-  <% end %>
+    <% if @collection.any? %>
+      <section>
+        <h2><%= t(:dream_count, count: @entity.dreams_count) %></h2>
+        <%= paginate @collection %>
+        <%=
+          render(
+              partial: 'my/dreams/list',
+              locals: { collection: @collection }
+          )
+        %>
+        <%= paginate @collection %>
+      </section>
+    <% else %>
+      <div class="message-box-warning">
+        Вы пока не описали ни одного сна в этом месте
+      </div>
+    <% end %>
+  </div>
 </article>
