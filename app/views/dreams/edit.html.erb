@@ -6,7 +6,9 @@
 <% end %>
 
 <article>
-  <h1><%= t('.heading') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
 
-  <%= render partial: 'form', locals: { entity: @entity } %>
+    <%= render partial: 'form', locals: { entity: @entity } %>
+  </div>
 </article>

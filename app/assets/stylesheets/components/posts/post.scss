@@ -1,4 +1,12 @@
 article.post {
+  background: $bg-main;
+  margin: 0 auto;
+  max-width: $content-width;
+
+  h1 {
+    padding: 0 var(--spacer-xs);
+  }
+
   figure {
     border-bottom: $border-secondary;
     margin: 0 auto;
@@ -18,8 +26,12 @@ article.post {
     margin-left: auto;
   }
 
-  .body {
-    padding: var(--spacer-xxs);
+  .text {
+    padding: var(--spacer-xs);
+  }
+
+  .lead {
+    color: $text-color-secondary;
   }
 
   footer {

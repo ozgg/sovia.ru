@@ -5,22 +5,25 @@
 <% end %>
 
 <article class="dream">
-  <header>
-    <h1><%= @entity.title! %></h1>
-  </header>
+  <div class="content-wrapper">
+    <header>
+      <h1><%= @entity.title! %></h1>
+    </header>
 
-  <div class="body">
-    <%= raw component_handler.parsed_dream(@entity) %>
-  </div>
-
-  <footer>
-    <div class="author">
-      <div class="image">
-        <%= user_image_tiny(@entity.user) %>
-      </div>
-      <%= user_link(@entity.user) %>
+    <div class="body">
+      <%= raw component_handler.parsed_dream(@entity) %>
     </div>
 
-    <%= time_tag(@entity.created_at.to_date) %>
-  </footer>
+    <footer>
+      <div class="author">
+        <div class="image">
+          <%= user_image_tiny(@entity.user) %>
+        </div>
+        <%= user_link(@entity.user) %>
+      </div>
+
+      <%= time_tag(@entity.created_at.to_date) %>
+    </footer>
+  </div>
 </article>
+<%= render partial: 'comments/section', locals: { entity: @entity } %>

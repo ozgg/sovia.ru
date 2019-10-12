@@ -4,10 +4,12 @@
   <span><%= t('.nav_text') %></span>
 <% end %>
 
-<section>
-  <h1><%= t('.heading') %></h1>
+<article>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
 
-  <%= paginate @collection %>
-  <%= render partial: 'list', locals: { collection: @collection } %>
-  <%= paginate @collection %>
-</section>
+    <%= paginate @collection %>
+    <%= render partial: 'list', locals: { collection: @collection } %>
+    <%= paginate @collection %>
+  </div>
+</article>
