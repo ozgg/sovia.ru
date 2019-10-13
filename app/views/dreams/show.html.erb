@@ -26,4 +26,5 @@
     </footer>
   </div>
 </article>
+<%= render partial: 'shared/track', locals: { item: @entity } %>
 <%= render partial: 'comments/section', locals: { entity: @entity } %>

@@ -3,10 +3,19 @@
 # Legacy importer for structure for version 5
 class LegacyImporter
   ALLOWED_USER = %w[
-      allow_login bot created_at email email_confirmed ip last_seen
-      password_digest screen_name slug updated_at
+    allow_login bot created_at email email_confirmed ip last_seen
+    password_digest screen_name slug updated_at
   ].freeze
   ALLOWED_POST = %w[created_at ip lead slug title updated_at user_id].freeze
+  ALLOWED_DREAM = %w[
+    body created_at ip lucidity title updated_at user_id uuid
+  ].freeze
+  DREAM_PRIVACY = {
+    generally_accessible: Dream.privacies[:generally_accessible],
+    visible_to_community: Dream.privacies[:for_community],
+    visible_to_followees: Dream.privacies[:for_community],
+    personal: Dream.privacies[:personal]
+  }.freeze
 
   # @param [String] media_dir
   def initialize(media_dir = nil)
@@ -36,6 +45,14 @@ class LegacyImporter
     @post = Post.find_or_initialize_by(id: id)
     assign_post_attributes
     @post.tags_string = @data['tags_string'] if @data.key?('tags_string')
+  end
+
+  # @param [Integer] id
+  # @param [Hash] data
+  def import_dream(id, data)
+    @data = data
+    @dream = Dream.find_or_initialize_by(id: id)
+    assign_dream_attributes
   end
 
   private
@@ -109,7 +126,7 @@ class LegacyImporter
   def assign_post_attributes
     @post.assign_attributes(@data.select { |a| ALLOWED_POST.include?(a) })
     @post.post_type_id = 2
-    # add_post_image
+    add_post_image
     prepare_post_body
     @post.publication_time = @data['created_at']
     @post.agent = Agent[@data['agent']] if @data.key?('agent')
@@ -128,5 +145,13 @@ class LegacyImporter
       end
       @post.body = body
     end
+  end
+
+  def assign_dream_attributes
+    @dream.assign_attributes(@data.select { |a| ALLOWED_DREAM.include?(a) })
+    @dream.privacy = DREAM_PRIVACY[@data['privacy'].to_sym]
+    @dream.sleep_place_id = @data['place_id'] if @data.key?('place_id')
+    @dream.agent = Agent[@data['agent']] if @data.key?('agent')
+    @dream.save!
   end
 end

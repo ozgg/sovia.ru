@@ -47,7 +47,7 @@ class Dream < ApplicationRecord
   # @param [User] user
   # @param [Integer] page
   def self.page_for_visitor(user, page = 1)
-    list_for_visitors(user).page(page)
+    list_for_visitors(user).page(page).per(18)
   end
 
   # @param [Integer] page
@@ -58,7 +58,7 @@ class Dream < ApplicationRecord
   # @param [User] user
   # @param [Integer] page
   def self.page_for_owner(user, page = 1)
-    list_for_owner(user).page(page)
+    list_for_owner(user).page(page).per(18)
   end
 
   # @param [User|nil] user
@@ -115,6 +115,6 @@ class Dream < ApplicationRecord
   end
 
   def normalize_privacy
-    self.visibility = Dream.privacies[:generally_accessible] if user.nil?
+    self.privacy = Dream.privacies[:generally_accessible] if user.nil?
   end
 end

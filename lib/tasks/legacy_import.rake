@@ -67,6 +67,22 @@ namespace :legacy_import do
 
   desc 'Import dreams from legacy YAML'
   task dreams: :environment do
+    file_path = "#{Rails.root}/tmp/import/dreams.yml"
+    if File.exist? file_path
+      puts 'Importing legacy dreams...'
+      importer = LegacyImporter.new
+      File.open(file_path, 'r') do |file|
+        YAML.safe_load(file).each do |id, data|
+          print "\r#{id}   "
+          importer.import_dream(id, data)
+        end
+        puts
+      end
+      Dream.connection.execute "select setval('dreams_id_seq', (select max(id) from dreams));"
+      puts "Done. We have #{Dream.count} dreams now"
+    else
+      puts "Cannot find file #{file_path}"
+    end
   end
 
   desc 'Import comments from legacy YAML'
