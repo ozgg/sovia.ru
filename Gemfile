@@ -28,6 +28,12 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'dotenv-rails'
 
+# OAuth authentication
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+gem 'omniauth-mail_ru'
+
 gem 'autoprefixer-rails', group: :production
 
 # gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'
