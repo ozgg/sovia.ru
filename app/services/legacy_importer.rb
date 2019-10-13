@@ -25,11 +25,6 @@ class LegacyImporter
   # @param [Integer] id
   # @param [Hash] data
   def import_user(id, data)
-    no_dreams = data['dreams_count'].zero?
-    no_comments = data['comments_count'].zero?
-    no_posts = data['posts_count'].zero?
-    return if no_dreams && no_comments && no_posts
-
     @user = User.find_or_initialize_by(id: id)
     @data = data
     @user.consent = true
@@ -96,12 +91,12 @@ class LegacyImporter
   # @param [ForeignSite] site
   def foreign_user(site)
     allowed = %w[slug name email ip created_at updated_at]
-    user = ForeignUser.new(foreign_site: site)
+    criteria = { foreign_site: site, slug: @data['slug'] }
+    user = ForeignUser.find_or_initialize_by(criteria)
     user.assign_attributes(@data.select { |a| allowed.include?(a) })
     user.agent = Agent[@data['agent']] if @data.key?('agent')
     data = {
-      uid: user.slug,
-      info: { name: user.name, email: user.email }
+      uid: user.slug, info: { name: user.name, email: user.email }
     }
     user.data = JSON.generate(data)
     user

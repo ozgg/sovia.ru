@@ -87,5 +87,27 @@ namespace :legacy_import do
 
   desc 'Import comments from legacy YAML'
   task comments: :environment do
+    file_path = "#{Rails.root}/tmp/import/comments.yml"
+    ignored   = %w[agent]
+    if File.exist?(file_path)
+      puts 'Importing legacy comments...'
+      File.open(file_path, 'r') do |file|
+        YAML.safe_load(file).each do |id, data|
+          print "\r#{id}    "
+          next if data['commentable_type'] == 'Question'
+
+          entity     = Comment.find_or_initialize_by(id: id)
+          attributes = data.reject { |key| ignored.include? key }
+          entity.assign_attributes(attributes)
+          entity.agent = Agent[data['agent']] if data.key?('agent')
+          entity.save(validate: false)
+        end
+        puts
+      end
+      Comment.connection.execute "select setval('comments_id_seq', (select max(id) from comments));"
+      puts "Done. We have #{Comment.count} comments now"
+    else
+      puts "Cannot find file #{file_path}"
+    end
   end
 end
