@@ -1,7 +1,7 @@
 PATH
   remote: /Users/maxim/Projects/Biovision/gems/biovision-base
   specs:
-    biovision-base (0.42.191004.0)
+    biovision-base (0.42.191012.1)
       bcrypt (~> 3.1)
       carrierwave (~> 1.2)
       carrierwave-bombshelter (~> 0.2)
@@ -23,7 +23,7 @@ PATH
 PATH
   remote: /Users/maxim/Projects/Biovision/gems/biovision-post
   specs:
-    biovision-post (0.25.191007.0)
+    biovision-post (0.25.191012.1)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)
