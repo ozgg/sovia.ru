@@ -46,6 +46,23 @@ namespace :legacy_import do
 
   desc 'Import posts from legacy YAML'
   task posts: :environment do
+    file_path = "#{Rails.root}/tmp/import/posts.yml"
+    media_dir = "#{Rails.root}/tmp/import/posts"
+    if File.exist? file_path
+      puts 'Importing legacy posts...'
+      importer = LegacyImporter.new(media_dir)
+      File.open(file_path, 'r') do |file|
+        YAML.safe_load(file).each do |id, data|
+          print "\r#{id}   "
+          importer.import_post(id, data)
+        end
+        puts
+      end
+      Post.connection.execute "select setval('posts_id_seq', (select max(id) from posts));"
+      puts "Done. We have #{Post.count} posts now"
+    else
+      puts "Cannot find file #{file_path}"
+    end
   end
 
   desc 'Import dreams from legacy YAML'

@@ -23,7 +23,7 @@ PATH
 PATH
   remote: /Users/maxim/Projects/Biovision/gems/biovision-post
   specs:
-    biovision-post (0.25.191012.1)
+    biovision-post (0.26.191013.0)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)

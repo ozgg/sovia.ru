@@ -6,6 +6,7 @@ class LegacyImporter
       allow_login bot created_at email email_confirmed ip last_seen
       password_digest screen_name slug updated_at
   ].freeze
+  ALLOWED_POST = %w[created_at ip lead slug title updated_at user_id].freeze
 
   # @param [String] media_dir
   def initialize(media_dir = nil)
@@ -24,6 +25,17 @@ class LegacyImporter
     @data = data
     @user.consent = true
     data['network'] == 'native' ? import_native_user : import_foreign_user
+  end
+
+  # @param [Integer] id
+  # @param [Hash] data
+  def import_post(id, data)
+    return unless data['visible']
+
+    @data = data
+    @post = Post.find_or_initialize_by(id: id)
+    assign_post_attributes
+    @post.tags_string = @data['tags_string'] if @data.key?('tags_string')
   end
 
   private
@@ -85,5 +97,36 @@ class LegacyImporter
 
     @user.notice = @user.email
     @user.email = nil
+  end
+
+  def add_post_image
+    return if !@data.key?('image') || @data['image'].blank?
+
+    image_file = "#{@media_dir}/#{@post.id}/#{@data['image']}"
+    @post.image = Pathname.new(image_file).open if File.exist?(image_file)
+  end
+
+  def assign_post_attributes
+    @post.assign_attributes(@data.select { |a| ALLOWED_POST.include?(a) })
+    @post.post_type_id = 2
+    # add_post_image
+    prepare_post_body
+    @post.publication_time = @data['created_at']
+    @post.agent = Agent[@data['agent']] if @data.key?('agent')
+    @post.save!
+  end
+
+  def prepare_post_body
+    if @data['body'].to_s.starts_with?('<')
+      @post.body = @data['body']
+    else
+      body = ''
+      @data['body'].split(/\r?\n/).each do |string|
+        next if string.blank?
+
+        body += string.to_s.starts_with?('<') ? string : "<p>#{string}</p>"
+      end
+      @post.body = body
+    end
   end
 end
