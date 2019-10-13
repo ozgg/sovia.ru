@@ -68,13 +68,14 @@
 
   time {
     color: $text-color-secondary;
-    margin-left: auto;
+    margin-left: var(--spacer-xs);
   }
 
   .author {
     align-items: center;
     display: flex;
     font-weight: 400;
+    margin-right: auto;
   }
 }
 

@@ -36,9 +36,9 @@ module Biovision
 
       # @param [Dream] dream
       def dream_preview(dream)
-        owner   = dream.user
-        strings = dream.body.split("\n").map(&:squish).reject(&:blank?).first(2)
-        strings.map { |s| parse(s, owner) }.join
+        words = parsed_dream(dream).gsub(%r{</?[^>]*>}, '').split(/\s+/)
+        ellipsis = words.count > 50 ? '…' : ''
+        "<p>#{words.first(50).join(' ')}#{ellipsis}</p>"
       end
 
       # @param [Dream] dream

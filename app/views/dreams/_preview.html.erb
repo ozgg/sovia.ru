@@ -13,6 +13,7 @@
       </div>
       <%= user_link(dream.user) %>
     </div>
+    <span class="comment_count"><%= dream.comments_count %></span>
     <%= time_tag(dream.created_at.to_date) %>
   </footer>
 </div>

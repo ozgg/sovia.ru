@@ -5,7 +5,8 @@
   <div><%= admin_dream_link(entity) %></div>
   <div class="info">
     <%= time_tag(entity.created_at) %>,
-    <%= dream_privacy(entity) %>
+    <%= dream_privacy(entity) %>,
+    <%= t(:comment_count, count: entity.comments_count) %>
   </div>
   <div class="secondary info">
     <%= admin_user_link(entity.user) %>

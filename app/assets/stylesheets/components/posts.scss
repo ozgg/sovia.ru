@@ -4,6 +4,7 @@ $background-post-tag: rgb(248, 248, 248);
 
 .view_count {
   background: image_url('biovision/post/icons/view.svg') no-repeat center left / 1.6rem auto;
+  display: none;
   margin: 0 .4rem;
   padding-left: 1.8rem;
 }

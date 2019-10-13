@@ -45,9 +45,12 @@
     }
   }
 
+  .meta {
+    margin-top: auto;
+  }
+
   .counters {
     border-top: $border-secondary;
-    margin-top: auto;
     padding: var(--spacer-xxs, .4rem);
     text-align: right;
   }
