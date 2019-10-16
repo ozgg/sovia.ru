@@ -17,7 +17,13 @@
       <ul>
         <% %w[facebook vkontakte twitter].each do |slug| %>
           <li>
-            <%= link_to(image_tag("icons/social/#{slug}.svg", alt: slug), "/auth/#{slug}") %>
+            <%=
+              link_to(
+                  image_tag("icons/social/#{slug}.svg", alt: slug),
+                  "/auth/#{slug}",
+                  method: :post
+              )
+            %>
           </li>
         <% end %>
       </ul>

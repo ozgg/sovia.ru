@@ -29,10 +29,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'dotenv-rails'
 
 # OAuth authentication
-gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
 gem 'omniauth-mail_ru'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'omniauth-twitter'
+gem 'omniauth-vkontakte'
 
 gem 'autoprefixer-rails', group: :production
 
