@@ -55,5 +55,17 @@ class CreateDreams < ActiveRecord::Migration[5.2]
 
     add_index :dreams, %i[visible privacy]
     execute "create index dreams_created_month_idx on dreams using btree (date_trunc('month', created_at));"
+    execute %(
+      create or replace function dreams_tsvector(title text, body text)
+        returns tsvector as $$
+          begin
+            return (
+              setweight(to_tsvector('russian', coalesce(title, '')), 'A') ||
+              setweight(to_tsvector('russian', body), 'C')
+            );
+          end
+        $$ language 'plpgsql' immutable;
+    )
+    execute "create index dreams_search_idx on dreams using gin(dreams_tsvector(title, body));"
   end
 end

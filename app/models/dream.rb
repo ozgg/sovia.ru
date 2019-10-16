@@ -90,6 +90,14 @@ class Dream < ApplicationRecord
     title || I18n.t(:untitled)
   end
 
+  def url
+    "/dreams/#{id}"
+  end
+
+  def suspect_spam?
+    user.nil? && body.scan(%r{https?://[a-z0-9]+}i).length.positive?
+  end
+
   private
 
   def normalize_attributes

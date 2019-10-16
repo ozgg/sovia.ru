@@ -36,7 +36,7 @@ module Biovision
 
       # @param [Dream] dream
       def dream_preview(dream)
-        words = parsed_dream(dream).gsub(%r{</?[^>]*>}, '').split(/\s+/)
+        words = parsed_dream(dream).gsub(%r{</?[^>]*>}, ' ').split(/\s+/)
         ellipsis = words.count > 50 ? '…' : ''
         "<p>#{words.first(50).join(' ')}#{ellipsis}</p>"
       end

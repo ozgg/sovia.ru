@@ -80,7 +80,9 @@ class DreamsController < ApplicationController
   end
 
   def creation_parameters
-    entity_parameters.merge(owner_for_entity)
+    parameters = entity_parameters.merge(owner_for_entity(true))
+    parameters[:visible] = false
+    parameters
   end
 
   def component_slug

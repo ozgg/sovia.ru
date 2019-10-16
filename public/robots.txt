@@ -1,1 +1,14 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+Host: https://sovia.ru
+Sitemap: https://sovia.ru/sitemap.xml
+
+User-agent: *
+Disallow: /admin
+Disallow: /articles/tagged
+Disallow: /auth
+Disallow: /comments
+Disallow: /dreambook/search
+Disallow: /news/tagged
+Disallow: /my
+Disallow: /places
+Disallow: /posts/new
+Disallow: /posts/tagged

@@ -23,6 +23,7 @@ ru:
           generally_accessible: "Для всех"
           for_community: "Для сообщества"
           personal: "Только для меня"
+        visible: "Показывать"
       sleep_place:
         dreams_count: "Количество снов"
         name: "Название"

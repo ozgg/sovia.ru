@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <%
+    prefix = "#{request.protocol}#{request.host}"
+    time_format = '%Y-%m-%dT%H:%M:%S%:z'
+  %>
+  <% Post.list_for_visitors.each do |entity| %>
+    <url>
+      <loc><%= "#{prefix}#{entity.url}" %></loc>
+      <lastmod><%= entity.updated_at.strftime(time_format) %></lastmod>
+    </url>
+  <% end %>
+</urlset>

@@ -24,6 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'sitemap' => 'index#sitemap', defaults: { format: :xml }
+  get 'sitemap.dreambook' => 'index#sitemap_dreambook', defaults: { format: :xml }
+  get 'sitemap.dreams' => 'index#sitemap_dreams', defaults: { format: :xml }
+  get 'sitemap.posts' => 'index#sitemap_posts', defaults: { format: :xml }
+  get 'sitemap.questions' => 'index#sitemap_questions', defaults: { format: :xml }
+
   resources :sleep_places, only: %i[update destroy]
   resources :dreams, only: %i[update destroy]
 
