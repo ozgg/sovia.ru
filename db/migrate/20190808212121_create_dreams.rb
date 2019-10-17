@@ -61,7 +61,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
           begin
             return (
               setweight(to_tsvector('russian', coalesce(title, '')), 'A') ||
-              setweight(to_tsvector('russian', body), 'C')
+              setweight(to_tsvector('russian', body), 'B')
             );
           end
         $$ language 'plpgsql' immutable;

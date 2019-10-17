@@ -34,7 +34,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 if ENV['RAILS_ENV'] == 'production'
-  shared_path = '/var/www/6.sovia.ru/shared'
+  shared_path = '/var/www/sovia.ru/shared'
   logs_dir    = "#{shared_path}/log"
 
   state_path "#{shared_path}/tmp/puma/state"

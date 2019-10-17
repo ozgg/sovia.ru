@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_222222) do
+ActiveRecord::Schema.define(version: 2019_10_17_222938) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_222222) do
     t.string "author_email"
     t.text "body", null: false
     t.jsonb "data", default: {}, null: false
+    t.index "to_tsvector('russian'::regconfig, body)", name: "comments_search_idx", using: :gin
     t.index ["agent_id"], name: "index_comments_on_agent_id"
     t.index ["approved", "agent_id", "ip"], name: "index_comments_on_approved_and_agent_id_and_ip"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
@@ -147,6 +149,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_222222) do
     t.text "body", null: false
     t.jsonb "data", default: {}, null: false
     t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx"
+    t.index "dreams_tsvector((title)::text, body)", name: "dreams_search_idx", using: :gin
     t.index ["agent_id"], name: "index_dreams_on_agent_id"
     t.index ["sleep_place_id"], name: "index_dreams_on_sleep_place_id"
     t.index ["user_id"], name: "index_dreams_on_user_id"
@@ -334,6 +337,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_222222) do
     t.string "name", null: false
     t.string "summary"
     t.text "description"
+    t.index "patterns_tsvector((name)::text, (summary)::text, description)", name: "patterns_search_idx", using: :gin
     t.index ["name"], name: "index_patterns_on_name", unique: true
   end
 
@@ -638,6 +642,41 @@ ActiveRecord::Schema.define(version: 2019_10_12_222222) do
     t.index ["slug"], name: "index_simple_blocks_on_slug"
   end
 
+  create_table "simple_image_tag_images", comment: "Link between simple image and tag", force: :cascade do |t|
+    t.bigint "simple_image_id", null: false
+    t.bigint "simple_image_tag_id", null: false
+    t.index ["simple_image_id"], name: "index_simple_image_tag_images_on_simple_image_id"
+    t.index ["simple_image_tag_id"], name: "index_simple_image_tag_images_on_simple_image_tag_id"
+  end
+
+  create_table "simple_image_tags", comment: "Tag for tagging simple image", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "simple_images_count", default: 0, null: false
+    t.index ["name"], name: "index_simple_image_tags_on_name"
+    t.index ["simple_images_count"], name: "index_simple_image_tags_on_simple_images_count"
+  end
+
+  create_table "simple_images", comment: "Simple image", force: :cascade do |t|
+    t.bigint "biovision_component_id", null: false
+    t.bigint "user_id"
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.uuid "uuid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "image_alt_text"
+    t.string "caption"
+    t.string "source_name"
+    t.string "source_link"
+    t.jsonb "data", default: {}, null: false
+    t.index ["agent_id"], name: "index_simple_images_on_agent_id"
+    t.index ["biovision_component_id"], name: "index_simple_images_on_biovision_component_id"
+    t.index ["user_id"], name: "index_simple_images_on_user_id"
+  end
+
   create_table "sleep_places", comment: "Sleep place", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "dreams_count", default: 0, null: false
@@ -795,6 +834,11 @@ ActiveRecord::Schema.define(version: 2019_10_12_222222) do
   add_foreign_key "privilege_group_privileges", "privilege_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privileges", "privileges", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "simple_image_tag_images", "simple_image_tags", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "simple_image_tag_images", "simple_images", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "simple_images", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "simple_images", "biovision_components", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "simple_images", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "sleep_places", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tokens", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "users", on_update: :cascade, on_delete: :cascade

@@ -30,5 +30,18 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
     end
 
     add_index :patterns, :name, unique: true
+    execute %(
+      create or replace function patterns_tsvector(name text, summary text, description text)
+        returns tsvector as $$
+          begin
+            return (
+              setweight(to_tsvector('russian', name), 'A') ||
+              setweight(to_tsvector('russian', coalesce(summary, '')), 'B') ||
+              setweight(to_tsvector('russian', coalesce(description, '')), 'C')
+            );
+          end
+        $$ language 'plpgsql' immutable;
+    )
+    execute "create index patterns_search_idx on patterns using gin(patterns_tsvector(name, summary, description));"
   end
 end

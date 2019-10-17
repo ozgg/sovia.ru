@@ -37,12 +37,12 @@ gem 'omniauth-vkontakte'
 
 gem 'autoprefixer-rails', group: :production
 
-# gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'
-gem 'biovision-base', path: '/Users/maxim/Projects/Biovision/gems/biovision-base'
-# gem 'biovision-post', git: 'https://github.com/Biovision/biovision-post.git'
-gem 'biovision-post', path: '/Users/maxim/Projects/Biovision/gems/biovision-post'
-# gem 'biovision-comment', git: 'https://github.com/Biovision/biovision-comment.git'
-gem 'biovision-comment', path: '/Users/maxim/Projects/Biovision/gems/biovision-comment'
+gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'
+# gem 'biovision-base', path: '/Users/maxim/Projects/Biovision/gems/biovision-base'
+gem 'biovision-post', git: 'https://github.com/Biovision/biovision-post.git'
+# gem 'biovision-post', path: '/Users/maxim/Projects/Biovision/gems/biovision-post'
+gem 'biovision-comment', git: 'https://github.com/Biovision/biovision-comment.git'
+# gem 'biovision-comment', path: '/Users/maxim/Projects/Biovision/gems/biovision-comment'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

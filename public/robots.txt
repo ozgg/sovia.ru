@@ -5,10 +5,8 @@ User-agent: *
 Disallow: /admin
 Disallow: /articles/tagged
 Disallow: /auth
-Disallow: /comments
 Disallow: /dreambook/search
 Disallow: /news/tagged
 Disallow: /my
-Disallow: /places
 Disallow: /posts/new
 Disallow: /posts/tagged
