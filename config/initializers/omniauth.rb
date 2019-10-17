@@ -16,7 +16,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     scope: 'email'
   }
 
-  provider :mail_ru, ENV['MAIL_RU_APP_ID'], ENV['MAIL_RU_PRIVATE_KEY'], {
+  provider :mail_ru, ENV['MAIL_RU_APP_ID'], ENV['MAIL_RU_APP_SECRET'], {
     mode: :basic_auth
   }
 end
