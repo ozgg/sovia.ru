@@ -73,14 +73,13 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     domain: 'sovia.ru',
-    user_name: 'webmaster@sovia.ru',
+    user_name: 'support@sovia.ru',
     password: ENV['MAIL_PASSWORD'],
     authentication: :plain,
     enable_starttls_auto: true
   }
   config.action_mailer.default_options = {
-    from: 'sovia.ru <webmaster@sovia.ru>',
-    reply_to: 'support@sovia.ru'
+    from: 'sovia.ru <webmaster@sovia.ru>'
   }
   config.action_mailer.default_url_options = { host: 'sovia.ru', protocol: 'https' }
 
