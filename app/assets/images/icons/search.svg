@@ -1,0 +1,10 @@
+<svg height="24" version="1.1" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <title>Search</title>
+  <style>
+    * { stroke: #000; fill: none; stroke-width: 2; stroke-linecap: round }
+  </style>
+  <g>
+    <circle cx="9.25" cy="9.25" r="8"/>
+    <line x1="15" y1="15" x2="22" y2="22"/>
+  </g>
+</svg>

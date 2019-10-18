@@ -1,0 +1,11 @@
+<%=
+  form_with(
+      url: dreambook_search_path, local: true, method: :get, html: { class: 'dreambook-form'}
+  ) do
+%>
+  <div>
+    <%= label_tag :q, t('.search') %>
+    <%= search_field_tag(:q, query, maxlength: 100, required: true) %>
+    <button></button>
+  </div>
+<% end %>

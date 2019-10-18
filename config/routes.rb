@@ -45,7 +45,8 @@ Rails.application.routes.draw do
 
     scope 'dreambook', controller: :dreambook do
       get '/' => :index, as: :dreambook
-      get '/:word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
+      get 'search' => :search, as: :dreambook_search
+      get ':word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
     end
 
     namespace :my do
@@ -57,6 +58,7 @@ Rails.application.routes.draw do
       resources :dreams, only: %i[index show], concerns: :toggle
       resources :sleep_places, only: :index
       resources :patterns, only: %i[index show]
+      resources :dreambook_queries, only: :index
     end
   end
 end

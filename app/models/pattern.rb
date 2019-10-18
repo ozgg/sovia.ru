@@ -4,19 +4,25 @@
 #
 # Attributes:
 #   created_at [DateTime]
+#   data [JSON]
 #   description [Text], optional
 #   name [String]
+#   processed [Boolean]
 #   summary [String], optional
 #   updated_at [DateTime]
 class Pattern < ApplicationRecord
   include Checkable
   include RequiredUniqueName
+  include Toggleable
 
   DESCRIPTION_LIMIT = 65_535
   NAME_LIMIT = 50
   SUMMARY_LIMIT = 255
 
+  toggleable :processed
+
   scope :letter, ->(v) { where('name ilike ?', "#{v[0]}%") unless v.blank? }
+  scope :search, ->(v) { where("patterns_tsvector(name, summary, description) @@ phraseto_tsquery('russian', ?)", v) unless v.blank? }
   scope :list_for_visitors, -> { ordered_by_name }
   scope :list_for_administration, -> { ordered_by_name }
 
@@ -26,7 +32,7 @@ class Pattern < ApplicationRecord
   end
 
   def self.entity_parameters
-    %i[description name summary]
+    %i[description name processed summary]
   end
 
   # @param [String] name

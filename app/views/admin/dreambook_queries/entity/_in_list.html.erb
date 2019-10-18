@@ -1,0 +1,13 @@
+<div class="image">
+  <%= profile_avatar(entity.user) %>
+</div>
+<div class="data">
+  <div>
+    <%= link_to(entity.body, dreambook_search_path(q: entity.body)) %>
+  </div>
+  <div class="info">
+    <%= admin_user_link(entity.user) %>,
+    <%= time_tag(entity.created_at) %>
+  </div>
+  <%= render partial: 'shared/track', locals: { item: entity } %>
+</div>

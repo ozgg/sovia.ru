@@ -1,11 +1,16 @@
 ru:
   activerecord:
     models:
+      dreambook_query: "Запрос в поиске по соннику"
       pattern: "Образ сна"
     attributes:
+      dreambook_query:
+        body: "Запрос"
+        user: "Пользователь"
       pattern:
         description: "Описание"
         name: "Название"
+        processed: "Обработанo"
         summary: "Суть"
   biovision:
     components:
@@ -21,6 +26,13 @@ ru:
         title: "Образы сна, страница %{page}"
       show:
         title: "Образ сна «%{name}»"
+    dreambook_queries:
+      nav_item:
+        text: "Запросы к соннику"
+        description: "Список поисковых запросов в соннике"
+      index:
+        title: "Запросы к соннику, страница %{page}"
+        heading: "Поисковые запросы к соннику"
   patterns:
     destroy:
       success: "Образ сна удалён"
@@ -46,3 +58,9 @@ ru:
     word:
       title: "Сонник: %{pattern}"
       heading: "Сонник"
+    search:
+      title: "Поиск по соннику"
+      nav_text: "Поиск по соннику"
+      heading: "Поиск по соннику"
+    form:
+      search: "Искать"

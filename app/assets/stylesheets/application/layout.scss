@@ -21,14 +21,24 @@ body {
   width: 100%;
 }
 
-h1 {
-  font: 400 var(--font-size-xl) $font-family-heading;
+h1,
+h2,
+h3 {
+  font-family: $font-family-heading;
+  font-weight: 400;
   margin: 0;
 }
 
+h1 {
+  font-size: var(--font-size-xl);
+}
+
 h2 {
-  font: 400 var(--font-size-large) $font-family-heading;
-  margin: 0;
+  font-size: var(--font-size-large);
+}
+
+h3 {
+  font-size: var(--font-size-increased);
 }
 
 .breadcrumbs {

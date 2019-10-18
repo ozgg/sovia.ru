@@ -1,7 +1,11 @@
 <section class="index-dreambook">
   <h2>Сонник</h2>
 
-  <div class="text"><%= raw SimpleBlock['index-dreambook'] %></div>
+  <aside class="text"><%= raw SimpleBlock['index-dreambook'] %></aside>
+
+  <h3>Поиск по соннику</h3>
+
+  <%= render partial: 'dreambook/form', locals: { query: '' } %>
 
   <%= render 'dreambook/letters' %>
 </section>

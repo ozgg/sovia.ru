@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_222938) do
+ActiveRecord::Schema.define(version: 2019_10_18_195824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -131,6 +131,17 @@ ActiveRecord::Schema.define(version: 2019_10_17_222938) do
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["data"], name: "index_comments_on_data", using: :gin
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "dreambook_queries", comment: "Dreambook search query", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "body"
+    t.index ["agent_id"], name: "index_dreambook_queries_on_agent_id"
+    t.index ["user_id"], name: "index_dreambook_queries_on_user_id"
   end
 
   create_table "dreams", comment: "Dream", force: :cascade do |t|
@@ -337,6 +348,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_222938) do
     t.string "name", null: false
     t.string "summary"
     t.text "description"
+    t.boolean "processed", default: false, null: false
+    t.jsonb "data", default: {}, null: false
     t.index "patterns_tsvector((name)::text, (summary)::text, description)", name: "patterns_search_idx", using: :gin
     t.index ["name"], name: "index_patterns_on_name", unique: true
   end
@@ -777,6 +790,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_222938) do
   add_foreign_key "comments", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "comments", "comments", column: "parent_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dreambook_queries", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreambook_queries", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "dreams", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "dreams", "sleep_places", on_update: :cascade, on_delete: :nullify
   add_foreign_key "dreams", "users", on_update: :cascade, on_delete: :cascade

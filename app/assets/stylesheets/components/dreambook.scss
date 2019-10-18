@@ -31,3 +31,35 @@
     }
   }
 }
+
+.dreambook-form {
+  margin: var(--spacer-s);
+
+  > div {
+    align-items: center;
+    display: flex;
+    margin: 0 auto var(--spacer-m);
+    max-width: 48rem;
+  }
+
+  input[type=search] {
+    flex: 1;
+    margin: 0 var(--spacer-xs);
+    min-width: 10ch;
+  }
+
+  button {
+    background: image_url('icons/search.svg') no-repeat center / 1.8rem auto;
+    border: none;
+    border-radius: 50%;
+    height: 2.4rem;
+    transition: .25s;
+    width: 2.4rem;
+
+    &:focus,
+    &:hover {
+      box-shadow: 0 0 .4rem rgba(0, 0, 0, .5);
+      outline: none;
+    }
+  }
+}

@@ -110,4 +110,28 @@ namespace :legacy_import do
       puts "Cannot find file #{file_path}"
     end
   end
+
+  desc 'Import tokens from legacy YAML'
+  task tokens: :environment do
+    file_path = "#{Rails.root}/tmp/import/tokens.yml"
+    ignored = %w[agent]
+    if File.exist? file_path
+      puts 'Importing legacy tokens...'
+      File.open(file_path, 'r') do |file|
+        YAML.safe_load(file).each do |id, data|
+          print "\r#{id}   "
+          attributes = data.reject { |key| ignored.include? key }
+          entity = Token.find_or_initialize_by(id: id)
+          entity.assign_attributes(attributes)
+          entity.agent = Agent[data['agent']] if data.key?('agent')
+          entity.save!
+        end
+        puts
+      end
+      Token.connection.execute "select setval('tokens_id_seq', (select max(id) from tokens));"
+      puts "Done. We have #{Token.count} tokens now"
+    else
+      puts "Cannot find file #{file_path}"
+    end
+  end
 end

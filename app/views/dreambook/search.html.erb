@@ -1,0 +1,34 @@
+<% content_for :meta_title, t('.title') %>
+<% content_for :breadcrumbs do %>
+  <span><%= t('.nav_text') %></span>
+<% end %>
+
+<article>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
+
+    <%= render partial: 'dreambook/form', locals: { query: @query } %>
+
+    <% if @query.blank? %>
+      <aside><%= raw SimpleBlock['dreambook-search'] %></aside>
+
+      <%= render 'dreambook/letters' %>
+    <% else %>
+      <section>
+        <% if @collection.any? %>
+          <ul class="dreambook-words">
+            <% @collection.each do |pattern| %>
+              <li><%= link_to(pattern.name, dreambook_word_path(word: pattern.name)) %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="message-box-warning">Ничего не нашлось.</div>
+          <p>
+            Вы всегда можете <%= link_to('описать свой сон', new_dream_path) %>,
+            и вам помогут его растолковать.
+          </p>
+        <% end %>
+      </section>
+    <% end %>
+  </div>
+</article>
