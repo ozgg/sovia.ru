@@ -4,11 +4,11 @@
 # Convert BiovisionParameter records to JSONB data in BiovisionComponent
 class AddParametersToBiovisionComponents < ActiveRecord::Migration[5.2]
   def up
-    return if column_exists?(:biovision_components, :parameters)
+    # return if column_exists?(:biovision_components, :parameters)
 
-    add_column :biovision_components, :parameters, :jsonb, default: {}, null: false
+    # add_column :biovision_components, :parameters, :jsonb, default: {}, null: false
 
-    move_data
+    # move_data
   end
 
   def down

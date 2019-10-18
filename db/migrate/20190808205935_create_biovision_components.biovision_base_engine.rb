@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-# This migration comes from biovision_base_engine (originally 20181217000000)
 
 # Table and default items for Biovision components
 class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
@@ -18,6 +17,7 @@ class CreateBiovisionComponents < ActiveRecord::Migration[5.2]
   def create_components_table
     create_table :biovision_components, comment: 'Biovision component' do |t|
       t.timestamps
+      t.integer :priority, limit: 2, default: 1, null: false
       t.string :slug, null: false
       t.jsonb :settings, null: false, default: {}
       t.jsonb :parameters, null: false, default: {}
