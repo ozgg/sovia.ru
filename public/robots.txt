@@ -12,3 +12,5 @@ Disallow: /auth        # OAuth makes sense only for humans
 Disallow: /my          # Part for logged-in users only
 Disallow: /questions   # Questions were completely removed
 Disallow: /statistics  # Public statistics is not available anymore
+Disallow: /u/*/dreams  # List of dreams is available only via sitemap
+Disallow: /u/*/comments # Comments are visible only on commentable page
