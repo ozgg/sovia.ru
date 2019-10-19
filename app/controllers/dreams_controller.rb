@@ -25,6 +25,7 @@ class DreamsController < ApplicationController
   # post /dreams
   def create
     @entity = Dream.new(creation_parameters)
+    @entity.visible = false if @entity.suspect_spam?
     if @entity.save
       form_processed_ok(dream_path(id: @entity.id))
     else
@@ -80,9 +81,7 @@ class DreamsController < ApplicationController
   end
 
   def creation_parameters
-    parameters = entity_parameters.merge(owner_for_entity(true))
-    parameters[:visible] = false
-    parameters
+    entity_parameters.merge(owner_for_entity(true))
   end
 
   def component_slug
