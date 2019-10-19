@@ -24,9 +24,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-post.git
-  revision: b0f17f67652ce1ec9b882acbe905b7bb684705e5
+  revision: 75065057d8fe32aae56dafafd7ce4bab2bd27de4
   specs:
-    biovision-post (0.26.191013.1)
+    biovision-post (0.26.191020.0)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)
