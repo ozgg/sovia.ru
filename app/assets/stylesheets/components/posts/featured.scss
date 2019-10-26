@@ -46,7 +46,8 @@
   }
 
   .lead {
-    color: $text-color-inverted-secondary;
+    color: $text-color-inverted-primary;
     margin-top: var(--spacer-s);
+    text-shadow: 0 0 .2rem $text-color-primary;
   }
 }
