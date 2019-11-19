@@ -23,6 +23,7 @@ class Pattern < ApplicationRecord
 
   scope :letter, ->(v) { where('name ilike ?', "#{v[0]}%") unless v.blank? }
   scope :search, ->(v) { where("patterns_tsvector(name, summary, description) @@ phraseto_tsquery('russian', ?)", v) unless v.blank? }
+  scope :recent, -> { order('id desc') }
   scope :list_for_visitors, -> { ordered_by_name }
   scope :list_for_administration, -> { ordered_by_name }
 

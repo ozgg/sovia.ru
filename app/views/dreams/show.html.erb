@@ -22,9 +22,13 @@
         <%= user_link(@entity.user) %>
       </div>
 
-      <%= time_tag(@entity.created_at.to_date) %>
+      <%= time_tag(@entity.created_at) %>
     </footer>
   </div>
 </article>
 <%= render partial: 'shared/track', locals: { item: @entity } %>
 <%= render partial: 'comments/section', locals: { entity: @entity } %>
+
+<% content_for :sidebar do %>
+  <%= render 'sidebar/patterns' %>
+<% end %>

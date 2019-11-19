@@ -1,6 +1,5 @@
 // Здесь можно переобъявлять то, что описано в biovision/base/default,
 // а также добавлять новые общие стили
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700|Roboto+Condensed:300&subset=cyrillic');
 
 $font-family-nav: "Roboto Condensed", sans-serif;
 
@@ -17,3 +16,5 @@ $bg-stripe: radial-gradient(circle at top right, #fff6f2, #ffefe7) fixed no-repe
 
 $block-shadow: .2rem .2rem .4rem rgba(0, 0, 0, .25);
 $block-shadow-wide: .2rem .2rem .4rem rgba(0, 0, 0, .125), .2rem .2rem .8rem rgba(0, 0, 0, .125);
+
+@import "biovision/base/default";

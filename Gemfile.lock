@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/Biovision/biovision-base.git
-  revision: 2c165b1727fda65f69b12196fa371d6e0944fe6c
+  revision: aafb53bb945c46a72297168fe2799bc53f3c21c9
   specs:
-    biovision-base (0.42.191027.0)
+    biovision-base (0.42.191117.0)
       bcrypt (~> 3.1)
       carrierwave (~> 1.2)
       carrierwave-bombshelter (~> 0.2)
@@ -24,9 +24,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-post.git
-  revision: 75065057d8fe32aae56dafafd7ce4bab2bd27de4
+  revision: 0b432c465dcfa51b51a2c105218402fdcb48ca5d
   specs:
-    biovision-post (0.26.191020.0)
+    biovision-post (0.26.191119.0)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)
@@ -76,7 +76,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
-    autoprefixer-rails (9.7.0)
+    autoprefixer-rails (9.7.2)
       execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
@@ -112,7 +112,7 @@ GEM
     faraday (0.17.0)
       multipart-post (>= 1.2, < 3)
     fastimage (2.1.7)
-    ffi (1.11.1)
+    ffi (1.11.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
@@ -158,14 +158,14 @@ GEM
     mini_magick (4.9.5)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.12.2)
+    minitest (5.13.0)
     msgpack (1.3.1)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nokogiri (1.10.4)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
     oauth2 (1.4.2)
@@ -193,8 +193,8 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
-    omniauth-vkontakte (1.5.0)
-      omniauth-oauth2 (~> 1.5)
+    omniauth-vkontakte (1.5.1)
+      omniauth-oauth2 (>= 1.5, <= 1.6)
     open4 (1.3.4)
     pg (1.1.4)
     puma (3.12.1)
@@ -228,7 +228,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rake (13.0.0)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)

@@ -21,10 +21,22 @@
   <%= render 'shared/flash_messages' %>
   <%= render 'shared/breadcrumbs' %>
 
-  <%= yield %>
+  <% if content_for?(:sidebar) %>
+    <div class="content-with-sidebar">
+      <div class="content">
+        <%= yield %>
+      </div>
+      <aside class="main-sidebar">
+        <%= yield :sidebar %>
+      </aside>
+    </div>
+  <% else %>
+    <%= yield %>
+  <% end %>
 </main>
 
 <%= render 'layouts/application/footer' %>
 <%= raw SimpleBlock['counters'] %>
+<%= raw SimpleBlock['addthis'] unless content_for?(:hide_addthis) %>
 </body>
 </html>

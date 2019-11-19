@@ -4,7 +4,7 @@
   flex-direction: column;
   margin: var(--spacer-xs);
   position: relative;
-  width: calc(25% - var(--spacer-s));
+  width: calc(100% / 3 - var(--spacer-s));
 
   &:hover {
     box-shadow: 0 0 .4rem rgba(0, 0, 0, .25);
@@ -86,24 +86,46 @@
   }
 }
 
-@media (max-width: 1200px) {
+.index-posts {
   .post-preview {
-    width: calc(100% / 3 - var(--spacer-s));
+    width: calc(25% - var(--spacer-s));
+  }
+}
+
+@media (max-width: 1200px) {
+  .index-posts {
+    .post-preview {
+      width: calc(100% / 3 - var(--spacer-s));
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .post-preview {
+    width: calc(50% - var(--spacer-s));
+  }
+
+  .index-posts {
+    .post-preview {
+      width: calc(100% / 3 - var(--spacer-s));
+    }
   }
 }
 
 @media (max-width: 900px) {
-  .post-preview {
-    width: calc(50% - var(--spacer-s));
+  .index-posts {
+    .post-preview {
+      width: calc(50% - var(--spacer-s));
+    }
   }
 }
 
 @media (max-width: 600px) {
-  .post-preview {
+  .post-preview,
+  .index-posts .post-preview {
     max-width: 48rem;
     margin-left: auto;
     margin-right: auto;
     width: calc(100% - var(--spacer-s));
   }
 }
-

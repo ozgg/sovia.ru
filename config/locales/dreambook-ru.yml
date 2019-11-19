@@ -64,3 +64,6 @@ ru:
       heading: "Поиск по соннику"
     form:
       search: "Искать"
+  sidebar:
+    patterns:
+      heading: "Обновления сонника"
