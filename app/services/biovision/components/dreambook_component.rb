@@ -8,6 +8,14 @@ module Biovision
       LETTERS = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ'
       SLUG = 'dreambook'
 
+      # @param [String] body
+      # @return [Pattern|PendingPattern]
+      def self.pattern_or_pending(body)
+        pattern = Pattern.find_by(name: body)
+
+        pattern || PendingPattern.find_or_create_by(name: body)
+      end
+
       def use_parameters?
         false
       end

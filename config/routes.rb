@@ -57,8 +57,12 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :dreams, only: %i[index show], concerns: :toggle
       resources :sleep_places, only: :index
-      resources :patterns, only: %i[index show]
       resources :dreambook_queries, only: :index
+      resources :patterns, only: %i[index show]
+      resources :pending_patterns, only: :index do
+        post 'enqueue', on: :collection
+        post 'summary', on: :member
+      end
     end
   end
 end

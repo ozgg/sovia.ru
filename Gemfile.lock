@@ -14,9 +14,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-comment.git
-  revision: 09467079086f8fb976d93cf95946627ffc0c9928
+  revision: 1b0c44c5ddcd8f7f078df8a17dada24d7da78f60
   specs:
-    biovision-comment (0.9.191018.0)
+    biovision-comment (0.10.191121.0)
       biovision-base
       kaminari
       rails (~> 5.2)

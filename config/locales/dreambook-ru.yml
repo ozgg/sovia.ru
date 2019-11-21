@@ -3,6 +3,7 @@ ru:
     models:
       dreambook_query: "Запрос в поиске по соннику"
       pattern: "Образ сна"
+      pending_pattern: "Образ в очереди"
     attributes:
       dreambook_query:
         body: "Запрос"
@@ -12,6 +13,10 @@ ru:
         name: "Название"
         processed: "Обработанo"
         summary: "Суть"
+      pending_pattern:
+        name: "Название"
+        pattern: "Образ"
+        processed: "Обработан"
   biovision:
     components:
       dreambook:
@@ -33,6 +38,14 @@ ru:
       index:
         title: "Запросы к соннику, страница %{page}"
         heading: "Поисковые запросы к соннику"
+    pending_patterns:
+      nav_item:
+        description: "Управление очередью образов снов"
+        text: "Очередь образов снов"
+      index:
+        heading: "Очередь образов снов"
+        title: "Очередь образов снов, страница %{page}"
+        enqueue: "Добавить образы"
   patterns:
     destroy:
       success: "Образ сна удалён"

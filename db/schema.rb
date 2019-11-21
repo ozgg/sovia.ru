@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_18_195824) do
+ActiveRecord::Schema.define(version: 2019_11_21_111111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -352,6 +352,16 @@ ActiveRecord::Schema.define(version: 2019_10_18_195824) do
     t.jsonb "data", default: {}, null: false
     t.index "patterns_tsvector((name)::text, (summary)::text, description)", name: "patterns_search_idx", using: :gin
     t.index ["name"], name: "index_patterns_on_name", unique: true
+  end
+
+  create_table "pending_patterns", comment: "Pending pattern for interpretation", force: :cascade do |t|
+    t.bigint "pattern_id"
+    t.boolean "processed", default: false, null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_pending_patterns_on_name"
+    t.index ["pattern_id"], name: "index_pending_patterns_on_pattern_id"
   end
 
   create_table "post_attachments", comment: "Attachment for post", force: :cascade do |t|
@@ -817,6 +827,7 @@ ActiveRecord::Schema.define(version: 2019_10_18_195824) do
   add_foreign_key "media_folders", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "metric_values", "metrics", on_update: :cascade, on_delete: :cascade
   add_foreign_key "metrics", "biovision_components", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "pending_patterns", "patterns", on_update: :cascade, on_delete: :nullify
   add_foreign_key "post_attachments", "posts", on_update: :cascade, on_delete: :cascade
   add_foreign_key "post_categories", "post_categories", column: "parent_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "post_categories", "post_types", on_update: :cascade, on_delete: :cascade
