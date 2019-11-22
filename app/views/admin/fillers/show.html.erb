@@ -1,0 +1,49 @@
+<% content_for :meta_title, t('.title', title: @entity.title!) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.fillers.nav_item.text'), admin_fillers_path) %>
+  <span><%= @entity.title! %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.title! %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_fillers_path) %></li>
+    <li><%= edit_icon(edit_filler_path(id: @entity.id)) %></li>
+  </ul>
+
+  <dl>
+    <% unless @entity.title.blank? %>
+      <div>
+        <dt><%= t('activerecord.attributes.filler.title') %></dt>
+        <dd><%= @entity.title %></dd>
+      </div>
+    <% end %>
+
+    <% unless @entity.user.nil? %>
+      <div>
+        <dt><%= t('activerecord.attributes.filler.user') %></dt>
+        <dd><%= admin_user_link(@entity.user) %></dd>
+      </div>
+    <% end %>
+
+    <div>
+      <dt><%= t('activerecord.attributes.filler.body') %></dt>
+      <dd>
+        <div class="text">
+          <%= simple_format @entity.body %>
+        </div>
+      </dd>
+    </div>
+
+    <%=
+      render(
+          partial: 'shared/entity/timestamps',
+          locals: {
+              entity: @entity
+          }
+      )
+    %>
+  </dl>
+</article>

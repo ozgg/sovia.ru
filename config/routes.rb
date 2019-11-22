@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   resources :sleep_places, only: %i[update destroy]
   resources :dreams, only: %i[update destroy]
+  resources :fillers, only: %i[destroy update]
 
   resources :patterns, only: %i[update destroy]
 
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
 
     resources :sleep_places, only: %i[new create edit], concerns: :check
     resources :dreams, except: %i[update destroy], concerns: :check
+    resources :fillers, only: %i[create edit new], concerns: :check
 
     resources :patterns, only: %i[new create edit], concerns: :check
 
@@ -56,6 +58,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :dreams, only: %i[index show], concerns: :toggle
+      resources :fillers, only: %i[index show]
       resources :sleep_places, only: :index
       resources :dreambook_queries, only: :index
       resources :patterns, only: %i[index show]

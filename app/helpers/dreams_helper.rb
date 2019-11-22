@@ -15,6 +15,13 @@ module DreamsHelper
     link_to(text, admin_dream_path(id: entity.id), options)
   end
 
+  # @param [Filler] entity
+  # @param [String] text
+  # @param [Hash] options
+  def admin_filler_link(entity, text = entity.title!, options = {})
+    link_to(text, admin_filler_path(id: entity.id), options)
+  end
+
   # @param [Dream] entity
   # @param [String] text
   # @param [Hash] options
@@ -32,5 +39,14 @@ module DreamsHelper
   # @param [Dream] entity
   def dream_privacy(entity)
     t("activerecord.attributes.dream.privacies.#{entity.privacy}")
+  end
+
+  def bots_for_select
+    list = [[t(:not_selected), '']]
+    list + User.bots(1).order('screen_name asc').map do |bot|
+      gender_key = bot.data.dig('profile', 'gender')
+      gender = UserProfileHandler::GENDERS[gender_key.blank? ? nil : gender_key.to_i]
+      ["#{bot.profile_name} (#{gender})", bot.id]
+    end
   end
 end

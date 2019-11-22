@@ -20,7 +20,7 @@ class PendingPattern < ApplicationRecord
 
   scope :processed, ->(v = true) { where(processed: [true, false].include?(v) ? v : v.to_i.positive?) unless v.to_s.blank? }
   scope :name_like, ->(v) { where('name ilike ?', "%#{v}%") unless v.blank? }
-  scope :list_for_administration, -> { order('processed asc, weight desc, name asc') }
+  scope :list_for_administration, -> { order('processed asc, name asc') }
   scope :filtered, ->(f) { processed(f[:processed]).name_like(f[:name]) }
 
   # @param [Integer] page

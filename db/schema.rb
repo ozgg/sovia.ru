@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_111111) do
+ActiveRecord::Schema.define(version: 2019_11_22_192832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -237,6 +237,15 @@ ActiveRecord::Schema.define(version: 2019_11_21_111111) do
     t.index ["agent_id"], name: "index_feedback_requests_on_agent_id"
     t.index ["language_id"], name: "index_feedback_requests_on_language_id"
     t.index ["user_id"], name: "index_feedback_requests_on_user_id"
+  end
+
+  create_table "fillers", comment: "Filler for dream", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "body", null: false
+    t.index ["user_id"], name: "index_fillers_on_user_id"
   end
 
   create_table "foreign_sites", comment: "Foreign site for OAuth", force: :cascade do |t|
@@ -814,6 +823,7 @@ ActiveRecord::Schema.define(version: 2019_11_21_111111) do
   add_foreign_key "feedback_requests", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "feedback_requests", "languages", on_update: :cascade, on_delete: :nullify
   add_foreign_key "feedback_requests", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "fillers", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "foreign_users", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "foreign_users", "foreign_sites", on_update: :cascade, on_delete: :cascade
   add_foreign_key "foreign_users", "users", on_update: :cascade, on_delete: :cascade

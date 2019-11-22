@@ -6,8 +6,14 @@ ru:
     many: "%{count} снов"
     other: "%{count} снов"
   activerecord:
+    errors:
+      models:
+        filler:
+          user:
+            not_bot: "должен быть ботом"
     models:
       dream: "Сон"
+      filler: "Наполнитель"
       sleep_place: "Место для сна"
     attributes:
       dream:
@@ -24,6 +30,11 @@ ru:
           for_community: "Для сообщества"
           personal: "Только для меня"
         visible: "Показывать"
+      filler:
+        body: "Текст"
+        title: "Название"
+        user: "Пользователь"
+        user_id: "Пользователь"
       sleep_place:
         dreams_count: "Количество снов"
         name: "Название"
@@ -109,3 +120,23 @@ ru:
         heading: "Сны"
       show:
         title: "Сон «%{title}»"
+    fillers:
+      nav_item:
+        text: "Наполнители"
+        description: "Управление наполнителями для снов"
+      index:
+        title: "Наполнители, страница %{page}"
+        heading: "Наполнители для снов"
+      show:
+        title: "Наполнитель «%{title}»"
+  fillers:
+    destroy:
+      success: "Наполнитель удалён"
+    new:
+      heading: "Новый наполнитель"
+      nav_text: "Добавить"
+      title: "Добавление наполнителя"
+    edit:
+      heading: "Редактирование наполнителя"
+      nav_text: "Редактировать"
+      title: "Редактирование наполнителя"
