@@ -98,6 +98,18 @@ module Biovision
 
         SleepPlace.owned_by(user).count < settings['place_limit']
       end
+
+      protected
+
+      # @param [Hash] data
+      # @return [Hash]
+      def normalize_settings(data)
+        result = {}
+        numbers = %w[filler_timeout place_limit]
+        numbers.each { |f| result[f] = data[f].to_i }
+
+        result
+      end
     end
   end
 end

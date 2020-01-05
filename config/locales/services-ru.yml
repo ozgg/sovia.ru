@@ -1,0 +1,72 @@
+ru:
+  service_count:
+    zero: "услуг нет"
+    one: "%{count} услуга"
+    few: "%{count} услуги"
+    many: "%{count} услуг"
+    other: "%{count} услуг"
+  activerecord:
+    models:
+      service: "Сон"
+      user_service: "Услуга у пользователя"
+    attributes:
+      service:
+        active: "Активна"
+        description: "Описание"
+        duration: "Период действия"
+        highlighted: "Выделять"
+        image: "Картинка"
+        lead: "Краткое описание"
+        name: "Название"
+        old_price: "Старая цена"
+        price: "Цена"
+        priority: "Порядок сортировки"
+        slug: "Идентификатор"
+        users_count: "Количество пользователей"
+        visible: "Показывать"
+      user_service:
+        end_date: "Дата окончания"
+        quantity: "Количество"
+        service: "Услуга"
+        user: "Пользователь"
+  biovision:
+    components:
+      services:
+        name: "Услуги"
+        description: "Список услуг для пользователей"
+  my:
+    services:
+      index:
+        heading: "Мои услуги"
+        nav_text: "Услуги"
+        title: "Мои услуги"
+  services:
+    destroy:
+      success: "Услуга удалена"
+    edit:
+      heading: "Редактирование услуги"
+      nav_text: "Редактировать"
+      title: "Редактирование услуги"
+    form:
+      guidelines:
+    index:
+      description: "Список услуг на сайте о снах Совия (sovia)."
+      heading: "Услуги"
+      nav_text: "Услуги"
+      title: "Услуги"
+    new:
+      heading: "Новая услуга"
+      nav_text: "Добавить услугу"
+      title: "Добавление услуги"
+    show:
+      title: "Услуга «%{name}»"
+  admin:
+    services:
+      nav_item:
+        text: "Список услуг"
+        description: "Список доступных услуг"
+      index:
+        heading: "Услуги"
+        title: "Услуги"
+      show:
+        title: "Услуга «%{name}»"

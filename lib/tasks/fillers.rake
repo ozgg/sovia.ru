@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 namespace :fillers do
   desc 'Apply filler'
   task apply: :environment do
-    if (10..23).include?(Time.now.hour) && Dream.last.created_at < 5.hours.ago
+    slug = Biovision::Components::DreamsComponent::SLUG
+    component = Biovision::Components::BaseComponent.handler(slug)
+    lag = component.settings['filler_timeout'].to_i.abs
+    if (10..23).include?(Time.now.hour) && Dream.last.created_at < lag.hours.ago
       filler = Filler.first
       unless filler.nil?
         lag   = rand(3600).seconds.ago

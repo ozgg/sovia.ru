@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_003334) do
+ActiveRecord::Schema.define(version: 2019_12_07_222855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -660,6 +660,25 @@ ActiveRecord::Schema.define(version: 2019_11_25_003334) do
     t.index ["slug"], name: "index_privileges_on_slug", unique: true
   end
 
+  create_table "services", comment: "Paid services", force: :cascade do |t|
+    t.integer "priority", limit: 2, default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.boolean "visible", default: true, null: false
+    t.boolean "highlighted", default: false, null: false
+    t.integer "price", null: false
+    t.integer "old_price"
+    t.integer "users_count", default: 0, null: false
+    t.integer "duration", default: 0, null: false
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "image"
+    t.string "lead"
+    t.text "description"
+    t.jsonb "data", default: {}, null: false
+  end
+
   create_table "simple_blocks", comment: "Simple editable block", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -749,6 +768,18 @@ ActiveRecord::Schema.define(version: 2019_11_25_003334) do
     t.bigint "privilege_id", null: false
     t.index ["privilege_id"], name: "index_user_privileges_on_privilege_id"
     t.index ["user_id"], name: "index_user_privileges_on_user_id"
+  end
+
+  create_table "user_services", comment: "Purchased services", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "service_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1, null: false
+    t.date "end_date"
+    t.jsonb "data", default: {}, null: false
+    t.index ["service_id"], name: "index_user_services_on_service_id"
+    t.index ["user_id"], name: "index_user_services_on_user_id"
   end
 
   create_table "users", comment: "User", force: :cascade do |t|
@@ -882,6 +913,8 @@ ActiveRecord::Schema.define(version: 2019_11_25_003334) do
   add_foreign_key "user_languages", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_privileges", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_services", "services", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_services", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "languages", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "users", column: "inviter_id", on_update: :cascade, on_delete: :nullify
