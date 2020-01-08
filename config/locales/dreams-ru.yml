@@ -14,6 +14,8 @@ ru:
     models:
       dream: "Сон"
       filler: "Наполнитель"
+      interpretation: "Запрос толкования"
+      interpretation_message: "Сообщение в толковании"
       sleep_place: "Место для сна"
     attributes:
       dream:
@@ -35,10 +37,21 @@ ru:
         title: "Название"
         user: "Пользователь"
         user_id: "Пользователь"
+      interpretation_message:
+        body: "Текст"
+        from_user: "От пользователя"
+        interpretation: "Запрос толкования"
+        interpretation_id: "Запрос толкования"
+      interpretation:
+        body: "Текст"
+        solved: "Ответ получен"
       sleep_place:
         dreams_count: "Количество снов"
         name: "Название"
         user: "Пользователь"
+  attributes:
+    dream: "Сон"
+    dream_id: "Сон"
   biovision:
     components:
       dreams:
