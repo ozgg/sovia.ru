@@ -9,7 +9,7 @@ class Admin::DreambookQueriesController < AdminController
 
   private
 
-  def component_slug
-    Biovision::Components::DreambookComponent::SLUG
+  def component_class
+    Biovision::Components::DreambookComponent
   end
 end

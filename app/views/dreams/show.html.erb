@@ -27,6 +27,14 @@
   </div>
 </article>
 <%= render partial: 'shared/track', locals: { item: @entity } %>
+<% if @entity.owned_by?(current_user) %>
+  <%=
+    render(
+        partial: 'dreams/interpretation_form',
+        locals: { dream: @entity }
+    )
+  %>
+<% end %>
 <%= render partial: 'comments/section', locals: { entity: @entity } %>
 
 <% content_for :sidebar do %>

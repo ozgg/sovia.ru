@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/Biovision/biovision-base.git
-  revision: c9e4abc5b3273ef0d06208ae186b936375717c57
+  revision: 5fcac293b2098bffc9da87c2e5bfc0e2eff8cd9d
   specs:
-    biovision-base (0.43.200108.1)
+    biovision-base (0.44.200210.1)
       bcrypt (~> 3.1)
       carrierwave (~> 2.0)
       carrierwave-bombshelter (~> 0.2)
@@ -14,9 +14,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-comment.git
-  revision: 1b0c44c5ddcd8f7f078df8a17dada24d7da78f60
+  revision: c21396ab1007d93e8dc7e99f904e8caeab90a4f7
   specs:
-    biovision-comment (0.10.191121.0)
+    biovision-comment (0.10.200209.0)
       biovision-base
       kaminari
       rails (~> 5.2)
@@ -24,9 +24,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-post.git
-  revision: 7f1d76bf9fd29a6e83f7d3e81a5fd5dd1a10caf0
+  revision: 149cbfe11800f79b5d002b25037266837cb2a05a
   specs:
-    biovision-post (0.28.191219.0)
+    biovision-post (0.29.200208.1)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)
@@ -78,14 +78,14 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
-    autoprefixer-rails (9.7.3)
+    autoprefixer-rails (9.7.4)
       execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (11.0.1)
+    byebug (11.1.1)
     carrierwave (2.0.2)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -97,9 +97,9 @@ GEM
       activesupport (>= 3.2.0)
       carrierwave
       fastimage
-    concurrent-ruby (1.1.5)
-    crass (1.0.5)
-    database_cleaner (1.7.0)
+    concurrent-ruby (1.1.6)
+    crass (1.0.6)
+    database_cleaner (1.8.2)
     diff-lcs (1.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -117,33 +117,33 @@ GEM
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     fastimage (2.1.7)
-    ffi (1.11.3)
+    ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    i18n (1.7.1)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    image_processing (1.10.1)
+    image_processing (1.10.3)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    jbuilder (2.9.1)
-      activesupport (>= 4.2.0)
+    jbuilder (2.10.0)
+      activesupport (>= 5.0.0)
     jwt (2.2.1)
-    kaminari (1.1.1)
+    kaminari (1.2.0)
       activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.1.1)
-      kaminari-activerecord (= 1.1.1)
-      kaminari-core (= 1.1.1)
-    kaminari-actionview (1.1.1)
+      kaminari-actionview (= 1.2.0)
+      kaminari-activerecord (= 1.2.0)
+      kaminari-core (= 1.2.0)
+    kaminari-actionview (1.2.0)
       actionview
-      kaminari-core (= 1.1.1)
-    kaminari-activerecord (1.1.1)
+      kaminari-core (= 1.2.0)
+    kaminari-activerecord (1.2.0)
       activerecord
-      kaminari-core (= 1.1.1)
-    kaminari-core (1.1.1)
+      kaminari-core (= 1.2.0)
+    kaminari-core (1.2.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -159,24 +159,24 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
-    mimemagic (0.3.3)
+    mimemagic (0.3.4)
     mina (1.2.3)
       open4 (~> 1.3.4)
       rake
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.13.0)
-    msgpack (1.3.1)
+    minitest (5.14.0)
+    msgpack (1.3.3)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
-    oauth2 (1.4.2)
+    oauth2 (1.4.3)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
@@ -185,7 +185,7 @@ GEM
     omniauth (1.9.0)
       hashie (>= 3.4.6, < 3.7.0)
       rack (>= 1.6.2, < 3)
-    omniauth-facebook (5.0.0)
+    omniauth-facebook (6.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-mail_ru (1.2.0)
       omniauth-oauth2 (>= 1.0)
@@ -207,7 +207,7 @@ GEM
     pg (1.2.2)
     public_suffix (4.0.3)
     puma (3.12.2)
-    rack (2.0.8)
+    rack (2.2.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.1)

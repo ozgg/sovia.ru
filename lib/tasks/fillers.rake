@@ -3,8 +3,7 @@
 namespace :fillers do
   desc 'Apply filler'
   task apply: :environment do
-    slug = Biovision::Components::DreamsComponent::SLUG
-    component = Biovision::Components::BaseComponent.handler(slug)
+    component = Biovision::Components::DreamsComponent[nil]
     lag = component.settings['filler_timeout'].to_i.abs
     if (10..23).include?(Time.now.hour) && Dream.last.created_at < lag.hours.ago
       filler = Filler.first

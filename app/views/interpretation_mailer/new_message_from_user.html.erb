@@ -1,0 +1,8 @@
+<p>
+  Новый ответ от пользователя в
+  <%= link_to('запросе на толкование сна', admin_interpretation_url(id: @entity.interpretation_id)) %>.
+</p>
+
+<blockquote>
+  <%= simple_format(@entity.body) %>
+</blockquote>

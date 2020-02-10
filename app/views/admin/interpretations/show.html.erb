@@ -1,0 +1,90 @@
+<% content_for :meta_title, t('.title', title: @entity.title) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.interpretations.nav_item.text'), admin_interpretations_path) %>
+  <span><%= @entity.title %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.title %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_interpretations_path) %></li>
+  </ul>
+
+  <dl>
+    <div>
+      <dt><%= t('attributes.user') %></dt>
+      <dd><%= admin_user_link(@entity.user) %></dd>
+    </div>
+
+    <% unless @entity.dream.blank? %>
+      <div>
+        <dt><%= t('attributes.dream') %></dt>
+        <dd><%= admin_dream_link(@entity.dream) %></dd>
+      </div>
+    <% end %>
+
+    <%=
+      render(
+          partial: 'shared/entity/timestamps',
+          locals: {
+              entity: @entity
+          }
+      )
+    %>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals:  {
+            entity: @entity,
+            url:    toggle_admin_interpretation_path(id: @entity.id)
+        }
+    )
+  %>
+
+  <div class="text">
+    <%= raw component_handler.parsed_dream(@entity.dream) %>
+  </div>
+
+  <section class="interpretation-messages">
+    <%=
+      render(
+          partial: 'admin/interpretations/messages',
+          locals: {
+              collection: @entity.interpretation_messages.ordered
+          }
+      )
+    %>
+
+    <div
+      class="container"
+      id="new-interpretation-message-container"
+      data-url="<%= messages_admin_interpretation_path(id: @entity.id) %>"
+    >
+      <div class="fields">
+        <%= label_tag 'message-body', 'Ваше сообщение' %>
+        <%=
+          text_area_tag(
+              'message-body',
+              '',
+              class: 'auto-expand input-text',
+              data: {
+                  max_rows: 20,
+                  min_rows: 3
+              },
+              maxlength: InterpretationMessage::BODY_LIMIT,
+              required: true,
+              rows: 3
+          )
+        %>
+      </div>
+      <div class="buttons">
+        <button class="button-primary" disabled type="button"><%= t(:submit) %></button>
+      </div>
+      <div class="result"></div>
+    </div>
+  </section>
+</article>

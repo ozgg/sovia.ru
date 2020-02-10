@@ -68,7 +68,7 @@ class SleepPlacesController < ProfileController
     redirect_to my_sleep_places_path
   end
 
-  def component_slug
-    Biovision::Components::DreamsComponent::SLUG
+  def component_class
+    Biovision::Components::DreamsComponent
   end
 end

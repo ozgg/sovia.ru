@@ -1,0 +1,61 @@
+<% content_for :meta_title, t('.title', dream: @entity.title) %>
+<% content_for :breadcrumbs do %>
+  <%= link_to(t('my.index.index.nav_text'), my_path) %>
+  <%= link_to(t('my.interpretations.index.nav_text'), my_interpretations_path) %>
+  <%= @entity.title %>
+<% end %>
+
+<article>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
+
+    <% unless @entity.dream.blank? %>
+      <details class="interpretation-dream">
+        <summary><%= @entity.title %></summary>
+
+        <div class="dream-text">
+          <%= raw component_handler.parsed_dream(@entity.dream) %>
+        </div>
+      </details>
+    <% end %>
+
+    <section class="interpretation-messages">
+      <%=
+        render(
+            partial: 'my/interpretations/messages',
+            locals: {
+                collection: @entity.interpretation_messages.ordered
+            }
+        )
+      %>
+
+      <div
+        class="container"
+        id="new-interpretation-message-container"
+        data-url="<%= messages_my_interpretation_path(id: @entity.id) %>"
+      >
+        <div class="fields">
+          <%= label_tag 'message-body', 'Ваше сообщение' %>
+          <%=
+            text_area_tag(
+                'message-body',
+                '',
+                class: 'auto-expand input-text',
+                data: {
+                    max_rows: 20,
+                    min_rows: 3
+                },
+                maxlength: InterpretationMessage::BODY_LIMIT,
+                required: true,
+                rows: 3
+            )
+          %>
+        </div>
+        <div class="buttons">
+          <button class="button-primary" disabled type="button"><%= t(:submit) %></button>
+        </div>
+        <div class="result"></div>
+      </div>
+    </section>
+  </div>
+</article>

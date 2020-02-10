@@ -19,6 +19,13 @@
       <%= raw component_handler.parsed_dream(@entity) %>
     </div>
 
+    <%=
+      render(
+          partial: 'dreams/interpretation_form',
+          locals: { dream: @entity }
+      )
+    %>
+
     <footer>
       <%= t('activerecord.attributes.dream.lucidity') %>: <%= @entity.lucidity %>,
       <%= dream_privacy(@entity) %>,

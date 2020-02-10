@@ -4,10 +4,9 @@ module Biovision
   module Components
     # Component for handling dreams
     class DreamsComponent < BaseComponent
-      SLUG = 'dreams'
-
       LINK_PATTERN = /\[dream (?<id>\d{1,7})\](?:\((?<text>[^)]{1,64})\))?/.freeze
       NAME_PATTERN = /{(?<name>[^}]{1,30})}(?:\((?<text>[^)]{1,30})\))?/.freeze
+      REQUEST_COUNTER = 'interpretation_requests'
 
       def use_parameters?
         false
@@ -99,6 +98,28 @@ module Biovision
         SleepPlace.owned_by(user).count < settings['place_limit']
       end
 
+      # @param [Integer] dream_id
+      def request_interpretation(dream_id)
+        dream = Dream.owned_by(@user).find_by(id: dream_id)
+
+        return Interpretation::STATE_NO_DREAM if dream.nil?
+        return Interpretation::STATE_NO_REQUESTS if request_count < 1
+
+        criteria = { user: @user, dream: dream }
+        interpretation = Interpretation.find_by(criteria)
+        if interpretation.nil?
+          create_interpretation_request(dream)
+        else
+          Interpretation::STATE_EXISTS
+        end
+      end
+
+      def request_count
+        return 0 if @user.nil?
+
+        @user.data.dig('sovia', REQUEST_COUNTER).to_i
+      end
+
       protected
 
       # @param [Hash] data
@@ -109,6 +130,24 @@ module Biovision
         numbers.each { |f| result[f] = data[f].to_i }
 
         result
+      end
+
+      # @param [Dream] dream
+      def create_interpretation_request(dream)
+        interpretation = Interpretation.new(dream: dream, user: @user)
+        if interpretation.save
+          decrement_request_count
+          InterpretationMailer.new_request(interpretation.id)
+          Interpretation::STATE_CREATED
+        else
+          Interpretation::STATE_ERROR
+        end
+      end
+
+      def decrement_request_count
+        @user.data['sovia'] ||= {}
+        @user.data['sovia'][REQUEST_COUNTER] = request_count - 1
+        @user.save
       end
     end
   end

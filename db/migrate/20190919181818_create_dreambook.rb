@@ -16,7 +16,7 @@ class CreateDreambook < ActiveRecord::Migration[5.2]
   private
 
   def create_component
-    slug = Biovision::Components::DreambookComponent::SLUG
+    slug = Biovision::Components::DreambookComponent.slug
 
     return if BiovisionComponent.where(slug: slug).exists?
 

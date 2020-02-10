@@ -24,4 +24,8 @@ class InterpretationMessage < ApplicationRecord
   def self.entity_parameters
     %i[body]
   end
+
+  def user
+    interpretation.user
+  end
 end

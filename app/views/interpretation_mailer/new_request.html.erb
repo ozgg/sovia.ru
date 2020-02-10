@@ -1,0 +1,15 @@
+<p>Поступил новый <%= link_to('запрос на толкование сна', admin_interpretation_url(id: @entity.id)) %>.</p>
+
+<dl>
+  <div>
+    <dt><%= t('attributes.user') %></dt>
+    <dd><%= link_to(@entity.user.profile_name, admin_user_url(id: @entity.user_id)) %></dd>
+  </div>
+
+  <% unless @entity.dream.blank? %>
+    <div>
+      <dt><%= t('attributes.dream') %></dt>
+      <dd><%= link_to(@entity.title, admin_dream_url(id: @entity.dream_id)) %></dd>
+    </div>
+  <% end %>
+</dl>

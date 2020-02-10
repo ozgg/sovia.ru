@@ -1,0 +1,10 @@
+<h1>Здравствуйте, <%= @entity.user.name_for_letter %>.</h1>
+
+<p>
+  На ваш <%= link_to('запрос толкования сна', my_interpretation_url(id: @entity.interpretation_id)) %>
+  дан новый ответ от толкователя:
+</p>
+
+<blockquote>
+  <%= simple_format(@entity.body) %>
+</blockquote>

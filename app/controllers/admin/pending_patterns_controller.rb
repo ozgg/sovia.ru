@@ -27,8 +27,8 @@ class Admin::PendingPatternsController < AdminController
 
   private
 
-  def component_slug
-    Biovision::Components::DreambookComponent::SLUG
+  def component_class
+    Biovision::Components::DreambookComponent
   end
 
   def set_entity

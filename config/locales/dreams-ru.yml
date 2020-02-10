@@ -5,6 +5,18 @@ ru:
     few: "%{count} сна"
     many: "%{count} снов"
     other: "%{count} снов"
+  interpretation_request_count:
+    zero: "не осталось ни одного запроса на толкование"
+    one: "остался %{count} запрос на толкование"
+    few: "осталось %{count} запроса на толкование"
+    many: "осталось %{count} запросов на толкование"
+    other: "осталось %{count} запросов на толкование"
+  interpretation_message_count:
+    zero: "сообщений нет"
+    one: "%{count} сообщение"
+    few: "%{count} сообщения"
+    many: "%{count} сообщений"
+    other: "%{count} сообщений"
   activerecord:
     errors:
       models:
@@ -20,6 +32,7 @@ ru:
     attributes:
       dream:
         body: "Сюжет"
+        interpreted: "Растолкован"
         lucidity: "Осознанность"
         privacy: "Видимость"
         sleep_place: "Место для сна"
@@ -70,6 +83,23 @@ ru:
         empty_list: "Вы пока не описали ни одного сна"
       show:
         title: "Мой сон «%{title}»"
+    interpretations:
+      create:
+        created: "Запрос на толкование сна успешно отправлен."
+        error: "Ошибка при отправке запроса, попробуйте позже."
+        exists: "Запрос на толкование сна уже был отправлен ранее."
+        no_dream: "Сон не найден."
+        no_requests: "У вас не осталось запросов на толкование."
+      show:
+        title: "Запрос на толкование сна «%{dream}»"
+        heading: "Запрос на толкование сна"
+      create_message:
+        success: "Сообщение отправлено"
+        error: "Ошибка отправки сообщения"
+      index:
+        title: "Мои запросы толкований снов, страница %{page}"
+        nav_text: "Запросы толкований снов"
+        heading: "Запросы толкований снов"
     sleep_places:
       index:
         heading: "Мои места для сна"
@@ -102,6 +132,8 @@ ru:
       title: "Описание нового сна"
     show:
       title: "Сон «%{title}»"
+    interpretation_form:
+      heading: "Запрос толкования сна"
   sleep_places:
     destroy:
       success: "Место для сна успешно удалено"
@@ -143,6 +175,18 @@ ru:
         heading: "Наполнители для снов"
       show:
         title: "Наполнитель «%{title}»"
+    interpretations:
+      create_message:
+        success: "Сообщение отправлено"
+        error: ""
+      index:
+        title: "Запросы толкований снов, страница %{page}"
+        heading: "Запросы толкований снов"
+      nav_item:
+        text: "Запросы толкований"
+        description: "Просмотр запросов на толкование снов"
+      show:
+        title: "Запрос на толкование сна «%{title}»"
   fillers:
     destroy:
       success: "Наполнитель удалён"
@@ -154,3 +198,15 @@ ru:
       heading: "Редактирование наполнителя"
       nav_text: "Редактировать"
       title: "Редактирование наполнителя"
+  interpretation_mailer:
+    new_message_from_interpreter:
+      subject: "Новое сообщение от толкователя вашего сна"
+    new_message_from_user:
+      subject: "Новое сообщение от пользователя в запросе толкования сна"
+    new_request:
+      subject: "Новый запрос на толкование сна"
+  interpretations:
+    index:
+      title: "Толкование снов"
+      nav_text: "Толкование снов"
+      heading: "Толкование снов"

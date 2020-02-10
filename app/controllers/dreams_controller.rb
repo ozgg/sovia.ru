@@ -84,7 +84,7 @@ class DreamsController < ApplicationController
     entity_parameters.merge(owner_for_entity(true))
   end
 
-  def component_slug
-    Biovision::Components::DreamsComponent::SLUG
+  def component_class
+    Biovision::Components::DreamsComponent
   end
 end

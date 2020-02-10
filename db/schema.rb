@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_07_222855) do
+ActiveRecord::Schema.define(version: 2020_02_10_102455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.jsonb "settings", default: {}, null: false
     t.jsonb "parameters", default: {}, null: false
     t.integer "priority", limit: 2, default: 1, null: false
+    t.boolean "active", default: true, null: false
     t.index ["slug"], name: "index_biovision_components_on_slug", unique: true
   end
 
@@ -116,15 +117,13 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.boolean "deleted", default: false, null: false
     t.boolean "spam", default: false, null: false
     t.boolean "approved", default: true, null: false
-    t.integer "upvote_count", default: 0, null: false
-    t.integer "downvote_count", default: 0, null: false
-    t.integer "vote_result", default: 0, null: false
     t.integer "commentable_id", null: false
     t.string "commentable_type", null: false
     t.string "author_name"
     t.string "author_email"
     t.text "body", null: false
     t.jsonb "data", default: {}, null: false
+    t.uuid "uuid"
     t.index "to_tsvector('russian'::regconfig, body)", name: "comments_search_idx", using: :gin
     t.index ["agent_id"], name: "index_comments_on_agent_id"
     t.index ["approved", "agent_id", "ip"], name: "index_comments_on_approved_and_agent_id_and_ip"
@@ -159,6 +158,7 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.string "title"
     t.text "body", null: false
     t.jsonb "data", default: {}, null: false
+    t.boolean "interpreted", default: false, null: false
     t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx"
     t.index "dreams_tsvector((title)::text, body)", name: "dreams_search_idx", using: :gin
     t.index ["agent_id"], name: "index_dreams_on_agent_id"
@@ -270,6 +270,30 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.index ["user_id"], name: "index_foreign_users_on_user_id"
   end
 
+  create_table "interpretation_messages", comment: "Messages in interpretation requests", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "interpretation_id", null: false
+    t.boolean "from_user", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "body", null: false
+    t.index ["interpretation_id"], name: "index_interpretation_messages_on_interpretation_id"
+    t.index ["uuid"], name: "index_interpretation_messages_on_uuid", unique: true
+  end
+
+  create_table "interpretations", comment: "Interpretation requests", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id", null: false
+    t.bigint "dream_id"
+    t.boolean "solved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "body"
+    t.index ["dream_id"], name: "index_interpretations_on_dream_id"
+    t.index ["user_id"], name: "index_interpretations_on_user_id"
+    t.index ["uuid"], name: "index_interpretations_on_uuid", unique: true
+  end
+
   create_table "languages", comment: "Language l10n, i18n, etc.", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -349,6 +373,21 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.integer "previous_value", default: 0, null: false
     t.string "name", null: false
     t.index ["biovision_component_id"], name: "index_metrics_on_biovision_component_id"
+  end
+
+  create_table "notifications", comment: "Component notifications", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "biovision_component_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "email_sent", default: false, null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index ["biovision_component_id"], name: "index_notifications_on_biovision_component_id"
+    t.index ["data"], name: "index_notifications_on_data", using: :gin
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.index ["uuid"], name: "index_notifications_on_uuid", unique: true
   end
 
   create_table "patterns", comment: "Dreambook pattern", force: :cascade do |t|
@@ -584,9 +623,6 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.integer "privacy", limit: 2, default: 0
     t.integer "comments_count", default: 0, null: false
     t.integer "view_count", default: 0, null: false
-    t.integer "upvote_count", default: 0, null: false
-    t.integer "downvote_count", default: 0, null: false
-    t.integer "vote_result", default: 0, null: false
     t.integer "time_required", limit: 2
     t.datetime "publication_time"
     t.uuid "uuid", null: false
@@ -752,6 +788,14 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.index ["user_id"], name: "index_tokens_on_user_id"
   end
 
+  create_table "user_bans", comment: "Personal ban lists for users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "other_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_bans_on_user_id"
+  end
+
   create_table "user_languages", comment: "Language for user", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -759,6 +803,20 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.bigint "language_id", null: false
     t.index ["language_id"], name: "index_user_languages_on_language_id"
     t.index ["user_id"], name: "index_user_languages_on_user_id"
+  end
+
+  create_table "user_messages", comment: "Messages between users", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "read", default: false, null: false
+    t.boolean "sender_deleted", default: false, null: false
+    t.boolean "receiver_deleted", default: false, null: false
+    t.text "body"
+    t.jsonb "data", default: {}, null: false
+    t.index ["uuid"], name: "index_user_messages_on_uuid", unique: true
   end
 
   create_table "user_privileges", comment: "Privilege for user", force: :cascade do |t|
@@ -780,6 +838,13 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
     t.jsonb "data", default: {}, null: false
     t.index ["service_id"], name: "index_user_services_on_service_id"
     t.index ["user_id"], name: "index_user_services_on_user_id"
+  end
+
+  create_table "user_subscriptions", comment: "User-to-user subscriptions", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", comment: "User", force: :cascade do |t|
@@ -858,6 +923,9 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
   add_foreign_key "foreign_users", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "foreign_users", "foreign_sites", on_update: :cascade, on_delete: :cascade
   add_foreign_key "foreign_users", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "interpretation_messages", "interpretations", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "interpretations", "dreams", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "interpretations", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "login_attempts", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "login_attempts", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "media_files", "agents", on_update: :cascade, on_delete: :nullify
@@ -868,6 +936,8 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
   add_foreign_key "media_folders", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "metric_values", "metrics", on_update: :cascade, on_delete: :cascade
   add_foreign_key "metrics", "biovision_components", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "notifications", "biovision_components", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "pending_patterns", "patterns", on_update: :cascade, on_delete: :nullify
   add_foreign_key "post_attachments", "posts", on_update: :cascade, on_delete: :cascade
   add_foreign_key "post_categories", "post_categories", column: "parent_id", on_update: :cascade, on_delete: :cascade
@@ -909,12 +979,18 @@ ActiveRecord::Schema.define(version: 2019_12_07_222855) do
   add_foreign_key "sleep_places", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tokens", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_bans", "users", column: "other_user_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_bans", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_messages", "users", column: "receiver_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_messages", "users", column: "sender_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_privileges", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_services", "services", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_services", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_subscriptions", "users", column: "followee_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_subscriptions", "users", column: "follower_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "users", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "languages", on_update: :cascade, on_delete: :nullify
   add_foreign_key "users", "users", column: "inviter_id", on_update: :cascade, on_delete: :nullify

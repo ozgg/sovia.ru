@@ -20,7 +20,7 @@ class My::DreamsController < ProfileController
     handle_http_404('Cannot find dream') if @entity.nil?
   end
 
-  def component_slug
-    Biovision::Components::DreamsComponent::SLUG
+  def component_class
+    Biovision::Components::DreamsComponent
   end
 end

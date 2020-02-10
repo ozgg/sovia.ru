@@ -1,0 +1,17 @@
+<% if collection.any? %>
+  <ul class="interpretations-list">
+    <% collection.each do |entity| %>
+      <li>
+        <div class="link">
+          <%= my_interpretation_link(entity, entity.title) %>
+          <% if entity.solved? %>
+            <span>(<%= t('activerecord.attributes.interpretation.solved') %>)</span>
+          <% end %>
+        </div>
+        <div><%= t(:interpretation_message_count, count: entity.message_count) %></div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="message-box-info">Вы не запросили ни одного толкования</div>
+<% end %>

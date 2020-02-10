@@ -15,8 +15,8 @@ class Admin::FillersController < AdminController
 
   private
 
-  def component_slug
-    Biovision::Components::DreamsComponent::SLUG
+  def component_class
+    Biovision::Components::DreamsComponent
   end
 
   def set_entity

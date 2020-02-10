@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
 
+    get 'interpretations' => 'interpretations#index'
+
     resources :sleep_places, only: %i[new create edit], concerns: :check
     resources :dreams, except: %i[update destroy], concerns: :check
     resources :fillers, only: %i[create edit new], concerns: :check
@@ -54,6 +56,9 @@ Rails.application.routes.draw do
     namespace :my do
       resources :sleep_places, only: %i[index show]
       resources :dreams, only: %i[index show]
+      resources :interpretations, only: %i[index create show] do
+        post 'messages' => :create_message, on: :member
+      end
     end
 
     namespace :admin do
@@ -65,6 +70,9 @@ Rails.application.routes.draw do
       resources :pending_patterns, only: :index do
         post 'enqueue', on: :collection
         post 'summary', on: :member
+      end
+      resources :interpretations, only: %i[index show], concerns: :toggle do
+        post 'messages' => :create_message, on: :member
       end
     end
   end

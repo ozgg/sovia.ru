@@ -91,4 +91,96 @@ Sovia.components.pendingPatternSummary = {
     }
 };
 
+Sovia.components.interpretationRequests = {
+    initialized: false,
+    selector: "dream_interpretation_request_container",
+    container: undefined,
+    result: undefined,
+    /**
+     * @type {HTMLButtonElement}
+     */
+    button: undefined,
+    init: function () {
+        this.container = document.getElementById(this.selector);
+        if (this.container) {
+            this.result = this.container.querySelector(".result");
+            this.button = this.container.querySelector("button");
+            this.button.addEventListener("click", this.handler);
+            this.initialized = true;
+        }
+    },
+    handler: function () {
+        const component = Sovia.components.interpretationRequests;
+        const url = component.button.getAttribute("data-url");
+        const request = Biovision.jsonAjaxRequest("post", url, component.processResponse);
+        const data = {"dream_id": component.button.getAttribute("data-dream-id")};
+        component.button.disabled = true;
+        request.send(JSON.stringify(data));
+    },
+    processResponse: function () {
+        const component = Sovia.components.interpretationRequests;
+        const response = JSON.parse(this.responseText);
+        if (response.hasOwnProperty("meta")) {
+            component.result.innerHTML = response["meta"]["result"];
+        }
+        component.button.remove();
+    }
+};
+
+Sovia.components.interpretationMessage = {
+    initialized: false,
+    selector: "new-interpretation-message-container",
+    container: undefined,
+    /**
+     * @type [HTMLTextAreaElement]
+     */
+    field: undefined,
+    /**
+     * @type [HTMLButtonElement]
+     */
+    button: undefined,
+    result: undefined,
+    url: undefined,
+    init: function () {
+        this.container = document.getElementById(this.selector);
+        if (this.container) {
+            this.url = this.container.getAttribute("data-url");
+            this.field = this.container.querySelector("textarea");
+            this.button = this.container.querySelector("button");
+            this.result = this.container.querySelector(".result");
+            this.field.addEventListener("keyup", this.keyup);
+            this.button.addEventListener("click", this.send);
+            this.initialized = true;
+        }
+    },
+    keyup: function () {
+        const component = Sovia.components.interpretationMessage;
+        const message = component.field.value.trim();
+        component.button.disabled = message.length < 1;
+        component.result.innerHTML = "";
+    },
+    send: function () {
+        const component = Sovia.components.interpretationMessage;
+        const request = Biovision.jsonAjaxRequest("post", component.url, component.processResponse, null);
+        const data = {
+            "interpretation_message": {
+                "body": component.field.value
+            }
+        };
+
+        component.button.disabled = true;
+        request.send(JSON.stringify(data));
+    },
+    processResponse: function () {
+        const response = JSON.parse(this.responseText);
+        if (response.hasOwnProperty("meta")) {
+            const component = Sovia.components.interpretationMessage;
+            component.result.innerHTML = response["meta"]["result"];
+            if (response["meta"]["ok"]) {
+                component.field.value = "";
+            }
+        }
+    }
+};
+
 Biovision.components.dreambook = Sovia;

@@ -7,6 +7,7 @@
 #   body [Text]
 #   comments_count [Integer]
 #   created_at [DateTime]
+#   interpreted [Boolean]
 #   ip [Inet], optional
 #   lucidity [Integer]
 #   privacy [Integer], enum
@@ -33,6 +34,7 @@ class Dream < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :sleep_place, optional: true, counter_cache: true
   belongs_to :agent, optional: true
+  has_many :interpretations
 
   after_initialize { self.uuid = SecureRandom.uuid if uuid.nil? }
   before_validation :normalize_attributes

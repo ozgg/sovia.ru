@@ -16,7 +16,7 @@ class CreateDreams < ActiveRecord::Migration[5.2]
   private
 
   def create_component
-    slug = Biovision::Components::DreamsComponent::SLUG
+    slug = Biovision::Components::DreamsComponent.slug
 
     return if BiovisionComponent.where(slug: slug).exists?
 
@@ -66,6 +66,6 @@ class CreateDreams < ActiveRecord::Migration[5.2]
           end
         $$ language 'plpgsql' immutable;
     )
-    execute "create index dreams_search_idx on dreams using gin(dreams_tsvector(title, body));"
+    execute 'create index dreams_search_idx on dreams using gin(dreams_tsvector(title, body));'
   end
 end

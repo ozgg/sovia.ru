@@ -41,6 +41,20 @@ module DreamsHelper
     t("activerecord.attributes.dream.privacies.#{entity.privacy}")
   end
 
+  # @param [Interpretation] entity
+  # @param [String] text
+  # @param [Hash] options
+  def admin_interpretation_link(entity, text = entity.title, options = {})
+    link_to(text, admin_interpretation_path(id: entity.id), options)
+  end
+
+  # @param [Interpretation] entity
+  # @param [String] text
+  # @param [Hash] options
+  def my_interpretation_link(entity, text, options = {})
+    link_to(text, my_interpretation_path(id: entity.id), options)
+  end
+
   def bots_for_select
     list = [[t(:not_selected), '']]
     list + User.bots(1).order('screen_name asc').map do |bot|

@@ -6,7 +6,6 @@ module Biovision
     class DreambookComponent < BaseComponent
       LINK_PATTERN = /\[\[(?<body>[^\]]{1,50})\]\](?:\((?<text>[^)]{1,64})\))?/.freeze
       LETTERS = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ'
-      SLUG = 'dreambook'
 
       # @param [String] body
       # @return [Pattern|PendingPattern]

@@ -6,7 +6,7 @@
         partial: 'dreams/list',
         locals: {
             collection: Dream.list_for_visitors(current_user).first(6),
-            handler: Biovision::Components::BaseComponent.handler('dreams', current_user)
+            handler: Biovision::Components::DreamsComponent[current_user]
         }
     )
   %>
