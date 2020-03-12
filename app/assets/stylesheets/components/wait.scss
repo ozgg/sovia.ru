@@ -1,0 +1,54 @@
+.wait {
+  border: .1rem solid #aaa;
+  border-radius: 50%;
+  display: none;
+  height: 3.2rem;
+  justify-content: center;
+  position: relative;
+  width: 3.2rem;
+
+  span {
+    background: #777;
+    border-radius: .15rem;
+    bottom: 50%;
+    content: '\A';
+    display: inline-block;
+    position: absolute;
+    transform-origin: bottom center;
+    width: .3rem;
+  }
+
+  .h {
+    height: 1rem;
+  }
+
+  .m {
+    height: 1.2rem;
+  }
+}
+
+.buy-button .processing {
+  display: none;
+
+  & + .wait {
+    display: inline-flex;
+
+    .h {
+      animation: wait-clock 30s linear infinite;
+    }
+
+    .m {
+      animation: wait-clock .5s linear infinite;
+    }
+  }
+}
+
+@keyframes wait-clock {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

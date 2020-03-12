@@ -35,6 +35,8 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 
+gem 'paypal-sdk-rest'
+
 gem 'autoprefixer-rails', group: :production
 
 gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'

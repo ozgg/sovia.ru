@@ -1,0 +1,17 @@
+<% show_button = !current_user.nil? %>
+<section class="dreams-interpretation-prices">
+  <ul>
+    <% Biovision::Components::DreamsComponent.price_map.each do |quantity, price| %>
+      <li>
+        <div class="quantity"><%= t(:dream_count, count: quantity) %></div>
+        <div class="price"><span class="money"><%= price %></span></div>
+        <% if show_button %>
+          <div class="buy-button">
+            <%= link_to('Купить', paypal_invoices_path(q: quantity), class: 'paypal') %>
+            <span class="wait"><span class="h"></span><span class="m"></span></span>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>

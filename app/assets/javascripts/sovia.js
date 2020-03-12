@@ -183,4 +183,48 @@ Sovia.components.interpretationMessage = {
     }
 };
 
+Sovia.components.buyButtons = {
+    initialized: false,
+    selector: ".buy-button a",
+    buttons: [],
+    init: function () {
+        document.querySelectorAll(this.selector).forEach(this.apply);
+        this.initialized = true;
+    },
+    apply: function (element) {
+        const component = Sovia.components.buyButtons;
+        component.buttons.push(element);
+        element.addEventListener("click", component.handler);
+    },
+    handler: function (event) {
+        event.preventDefault();
+        const component = Sovia.components.buyButtons;
+        const button = event.target;
+        const url = button.getAttribute("href");
+        const request = Biovision.jsonAjaxRequest("post", url, component.processResponse, component.processFailure);
+        button.classList.add("processing");
+        request.send();
+    },
+    processResponse: function () {
+        const response = JSON.parse(this.responseText);
+        let nextLink = false;
+        if (response.hasOwnProperty("links")) {
+            const links = response.links;
+            if (links.hasOwnProperty("next")) {
+                nextLink = true;
+                document.location.href = links.next;
+            }
+        }
+        if (!nextLink) {
+            Sovia.components.buyButtons.processFailure();
+        }
+    },
+    processFailure: function () {
+        const component = Sovia.components.buyButtons;
+        component.buttons.forEach(function (button) {
+            button.classList.remove("processing");
+        });
+    }
+};
+
 Biovision.components.dreambook = Sovia;

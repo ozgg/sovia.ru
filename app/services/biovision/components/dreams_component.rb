@@ -8,6 +8,10 @@ module Biovision
       NAME_PATTERN = /{(?<name>[^}]{1,30})}(?:\((?<text>[^)]{1,30})\))?/.freeze
       REQUEST_COUNTER = 'interpretation_requests'
 
+      def self.price_map
+        { 1 => 500, 3 => 1000, 5 => 1500, 10 => 2000 }
+      end
+
       def use_parameters?
         false
       end

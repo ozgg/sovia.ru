@@ -1,0 +1,29 @@
+ru:
+  invoice_count:
+    zero: "счетов нет"
+    one: "%{count} счёт"
+    few: "%{count} стёта"
+    many: "%{count} счетов"
+    other: "%{count} счетов"
+  activerecord:
+    models:
+      paypal_invoice: "Счёт PayPal"
+    attributes:
+      invoice:
+        amount: "Сумма"
+        paid: "Оплачен"
+  admin:
+    paypal_invoices:
+      nav_item:
+        description: "Управление списком счетов PayPal"
+        text: "Список счетов PayPal"
+      index:
+        title: "Счета PayPal, страница %{page}"
+        heading: "Счета PayPal"
+      show:
+        title: "Счёт PayPal №%{id}"
+        data: "Данные платежа"
+  biovision:
+    components:
+      invoices:
+        name: "Счета"

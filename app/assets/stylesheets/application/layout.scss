@@ -90,6 +90,12 @@ div.track {
   }
 }
 
+.money::after {
+  content: '₽';
+  margin-left: var(--spacer-xxs);
+}
+
+@import "application/components";
 @import "application/layout/header";
 @import "application/layout/footer";
 @import "application/layout/authentication";

@@ -2,7 +2,7 @@
 
 # Information about dream interpretations service
 class InterpretationsController < ApplicationController
-  # get /interpretation
+  # get /interpretations
   def index
   end
 end

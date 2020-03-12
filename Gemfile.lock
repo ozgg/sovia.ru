@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/Biovision/biovision-base.git
-  revision: 5fcac293b2098bffc9da87c2e5bfc0e2eff8cd9d
+  revision: e73cc47352f48f10452f71a4c32c872ab13ec2e9
   specs:
-    biovision-base (0.44.200210.1)
+    biovision-base (0.46.200305.0)
       bcrypt (~> 3.1)
       carrierwave (~> 2.0)
       carrierwave-bombshelter (~> 0.2)
@@ -24,9 +24,9 @@ GIT
 
 GIT
   remote: https://github.com/Biovision/biovision-post.git
-  revision: 149cbfe11800f79b5d002b25037266837cb2a05a
+  revision: 4472bfb42c2b153948b417690170fac4eaf0c662
   specs:
-    biovision-post (0.29.200208.1)
+    biovision-post (0.30.200305.0)
       biovision-base
       rails (~> 5.1)
       rails-i18n (~> 5.0)
@@ -82,11 +82,11 @@ GEM
       execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
-    bootsnap (1.4.5)
+    bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.1)
-    carrierwave (2.0.2)
+    carrierwave (2.1.0)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -99,7 +99,7 @@ GEM
       fastimage
     concurrent-ruby (1.1.6)
     crass (1.0.6)
-    database_cleaner (1.8.2)
+    database_cleaner (1.8.3)
     diff-lcs (1.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -120,7 +120,7 @@ GEM
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    hashie (3.6.0)
+    hashie (4.1.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -173,17 +173,17 @@ GEM
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.4)
-    oauth2 (1.4.3)
+    oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    omniauth (1.9.0)
-      hashie (>= 3.4.6, < 3.7.0)
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-facebook (6.0.0)
       omniauth-oauth2 (~> 1.2)
@@ -204,6 +204,9 @@ GEM
     omniauth-vkontakte (1.5.1)
       omniauth-oauth2 (>= 1.5, <= 1.6)
     open4 (1.3.4)
+    paypal-sdk-rest (1.7.4)
+      multi_json (~> 1.0)
+      xml-simple
     pg (1.2.2)
     public_suffix (4.0.3)
     puma (3.12.4)
@@ -254,7 +257,7 @@ GEM
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-rails (3.9.0)
+    rspec-rails (3.9.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -299,6 +302,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -321,6 +325,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 0.1)
   omniauth-twitter
   omniauth-vkontakte
+  paypal-sdk-rest
   pg (>= 0.18, < 2.0)
   puma (~> 3.12)
   rails (~> 5.2.3)

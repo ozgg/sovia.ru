@@ -108,3 +108,35 @@
     text-align: right;
   }
 }
+
+.dreams-interpretation-prices {
+  ul {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: var(--spacer-m) auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  li {
+    border-radius: var(--spacer-s);
+    box-shadow: $block-shadow;
+    margin: var(--spacer-s) auto;
+    max-width: 24rem;
+    padding: var(--spacer-s);
+    width: 20%;
+  }
+
+  .quantity {
+    font-family: $font-family-heading;
+    font-size: var(--font-size-xl);
+  }
+
+  .price {
+    font-size: var(--font-size-large);
+    font-weight: 500;
+    margin: var(--spacer-s) auto;
+  }
+}

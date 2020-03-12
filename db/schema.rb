@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_102455) do
+ActiveRecord::Schema.define(version: 2020_03_12_123104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -402,6 +402,22 @@ ActiveRecord::Schema.define(version: 2020_02_10_102455) do
     t.index ["name"], name: "index_patterns_on_name", unique: true
   end
 
+  create_table "paypal_invoices", comment: "PayPal invoices", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "uuid", null: false
+    t.boolean "paid", default: false, null: false
+    t.integer "amount", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index ["agent_id"], name: "index_paypal_invoices_on_agent_id"
+    t.index ["data"], name: "index_paypal_invoices_on_data", using: :gin
+    t.index ["user_id"], name: "index_paypal_invoices_on_user_id"
+    t.index ["uuid"], name: "index_paypal_invoices_on_uuid", unique: true
+  end
+
   create_table "pending_patterns", comment: "Pending pattern for interpretation", force: :cascade do |t|
     t.bigint "pattern_id"
     t.boolean "processed", default: false, null: false
@@ -759,6 +775,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_102455) do
     t.string "source_name"
     t.string "source_link"
     t.jsonb "data", default: {}, null: false
+    t.integer "object_count", default: 0, null: false
     t.index ["agent_id"], name: "index_simple_images_on_agent_id"
     t.index ["biovision_component_id"], name: "index_simple_images_on_biovision_component_id"
     t.index ["user_id"], name: "index_simple_images_on_user_id"
@@ -816,6 +833,9 @@ ActiveRecord::Schema.define(version: 2020_02_10_102455) do
     t.boolean "receiver_deleted", default: false, null: false
     t.text "body"
     t.jsonb "data", default: {}, null: false
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.index ["agent_id"], name: "index_user_messages_on_agent_id"
     t.index ["uuid"], name: "index_user_messages_on_uuid", unique: true
   end
 
@@ -938,6 +958,8 @@ ActiveRecord::Schema.define(version: 2020_02_10_102455) do
   add_foreign_key "metrics", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "paypal_invoices", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "paypal_invoices", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "pending_patterns", "patterns", on_update: :cascade, on_delete: :nullify
   add_foreign_key "post_attachments", "posts", on_update: :cascade, on_delete: :cascade
   add_foreign_key "post_categories", "post_categories", column: "parent_id", on_update: :cascade, on_delete: :cascade
@@ -983,6 +1005,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_102455) do
   add_foreign_key "user_bans", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_languages", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user_messages", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "user_messages", "users", column: "receiver_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_messages", "users", column: "sender_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "user_privileges", "privileges", on_update: :cascade, on_delete: :cascade

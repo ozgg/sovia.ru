@@ -39,7 +39,16 @@ Rails.application.routes.draw do
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
 
-    get 'interpretations' => 'interpretations#index'
+    scope 'interpretations', controller: :interpretations do
+      get '/' => :index, as: :interpretations
+      get 'paypal' => :paypal
+    end
+
+    scope 'paypal', controller: :paypal do
+      post '/' => :hook, as: :nil
+      post 'invoices' => :create_invoice, as: :paypal_invoices
+      get 'done'
+    end
 
     resources :sleep_places, only: %i[new create edit], concerns: :check
     resources :dreams, except: %i[update destroy], concerns: :check

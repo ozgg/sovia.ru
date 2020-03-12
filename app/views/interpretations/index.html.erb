@@ -4,7 +4,15 @@
 <% end %>
 
 <article>
-  <h1><%= t('.heading') %></h1>
+  <div class="content-wrapper">
+    <h1><%= t('.heading') %></h1>
+
+    <section class="intro">
+
+    </section>
+
+    <%= render partial: 'components/dreams/widgets/interpretation_prices' %>
+  </div>
 </article>
 
 <% content_for :sidebar do %>
