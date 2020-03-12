@@ -45,9 +45,10 @@ Rails.application.routes.draw do
     end
 
     scope 'paypal', controller: :paypal do
-      post '/' => :hook, as: :nil
+      post '/' => :hook, as: nil
       post 'invoices' => :create_invoice, as: :paypal_invoices
-      get 'done'
+      get ':id/success' => :success, as: nil
+      get ':id/cancel' => :cancel, as: nil
     end
 
     resources :sleep_places, only: %i[new create edit], concerns: :check
@@ -60,6 +61,7 @@ Rails.application.routes.draw do
       get '/' => :index, as: :dreambook
       get 'search' => :search, as: :dreambook_search
       get ':word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
+      get ':letter/:word', to: redirect('/dreambook/%{word}')
     end
 
     namespace :my do

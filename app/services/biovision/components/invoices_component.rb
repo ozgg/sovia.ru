@@ -23,7 +23,7 @@ module Biovision
         entity.paid = true
         entity.data['frozen'] = true
         entity.save!
-        entity.user.increment!(:balance, entity.amount)
+        increment_request_count(entity.user, entity.quantity)
       end
 
       # @param [Invoice] entity
@@ -33,6 +33,17 @@ module Biovision
         entity.data['frozen'] = true
         entity.data['state'] = 'cancelled'
         entity.save!
+      end
+
+      # @param [User] user
+      # @param [Integer] delta
+      def increment_request_count(user, delta)
+        key = Biovision::Components::DreamsComponent::REQUEST_COUNTER
+        user.data['sovia'] ||= { key => 0 }
+        user.data['sovia'][key] = 0 unless user.data['sovia'].key?(key)
+        new_value = user.data['sovia'][key].to_i + delta
+        user.data['sovia'][key] = new_value
+        user.save
       end
 
       private
@@ -79,8 +90,8 @@ module Biovision
 
       def redirect_urls
         {
-          return_url: "#{url_prefix}/payments/#{@invoice.uuid}/success",
-          cancel_url: "#{url_prefix}/payments/#{@invoice.uuid}/cancel"
+          return_url: "#{url_prefix}/paypal/#{@invoice.uuid}/success",
+          cancel_url: "#{url_prefix}/paypal/#{@invoice.uuid}/cancel"
         }
       end
     end

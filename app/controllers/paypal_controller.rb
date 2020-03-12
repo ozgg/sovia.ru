@@ -16,7 +16,7 @@ class PaypalController < ApplicationController
     head :no_content
   end
 
-  # post /payments
+  # post /paypal
   def create_invoice
     component_handler.url_prefix = "#{request.protocol}#{request.host_with_port}"
     @entity = component_handler.create_invoice(creation_parameters)
@@ -28,7 +28,7 @@ class PaypalController < ApplicationController
     end
   end
 
-  # get /payments/:id/success
+  # get /paypal/:id/success
   def success
     invoice = PaypalInvoice.find_by(uuid: params[:id])
     component_handler.mark_as_paid(invoice) unless invoice.nil?
@@ -36,7 +36,7 @@ class PaypalController < ApplicationController
     redirect_to my_path
   end
 
-  # get /payments/:id/cancel
+  # get /paypal/:id/cancel
   def cancel
     invoice = PaypalInvoice.find_by(uuid: params[:id])
     component_handler.mark_as_cancelled(invoice) unless invoice.nil?

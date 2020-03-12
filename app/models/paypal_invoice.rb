@@ -35,6 +35,6 @@ class PaypalInvoice < ApplicationRecord
   end
 
   def quantity
-    data.dig('sovia', 'quantity') || 1
+    (data.dig('sovia', 'quantity') || 1).to_i
   end
 end
