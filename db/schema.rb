@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_12_123104) do
+ActiveRecord::Schema.define(version: 2020_03_13_113930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -400,6 +400,15 @@ ActiveRecord::Schema.define(version: 2020_03_12_123104) do
     t.jsonb "data", default: {}, null: false
     t.index "patterns_tsvector((name)::text, (summary)::text, description)", name: "patterns_search_idx", using: :gin
     t.index ["name"], name: "index_patterns_on_name", unique: true
+  end
+
+  create_table "paypal_events", comment: "PayPal webhook events", force: :cascade do |t|
+    t.bigint "paypal_invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index ["data"], name: "index_paypal_events_on_data", using: :gin
+    t.index ["paypal_invoice_id"], name: "index_paypal_events_on_paypal_invoice_id"
   end
 
   create_table "paypal_invoices", comment: "PayPal invoices", force: :cascade do |t|
@@ -958,6 +967,7 @@ ActiveRecord::Schema.define(version: 2020_03_12_123104) do
   add_foreign_key "metrics", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "paypal_events", "paypal_invoices", on_update: :cascade, on_delete: :nullify
   add_foreign_key "paypal_invoices", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "paypal_invoices", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "pending_patterns", "patterns", on_update: :cascade, on_delete: :nullify
