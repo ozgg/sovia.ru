@@ -130,7 +130,7 @@ module Biovision
       # @return [Hash]
       def normalize_settings(data)
         result = {}
-        numbers = %w[filler_timeout place_limit]
+        numbers = %w[filler_timeout place_limit free_interpretations]
         numbers.each { |f| result[f] = data[f].to_i }
 
         result

@@ -39,9 +39,11 @@ module Biovision
       # @param [Integer] delta
       def increment_request_count(user, delta)
         key = Biovision::Components::DreamsComponent::REQUEST_COUNTER
-        user.data['sovia'] ||= { key => 0 }
-        user.data['sovia'][key] = 0 unless user.data['sovia'].key?(key)
-        new_value = user.data['sovia'][key].to_i + delta
+        user.data['sovia'] ||= {}
+        data = user.data['sovia']
+        data[key] = 0 unless data.key?(key)
+        new_value = data[key].to_i + delta
+
         user.data['sovia'][key] = new_value
         user.save
       end
@@ -74,13 +76,13 @@ module Biovision
         {
           item_list: { items: [item_data] },
           amount: { total: @invoice.amount.to_s, currency: 'RUB' },
-          description: "#{@invoice.quantity}x Dream interpretation requests"
+          description: "#{@invoice.quantity}x dream interpretation requests"
         }
       end
 
       def item_data
         {
-          name: "Dream interpretations (#{@invoice.quantity})",
+          name: "#{@invoice.quantity}x dream interpretation requests",
           sku: "DI-#{@invoice.quantity}",
           price: @invoice.amount.to_s,
           currency: 'RUB',

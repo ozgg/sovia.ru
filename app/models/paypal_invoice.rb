@@ -30,6 +30,11 @@ class PaypalInvoice < ApplicationRecord
     list_for_administration.page(page)
   end
 
+  # @param [String] paypal_id
+  def self.[](paypal_id)
+    find_by("data->'paypal'->>'id' = ?", paypal_id)
+  end
+
   def name
     user.profile_name
   end

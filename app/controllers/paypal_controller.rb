@@ -6,12 +6,11 @@ class PaypalController < ApplicationController
 
   # post /paypal
   def hook
-    File.open("#{Rails.root}/log/paypal.log", 'ab') do |f|
-      f.puts Time.now
-      f.puts request.headers
-      f.puts params
-      f.puts
-    end
+    body = params[:paypal].to_json
+    handler = Biovision::Components::Invoices::Paypal::HookHandler.new(request.headers, body)
+    valid = handler.valid?
+    log_hook(valid)
+    handler.handle(params[:paypal]&.permit!.to_h) if valid
 
     head :no_content
   end
@@ -62,5 +61,15 @@ class PaypalController < ApplicationController
     }
 
     attributes.merge(owner_for_entity(true))
+  end
+
+  # @param [TrueClass|FalseClass] valid
+  def log_hook(valid)
+    File.open("#{Rails.root}/log/paypal.log", 'ab') do |f|
+      f.puts Time.now
+      f.puts params.to_json
+      f.puts valid ? '[valid]' : '[invalid]'
+      f.puts
+    end
   end
 end
