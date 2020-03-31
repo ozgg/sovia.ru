@@ -22,7 +22,8 @@ class RobokassaController < ApplicationController
       result = 'Bad signature'
     end
 
-    RobokassaHandler.log_event("#{request.method} #{request.original_url}\n\t#{result}")
+    event = "#{request.method} #{request.original_url}\n\t#{result}"
+    Biovision::Components::Invoices::RobokassaHandler.log_event(event)
 
     render plain: result
   end

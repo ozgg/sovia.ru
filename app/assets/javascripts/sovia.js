@@ -263,7 +263,7 @@ Sovia.components.robokassaButtons = {
 
             const form = document.createElement("form");
             form.action = "https://merchant.roboxchange.com/Index.aspx";
-            form.setAttribute("method", "post");
+            form.method = "post";
             fields.forEach(function (pair) {
                 const input = document.createElement("input");
                 input.setAttribute("type", "hidden");
