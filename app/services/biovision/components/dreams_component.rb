@@ -31,6 +31,7 @@ module Biovision
       # @param [Dream] dream
       def parsed_dream(dream)
         parser = Dreams::Parser.new(user)
+        # @type [User]
         owner = dream.user
         strings = dream.body.split("\n").map(&:squish).reject(&:blank?)
         strings.map { |s| parser.parse(s, owner) }.join
@@ -71,6 +72,15 @@ module Biovision
         @user.data.dig('sovia', REQUEST_COUNTER).to_i
       end
 
+      # @param [Integer] new_value
+      def request_count=(new_value)
+        return if @user.nil?
+
+        @user.data['sovia'] ||= {}
+        @user.data['sovia'][REQUEST_COUNTER] = new_value.to_i
+        @user.save
+      end
+
       protected
 
       # @param [Hash] data
@@ -87,18 +97,12 @@ module Biovision
       def create_interpretation_request(dream)
         interpretation = Interpretation.new(dream: dream, user: @user)
         if interpretation.save
-          decrement_request_count
+          self.request_count = request_count - 1
           InterpretationMailer.new_request(interpretation.id)
           Interpretation::STATE_CREATED
         else
           Interpretation::STATE_ERROR
         end
-      end
-
-      def decrement_request_count
-        @user.data['sovia'] ||= {}
-        @user.data['sovia'][REQUEST_COUNTER] = request_count - 1
-        @user.save
       end
     end
   end

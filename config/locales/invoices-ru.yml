@@ -8,10 +8,13 @@ ru:
   activerecord:
     models:
       paypal_invoice: "Счёт PayPal"
+      robokassa_invoice: "Счёт Робокассы"
     attributes:
       invoice:
         amount: "Сумма"
         paid: "Оплачен"
+      robokassa_invoice:
+        price: "Цена"
   admin:
     paypal_invoices:
       nav_item:
@@ -22,6 +25,16 @@ ru:
         heading: "Счета PayPal"
       show:
         title: "Счёт PayPal №%{id}"
+        data: "Данные платежа"
+    robokassa_invoices:
+      nav_item:
+        description: "Управление списком счетов Робокассы"
+        text: "Список счетов Робокассы"
+      index:
+        title: "Счета Робокассы, страница %{page}"
+        heading: "Счета Робокассы"
+      show:
+        title: "Счёт Робокассы №%{id}"
         data: "Данные платежа"
   biovision:
     components:

@@ -8,6 +8,12 @@ module Biovision
 
       attr_accessor :url_prefix
 
+      # @param [RobokassaInvoice] invoice
+      # @param [TrueClass|FalseClass] test_mode
+      def robokassa(invoice, test_mode = false)
+        Biovision::Components::Invoices::RobokassaHandler.new(invoice, test_mode)
+      end
+
       # @param [Hash] parameters
       def create_invoice(parameters)
         @invoice = ::PaypalInvoice.new(parameters)

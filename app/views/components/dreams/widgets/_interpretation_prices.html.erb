@@ -7,7 +7,7 @@
         <div class="price"><span class="money"><%= price %></span></div>
         <% if show_button %>
           <div class="buy-button">
-            <%= link_to('Купить', paypal_invoices_path(q: quantity), class: 'paypal') %>
+            <%= link_to('Купить', robokassa_invoices_path(q: quantity), class: 'robokassa') %>
             <span class="wait"><span class="h"></span><span class="m"></span></span>
           </div>
         <% end %>

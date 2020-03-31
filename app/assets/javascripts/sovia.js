@@ -183,22 +183,22 @@ Sovia.components.interpretationMessage = {
     }
 };
 
-Sovia.components.buyButtons = {
+Sovia.components.paypalButtons = {
     initialized: false,
-    selector: ".buy-button a",
+    selector: ".buy-button .paypal",
     buttons: [],
     init: function () {
         document.querySelectorAll(this.selector).forEach(this.apply);
         this.initialized = true;
     },
     apply: function (element) {
-        const component = Sovia.components.buyButtons;
+        const component = Sovia.components.paypalButtons;
         component.buttons.push(element);
         element.addEventListener("click", component.handler);
     },
     handler: function (event) {
         event.preventDefault();
-        const component = Sovia.components.buyButtons;
+        const component = Sovia.components.paypalButtons;
         const button = event.target;
         const url = button.getAttribute("href");
         const request = Biovision.jsonAjaxRequest("post", url, component.processResponse, component.processFailure);
@@ -216,11 +216,70 @@ Sovia.components.buyButtons = {
             }
         }
         if (!nextLink) {
-            Sovia.components.buyButtons.processFailure();
+            Sovia.components.paypalButtons.processFailure();
         }
     },
     processFailure: function () {
-        const component = Sovia.components.buyButtons;
+        const component = Sovia.components.paypalButtons;
+        component.buttons.forEach(function (button) {
+            button.classList.remove("processing");
+        });
+    }
+};
+
+Sovia.components.robokassaButtons = {
+    initialized: false,
+    selector: ".buy-button .robokassa",
+    buttons: [],
+    init: function () {
+        document.querySelectorAll(this.selector).forEach(this.apply);
+        this.initialized = true;
+    },
+    apply: function (element) {
+        const component = Sovia.components.robokassaButtons;
+        component.buttons.push(element);
+        element.addEventListener("click", component.handler);
+    },
+    handler: function (event) {
+        event.preventDefault();
+        const component = Sovia.components.robokassaButtons;
+        const button = event.target;
+        const url = button.getAttribute("href");
+        const request = Biovision.jsonAjaxRequest("post", url, component.processResponse, component.processFailure);
+        button.classList.add("processing");
+        request.send();
+    },
+    processResponse: function () {
+        const response = JSON.parse(this.responseText);
+        if (response.hasOwnProperty("meta")) {
+            const data = response.meta.robokassa;
+            const fields = [
+                ["IsTest", data["is_test"]],
+                ["MerchantLogin", data["login"]],
+                ["OutSum", data["out_sum"]],
+                ["InvId", data["inv_id"]],
+                ["SignatureValue", data["signature"]]
+            ];
+
+            const form = document.createElement("form");
+            form.action = "https://merchant.roboxchange.com/Index.aspx";
+            form.setAttribute("method", "post");
+            fields.forEach(function (pair) {
+                const input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", pair[0]);
+                input.value = pair[1];
+                form.append(input);
+            });
+            console.log(form);
+            // document.querySelector("body").append(form);
+            form.submit();
+        } else {
+            Sovia.components.robokassaButtons.processFailure();
+        }
+    },
+    processFailure: function () {
+        const component = Sovia.components.robokassaButtons;
         component.buttons.forEach(function (button) {
             button.classList.remove("processing");
         });

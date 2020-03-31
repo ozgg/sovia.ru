@@ -1,0 +1,40 @@
+<% content_for :meta_title, t('.title', id: @entity.id) %>
+<% content_for :breadcrumbs do %>
+  <%= admin_biovision_component_link(component_handler.component) %>
+  <%= link_to(t('admin.robokassa_invoices.nav_item.text'), admin_robokassa_invoices_path) %>
+  <span><%= @entity.id %></span>
+<% end %>
+
+<article>
+  <h1><%= @entity.id %></h1>
+
+  <ul class="actions">
+    <li><%= back_icon(admin_robokassa_invoices_path) %></li>
+    <li class="danger"><%= destroy_icon(@entity) %></li>
+  </ul>
+
+  <dl>
+    <div>
+      <dt><%= t('attributes.user') %></dt>
+      <dd><%= admin_user_link(@entity.user) %></dd>
+    </div>
+
+    <div>
+      <dt><%= t('activerecord.attributes.robokassa_invoice.price') %></dt>
+      <dd><span class="money"><%= @entity.price %></span></dd>
+    </div>
+
+    <%= render(partial: 'shared/entity/uuid', locals: { entity: @entity }) %>
+    <%= render(partial: 'shared/entity/timestamps', locals: { entity: @entity }) %>
+  </dl>
+
+  <%=
+    render(
+        partial: 'shared/admin/toggleable',
+        locals: {
+            entity: @entity,
+            url: toggle_admin_robokassa_invoice_path(id: @entity.id)
+        }
+    )
+  %>
+</article>

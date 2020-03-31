@@ -1,0 +1,12 @@
+<div class="image">
+  <%= profile_avatar(entity.user) %>
+</div>
+<div class="data">
+  <div><%= admin_robokassa_invoice_link(entity) %></div>
+  <div class="info">
+    <%= time_tag(entity.created_at) %>
+  </div>
+  <div class="secondary info">
+    <%= admin_user_link(entity.user) %>
+  </div>
+</div>

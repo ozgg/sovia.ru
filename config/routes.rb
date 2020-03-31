@@ -51,6 +51,13 @@ Rails.application.routes.draw do
       get ':id/cancel' => :cancel, as: nil
     end
 
+    scope 'robokassa', controller: :robokassa do
+      post '/' => :create_invoice, as: :robokassa_invoices
+      post 'result' => :pay_result, as: nil
+      get 'success' => :pay_success, as: nil
+      get 'fail' => :pay_fail, as: nil
+    end
+
     resources :sleep_places, only: %i[new create edit], concerns: :check
     resources :dreams, except: %i[update destroy], concerns: :check
     resources :fillers, only: %i[create edit new], concerns: :check

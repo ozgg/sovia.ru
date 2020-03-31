@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_113930) do
+ActiveRecord::Schema.define(version: 2020_03_31_100546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -721,6 +721,23 @@ ActiveRecord::Schema.define(version: 2020_03_13_113930) do
     t.index ["slug"], name: "index_privileges_on_slug", unique: true
   end
 
+  create_table "robokassa_invoices", comment: "Robokassa invoices", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id"
+    t.bigint "agent_id"
+    t.inet "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "state", limit: 2, default: 0, null: false
+    t.integer "price"
+    t.string "email"
+    t.jsonb "data", default: {}, null: false
+    t.index ["agent_id"], name: "index_robokassa_invoices_on_agent_id"
+    t.index ["data"], name: "index_robokassa_invoices_on_data", using: :gin
+    t.index ["user_id"], name: "index_robokassa_invoices_on_user_id"
+    t.index ["uuid"], name: "index_robokassa_invoices_on_uuid", unique: true
+  end
+
   create_table "services", comment: "Paid services", force: :cascade do |t|
     t.integer "priority", limit: 2, default: 1, null: false
     t.datetime "created_at", null: false
@@ -1003,6 +1020,8 @@ ActiveRecord::Schema.define(version: 2020_03_13_113930) do
   add_foreign_key "privilege_group_privileges", "privilege_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privilege_group_privileges", "privileges", on_update: :cascade, on_delete: :cascade
   add_foreign_key "privileges", "privileges", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "robokassa_invoices", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "robokassa_invoices", "users", on_update: :cascade, on_delete: :nullify
   add_foreign_key "simple_image_tag_images", "simple_image_tags", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_image_tag_images", "simple_images", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_images", "agents", on_update: :cascade, on_delete: :nullify
