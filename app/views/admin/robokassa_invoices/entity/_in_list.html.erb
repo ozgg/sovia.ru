@@ -6,7 +6,11 @@
   <div class="info">
     <%= time_tag(entity.created_at) %>
   </div>
+  <div class="info">
+    <%= robokassa_invoice_state(entity) %>
+  </div>
   <div class="secondary info">
-    <%= admin_user_link(entity.user) %>
+    <%= admin_user_link(entity.user) %>,
+    <%= t(:interpretation_count, count: entity.interpretation_count) %>
   </div>
 </div>

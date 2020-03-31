@@ -5,6 +5,12 @@ ru:
     few: "%{count} сна"
     many: "%{count} снов"
     other: "%{count} снов"
+  interpretation_count:
+    zero: "ни одного запроса на толкование"
+    one: "%{count} запрос на толкование"
+    few: "%{count} запроса на толкование"
+    many: "%{count} запросов на толкование"
+    other: "%{count} запросов на толкование"
   interpretation_request_count:
     zero: "не осталось ни одного запроса на толкование"
     one: "остался %{count} запрос на толкование"

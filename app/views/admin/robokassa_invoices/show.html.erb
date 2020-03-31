@@ -6,7 +6,10 @@
 <% end %>
 
 <article>
-  <h1><%= @entity.id %></h1>
+  <h1>
+    <%= @entity.id %>,
+    <%= t(:interpretation_count, count: @entity.interpretation_count) %>
+  </h1>
 
   <ul class="actions">
     <li><%= back_icon(admin_robokassa_invoices_path) %></li>
@@ -24,17 +27,12 @@
       <dd><span class="money"><%= @entity.price %></span></dd>
     </div>
 
+    <div>
+      <dt><%= t('activerecord.attributes.robokassa_invoice.state') %></dt>
+      <dd><%= robokassa_invoice_state(@entity) %></dd>
+    </div>
+
     <%= render(partial: 'shared/entity/uuid', locals: { entity: @entity }) %>
     <%= render(partial: 'shared/entity/timestamps', locals: { entity: @entity }) %>
   </dl>
-
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals: {
-            entity: @entity,
-            url: toggle_admin_robokassa_invoice_path(id: @entity.id)
-        }
-    )
-  %>
 </article>

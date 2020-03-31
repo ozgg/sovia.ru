@@ -15,6 +15,11 @@ ru:
         paid: "Оплачен"
       robokassa_invoice:
         price: "Цена"
+        states:
+          reserved: "Ожидает оплаты"
+          paid: "Оплачен"
+          cancelled: "Отменён"
+        state: "Статус"
   admin:
     paypal_invoices:
       nav_item:
@@ -40,3 +45,6 @@ ru:
     components:
       invoices:
         name: "Счета"
+  robokassa_invoices:
+    destroy:
+      success: "Счёт Робокассы удалён"

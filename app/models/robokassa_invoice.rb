@@ -28,4 +28,18 @@ class RobokassaInvoice < ApplicationRecord
 
   scope :recent, -> { order('id desc') }
   scope :list_for_administration, -> { recent }
+
+  # @param [Integer] page
+  def self.page_for_administration(page = 1)
+    list_for_administration.page(page)
+  end
+
+  def text_for_link
+    "#{I18n.t('activerecord.models.robokassa_invoice')} #{id}"
+  end
+
+  def interpretation_count
+    key = Biovision::Components::DreamsComponent::REQUEST_COUNTER
+    data.dig('sovia', key).to_i
+  end
 end

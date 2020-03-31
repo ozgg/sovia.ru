@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   resources :patterns, only: %i[update destroy]
 
+  resources :robokassa_invoices, only: :destroy
+
   scope '(:locale)', constraints: { locale: /ru|en/ } do
     root 'index#index'
 
@@ -92,6 +94,7 @@ Rails.application.routes.draw do
       resources :interpretations, only: %i[index show], concerns: :toggle do
         post 'messages' => :create_message, on: :member
       end
+      resources :robokassa_invoices, only: %i[index show]
     end
   end
 end
