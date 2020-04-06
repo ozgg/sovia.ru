@@ -2,7 +2,7 @@
 
 # Handling Robokassa responses and callbacks
 class RobokassaController < ApplicationController
-  TEST_MODE = true
+  TEST_MODE = false
 
   skip_before_action :verify_authenticity_token, except: :create_invoice
   before_action :set_handler, except: %i[create_invoice pay_fail]
