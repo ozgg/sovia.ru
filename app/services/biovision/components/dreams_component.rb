@@ -7,7 +7,7 @@ module Biovision
       REQUEST_COUNTER = 'interpretation_requests'
 
       def self.price_map
-        { 1 => 500, 3 => 1000, 5 => 1500, 10 => 2000 }
+        { 1 => 300, 3 => 750, 5 => 1200, 10 => 2000 }
       end
 
       def use_parameters?

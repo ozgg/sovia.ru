@@ -1,49 +1,47 @@
-<% if current_user.data['feature_preview'] %>
-  <%
-    interpretation = dream.interpretations.first
-    request_count = component_handler.request_count
-  %>
-  <section class="dream-interpretation_request">
-    <header>
-      <h2><%= t('.heading') %></h2>
-    </header>
+<%
+  interpretation = dream.interpretations.first
+  request_count = component_handler.request_count
+%>
+<section class="dream-interpretation_request">
+  <header>
+    <h2><%= t('.heading') %></h2>
+  </header>
 
-    <% if interpretation.nil? %>
-      <% if request_count.positive? %>
-        <p>
-          У вас <%= t(:interpretation_request_count, count: request_count) %>.
-        </p>
-        <div class="container" id="dream_interpretation_request_container">
-          <div class="state-a">
-            <%=
-              button_tag(
-                  'Запросить толкование',
-                  class: 'button-primary',
-                  data: {
-                      dream_id: dream.id,
-                      url: my_interpretations_path
-                  },
-                  type: :button
-              )
-            %>
-          </div>
-          <div class="result"></div>
+  <% if interpretation.nil? %>
+    <% if request_count.positive? %>
+      <p>
+        У вас <%= t(:interpretation_request_count, count: request_count) %>.
+      </p>
+      <div class="container" id="dream_interpretation_request_container">
+        <div class="state-a">
+          <%=
+            button_tag(
+                'Запросить толкование',
+                class: 'button-primary',
+                data: {
+                    dream_id: dream.id,
+                    url: my_interpretations_path
+                },
+                type: :button
+            )
+          %>
         </div>
-      <% else %>
-        <p>
-          У вас не осталось запросов на толкование, вы можете их приобрести.
-        </p>
-      <% end %>
-    <% else %>
-      <div>
-        <%=
-          my_interpretation_link(
-              interpretation,
-              t(:interpretation_message_count, count: interpretation.message_count),
-              class: 'button-nav'
-          )
-        %>
+        <div class="result"></div>
       </div>
+    <% else %>
+      <p>
+        У вас не осталось запросов на толкование, вы можете их приобрести.
+      </p>
     <% end %>
-  </section>
-<% end %>
+  <% else %>
+    <div>
+      <%=
+        my_interpretation_link(
+            interpretation,
+            t(:interpretation_message_count, count: interpretation.message_count),
+            class: 'button-nav'
+        )
+      %>
+    </div>
+  <% end %>
+</section>

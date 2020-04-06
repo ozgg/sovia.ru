@@ -130,7 +130,7 @@ ru:
     index:
       description: "Сны, описанные пользователями на сайте о снах Sovia (Совия), страница %{page}"
       heading: "Дневник снов"
-      nav_text: "Дневник снов"
+      nav_text: "Сны"
       title: "Дневник снов, страница %{page}"
     new:
       heading: "Новый сон"

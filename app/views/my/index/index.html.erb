@@ -18,11 +18,9 @@
         <li>
           <%= link_to(t('my.dreams.index.nav_text'), my_dreams_path) %>
         </li>
-        <% if current_user.data['feature_preview'] %>
-          <li>
-            <%= link_to(t('my.interpretations.index.nav_text'), my_interpretations_path) %>
-          </li>
-        <% end %>
+        <li>
+          <%= link_to(t('my.interpretations.index.nav_text'), my_interpretations_path) %>
+        </li>
       </ul>
     </nav>
   </div>

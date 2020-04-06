@@ -140,3 +140,21 @@
     margin: var(--spacer-s) auto;
   }
 }
+
+@media (max-width: 1100px) {
+  .dreams-interpretation-prices {
+    li {
+      max-width: none;
+      width: 40%;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .dreams-interpretation-prices {
+    li {
+      max-width: none;
+      width: 80%;
+    }
+  }
+}
