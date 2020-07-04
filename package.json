@@ -1,5 +1,16 @@
 {
   "name": "sovia6",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@biovision/biovision": "^0.0.2",
+    "@biovision/comments": "^0.0.1",
+    "@biovision/posts": "^0.0.1",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
 }
