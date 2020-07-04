@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/maxim/Projects/Biovision/gems/biovision-base
+GIT
+  remote: https://github.com/Biovision/biovision-base.git
+  revision: b5e05877bb3edae38cd181a9e12ea45d7b6d0b96
   specs:
     biovision-base (0.47.200503.1)
       bcrypt (~> 3.1)
@@ -11,14 +12,16 @@ PATH
       rails-i18n (~> 6.0)
       rest-client (~> 2.1)
 
-PATH
-  remote: /Users/maxim/Projects/Biovision/gems/biovision-comment
+GIT
+  remote: https://github.com/Biovision/biovision-comment.git
+  revision: 2d27983e0ba166f209e76627f0538fd670ce5b4e
   specs:
     biovision-comment (0.12.200627.0)
       biovision-base
 
-PATH
-  remote: /Users/maxim/Projects/Biovision/gems/biovision-post
+GIT
+  remote: https://github.com/Biovision/biovision-post.git
+  revision: db5ab9dcb5af5d28bcec6c098f102b438b2e1282
   specs:
     biovision-post (0.31.200628.0)
       biovision-base
