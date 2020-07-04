@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+class Models::UserDecorator
+end
+
 User.class_eval do
   after_create :add_free_interpretations
 
