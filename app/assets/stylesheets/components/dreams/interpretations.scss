@@ -1,9 +1,11 @@
 @import "shared";
 
 .dream-interpretation_request {
+  background: var(--bg-main);
   border-radius: var(--spacer-xs);
   box-shadow: 0 .2rem .4rem rgba(0, 0, 0, .25), 0 .4rem .8rem rgba(0, 0, 0, .125);
-  margin: var(--spacer-s);
+  margin: var(--spacer-s) auto;
+  max-width: var(--content-width);
   padding: var(--spacer-s);
 
   h2 {
