@@ -10,7 +10,6 @@
     <li><%= back_icon(admin_path) %></li>
   </ul>
 
-  <%= paginate @collection %>
   <%=
     render(
         partial: 'shared/admin/list',
@@ -20,5 +19,4 @@
         }
     )
   %>
-  <%= paginate @collection %>
 </article>

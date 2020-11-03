@@ -11,7 +11,6 @@
     <li><%= create_icon(new_dream_path) %></li>
   </ul>
 
-  <%= paginate @collection %>
   <%=
     render(
         partial: 'shared/admin/list',
@@ -21,5 +20,4 @@
         }
     )
   %>
-  <%= paginate @collection %>
 </article>

@@ -1,6 +1,4 @@
-<div class="image">
-  <%= profile_avatar(entity.user) %>
-</div>
+<figure class="image"><%= profile_avatar(entity.user) %></figure>
 <div class="data">
   <div><%= admin_dream_link(entity) %></div>
   <div class="info">
@@ -12,15 +10,7 @@
     <%= admin_user_link(entity.user) %>
   </div>
 
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals:  {
-            entity: entity,
-            url:    toggle_admin_dream_path(id: entity.id)
-        }
-    )
-  %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: entity }) %>
 
   <ul class="actions">
     <% if handler.visible?(entity) %>

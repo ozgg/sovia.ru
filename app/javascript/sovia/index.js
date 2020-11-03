@@ -271,8 +271,8 @@ Sovia.components.robokassaButtons = {
                 input.value = pair[1];
                 form.append(input);
             });
-            console.log(form);
-            // document.querySelector("body").append(form);
+            // console.log(form);
+            document.querySelector("body").append(form);
             form.submit();
         } else {
             Sovia.components.robokassaButtons.processFailure();

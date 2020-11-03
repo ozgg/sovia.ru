@@ -8,7 +8,7 @@ class RobokassaInvoicesController < AdminController
   def destroy
     flash[:notice] = t('.success') if @entity.destroy
 
-    redirect_to(admin_patterns_path)
+    redirect_to(admin_robokassa_invoices_path)
   end
 
   protected

@@ -28,22 +28,12 @@
     <%=
       render(
           partial: 'shared/entity/timestamps',
-          locals: {
-              entity: @entity
-          }
+          locals: { entity: @entity }
       )
     %>
   </dl>
 
-  <%=
-    render(
-        partial: 'shared/admin/toggleable',
-        locals:  {
-            entity: @entity,
-            url:    toggle_admin_interpretation_path(id: @entity.id)
-        }
-    )
-  %>
+  <%= render(partial: 'shared/admin/toggle', locals: { entity: @entity }) %>
 
   <div class="text">
     <%= raw component_handler.parsed_dream(@entity.dream) %>
@@ -70,14 +60,14 @@
           text_area_tag(
               'message-body',
               '',
-              class: 'auto-expand input-text',
+              class: 'input-text',
               data: {
                   max_rows: 20,
                   min_rows: 3
               },
               maxlength: InterpretationMessage::BODY_LIMIT,
               required: true,
-              rows: 3
+              rows: 5
           )
         %>
       </div>
