@@ -13,16 +13,7 @@ Rails.application.routes.draw do
     post :priority, on: :member, defaults: { format: :json }
   end
 
-  concern :removable_image do
-    delete :image, action: :destroy_image, on: :member, defaults: { format: :json }
-  end
-
-  concern :lock do
-    member do
-      put :lock, defaults: { format: :json }
-      delete :lock, action: :unlock, defaults: { format: :json }
-    end
-  end
+  root 'index#index'
 
   get 'sitemap' => 'index#sitemap', defaults: { format: :xml }
   get 'sitemap.dreambook' => 'index#sitemap_dreambook', defaults: { format: :xml }
@@ -30,71 +21,43 @@ Rails.application.routes.draw do
   get 'sitemap.posts' => 'index#sitemap_posts', defaults: { format: :xml }
   get 'sitemap.questions' => 'index#sitemap_questions', defaults: { format: :xml }
 
-  resources :sleep_places, only: %i[update destroy]
-  resources :dreams, only: %i[update destroy]
-  resources :fillers, only: %i[destroy update]
+  resources :dreams, only: %i[index show]
 
-  resources :patterns, only: %i[update destroy]
+  scope 'interpretations', controller: :interpretations do
+    get '/' => :index, as: :interpretations
+  end
 
-  resources :robokassa_invoices, only: :destroy
+  scope 'robokassa', controller: :robokassa do
+    post '/' => :create_invoice, as: :robokassa_invoices
+    post 'result' => :pay_result, as: nil
+    get 'success' => :pay_success, as: nil
+    get 'fail' => :pay_fail, as: nil
+  end
 
-  scope '(:locale)', constraints: { locale: /ru|en/ } do
-    root 'index#index'
+  scope 'dreambook', controller: :dreambook do
+    get '/' => :index, as: :dreambook
+    get 'search' => :search, as: :dreambook_search
+    get ':word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
+    get ':letter/:word', to: redirect('/dreambook/%{word}')
+  end
 
-    scope 'interpretations', controller: :interpretations do
-      get '/' => :index, as: :interpretations
-      get 'paypal' => :paypal
+  namespace :my do
+    resources :sleep_places, concerns: :check
+    resources :dreams, concerns: :check
+    resources :patterns, concerns: :check
+    resources :interpretations, only: %i[index create show] do
+      post 'messages' => :create_message, on: :member
     end
+  end
 
-    scope 'paypal', controller: :paypal do
-      post '/' => :hook, as: nil
-      post 'invoices' => :create_invoice, as: :paypal_invoices
-      get ':id/success' => :success, as: nil
-      get ':id/cancel' => :cancel, as: nil
+  namespace :admin do
+    resources :dreams, concerns: %i[check toggle]
+    resources :fillers, concerns: :check
+    resources :sleep_places, only: :index
+    resources :patterns, concerns: :check
+    resources :interpretations, only: %i[index show], concerns: :toggle do
+      post 'messages' => :create_message, on: :member
     end
-
-    scope 'robokassa', controller: :robokassa do
-      post '/' => :create_invoice, as: :robokassa_invoices
-      post 'result' => :pay_result, as: nil
-      get 'success' => :pay_success, as: nil
-      get 'fail' => :pay_fail, as: nil
-    end
-
-    resources :sleep_places, only: %i[new create edit], concerns: :check
-    resources :dreams, except: %i[update destroy], concerns: :check
-    resources :fillers, only: %i[create edit new], concerns: :check
-
-    resources :patterns, only: %i[new create edit], concerns: :check
-
-    scope 'dreambook', controller: :dreambook do
-      get '/' => :index, as: :dreambook
-      get 'search' => :search, as: :dreambook_search
-      get ':word' => :word, as: :dreambook_word, constraints: { word: %r{[^/]+} }
-      get ':letter/:word', to: redirect('/dreambook/%{word}')
-    end
-
-    namespace :my do
-      resources :sleep_places, only: %i[index show]
-      resources :dreams, only: %i[index show]
-      resources :interpretations, only: %i[index create show] do
-        post 'messages' => :create_message, on: :member
-      end
-    end
-
-    namespace :admin do
-      resources :dreams, only: %i[index show], concerns: :toggle
-      resources :fillers, only: %i[index show]
-      resources :sleep_places, only: :index
-      resources :dreambook_queries, only: :index
-      resources :patterns, only: %i[index show]
-      resources :pending_patterns, only: :index do
-        post 'enqueue', on: :collection
-        post 'summary', on: :member
-      end
-      resources :interpretations, only: %i[index show], concerns: :toggle do
-        post 'messages' => :create_message, on: :member
-      end
-      resources :robokassa_invoices, only: %i[index show]
-    end
+    resources :robokassa_invoices, only: %i[destroy index show]
   end
 end

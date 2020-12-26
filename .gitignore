@@ -11,11 +11,11 @@
 /log/*
 /tmp/*
 
-# Ignore uploaded files in development
-/storage/*
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
 
-/node_modules
-/yarn-error.log
+# Ignore uploaded files in development.
+/storage/*
 
 /public/assets
 .byebug_history
@@ -23,16 +23,16 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/public/uploads
-
-/spec/examples.txt
-/spec/support/uploads/*
-
-.env
-
 /public/packs
 /public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/public/uploads
+
+/spec/examples.txt
+/spec/support/uploads/*
+
+.env

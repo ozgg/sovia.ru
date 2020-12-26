@@ -1,20 +1,5 @@
 <footer class="main-footer">
   <div class="content-wrapper">
-    <div>
-      <div class="copyright">&copy; <%= t(:copyright) %></div>
-      <div class="info">ИП Хан-Магомедов М.Д.<br/>ОГРН 319774600559291</div>
-    </div>
-    <nav>
-      <ul>
-        <li><%= link_to(t('about.index.nav_text'), about_path) %></li>
-        <li><%= link_to(t('about.tos.nav_text'), tos_path) %></li>
-        <li><%= link_to(t('about.privacy.nav_text'), privacy_path) %></li>
-        <li><%= link_to(t('about.contact.nav_text'), contact_path) %></li>
-        <li><%= link_to('Услуги', interpretations_path) %></li>
-        <% if UserPrivilege.user_has_any_privilege?(current_user) %>
-            <li><%= link_to(t('admin.index.index.heading'), admin_path) %></li>
-        <% end %>
-      </ul>
-    </nav>
+    <div class="copyright">&copy; <%= t(:copyright) %></div>
   </div>
 </footer>

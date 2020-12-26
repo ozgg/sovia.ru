@@ -1,16 +1,1 @@
-Host: https://sovia.ru
-Sitemap: https://sovia.ru/sitemap.xml
-
-User-agent: *
-Allow: /dreams/new     # Allow users to search new dream form
-Disallow: /*archive    # Archive is indexed via sitemap
-Disallow: /*new        # Only logged-in users can add new things (except dreams)
-Disallow: /*search     # Search on site makes sense only for humans
-Disallow: /*tagged     # Tagged content is indexed via sitemap
-Disallow: /admin       # Restricted administrative area
-Disallow: /auth        # OAuth makes sense only for humans
-Disallow: /my          # Part for logged-in users only
-Disallow: /questions   # Questions were completely removed
-Disallow: /statistics  # Public statistics is not available anymore
-Disallow: /u/*/dreams  # List of dreams is available only via sitemap
-Disallow: /u/*/comments # Comments are visible only on commentable page
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file

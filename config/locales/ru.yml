@@ -20,6 +20,3 @@ ru:
         navigation:
           toggle_navigation: "Открыть/закрыть меню"
       title: "Совия"
-  authentication:
-    new:
-      social: "Через социальные сети"

@@ -1,50 +1,35 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2'
+gem 'rails', '~> 6.1.0'
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
+# Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# Use Active Storage variant
+# gem 'image_processing', '~> 1.2'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'dotenv-rails'
 
-# OAuth authentication
-gem 'omniauth-facebook'
-gem 'omniauth-mail_ru'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
-gem 'omniauth-twitter'
-gem 'omniauth-vkontakte'
+# gem 'autoprefixer-rails', group: :production
 
-gem 'paypal-sdk-rest'
-
-gem 'autoprefixer-rails', group: :production
-
-gem 'biovision-base', git: 'https://github.com/Biovision/biovision-base.git'
-# gem 'biovision-base', path: '/Users/maxim/Projects/Biovision/gems/biovision-base'
-gem 'biovision-post', git: 'https://github.com/Biovision/biovision-post.git'
-# gem 'biovision-post', path: '/Users/maxim/Projects/Biovision/gems/biovision-post'
-gem 'biovision-comment', git: 'https://github.com/Biovision/biovision-comment.git'
-# gem 'biovision-comment', path: '/Users/maxim/Projects/Biovision/gems/biovision-comment'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+# gem 'biovision', git: 'https://github.com/Biovision/biovision.git'
+gem 'biovision', path: '/Users/maxim/Projects/Biovision/gems/biovision'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,11 +41,13 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 4.1.0'
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'listen', '~> 3.3'
   gem 'mina'
 end
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
