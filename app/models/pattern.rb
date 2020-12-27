@@ -54,4 +54,12 @@ class Pattern < ApplicationRecord
   def self.[](name)
     find_by('user_id is null and name ilike ?', name)
   end
+
+  def text_for_link
+    name
+  end
+
+  def world_url
+    "/#{dreambook}/#{CGI.escape(name)}"
+  end
 end

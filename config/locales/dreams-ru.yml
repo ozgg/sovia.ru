@@ -1,0 +1,211 @@
+ru:
+  dream_count:
+    zero: "снов нет"
+    one: "%{count} сон"
+    few: "%{count} сна"
+    many: "%{count} снов"
+    other: "%{count} снов"
+  interpretation_count:
+    zero: "ни одного запроса на толкование"
+    one: "%{count} запрос на толкование"
+    few: "%{count} запроса на толкование"
+    many: "%{count} запросов на толкование"
+    other: "%{count} запросов на толкование"
+  interpretation_request_count:
+    zero: "не осталось ни одного запроса на толкование"
+    one: "остался %{count} запрос на толкование"
+    few: "осталось %{count} запроса на толкование"
+    many: "осталось %{count} запросов на толкование"
+    other: "осталось %{count} запросов на толкование"
+  interpretation_message_count:
+    zero: "сообщений нет"
+    one: "%{count} сообщение"
+    few: "%{count} сообщения"
+    many: "%{count} сообщений"
+    other: "%{count} сообщений"
+  activerecord:
+    errors:
+      models:
+        filler:
+          user:
+            not_bot: "должен быть ботом"
+    models:
+      dream: "Сон"
+      filler: "Наполнитель"
+      interpretation: "Запрос толкования"
+      interpretation_message: "Сообщение в толковании"
+      sleep_place: "Место для сна"
+    attributes:
+      dream:
+        body: "Сюжет"
+        interpreted: "Растолкован"
+        lucidity: "Осознанность"
+        privacy: "Видимость"
+        sleep_place: "Место для сна"
+        sleep_place_id: "Место для сна"
+        title: "Название"
+        privacies:
+          generally_accessible: "Для всех"
+          for_community: "Для сообщества"
+          personal: "Только для меня"
+      filler:
+        body: "Текст"
+        title: "Название"
+      interpretation_message:
+        body: "Текст"
+        from_user: "От пользователя"
+        interpretation: "Запрос толкования"
+        interpretation_id: "Запрос толкования"
+      interpretation:
+        body: "Текст"
+        solved: "Ответ получен"
+      sleep_place:
+        dreams_count: "Количество снов"
+        name: "Название"
+  attributes:
+    dream: "Сон"
+    dream_id: "Сон"
+  biovision:
+    components:
+      dreams:
+        name: "Сны"
+        description: "Дневник снов пользователей"
+        settings:
+          filler_timeout: "Тайм-аут для заполнения снов (в часах)"
+          free_interpretations: "Количество бесплатных толкований при регистрации"
+          place_limit: "Максимальное количество мест для сна на пользователя"
+  my:
+    dreams:
+      index:
+        heading: "Мои сны"
+        nav_text: "Сны"
+        title: "Мои сны, страница %{page}"
+      list:
+        empty_list: "Вы пока не описали ни одного сна"
+      show:
+        title: "Мой сон «%{title}»"
+    interpretations:
+      create:
+        created: "Запрос на толкование сна успешно отправлен."
+        error: "Ошибка при отправке запроса, попробуйте позже."
+        exists: "Запрос на толкование сна уже был отправлен ранее."
+        no_dream: "Сон не найден."
+        no_requests: "У вас не осталось запросов на толкование."
+      show:
+        title: "Запрос на толкование сна «%{dream}»"
+        heading: "Запрос на толкование сна"
+      create_message:
+        success: "Сообщение отправлено"
+        error: "Ошибка отправки сообщения"
+      index:
+        title: "Мои запросы толкований снов, страница %{page}"
+        nav_text: "Запросы толкований снов"
+        heading: "Запросы толкований снов"
+    sleep_places:
+      index:
+        heading: "Мои места для сна"
+        nav_text: "Места для сна"
+        title: "Мои места для сна"
+      list:
+        empty_list: "Вы пока не добавили ни одного места для сна"
+      show:
+        title: "Место для сна «%{name}»"
+      destroy:
+        success: "Место для сна успешно удалено"
+      edit:
+        heading: "Редактирование места для сна"
+        nav_text: "Редактировать"
+        title: "Редактирование места для сна"
+      form:
+        guidelines:
+          name: "Максимум 50 символов"
+      new:
+        heading: "Новое место для сна"
+        nav_text: "Добавить"
+        title: "Добавление места для сна"
+        limit_reached: "Вы создали максимальное количество мест для сна"
+  dreams:
+    destroy:
+      success: "Сон успешно удалён"
+    edit:
+      heading: "Редактирование сна"
+      nav_text: "Редактировать"
+      title: "Редактирование сна"
+    form:
+      guidelines:
+        body: "Опишите сюжет достаточно подробно"
+        title: "Максимум 255 символов"
+      no_sleep_places: "Вы не добавили ни одного места для сна"
+    index:
+      description: "Сны, описанные пользователями на сайте о снах Sovia (Совия), страница %{page}"
+      heading: "Дневник снов"
+      nav_text: "Сны"
+      title: "Дневник снов, страница %{page}"
+    new:
+      heading: "Новый сон"
+      nav_text: "Описать сон"
+      title: "Описание нового сна"
+    show:
+      title: "Сон «%{title}»"
+    interpretation_form:
+      heading: "Запрос толкования сна"
+  admin:
+    sleep_places:
+      nav_item:
+        text: "Места для сна"
+        description: "Список мест для сна пользователей"
+      index:
+        title: "Места для сна, страница %{page}"
+        heading: "Места для сна"
+    dreams:
+      nav_item:
+        text: "Описанные сны"
+        description: "Описанные пользователями сны"
+      index:
+        title: "Сны, страница %{page}"
+        heading: "Сны"
+      show:
+        title: "Сон «%{title}»"
+    fillers:
+      nav_item:
+        text: "Наполнители"
+        description: "Управление наполнителями для снов"
+      index:
+        title: "Наполнители, страница %{page}"
+        heading: "Наполнители для снов"
+      show:
+        title: "Наполнитель «%{title}»"
+      destroy:
+        success: "Наполнитель удалён"
+      new:
+        heading: "Новый наполнитель"
+        nav_text: "Добавить"
+        title: "Добавление наполнителя"
+      edit:
+        heading: "Редактирование наполнителя"
+        nav_text: "Редактировать"
+        title: "Редактирование наполнителя"
+    interpretations:
+      create_message:
+        success: "Сообщение отправлено"
+        error: ""
+      index:
+        title: "Запросы толкований снов, страница %{page}"
+        heading: "Запросы толкований снов"
+      nav_item:
+        text: "Запросы толкований"
+        description: "Просмотр запросов на толкование снов"
+      show:
+        title: "Запрос на толкование сна «%{title}»"
+  interpretation_mailer:
+    new_message_from_interpreter:
+      subject: "Новое сообщение от толкователя вашего сна"
+    new_message_from_user:
+      subject: "Новое сообщение от пользователя в запросе толкования сна"
+    new_request:
+      subject: "Новый запрос на толкование сна"
+  interpretations:
+    index:
+      title: "Толкование снов"
+      nav_text: "Толкование снов"
+      heading: "Толкование снов"

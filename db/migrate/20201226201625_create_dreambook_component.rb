@@ -13,7 +13,7 @@ class CreateDreambookComponent < ActiveRecord::Migration[6.1]
       drop_table model.table_name if model.table_exists?
     end
 
-    BiovisionComponent[Biovision::Components::DreambookComponent.slug]&.destroy
+    BiovisionComponent[Biovision::Components::DreambookComponent]&.destroy
   end
 
   private
