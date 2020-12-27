@@ -1,0 +1,58 @@
+ru:
+  activerecord:
+    models:
+      pattern: "Образ сна"
+      pattern_link: "Связь между образами сна"
+    attributes:
+      pattern:
+        description: "Описание"
+        name: "Название"
+        processed: "Обработанo"
+        summary: "Суть"
+      pattern_link:
+        other_pattern: "Другой образ"
+        other_pattern_id: "Другой образ"
+  attributes:
+    pattern: "Образ сна"
+    pattern_id: "Образ сна"
+  biovision:
+    components:
+      dreambook:
+        name: "Сонник"
+  admin:
+    patterns:
+      destroy:
+        success: "Образ сна удалён"
+      edit:
+        heading: "Редактирование образа сна"
+        nav_text: "Редактировать"
+        title: "Редактирование образа сна"
+      form:
+        guidelines:
+          name: "Максимум 100 символов"
+          summary: "Максимум 255 символов"
+      index:
+        heading: "Образы сна"
+        title: "Образы сна, страница %{page}"
+      nav_item:
+        description: "Управление образами снов"
+        text: "Образы сна"
+      new:
+        heading: "Новый образ сна"
+        nav_text: "Добавить"
+        title: "Описание нового образа сна"
+      show:
+        title: "Образ сна «%{name}»"
+  dreambook:
+    index:
+      title: "Сонник"
+      nav_text: "Сонник"
+    word:
+      title: "Сонник: %{pattern}"
+      heading: "Сонник"
+    search:
+      title: "Поиск по соннику"
+      nav_text: "Поиск по соннику"
+      heading: "Поиск по соннику"
+    form:
+      search: "Искать"
