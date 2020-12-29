@@ -1,0 +1,14 @@
+<nav class="header-nav">
+  <input type="checkbox" id="header-nav-toggle" class="visually-hidden control-box"/>
+  <label for="header-nav-toggle" class="control-button" aria-label="<%= t('.toggle_navigation') %>">
+    <span class="a"></span>
+    <span class="b"></span>
+    <span class="c"></span>
+  </label>
+  <ul class="links">
+    <li><%= link_to('О проекте', '#') %></li>
+    <li><%= link_to('Статьи', '#') %></li>
+    <li><%= link_to(t('dreams.index.nav_text'), dreams_path) %></li>
+    <li><%= link_to(t('interpretations.index.nav_text'), interpretations_path) %></li>
+  </ul>
+</nav>

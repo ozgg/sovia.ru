@@ -1,0 +1,31 @@
+.main-header {
+  background: var(--background-shader);
+  box-shadow: 0 .2rem .2rem rgba(0, 0, 0, .125), 0 .4rem .4rem rgba(0, 0, 0, .125), 0 .8rem .8rem rgba(0, 0, 0, .125);
+  z-index: 3;
+
+  .content-wrapper {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 var(--spacer-xs);
+  }
+
+  .logo {
+    width: 16rem;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .main-header {
+    .logo {
+      width: 14rem;
+    }
+  }
+}
+
+@import "application/layout/header/navigation";
+@import "application/layout/header/authentication";

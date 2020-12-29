@@ -1,4 +1,9 @@
 <header class="main-header">
   <div class="content-wrapper">
+    <div class="logo">
+      <%= link_to(image_tag('logo.svg', alt: 'Sovia'), root_path) %>
+    </div>
+    <%= render 'layouts/application/header/navigation' %>
+    <%= render 'layouts/application/header/authentication' %>
   </div>
 </header>

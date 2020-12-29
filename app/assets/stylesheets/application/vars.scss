@@ -1,0 +1,10 @@
+@import "shared";
+
+:root {
+  --background-body: #{$background-body};
+  --background-main: #{$background-main};
+  --background-footer: #{$background-footer};
+  --background-shader: #{$background-shader};
+
+  --font-family-nav: #{$font-family-nav};
+}

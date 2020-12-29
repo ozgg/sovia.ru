@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_25_192717) do
+ActiveRecord::Schema.define(version: 2020_12_28_153048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,63 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
     t.index ["user_id"], name: "index_codes_on_user_id"
   end
 
+  create_table "comments", comment: "Comments", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id"
+    t.bigint "agent_id"
+    t.bigint "ip_address_id"
+    t.integer "commentable_id", null: false
+    t.string "commentable_type", null: false
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "visible", default: true, null: false
+    t.text "body"
+    t.jsonb "data", default: {}, null: false
+    t.string "parents_cache", default: "", null: false
+    t.integer "children_cache", default: [], null: false, array: true
+    t.index "to_tsvector('russian'::regconfig, body)", name: "comments_search_idx", using: :gin
+    t.index ["agent_id"], name: "index_comments_on_agent_id"
+    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+    t.index ["data"], name: "index_comments_on_data", using: :gin
+    t.index ["ip_address_id"], name: "index_comments_on_ip_address_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["uuid"], name: "index_comments_on_uuid", unique: true
+  end
+
+  create_table "dream_patterns", comment: "Links between dreams and patterns", force: :cascade do |t|
+    t.bigint "dream_id", null: false
+    t.bigint "pattern_id", null: false
+    t.index ["dream_id"], name: "index_dream_patterns_on_dream_id"
+    t.index ["pattern_id"], name: "index_dream_patterns_on_pattern_id"
+  end
+
+  create_table "dreams", comment: "Dreams", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id", null: false
+    t.bigint "simple_image_id"
+    t.bigint "agent_id"
+    t.bigint "ip_address_id"
+    t.bigint "sleep_place_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "interpreted", default: false, null: false
+    t.integer "lucidity", limit: 2, default: 0, null: false
+    t.integer "privacy", limit: 2, default: 0, null: false
+    t.string "title"
+    t.text "body", null: false
+    t.jsonb "data", default: {}, null: false
+    t.index "date_trunc('month'::text, created_at)", name: "dreams_created_month_idx"
+    t.index "dreams_tsvector((title)::text, body)", name: "dreams_search_idx", using: :gin
+    t.index ["agent_id"], name: "index_dreams_on_agent_id"
+    t.index ["ip_address_id"], name: "index_dreams_on_ip_address_id"
+    t.index ["privacy"], name: "index_dreams_on_privacy"
+    t.index ["simple_image_id"], name: "index_dreams_on_simple_image_id"
+    t.index ["sleep_place_id"], name: "index_dreams_on_sleep_place_id"
+    t.index ["user_id"], name: "index_dreams_on_user_id"
+    t.index ["uuid"], name: "index_dreams_on_uuid", unique: true
+  end
+
   create_table "dynamic_blocks", comment: "Dynamic blocks", force: :cascade do |t|
     t.string "slug", null: false
     t.boolean "visible", default: true, null: false
@@ -154,6 +211,37 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
     t.index ["simple_image_id"], name: "index_dynamic_pages_on_simple_image_id"
     t.index ["url"], name: "index_dynamic_pages_on_url"
     t.index ["uuid"], name: "index_dynamic_pages_on_uuid", unique: true
+  end
+
+  create_table "fillers", comment: "Dream fillers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body", null: false
+    t.index ["user_id"], name: "index_fillers_on_user_id"
+  end
+
+  create_table "interpretation_messages", comment: "Messages in interpretation requests", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "interpretation_id", null: false
+    t.boolean "from_user", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "body", null: false
+    t.index ["interpretation_id"], name: "index_interpretation_messages_on_interpretation_id"
+    t.index ["uuid"], name: "index_interpretation_messages_on_uuid", unique: true
+  end
+
+  create_table "interpretations", comment: "Interpretation requests", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id", null: false
+    t.bigint "dream_id"
+    t.boolean "solved", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "body"
+    t.index ["dream_id"], name: "index_interpretations_on_dream_id"
+    t.index ["user_id"], name: "index_interpretations_on_user_id"
+    t.index ["uuid"], name: "index_interpretations_on_uuid", unique: true
   end
 
   create_table "ip_addresses", comment: "IP addresses", force: :cascade do |t|
@@ -243,6 +331,58 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
     t.index ["uuid"], name: "index_notifications_on_uuid", unique: true
   end
 
+  create_table "pattern_links", comment: "Links between patterns", force: :cascade do |t|
+    t.bigint "pattern_id", null: false
+    t.integer "other_pattern_id", null: false
+    t.index ["pattern_id"], name: "index_pattern_links_on_pattern_id"
+  end
+
+  create_table "patterns", comment: "Dream patterns", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id"
+    t.bigint "simple_image_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "visible", default: true, null: false
+    t.boolean "processed", default: false, null: false
+    t.integer "dream_count", default: 0, null: false
+    t.string "name", null: false
+    t.string "summary"
+    t.text "description"
+    t.jsonb "data", default: {}, null: false
+    t.index "patterns_tsvector((name)::text, (summary)::text, description)", name: "patterns_search_idx", using: :gin
+    t.index ["data"], name: "index_patterns_on_data", using: :gin
+    t.index ["name"], name: "index_patterns_on_name"
+    t.index ["processed"], name: "index_patterns_on_processed"
+    t.index ["simple_image_id"], name: "index_patterns_on_simple_image_id"
+    t.index ["user_id"], name: "index_patterns_on_user_id"
+    t.index ["uuid"], name: "index_patterns_on_uuid", unique: true
+  end
+
+  create_table "posts", comment: "Posts", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id", null: false
+    t.bigint "simple_image_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "publication_time"
+    t.boolean "visible", default: true, null: false
+    t.boolean "featured", default: false, null: false
+    t.string "title", null: false
+    t.string "slug"
+    t.text "lead"
+    t.text "body", null: false
+    t.string "source_name"
+    t.string "source_link"
+    t.jsonb "data", default: {}, null: false
+    t.index "date_trunc('month'::text, publication_time)", name: "posts_pubdate_month_idx"
+    t.index "posts_tsvector((title)::text, lead, body)", name: "posts_search_idx", using: :gin
+    t.index ["data"], name: "index_posts_on_data", using: :gin
+    t.index ["simple_image_id"], name: "index_posts_on_simple_image_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["uuid"], name: "index_posts_on_uuid", unique: true
+  end
+
   create_table "simple_image_tag_images", comment: "Links between simple images and tags", force: :cascade do |t|
     t.bigint "simple_image_id", null: false
     t.bigint "simple_image_tag_id", null: false
@@ -279,6 +419,15 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
     t.index ["ip_address_id"], name: "index_simple_images_on_ip_address_id"
     t.index ["user_id"], name: "index_simple_images_on_user_id"
     t.index ["uuid"], name: "index_simple_images_on_uuid", unique: true
+  end
+
+  create_table "sleep_places", comment: "Sleep places", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.bigint "user_id", null: false
+    t.integer "dreams_count", default: 0, null: false
+    t.string "name", null: false
+    t.index ["user_id"], name: "index_sleep_places_on_user_id"
+    t.index ["uuid"], name: "index_sleep_places_on_uuid", unique: true
   end
 
   create_table "tokens", comment: "Authentication tokens", force: :cascade do |t|
@@ -357,8 +506,23 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
   add_foreign_key "codes", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "codes", "ip_addresses", on_update: :cascade, on_delete: :nullify
   add_foreign_key "codes", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "comments", "comments", column: "parent_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "comments", "ip_addresses", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_patterns", "dreams", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dream_patterns", "patterns", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "dreams", "agents", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "ip_addresses", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "simple_images", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "sleep_places", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "dreams", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "dynamic_pages", "languages", on_update: :cascade, on_delete: :cascade
   add_foreign_key "dynamic_pages", "simple_images", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "fillers", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "interpretation_messages", "interpretations", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "interpretations", "dreams", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "interpretations", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "login_attempts", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "login_attempts", "ip_addresses", on_update: :cascade, on_delete: :nullify
   add_foreign_key "login_attempts", "users", on_update: :cascade, on_delete: :cascade
@@ -368,12 +532,19 @@ ActiveRecord::Schema.define(version: 2020_12_25_192717) do
   add_foreign_key "navigation_group_pages", "navigation_groups", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "notifications", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "pattern_links", "patterns", column: "other_pattern_id", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "pattern_links", "patterns", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "patterns", "simple_images", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "patterns", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "posts", "simple_images", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "posts", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_image_tag_images", "simple_image_tags", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_image_tag_images", "simple_images", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_images", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "simple_images", "biovision_components", on_update: :cascade, on_delete: :cascade
   add_foreign_key "simple_images", "ip_addresses", on_update: :cascade, on_delete: :nullify
   add_foreign_key "simple_images", "users", on_update: :cascade, on_delete: :nullify
+  add_foreign_key "sleep_places", "users", on_update: :cascade, on_delete: :cascade
   add_foreign_key "tokens", "agents", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "ip_addresses", on_update: :cascade, on_delete: :nullify
   add_foreign_key "tokens", "users", on_update: :cascade, on_delete: :cascade

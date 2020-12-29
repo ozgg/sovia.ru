@@ -1,0 +1,26 @@
+@import "application/vars";
+
+body {
+  background: var(--background-body);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  padding: var(--spacer-s) var(--spacer-xxs);
+}
+
+#main {
+  .content-wrapper {
+    background: var(--background-main);
+  }
+}
+
+.breadcrumbs {
+  font-family: var(--font-family-nav);
+}
+
+@import "application/components";
+@import "application/layout/header";
+@import "application/layout/footer";

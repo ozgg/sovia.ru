@@ -66,7 +66,7 @@ class CreateDreamsComponent < ActiveRecord::Migration[6.1]
     end
 
     add_index :dreams, :uuid, unique: true
-    add_index :dreams, %i[visible privacy]
+    add_index :dreams, :privacy
     execute "create index dreams_created_month_idx on dreams using btree (date_trunc('month', created_at));"
     execute %(
       create or replace function dreams_tsvector(title text, body text)

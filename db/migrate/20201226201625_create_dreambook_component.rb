@@ -27,15 +27,15 @@ class CreateDreambookComponent < ActiveRecord::Migration[6.1]
     create_table :patterns, comment: 'Dream patterns' do |t|
       t.uuid :uuid, null: false
       t.references :user, foreign_key: { on_update: :cascade, on_delete: :cascade }
-      t.references :simple_image, foreign_key: { on_update: :cascadee, on_delete: :nullify }
+      t.references :simple_image, foreign_key: { on_update: :cascade, on_delete: :nullify }
       t.timestamps
       t.boolean :visible, default: true, null: false
-      t.boolean :processed, index: true, default: false, null: falsee
+      t.boolean :processed, index: true, default: false, null: false
       t.integer :dream_count, default: 0, null: false
       t.string :name, index: true, null: false
       t.string :summary
       t.text :description
-      t.jsonb :data, default: {}, null: falsee
+      t.jsonb :data, default: {}, null: false
     end
 
     execute %(

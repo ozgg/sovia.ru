@@ -1,5 +1,20 @@
 <footer class="main-footer">
   <div class="content-wrapper">
-    <div class="copyright">&copy; <%= t(:copyright) %></div>
+    <div>
+      <div class="copyright">&copy; <%= t(:copyright) %></div>
+      <div class="info">ИП Хан-Магомедов М.Д.<br/>ОГРН 319774600559291</div>
+    </div>
+    <nav>
+      <ul>
+        <li><%= link_to('О проекте', '#') %></li>
+        <li><%= link_to('Пользовательское соглашение', '#') %></li>
+        <li><%= link_to('Конфиденциальность', '#') %></li>
+        <li><%= link_to('Контакты', '#') %></li>
+        <li><%= link_to('Услуги', '#') %></li>
+        <% if Biovision::Components::BaseComponent.privileged?(current_user) %>
+          <li><%= link_to(t('admin.index.index.heading'), admin_path) %></li>
+        <% end %>
+      </ul>
+    </nav>
   </div>
 </footer>
